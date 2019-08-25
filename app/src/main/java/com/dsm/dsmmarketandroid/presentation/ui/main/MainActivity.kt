@@ -1,7 +1,8 @@
-package com.dsm.dsmmarketandroid
+package com.dsm.dsmmarketandroid.presentation.ui.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.dsm.dsmmarketandroid.R
 
 class MainActivity : AppCompatActivity() {
 
