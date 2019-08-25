@@ -29,7 +29,9 @@ android {
 dependencies {
     def dependencies = rootProject.ext.dataDependencies
     def testDependencies = rootProject.ext.dataTestDependencies
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(path: ':domain')
 
     implementation 'androidx.appcompat:appcompat:1.0.2'
 
@@ -39,4 +41,5 @@ dependencies {
     // testing
     testImplementation testDependencies.junit
     androidTestImplementation testDependencies.testRunner
+
 }
