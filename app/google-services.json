@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "519373665658",
+    "firebase_url": "https://dsmmarket-251e0.firebaseio.com",
+    "project_id": "dsmmarket-251e0",
+    "storage_bucket": "dsmmarket-251e0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:519373665658:android:97896c357bd6452d",
+        "android_client_info": {
+          "package_name": "com.dsm.dsmmarketandroid"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "519373665658-u2500021h2duc6k67em51oqng28oh1a0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dsm.dsmmarketandroid",
+            "certificate_hash": "20238275ffb82e65d62d64b57d267bc0a2a5cdc0"
+          }
+        },
+        {
+          "client_id": "519373665658-98d0okeen5r57tsmglhamr1rsn4p2ki6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD57IKcrcWpZ1ZNxL9OLfLy2YAHjvCJkas"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "519373665658-98d0okeen5r57tsmglhamr1rsn4p2ki6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
