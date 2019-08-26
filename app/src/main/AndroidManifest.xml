@@ -10,10 +10,20 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+        <activity android:name=".presentation.ui.changePassword.ChangePassword">
+        </activity>
+        <activity android:name=".presentation.ui.findPassword.FindPasswordActivity">
+        </activity>
+        <activity android:name=".presentation.ui.login.LoginActivity">
+        </activity>
+        <activity android:name=".presentation.ui.start.StartActivity">
+        </activity>
+        <activity android:name=".presentation.ui.signUp.SignUpActivity">
+        </activity>
         <activity android:name=".presentation.ui.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.VIEW"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
