@@ -1,3 +1,23 @@
 <resources>
-    <string name="app_name">DsmMarketAndroid</string>
+    <string name="app_name">대마장터</string>
+    <string name="app_intro">평화로운 거래, 새로운 만남 대마장터</string>
+
+    <!--account-->
+    <string name="login">로그인</string>
+    <string name="sign_up">회원가입</string>
+    <string name="id">아이디</string>
+    <string name="password">비밀번호</string>
+    <string name="password_confirm">비밀번호 확인</string>
+    <string name="forget_password">비밀번호를 잊으셨나요?</string>
+    <string name="name">닉네임</string>
+    <string name="gender">성별</string>
+    <string name="grade">학년</string>
+    <string name="find_password">비밀번호 찾기</string>
+    <string name="email">이메일</string>
+    <string name="change_password">비밀번호 변경</string>
+    <string name="new_password">새 비밀번호</string>
+    <string name="new_password_confirm">새 비밀번호 확인</string>
+
+    <!--content description-->
+    <string name="description_logo">앱 로고</string>
 </resources>

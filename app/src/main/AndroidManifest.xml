@@ -1,33 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.dsm.dsmmarketandroid">
+    package="com.dsm.dsmmarketandroid">
 
     <application
-            android:allowBackup="true"
-            android:fullBackupContent="true"
-            android:icon="@mipmap/ic_launcher"
-            android:label="@string/app_name"
-            android:roundIcon="@mipmap/ic_launcher_round"
-            android:supportsRtl="true"
-            android:theme="@style/AppTheme">
-        <activity android:name=".presentation.ui.changePassword.ChangePassword">
-        </activity>
-        <activity android:name=".presentation.ui.findPassword.FindPasswordActivity">
-        </activity>
-        <activity android:name=".presentation.ui.login.LoginActivity">
-        </activity>
+        android:allowBackup="true"
+        android:fullBackupContent="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".presentation.ui.changePassword.ChangePasswordActivity" />
+        <activity android:name=".presentation.ui.findPassword.FindPasswordActivity" />
+        <activity android:name=".presentation.ui.login.LoginActivity" />
         <activity android:name=".presentation.ui.start.StartActivity">
-        </activity>
-        <activity android:name=".presentation.ui.signUp.SignUpActivity">
-        </activity>
-        <activity android:name=".presentation.ui.main.MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <action android:name="android.intent.action.VIEW"/>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.VIEW" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".presentation.ui.signUp.SignUpActivity" />
+        <activity android:name=".presentation.ui.main.MainActivity" />
     </application>
 
 </manifest>
