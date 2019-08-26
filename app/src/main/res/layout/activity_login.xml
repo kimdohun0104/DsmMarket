@@ -101,6 +101,7 @@
             tools:ignore="SmallSp" />
 
         <Button
+            android:id="@+id/btn_login"
             android:layout_width="0dp"
             android:layout_height="46dp"
             android:layout_marginStart="25dp"

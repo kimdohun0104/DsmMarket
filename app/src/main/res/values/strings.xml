@@ -9,15 +9,25 @@
     <string name="password">비밀번호</string>
     <string name="password_confirm">비밀번호 확인</string>
     <string name="forget_password">비밀번호를 잊으셨나요?</string>
-    <string name="name">닉네임</string>
-    <string name="gender">성별</string>
-    <string name="grade">학년</string>
     <string name="find_password">비밀번호 찾기</string>
-    <string name="email">이메일</string>
     <string name="change_password">비밀번호 변경</string>
     <string name="new_password">새 비밀번호</string>
     <string name="new_password_confirm">새 비밀번호 확인</string>
+    <string name="name">닉네임</string>
+    <string name="gender">성별</string>
+    <string name="grade">학년</string>
+    <string name="email">이메일</string>
 
     <!--content description-->
     <string name="description_logo">앱 로고</string>
+
+    <!--main-->
+    <string name="purchase">구매</string>
+    <string name="rent">대여</string>
+    <string name="post">글쓰기</string>
+    <string name="chatting">채팅</string>
+    <string name="me">ME!</string>
+
+    <string name="post_purchase_product">구매 상품 등록하기</string>
+    <string name="post_rent_product">대여 상품 등록하기</string>
 </resources>

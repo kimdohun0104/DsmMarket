@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/purchase"
+        android:title="@string/purchase"
+        android:icon="@drawable/ic_purchase" />
+
+    <item
+        android:id="@+id/rent"
+        android:title="@string/rent"
+        android:icon="@drawable/ic_rent" />
+
+    <item
+        android:id="@+id/post"
+        android:title="@string/post"
+        android:icon="@drawable/ic_post" />
+
+    <item
+        android:id="@+id/chatting"
+        android:title="@string/chatting"
+        android:icon="@drawable/ic_chat" />
+
+    <item
+        android:id="@+id/me"
+        android:title="@string/me"
+        android:icon="@drawable/ic_user" />
+
+</menu>
