@@ -10,6 +10,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".presentation.ui.past.PastActivity"></activity>
+        <activity android:name=".presentation.ui.myPost.MyPostActivity" />
+        <activity android:name=".presentation.ui.interest.InterestActivity" />
+        <activity android:name=".presentation.ui.changeName.ChangeNameActivity" />
         <activity android:name=".presentation.ui.changePassword.ChangePasswordActivity" />
         <activity android:name=".presentation.ui.findPassword.FindPasswordActivity" />
         <activity android:name=".presentation.ui.login.LoginActivity" />

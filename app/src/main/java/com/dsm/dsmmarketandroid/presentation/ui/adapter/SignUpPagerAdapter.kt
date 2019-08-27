@@ -8,7 +8,7 @@ import com.dsm.dsmmarketandroid.presentation.ui.signUp.SignUp1Fragment
 import com.dsm.dsmmarketandroid.presentation.ui.signUp.SignUp2Fragment
 
 @SuppressLint("WrongConstant")
-class SignUpViewPagerAdapter(fragmentManager: FragmentManager) :
+class SignUpPagerAdapter(fragmentManager: FragmentManager) :
     FragmentPagerAdapter(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
     override fun getItem(position: Int): Fragment =
