@@ -1,4 +1,4 @@
-package com.dsm.dsmmarketandroid.customView;
+package com.dsm.dsmmarketandroid.custom;
 
 import android.content.Context;
 import android.util.AttributeSet;

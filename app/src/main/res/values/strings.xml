@@ -42,4 +42,10 @@
 
     <string name="post_date">등록일:</string>
     <string name="won">원</string>
+    <string name="deal_with_chatting">채팅으로 거래하기</string>
+    <string name="comment">댓글</string>
+    <string name="count">개</string>
+    <string name="report">신고하기</string>
+    <string name="related_product">관련 상품</string>
+    <string name="recommend_product">추천 상품</string>
 </resources>

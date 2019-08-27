@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.dsm.dsmmarketandroid">
 
+
     <application
         android:allowBackup="true"
         android:fullBackupContent="true"
@@ -10,7 +11,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".presentation.ui.past.PastActivity"></activity>
+        <activity android:name=".presentation.ui.purchaseDetail.PurchaseDetailActivity" />
+        <activity android:name=".presentation.ui.category.CategoryActivity" />
+        <activity android:name=".presentation.ui.search.SearchActivity" />
+        <activity android:name=".presentation.ui.past.PastActivity" />
         <activity android:name=".presentation.ui.myPost.MyPostActivity" />
         <activity android:name=".presentation.ui.interest.InterestActivity" />
         <activity android:name=".presentation.ui.changeName.ChangeNameActivity" />

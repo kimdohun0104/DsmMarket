@@ -4,25 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/tb_me"
-        style="@style/ToolBarStyle.Event"
-        android:layout_width="0dp"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorPrimary"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:titleTextColor="@color/white"
-        app:title="김도훈" />
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_interest"
         android:layout_width="0dp"
         android:layout_height="68dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tb_me"
+        app:layout_constraintTop_toTopOf="parent"
         android:background="@color/colorRed">
 
         <androidx.appcompat.widget.AppCompatImageView
