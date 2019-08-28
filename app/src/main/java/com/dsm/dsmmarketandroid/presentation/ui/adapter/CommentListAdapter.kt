@@ -19,7 +19,7 @@ class CommentListAdapter : RecyclerView.Adapter<CommentListAdapter.ViewHolder>()
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind()
 
-    inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind() {
             val item = listItems[adapterPosition]
             itemView.tv_name.text = item.writer

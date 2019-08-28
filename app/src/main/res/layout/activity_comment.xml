@@ -18,7 +18,7 @@
         app:navigationIcon="@drawable/ic_back_black"
         app:title="@string/comment"
         app:titleTextColor="@color/black"
-        app:menu="@menu/menu_comment_toolbar"/>
+        app:menu="@menu/menu_comment_toolbar" />
 
     <TextView
         android:id="@+id/tv_all"
@@ -30,7 +30,7 @@
         android:layout_marginStart="15dp"
         android:layout_marginTop="13dp"
         android:textSize="15sp"
-        android:textColor="@color/black"/>
+        android:textColor="@color/black" />
 
     <TextView
         android:id="@+id/tv_comment_count"
@@ -52,7 +52,7 @@
         app:layout_constraintLeft_toRightOf="@id/tv_comment_count"
         app:layout_constraintTop_toTopOf="@id/tv_comment_count"
         app:layout_constraintBottom_toBottomOf="@id/tv_comment_count" />
-    
+
     <View
         android:id="@+id/view_line"
         android:layout_width="0dp"

@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.dsm.dsmmarketandroid.R
-import com.dsm.dsmmarketandroid.presentation.ui.chat.ChatFragment
+import com.dsm.dsmmarketandroid.presentation.ui.chatList.ChatFragment
 import com.dsm.dsmmarketandroid.presentation.ui.me.MeFragment
 import com.dsm.dsmmarketandroid.presentation.ui.post.PostBottomFragment
 import com.dsm.dsmmarketandroid.presentation.ui.purchase.PurchaseFragment

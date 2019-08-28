@@ -1,9 +1,9 @@
 package com.dsm.dsmmarketandroid.presentation.ui.comment
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.trash_model.CommentModel
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.CommentListAdapter
@@ -23,18 +23,26 @@ class CommentActivity : AppCompatActivity() {
         rv_comment.adapter = adapter
         adapter.addItems(
             listOf(
-                CommentModel("소동현", "2019-03-01", "저 정말 지옥참마도 가지고 싶었는데...\n" +
-                        "제가 통장에 돈이 999원 밖에 없네요... \n" +
-                        "하... 엄마한테 돈이라도 빌려야하나...."),
-                CommentModel("소동현", "2019-03-01", "저 정말 지옥참마도 가지고 싶었는데...\n" +
-                        "제가 통장에 돈이 999원 밖에 없네요... \n" +
-                        "하... 엄마한테 돈이라도 빌려야하나...."),
-                CommentModel("소동현", "2019-03-01", "저 정말 지옥참마도 가지고 싶었는데...\n" +
-                        "제가 통장에 돈이 999원 밖에 없네요... \n" +
-                        "하... 엄마한테 돈이라도 빌려야하나...."),
-                CommentModel("소동현", "2019-03-01", "저 정말 지옥참마도 가지고 싶었는데...\n" +
-                        "제가 통장에 돈이 999원 밖에 없네요... \n" +
-                        "하... 엄마한테 돈이라도 빌려야하나....")
+                CommentModel(
+                    "소동현", "2019-03-01", "저 정말 지옥참마도 가지고 싶었는데...\n" +
+                            "제가 통장에 돈이 999원 밖에 없네요... \n" +
+                            "하... 엄마한테 돈이라도 빌려야하나...."
+                ),
+                CommentModel(
+                    "소동현", "2019-03-01", "저 정말 지옥참마도 가지고 싶었는데...\n" +
+                            "제가 통장에 돈이 999원 밖에 없네요... \n" +
+                            "하... 엄마한테 돈이라도 빌려야하나...."
+                ),
+                CommentModel(
+                    "소동현", "2019-03-01", "저 정말 지옥참마도 가지고 싶었는데...\n" +
+                            "제가 통장에 돈이 999원 밖에 없네요... \n" +
+                            "하... 엄마한테 돈이라도 빌려야하나...."
+                ),
+                CommentModel(
+                    "소동현", "2019-03-01", "저 정말 지옥참마도 가지고 싶었는데...\n" +
+                            "제가 통장에 돈이 999원 밖에 없네요... \n" +
+                            "하... 엄마한테 돈이라도 빌려야하나...."
+                )
             )
         )
     }

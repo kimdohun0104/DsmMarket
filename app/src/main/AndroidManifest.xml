@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.dsm.dsmmarketandroid">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:fullBackupContent="true"
@@ -10,8 +12,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".presentation.ui.addComment.AddCommentActivity"
-            android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".presentation.ui.chat.ChatActivity" />
+        <activity android:name=".presentation.ui.post.postRent.PostRentActivity" />
+        <activity android:name=".presentation.ui.post.postPurchase.PostPurchaseActivity" />
+        <activity
+            android:name=".presentation.ui.addComment.AddCommentActivity"
+            android:windowSoftInputMode="adjustResize" />
         <activity android:name=".presentation.ui.comment.CommentActivity" />
         <activity android:name=".presentation.ui.purchaseDetail.PurchaseDetailActivity" />
         <activity android:name=".presentation.ui.category.CategoryActivity" />

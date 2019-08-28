@@ -50,6 +50,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.1.0-alpha09'
     implementation 'com.pm10:indicator:1.0.2'
     implementation 'com.makeramen:roundedimageview:2.3.0'
+    implementation 'de.hdodenhof:circleimageview:3.0.1'
 
     // kotlin
     implementation dependencies.kotlin
