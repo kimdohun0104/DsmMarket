@@ -56,4 +56,6 @@
 
 
     <string name="input_content">내용을 입력해주세요…</string>
+    <string name="input_search">검색어를 입력해주세요…</string>
+    <string name="recent_search_word">최근 검색어</string>
 </resources>

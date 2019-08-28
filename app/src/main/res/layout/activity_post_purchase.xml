@@ -3,7 +3,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".presentation.ui.post.postPurchase.PostPurchaseActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tb_post_purchase"
+        android:layout_width="0dp"
+        android:layout_height="?attr/actionBarSize"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/white"
+        app:title="@string/post_purchase_product"
+        style="@style/ToolBarStyle.Event"
+        app:navigationIcon="@drawable/ic_back_black" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
