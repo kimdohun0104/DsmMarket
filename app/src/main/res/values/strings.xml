@@ -48,4 +48,9 @@
     <string name="report">신고하기</string>
     <string name="related_product">관련 상품</string>
     <string name="recommend_product">추천 상품</string>
+
+    <!--comment-->
+    <string name="all">총</string>
+    <string name="add_comment">댓글 작성</string>
+    <string name="content">내용</string>
 </resources>

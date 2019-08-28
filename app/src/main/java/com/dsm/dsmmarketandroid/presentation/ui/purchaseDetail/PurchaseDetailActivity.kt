@@ -5,8 +5,10 @@ import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.dsm.dsmmarketandroid.R
+import com.dsm.dsmmarketandroid.presentation.ui.comment.CommentActivity
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_purchase_detail.*
+import org.jetbrains.anko.startActivity
 
 class PurchaseDetailActivity : AppCompatActivity() {
 
@@ -17,6 +19,8 @@ class PurchaseDetailActivity : AppCompatActivity() {
         tb_purchase_detail.background.alpha = 0
         tb_purchase_detail.setNavigationOnClickListener { finish() }
         tb_purchase_detail.overflowIcon = ContextCompat.getDrawable(this, R.drawable.ic_menu)
+
+        ll_comment.setOnClickListener { startActivity<CommentActivity>() }
 
         Picasso.get().load("http://recipe1.ezmember.co.kr/cache/recipe/2016/11/05/c4d779d37826aca82a44df01b3d4131c1.jpg").into(iv_product)
     }
