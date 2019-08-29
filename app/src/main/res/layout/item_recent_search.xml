@@ -19,7 +19,7 @@
     <androidx.appcompat.widget.AppCompatImageButton
         android:layout_width="12dp"
         android:layout_height="12dp"
-        android:src="@drawable/ic_x"
+        android:src="@drawable/ic_x_grey"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@id/tv_search_word"
         app:layout_constraintBottom_toBottomOf="@id/tv_search_word"

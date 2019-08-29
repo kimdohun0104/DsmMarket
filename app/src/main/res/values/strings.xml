@@ -58,4 +58,17 @@
     <string name="input_content">내용을 입력해주세요…</string>
     <string name="input_search">검색어를 입력해주세요…</string>
     <string name="recent_search_word">최근 검색어</string>
+
+
+    <string name="title">제목</string>
+    <string name="price">가격</string>
+    <string name="category">카테고리</string>
+    <string name="picture">사진</string>
+    <string name="max_5">최대 5개</string>
+    <string name="tag">태그</string>
+    <string name="post_product">상품 등록</string>
+    <string name="rental_time">대여 가능 시간 (선택)</string>
+
+    <!--category-->
+    <string name="book">책</string>
 </resources>

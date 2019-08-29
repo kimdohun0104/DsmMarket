@@ -3,6 +3,185 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".presentation.ui.post.postRent.PostRentActivity">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tb_post_rent"
+        style="@style/ToolBarStyle.Event"
+        android:layout_width="0dp"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/white"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/ic_back_black"
+        app:title="@string/post_rent_product"
+        app:titleTextColor="@color/black" />
 
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/et_title"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="30dp"
+        android:background="@null"
+        android:hint="@string/title"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tb_post_rent" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0.3dp"
+        android:background="@color/colorGrey"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_title" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/et_price"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:background="@null"
+        android:hint="@string/price"
+        app:layout_constraintLeft_toLeftOf="@id/et_title"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_title" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0.3dp"
+        android:background="@color/colorGrey"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_price" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_category"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_price">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:text="@string/category"
+            android:textColor="@color/colorGrey"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="21dp"
+            android:layout_height="21dp"
+            android:layout_marginEnd="18dp"
+            android:src="@drawable/ic_down_arrow_grey"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0.3dp"
+        android:background="@color/colorGrey"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cl_category" />
+
+    <TextView
+        android:id="@+id/tv_picture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/picture"
+        android:textColor="@color/colorGrey"
+        android:textSize="16sp"
+        app:layout_constraintLeft_toLeftOf="@id/et_price"
+        app:layout_constraintTop_toBottomOf="@id/cl_category" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_select_image"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="13dp"
+        android:src="@drawable/ic_select_picture"
+        app:layout_constraintLeft_toLeftOf="@id/tv_picture"
+        app:layout_constraintTop_toBottomOf="@id/tv_picture" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:text="@string/rental_time"
+        android:textSize="14sp"
+        android:textColor="@color/colorGrey"
+        app:layout_constraintLeft_toRightOf="@id/iv_select_image"
+        app:layout_constraintTop_toTopOf="@id/tv_picture"
+        app:layout_constraintRight_toRightOf="parent"
+        android:background="@drawable/bg_edit_text_grey"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp" />
+
+    <View
+        android:id="@+id/view_picture_line"
+        android:layout_width="0dp"
+        android:layout_height="0.3dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/colorGrey"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_select_image" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="30dp"
+        android:background="@null"
+        android:gravity="top"
+        android:hint="@string/input_content"
+        android:paddingTop="16dp"
+        app:layout_constraintBottom_toTopOf="@id/et_tag"
+        app:layout_constraintLeft_toLeftOf="@id/et_price"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/view_picture_line" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0.3dp"
+        android:background="@color/colorGrey"
+        app:layout_constraintBottom_toTopOf="@id/et_tag"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <mabbas007.tagsedittext.TagsEditText
+        android:id="@+id/et_tag"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:background="@null"
+        android:hint="@string/tag"
+        app:allowSpaceInTag="true"
+        app:layout_constraintBottom_toTopOf="@id/btn_post"
+        app:layout_constraintLeft_toLeftOf="@id/et_price"
+        app:layout_constraintRight_toRightOf="parent"
+        app:tagsBackground="@drawable/bg_primary_light_rounded"
+        app:tagsCloseImageRight="@drawable/ic_x_white"
+        app:tagsPaddingBottom="4dp"
+        app:tagsPaddingLeft="8dp"
+        app:tagsPaddingRight="8dp"
+        app:tagsPaddingTop="4dp" />
+
+    <Button
+        android:id="@+id/btn_post"
+        android:layout_width="0dp"
+        android:layout_height="46dp"
+        android:background="@drawable/bg_gradient_primary"
+        android:text="@string/post_product"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".presentation.ui.searchResult.SearchResultActivity"></activity>
+        <activity android:name=".presentation.ui.postCategory.PostCategoryActivity"></activity>
+        <activity android:name=".presentation.ui.searchResult.SearchResultActivity" />
         <activity android:name=".presentation.ui.chat.ChatActivity" />
         <activity android:name=".presentation.ui.post.postRent.PostRentActivity" />
         <activity android:name=".presentation.ui.post.postPurchase.PostPurchaseActivity" />
