@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_interest"
+        android:layout_width="0dp"
+        android:layout_height="68dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/colorRed">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_heart"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/hearts"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="18dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/interest_product"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="17sp"
+            app:layout_constraintLeft_toRightOf="@id/iv_heart"
+            app:layout_constraintTop_toTopOf="@id/iv_heart"
+            app:layout_constraintBottom_toBottomOf="@id/iv_heart"
+            android:layout_marginStart="24dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_post_product"
+        android:layout_width="0dp"
+        android:layout_height="68dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cl_interest"
+        android:background="@color/colorSky">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_box"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/box"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="18dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/my_post_product"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="17sp"
+            app:layout_constraintLeft_toRightOf="@id/iv_box"
+            app:layout_constraintTop_toTopOf="@id/iv_box"
+            app:layout_constraintBottom_toBottomOf="@id/iv_box"
+            android:layout_marginStart="24dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_past_product"
+        android:layout_width="0dp"
+        android:layout_height="68dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cl_post_product"
+        android:background="@color/colorGreen">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_past"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/past"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="18dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/past_saw_product"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="17sp"
+            app:layout_constraintLeft_toRightOf="@id/iv_past"
+            app:layout_constraintTop_toTopOf="@id/iv_past"
+            app:layout_constraintBottom_toBottomOf="@id/iv_past"
+            android:layout_marginStart="24dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/tv_user_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/user_info"
+        android:textSize="13sp"
+        android:textColor="@color/black"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginStart="18dp"
+        app:layout_constraintTop_toBottomOf="@id/cl_past_product"
+        android:layout_marginTop="50dp" />
+
+    <View
+        android:id="@+id/view_user_info"
+        android:layout_width="0dp"
+        android:layout_height="0.7dp"
+        android:background="@color/colorGrey_3"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_user_info"
+        android:layout_marginTop="8dp" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_change_name"
+        android:layout_width="0dp"
+        android:layout_height="42dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/view_user_info">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/modify_name"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="18dp" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="13dp"
+            android:layout_height="13dp"
+            android:src="@drawable/ic_right_arrow_grey"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginEnd="10dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_change_password"
+        android:layout_width="0dp"
+        android:layout_height="42dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cl_change_name">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/modify_password"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="18dp" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="13dp"
+            android:layout_height="13dp"
+            android:src="@drawable/ic_right_arrow_grey"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginEnd="10dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

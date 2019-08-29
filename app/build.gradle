@@ -47,6 +47,12 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.0.2'
     implementation 'androidx.core:core-ktx:1.0.2'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'com.google.android.material:material:1.1.0-alpha09'
+    implementation 'com.pm10:indicator:1.0.2'
+    implementation 'com.makeramen:roundedimageview:2.3.0'
+    implementation 'de.hdodenhof:circleimageview:3.0.1'
+    implementation 'com.github.mabbas007:TagsEditText:1.0.5'
+    implementation 'net.cachapa.expandablelayout:expandablelayout:2.9.2'
 
     // kotlin
     implementation dependencies.kotlin
@@ -57,8 +63,14 @@ dependencies {
     androidTestImplementation testDependencies.espressoCore
 
     // firebase
-    implementation 'com.google.firebase:firebase-core:17.1.0'
-    implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
+    implementation dependencies.firebaseCore
+    implementation dependencies.crashlytics
+
+    // koin
+    implementation dependencies.anko
+
+    // picasso
+    implementation dependencies.picasso
 }
 
 apply plugin: 'com.google.gms.google-services'
