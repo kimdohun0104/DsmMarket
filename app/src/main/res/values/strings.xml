@@ -71,4 +71,25 @@
 
     <!--category-->
     <string name="book">책</string>
+    
+    <string-array name="grade">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <string-array name="gender">
+        <item>남성</item>
+        <item>여성</item>
+        <item>밝히지 않음</item>
+    </string-array>
+    
+    <!--fail-->
+    <string name="fail_login">이메일 또는 비밀번호가 틀렸습니다</string>
+    <string name="fail_invalid_email">유효하지 않은 이메일입니다</string>
+    <string name="fail_diff_password">비밀번호가 일치하지 않습니다</string>
+    <string name="fail_sign_up">회원가입에 실패했습니다</string>
+    <string name="fail_existent_email">이미 존재하는 이메일입니다</string>
+    <string name="fail_existent_nick">이미 존재하는 닉네임입니다</string>
+
 </resources>

@@ -6,6 +6,11 @@ ext {
     crashlyticsVersion = '2.10.1'
     ankoVersion = '0.10.8'
     picassoVersion = '2.71828'
+    retrofitVersion = '2.6.1'
+    rxJavaVersion = '2.2.12'
+    rxAndroidVersion = '2.1.1'
+    koinVersion = '2.0.1'
+    lifecycleVersion = '2.0.0'
 
     // testing
     junitVersion = '4.12'
@@ -13,11 +18,17 @@ ext {
     espressoCoreVersion = '3.2.0'
 
     domainDependencies = [
-            kotlin: "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
+            kotlin: "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion",
+            rxJava: "io.reactivex.rxjava2:rxjava:$rxJavaVersion",
+            retrofit: "com.squareup.retrofit2:retrofit:$retrofitVersion"
     ]
 
     dataDependencies = [
-            kotlin: "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
+            kotlin: "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion",
+            retrofit: "com.squareup.retrofit2:retrofit:$retrofitVersion",
+            rxJava: "io.reactivex.rxjava2:rxjava:$rxJavaVersion",
+            rxAndroid: "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion",
+            koinAndroid: "org.koin:koin-android:$koinVersion"
     ]
 
     presentationDependencies = [
@@ -25,7 +36,15 @@ ext {
             firebaseCore: "com.google.firebase:firebase-core:$firebaseCoreVersion",
             crashlytics: "com.crashlytics.sdk.android:crashlytics:$crashlyticsVersion",
             anko: "org.jetbrains.anko:anko:$ankoVersion",
-            picasso: "com.squareup.picasso:picasso:$picassoVersion"
+            picasso: "com.squareup.picasso:picasso:$picassoVersion",
+            koinAndroid: "org.koin:koin-android:$koinVersion",
+            retrofit: "com.squareup.retrofit2:retrofit:$retrofitVersion",
+            retrofitGson: "com.squareup.retrofit2:converter-gson:$retrofitVersion",
+            retrofitRxJava: "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion",
+            lifecycleRuntime: "androidx.lifecycle:lifecycle-runtime:$lifecycleVersion",
+            lifecycleExtensions: "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion",
+            lifecycleCompiler: "androidx.lifecycle:lifecycle-compiler:$lifecycleVersion",
+            koinViewModel: "org.koin:koin-androidx-viewmodel:$koinVersion"
     ]
 
     dataTestDependencies = [

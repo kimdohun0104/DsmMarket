@@ -4,6 +4,8 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'kotlin-kapt'
+
 apply plugin: 'io.fabric'
 
 android {
@@ -33,6 +35,9 @@ android {
     compileOptions {
         sourceCompatibility 1.8
         targetCompatibility 1.8
+    }
+    dataBinding {
+        enabled = true
     }
 }
 
@@ -66,11 +71,25 @@ dependencies {
     implementation dependencies.firebaseCore
     implementation dependencies.crashlytics
 
-    // koin
+    // anko
     implementation dependencies.anko
 
     // picasso
     implementation dependencies.picasso
+
+    // koin
+    implementation dependencies.koinAndroid
+    implementation dependencies.koinViewModel
+
+    // retrofit
+    implementation dependencies.retrofit
+    implementation dependencies.retrofitGson
+    implementation dependencies.retrofitRxJava
+
+    // lifecycle
+    implementation dependencies.lifecycleRuntime
+    implementation dependencies.lifecycleExtensions
+    kapt dependencies.lifecycleCompiler
 }
 
 apply plugin: 'com.google.gms.google-services'

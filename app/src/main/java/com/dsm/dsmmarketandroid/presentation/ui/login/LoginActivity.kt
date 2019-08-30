@@ -1,22 +1,43 @@
 package com.dsm.dsmmarketandroid.presentation.ui.login
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import com.dsm.dsmmarketandroid.R
+import com.dsm.dsmmarketandroid.databinding.ActivityLoginBinding
+import com.dsm.dsmmarketandroid.presentation.ui.base.BaseActivity
 import com.dsm.dsmmarketandroid.presentation.ui.findPassword.FindPasswordActivity
 import com.dsm.dsmmarketandroid.presentation.ui.main.MainActivity
 import kotlinx.android.synthetic.main.activity_login.*
 import org.jetbrains.anko.startActivity
+import org.jetbrains.anko.toast
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class LoginActivity : AppCompatActivity() {
+class LoginActivity : BaseActivity<ActivityLoginBinding>() {
+
+    override val layoutResourceId: Int
+        get() = R.layout.activity_login
+
+    private val viewModel: LoginViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+
         tb_login.setNavigationOnClickListener { finish() }
 
         tv_forget_password.setOnClickListener { startActivity<FindPasswordActivity>() }
 
         btn_login.setOnClickListener { startActivity<MainActivity>() }
+
+        viewModel.loginSuccessEvent.observe(this, Observer {
+            val intent = Intent(this, MainActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            startActivity(intent)
+        })
+
+        viewModel.loginFailEvent.observe(this, Observer { toast(getString(R.string.fail_login)) })
+
+        binding.viewModel = viewModel
     }
 }

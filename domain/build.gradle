@@ -8,6 +8,12 @@ dependencies {
 
     // kotlin
     implementation dependencies.kotlin
+
+    // rxJava
+    implementation dependencies.rxJava
+
+    // retrofit
+    implementation dependencies.retrofit
 }
 
 sourceCompatibility = "7"
