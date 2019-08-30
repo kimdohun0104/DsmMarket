@@ -1,64 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+<layout xmlns:bind="http://schemas.android.com/tools">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/til_name"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.dsm.dsmmarketandroid.presentation.ui.signUp.SignUpViewModel" />
+    </data>
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_name"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="@string/name" />
-    </com.google.android.material.textfield.TextInputLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/tv_gender"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="@string/gender"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        app:layout_constraintLeft_toLeftOf="@id/til_name"
-        app:layout_constraintTop_toBottomOf="@id/til_name" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-    <Spinner
-        android:id="@+id/spn_gender"
-        android:layout_width="0dp"
-        android:layout_height="28dp"
-        android:layout_marginStart="16dp"
-        app:layout_constraintBottom_toBottomOf="@id/tv_gender"
-        app:layout_constraintLeft_toRightOf="@id/tv_gender"
-        app:layout_constraintRight_toRightOf="@id/til_name"
-        app:layout_constraintTop_toTopOf="@id/tv_gender" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_name"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/name"
+                android:text="@={viewModel.name}"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <TextView
-        android:id="@+id/tv_grade"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="@string/grade"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        app:layout_constraintLeft_toLeftOf="@id/tv_gender"
-        app:layout_constraintTop_toBottomOf="@id/tv_gender" />
+        <TextView
+            android:id="@+id/tv_gender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="@string/gender"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintLeft_toLeftOf="@id/til_name"
+            app:layout_constraintTop_toBottomOf="@id/til_name" />
 
-    <Spinner
-        android:layout_width="0dp"
-        android:layout_height="28dp"
-        app:layout_constraintBottom_toBottomOf="@id/tv_grade"
-        app:layout_constraintLeft_toLeftOf="@id/spn_gender"
-        app:layout_constraintRight_toRightOf="@id/spn_gender"
-        app:layout_constraintTop_toTopOf="@id/tv_grade" />
+        <Spinner
+            android:id="@+id/spn_gender"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="16dp"
+            android:entries="@array/grade"
+            app:layout_constraintBottom_toBottomOf="@id/tv_gender"
+            app:layout_constraintLeft_toRightOf="@id/tv_gender"
+            app:layout_constraintRight_toRightOf="@id/til_name"
+            app:layout_constraintTop_toTopOf="@id/tv_gender"
+            bind:spinner="@{viewModel.gender}"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/tv_grade"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="@string/grade"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintLeft_toLeftOf="@id/tv_gender"
+            app:layout_constraintTop_toBottomOf="@id/tv_gender" />
+
+        <Spinner
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:entries="@array/gender"
+            app:layout_constraintBottom_toBottomOf="@id/tv_grade"
+            app:layout_constraintLeft_toLeftOf="@id/spn_gender"
+            app:layout_constraintRight_toRightOf="@id/spn_gender"
+            app:layout_constraintTop_toTopOf="@id/tv_grade"
+            bind:spinner="@{viewModel.grade}"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

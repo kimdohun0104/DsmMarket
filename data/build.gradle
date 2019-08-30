@@ -42,4 +42,13 @@ dependencies {
     testImplementation testDependencies.junit
     androidTestImplementation testDependencies.testRunner
 
+    // retrofit
+    implementation dependencies.retrofit
+
+    // rxJava
+    implementation dependencies.rxJava
+    implementation dependencies.rxAndroid
+
+    // koin
+    implementation dependencies.koinAndroid
 }
