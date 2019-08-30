@@ -24,6 +24,12 @@ class AccountDataSourceImpl(
     override fun refreshToken(refreshToken: String): Flowable<Response<Map<String, Any>>> =
         api.refreshToken(refreshToken).addSchedulers()
 
+    override fun sendEmail(email: String): Flowable<Response<Unit>> =
+        api.sendMail(email).addSchedulers()
+
+    override fun mailConfirm(body: Any): Flowable<Response<Unit>> =
+        api.mailConfirm(body).addSchedulers()
+
     override fun setAccessToken(token: String) =
         prefHelper.setAccessToken(token)
 

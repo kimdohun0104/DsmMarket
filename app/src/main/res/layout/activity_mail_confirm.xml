@@ -1,31 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
         <variable
             name="viewModel"
-            type="com.dsm.dsmmarketandroid.presentation.ui.findPassword.FindPasswordViewModel" />
+            type="com.dsm.dsmmarketandroid.presentation.ui.mailConfirm.MailConfirmViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.ui.findPassword.FindPasswordActivity">
+        tools:context=".presentation.ui.mailConfirm.MailConfirmActivity">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/tb_login"
-            style="@style/ToolBarStyle.Event"
+            android:id="@+id/tb_confirm_code"
             android:layout_width="0dp"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/white"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:navigationIcon="@drawable/ic_back_black"
-            app:title="@string/find_password"
-            app:titleTextColor="@color/black" />
+            android:background="@color/white"
+            style="@style/ToolBarStyle.Event"
+            app:title="@string/mail_confirm"
+            app:titleTextColor="@color/black"
+            app:navigationIcon="@drawable/ic_back_black" />
 
         <View
             android:layout_width="0dp"
@@ -33,7 +32,7 @@
             android:background="@drawable/bg_gradient_primary"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tb_login" />
+            app:layout_constraintTop_toBottomOf="@id/tb_confirm_code" />
 
         <ImageView
             android:id="@+id/iv_logo"
@@ -45,7 +44,7 @@
             android:transitionName="logo"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tb_login" />
+            app:layout_constraintTop_toBottomOf="@id/tb_confirm_code" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_parent"
@@ -63,7 +62,7 @@
             app:layout_constraintTop_toBottomOf="@id/iv_logo">
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_email"
+                android:id="@+id/til_code"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
@@ -74,30 +73,30 @@
                 app:layout_constraintTop_toTopOf="@id/cl_parent">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/et_email"
+                    android:id="@+id/et_code"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:hint="@string/email"
-                    android:text="@={viewModel.email}"/>
+                    android:hint="@string/confirm_code"
+                    android:text="@={viewModel.confirmCode}"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
-                android:id="@+id/btn_find_password"
+                android:id="@+id/btn_confirm_code"
                 android:layout_width="0dp"
                 android:layout_height="46dp"
                 android:layout_marginStart="25dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="25dp"
-                android:text="@string/find_password"
+                android:text="@string/mail_confirm"
                 android:textColor="@color/colorWhite"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/til_email"
-                android:background="@{viewModel.isFindPasswordBtnEnable ? @drawable/bg_btn_primary_rounded : @drawable/bg_btn_grey_rounded}"
-                android:clickable="@{viewModel.isFindPasswordBtnEnable}"
-                android:onClick="@{() -> viewModel.sendEmail()}"/>
+                app:layout_constraintTop_toBottomOf="@id/til_code"
+                android:background="@{viewModel.isConfirmCodeBtnEnable ? @drawable/bg_btn_primary_rounded : @drawable/bg_btn_grey_rounded}"
+                android:clickable="@{viewModel.isConfirmCodeBtnEnable}"
+                android:onClick="@{() -> viewModel.confirmCode()}"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

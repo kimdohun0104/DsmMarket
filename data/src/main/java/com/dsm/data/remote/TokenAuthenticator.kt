@@ -28,7 +28,8 @@ class TokenAuthenticator(private val prefHelper: PrefHelper) : Authenticator, Ko
                         .addHeader("authorization", accessToken)
                         .build()
                 } else {
-
+                    prefHelper.deleteRefreshToken()
+                    prefHelper.deleteAccessToken()
                 }
             }
         }
