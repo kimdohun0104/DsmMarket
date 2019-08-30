@@ -1,7 +1,6 @@
 package com.dsm.dsmmarketandroid.presentation.ui.findPassword
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.ActivityFindPasswordBinding

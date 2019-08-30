@@ -38,6 +38,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
 
         viewModel.loginFailEvent.observe(this, Observer { toast(getString(R.string.fail_login)) })
 
+        viewModel.serverErrorEvent.observe(this, Observer { toast(getString(R.string.fail_server_error)) })
+
         binding.viewModel = viewModel
     }
 }

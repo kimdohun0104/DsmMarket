@@ -1,7 +1,6 @@
 package com.dsm.dsmmarketandroid.presentation.util
 
 import android.widget.Spinner
-import androidx.core.view.get
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.MutableLiveData
 

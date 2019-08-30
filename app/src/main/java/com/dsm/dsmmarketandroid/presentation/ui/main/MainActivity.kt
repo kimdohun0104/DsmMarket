@@ -1,11 +1,8 @@
 package com.dsm.dsmmarketandroid.presentation.ui.main
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.dsm.data.addSchedulers
-import com.dsm.data.remote.Api
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.ui.chatList.ChatFragment
 import com.dsm.dsmmarketandroid.presentation.ui.me.MeFragment
@@ -13,7 +10,6 @@ import com.dsm.dsmmarketandroid.presentation.ui.post.PostBottomFragment
 import com.dsm.dsmmarketandroid.presentation.ui.purchase.PurchaseFragment
 import com.dsm.dsmmarketandroid.presentation.ui.rent.RentFragment
 import kotlinx.android.synthetic.main.activity_main.*
-import org.koin.android.ext.android.inject
 
 class MainActivity : AppCompatActivity() {
 

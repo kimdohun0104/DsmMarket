@@ -2,6 +2,7 @@
 <layout>
 
     <data>
+
         <variable
             name="viewModel"
             type="com.dsm.dsmmarketandroid.presentation.ui.login.LoginViewModel" />
@@ -78,7 +79,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:hint="@string/email"
-                    android:text="@={viewModel.email}"/>
+                    android:text="@={viewModel.email}" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -95,7 +96,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:hint="@string/password"
-                    android:text="@={viewModel.password}"/>
+                    android:text="@={viewModel.password}" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
@@ -117,16 +118,16 @@
                 android:layout_marginStart="25dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="25dp"
+                android:background="@{viewModel.isLoginEnable ? @drawable/bg_primary_rounded : @drawable/bg_grey_rounded}"
+                android:clickable="@{viewModel.isLoginEnable}"
+                android:onClick="@{() -> viewModel.login()}"
                 android:text="@string/login"
                 android:textColor="@color/colorWhite"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_forget_password"
-                android:background="@{viewModel.isLoginBtnEnable ? @drawable/bg_btn_primary_rounded : @drawable/bg_btn_grey_rounded}"
-                android:clickable="@{viewModel.isLoginBtnEnable}"
-                android:onClick="@{() -> viewModel.login()}"/>
+                app:layout_constraintTop_toBottomOf="@id/tv_forget_password" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

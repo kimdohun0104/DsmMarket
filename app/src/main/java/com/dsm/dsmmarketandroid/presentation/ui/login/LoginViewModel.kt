@@ -1,6 +1,5 @@
 package com.dsm.dsmmarketandroid.presentation.ui.login
 
-import android.util.Log
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import com.dsm.domain.usecase.LoginUseCase
@@ -12,13 +11,14 @@ class LoginViewModel(private val loginUseCase: LoginUseCase) : BaseViewModel() {
     val email = MutableLiveData<String>()
     val password = MutableLiveData<String>()
 
-    val isLoginBtnEnable = MediatorLiveData<Boolean>().apply {
+    val isLoginEnable = MediatorLiveData<Boolean>().apply {
         addSource(email) { value = !email.value.isNullOrBlank() && !password.value.isNullOrBlank() }
         addSource(password) { value = !email.value.isNullOrBlank() && !password.value.isNullOrBlank() }
     }
 
     val loginSuccessEvent = SingleLiveEvent<Any>()
     val loginFailEvent = SingleLiveEvent<Any>()
+    val serverErrorEvent = SingleLiveEvent<Any>()
 
     fun login() {
         addDisposable(
@@ -33,7 +33,7 @@ class LoginViewModel(private val loginUseCase: LoginUseCase) : BaseViewModel() {
                     403 -> loginFailEvent.call()
                 }
             }, {
-                loginFailEvent.call()
+                serverErrorEvent.call()
             })
         )
     }

@@ -1,7 +1,7 @@
 package com.dsm.dsmmarketandroid.presentation.ui.postCategory
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.dsm.dsmmarketandroid.R
 
 class PostCategoryActivity : AppCompatActivity() {

@@ -1,15 +1,11 @@
 package com.dsm.dsmmarketandroid.presentation.ui.signUp
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.FragmentSignUp2Binding
 import com.dsm.dsmmarketandroid.presentation.ui.base.BaseFragment
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SignUp2Fragment : BaseFragment<FragmentSignUp2Binding>() {
 

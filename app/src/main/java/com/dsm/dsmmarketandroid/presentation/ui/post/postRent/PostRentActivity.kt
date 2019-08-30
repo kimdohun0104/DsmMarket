@@ -3,7 +3,6 @@ package com.dsm.dsmmarketandroid.presentation.ui.post.postRent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.dsm.dsmmarketandroid.R
-import com.dsm.dsmmarketandroid.presentation.ui.category.CategoryActivity
 import com.dsm.dsmmarketandroid.presentation.ui.postCategory.PostCategoryActivity
 import kotlinx.android.synthetic.main.activity_post_rent.*
 import org.jetbrains.anko.startActivity

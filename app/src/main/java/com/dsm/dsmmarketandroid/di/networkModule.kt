@@ -1,8 +1,8 @@
 package com.dsm.dsmmarketandroid.di
 
 import com.dsm.data.remote.Api
-import com.dsm.data.remote.TokenAuthenticator
-import com.dsm.data.remote.TokenInterceptor
+import com.dsm.data.remote.token.TokenAuthenticator
+import com.dsm.data.remote.token.TokenInterceptor
 import okhttp3.OkHttpClient
 import org.koin.dsl.module
 import retrofit2.Retrofit

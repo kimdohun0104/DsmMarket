@@ -1,7 +1,6 @@
 package com.dsm.dsmmarketandroid.presentation.ui.signUp
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.ActivitySignUpBinding
@@ -31,11 +30,11 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() {
 
         viewModel.signUpSuccessEvent.observe(this, Observer { finish() })
 
-        viewModel.signUpFailEvent.observe(this, Observer { toast(getString(R.string.fail_sign_up)) })
-
         viewModel.existentEmailEvent.observe(this, Observer { toast(getString(R.string.fail_existent_email)) })
 
         viewModel.existentNameEvent.observe(this, Observer { toast(getString(R.string.fail_existent_nick)) })
+
+        viewModel.serverErrorEvent.observe(this, Observer { toast(getString(R.string.fail_server_error)) })
 
         binding.viewModel = viewModel
     }

@@ -1,7 +1,6 @@
 package com.dsm.data.dataSource
 
 import io.reactivex.Flowable
-import retrofit2.Call
 import retrofit2.Response
 
 interface AccountDataSource {

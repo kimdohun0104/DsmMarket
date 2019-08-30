@@ -1,6 +1,5 @@
 package com.dsm.dsmmarketandroid.di
 
-import com.dsm.domain.usecase.MailConfirmUseCase
 import com.dsm.dsmmarketandroid.presentation.ui.findPassword.FindPasswordViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.login.LoginViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.mailConfirm.MailConfirmViewModel
