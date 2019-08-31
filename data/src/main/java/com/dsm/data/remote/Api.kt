@@ -12,19 +12,25 @@ interface Api {
     @POST("account/auth/join")
     fun signUp(@Body body: Any): Flowable<Response<Map<String, Int>>>
 
-    @PATCH("account/edit/password")
-    fun editPassword(@Body body: Any): Flowable<Response<Unit>>
+    @FormUrlEncoded
+    @POST("mail/send")
+    fun sendPasswordCode(@Field("email") email: String): Flowable<Response<Unit>>
+
+    @POST("mail/confirm")
+    fun passwordCodeConfirm(@Body body: Any): Flowable<Response<Unit>>
+
+    @FormUrlEncoded
+    @POST("account/edit/password")
+    fun changePassword(@Field("password") newPassword: String): Flowable<Response<Unit>>
+
+    @FormUrlEncoded
+    @PATCH("mail/password")
+    fun changePassword(@Field("email") email: String,
+                       @Field("password") newPassword: String): Flowable<Response<Unit>>
 
     @FormUrlEncoded
     @PATCH("account/edit/name")
     fun editName(@Field("new_nick") newName: String): Flowable<Response<Map<String, Any>>>
-
-    @FormUrlEncoded
-    @POST("mail/send")
-    fun sendMail(@Field("email") email: String): Flowable<Response<Unit>>
-
-    @POST("mail/confirm")
-    fun mailConfirm(@Body body: Any): Flowable<Response<Unit>>
 
     @FormUrlEncoded
     @POST("account/auth/token")

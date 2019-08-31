@@ -7,9 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.ui.changeName.ChangeNameActivity
-import com.dsm.dsmmarketandroid.presentation.ui.changePassword.ChangePasswordActivity
 import com.dsm.dsmmarketandroid.presentation.ui.interest.InterestActivity
 import com.dsm.dsmmarketandroid.presentation.ui.myPost.MyPostActivity
+import com.dsm.dsmmarketandroid.presentation.ui.password.changePassword.ChangePasswordActivity
 import com.dsm.dsmmarketandroid.presentation.ui.past.PastActivity
 import kotlinx.android.synthetic.main.fragment_me.view.*
 import org.jetbrains.anko.startActivity

@@ -15,11 +15,17 @@ class AccountRepositoryImpl(private val accountDataSource: AccountDataSource) : 
     override fun refreshToken(refreshToken: String): Flowable<Response<Map<String, Any>>> =
         accountDataSource.refreshToken(refreshToken)
 
-    override fun sendMail(email: String): Flowable<Response<Unit>> =
-        accountDataSource.sendEmail(email)
+    override fun sendPasswordCode(email: String): Flowable<Response<Unit>> =
+        accountDataSource.sendPasswordCode(email)
 
-    override fun mailConfirm(body: Any): Flowable<Response<Unit>> =
-        accountDataSource.mailConfirm(body)
+    override fun passwordCodeConfirm(body: Any): Flowable<Response<Unit>> =
+        accountDataSource.passwordCodeConfirm(body)
+
+    override fun changePassword(newPassword: String): Flowable<Response<Unit>> =
+        accountDataSource.changePassword(newPassword)
+
+    override fun changePassword(email: String, newPassword: String): Flowable<Response<Unit>> =
+        accountDataSource.changePassword(email, newPassword)
 
     override fun setAccessToken(token: String) =
         accountDataSource.setAccessToken(token)

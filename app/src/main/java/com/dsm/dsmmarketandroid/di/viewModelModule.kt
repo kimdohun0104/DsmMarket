@@ -1,8 +1,9 @@
 package com.dsm.dsmmarketandroid.di
 
-import com.dsm.dsmmarketandroid.presentation.ui.findPassword.FindPasswordViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.login.LoginViewModel
-import com.dsm.dsmmarketandroid.presentation.ui.mailConfirm.MailConfirmViewModel
+import com.dsm.dsmmarketandroid.presentation.ui.password.changePassword.ChangePasswordViewModel
+import com.dsm.dsmmarketandroid.presentation.ui.password.passwordCodeConfirm.PasswordCodeConfirmViewModel
+import com.dsm.dsmmarketandroid.presentation.ui.password.sendPasswordCode.SendPasswordCodeViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.signUp.SignUpViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -12,7 +13,9 @@ val viewModelModule = module {
 
     viewModel { SignUpViewModel(get()) }
 
-    viewModel { FindPasswordViewModel(get()) }
+    viewModel { SendPasswordCodeViewModel(get()) }
 
-    viewModel { MailConfirmViewModel(get()) }
+    viewModel { PasswordCodeConfirmViewModel(get()) }
+
+    viewModel { ChangePasswordViewModel(get()) }
 }
