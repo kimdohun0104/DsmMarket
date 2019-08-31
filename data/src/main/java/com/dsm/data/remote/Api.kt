@@ -38,7 +38,6 @@ interface Api {
     @POST("account/auth/token")
     fun refreshToken(@Field("refresh_token") refreshToken: String): Flowable<Response<Map<String, Any>>>
 
-    @FormUrlEncoded
     @GET("account/get/nick")
     fun getUserNick(): Flowable<Response<Map<String, String>>>
 }
