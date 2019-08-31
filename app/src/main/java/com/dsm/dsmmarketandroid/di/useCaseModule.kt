@@ -17,4 +17,6 @@ val useCaseModule = module {
     factory { ChangePasswordUseCase(get()) }
 
     factory { GetUserNickUseCase(get()) }
+
+    factory { ChangeNickUseCase(get()) }
 }

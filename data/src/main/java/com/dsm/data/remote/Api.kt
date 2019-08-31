@@ -31,8 +31,8 @@ interface Api {
     ): Flowable<Response<Unit>>
 
     @FormUrlEncoded
-    @PATCH("account/edit/name")
-    fun editName(@Field("new_nick") newName: String): Flowable<Response<Map<String, Any>>>
+    @PATCH("account/edit/nick")
+    fun changeUserNick(@Field("nick") newNick: String): Flowable<Response<Unit>>
 
     @FormUrlEncoded
     @POST("account/auth/token")

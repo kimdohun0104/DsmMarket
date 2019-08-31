@@ -27,12 +27,27 @@ class AccountRepositoryImpl(private val accountDataSource: AccountDataSource) : 
     override fun changePassword(email: String, newPassword: String): Flowable<Response<Unit>> =
         accountDataSource.changePassword(email, newPassword)
 
-    override fun getUserNick(): Flowable<Response<Map<String, String>>> =
-        accountDataSource.getUserNick()
+    override fun getRemoteUserNick(): Flowable<String> =
+        accountDataSource.getRemoteUserNick().map {
+            if (it.code() == 200) {
+                it.body()!!["nick"]
+            } else {
+                ""
+            }
+        }
+
+    override fun changeUserNick(newNick: String): Flowable<Response<Unit>> =
+        accountDataSource.changeUserNick(newNick)
 
     override fun setAccessToken(token: String) =
         accountDataSource.setAccessToken(token)
 
     override fun setRefreshToken(token: String) =
         accountDataSource.setRefreshToken(token)
+
+    override fun setUserNick(nick: String) =
+        accountDataSource.setUserNick(nick)
+
+    override fun getLocalUserNick(): String? =
+        accountDataSource.getLocalUserNick()
 }

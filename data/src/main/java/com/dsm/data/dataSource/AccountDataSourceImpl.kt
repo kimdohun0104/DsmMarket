@@ -32,12 +32,21 @@ class AccountDataSourceImpl(
     override fun changePassword(email: String, newPassword: String): Flowable<Response<Unit>> =
         api.changePassword(email, newPassword).addSchedulers()
 
-    override fun getUserNick(): Flowable<Response<Map<String, String>>> =
+    override fun getRemoteUserNick(): Flowable<Response<Map<String, String>>> =
         api.getUserNick().addSchedulers()
+
+    override fun changeUserNick(newNick: String): Flowable<Response<Unit>> =
+        api.changeUserNick(newNick).addSchedulers()
 
     override fun setAccessToken(token: String) =
         prefHelper.setAccessToken(token)
 
     override fun setRefreshToken(token: String) =
         prefHelper.setRefreshToken(token)
+
+    override fun setUserNick(nick: String) =
+        prefHelper.setUserNick(nick)
+
+    override fun getLocalUserNick(): String? =
+        prefHelper.getUserNick()
 }

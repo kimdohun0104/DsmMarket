@@ -1,5 +1,6 @@
 package com.dsm.dsmmarketandroid.di
 
+import com.dsm.dsmmarketandroid.presentation.ui.changeNick.ChangeNickViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.login.LoginViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.me.MeViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.password.changePassword.ChangePasswordViewModel
@@ -21,4 +22,6 @@ val viewModelModule = module {
     viewModel { ChangePasswordViewModel(get()) }
 
     viewModel { MeViewModel(get()) }
+
+    viewModel { ChangeNickViewModel(get()) }
 }

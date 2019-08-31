@@ -30,6 +30,7 @@ class TokenAuthenticator(private val prefHelper: PrefHelper) : Authenticator, Ko
                 } else {
                     prefHelper.deleteRefreshToken()
                     prefHelper.deleteAccessToken()
+                    prefHelper.deleteUserNick()
                 }
             }
         }

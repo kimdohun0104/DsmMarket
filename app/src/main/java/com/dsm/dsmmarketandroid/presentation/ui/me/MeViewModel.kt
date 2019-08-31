@@ -12,7 +12,7 @@ class MeViewModel(private val getUserNickUseCase: GetUserNickUseCase) : BaseView
         addDisposable(
             getUserNickUseCase.create(Unit)
                 .subscribe({
-                    userNick.value = it.body()!!["nick"]
+                    userNick.value = it
                 }, {
                     userNick.value = ""
                 })
