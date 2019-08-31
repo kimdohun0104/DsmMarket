@@ -1,6 +1,5 @@
 package com.dsm.dsmmarketandroid.presentation.ui.password.sendPasswordCode
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
