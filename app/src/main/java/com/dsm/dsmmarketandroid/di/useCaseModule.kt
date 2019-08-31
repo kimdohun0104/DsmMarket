@@ -10,7 +10,9 @@ val useCaseModule = module {
 
     factory { RefreshTokenUseCase(get()) }
 
-    factory { SendMailUseCase(get()) }
+    factory { SendPasswordCodeUseCase(get()) }
 
-    factory { MailConfirmUseCase(get()) }
+    factory { PasswordCodeConfirmUseCase(get()) }
+
+    factory { ChangePasswordUseCase(get()) }
 }

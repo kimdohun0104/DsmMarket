@@ -20,11 +20,17 @@ class AccountDataSourceImpl(
     override fun refreshToken(refreshToken: String): Flowable<Response<Map<String, Any>>> =
         api.refreshToken(refreshToken).addSchedulers()
 
-    override fun sendEmail(email: String): Flowable<Response<Unit>> =
-        api.sendMail(email).addSchedulers()
+    override fun sendPasswordCode(email: String): Flowable<Response<Unit>> =
+        api.sendPasswordCode(email).addSchedulers()
 
-    override fun mailConfirm(body: Any): Flowable<Response<Unit>> =
-        api.mailConfirm(body).addSchedulers()
+    override fun passwordCodeConfirm(body: Any): Flowable<Response<Unit>> =
+        api.passwordCodeConfirm(body).addSchedulers()
+
+    override fun changePassword(newPassword: String): Flowable<Response<Unit>> =
+        api.changePassword(newPassword).addSchedulers()
+
+    override fun changePassword(email: String, newPassword: String): Flowable<Response<Unit>> =
+        api.changePassword(email, newPassword).addSchedulers()
 
     override fun setAccessToken(token: String) =
         prefHelper.setAccessToken(token)

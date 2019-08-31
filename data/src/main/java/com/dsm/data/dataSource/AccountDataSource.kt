@@ -11,9 +11,13 @@ interface AccountDataSource {
 
     fun refreshToken(refreshToken: String): Flowable<Response<Map<String, Any>>>
 
-    fun sendEmail(email: String): Flowable<Response<Unit>>
+    fun sendPasswordCode(email: String): Flowable<Response<Unit>>
 
-    fun mailConfirm(body: Any): Flowable<Response<Unit>>
+    fun passwordCodeConfirm(body: Any): Flowable<Response<Unit>>
+
+    fun changePassword(newPassword: String): Flowable<Response<Unit>>
+
+    fun changePassword(email: String, newPassword: String): Flowable<Response<Unit>>
 
     fun setAccessToken(token: String)
 

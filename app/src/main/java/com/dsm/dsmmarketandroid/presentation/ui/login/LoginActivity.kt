@@ -6,8 +6,8 @@ import androidx.lifecycle.Observer
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.ActivityLoginBinding
 import com.dsm.dsmmarketandroid.presentation.ui.base.BaseActivity
-import com.dsm.dsmmarketandroid.presentation.ui.findPassword.FindPasswordActivity
 import com.dsm.dsmmarketandroid.presentation.ui.main.MainActivity
+import com.dsm.dsmmarketandroid.presentation.ui.password.sendPasswordCode.SendPasswordCodeActivity
 import kotlinx.android.synthetic.main.activity_login.*
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
@@ -25,7 +25,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
 
         tb_login.setNavigationOnClickListener { finish() }
 
-        tv_forget_password.setOnClickListener { startActivity<FindPasswordActivity>() }
+        tv_forget_password.setOnClickListener { startActivity<SendPasswordCodeActivity>() }
 
         btn_login.setOnClickListener { startActivity<MainActivity>() }
 
