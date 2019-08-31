@@ -1,11 +1,10 @@
 package com.dsm.dsmmarketandroid.presentation.util
 
+import android.graphics.drawable.ColorDrawable
 import android.widget.Spinner
 import androidx.databinding.BindingAdapter
-import androidx.lifecycle.MutableLiveData
-import android.graphics.drawable.ColorDrawable
 import androidx.databinding.BindingConversion
-
+import androidx.lifecycle.MutableLiveData
 
 
 object BindingUtil {
