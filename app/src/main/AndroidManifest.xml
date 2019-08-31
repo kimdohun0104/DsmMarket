@@ -32,7 +32,7 @@
         <activity android:name=".presentation.ui.past.PastActivity" />
         <activity android:name=".presentation.ui.myPost.MyPostActivity" />
         <activity android:name=".presentation.ui.interest.InterestActivity" />
-        <activity android:name=".presentation.ui.changeName.ChangeNameActivity" />
+        <activity android:name=".presentation.ui.changeNick.ChangeNickActivity" />
         <activity android:name=".presentation.ui.password.changePassword.ChangePasswordActivity" />
         <activity android:name=".presentation.ui.password.sendPasswordCode.SendPasswordCodeActivity" />
         <activity android:name=".presentation.ui.login.LoginActivity" />

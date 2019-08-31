@@ -16,4 +16,17 @@ class AccountServiceImpl(private val accountRepository: AccountRepository) : Acc
             }
             it
         }
+
+    override fun getUserNick(): Flowable<String> =
+        accountRepository.getRemoteUserNick()
+            .doOnNext { accountRepository.setUserNick(it) }
+            .onErrorReturn { accountRepository.getLocalUserNick() }
+
+    override fun changeUserNick(newNick: String): Flowable<Response<Unit>> =
+        accountRepository.changeUserNick(newNick).map {
+            if (it.code() == 200) {
+                accountRepository.setUserNick(newNick)
+            }
+            it
+        }
 }

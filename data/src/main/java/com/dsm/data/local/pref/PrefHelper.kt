@@ -12,4 +12,10 @@ interface PrefHelper {
     fun deleteAccessToken()
 
     fun deleteRefreshToken()
+
+    fun setUserNick(nick: String)
+
+    fun getUserNick(): String?
+
+    fun deleteUserNick()
 }
