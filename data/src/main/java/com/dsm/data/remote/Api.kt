@@ -25,8 +25,10 @@ interface Api {
 
     @FormUrlEncoded
     @PATCH("mail/password")
-    fun changePassword(@Field("email") email: String,
-                       @Field("password") newPassword: String): Flowable<Response<Unit>>
+    fun changePassword(
+        @Field("email") email: String,
+        @Field("password") newPassword: String
+    ): Flowable<Response<Unit>>
 
     @FormUrlEncoded
     @PATCH("account/edit/name")
@@ -35,4 +37,8 @@ interface Api {
     @FormUrlEncoded
     @POST("account/auth/token")
     fun refreshToken(@Field("refresh_token") refreshToken: String): Flowable<Response<Map<String, Any>>>
+
+    @FormUrlEncoded
+    @GET("account/get/nick")
+    fun getUserNick(): Flowable<Response<Map<String, String>>>
 }

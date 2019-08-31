@@ -18,6 +18,8 @@ interface AccountRepository {
 
     fun changePassword(email: String, newPassword: String): Flowable<Response<Unit>>
 
+    fun getUserNick(): Flowable<Response<Map<String, String>>>
+
     fun setAccessToken(token: String)
 
     fun setRefreshToken(token: String)

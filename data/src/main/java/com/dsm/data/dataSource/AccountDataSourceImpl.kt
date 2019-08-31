@@ -32,6 +32,9 @@ class AccountDataSourceImpl(
     override fun changePassword(email: String, newPassword: String): Flowable<Response<Unit>> =
         api.changePassword(email, newPassword).addSchedulers()
 
+    override fun getUserNick(): Flowable<Response<Map<String, String>>> =
+        api.getUserNick().addSchedulers()
+
     override fun setAccessToken(token: String) =
         prefHelper.setAccessToken(token)
 
