@@ -27,9 +27,9 @@ class PasswordCodeConfirmActivity : BaseActivity<ActivityPasswordCodeConfirmBind
             startActivity<ChangePasswordActivity>("email" to email)
         })
 
-        viewModel.confirmCodeFailEvent.observe(this, Observer { toast(R.string.fail_confirm_code) })
+        viewModel.toastConfirmCodeFailEvent.observe(this, Observer { toast(R.string.fail_confirm_code) })
 
-        viewModel.serverErrorEvent.observe(this, Observer { toast(R.string.fail_server_error) })
+        viewModel.toastServerErrorEvent.observe(this, Observer { toast(R.string.fail_server_error) })
 
         binding.viewModel = viewModel
     }

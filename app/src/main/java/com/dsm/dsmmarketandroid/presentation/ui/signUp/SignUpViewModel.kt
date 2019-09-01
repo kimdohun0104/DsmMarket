@@ -31,24 +31,24 @@ class SignUpViewModel(private val signUpUseCase: SignUpUseCase) : BaseViewModel(
 
     private fun MutableLiveData<String>.isValueBlank() = this.value.isNullOrBlank()
 
-    val emailInvalidEvent = SingleLiveEvent<Any>()
-    val passwordDiffEvent = SingleLiveEvent<Any>()
+    val toastEmailInvalidEvent = SingleLiveEvent<Any>()
+    val toastPasswordDiffEvent = SingleLiveEvent<Any>()
 
-    val existentEmailEvent = SingleLiveEvent<Any>()
-    val existentNameEvent = SingleLiveEvent<Any>()
+    val toastExistentEmailEvent = SingleLiveEvent<Any>()
+    val toastExistentNameEvent = SingleLiveEvent<Any>()
 
-    val signUpSuccessEvent = SingleLiveEvent<Any>()
+    val finishActivityEvent = SingleLiveEvent<Any>()
 
-    val serverErrorEvent = SingleLiveEvent<Any>()
+    val toastServerErrorEvent = SingleLiveEvent<Any>()
 
     fun signUp() {
         if (!Validator.validEmail(email.value!!)) {
-            emailInvalidEvent.call()
+            toastEmailInvalidEvent.call()
             return
         }
 
         if (password.value != reType.value) {
-            passwordDiffEvent.call()
+            toastPasswordDiffEvent.call()
             return
         }
 
@@ -63,17 +63,17 @@ class SignUpViewModel(private val signUpUseCase: SignUpUseCase) : BaseViewModel(
                 )
             ).subscribe({
                 when (it.code()) {
-                    200 -> signUpSuccessEvent.call()
+                    200 -> finishActivityEvent.call()
                     403 -> {
                         if (it.body()!!["errorCode"] == 0) {
-                            existentEmailEvent.call()
+                            toastExistentEmailEvent.call()
                         } else {
-                            existentNameEvent.call()
+                            toastExistentNameEvent.call()
                         }
                     }
                 }
             }, {
-                serverErrorEvent.call()
+                toastServerErrorEvent.call()
             })
         )
     }

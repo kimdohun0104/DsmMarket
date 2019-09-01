@@ -18,9 +18,8 @@ class ChangePasswordViewModel(
         addSource(reType) { value = !newPassword.value.isNullOrBlank() && !reType.value.isNullOrBlank() }
     }
 
-    val passwordDiffEvent = SingleLiveEvent<Any>()
-    val serverErrorEvent = SingleLiveEvent<Any>()
-    val changePasswordFailEvent = SingleLiveEvent<Any>()
+    val toastPasswordDiffEvent = SingleLiveEvent<Any>()
+    val toastServerErrorEvent = SingleLiveEvent<Any>()
 
     val finishActivityEvent = SingleLiveEvent<Any>()
 
@@ -29,7 +28,7 @@ class ChangePasswordViewModel(
 
     fun changePassword(email: String) {
         if (newPassword.value != reType.value) {
-            passwordDiffEvent.call()
+            toastPasswordDiffEvent.call()
             return
         }
 
@@ -37,22 +36,22 @@ class ChangePasswordViewModel(
             if (email.isBlank()) {
                 changePasswordUseCase.create(newPassword.value!!)
                     .subscribe({
-                        when (it.code()) {
+                        when (it) {
                             200 -> finishActivityEvent.call()
-                            else -> changePasswordFailEvent.call()
+                            else -> toastServerErrorEvent.call()
                         }
                     }, {
-                        serverErrorEvent.call()
+                        toastServerErrorEvent.call()
                     })
             } else {
                 changePasswordUseCase.create(ChangePasswordUseCase.Params(email, newPassword.value!!))
                     .subscribe({
-                        when (it.code()) {
+                        when (it) {
                             200 -> intentLoginActivity.call()
-                            else -> changePasswordFailEvent.call()
+                            else -> toastServerErrorEvent.call()
                         }
                     }, {
-                        serverErrorEvent.call()
+                        toastServerErrorEvent.call()
                     })
             }
         )

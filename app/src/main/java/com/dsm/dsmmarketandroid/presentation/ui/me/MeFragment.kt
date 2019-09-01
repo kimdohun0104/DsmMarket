@@ -30,7 +30,7 @@ class MeFragment : BaseFragment<FragmentMeBinding>() {
         cl_change_name.setOnClickListener { activity?.startActivity<ChangeNickActivity>("nick" to activity?.title) }
         cl_change_password.setOnClickListener { activity?.startActivity<ChangePasswordActivity>() }
 
-        viewModel.userNick.observe(this, Observer{ activity?.title = it })
+        viewModel.userNick.observe(this, Observer { activity?.title = it })
 
         binding.viewModel = viewModel
     }

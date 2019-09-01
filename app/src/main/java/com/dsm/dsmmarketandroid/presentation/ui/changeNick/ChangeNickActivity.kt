@@ -1,7 +1,6 @@
 package com.dsm.dsmmarketandroid.presentation.ui.changeNick
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.ActivityChangeNickBinding
@@ -21,11 +20,11 @@ class ChangeNickActivity : BaseActivity<ActivityChangeNickBinding>() {
         tb_change_name.setNavigationOnClickListener { finish() }
         binding.nick = intent.getStringExtra("nick")
 
-        viewModel.changeNickSuccessEvent.observe(this, Observer { finish() })
+        viewModel.finishActivityEvent.observe(this, Observer { finish() })
 
-        viewModel.existentNickEvent.observe(this, Observer { toast(getString(R.string.fail_existent_nick)) })
+        viewModel.toastExistentNickEvent.observe(this, Observer { toast(getString(R.string.fail_existent_nick)) })
 
-        viewModel.serverErrorEvent.observe(this, Observer { toast(getString(R.string.fail_server_error)) })
+        viewModel.toastServerErrorEvent.observe(this, Observer { toast(getString(R.string.fail_server_error)) })
 
         binding.viewModel = viewModel
     }

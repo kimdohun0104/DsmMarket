@@ -16,9 +16,9 @@ class LoginViewModel(private val loginUseCase: LoginUseCase) : BaseViewModel() {
         addSource(password) { value = !email.value.isNullOrBlank() && !password.value.isNullOrBlank() }
     }
 
-    val loginSuccessEvent = SingleLiveEvent<Any>()
-    val loginFailEvent = SingleLiveEvent<Any>()
-    val serverErrorEvent = SingleLiveEvent<Any>()
+    val intentMainActivityEvent = SingleLiveEvent<Any>()
+    val toastLoginFailEvent = SingleLiveEvent<Any>()
+    val toastServerErrorEvent = SingleLiveEvent<Any>()
 
     fun login() {
         addDisposable(
@@ -28,12 +28,12 @@ class LoginViewModel(private val loginUseCase: LoginUseCase) : BaseViewModel() {
                     "password" to password.value
                 )
             ).subscribe({
-                when (it.code()) {
-                    200 -> loginSuccessEvent.call()
-                    403 -> loginFailEvent.call()
+                when (it) {
+                    200 -> intentMainActivityEvent.call()
+                    403 -> toastLoginFailEvent.call()
                 }
             }, {
-                serverErrorEvent.call()
+                toastServerErrorEvent.call()
             })
         )
     }

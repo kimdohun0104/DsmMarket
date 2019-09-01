@@ -26,9 +26,9 @@ class ChangePasswordActivity : BaseActivity<ActivityChangePasswordBinding>() {
         val rotateAnim = AnimationUtils.loadAnimation(this, R.anim.anim_rotate)
         view_ring.startAnimation(rotateAnim)
 
-        viewModel.passwordDiffEvent.observe(this, Observer { toast(getString(R.string.fail_diff_password)) })
+        viewModel.toastPasswordDiffEvent.observe(this, Observer { toast(getString(R.string.fail_diff_password)) })
 
-        viewModel.serverErrorEvent.observe(this, Observer { toast(getString(R.string.fail_server_error)) })
+        viewModel.toastServerErrorEvent.observe(this, Observer { toast(getString(R.string.fail_server_error)) })
 
         viewModel.finishActivityEvent.observe(this, Observer { toast(getString(R.string.fail_server_error)) })
 
@@ -37,8 +37,6 @@ class ChangePasswordActivity : BaseActivity<ActivityChangePasswordBinding>() {
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
             startActivity(intent)
         })
-
-        viewModel.changePasswordFailEvent.observe(this, Observer { toast(getString(R.string.fail_change_password)) })
 
         binding.viewModel = viewModel
     }
