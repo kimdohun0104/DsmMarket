@@ -1,7 +1,6 @@
 package com.dsm.dsmmarketandroid.di
 
 import com.dsm.data.remote.Api
-import com.dsm.data.remote.token.TokenAuthenticator
 import com.dsm.data.remote.token.TokenInterceptor
 import okhttp3.OkHttpClient
 import org.koin.dsl.module
@@ -14,7 +13,6 @@ val networkModule = module {
     single {
         OkHttpClient.Builder()
             .addInterceptor(TokenInterceptor(get()))
-            .authenticator(TokenAuthenticator(get()))
             .build()
     }
 

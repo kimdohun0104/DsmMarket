@@ -16,6 +16,14 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
+        <activity android:name=".presentation.ui.splash.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".presentation.ui.password.passwordCodeConfirm.PasswordCodeConfirmActivity" />
         <activity android:name=".presentation.ui.postCategory.PostCategoryActivity" />
         <activity android:name=".presentation.ui.searchResult.SearchResultActivity" />
@@ -36,14 +44,7 @@
         <activity android:name=".presentation.ui.password.changePassword.ChangePasswordActivity" />
         <activity android:name=".presentation.ui.password.sendPasswordCode.SendPasswordCodeActivity" />
         <activity android:name=".presentation.ui.login.LoginActivity" />
-        <activity android:name=".presentation.ui.start.StartActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".presentation.ui.start.StartActivity" />
         <activity android:name=".presentation.ui.signUp.SignUpActivity" />
         <activity android:name=".presentation.ui.main.MainActivity" />
     </application>

@@ -7,6 +7,7 @@ import com.dsm.dsmmarketandroid.presentation.ui.password.changePassword.ChangePa
 import com.dsm.dsmmarketandroid.presentation.ui.password.passwordCodeConfirm.PasswordCodeConfirmViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.password.sendPasswordCode.SendPasswordCodeViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.signUp.SignUpViewModel
+import com.dsm.dsmmarketandroid.presentation.ui.splash.SplashViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -24,4 +25,6 @@ val viewModelModule = module {
     viewModel { MeViewModel(get()) }
 
     viewModel { ChangeNickViewModel(get()) }
+
+    viewModel { SplashViewModel(get()) }
 }

@@ -9,6 +9,9 @@ interface Api {
     @POST("account/auth/login")
     fun login(@Body body: Any): Flowable<Response<Map<String, Any>>>
 
+    @GET("account/auth/login")
+    fun login(): Flowable<Response<Unit>>
+
     @POST("account/auth/join")
     fun signUp(@Body body: Any): Flowable<Response<Map<String, Int>>>
 
