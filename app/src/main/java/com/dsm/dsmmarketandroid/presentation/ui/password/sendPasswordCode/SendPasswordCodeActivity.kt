@@ -27,7 +27,7 @@ class SendPasswordCodeActivity : BaseActivity<ActivitySendPasswordCodeBinding>()
 
         viewModel.intentPasswordCodeConfirmWithEmail.observe(this, Observer { startActivity<PasswordCodeConfirmActivity>("email" to it) })
 
-        viewModel.serverErrorEvent.observe(this, Observer { toast(getString(R.string.fail_server_error)) })
+        viewModel.toastServerErrorEvent.observe(this, Observer { toast(getString(R.string.fail_server_error)) })
 
         binding.viewModel = viewModel
     }

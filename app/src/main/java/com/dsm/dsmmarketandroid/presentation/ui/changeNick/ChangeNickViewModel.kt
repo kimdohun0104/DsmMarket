@@ -13,20 +13,20 @@ class ChangeNickViewModel(private val changeNickUseCase: ChangeNickUseCase) : Ba
 
     val isChangeNickEnable: LiveData<Boolean> = Transformations.map(nick) { it != "" }
 
-    val changeNickSuccessEvent = SingleLiveEvent<Any>()
-    val existentNickEvent = SingleLiveEvent<Any>()
-    val serverErrorEvent = SingleLiveEvent<Any>()
+    val finishActivityEvent = SingleLiveEvent<Any>()
+    val toastExistentNickEvent = SingleLiveEvent<Any>()
+    val toastServerErrorEvent = SingleLiveEvent<Any>()
 
     fun changeNick() {
         addDisposable(
             changeNickUseCase.create(nick.value!!)
                 .subscribe({
-                    when (it.code()) {
-                        200 -> changeNickSuccessEvent.call()
-                        403 -> existentNickEvent.call()
+                    when (it) {
+                        200 -> finishActivityEvent.call()
+                        403 -> toastExistentNickEvent.call()
                     }
                 }, {
-                    serverErrorEvent.call()
+                    toastServerErrorEvent.call()
                 })
         )
     }

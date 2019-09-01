@@ -16,18 +16,18 @@ class SendPasswordCodeViewModel(
     val isSendPasswordCodeEnable: LiveData<Boolean> = Transformations.map(email) { it != "" }
 
     val intentPasswordCodeConfirmWithEmail = MutableLiveData<String>()
-    val serverErrorEvent = SingleLiveEvent<Any>()
+    val toastServerErrorEvent = SingleLiveEvent<Any>()
 
     fun sendPasswordCode() {
         addDisposable(
             sendPasswordCodeUseCase.create(email.value!!)
                 .subscribe({
-                    when (it.code()) {
+                    when (it) {
                         200 -> intentPasswordCodeConfirmWithEmail.value = email.value
-                        else -> serverErrorEvent.call()
+                        else -> toastServerErrorEvent.call()
                     }
                 }, {
-                    serverErrorEvent.call()
+                    toastServerErrorEvent.call()
                 })
         )
     }

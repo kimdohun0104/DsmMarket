@@ -24,17 +24,17 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() {
         vp_sign_up.adapter = SignUpPagerAdapter(supportFragmentManager)
         ci_sign_up.setupWithViewPager(vp_sign_up)
 
-        viewModel.emailInvalidEvent.observe(this, Observer { toast(getString(R.string.fail_invalid_email)) })
+        viewModel.toastEmailInvalidEvent.observe(this, Observer { toast(getString(R.string.fail_invalid_email)) })
 
-        viewModel.passwordDiffEvent.observe(this, Observer { toast(getString(R.string.fail_diff_password)) })
+        viewModel.toastPasswordDiffEvent.observe(this, Observer { toast(getString(R.string.fail_diff_password)) })
 
-        viewModel.signUpSuccessEvent.observe(this, Observer { finish() })
+        viewModel.finishActivityEvent.observe(this, Observer { finish() })
 
-        viewModel.existentEmailEvent.observe(this, Observer { toast(getString(R.string.fail_existent_email)) })
+        viewModel.toastExistentEmailEvent.observe(this, Observer { toast(getString(R.string.fail_existent_email)) })
 
-        viewModel.existentNameEvent.observe(this, Observer { toast(getString(R.string.fail_existent_nick)) })
+        viewModel.toastExistentNameEvent.observe(this, Observer { toast(getString(R.string.fail_existent_nick)) })
 
-        viewModel.serverErrorEvent.observe(this, Observer { toast(getString(R.string.fail_server_error)) })
+        viewModel.toastServerErrorEvent.observe(this, Observer { toast(getString(R.string.fail_server_error)) })
 
         binding.viewModel = viewModel
     }

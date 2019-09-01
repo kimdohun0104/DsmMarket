@@ -16,8 +16,8 @@ class PasswordCodeConfirmViewModel(
     val isConfirmPasswordCodeEnable: LiveData<Boolean> = Transformations.map(passwordCode) { it != "" }
 
     val intentChangePasswordWithEmail = MutableLiveData<String>()
-    val confirmCodeFailEvent = SingleLiveEvent<Any>()
-    val serverErrorEvent = SingleLiveEvent<Any>()
+    val toastConfirmCodeFailEvent = SingleLiveEvent<Any>()
+    val toastServerErrorEvent = SingleLiveEvent<Any>()
 
     fun confirmPasswordCode(email: String) {
         addDisposable(
@@ -27,12 +27,12 @@ class PasswordCodeConfirmViewModel(
                     "code" to passwordCode.value!!.toInt()
                 )
             ).subscribe({
-                when (it.code()) {
+                when (it) {
                     200 -> intentChangePasswordWithEmail.value = email
-                    403 -> confirmCodeFailEvent.call()
+                    403 -> toastConfirmCodeFailEvent.call()
                 }
             }, {
-                serverErrorEvent.call()
+                toastServerErrorEvent.call()
             })
         )
     }

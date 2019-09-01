@@ -29,16 +29,16 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
 
         btn_login.setOnClickListener { startActivity<MainActivity>() }
 
-        viewModel.loginSuccessEvent.observe(this, Observer {
+        viewModel.intentMainActivityEvent.observe(this, Observer {
             val intent = Intent(this, MainActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
             startActivity(intent)
         })
 
-        viewModel.loginFailEvent.observe(this, Observer { toast(getString(R.string.fail_login)) })
+        viewModel.toastLoginFailEvent.observe(this, Observer { toast(getString(R.string.fail_login)) })
 
-        viewModel.serverErrorEvent.observe(this, Observer { toast(getString(R.string.fail_server_error)) })
+        viewModel.toastServerErrorEvent.observe(this, Observer { toast(getString(R.string.fail_server_error)) })
 
         binding.viewModel = viewModel
     }

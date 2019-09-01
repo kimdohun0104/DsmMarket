@@ -1,12 +1,11 @@
 package com.dsm.domain.usecase
 
 import com.dsm.domain.base.UseCase
-import com.dsm.domain.repository.AccountRepository
+import com.dsm.domain.repository.PasswordRepository
 import io.reactivex.Flowable
-import retrofit2.Response
 
-class PasswordCodeConfirmUseCase(private val accountRepository: AccountRepository) : UseCase<Any, Response<Unit>>() {
-    override fun create(data: Any): Flowable<Response<Unit>> =
-        accountRepository.passwordCodeConfirm(data)
+class PasswordCodeConfirmUseCase(private val passwordRepository: PasswordRepository) : UseCase<Any, Int>() {
+    override fun create(data: Any): Flowable<Int> =
+        passwordRepository.passwordCodeConfirm(data)
 
 }

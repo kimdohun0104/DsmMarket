@@ -1,13 +1,25 @@
 package com.dsm.data.repository
 
-import com.dsm.data.dataSource.AccountDataSource
+import com.dsm.data.dataSource.account.AccountDataSource
+import com.dsm.data.local.pref.PrefHelper
 import com.dsm.domain.repository.AccountRepository
 import io.reactivex.Flowable
 import retrofit2.Response
 
-class AccountRepositoryImpl(private val accountDataSource: AccountDataSource) : AccountRepository {
-    override fun login(body: Any): Flowable<Response<Map<String, Any>>> =
-        accountDataSource.login(body)
+class AccountRepositoryImpl(
+    private val accountDataSource: AccountDataSource,
+    private val prefHelper: PrefHelper
+) : AccountRepository {
+
+    override fun login(body: Any): Flowable<Int> =
+        accountDataSource.login(body).map {
+            if (it.code() == 200) {
+                val response = it.body()!!
+                prefHelper.setAccessToken(response["access_token"] as String)
+                prefHelper.setRefreshToken(response["refresh_token"] as String)
+            }
+            it.code()
+        }
 
     override fun signUp(body: Any): Flowable<Response<Map<String, Int>>> =
         accountDataSource.signUp(body)
@@ -15,39 +27,20 @@ class AccountRepositoryImpl(private val accountDataSource: AccountDataSource) : 
     override fun refreshToken(refreshToken: String): Flowable<Response<Map<String, Any>>> =
         accountDataSource.refreshToken(refreshToken)
 
-    override fun sendPasswordCode(email: String): Flowable<Response<Unit>> =
-        accountDataSource.sendPasswordCode(email)
-
-    override fun passwordCodeConfirm(body: Any): Flowable<Response<Unit>> =
-        accountDataSource.passwordCodeConfirm(body)
-
-    override fun changePassword(newPassword: String): Flowable<Response<Unit>> =
-        accountDataSource.changePassword(newPassword)
-
-    override fun changePassword(email: String, newPassword: String): Flowable<Response<Unit>> =
-        accountDataSource.changePassword(email, newPassword)
-
-    override fun getRemoteUserNick(): Flowable<String> =
-        accountDataSource.getRemoteUserNick().map {
+    override fun getUserNick(): Flowable<String?> =
+        accountDataSource.getUserNick().map {
             if (it.code() == 200) {
                 it.body()!!["nick"]
             } else {
                 ""
             }
         }
+            .doOnNext { prefHelper.setUserNick(it!!) }
+            .onErrorReturn { prefHelper.getUserNick() }
 
-    override fun changeUserNick(newNick: String): Flowable<Response<Unit>> =
-        accountDataSource.changeUserNick(newNick)
-
-    override fun setAccessToken(token: String) =
-        accountDataSource.setAccessToken(token)
-
-    override fun setRefreshToken(token: String) =
-        accountDataSource.setRefreshToken(token)
-
-    override fun setUserNick(nick: String) =
-        accountDataSource.setUserNick(nick)
-
-    override fun getLocalUserNick(): String? =
-        accountDataSource.getLocalUserNick()
+    override fun changeUserNick(newNick: String): Flowable<Int> =
+        accountDataSource.changeUserNick(newNick).map {
+            if (it.code() == 200) prefHelper.setUserNick(newNick)
+            it.code()
+        }
 }
