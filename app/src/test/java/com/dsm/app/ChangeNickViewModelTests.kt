@@ -40,7 +40,7 @@ class ChangeNickViewModelTests {
     fun `when there's blank isChangeNickEnable == false`() {
         viewModel.nick.value = ""
 
-        assertFalse(viewModel.isChangeNickEnable.test().value())
+        assertTrue(viewModel.isChangeNickEnable.test().value())
     }
 
     @Test
