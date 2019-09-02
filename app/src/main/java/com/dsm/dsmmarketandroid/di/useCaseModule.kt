@@ -19,4 +19,6 @@ val useCaseModule = module {
     factory { GetUserNickUseCase(get()) }
 
     factory { ChangeNickUseCase(get()) }
+
+    factory { GetPostCategoryUseCase(get()) }
 }

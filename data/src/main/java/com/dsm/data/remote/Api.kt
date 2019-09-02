@@ -1,5 +1,7 @@
 package com.dsm.data.remote
 
+import com.dsm.data.remote.entity.PostCategoryEntity
+import com.dsm.data.remote.entity.PostCategoryListEntity
 import io.reactivex.Flowable
 import retrofit2.Response
 import retrofit2.http.*
@@ -43,4 +45,7 @@ interface Api {
 
     @GET("account/get/nick")
     fun getUserNick(): Flowable<Response<Map<String, String>>>
+
+    @GET("post/category")
+    fun getPostCategory(): Flowable<PostCategoryListEntity>
 }

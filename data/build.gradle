@@ -2,6 +2,8 @@ apply plugin: 'com.android.library'
 
 apply plugin: 'kotlin-android'
 
+apply plugin: 'kotlin-kapt'
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.0"
@@ -44,6 +46,7 @@ dependencies {
 
     // retrofit
     implementation dependencies.retrofit
+    implementation dependencies.retrofitGson
 
     // rxJava
     implementation dependencies.rxJava
@@ -51,4 +54,9 @@ dependencies {
 
     // koin
     implementation dependencies.koinAndroid
+
+    // room
+    implementation dependencies.roomRuntime
+    kapt dependencies.roomCompiler
+    implementation dependencies.roomRxJava
 }

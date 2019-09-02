@@ -1,83 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".presentation.ui.postCategory.PostCategoryActivity">
+<layout>
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/tb_post_category"
-        android:layout_width="0dp"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/white"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:title="@string/category"
-        style="@style/ToolBarStyle.Event"
-        app:navigationIcon="@drawable/ic_back_black"
-        app:titleTextColor="@color/black" />
+    <data>
+        <variable
+            name="viewModel"
+            type="com.dsm.dsmmarketandroid.presentation.ui.postCategory.PostCategoryViewModel" />
+    </data>
 
-    <ScrollView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tb_post_category"
-        app:layout_constraintBottom_toBottomOf="parent">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".presentation.ui.postCategory.PostCategoryActivity">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/book"
-                    android:textColor="@color/black"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginStart="30dp"
-                    android:layout_marginBottom="16dp"/>
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/tb_post_category"
+            style="@style/ToolBarStyle.Event"
+            android:layout_width="0dp"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/white"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navigationIcon="@drawable/ic_back_black"
+            app:title="@string/category"
+            app:titleTextColor="@color/black" />
 
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1" />
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="21dp"
-                    android:layout_height="21dp"
-                    android:src="@drawable/ic_down_arrow_grey"
-                    android:layout_marginEnd="18dp"/>
-            </LinearLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.3dp"
-                android:background="@color/colorGrey" />
-
-            <net.cachapa.expandablelayout.ExpandableLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingStart="40dp"
-                android:paddingEnd="40dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:textSize="14sp"
-                    android:layout_marginBottom="16dp"/>
-
-            </net.cachapa.expandablelayout.ExpandableLayout>
-        </LinearLayout>
-    </ScrollView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_category"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tb_post_category" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
