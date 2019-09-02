@@ -66,6 +66,11 @@ dependencies {
     testImplementation testDependencies.junit
     androidTestImplementation testDependencies.testRunner
     androidTestImplementation testDependencies.espressoCore
+    androidTestImplementation testDependencies.mockitoAndroid
+    testImplementation testDependencies.mockitoCore
+    testImplementation testDependencies.mockitoInline
+    testImplementation testDependencies.liveDataTestingKtx
+    testImplementation testDependencies.coreTesting
 
     // firebase
     implementation dependencies.firebaseCore

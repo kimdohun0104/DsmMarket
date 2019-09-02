@@ -16,6 +16,11 @@ ext {
     junitVersion = '4.12'
     testRunnerVersion = '1.2.0'
     espressoCoreVersion = '3.2.0'
+    mockitoAndroidVersion = '2.6.3'
+    mockitoCoreVersion = '2.23.4'
+    mockitoInlineVersion = '2.13.0'
+    liveDataTestingVersion = '1.1.0'
+    coreTestingVersion = '1.1.1'
 
     domainDependencies = [
             kotlin: "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion",
@@ -55,6 +60,11 @@ ext {
     presentationTestDependencies = [
             junit: "junit:junit:$junitVersion",
             testRunner: "androidx.test:runner:$testRunnerVersion",
-            espressoCore: "androidx.test.espresso:espresso-core:$espressoCoreVersion"
+            espressoCore: "androidx.test.espresso:espresso-core:$espressoCoreVersion",
+            mockitoAndroid: "org.mockito:mockito-android:$mockitoAndroidVersion",
+            mockitoCore: "org.mockito:mockito-core:$mockitoCoreVersion",
+            mockitoInline: "org.mockito:mockito-inline:$mockitoInlineVersion",
+            liveDataTestingKtx: "com.jraska.livedata:testing-ktx:$liveDataTestingVersion",
+            coreTesting: "android.arch.core:core-testing:$coreTestingVersion"
     ]
 }
