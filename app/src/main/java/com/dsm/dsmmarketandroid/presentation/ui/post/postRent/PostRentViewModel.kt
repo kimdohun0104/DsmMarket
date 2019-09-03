@@ -1,6 +1,5 @@
 package com.dsm.dsmmarketandroid.presentation.ui.post.postRent
 
-import android.util.Log
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import com.dsm.dsmmarketandroid.presentation.base.BaseViewModel

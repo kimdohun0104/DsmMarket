@@ -12,7 +12,6 @@ import androidx.core.content.ContextCompat
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.ActivityPostRentBinding
 import com.dsm.dsmmarketandroid.presentation.ui.base.BaseActivity
-import com.dsm.dsmmarketandroid.presentation.ui.post.postPurchase.PostPurchaseActivity
 import com.dsm.dsmmarketandroid.presentation.ui.post.postRent.rentTime.SelectRentTimeFragment
 import com.dsm.dsmmarketandroid.presentation.ui.postCategory.PostCategoryActivity
 import com.google.android.material.snackbar.Snackbar

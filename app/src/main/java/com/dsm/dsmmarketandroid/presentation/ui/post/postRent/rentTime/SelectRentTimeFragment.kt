@@ -4,14 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import com.dsm.dsmmarketandroid.R
-import com.dsm.dsmmarketandroid.databinding.FragmentSelectRentTimeBinding
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.RentTimePagerAdapter
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.tabs.TabLayout
-import kotlinx.android.synthetic.main.fragment_select_rent_time.*
 import kotlinx.android.synthetic.main.fragment_select_rent_time.view.*
 
 class SelectRentTimeFragment : BottomSheetDialogFragment() {
