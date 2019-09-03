@@ -1,12 +1,10 @@
-package com.dsm.app
+package com.dsm.app.viewModel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.dsm.domain.usecase.LoginUseCase
 import com.dsm.domain.usecase.SignUpUseCase
 import com.dsm.dsmmarketandroid.presentation.ui.signUp.SignUpViewModel
 import com.jraska.livedata.test
 import io.reactivex.Flowable
-import okhttp3.ResponseBody
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Before

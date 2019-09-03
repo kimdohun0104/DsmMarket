@@ -70,6 +70,9 @@
     <string name="tag">태그</string>
     <string name="post_product">상품 등록</string>
     <string name="rental_time">대여 가능 시간 (선택)</string>
+    <string name="max_image">이미지는 최대 5개입니다</string>
+    <string name="start">시작</string>
+    <string name="end">끝</string>
 
     <!--category-->
     <string name="book">책</string>
@@ -98,5 +101,9 @@
     <string name="fail_invalid_confirm_code">인증코드가 유효하지 않습니다</string>
     <string name="fail_server_error">서버에 문제가 발생했습니다</string>
     <string name="fail_change_password">비밀번호를 변경하지 못했습니다</string>
+    <string name="fail_permission_denied">권한이 필요합니다</string>
 
+    <string name="tilde">~</string>
+    <string name="confirm">확인</string>
+    <string name="colon">:</string>
 </resources>

@@ -1,8 +1,7 @@
-package com.dsm.app
+package com.dsm.app.viewModel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.dsm.domain.usecase.ChangeNickUseCase
-import com.dsm.domain.usecase.SendPasswordCodeUseCase
 import com.dsm.dsmmarketandroid.presentation.ui.changeNick.ChangeNickViewModel
 import com.jraska.livedata.test
 import io.reactivex.Flowable

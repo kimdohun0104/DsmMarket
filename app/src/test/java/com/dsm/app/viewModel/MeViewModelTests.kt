@@ -1,4 +1,4 @@
-package com.dsm.app
+package com.dsm.app.viewModel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.dsm.domain.usecase.GetUserNickUseCase

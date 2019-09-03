@@ -20,8 +20,12 @@ class TokenInterceptor(private val prefHelper: PrefHelper) : Interceptor, KoinCo
         }
 
         val response = chain.proceed(request)
-        val json = JSONObject(response.body()!!.string())
-        val errorCode = json.getInt("errorCode")
+        val responseCopy = response.peekBody(Long.MAX_VALUE)
+        val json = JSONObject(responseCopy.string())
+        var errorCode = 0
+        if (json.has("errorCode")) {
+            errorCode = json.getInt("errorCode")
+        }
 
         if (response.code() == 401 && errorCode != 4) {
             val refreshResponse = refreshTokenUseCase.create(prefHelper.getRefreshToken()!!).blockingFirst()

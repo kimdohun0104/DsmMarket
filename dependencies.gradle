@@ -11,6 +11,7 @@ ext {
     rxAndroidVersion = '2.1.1'
     koinVersion = '2.0.1'
     lifecycleVersion = '2.0.0'
+    roomVersion = '2.2.0-alpha02'
 
     // testing
     junitVersion = '4.12'
@@ -33,7 +34,11 @@ ext {
             retrofit: "com.squareup.retrofit2:retrofit:$retrofitVersion",
             rxJava: "io.reactivex.rxjava2:rxjava:$rxJavaVersion",
             rxAndroid: "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion",
-            koinAndroid: "org.koin:koin-android:$koinVersion"
+            koinAndroid: "org.koin:koin-android:$koinVersion",
+            roomRuntime: "androidx.room:room-runtime:$roomVersion",
+            roomCompiler: "androidx.room:room-compiler:$roomVersion",
+            roomRxJava: "androidx.room:room-rxjava2:$roomVersion",
+            retrofitGson: "com.squareup.retrofit2:converter-gson:$retrofitVersion"
     ]
 
     presentationDependencies = [
