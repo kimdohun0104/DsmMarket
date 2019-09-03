@@ -1,6 +1,5 @@
 package com.dsm.data.remote
 
-import com.dsm.data.remote.entity.PostCategoryEntity
 import com.dsm.data.remote.entity.PostCategoryListEntity
 import io.reactivex.Flowable
 import retrofit2.Response

@@ -4,6 +4,7 @@
     package="com.dsm.dsmmarketandroid">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:name=".presentation.BaseApp"
@@ -29,7 +30,8 @@
         <activity android:name=".presentation.ui.searchResult.SearchResultActivity" />
         <activity android:name=".presentation.ui.chat.ChatActivity" />
         <activity android:name=".presentation.ui.post.postRent.PostRentActivity" />
-        <activity android:name=".presentation.ui.post.postPurchase.PostPurchaseActivity" />
+        <activity android:name=".presentation.ui.post.postPurchase.PostPurchaseActivity"
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".presentation.ui.addComment.AddCommentActivity"
             android:windowSoftInputMode="adjustResize" />

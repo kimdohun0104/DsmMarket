@@ -6,6 +6,7 @@ import com.dsm.dsmmarketandroid.presentation.ui.me.MeViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.password.changePassword.ChangePasswordViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.password.passwordCodeConfirm.PasswordCodeConfirmViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.password.sendPasswordCode.SendPasswordCodeViewModel
+import com.dsm.dsmmarketandroid.presentation.ui.post.postPurchase.PostPurchaseViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.postCategory.PostCategoryViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.signUp.SignUpViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.splash.SplashViewModel
@@ -30,4 +31,6 @@ val viewModelModule = module {
     viewModel { SplashViewModel(get()) }
 
     viewModel { PostCategoryViewModel(get(), get()) }
+
+    viewModel { PostPurchaseViewModel() }
 }

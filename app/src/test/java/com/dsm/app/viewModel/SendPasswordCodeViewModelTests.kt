@@ -1,7 +1,6 @@
-package com.dsm.app
+package com.dsm.app.viewModel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.dsm.domain.usecase.ChangePasswordUseCase
 import com.dsm.domain.usecase.SendPasswordCodeUseCase
 import com.dsm.dsmmarketandroid.presentation.ui.password.sendPasswordCode.SendPasswordCodeViewModel
 import com.jraska.livedata.test
