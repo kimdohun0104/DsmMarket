@@ -14,18 +14,18 @@ class PostRentViewModel : BaseViewModel() {
     val content = MutableLiveData<String>()
     val tag = MutableLiveData<String>()
 
-    val startHour = MutableLiveData<String>()
-    val startMinute = MutableLiveData<String>()
-    val endHour = MutableLiveData<String>()
-    val endMinute = MutableLiveData<String>()
+    val startHour = MutableLiveData<String>().apply { value = "1" }
+    val startMinute = MutableLiveData<String>().apply { value = "00" }
+    val endHour = MutableLiveData<String>().apply { value = "1" }
+    val endMinute = MutableLiveData<String>().apply { value = "00" }
 
-    private fun getRentTime() = startHour.value + " : " + startMinute.value + " ~ " + endHour.value + " : " + endMinute.value
+    private fun getFormatedTime() = startHour.value + " : " + startMinute.value + " ~ " + endHour.value + " : " + endMinute.value
 
-    val rentTime = MediatorLiveData<String>().apply {
-        addSource(startHour) { value = getRentTime() }
-        addSource(startMinute) { value = getRentTime() }
-        addSource(endHour) { value = getRentTime() }
-        addSource(endMinute) { value = getRentTime() }
+    val rentTime: MutableLiveData<String> = MediatorLiveData<String>().apply {
+        addSource(startHour) { value = getFormatedTime() }
+        addSource(startMinute) { value = getFormatedTime() }
+        addSource(endHour) { value = getFormatedTime() }
+        addSource(endMinute) { value = getFormatedTime() }
     }
 
     private fun MutableLiveData<String>.isValueBlank() = this.value.isNullOrBlank()
