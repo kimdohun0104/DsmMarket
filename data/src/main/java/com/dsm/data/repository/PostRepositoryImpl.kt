@@ -7,7 +7,6 @@ import com.dsm.domain.repository.PostRepository
 import io.reactivex.Flowable
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import retrofit2.Response
 
 class PostRepositoryImpl(private val postDataSource: PostDataSource) : PostRepository {
 

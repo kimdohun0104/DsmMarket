@@ -1,6 +1,5 @@
 package com.dsm.dsmmarketandroid.presentation.ui.post.postRent
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
@@ -67,7 +66,7 @@ class PostRentViewModel(private val postRentUseCase: PostRentUseCase) : BaseView
                         "content" to RequestBody.create(MediaType.parse("text/plain"), content.value!!),
                         "price" to RequestBody.create(MediaType.parse("text/plain"), price.value!!),
                         "category" to RequestBody.create(MediaType.parse("text/plain"), category.value!!),
-                        "tag" to RequestBody.create(MediaType.parse("text/plain"), tag.value!!),
+                        "tag" to RequestBody.create(MediaType.parse("text/plain"), " ${tag.value!!.trim()}".trimEnd().replace(" ", "#")),
                         "possible_time" to RequestBody.create(MediaType.parse("text/plain"), rentTime.value ?: "")
                     )
                 )
@@ -77,7 +76,6 @@ class PostRentViewModel(private val postRentUseCase: PostRentUseCase) : BaseView
                     else -> toastServerErrorEvent.call()
                 }
             }, {
-                Log.d("DEBUGLOG", it.message.toString())
                 toastServerErrorEvent.call()
             })
         )
