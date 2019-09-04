@@ -28,7 +28,7 @@
             app:titleTextColor="@color/black" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_category"
+            android:id="@+id/rv_post_category"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"

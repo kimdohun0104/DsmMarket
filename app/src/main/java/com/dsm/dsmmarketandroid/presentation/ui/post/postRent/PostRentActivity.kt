@@ -12,12 +12,10 @@ import androidx.core.content.ContextCompat
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.ActivityPostRentBinding
 import com.dsm.dsmmarketandroid.presentation.ui.base.BaseActivity
-import com.dsm.dsmmarketandroid.presentation.ui.post.postPurchase.PostPurchaseActivity
 import com.dsm.dsmmarketandroid.presentation.ui.post.postRent.rentTime.SelectRentTimeFragment
 import com.dsm.dsmmarketandroid.presentation.ui.postCategory.PostCategoryActivity
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_post_rent.*
-import org.jetbrains.anko.startActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PostRentActivity : BaseActivity<ActivityPostRentBinding>() {
@@ -27,6 +25,7 @@ class PostRentActivity : BaseActivity<ActivityPostRentBinding>() {
     companion object {
         private const val READ_EXTERNAL_STORAGE_PERMISSION = 0
         private const val SELECT_IMAGE = 1
+        private const val CATEGORY = 2
     }
 
     private val viewModel: PostRentViewModel by viewModel()
@@ -37,7 +36,7 @@ class PostRentActivity : BaseActivity<ActivityPostRentBinding>() {
 
         tb_post_rent.setNavigationOnClickListener { finish() }
 
-        cl_category.setOnClickListener { startActivity<PostCategoryActivity>() }
+        cl_category.setOnClickListener { startActivityForResult(Intent(this, PostCategoryActivity::class.java), CATEGORY) }
 
         iv_select_image.setOnClickListener {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
@@ -65,6 +64,8 @@ class PostRentActivity : BaseActivity<ActivityPostRentBinding>() {
             if (requestCode == SELECT_IMAGE) {
                 iv_select_image.setImageURI(data?.data!!)
                 viewModel.photo.value = getPathFromUri(data.data!!)
+            } else if (requestCode == CATEGORY) {
+                viewModel.category.value = data?.getStringExtra("category")
             }
         }
     }

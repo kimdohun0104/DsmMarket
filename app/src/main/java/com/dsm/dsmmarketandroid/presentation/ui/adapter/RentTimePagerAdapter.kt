@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import com.dsm.dsmmarketandroid.presentation.ui.interest.purchase.InterestPurchaseFragment
 import com.dsm.dsmmarketandroid.presentation.ui.post.postRent.rentTime.EndTimeFragment
 import com.dsm.dsmmarketandroid.presentation.ui.post.postRent.rentTime.StartTimeFragment
 

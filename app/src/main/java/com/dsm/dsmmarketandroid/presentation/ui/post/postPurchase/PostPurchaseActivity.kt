@@ -6,7 +6,6 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
@@ -18,7 +17,6 @@ import com.dsm.dsmmarketandroid.presentation.ui.base.BaseActivity
 import com.dsm.dsmmarketandroid.presentation.ui.postCategory.PostCategoryActivity
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_post_purchase.*
-import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -29,6 +27,7 @@ class PostPurchaseActivity : BaseActivity<ActivityPostPurchaseBinding>() {
     companion object {
         private const val SELECT_IMAGE = 1
         private const val READ_EXTERNAL_STORAGE_PERMISSION = 2
+        private const val CATEGORY = 3
     }
 
     private val viewModel: PostPurchaseViewModel by viewModel()
@@ -44,7 +43,7 @@ class PostPurchaseActivity : BaseActivity<ActivityPostPurchaseBinding>() {
 
         tb_post_purchase.setNavigationOnClickListener { finish() }
 
-        cl_category.setOnClickListener { startActivity<PostCategoryActivity>() }
+        cl_category.setOnClickListener { startActivityForResult(Intent(this, PostCategoryActivity::class.java), CATEGORY) }
 
         iv_select_image.setOnClickListener {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
@@ -90,6 +89,8 @@ class PostPurchaseActivity : BaseActivity<ActivityPostPurchaseBinding>() {
                 }
 
                 viewModel.imageList.value = uri
+            } else if (requestCode == CATEGORY) {
+                viewModel.category.value = data?.getStringExtra("category")
             }
         }
     }

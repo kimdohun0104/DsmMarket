@@ -1,7 +1,6 @@
 package com.dsm.dsmmarketandroid.presentation.ui.post.postPurchase
 
 import android.net.Uri
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
@@ -14,15 +13,17 @@ class PostPurchaseViewModel : BaseViewModel() {
     val title = MutableLiveData<String>()
     val price = MutableLiveData<String>()
     val content = MutableLiveData<String>()
-    //    val category = MutableLiveData<String>()
+    val category = MutableLiveData<String>()
     val tag = MutableLiveData<String>()
     val imageList = ListLiveData<Uri>()
+
+    val isCategorySelected: LiveData<Boolean> = Transformations.map(category) { it != "" }
 
     private fun MutableLiveData<String>.isValueBlank() = this.value.isNullOrBlank()
 
     private fun isBlankExist() = title.isValueBlank() || price.isValueBlank()
             || content.isValueBlank() || tag.isValueBlank()
-            || imageList.value?.size == 0
+            || imageList.value?.size == 0 || category.isValueBlank()
 
     val isPostEnable = MediatorLiveData<Boolean>().apply {
         addSource(title) { value = !isBlankExist() }
@@ -30,7 +31,7 @@ class PostPurchaseViewModel : BaseViewModel() {
         addSource(content) { value = !isBlankExist() }
         addSource(tag) { value = !isBlankExist() }
         addSource(imageList) { value = !isBlankExist() }
-        // addSource(category) { value = isBlankExist() }
+         addSource(category) { value = isBlankExist() }
     }
 
     fun post() {

@@ -8,7 +8,7 @@ class PostCategoryModelMapper : Mapper<List<PostCategory>, List<PostCategoryMode
     override fun mapFrom(from: List<PostCategory>): List<PostCategoryModel> {
         val list = arrayListOf<PostCategoryModel>()
         from.forEach {
-            list.add(PostCategoryModel.ParentCategory(it.parent))
+            list.add(PostCategoryModel.ParentCategory(it.parent, null))
             it.child.forEach { child ->
                 list.add(PostCategoryModel.ChildCategory(child, it.parent))
             }
