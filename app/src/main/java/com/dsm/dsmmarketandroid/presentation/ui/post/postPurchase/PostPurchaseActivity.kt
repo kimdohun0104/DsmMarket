@@ -1,14 +1,10 @@
 package com.dsm.dsmmarketandroid.presentation.ui.post.postPurchase
 
-import android.Manifest
 import android.app.Activity
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dsm.dsmmarketandroid.R
@@ -16,6 +12,7 @@ import com.dsm.dsmmarketandroid.databinding.ActivityPostPurchaseBinding
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.PostImageListAdapter
 import com.dsm.dsmmarketandroid.presentation.ui.base.BaseActivity
 import com.dsm.dsmmarketandroid.presentation.ui.postCategory.PostCategoryActivity
+import com.dsm.dsmmarketandroid.presentation.util.PermissionUtil
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_post_purchase.*
 import org.jetbrains.anko.toast
@@ -27,7 +24,6 @@ class PostPurchaseActivity : BaseActivity<ActivityPostPurchaseBinding>() {
 
     companion object {
         private const val SELECT_IMAGE = 1
-        private const val READ_EXTERNAL_STORAGE_PERMISSION = 2
         private const val CATEGORY = 3
     }
 
@@ -35,7 +31,7 @@ class PostPurchaseActivity : BaseActivity<ActivityPostPurchaseBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        permissionRequest()
+        PermissionUtil.requestReadExternalStorage(this)
         binding.isImageSelectVisible = true
 
         rv_post_image.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
@@ -47,8 +43,8 @@ class PostPurchaseActivity : BaseActivity<ActivityPostPurchaseBinding>() {
         cl_category.setOnClickListener { startActivityForResult(Intent(this, PostCategoryActivity::class.java), CATEGORY) }
 
         iv_select_image.setOnClickListener {
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
-                permissionRequest()
+            if (PermissionUtil.isReadExternalStorageAllow(this)) {
+                PermissionUtil.requestReadExternalStorage(this)
                 Snackbar.make(iv_select_image, getString(R.string.fail_permission_denied), Snackbar.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
@@ -76,24 +72,21 @@ class PostPurchaseActivity : BaseActivity<ActivityPostPurchaseBinding>() {
         binding.viewModel = viewModel
     }
 
-    private fun permissionRequest() =
-        ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), READ_EXTERNAL_STORAGE_PERMISSION)
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == SELECT_IMAGE) {
                 val clip = data?.clipData
-                val uri = arrayListOf<String>()
+                val pathList = arrayListOf<String>()
                 for (i in 0 until clip?.itemCount!!) {
                     if (i >= 5) {
                         toast(getString(R.string.max_image))
                         break
                     }
-                    uri.add(getPathFromUri(clip.getItemAt(i).uri)!!)
+                    pathList.add(getPathFromUri(clip.getItemAt(i).uri)!!)
                 }
 
-                viewModel.imageList.value = uri
+                viewModel.imageList.value = pathList
             } else if (requestCode == CATEGORY) {
                 viewModel.category.value = data?.getStringExtra("category")
             }
