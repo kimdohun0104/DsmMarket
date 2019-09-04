@@ -14,4 +14,7 @@ class PostDataSourceImpl(private val api: Api) : PostDataSource {
 
     override fun postRent(img: MultipartBody.Part, params: Map<String, RequestBody>): Flowable<Response<Unit>> =
         api.postRent(img, params).addSchedulers()
+
+    override fun postPurchase(img: List<MultipartBody.Part>, params: Map<String, RequestBody>): Flowable<Response<Unit>> =
+        api.postPurchase(img, params).addSchedulers()
 }

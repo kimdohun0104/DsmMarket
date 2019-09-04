@@ -23,4 +23,7 @@ val useCaseModule = module {
     factory { GetPostCategoryUseCase(get()) }
 
     factory { PostRentUseCase(get()) }
+
+    factory { PostPurchaseUseCase(get()) }
+
 }

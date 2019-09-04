@@ -10,4 +10,6 @@ interface PostDataSource {
     fun getPostCategory(): Flowable<PostCategoryListEntity>
 
     fun postRent(img: MultipartBody.Part, params: Map<String, RequestBody>): Flowable<Response<Unit>>
+
+    fun postPurchase(img: List<MultipartBody.Part>, params: Map<String, RequestBody>): Flowable<Response<Unit>>
 }

@@ -17,4 +17,7 @@ class PostRepositoryImpl(private val postDataSource: PostDataSource) : PostRepos
 
     override fun postRent(img: MultipartBody.Part, params: Map<String, RequestBody>): Flowable<Int> =
         postDataSource.postRent(img, params).map { it.code() }
+
+    override fun postPurchase(img: List<MultipartBody.Part>, params: Map<String, RequestBody>): Flowable<Int> =
+        postDataSource.postPurchase(img, params).map { it.code() }
 }

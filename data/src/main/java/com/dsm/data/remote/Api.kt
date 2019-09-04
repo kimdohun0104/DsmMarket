@@ -52,5 +52,15 @@ interface Api {
 
     @Multipart
     @POST("post/add/rent")
-    fun postRent(@Part img: MultipartBody.Part, @PartMap params: Map<String, @JvmSuppressWildcards RequestBody>): Flowable<Response<Unit>>
+    fun postRent(
+        @Part img: MultipartBody.Part,
+        @PartMap params: Map<String, @JvmSuppressWildcards RequestBody>
+    ): Flowable<Response<Unit>>
+
+    @Multipart
+    @POST("post/add/deal")
+    fun postPurchase(
+        @Part img: List<MultipartBody.Part>,
+        @PartMap params: Map<String, @JvmSuppressWildcards RequestBody>
+    ): Flowable<Response<Unit>>
 }
