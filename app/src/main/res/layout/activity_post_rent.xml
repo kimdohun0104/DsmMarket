@@ -226,6 +226,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             android:onClick="@{() -> viewModel.post()}"
-            android:background="@{viewModel.isPostEnable ? @drawable/bg_gradient_primary : BindingUtil.convertColorToDrawable(@color/colorGrey_3) }" />
+            android:background="@{viewModel.isPostEnable ? @drawable/bg_gradient_primary : BindingUtil.convertColorToDrawable(@color/colorGrey_3) }"
+            android:clickable="@{viewModel.isPostEnable}"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

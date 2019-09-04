@@ -1,29 +1,48 @@
 package com.dsm.dsmmarketandroid.presentation.ui.post.postRent
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
+import com.dsm.domain.usecase.PostRentUseCase
 import com.dsm.dsmmarketandroid.presentation.base.BaseViewModel
+import com.dsm.dsmmarketandroid.presentation.util.SingleLiveEvent
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import java.io.File
 
-class PostRentViewModel : BaseViewModel() {
+class PostRentViewModel(private val postRentUseCase: PostRentUseCase) : BaseViewModel() {
 
     val title = MutableLiveData<String>()
     val price = MutableLiveData<String>()
     val photo = MutableLiveData<String>()
-    val possibleTime = MutableLiveData<String>()
     val content = MutableLiveData<String>()
     val tag = MutableLiveData<String>()
     val category = MutableLiveData<String>()
 
-    val isCategorySelected: LiveData<Boolean> = Transformations.map(category) { it != "" }
+    private fun MutableLiveData<String>.isValueBlank() = this.value.isNullOrBlank()
+
+    private fun isBlankExist() = title.isValueBlank() || price.isValueBlank()
+            || photo.value == null || content.isValueBlank()
+            || tag.isValueBlank() || category.isValueBlank()
+
+    val isPostEnable = MediatorLiveData<Boolean>().apply {
+        addSource(title) { value = !isBlankExist() }
+        addSource(price) { value = !isBlankExist() }
+        addSource(photo) { value = !isBlankExist() }
+        addSource(content) { value = !isBlankExist() }
+        addSource(tag) { value = !isBlankExist() }
+        addSource(category) { value = !isBlankExist() }
+    }
 
     val startHour = MutableLiveData<String>()
     val startMinute = MutableLiveData<String>()
     val endHour = MutableLiveData<String>()
     val endMinute = MutableLiveData<String>()
 
-    private fun getFormattedTime() = startHour.value + " : " + startMinute.value + " ~ " + endHour.value + " : " + endMinute.value
+    private fun getFormattedTime() = startHour.value + ":" + startMinute.value + "~" + endHour.value + ":" + endMinute.value
 
     val rentTime: MutableLiveData<String> = MediatorLiveData<String>().apply {
         addSource(startHour) { value = getFormattedTime() }
@@ -32,22 +51,35 @@ class PostRentViewModel : BaseViewModel() {
         addSource(endMinute) { value = getFormattedTime() }
     }
 
-    private fun MutableLiveData<String>.isValueBlank() = this.value.isNullOrBlank()
+    val isCategorySelected: LiveData<Boolean> = Transformations.map(category) { it != "" }
 
-    private fun isBlankExist() = title.isValueBlank() || price.isValueBlank()
-            || photo.value == null || possibleTime.isValueBlank()
-            || content.isValueBlank() || tag.isValueBlank() || category.isValueBlank()
-
-    val isPostEnable = MediatorLiveData<Boolean>().apply {
-        addSource(title) { value = !isBlankExist() }
-        addSource(price) { value = !isBlankExist() }
-        addSource(photo) { value = !isBlankExist() }
-        addSource(possibleTime) { value = !isBlankExist() }
-        addSource(content) { value = !isBlankExist() }
-        addSource(tag) { value = !isBlankExist() }
-        addSource(category) { value = !isBlankExist() }
-    }
+    val finishActivityEvent = SingleLiveEvent<Any>()
+    val toastServerErrorEvent = SingleLiveEvent<Any>()
 
     fun post() {
+        val imageFile = File(photo.value!!)
+        addDisposable(
+            postRentUseCase.create(
+                PostRentUseCase.Params(
+                    MultipartBody.Part.createFormData("file", imageFile.name, RequestBody.create(MediaType.parse("image/*"), imageFile)),
+                    mapOf(
+                        "title" to RequestBody.create(MediaType.parse("text/plain"), title.value!!),
+                        "content" to RequestBody.create(MediaType.parse("text/plain"), content.value!!),
+                        "price" to RequestBody.create(MediaType.parse("text/plain"), price.value!!),
+                        "category" to RequestBody.create(MediaType.parse("text/plain"), category.value!!),
+                        "tag" to RequestBody.create(MediaType.parse("text/plain"), tag.value!!),
+                        "possible_time" to RequestBody.create(MediaType.parse("text/plain"), rentTime.value ?: "")
+                    )
+                )
+            ).subscribe({
+                when (it) {
+                    200 -> finishActivityEvent.call()
+                    else -> toastServerErrorEvent.call()
+                }
+            }, {
+                Log.d("DEBUGLOG", it.message.toString())
+                toastServerErrorEvent.call()
+            })
+        )
     }
 }

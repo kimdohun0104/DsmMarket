@@ -2,6 +2,8 @@ package com.dsm.data.remote
 
 import com.dsm.data.remote.entity.PostCategoryListEntity
 import io.reactivex.Flowable
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -47,4 +49,8 @@ interface Api {
 
     @GET("post/category")
     fun getPostCategory(): Flowable<PostCategoryListEntity>
+
+    @Multipart
+    @POST("post/add/rent")
+    fun postRent(@Part img: MultipartBody.Part, @PartMap params: Map<String, @JvmSuppressWildcards RequestBody>): Flowable<Response<Unit>>
 }

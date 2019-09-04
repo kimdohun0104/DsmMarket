@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.provider.MediaStore
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.Observer
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.ActivityPostRentBinding
 import com.dsm.dsmmarketandroid.presentation.ui.base.BaseActivity
@@ -16,6 +17,7 @@ import com.dsm.dsmmarketandroid.presentation.ui.post.postRent.rentTime.SelectRen
 import com.dsm.dsmmarketandroid.presentation.ui.postCategory.PostCategoryActivity
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_post_rent.*
+import org.jetbrains.anko.toast
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PostRentActivity : BaseActivity<ActivityPostRentBinding>() {
@@ -51,6 +53,10 @@ class PostRentActivity : BaseActivity<ActivityPostRentBinding>() {
         }
 
         btn_select_time.setOnClickListener { SelectRentTimeFragment().show(supportFragmentManager, "") }
+
+        viewModel.finishActivityEvent.observe(this, Observer { finish() })
+
+        viewModel.toastServerErrorEvent.observe(this, Observer { toast(getString(R.string.fail_server_error)) })
 
         binding.viewModel = viewModel
     }
