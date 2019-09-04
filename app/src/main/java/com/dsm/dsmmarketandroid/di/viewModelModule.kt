@@ -33,7 +33,7 @@ val viewModelModule = module {
 
     viewModel { PostCategoryViewModel(get(), get()) }
 
-    viewModel { PostPurchaseViewModel() }
+    viewModel { PostPurchaseViewModel(get()) }
 
     viewModel { PostRentViewModel(get()) }
 }

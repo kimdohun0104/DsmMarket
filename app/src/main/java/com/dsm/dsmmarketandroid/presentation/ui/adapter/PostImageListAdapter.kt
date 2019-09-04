@@ -1,17 +1,18 @@
 package com.dsm.dsmmarketandroid.presentation.ui.adapter
 
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.ui.post.postPurchase.PostPurchaseViewModel
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_post_image.view.*
+import java.io.File
 
 class PostImageListAdapter(private val viewModel: PostPurchaseViewModel) : RecyclerView.Adapter<PostImageListAdapter.ViewHolder>() {
 
-    private var listItems = arrayListOf<Uri>()
+    private var listItems = arrayListOf<String>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_post_image, parent, false))
@@ -22,7 +23,7 @@ class PostImageListAdapter(private val viewModel: PostPurchaseViewModel) : Recyc
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind() {
-            itemView.iv_image.setImageURI(listItems[adapterPosition])
+            Picasso.get().load(File(listItems[adapterPosition])).into(itemView.iv_image)
             itemView.iv_delete_image.setOnClickListener {
                 viewModel.imageRemovedAt(adapterPosition)
                 notifyItemRemoved(adapterPosition)
@@ -30,7 +31,7 @@ class PostImageListAdapter(private val viewModel: PostPurchaseViewModel) : Recyc
         }
     }
 
-    fun setItems(items: ArrayList<Uri>) {
+    fun setItems(items: ArrayList<String>) {
         listItems = items
         notifyDataSetChanged()
     }

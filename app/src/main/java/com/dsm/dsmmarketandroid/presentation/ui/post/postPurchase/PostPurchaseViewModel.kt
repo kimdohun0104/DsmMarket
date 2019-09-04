@@ -1,21 +1,26 @@
 package com.dsm.dsmmarketandroid.presentation.ui.post.postPurchase
 
-import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
+import com.dsm.domain.usecase.PostPurchaseUseCase
 import com.dsm.dsmmarketandroid.presentation.base.BaseViewModel
 import com.dsm.dsmmarketandroid.presentation.util.ListLiveData
+import com.dsm.dsmmarketandroid.presentation.util.SingleLiveEvent
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import java.io.File
 
-class PostPurchaseViewModel : BaseViewModel() {
+class PostPurchaseViewModel(private val postPurchaseUseCase: PostPurchaseUseCase) : BaseViewModel() {
 
     val title = MutableLiveData<String>()
     val price = MutableLiveData<String>()
     val content = MutableLiveData<String>()
     val category = MutableLiveData<String>()
     val tag = MutableLiveData<String>()
-    val imageList = ListLiveData<Uri>()
+    val imageList = ListLiveData<String>()
 
     val isCategorySelected: LiveData<Boolean> = Transformations.map(category) { it != "" }
 
@@ -31,17 +36,40 @@ class PostPurchaseViewModel : BaseViewModel() {
         addSource(content) { value = !isBlankExist() }
         addSource(tag) { value = !isBlankExist() }
         addSource(imageList) { value = !isBlankExist() }
-         addSource(category) { value = isBlankExist() }
+        addSource(category) { value = isBlankExist() }
     }
 
+    val finishActivityEvent = SingleLiveEvent<Any>()
+    val toastServerErrorEvent = SingleLiveEvent<Any>()
+
     fun post() {
-//        val multipartImageList = arrayListOf<MultipartBody.Part>()
-//
-//        imageList.value?.forEach {
-//            val imageFile = File(it.path!!)
-//            val requestImageFile = RequestBody.create(MediaType.parse("image/*"), imageFile)
-//            multipartImageList.add(MultipartBody.Part.createFormData("file", imageFile.name, requestImageFile))
-//        }
+        val multipartImageList = arrayListOf<MultipartBody.Part>()
+        imageList.value!!.forEach {
+            val imageFile = File(it)
+            multipartImageList.add(MultipartBody.Part.createFormData("file", imageFile.name, RequestBody.create(MediaType.parse("image/*"), imageFile)))
+        }
+
+        addDisposable(
+            postPurchaseUseCase.create(
+                PostPurchaseUseCase.Params(
+                    multipartImageList,
+                    mapOf(
+                        "title" to RequestBody.create(MediaType.parse("text/plain"), title.value!!),
+                        "content" to RequestBody.create(MediaType.parse("text/plain"), content.value!!),
+                        "price" to RequestBody.create(MediaType.parse("text/plain"), price.value!!),
+                        "category" to RequestBody.create(MediaType.parse("text/plain"), " ${tag.value!!.trim()}".trimEnd().replace(" ", "#")),
+                        "tag" to RequestBody.create(MediaType.parse("text/plain"), tag.value!!)
+                    )
+                )
+            ).subscribe({
+                when (it) {
+                    200 -> finishActivityEvent.call()
+                    else -> toastServerErrorEvent.call()
+                }
+            }, {
+                toastServerErrorEvent.call()
+            })
+        )
     }
 
     fun imageRemovedAt(index: Int) {

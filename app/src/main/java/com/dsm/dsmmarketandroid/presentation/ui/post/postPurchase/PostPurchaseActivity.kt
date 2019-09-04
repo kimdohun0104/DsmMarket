@@ -6,6 +6,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
@@ -68,6 +69,10 @@ class PostPurchaseActivity : BaseActivity<ActivityPostPurchaseBinding>() {
             }
         })
 
+        viewModel.finishActivityEvent.observe(this, Observer { finish() })
+
+        viewModel.toastServerErrorEvent.observe(this, Observer { toast(getString(R.string.fail_server_error)) })
+
         binding.viewModel = viewModel
     }
 
@@ -79,13 +84,13 @@ class PostPurchaseActivity : BaseActivity<ActivityPostPurchaseBinding>() {
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == SELECT_IMAGE) {
                 val clip = data?.clipData
-                val uri = arrayListOf<Uri>()
+                val uri = arrayListOf<String>()
                 for (i in 0 until clip?.itemCount!!) {
                     if (i >= 5) {
                         toast(getString(R.string.max_image))
                         break
                     }
-                    uri.add(clip.getItemAt(i).uri)
+                    uri.add(getPathFromUri(clip.getItemAt(i).uri)!!)
                 }
 
                 viewModel.imageList.value = uri
@@ -93,5 +98,17 @@ class PostPurchaseActivity : BaseActivity<ActivityPostPurchaseBinding>() {
                 viewModel.category.value = data?.getStringExtra("category")
             }
         }
+    }
+
+    private fun getPathFromUri(contentUri: Uri): String? {
+        var res: String? = null
+        val proj = arrayOf(MediaStore.Images.Media.DATA)
+        val cursor = contentResolver.query(contentUri, proj, null, null, null)
+        if (cursor!!.moveToFirst()) {
+            val columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
+            res = cursor.getString(columnIndex)
+        }
+        cursor.close()
+        return res
     }
 }
