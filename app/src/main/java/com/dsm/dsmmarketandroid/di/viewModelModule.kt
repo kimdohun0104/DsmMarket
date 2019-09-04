@@ -35,5 +35,5 @@ val viewModelModule = module {
 
     viewModel { PostPurchaseViewModel() }
 
-    viewModel { PostRentViewModel() }
+    viewModel { PostRentViewModel(get()) }
 }
