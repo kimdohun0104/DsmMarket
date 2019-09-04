@@ -77,16 +77,16 @@ class PostPurchaseActivity : BaseActivity<ActivityPostPurchaseBinding>() {
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == SELECT_IMAGE) {
                 val clip = data?.clipData
-                val uri = arrayListOf<String>()
+                val pathList = arrayListOf<String>()
                 for (i in 0 until clip?.itemCount!!) {
                     if (i >= 5) {
                         toast(getString(R.string.max_image))
                         break
                     }
-                    uri.add(getPathFromUri(clip.getItemAt(i).uri)!!)
+                    pathList.add(getPathFromUri(clip.getItemAt(i).uri)!!)
                 }
 
-                viewModel.imageList.value = uri
+                viewModel.imageList.value = pathList
             } else if (requestCode == CATEGORY) {
                 viewModel.category.value = data?.getStringExtra("category")
             }
