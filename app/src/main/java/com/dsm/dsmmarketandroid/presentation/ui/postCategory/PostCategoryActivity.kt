@@ -1,5 +1,7 @@
 package com.dsm.dsmmarketandroid.presentation.ui.postCategory
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import com.dsm.dsmmarketandroid.R
@@ -18,14 +20,23 @@ class PostCategoryActivity : BaseActivity<ActivityPostCategoryBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        tb_post_category.setNavigationOnClickListener { finish() }
+
         viewModel.getPostCategory()
 
-        val adapter = PostCategoryListAdapter()
+        val adapter = PostCategoryListAdapter(viewModel)
         rv_post_category.adapter = adapter
 
         viewModel.categoryList.observe(this, Observer { adapter.addItems(it) })
 
         viewModel.serverErrorEvent.observe(this, Observer { toast(getString(R.string.fail_server_error)) })
+
+        viewModel.selectedCategory.observe(this, Observer {
+            val resultIntent = Intent()
+            resultIntent.putExtra("category", it)
+            setResult(Activity.RESULT_OK, resultIntent)
+            finish()
+        })
 
         binding.viewModel = viewModel
     }

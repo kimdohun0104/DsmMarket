@@ -1,5 +1,6 @@
 package com.dsm.dsmmarketandroid.presentation.ui.postCategory
 
+import androidx.lifecycle.MutableLiveData
 import com.dsm.domain.usecase.GetPostCategoryUseCase
 import com.dsm.dsmmarketandroid.presentation.base.BaseViewModel
 import com.dsm.dsmmarketandroid.presentation.mapper.PostCategoryModelMapper
@@ -13,6 +14,7 @@ class PostCategoryViewModel(
 ) : BaseViewModel() {
 
     val categoryList = ListLiveData<PostCategoryModel>()
+    val selectedCategory = MutableLiveData<String>()
 
     val serverErrorEvent = SingleLiveEvent<Any>()
 
@@ -24,5 +26,9 @@ class PostCategoryViewModel(
                 serverErrorEvent.call()
             })
         )
+    }
+
+    fun selectCategory(category: String) {
+        selectedCategory.value = category
     }
 }

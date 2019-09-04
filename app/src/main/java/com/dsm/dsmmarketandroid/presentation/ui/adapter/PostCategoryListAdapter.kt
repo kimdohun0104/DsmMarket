@@ -8,10 +8,11 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.model.PostCategoryModel
+import com.dsm.dsmmarketandroid.presentation.ui.postCategory.PostCategoryViewModel
 import kotlinx.android.synthetic.main.item_child_category.view.*
 import kotlinx.android.synthetic.main.item_parent_category.view.*
 
-class PostCategoryListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class PostCategoryListAdapter(private val viewModel: PostCategoryViewModel) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
         private const val PARENT_CATEGORY = 0
@@ -93,7 +94,11 @@ class PostCategoryListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() 
 
     inner class ChildViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind() {
-            itemView.tv_child_category.text = (listItems[adapterPosition] as PostCategoryModel.ChildCategory).category
+            val item = listItems[adapterPosition] as PostCategoryModel.ChildCategory
+            itemView.tv_child_category.text = item.category
+            itemView.cl_child_parent.setOnClickListener {
+                viewModel.selectCategory(item.parent + "/" + item.category)
+            }
         }
     }
 }
