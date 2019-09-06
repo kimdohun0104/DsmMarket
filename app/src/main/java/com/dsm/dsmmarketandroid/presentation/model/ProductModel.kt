@@ -1,6 +1,6 @@
 package com.dsm.dsmmarketandroid.presentation.model
 
-data class PurchaseModel(
+data class ProductModel(
     val postId: Int,
 
     val title: String,

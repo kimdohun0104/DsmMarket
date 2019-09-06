@@ -1,6 +1,6 @@
 package com.dsm.data.remote.entity
 
-data class PurchaseEntity(
+data class ProductEntity(
     val postId: Int,
 
     val title: String,

@@ -8,7 +8,7 @@ import com.dsm.data.paging.NetworkState
 import com.dsm.data.paging.purchase.PurchaseDataFactory
 import com.dsm.dsmmarketandroid.presentation.base.BaseViewModel
 import com.dsm.dsmmarketandroid.presentation.mapper.PurchaseModelMapper
-import com.dsm.dsmmarketandroid.presentation.model.PurchaseModel
+import com.dsm.dsmmarketandroid.presentation.model.ProductModel
 import java.util.concurrent.Executors
 
 class PurchaseViewModel(
@@ -17,7 +17,7 @@ class PurchaseViewModel(
 ) : BaseViewModel() {
 
     val networkState: LiveData<NetworkState>
-    val purchaseLiveData: LiveData<PagedList<PurchaseModel>>
+    val productLiveData: LiveData<PagedList<ProductModel>>
 
     init {
         val executor = Executors.newFixedThreadPool(5)
@@ -30,7 +30,7 @@ class PurchaseViewModel(
             .setPageSize(15)
             .build()
 
-        purchaseLiveData = LivePagedListBuilder(purchaseModelDataFactory, pagedListConfig)
+        productLiveData = LivePagedListBuilder(purchaseModelDataFactory, pagedListConfig)
             .setFetchExecutor(executor)
             .build()
 

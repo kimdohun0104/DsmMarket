@@ -2,7 +2,7 @@ package com.dsm.data.remote.entity
 
 import com.google.gson.annotations.SerializedName
 
-data class PurchaseListEntity(
+data class ProductListEntity(
     @SerializedName("list")
-    val purchaseList: List<PurchaseEntity>
+    val productList: List<ProductEntity>
 )

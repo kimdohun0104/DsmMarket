@@ -1,7 +1,7 @@
 package com.dsm.data.remote
 
 import com.dsm.data.remote.entity.PostCategoryListEntity
-import com.dsm.data.remote.entity.PurchaseListEntity
+import com.dsm.data.remote.entity.ProductListEntity
 import io.reactivex.Flowable
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -69,5 +69,11 @@ interface Api {
     fun getPurchaseList(
         @Query("page") page: Int,
         @Query("pagesize") pageSize: Int
-    ): Flowable<PurchaseListEntity>
+    ): Flowable<ProductListEntity>
+
+    @GET("get/list/rent")
+    fun getRentList(
+        @Query("page") page: Int,
+        @Query("pagesize") pageSize: Int
+    ): Flowable<ProductListEntity>
 }
