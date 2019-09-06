@@ -17,5 +17,5 @@ val dataSourceModule = module {
 
     factory<PostDataSource> { PostDataSourceImpl(get()) }
 
-    factory<PurchaseDataSource> { PurchaseDataSourceImpl(get(), get()) }
+    factory<PurchaseDataSource> { PurchaseDataSourceImpl(get()) }
 }

@@ -68,6 +68,6 @@ interface Api {
     @GET("get/list/deal")
     fun getPurchaseList(
         @Query("page") page: Int,
-        @Query("pageSize") pageSize: Int
+        @Query("pagesize") pageSize: Int
     ): Flowable<PurchaseListEntity>
 }

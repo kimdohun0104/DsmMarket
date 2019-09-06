@@ -11,9 +11,6 @@ class PurchaseRepositoryImpl(private val purchaseDataSource: PurchaseDataSource)
     private val postMapper = PurchaseMapper()
 
     override fun getPurchaseList(page: Int, pageSize: Int): Flowable<List<Purchase>> =
-        purchaseDataSource.getRemotePurchaseList(page, pageSize)
-            .map(postMapper::mapFrom)
-            .doOnNext { list -> list.forEach { purchaseDataSource.cachePurchase(postMapper.mapFrom(it)).subscribe() } }
-            .onErrorReturn { postMapper.mapFrom(purchaseDataSource.getLocalPurchaseList(page, pageSize)) }
+        purchaseDataSource.getRemotePurchaseList(page, pageSize).map(postMapper::mapFrom)
 
 }

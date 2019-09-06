@@ -18,9 +18,9 @@ class BaseApp : Application() {
                     mapperModule,
                     networkModule,
                     repositoryModule,
-                    serviceModule,
                     useCaseModule,
-                    viewModelModule
+                    viewModelModule,
+                    pagingModule
                 )
             )
         }

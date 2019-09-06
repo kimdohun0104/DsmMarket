@@ -59,4 +59,7 @@ dependencies {
     implementation dependencies.roomRuntime
     kapt dependencies.roomCompiler
     implementation dependencies.roomRxJava
+
+    // paging
+    implementation dependencies.paging
 }

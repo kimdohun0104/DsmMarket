@@ -99,6 +99,9 @@ dependencies {
     // room
     implementation presentationDependencies.roomRuntime
     kapt presentationDependencies.roomCompiler
+
+    // paging
+    implementation dependencies.paging
 }
 
 apply plugin: 'com.google.gms.google-services'
