@@ -25,5 +25,4 @@ val useCaseModule = module {
     factory { PostRentUseCase(get()) }
 
     factory { PostPurchaseUseCase(get()) }
-
 }

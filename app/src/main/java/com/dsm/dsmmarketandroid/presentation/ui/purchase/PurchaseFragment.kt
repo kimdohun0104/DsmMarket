@@ -1,37 +1,41 @@
 package com.dsm.dsmmarketandroid.presentation.ui.purchase
 
 import android.os.Bundle
-import android.view.*
-import androidx.fragment.app.Fragment
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
+import androidx.lifecycle.Observer
 import com.dsm.dsmmarketandroid.R
-import com.dsm.dsmmarketandroid.presentation.trash_model.ProductModel
+import com.dsm.dsmmarketandroid.databinding.FragmentPurchaseBinding
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.PurchaseListAdapter
+import com.dsm.dsmmarketandroid.presentation.ui.base.BaseFragment
 import com.dsm.dsmmarketandroid.presentation.ui.category.CategoryActivity
 import com.dsm.dsmmarketandroid.presentation.ui.interest.InterestActivity
 import com.dsm.dsmmarketandroid.presentation.ui.search.SearchActivity
-import kotlinx.android.synthetic.main.fragment_purchase.view.*
+import kotlinx.android.synthetic.main.fragment_purchase.*
 import org.jetbrains.anko.startActivity
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class PurchaseFragment : Fragment() {
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val rootView = inflater.inflate(R.layout.fragment_purchase, container, false)
+class PurchaseFragment : BaseFragment<FragmentPurchaseBinding>() {
+    override val layoutResourceId: Int
+        get() = R.layout.fragment_purchase
+
+    private val viewModel: PurchaseViewModel by viewModel()
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
         activity?.setTitle(R.string.purchase)
 
         val adapter = PurchaseListAdapter()
-        rootView.rv_purchase.adapter = adapter
-        adapter.addItems(
-            arrayListOf(
-                ProductModel("http://img.allurekorea.com/allure/2018/12/style_5c248d8d46c15.jpg", "미칠듯이 좋은 화장품, 한정판매 간다.", "2019-03-01", "1000"),
-                ProductModel("https://s-i.huffpost.com/gen/3874780/images/n-GETTYIMAGESBANK-628x314.jpg", "우리 할머니 화장품 팝니다. 돈이 급해서 싸게 팜@@", "2019-03-01", "20000")
-            )
-        )
+        rv_purchase.adapter = adapter
 
-        return rootView
+        viewModel.purchaseLiveData.observe(this, Observer { adapter.submitList(it) })
+
+        viewModel.networkState.observe(this, Observer { adapter.setNetworkState(it) })
+
+        binding.viewModel = viewModel
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) =
