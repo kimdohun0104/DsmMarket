@@ -26,4 +26,5 @@ val useCaseModule = module {
 
     factory { PostPurchaseUseCase(get()) }
 
+    factory { GetPurchaseListUseCase(get()) }
 }

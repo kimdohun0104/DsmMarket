@@ -54,7 +54,9 @@ ext {
             lifecycleRuntime: "androidx.lifecycle:lifecycle-runtime:$lifecycleVersion",
             lifecycleExtensions: "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion",
             lifecycleCompiler: "androidx.lifecycle:lifecycle-compiler:$lifecycleVersion",
-            koinViewModel: "org.koin:koin-androidx-viewmodel:$koinVersion"
+            koinViewModel: "org.koin:koin-androidx-viewmodel:$koinVersion",
+            roomRuntime: "androidx.room:room-runtime:$roomVersion",
+            roomCompiler: "androidx.room:room-compiler:$roomVersion"
     ]
 
     dataTestDependencies = [
