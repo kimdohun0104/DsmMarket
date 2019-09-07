@@ -1,37 +1,39 @@
 package com.dsm.dsmmarketandroid.presentation.ui.rent
 
 import android.os.Bundle
-import android.view.*
-import androidx.fragment.app.Fragment
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
+import androidx.lifecycle.Observer
 import com.dsm.dsmmarketandroid.R
-import com.dsm.dsmmarketandroid.presentation.trash_model.ProductModel
+import com.dsm.dsmmarketandroid.databinding.FragmentRentBinding
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.RentListAdapter
+import com.dsm.dsmmarketandroid.presentation.ui.base.BaseFragment
 import com.dsm.dsmmarketandroid.presentation.ui.category.CategoryActivity
 import com.dsm.dsmmarketandroid.presentation.ui.interest.InterestActivity
 import com.dsm.dsmmarketandroid.presentation.ui.search.SearchActivity
-import kotlinx.android.synthetic.main.fragment_rent.view.*
+import kotlinx.android.synthetic.main.fragment_rent.*
 import org.jetbrains.anko.startActivity
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class RentFragment : Fragment() {
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val rootView = inflater.inflate(R.layout.fragment_rent, container, false)
+class RentFragment : BaseFragment<FragmentRentBinding>() {
+    override val layoutResourceId: Int
+        get() = R.layout.fragment_rent
+
+    private val viewModel: RentViewModel by viewModel()
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
         activity?.setTitle(R.string.rent)
 
         val adapter = RentListAdapter()
-        rootView.rv_rent.adapter = adapter
-        adapter.addItems(
-            arrayListOf(
-                ProductModel("http://img.allurekorea.com/allure/2018/12/style_5c248d8d46c15.jpg", "미칠듯이 좋은 화장품, 한정판매 간다.", "2019-03-01", "1000"),
-                ProductModel("https://s-i.huffpost.com/gen/3874780/images/n-GETTYIMAGESBANK-628x314.jpg", "우리 할머니 화장품 팝니다. 돈이 급해서 싸게 팜@@", "2019-03-01", "20000")
-            )
-        )
+        rv_rent.adapter = adapter
 
-        return rootView
+        viewModel.rentListItems.observe(this, Observer { adapter.submitList(it) })
+
+        viewModel.networkState.observe(this, Observer { adapter.setNetworkState(it) })
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

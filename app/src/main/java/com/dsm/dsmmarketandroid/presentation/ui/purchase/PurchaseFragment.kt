@@ -31,7 +31,7 @@ class PurchaseFragment : BaseFragment<FragmentPurchaseBinding>() {
         val adapter = PurchaseListAdapter()
         rv_purchase.adapter = adapter
 
-        viewModel.purchaseLiveData.observe(this, Observer { adapter.submitList(it) })
+        viewModel.purchaseListItems.observe(this, Observer { adapter.submitList(it) })
 
         viewModel.networkState.observe(this, Observer { adapter.setNetworkState(it) })
 

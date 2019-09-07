@@ -8,6 +8,8 @@ import com.dsm.data.dataSource.post.PostDataSource
 import com.dsm.data.dataSource.post.PostDataSourceImpl
 import com.dsm.data.dataSource.purchase.PurchaseDataSource
 import com.dsm.data.dataSource.purchase.PurchaseDataSourceImpl
+import com.dsm.data.dataSource.rent.RentDataSource
+import com.dsm.data.dataSource.rent.RentDataSourceImpl
 import org.koin.dsl.module
 
 val dataSourceModule = module {
@@ -18,4 +20,6 @@ val dataSourceModule = module {
     factory<PostDataSource> { PostDataSourceImpl(get()) }
 
     factory<PurchaseDataSource> { PurchaseDataSourceImpl(get()) }
+
+    factory<RentDataSource> { RentDataSourceImpl(get()) }
 }

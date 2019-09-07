@@ -1,6 +1,6 @@
 package com.dsm.domain.entity
 
-data class Purchase(
+data class Product(
     val postId: Int,
 
     val title: String,

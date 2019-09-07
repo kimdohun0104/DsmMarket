@@ -8,18 +8,18 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.dsm.data.paging.NetworkState
 import com.dsm.dsmmarketandroid.R
-import com.dsm.dsmmarketandroid.presentation.model.PurchaseModel
+import com.dsm.dsmmarketandroid.presentation.model.ProductModel
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_product.view.*
 
-class PurchaseListAdapter : PagedListAdapter<PurchaseModel, RecyclerView.ViewHolder>(DIFF_CALLBACK) {
+class PurchaseListAdapter : PagedListAdapter<ProductModel, RecyclerView.ViewHolder>(DIFF_CALLBACK) {
 
     companion object {
-        var DIFF_CALLBACK = object : DiffUtil.ItemCallback<PurchaseModel>() {
-            override fun areItemsTheSame(oldItem: PurchaseModel, newItem: PurchaseModel): Boolean =
+        var DIFF_CALLBACK = object : DiffUtil.ItemCallback<ProductModel>() {
+            override fun areItemsTheSame(oldItem: ProductModel, newItem: ProductModel): Boolean =
                 oldItem.postId == newItem.postId
 
-            override fun areContentsTheSame(oldItem: PurchaseModel, newItem: PurchaseModel): Boolean =
+            override fun areContentsTheSame(oldItem: ProductModel, newItem: ProductModel): Boolean =
                 oldItem == newItem
 
         }
@@ -73,7 +73,7 @@ class PurchaseListAdapter : PagedListAdapter<PurchaseModel, RecyclerView.ViewHol
     }
 
     inner class ItemHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(item: PurchaseModel?) {
+        fun bind(item: ProductModel?) {
             Picasso.get().load(item?.img).into(itemView.iv_product)
             itemView.tv_title.text = item?.title
             itemView.tv_product_date.text = item?.createdAt

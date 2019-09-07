@@ -1,13 +1,13 @@
-package com.dsm.data.paging.purchase
+package com.dsm.data.paging.rent
 
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.PageKeyedDataSource
 import com.dsm.data.paging.NetworkState
 import com.dsm.domain.entity.Product
-import com.dsm.domain.repository.PurchaseRepository
+import com.dsm.domain.repository.RentRepository
 import io.reactivex.disposables.CompositeDisposable
 
-class PurchaseKeyedDataSource(private val purchaseRepository: PurchaseRepository) : PageKeyedDataSource<Int, Product>() {
+class RentKeyedDataSource(private val rentRepository: RentRepository) : PageKeyedDataSource<Int, Product>() {
 
     val networkState = MutableLiveData<NetworkState>()
 
@@ -17,10 +17,9 @@ class PurchaseKeyedDataSource(private val purchaseRepository: PurchaseRepository
         networkState.postValue(NetworkState.LOADING)
 
         composite.add(
-            purchaseRepository.getPurchaseList(0, params.requestedLoadSize)
+            rentRepository.getRentList(0, params.requestedLoadSize)
                 .subscribe({
                     callback.onResult(it, null, 1)
-                    networkState.postValue(NetworkState.LOADED)
                 }, {
                     networkState.postValue(NetworkState.FAILED)
                 })
@@ -31,7 +30,7 @@ class PurchaseKeyedDataSource(private val purchaseRepository: PurchaseRepository
         networkState.postValue(NetworkState.LOADING)
 
         composite.add(
-            purchaseRepository.getPurchaseList(params.key, params.requestedLoadSize)
+            rentRepository.getRentList(params.key, params.requestedLoadSize)
                 .subscribe({
                     callback.onResult(it, params.key + 1)
                     networkState.postValue(NetworkState.LOADED)
