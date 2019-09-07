@@ -17,7 +17,7 @@ class RentViewModel(
 ) : BaseViewModel() {
 
     val networkState: LiveData<NetworkState>
-    val rentLiveData: LiveData<PagedList<ProductModel>>
+    val rentListItems: LiveData<PagedList<ProductModel>>
 
     init {
         val executor = Executors.newFixedThreadPool(5)
@@ -30,7 +30,7 @@ class RentViewModel(
             .setPageSize(15)
             .build()
 
-        rentLiveData = LivePagedListBuilder(productModelDataFactory, pagedListConfig)
+        rentListItems = LivePagedListBuilder(productModelDataFactory, pagedListConfig)
             .setFetchExecutor(executor)
             .build()
     }

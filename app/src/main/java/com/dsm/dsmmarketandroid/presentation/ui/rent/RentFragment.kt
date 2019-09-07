@@ -31,7 +31,7 @@ class RentFragment : BaseFragment<FragmentRentBinding>() {
         val adapter = RentListAdapter()
         rv_rent.adapter = adapter
 
-        viewModel.rentLiveData.observe(this, Observer { adapter.submitList(it) })
+        viewModel.rentListItems.observe(this, Observer { adapter.submitList(it) })
 
         viewModel.networkState.observe(this, Observer { adapter.setNetworkState(it) })
     }

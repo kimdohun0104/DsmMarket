@@ -17,7 +17,7 @@ class PurchaseViewModel(
 ) : BaseViewModel() {
 
     val networkState: LiveData<NetworkState>
-    val productLiveData: LiveData<PagedList<ProductModel>>
+    val purchaseListItems: LiveData<PagedList<ProductModel>>
 
     init {
         val executor = Executors.newFixedThreadPool(5)
@@ -30,7 +30,7 @@ class PurchaseViewModel(
             .setPageSize(15)
             .build()
 
-        productLiveData = LivePagedListBuilder(productModelDataFactory, pagedListConfig)
+        purchaseListItems = LivePagedListBuilder(productModelDataFactory, pagedListConfig)
             .setFetchExecutor(executor)
             .build()
 
