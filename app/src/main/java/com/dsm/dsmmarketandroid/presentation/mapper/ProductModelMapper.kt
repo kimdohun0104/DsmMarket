@@ -4,7 +4,7 @@ import com.dsm.domain.base.Mapper
 import com.dsm.domain.entity.Product
 import com.dsm.dsmmarketandroid.presentation.model.ProductModel
 
-class PurchaseModelMapper : Mapper<List<Product>, List<ProductModel>> {
+class ProductModelMapper : Mapper<List<Product>, List<ProductModel>> {
     override fun mapFrom(from: List<Product>): List<ProductModel> {
         val list = arrayListOf<ProductModel>()
         from.forEach {
