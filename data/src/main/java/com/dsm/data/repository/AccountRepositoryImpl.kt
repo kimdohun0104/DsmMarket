@@ -15,14 +15,17 @@ class AccountRepositoryImpl(
         accountDataSource.login(body).map {
             if (it.code() == 200) {
                 val response = it.body()!!
-                prefHelper.setAccessToken(response["access_token"] as String)
-                prefHelper.setRefreshToken(response["refresh_token"] as String)
+                prefHelper.setAccessToken(response["access_token"] ?: error(""))
+                prefHelper.setRefreshToken(response["refresh_token"] ?: error(""))
             }
             it.code()
         }
 
     override fun login(): Flowable<Int> =
         accountDataSource.login().map { it.code() }
+
+    override fun confirmPassword(password: String): Flowable<Response<Map<String, Int>>> =
+        accountDataSource.confirmPassword(password)
 
     override fun signUp(body: Any): Flowable<Response<Map<String, Int>>> =
         accountDataSource.signUp(body)

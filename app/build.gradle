@@ -58,6 +58,7 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:3.0.1'
     implementation 'com.github.mabbas007:TagsEditText:1.0.5'
     implementation 'net.cachapa.expandablelayout:expandablelayout:2.9.2'
+    implementation 'com.github.esafirm.android-image-picker:imagepicker:2.1.0'
 
     // kotlin
     implementation dependencies.kotlin

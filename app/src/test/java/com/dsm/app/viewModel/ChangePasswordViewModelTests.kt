@@ -48,33 +48,47 @@ class ChangePasswordViewModelTests {
         viewModel.newPassword.value = "NEW_PASSWORD"
         viewModel.reType.value = "DIFF_PASSWORD"
 
-        viewModel.changePassword("")
+        viewModel.changePassword(0)
 
         viewModel.toastPasswordDiffEvent.test().assertHasValue()
     }
 
     @Test
-    fun `when login state login success (200)`() {
+    fun `change password success (200)`() {
         viewModel.newPassword.value = "NEW_PASSWORD"
         viewModel.reType.value = "NEW_PASSWORD"
 
-        `when`(changePasswordUseCase.create(viewModel.newPassword.value!!)).thenReturn(Flowable.just(200))
+        `when`(
+            changePasswordUseCase
+                .create(
+                    mapOf(
+                        "authCode" to 0,
+                        "password" to viewModel.newPassword.value
+                    )
+                )
+        ).thenReturn(Flowable.just(200))
 
-        viewModel.changePassword("")
+        viewModel.changePassword(0)
 
         viewModel.finishActivityEvent.test().assertHasValue()
     }
 
     @Test
-    fun `when is not login state login success(200)`() {
+    fun `change password failed`() {
         viewModel.newPassword.value = "NEW_PASSWORD"
         viewModel.reType.value = "NEW_PASSWORD"
 
-        `when`(changePasswordUseCase.create(ChangePasswordUseCase.Params("email", viewModel.newPassword.value!!)))
-            .thenReturn(Flowable.just(200))
+        `when`(changePasswordUseCase
+            .create(
+                mapOf(
+                    "authCode" to 0,
+                    "password" to viewModel.newPassword.value
+                )
+            )
+        ).thenReturn(Flowable.just(400))
 
-        viewModel.changePassword("email")
+        viewModel.changePassword(0)
 
-        viewModel.intentLoginActivity.test().assertHasValue()
+        viewModel.toastServerErrorEvent.test().assertHasValue()
     }
 }

@@ -15,7 +15,9 @@ class PasswordCodeConfirmViewModel(
 
     val isConfirmPasswordCodeEnable: LiveData<Boolean> = Transformations.map(passwordCode) { it != "" }
 
-    val intentChangePasswordWithEmail = MutableLiveData<String>()
+    val intentChangePassword = MutableLiveData<Int>()
+    val finishActivityEvent = SingleLiveEvent<Any>()
+
     val toastConfirmCodeFailEvent = SingleLiveEvent<Any>()
     val toastServerErrorEvent = SingleLiveEvent<Any>()
 
@@ -24,11 +26,14 @@ class PasswordCodeConfirmViewModel(
             passwordCodeConfirmUseCase.create(
                 hashMapOf(
                     "email" to email,
-                    "code" to passwordCode.value!!.toInt()
+                    "mailCode" to passwordCode.value!!.toInt()
                 )
             ).subscribe({
-                when (it) {
-                    200 -> intentChangePasswordWithEmail.value = email
+                when (it.code()) {
+                    200 -> {
+                        intentChangePassword.value = it.body()!!["authCode"]
+                        finishActivityEvent.call()
+                    }
                     403 -> toastConfirmCodeFailEvent.call()
                 }
             }, {

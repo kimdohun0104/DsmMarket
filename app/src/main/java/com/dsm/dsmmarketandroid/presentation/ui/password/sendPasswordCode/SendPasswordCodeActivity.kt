@@ -25,11 +25,13 @@ class SendPasswordCodeActivity : BaseActivity<ActivitySendPasswordCodeBinding>()
 
         btn_find_password.setOnClickListener { startActivity<ChangePasswordActivity>() }
 
-        viewModel.toastInvalidEmailEvent.observe(this, Observer {  })
+        viewModel.toastInvalidEmailEvent.observe(this, Observer { toast(getString(R.string.fail_invalid_email)) })
 
         viewModel.intentPasswordCodeConfirmWithEmail.observe(this, Observer { startActivity<PasswordCodeConfirmActivity>("email" to it) })
 
         viewModel.toastServerErrorEvent.observe(this, Observer { toast(getString(R.string.fail_server_error)) })
+
+        viewModel.finishActivityResult.observe(this, Observer { finish() })
 
         binding.viewModel = viewModel
     }

@@ -19,6 +19,8 @@
     <string name="email">이메일</string>
     <string name="mail_confirm">인증코드 확인</string>
     <string name="confirm_code">인증코드</string>
+    <string name="original_password_confirm">기존 비밀번호 확인</string>
+    <string name="original_password">기존 비밀번호</string>
 
     <!--content description-->
     <string name="description_logo">앱 로고</string>
@@ -77,21 +79,11 @@
     <!--category-->
     <string name="book">책</string>
 
-    <string-array name="grade">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-    </string-array>
+    <string name="fail_login">이메일 또는 비밀번호가 틀렸습니다</string>
 
-    <string-array name="gender">
-        <item>남성</item>
-        <item>여성</item>
-        <item>밝히지 않음</item>
-    </string-array>
+    <string name="fail_invalid_email">유효하지 않은 이메일입니다</string>
 
     <!--fail-->
-    <string name="fail_login">이메일 또는 비밀번호가 틀렸습니다</string>
-    <string name="fail_invalid_email">유효하지 않은 이메일입니다</string>
     <string name="fail_diff_password">비밀번호가 일치하지 않습니다</string>
     <string name="fail_sign_up">회원가입에 실패했습니다</string>
     <string name="fail_existent_email">이미 존재하는 이메일입니다</string>
@@ -105,5 +97,16 @@
 
     <string name="tilde">~</string>
     <string name="confirm">확인</string>
+
     <string name="colon">:</string>
+    <string-array name="grade">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+    <string-array name="gender">
+        <item>남성</item>
+        <item>여성</item>
+        <item>밝히지 않음</item>
+    </string-array>
 </resources>

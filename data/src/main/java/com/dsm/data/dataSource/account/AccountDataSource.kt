@@ -5,9 +5,11 @@ import retrofit2.Response
 
 interface AccountDataSource {
 
-    fun login(body: Any): Flowable<Response<Map<String, Any>>>
+    fun login(body: Any): Flowable<Response<Map<String, String>>>
 
     fun login(): Flowable<Response<Unit>>
+
+    fun confirmPassword(password: String): Flowable<Response<Map<String, Int>>>
 
     fun signUp(body: Any): Flowable<Response<Map<String, Int>>>
 

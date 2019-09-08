@@ -2,9 +2,7 @@ package com.dsm.dsmmarketandroid.presentation.ui.post.postPurchase
 
 import android.app.Activity
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dsm.dsmmarketandroid.R
@@ -13,6 +11,7 @@ import com.dsm.dsmmarketandroid.presentation.ui.adapter.PostImageListAdapter
 import com.dsm.dsmmarketandroid.presentation.ui.base.BaseActivity
 import com.dsm.dsmmarketandroid.presentation.ui.postCategory.PostCategoryActivity
 import com.dsm.dsmmarketandroid.presentation.util.PermissionUtil
+import com.esafirm.imagepicker.features.ImagePicker
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_post_purchase.*
 import org.jetbrains.anko.toast
@@ -48,12 +47,7 @@ class PostPurchaseActivity : BaseActivity<ActivityPostPurchaseBinding>() {
                 Snackbar.make(iv_select_image, getString(R.string.fail_permission_denied), Snackbar.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            val intent = Intent().apply {
-                type = "image/*"
-                putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
-                action = Intent.ACTION_GET_CONTENT
-            }
-            startActivityForResult(Intent.createChooser(intent, "select image"), SELECT_IMAGE)
+            ImagePicker.create(this@PostPurchaseActivity).limit(5).start(SELECT_IMAGE)
         }
 
         viewModel.imageList.observe(this, Observer {
@@ -76,32 +70,14 @@ class PostPurchaseActivity : BaseActivity<ActivityPostPurchaseBinding>() {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == SELECT_IMAGE) {
-                val clip = data?.clipData
                 val pathList = arrayListOf<String>()
-                for (i in 0 until clip?.itemCount!!) {
-                    if (i >= 5) {
-                        toast(getString(R.string.max_image))
-                        break
-                    }
-                    pathList.add(getPathFromUri(clip.getItemAt(i).uri)!!)
+                ImagePicker.getImages(data).forEach {
+                    pathList.add(it.path)
                 }
-
                 viewModel.imageList.value = pathList
             } else if (requestCode == CATEGORY) {
                 viewModel.category.value = data?.getStringExtra("category")
             }
         }
-    }
-
-    private fun getPathFromUri(contentUri: Uri): String? {
-        var res: String? = null
-        val proj = arrayOf(MediaStore.Images.Media.DATA)
-        val cursor = contentResolver.query(contentUri, proj, null, null, null)
-        if (cursor!!.moveToFirst()) {
-            val columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
-            res = cursor.getString(columnIndex)
-        }
-        cursor.close()
-        return res
     }
 }

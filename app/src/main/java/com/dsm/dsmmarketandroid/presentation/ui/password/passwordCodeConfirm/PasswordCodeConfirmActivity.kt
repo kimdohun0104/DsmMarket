@@ -23,9 +23,9 @@ class PasswordCodeConfirmActivity : BaseActivity<ActivityPasswordCodeConfirmBind
         val email = intent.getStringExtra("email")
         binding.email = email
 
-        viewModel.intentChangePasswordWithEmail.observe(this, Observer {
-            startActivity<ChangePasswordActivity>("email" to email)
-        })
+        viewModel.intentChangePassword.observe(this, Observer { startActivity<ChangePasswordActivity>("authCode" to it) })
+
+        viewModel.finishActivityEvent.observe(this, Observer { finish() })
 
         viewModel.toastConfirmCodeFailEvent.observe(this, Observer { toast(R.string.fail_confirm_code) })
 
