@@ -1,5 +1,6 @@
 package com.dsm.dsmmarketandroid.presentation.ui.password.changePassword
 
+import android.util.Log
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import com.dsm.domain.usecase.ChangePasswordUseCase
@@ -23,37 +24,27 @@ class ChangePasswordViewModel(
 
     val finishActivityEvent = SingleLiveEvent<Any>()
 
-    val intentLoginActivity = SingleLiveEvent<Any>()
-
-
-    fun changePassword(email: String) {
+    fun changePassword(authCode: Int) {
         if (newPassword.value != reType.value) {
             toastPasswordDiffEvent.call()
             return
         }
 
         addDisposable(
-            if (email.isBlank()) {
-                changePasswordUseCase.create(newPassword.value!!)
-                    .subscribe({
-                        when (it) {
-                            200 -> finishActivityEvent.call()
-                            else -> toastServerErrorEvent.call()
-                        }
-                    }, {
-                        toastServerErrorEvent.call()
-                    })
-            } else {
-                changePasswordUseCase.create(ChangePasswordUseCase.Params(email, newPassword.value!!))
-                    .subscribe({
-                        when (it) {
-                            200 -> intentLoginActivity.call()
-                            else -> toastServerErrorEvent.call()
-                        }
-                    }, {
-                        toastServerErrorEvent.call()
-                    })
-            }
+            changePasswordUseCase.create(
+                mapOf(
+                    "authCode" to authCode,
+                    "password" to newPassword.value
+                )
+            ).subscribe({
+                when (it) {
+                    200 -> finishActivityEvent.call()
+                    else -> toastServerErrorEvent.call()
+                }
+            }, {
+                Log.d("DEBUGLOG", it.message.toString())
+                toastServerErrorEvent.call()
+            })
         )
     }
 }

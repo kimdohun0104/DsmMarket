@@ -5,8 +5,8 @@ import androidx.lifecycle.Observer
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.ActivitySplashBinding
 import com.dsm.dsmmarketandroid.presentation.ui.base.BaseActivity
-import com.dsm.dsmmarketandroid.presentation.ui.login.LoginActivity
 import com.dsm.dsmmarketandroid.presentation.ui.main.MainActivity
+import com.dsm.dsmmarketandroid.presentation.ui.start.StartActivity
 import org.jetbrains.anko.startActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -22,6 +22,6 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
 
         viewModel.intentMainActivityEvent.observe(this, Observer { startActivity<MainActivity>() })
 
-        viewModel.intentLoginActivityEvent.observe(this, Observer { startActivity<LoginActivity>() })
+        viewModel.intentStartActivity.observe(this, Observer { startActivity<StartActivity>() })
     }
 }

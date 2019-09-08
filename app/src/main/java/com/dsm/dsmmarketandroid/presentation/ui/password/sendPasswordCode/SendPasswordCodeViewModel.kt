@@ -19,6 +19,7 @@ class SendPasswordCodeViewModel(
     val toastInvalidEmailEvent = SingleLiveEvent<Any>()
     val intentPasswordCodeConfirmWithEmail = MutableLiveData<String>()
     val toastServerErrorEvent = SingleLiveEvent<Any>()
+    val finishActivityResult = SingleLiveEvent<Any>()
 
     fun sendPasswordCode() {
         if (!Validator.validEmail(email.value!!)) {
@@ -30,7 +31,10 @@ class SendPasswordCodeViewModel(
             sendPasswordCodeUseCase.create(email.value!!)
                 .subscribe({
                     when (it) {
-                        200 -> intentPasswordCodeConfirmWithEmail.value = email.value
+                        200 -> {
+                            intentPasswordCodeConfirmWithEmail.value = email.value
+                            finishActivityResult.call()
+                        }
                         else -> toastServerErrorEvent.call()
                     }
                 }, {

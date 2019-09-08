@@ -7,11 +7,14 @@ import retrofit2.Response
 
 class AccountDataSourceImpl(private val api: Api) : AccountDataSource {
 
-    override fun login(body: Any): Flowable<Response<Map<String, Any>>> =
+    override fun login(body: Any): Flowable<Response<Map<String, String>>> =
         api.login(body).addSchedulers()
 
     override fun login(): Flowable<Response<Unit>> =
         api.login().addSchedulers()
+
+    override fun confirmPassword(password: String): Flowable<Response<Map<String, Int>>> =
+        api.confirmPassword(password).addSchedulers()
 
     override fun signUp(body: Any): Flowable<Response<Map<String, Int>>> =
         api.signUp(body).addSchedulers()

@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.dsm.dsmmarketandroid">
 
-    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".presentation.BaseApp"
@@ -17,6 +17,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
+        <activity android:name=".presentation.ui.password.passwordConfirm.PasswordConfirmActivity" />
         <activity android:name=".presentation.ui.splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,8 +31,9 @@
         <activity android:name=".presentation.ui.searchResult.SearchResultActivity" />
         <activity android:name=".presentation.ui.chat.ChatActivity" />
         <activity android:name=".presentation.ui.post.postRent.PostRentActivity" />
-        <activity android:name=".presentation.ui.post.postPurchase.PostPurchaseActivity"
-            android:windowSoftInputMode="adjustPan"/>
+        <activity
+            android:name=".presentation.ui.post.postPurchase.PostPurchaseActivity"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".presentation.ui.addComment.AddCommentActivity"
             android:windowSoftInputMode="adjustResize" />

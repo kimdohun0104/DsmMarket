@@ -12,6 +12,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.mockito.Mockito.`when`
 import org.mockito.Mockito.mock
+import retrofit2.Response
 
 class PasswordCodeConfirmViewModelTests {
 
@@ -40,41 +41,5 @@ class PasswordCodeConfirmViewModelTests {
         viewModel.passwordCode.value = ""
 
         assertFalse(viewModel.isConfirmPasswordCodeEnable.test().value())
-    }
-
-    @Test
-    fun `confirm password code success (200)`() {
-        viewModel.passwordCode.value = "1234567"
-
-        `when`(
-            passwordCodeConfirmUseCase.create(
-                hashMapOf(
-                    "email" to "email",
-                    "code" to viewModel.passwordCode.value!!.toInt()
-                )
-            )
-        ).thenReturn(Flowable.just(200))
-
-        viewModel.confirmPasswordCode("email")
-
-        viewModel.intentChangePasswordWithEmail.test().assertHasValue()
-    }
-
-    @Test
-    fun `invalid confirm code (403)`() {
-        viewModel.passwordCode.value = "1234567"
-
-        `when`(
-            passwordCodeConfirmUseCase.create(
-                hashMapOf(
-                    "email" to "email",
-                    "code" to viewModel.passwordCode.value!!.toInt()
-                )
-            )
-        ).thenReturn(Flowable.just(403))
-
-        viewModel.confirmPasswordCode("email")
-
-        viewModel.toastConfirmCodeFailEvent.test().assertHasValue()
     }
 }

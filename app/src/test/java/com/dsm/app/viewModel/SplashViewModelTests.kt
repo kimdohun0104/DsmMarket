@@ -41,6 +41,6 @@ class SplashViewModelTests {
 
         viewModel.login()
 
-        viewModel.intentLoginActivityEvent.test().assertHasValue()
+        viewModel.intentStartActivity.test().assertHasValue()
     }
 }

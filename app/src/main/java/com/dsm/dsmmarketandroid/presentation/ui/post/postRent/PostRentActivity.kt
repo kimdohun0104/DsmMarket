@@ -2,9 +2,8 @@ package com.dsm.dsmmarketandroid.presentation.ui.post.postRent
 
 import android.app.Activity
 import android.content.Intent
-import android.net.Uri
+import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.provider.MediaStore
 import androidx.lifecycle.Observer
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.ActivityPostRentBinding
@@ -12,6 +11,7 @@ import com.dsm.dsmmarketandroid.presentation.ui.base.BaseActivity
 import com.dsm.dsmmarketandroid.presentation.ui.post.postRent.rentTime.SelectRentTimeFragment
 import com.dsm.dsmmarketandroid.presentation.ui.postCategory.PostCategoryActivity
 import com.dsm.dsmmarketandroid.presentation.util.PermissionUtil
+import com.esafirm.imagepicker.features.ImagePicker
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_post_rent.*
 import org.jetbrains.anko.toast
@@ -42,10 +42,7 @@ class PostRentActivity : BaseActivity<ActivityPostRentBinding>() {
                 Snackbar.make(iv_select_image, getString(R.string.fail_permission_denied), Snackbar.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            val intent = Intent(Intent.ACTION_GET_CONTENT).apply {
-                type = "image/*"
-            }
-            startActivityForResult(intent, SELECT_IMAGE)
+            ImagePicker.create(this@PostRentActivity).single().start(SELECT_IMAGE)
         }
 
         btn_select_time.setOnClickListener { SelectRentTimeFragment().show(supportFragmentManager, "") }
@@ -61,23 +58,12 @@ class PostRentActivity : BaseActivity<ActivityPostRentBinding>() {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == SELECT_IMAGE) {
-                iv_select_image.setImageURI(data?.data!!)
-                viewModel.photo.value = getPathFromUri(data.data!!)
+                val imagePath = ImagePicker.getFirstImageOrNull(data).path
+                iv_select_image.setImageBitmap(BitmapFactory.decodeFile(imagePath))
+                viewModel.photo.value = imagePath
             } else if (requestCode == CATEGORY) {
                 viewModel.category.value = data?.getStringExtra("category")
             }
         }
-    }
-
-    private fun getPathFromUri(contentUri: Uri): String? {
-        var res: String? = null
-        val proj = arrayOf(MediaStore.Images.Media.DATA)
-        val cursor = contentResolver.query(contentUri, proj, null, null, null)
-        if (cursor!!.moveToFirst()) {
-            val columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
-            res = cursor.getString(columnIndex)
-        }
-        cursor.close()
-        return res
     }
 }

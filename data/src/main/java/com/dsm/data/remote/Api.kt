@@ -10,68 +10,61 @@ import retrofit2.http.*
 
 interface Api {
 
-    @POST("account/auth/login")
-    fun login(@Body body: Any): Flowable<Response<Map<String, Any>>>
+    @POST("auth/login")
+    fun login(@Body body: Any): Flowable<Response<Map<String, String>>>
 
-    @GET("account/auth/login")
+    @GET("auth/login")
     fun login(): Flowable<Response<Unit>>
 
-    @POST("account/auth/join")
+    @GET("auth/login")
+    fun confirmPassword(@Query("password") password: String): Flowable<Response<Map<String, Int>>>
+
+    @GET("auth/mail")
+    fun sendPasswordCode(@Query("email") email: String): Flowable<Response<Unit>>
+
+    @POST("auth/mail")
+    fun passwordCodeConfirm(@Body body: Any): Flowable<Response<Map<String, Int>>>
+
+    @POST("account/join")
     fun signUp(@Body body: Any): Flowable<Response<Map<String, Int>>>
 
-    @FormUrlEncoded
-    @POST("mail/send")
-    fun sendPasswordCode(@Field("email") email: String): Flowable<Response<Unit>>
-
-    @POST("mail/confirm")
-    fun passwordCodeConfirm(@Body body: Any): Flowable<Response<Unit>>
+    @PATCH("account/password")
+    fun changePassword(@Body params: Any): Flowable<Response<Unit>>
 
     @FormUrlEncoded
-    @POST("account/edit/password")
-    fun changePassword(@Field("password") newPassword: String): Flowable<Response<Unit>>
+    @PATCH("account/nick")
+    fun changeUserNick(@Field("nick") nick: String): Flowable<Response<Unit>>
 
-    @FormUrlEncoded
-    @PATCH("mail/password")
-    fun changePassword(
-        @Field("email") email: String,
-        @Field("password") newPassword: String
-    ): Flowable<Response<Unit>>
+    @GET("token")
+    fun refreshToken(@Query("refresh_token") refreshToken: String): Flowable<Response<Map<String, Any>>>
 
-    @FormUrlEncoded
-    @PATCH("account/edit/nick")
-    fun changeUserNick(@Field("nick") newNick: String): Flowable<Response<Unit>>
-
-    @FormUrlEncoded
-    @POST("account/auth/token")
-    fun refreshToken(@Field("refresh_token") refreshToken: String): Flowable<Response<Map<String, Any>>>
-
-    @GET("account/get/nick")
+    @GET("user")
     fun getUserNick(): Flowable<Response<Map<String, String>>>
 
-    @GET("post/category")
+    @GET("category")
     fun getPostCategory(): Flowable<PostCategoryListEntity>
 
     @Multipart
-    @POST("post/add/rent")
+    @POST("post/rent")
     fun postRent(
         @Part img: MultipartBody.Part,
         @PartMap params: Map<String, @JvmSuppressWildcards RequestBody>
     ): Flowable<Response<Unit>>
 
     @Multipart
-    @POST("post/add/deal")
+    @POST("post/deal")
     fun postPurchase(
         @Part img: List<MultipartBody.Part>,
         @PartMap params: Map<String, @JvmSuppressWildcards RequestBody>
     ): Flowable<Response<Unit>>
 
-    @GET("get/list/deal")
+    @GET("list/deal")
     fun getPurchaseList(
         @Query("page") page: Int,
         @Query("pagesize") pageSize: Int
     ): Flowable<ProductListEntity>
 
-    @GET("get/list/rent")
+    @GET("list/rent")
     fun getRentList(
         @Query("page") page: Int,
         @Query("pagesize") pageSize: Int

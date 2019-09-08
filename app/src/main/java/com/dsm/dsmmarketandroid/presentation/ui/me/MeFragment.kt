@@ -9,7 +9,7 @@ import com.dsm.dsmmarketandroid.presentation.ui.base.BaseFragment
 import com.dsm.dsmmarketandroid.presentation.ui.changeNick.ChangeNickActivity
 import com.dsm.dsmmarketandroid.presentation.ui.interest.InterestActivity
 import com.dsm.dsmmarketandroid.presentation.ui.myPost.MyPostActivity
-import com.dsm.dsmmarketandroid.presentation.ui.password.changePassword.ChangePasswordActivity
+import com.dsm.dsmmarketandroid.presentation.ui.password.passwordConfirm.PasswordConfirmActivity
 import com.dsm.dsmmarketandroid.presentation.ui.past.PastActivity
 import kotlinx.android.synthetic.main.fragment_me.*
 import org.jetbrains.anko.startActivity
@@ -28,7 +28,7 @@ class MeFragment : BaseFragment<FragmentMeBinding>() {
         cl_post_product.setOnClickListener { activity?.startActivity<MyPostActivity>() }
         cl_past_product.setOnClickListener { activity?.startActivity<PastActivity>() }
         cl_change_name.setOnClickListener { activity?.startActivity<ChangeNickActivity>("nick" to activity?.title) }
-        cl_change_password.setOnClickListener { activity?.startActivity<ChangePasswordActivity>() }
+        cl_change_password.setOnClickListener { activity?.startActivity<PasswordConfirmActivity>() }
 
         viewModel.userNick.observe(this, Observer { activity?.title = it })
 
