@@ -8,7 +8,7 @@ import okhttp3.RequestBody
 interface PostRepository {
     fun getPostCategory(): Flowable<List<PostCategory>>
 
-    fun postRent(img: MultipartBody.Part, params: Map<String, RequestBody>): Flowable<Int>
+    fun postRent(img: MultipartBody.Part, params: Map<String, RequestBody>): Flowable<Unit>
 
-    fun postPurchase(img: List<MultipartBody.Part>, params: Map<String, RequestBody>): Flowable<Int>
+    fun postPurchase(img: List<MultipartBody.Part>, params: Map<String, RequestBody>): Flowable<Unit>
 }

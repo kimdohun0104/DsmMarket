@@ -6,6 +6,8 @@ import com.dsm.domain.usecase.SignUpUseCase
 import com.dsm.dsmmarketandroid.presentation.base.BaseViewModel
 import com.dsm.dsmmarketandroid.presentation.util.SingleLiveEvent
 import com.dsm.dsmmarketandroid.presentation.util.Validator
+import org.json.JSONObject
+import retrofit2.HttpException
 
 class SignUpViewModel(private val signUpUseCase: SignUpUseCase) : BaseViewModel() {
 
@@ -62,18 +64,19 @@ class SignUpViewModel(private val signUpUseCase: SignUpUseCase) : BaseViewModel(
                     "gender" to gender.value
                 )
             ).subscribe({
-                when (it.code()) {
-                    200 -> finishActivityEvent.call()
-                    403 -> {
-                        if (it.body()!!["errorCode"] == 0) {
-                            toastExistentEmailEvent.call()
-                        } else {
-                            toastExistentNameEvent.call()
+                finishActivityEvent.call()
+            }, {
+                if (it is HttpException) {
+                    if (it.code() == 403) {
+                        val errorResponse = JSONObject(it.response()?.errorBody()?.string()!!)
+                        if (errorResponse.has("errorCode")) {
+                            if (errorResponse.getInt("errorCode") == 0)
+                                toastExistentEmailEvent.call()
+                            else
+                                toastExistentNameEvent.call()
                         }
                     }
-                }
-            }, {
-                toastServerErrorEvent.call()
+                } else toastServerErrorEvent.call()
             })
         )
     }

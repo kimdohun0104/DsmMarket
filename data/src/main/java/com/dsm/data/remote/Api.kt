@@ -1,8 +1,6 @@
 package com.dsm.data.remote
 
-import com.dsm.data.remote.entity.LoginTokenEntity
-import com.dsm.data.remote.entity.PostCategoryListEntity
-import com.dsm.data.remote.entity.ProductListEntity
+import com.dsm.data.remote.entity.*
 import io.reactivex.Flowable
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -18,19 +16,19 @@ interface Api {
     fun autoLogin(): Flowable<Response<Unit>>
 
     @GET("auth/login")
-    fun confirmPassword(@Query("password") password: String): Flowable<Response<Map<String, Any>>>
+    fun confirmPassword(@Query("password") password: String): Flowable<Response<ConfirmPasswordEntity>>
 
     @GET("auth/mail")
     fun sendPasswordCode(@Query("email") email: String): Flowable<Response<Unit>>
 
     @POST("auth/mail")
-    fun passwordCodeConfirm(@Body body: Any): Flowable<Response<Map<String, Int>>>
-
-    @POST("account/join")
-    fun signUp(@Body body: Any): Flowable<Response<Map<String, Int>>>
+    fun passwordCodeConfirm(@Body body: Any): Flowable<Response<PasswordCodeConfirmEntity>>
 
     @PATCH("account/password")
     fun changePassword(@Body params: Any): Flowable<Response<Unit>>
+
+    @POST("account/join")
+    fun signUp(@Body body: Any): Flowable<Response<Map<String, Int>>>
 
     @FormUrlEncoded
     @PATCH("account/nick")

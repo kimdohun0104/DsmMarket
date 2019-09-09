@@ -1,12 +1,13 @@
 package com.dsm.domain.repository
 
 import io.reactivex.Flowable
-import retrofit2.Response
 
 interface PasswordRepository {
-    fun sendPasswordCode(email: String): Flowable<Int>
+    fun confirmPassword(password: String): Flowable<Pair<String, Int>>
 
-    fun passwordCodeConfirm(body: Any): Flowable<Response<Map<String, Int>>>
+    fun sendPasswordCode(email: String): Flowable<Unit>
 
-    fun changePassword(params: Any): Flowable<Int>
+    fun passwordCodeConfirm(body: Any): Flowable<Int>
+
+    fun changePassword(params: Any): Flowable<Unit>
 }

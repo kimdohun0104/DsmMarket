@@ -10,8 +10,6 @@ interface AccountDataSource {
 
     fun autoLogin(): Flowable<Response<Unit>>
 
-    fun confirmPassword(password: String): Flowable<Response<Map<String, Any>>>
-
     fun signUp(body: Any): Flowable<Response<Map<String, Int>>>
 
     fun refreshToken(refreshToken: String): Flowable<Response<Map<String, Any>>>
