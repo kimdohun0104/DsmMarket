@@ -12,10 +12,7 @@ class SplashViewModel(private val loginUseCase: LoginUseCase) : BaseViewModel() 
     fun login() {
         addDisposable(
             loginUseCase.create().subscribe({
-                when (it) {
-                    200 -> intentMainActivityEvent.call()
-                    else -> intentStartActivity.call()
-                }
+                intentMainActivityEvent.call()
             }, {
                 intentStartActivity.call()
             })

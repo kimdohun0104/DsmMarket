@@ -22,8 +22,11 @@ class AccountRepositoryImpl(
             Unit
         }
 
-    override fun login(): Flowable<Int> =
-        accountDataSource.login().map { it.code() }
+    override fun login(): Flowable<Unit> =
+        accountDataSource.login().map {
+            if (it.code() != 200) throw HttpException(it)
+            Unit
+        }
 
     override fun confirmPassword(password: String): Flowable<Response<Map<String, Any>>> =
         accountDataSource.confirmPassword(password)
