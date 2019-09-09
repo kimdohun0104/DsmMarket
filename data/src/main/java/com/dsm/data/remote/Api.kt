@@ -15,7 +15,7 @@ interface Api {
     fun login(@Body body: Any): Flowable<Response<LoginTokenEntity>>
 
     @GET("auth/login")
-    fun login(): Flowable<Response<Unit>>
+    fun autoLogin(): Flowable<Response<Unit>>
 
     @GET("auth/login")
     fun confirmPassword(@Query("password") password: String): Flowable<Response<Map<String, Any>>>

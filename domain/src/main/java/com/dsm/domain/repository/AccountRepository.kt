@@ -6,7 +6,7 @@ import retrofit2.Response
 interface AccountRepository {
     fun login(body: Any): Flowable<Unit>
 
-    fun login(): Flowable<Unit>
+    fun autoLogin(): Flowable<Unit>
 
     fun confirmPassword(password: String): Flowable<Response<Map<String, Any>>>
 

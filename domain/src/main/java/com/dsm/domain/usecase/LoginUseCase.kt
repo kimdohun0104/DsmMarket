@@ -9,5 +9,4 @@ class LoginUseCase(private val accountRepository: AccountRepository) : UseCase<A
     override fun create(data: Any): Flowable<Unit> =
         accountRepository.login(data)
 
-    fun create(): Flowable<Unit> = accountRepository.login()
 }

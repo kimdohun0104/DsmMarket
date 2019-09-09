@@ -22,8 +22,8 @@ class AccountRepositoryImpl(
             Unit
         }
 
-    override fun login(): Flowable<Unit> =
-        accountDataSource.login().map {
+    override fun autoLogin(): Flowable<Unit> =
+        accountDataSource.autoLogin().map {
             if (it.code() != 200) throw HttpException(it)
             Unit
         }
