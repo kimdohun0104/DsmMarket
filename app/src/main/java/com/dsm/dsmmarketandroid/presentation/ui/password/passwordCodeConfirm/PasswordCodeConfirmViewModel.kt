@@ -6,6 +6,7 @@ import androidx.lifecycle.Transformations
 import com.dsm.domain.usecase.PasswordCodeConfirmUseCase
 import com.dsm.dsmmarketandroid.presentation.base.BaseViewModel
 import com.dsm.dsmmarketandroid.presentation.util.SingleLiveEvent
+import retrofit2.HttpException
 
 class PasswordCodeConfirmViewModel(
     private val passwordCodeConfirmUseCase: PasswordCodeConfirmUseCase
@@ -29,15 +30,13 @@ class PasswordCodeConfirmViewModel(
                     "mailCode" to passwordCode.value!!.toInt()
                 )
             ).subscribe({
-                when (it.code()) {
-                    200 -> {
-                        intentChangePassword.value = it.body()!!["authCode"]
-                        finishActivityEvent.call()
-                    }
-                    403 -> toastConfirmCodeFailEvent.call()
-                }
+                intentChangePassword.value = it
+                finishActivityEvent.call()
             }, {
-                toastServerErrorEvent.call()
+                if (it is HttpException) {
+                    if (it.code() == 403)
+                        toastConfirmCodeFailEvent.call()
+                } else toastServerErrorEvent.call()
             })
         )
     }

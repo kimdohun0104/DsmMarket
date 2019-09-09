@@ -4,18 +4,12 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.dsm.domain.usecase.PostRentUseCase
 import com.dsm.dsmmarketandroid.presentation.ui.post.postRent.PostRentViewModel
 import com.jraska.livedata.test
-import io.reactivex.Flowable
-import okhttp3.MediaType
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.mockito.Mockito.`when`
 import org.mockito.Mockito.mock
-import java.io.File
 
 class PostRentViewModelTests {
 

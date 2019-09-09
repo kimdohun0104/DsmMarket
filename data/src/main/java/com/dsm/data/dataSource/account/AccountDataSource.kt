@@ -7,9 +7,7 @@ interface AccountDataSource {
 
     fun login(body: Any): Flowable<Response<Map<String, String>>>
 
-    fun login(): Flowable<Response<Unit>>
-
-    fun confirmPassword(password: String): Flowable<Response<Map<String, Any>>>
+    fun autoLogin(): Flowable<Response<Unit>>
 
     fun signUp(body: Any): Flowable<Response<Map<String, Int>>>
 

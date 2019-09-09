@@ -56,26 +56,10 @@ class LoginViewModelTests {
             "email" to viewModel.email.value,
             "password" to viewModel.password.value
         )
-        `when`(loginUseCase.create(request)).thenReturn(Flowable.just(200))
+        `when`(loginUseCase.create(request)).thenReturn(Flowable.just(Unit))
 
         viewModel.login()
 
         viewModel.intentMainActivityEvent.test().assertHasValue()
-    }
-
-    @Test
-    fun `login failed (403)`() {
-        viewModel.email.value = "test@test.com"
-        viewModel.password.value = "testPassword"
-
-        val request = hashMapOf(
-            "email" to viewModel.email.value,
-            "password" to viewModel.password.value
-        )
-        `when`(loginUseCase.create(request)).thenReturn(Flowable.just(403))
-
-        viewModel.login()
-
-        viewModel.toastLoginFailEvent.test().assertHasValue()
     }
 }

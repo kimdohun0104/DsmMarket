@@ -62,10 +62,7 @@ class PostPurchaseViewModel(private val postPurchaseUseCase: PostPurchaseUseCase
                     )
                 )
             ).subscribe({
-                when (it) {
-                    200 -> finishActivityEvent.call()
-                    else -> toastServerErrorEvent.call()
-                }
+                finishActivityEvent.call()
             }, {
                 toastServerErrorEvent.call()
             })

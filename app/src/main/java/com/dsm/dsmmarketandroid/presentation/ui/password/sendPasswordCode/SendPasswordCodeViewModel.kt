@@ -30,13 +30,8 @@ class SendPasswordCodeViewModel(
         addDisposable(
             sendPasswordCodeUseCase.create(email.value!!)
                 .subscribe({
-                    when (it) {
-                        200 -> {
-                            intentPasswordCodeConfirmWithEmail.value = email.value
-                            finishActivityResult.call()
-                        }
-                        else -> toastServerErrorEvent.call()
-                    }
+                    intentPasswordCodeConfirmWithEmail.value = email.value
+                    finishActivityResult.call()
                 }, {
                     toastServerErrorEvent.call()
                 })

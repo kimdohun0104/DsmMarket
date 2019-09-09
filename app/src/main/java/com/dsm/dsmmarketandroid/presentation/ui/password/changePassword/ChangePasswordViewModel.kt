@@ -37,10 +37,7 @@ class ChangePasswordViewModel(
                     "password" to newPassword.value
                 )
             ).subscribe({
-                when (it) {
-                    200 -> finishActivityEvent.call()
-                    else -> toastServerErrorEvent.call()
-                }
+                finishActivityEvent.call()
             }, {
                 toastServerErrorEvent.call()
             })

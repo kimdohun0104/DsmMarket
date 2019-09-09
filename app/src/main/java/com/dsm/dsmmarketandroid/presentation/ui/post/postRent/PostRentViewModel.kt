@@ -71,10 +71,7 @@ class PostRentViewModel(private val postRentUseCase: PostRentUseCase) : BaseView
                     )
                 )
             ).subscribe({
-                when (it) {
-                    200 -> finishActivityEvent.call()
-                    else -> toastServerErrorEvent.call()
-                }
+                finishActivityEvent.call()
             }, {
                 toastServerErrorEvent.call()
             })

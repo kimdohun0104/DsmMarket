@@ -6,6 +6,7 @@ import androidx.lifecycle.Transformations
 import com.dsm.domain.usecase.ChangeNickUseCase
 import com.dsm.dsmmarketandroid.presentation.base.BaseViewModel
 import com.dsm.dsmmarketandroid.presentation.util.SingleLiveEvent
+import retrofit2.HttpException
 
 class ChangeNickViewModel(private val changeNickUseCase: ChangeNickUseCase) : BaseViewModel() {
 
@@ -21,12 +22,12 @@ class ChangeNickViewModel(private val changeNickUseCase: ChangeNickUseCase) : Ba
         addDisposable(
             changeNickUseCase.create(nick.value!!)
                 .subscribe({
-                    when (it) {
-                        200 -> finishActivityEvent.call()
-                        403 -> toastExistentNickEvent.call()
-                    }
+                    finishActivityEvent.call()
                 }, {
-                    toastServerErrorEvent.call()
+                    if (it is HttpException) {
+                        if (it.code() == 403)
+                            toastExistentNickEvent.call()
+                    } else toastServerErrorEvent.call()
                 })
         )
     }

@@ -14,10 +14,10 @@ interface Api {
     fun login(@Body body: Any): Flowable<Response<Map<String, String>>>
 
     @GET("auth/login")
-    fun login(): Flowable<Response<Unit>>
+    fun autoLogin(): Flowable<Response<Unit>>
 
     @GET("auth/login")
-    fun confirmPassword(@Query("password") password: String): Flowable<Response<Map<String, Any>>>
+    fun confirmPassword(@Query("password") password: String): Flowable<Response<Map<String, String>>>
 
     @GET("auth/mail")
     fun sendPasswordCode(@Query("email") email: String): Flowable<Response<Unit>>
@@ -25,11 +25,11 @@ interface Api {
     @POST("auth/mail")
     fun passwordCodeConfirm(@Body body: Any): Flowable<Response<Map<String, Int>>>
 
-    @POST("account/join")
-    fun signUp(@Body body: Any): Flowable<Response<Map<String, Int>>>
-
     @PATCH("account/password")
     fun changePassword(@Body params: Any): Flowable<Response<Unit>>
+
+    @POST("account/join")
+    fun signUp(@Body body: Any): Flowable<Response<Map<String, Int>>>
 
     @FormUrlEncoded
     @PATCH("account/nick")

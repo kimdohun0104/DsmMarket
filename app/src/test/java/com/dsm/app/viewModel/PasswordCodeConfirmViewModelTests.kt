@@ -4,15 +4,12 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.dsm.domain.usecase.PasswordCodeConfirmUseCase
 import com.dsm.dsmmarketandroid.presentation.ui.password.passwordCodeConfirm.PasswordCodeConfirmViewModel
 import com.jraska.livedata.test
-import io.reactivex.Flowable
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.mockito.Mockito.`when`
 import org.mockito.Mockito.mock
-import retrofit2.Response
 
 class PasswordCodeConfirmViewModelTests {
 
