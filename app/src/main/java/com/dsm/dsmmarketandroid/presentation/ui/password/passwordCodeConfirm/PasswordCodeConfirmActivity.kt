@@ -23,7 +23,9 @@ class PasswordCodeConfirmActivity : BaseActivity<ActivityPasswordCodeConfirmBind
         val email = intent.getStringExtra("email")
         binding.email = email
 
-        viewModel.intentChangePassword.observe(this, Observer { startActivity<ChangePasswordActivity>("authCode" to it) })
+        viewModel.intentChangePassword.observe(this, Observer {
+            startActivity<ChangePasswordActivity>("authCode" to it, "email" to email)
+        })
 
         viewModel.finishActivityEvent.observe(this, Observer { finish() })
 

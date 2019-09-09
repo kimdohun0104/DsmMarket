@@ -13,7 +13,7 @@ class AccountDataSourceImpl(private val api: Api) : AccountDataSource {
     override fun login(): Flowable<Response<Unit>> =
         api.login().addSchedulers()
 
-    override fun confirmPassword(password: String): Flowable<Response<Map<String, Int>>> =
+    override fun confirmPassword(password: String): Flowable<Response<Map<String, Any>>> =
         api.confirmPassword(password).addSchedulers()
 
     override fun signUp(body: Any): Flowable<Response<Map<String, Int>>> =

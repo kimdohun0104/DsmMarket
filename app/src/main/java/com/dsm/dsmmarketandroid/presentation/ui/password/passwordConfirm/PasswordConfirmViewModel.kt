@@ -1,5 +1,6 @@
 package com.dsm.dsmmarketandroid.presentation.ui.password.passwordConfirm
 
+import android.util.Pair
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import com.dsm.domain.usecase.ConfirmPasswordUseCase
@@ -12,7 +13,7 @@ class PasswordConfirmViewModel(private val confirmPasswordUseCase: ConfirmPasswo
 
     val isConfirmEnable = Transformations.map(originalPassword) { it != "" }
 
-    val intentChangePassword = MutableLiveData<Int>()
+    val intentChangePassword = MutableLiveData<Pair<String, Int>>()
     val finishActivityEvent = SingleLiveEvent<Any>()
     val toastInvalidPasswordEvent = SingleLiveEvent<Any>()
     val toastServerErrorEvent = SingleLiveEvent<Any>()
@@ -23,10 +24,11 @@ class PasswordConfirmViewModel(private val confirmPasswordUseCase: ConfirmPasswo
                 .subscribe({
                     when (it.code()) {
                         200 -> {
-                            intentChangePassword.value = it.body()!!["authCode"]
+                            val response = it.body()!!
+                            intentChangePassword.value = Pair.create(response["email"] as String, response["authCode"] as Int)
                             finishActivityEvent.call()
                         }
-                        2 -> toastInvalidPasswordEvent
+                        2 -> toastInvalidPasswordEvent.call()
                     }
                 }, {
                     toastServerErrorEvent.call()

@@ -20,6 +20,7 @@ class ChangePasswordActivity : BaseActivity<ActivityChangePasswordBinding>() {
         super.onCreate(savedInstanceState)
         tb_change_password.setNavigationOnClickListener { finish() }
         binding.authCode = intent.getIntExtra("authCode", 0)
+        binding.email = intent.getStringExtra("email")
 
         val rotateAnim = AnimationUtils.loadAnimation(this, R.anim.anim_rotate)
         view_ring.startAnimation(rotateAnim)

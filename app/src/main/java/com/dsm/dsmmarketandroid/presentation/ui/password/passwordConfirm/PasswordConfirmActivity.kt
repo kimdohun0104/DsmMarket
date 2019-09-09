@@ -21,7 +21,9 @@ class PasswordConfirmActivity : BaseActivity<ActivityPasswordConfirmBinding>() {
         super.onCreate(savedInstanceState)
         tb_password_confirm.setNavigationOnClickListener { finish() }
 
-        viewModel.intentChangePassword.observe(this, Observer { startActivity<ChangePasswordActivity>("authCode" to it) })
+        viewModel.intentChangePassword.observe(this, Observer {
+            startActivity<ChangePasswordActivity>("email" to it.first, "authCode" to it.second)
+        })
 
         viewModel.finishActivityEvent.observe(this, Observer { finish() })
 

@@ -24,7 +24,7 @@ class AccountRepositoryImpl(
     override fun login(): Flowable<Int> =
         accountDataSource.login().map { it.code() }
 
-    override fun confirmPassword(password: String): Flowable<Response<Map<String, Int>>> =
+    override fun confirmPassword(password: String): Flowable<Response<Map<String, Any>>> =
         accountDataSource.confirmPassword(password)
 
     override fun signUp(body: Any): Flowable<Response<Map<String, Int>>> =

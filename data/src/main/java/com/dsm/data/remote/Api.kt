@@ -17,7 +17,7 @@ interface Api {
     fun login(): Flowable<Response<Unit>>
 
     @GET("auth/login")
-    fun confirmPassword(@Query("password") password: String): Flowable<Response<Map<String, Int>>>
+    fun confirmPassword(@Query("password") password: String): Flowable<Response<Map<String, Any>>>
 
     @GET("auth/mail")
     fun sendPasswordCode(@Query("email") email: String): Flowable<Response<Unit>>

@@ -1,6 +1,5 @@
 package com.dsm.dsmmarketandroid.presentation.ui.password.changePassword
 
-import android.util.Log
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import com.dsm.domain.usecase.ChangePasswordUseCase
@@ -24,7 +23,7 @@ class ChangePasswordViewModel(
 
     val finishActivityEvent = SingleLiveEvent<Any>()
 
-    fun changePassword(authCode: Int) {
+    fun changePassword(email: String, authCode: Int) {
         if (newPassword.value != reType.value) {
             toastPasswordDiffEvent.call()
             return
@@ -33,6 +32,7 @@ class ChangePasswordViewModel(
         addDisposable(
             changePasswordUseCase.create(
                 mapOf(
+                    "email" to email,
                     "authCode" to authCode,
                     "password" to newPassword.value
                 )
@@ -42,7 +42,6 @@ class ChangePasswordViewModel(
                     else -> toastServerErrorEvent.call()
                 }
             }, {
-                Log.d("DEBUGLOG", it.message.toString())
                 toastServerErrorEvent.call()
             })
         )
