@@ -22,6 +22,6 @@ class PurchaseRepositoryImpl(private val purchaseDataSource: PurchaseDataSource)
             if (it.code() == 200) purchaseDetailMapper.mapFrom(it.body()!!)
             else throw HttpException(it)
         }
-            .doOnNext { purchaseDataSource.addLocalPurchaseDetail(purchaseDetailMapper.mapFrom(it)) }
+            .doOnNext { purchaseDataSource.addLocalPurchaseDetail(purchaseDetailMapper.mapFrom(it)).subscribe() }
             .onErrorReturn { purchaseDetailMapper.mapFrom(purchaseDataSource.getLocalPurchaseDetail(postId)) }
 }

@@ -11,6 +11,7 @@ import com.dsm.dsmmarketandroid.presentation.ui.post.postPurchase.PostPurchaseVi
 import com.dsm.dsmmarketandroid.presentation.ui.post.postRent.PostRentViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.postCategory.PostCategoryViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.purchase.PurchaseViewModel
+import com.dsm.dsmmarketandroid.presentation.ui.purchaseDetail.PurchaseDetailViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.rent.RentViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.signUp.SignUpViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.splash.SplashViewModel
@@ -45,4 +46,6 @@ val viewModelModule = module {
     viewModel { RentViewModel(get(), get()) }
 
     viewModel { PasswordConfirmViewModel(get()) }
+
+    viewModel { PurchaseDetailViewModel(get(), get()) }
 }

@@ -9,10 +9,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.dsm.data.paging.NetworkState
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.model.ProductModel
+import com.dsm.dsmmarketandroid.presentation.ui.purchase.PurchaseViewModel
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_product.view.*
 
-class PurchaseListAdapter : PagedListAdapter<ProductModel, RecyclerView.ViewHolder>(DIFF_CALLBACK) {
+class PurchaseListAdapter(private val viewModel: PurchaseViewModel) : PagedListAdapter<ProductModel, RecyclerView.ViewHolder>(DIFF_CALLBACK) {
 
     companion object {
         var DIFF_CALLBACK = object : DiffUtil.ItemCallback<ProductModel>() {
@@ -78,6 +79,7 @@ class PurchaseListAdapter : PagedListAdapter<ProductModel, RecyclerView.ViewHold
             itemView.tv_title.text = item?.title
             itemView.tv_product_date.text = item?.createdAt
             itemView.tv_product_price.text = item?.price
+            itemView.cl_parent.setOnClickListener { viewModel.intentPurchaseDetail.value = item?.postId }
         }
     }
 }

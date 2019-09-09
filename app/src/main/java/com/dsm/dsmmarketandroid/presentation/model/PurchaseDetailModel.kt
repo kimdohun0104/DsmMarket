@@ -1,13 +1,8 @@
-package com.dsm.data.local.db.entity
+package com.dsm.dsmmarketandroid.presentation.model
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-
-@Entity
-data class PurchaseDetailRoomEntity(
+data class PurchaseDetailModel(
     val img: List<String>,
 
-    @PrimaryKey
     val id: Int,
 
     val title: String,

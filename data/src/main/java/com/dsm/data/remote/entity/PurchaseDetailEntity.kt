@@ -16,5 +16,7 @@ data class PurchaseDetailEntity(
     val price: String,
 
     @SerializedName("comments")
-    val commentCount: Int
+    val commentCount: Int,
+
+    val author: String
 )

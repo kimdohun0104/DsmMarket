@@ -8,11 +8,13 @@ import com.google.gson.reflect.TypeToken
 object Converters {
 
     @TypeConverter
-    fun fromString(value: String): ArrayList<String> {
-        val listType = object : TypeToken<ArrayList<String>>() {}.type
+    @JvmStatic
+    fun fromString(value: String): List<String> {
+        val listType = object : TypeToken<List<String>>() {}.type
         return Gson().fromJson(value, listType)
     }
 
+    @JvmStatic
     @TypeConverter
     fun fromList(list: List<String>): String = Gson().toJson(list)
 }

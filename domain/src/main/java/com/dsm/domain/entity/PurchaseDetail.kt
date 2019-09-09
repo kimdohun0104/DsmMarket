@@ -13,5 +13,7 @@ data class PurchaseDetail(
 
     val price: String,
 
-    val commentCount: Int
+    val commentCount: Int,
+
+    val author: String
 )

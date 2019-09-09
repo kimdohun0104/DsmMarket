@@ -6,6 +6,8 @@ import android.widget.Spinner
 import androidx.databinding.BindingAdapter
 import androidx.databinding.BindingConversion
 import androidx.lifecycle.MutableLiveData
+import androidx.viewpager2.widget.ViewPager2
+import com.dsm.dsmmarketandroid.presentation.ui.adapter.DetailImagePagerAdapter
 
 
 object BindingUtil {
@@ -36,5 +38,12 @@ object BindingUtil {
         } else {
             value.value = "30"
         }
+    }
+
+    @JvmStatic
+    @BindingAdapter("bind:detailImages")
+    fun bindDetailImages(view: ViewPager2, value: MutableLiveData<List<String>>) {
+        val adapter = view.adapter as DetailImagePagerAdapter
+        value.value?.let { adapter.imageList = it }
     }
 }
