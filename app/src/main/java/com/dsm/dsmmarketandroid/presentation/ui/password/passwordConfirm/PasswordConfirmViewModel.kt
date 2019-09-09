@@ -1,5 +1,6 @@
 package com.dsm.dsmmarketandroid.presentation.ui.password.passwordConfirm
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import com.dsm.domain.usecase.ConfirmPasswordUseCase
@@ -25,6 +26,7 @@ class PasswordConfirmViewModel(private val confirmPasswordUseCase: ConfirmPasswo
                     intentChangePassword.value = it
                     finishActivityEvent.call()
                 }, {
+                    Log.d("DEBUGLOG", it.message.toString())
                     if (it is HttpException) {
                         if (it.code() == 2)
                             toastInvalidPasswordEvent.call()

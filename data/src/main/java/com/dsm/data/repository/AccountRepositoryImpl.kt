@@ -16,8 +16,8 @@ class AccountRepositoryImpl(
         accountDataSource.login(body).map {
             if (it.code() == 200) {
                 val response = it.body()!!
-                prefHelper.setAccessToken(response.accessToken)
-                prefHelper.setRefreshToken(response.refreshToken)
+                prefHelper.setAccessToken(response["access_token"] ?: "")
+                prefHelper.setRefreshToken(response["refresh_token"] ?: "")
             } else throw HttpException(it)
         }
 

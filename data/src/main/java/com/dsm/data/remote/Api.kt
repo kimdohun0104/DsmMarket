@@ -10,19 +10,19 @@ import retrofit2.http.*
 interface Api {
 
     @POST("auth/login")
-    fun login(@Body body: Any): Flowable<Response<LoginTokenEntity>>
+    fun login(@Body body: Any): Flowable<Response<Map<String, String>>>
 
     @GET("auth/login")
     fun autoLogin(): Flowable<Response<Unit>>
 
     @GET("auth/login")
-    fun confirmPassword(@Query("password") password: String): Flowable<Response<ConfirmPasswordEntity>>
+    fun confirmPassword(@Query("password") password: String): Flowable<Response<Map<String, String>>>
 
     @GET("auth/mail")
     fun sendPasswordCode(@Query("email") email: String): Flowable<Response<Unit>>
 
     @POST("auth/mail")
-    fun passwordCodeConfirm(@Body body: Any): Flowable<Response<PasswordCodeConfirmEntity>>
+    fun passwordCodeConfirm(@Body body: Any): Flowable<Response<Map<String, Int>>>
 
     @PATCH("account/password")
     fun changePassword(@Body params: Any): Flowable<Response<Unit>>

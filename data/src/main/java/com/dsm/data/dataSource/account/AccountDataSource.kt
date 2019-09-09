@@ -1,12 +1,11 @@
 package com.dsm.data.dataSource.account
 
-import com.dsm.data.remote.entity.LoginTokenEntity
 import io.reactivex.Flowable
 import retrofit2.Response
 
 interface AccountDataSource {
 
-    fun login(body: Any): Flowable<Response<LoginTokenEntity>>
+    fun login(body: Any): Flowable<Response<Map<String, String>>>
 
     fun autoLogin(): Flowable<Response<Unit>>
 

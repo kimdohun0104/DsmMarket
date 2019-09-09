@@ -10,7 +10,8 @@ class PasswordRepositoryImpl(private val passwordDataSource: PasswordDataSource)
     override fun confirmPassword(password: String): Flowable<Pair<String, Int>> =
         passwordDataSource.confirmPassword(password).map {
             if (it.code() != 200) throw HttpException(it)
-            Pair(it.body()!!.email, it.body()!!.authCode)
+            val response = it.body()!!
+            Pair(response["email"] ?: "", (response["authCode"] ?: "").toInt())
         }
 
     override fun sendPasswordCode(email: String): Flowable<Unit> =
@@ -21,7 +22,7 @@ class PasswordRepositoryImpl(private val passwordDataSource: PasswordDataSource)
     override fun passwordCodeConfirm(body: Any): Flowable<Int> =
         passwordDataSource.passwordCodeConfirm(body).map {
             if (it.code() != 200) throw HttpException(it)
-            it.body()!!.authCode
+            it.body()!!["authCode"]
         }
 
     override fun changePassword(params: Any): Flowable<Unit> =
