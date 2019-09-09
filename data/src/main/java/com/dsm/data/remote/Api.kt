@@ -1,5 +1,6 @@
 package com.dsm.data.remote
 
+import com.dsm.data.remote.entity.LoginTokenEntity
 import com.dsm.data.remote.entity.PostCategoryListEntity
 import com.dsm.data.remote.entity.ProductListEntity
 import io.reactivex.Flowable
@@ -11,7 +12,7 @@ import retrofit2.http.*
 interface Api {
 
     @POST("auth/login")
-    fun login(@Body body: Any): Flowable<Response<Map<String, String>>>
+    fun login(@Body body: Any): Flowable<Response<LoginTokenEntity>>
 
     @GET("auth/login")
     fun login(): Flowable<Response<Unit>>

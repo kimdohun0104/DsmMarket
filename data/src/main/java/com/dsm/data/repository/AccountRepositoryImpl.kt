@@ -4,6 +4,7 @@ import com.dsm.data.dataSource.account.AccountDataSource
 import com.dsm.data.local.pref.PrefHelper
 import com.dsm.domain.repository.AccountRepository
 import io.reactivex.Flowable
+import retrofit2.HttpException
 import retrofit2.Response
 
 class AccountRepositoryImpl(
@@ -11,14 +12,14 @@ class AccountRepositoryImpl(
     private val prefHelper: PrefHelper
 ) : AccountRepository {
 
-    override fun login(body: Any): Flowable<Int> =
+    override fun login(body: Any): Flowable<Unit> =
         accountDataSource.login(body).map {
             if (it.code() == 200) {
                 val response = it.body()!!
-                prefHelper.setAccessToken(response["access_token"] ?: error(""))
-                prefHelper.setRefreshToken(response["refresh_token"] ?: error(""))
-            }
-            it.code()
+                prefHelper.setAccessToken(response.accessToken)
+                prefHelper.setRefreshToken(response.refreshToken)
+            } else throw HttpException(it)
+            Unit
         }
 
     override fun login(): Flowable<Int> =

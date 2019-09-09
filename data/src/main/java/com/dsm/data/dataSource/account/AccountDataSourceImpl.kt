@@ -2,12 +2,13 @@ package com.dsm.data.dataSource.account
 
 import com.dsm.data.addSchedulers
 import com.dsm.data.remote.Api
+import com.dsm.data.remote.entity.LoginTokenEntity
 import io.reactivex.Flowable
 import retrofit2.Response
 
 class AccountDataSourceImpl(private val api: Api) : AccountDataSource {
 
-    override fun login(body: Any): Flowable<Response<Map<String, String>>> =
+    override fun login(body: Any): Flowable<Response<LoginTokenEntity>> =
         api.login(body).addSchedulers()
 
     override fun login(): Flowable<Response<Unit>> =

@@ -4,7 +4,7 @@ import io.reactivex.Flowable
 import retrofit2.Response
 
 interface AccountRepository {
-    fun login(body: Any): Flowable<Int>
+    fun login(body: Any): Flowable<Unit>
 
     fun login(): Flowable<Int>
 

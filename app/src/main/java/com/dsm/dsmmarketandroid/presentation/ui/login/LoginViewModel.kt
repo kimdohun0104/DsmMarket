@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.dsm.domain.usecase.LoginUseCase
 import com.dsm.dsmmarketandroid.presentation.base.BaseViewModel
 import com.dsm.dsmmarketandroid.presentation.util.SingleLiveEvent
+import retrofit2.HttpException
 
 class LoginViewModel(private val loginUseCase: LoginUseCase) : BaseViewModel() {
 
@@ -28,12 +29,13 @@ class LoginViewModel(private val loginUseCase: LoginUseCase) : BaseViewModel() {
                     "password" to password.value
                 )
             ).subscribe({
-                when (it) {
-                    200 -> intentMainActivityEvent.call()
-                    403 -> toastLoginFailEvent.call()
-                }
+                intentMainActivityEvent.call()
             }, {
-                toastServerErrorEvent.call()
+                if (it is HttpException) {
+                    if (it.code() == 403) {
+                        toastLoginFailEvent.call()
+                    }
+                } else toastServerErrorEvent.call()
             })
         )
     }
