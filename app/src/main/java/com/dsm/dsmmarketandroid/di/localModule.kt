@@ -15,4 +15,6 @@ val localModule = module {
     }
 
     factory { get<AppDatabase>().purchaseDao() }
+
+    factory { get<AppDatabase>().rentDao() }
 }

@@ -4,6 +4,7 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.dsm.data.local.db.dao.PurchaseDao
+import com.dsm.data.local.db.dao.RentDao
 import com.dsm.data.local.db.entity.PurchaseDetailRoomEntity
 
 @Database(entities = [PurchaseDetailRoomEntity::class], version = 1)
@@ -11,4 +12,6 @@ import com.dsm.data.local.db.entity.PurchaseDetailRoomEntity
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun purchaseDao(): PurchaseDao
+
+    abstract fun rentDao(): RentDao
 }

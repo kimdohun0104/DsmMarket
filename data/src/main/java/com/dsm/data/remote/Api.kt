@@ -3,6 +3,7 @@ package com.dsm.data.remote
 import com.dsm.data.remote.entity.PostCategoryListEntity
 import com.dsm.data.remote.entity.ProductListEntity
 import com.dsm.data.remote.entity.PurchaseDetailEntity
+import com.dsm.data.remote.entity.RentDetailEntity
 import io.reactivex.Flowable
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -76,4 +77,10 @@ interface Api {
         @Query("postId") postId: Int,
         @Query("type") type: Int
     ): Flowable<Response<PurchaseDetailEntity>>
+
+    @GET("post")
+    fun getRentDetail(
+        @Query("postId") postId: Int,
+        @Query("type") type: Int
+    ): Flowable<Response<RentDetailEntity>>
 }

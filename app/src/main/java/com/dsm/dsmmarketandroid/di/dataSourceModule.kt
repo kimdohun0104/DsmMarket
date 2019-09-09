@@ -21,5 +21,5 @@ val dataSourceModule = module {
 
     factory<PurchaseDataSource> { PurchaseDataSourceImpl(get(), get()) }
 
-    factory<RentDataSource> { RentDataSourceImpl(get()) }
+    factory<RentDataSource> { RentDataSourceImpl(get(), get()) }
 }

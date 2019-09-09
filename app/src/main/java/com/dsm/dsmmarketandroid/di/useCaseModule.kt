@@ -31,4 +31,6 @@ val useCaseModule = module {
     factory { ConfirmPasswordUseCase(get()) }
 
     factory { GetPurchaseDetailUseCase(get()) }
+
+    factory { GetRentDetailUseCase(get()) }
 }
