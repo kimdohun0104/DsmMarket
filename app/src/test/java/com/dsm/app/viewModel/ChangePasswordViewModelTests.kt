@@ -48,7 +48,7 @@ class ChangePasswordViewModelTests {
         viewModel.newPassword.value = "NEW_PASSWORD"
         viewModel.reType.value = "DIFF_PASSWORD"
 
-        viewModel.changePassword(0)
+        viewModel.changePassword("", 0)
 
         viewModel.toastPasswordDiffEvent.test().assertHasValue()
     }
@@ -62,13 +62,14 @@ class ChangePasswordViewModelTests {
             changePasswordUseCase
                 .create(
                     mapOf(
+                        "email" to "EMAIL@example.com",
                         "authCode" to 0,
                         "password" to viewModel.newPassword.value
                     )
                 )
         ).thenReturn(Flowable.just(200))
 
-        viewModel.changePassword(0)
+        viewModel.changePassword("EMAIL@example.com", 0)
 
         viewModel.finishActivityEvent.test().assertHasValue()
     }
@@ -81,13 +82,14 @@ class ChangePasswordViewModelTests {
         `when`(changePasswordUseCase
             .create(
                 mapOf(
+                    "email" to "EMAIL@example.com",
                     "authCode" to 0,
                     "password" to viewModel.newPassword.value
                 )
             )
         ).thenReturn(Flowable.just(400))
 
-        viewModel.changePassword(0)
+        viewModel.changePassword("EMAIL@example.com", 0)
 
         viewModel.toastServerErrorEvent.test().assertHasValue()
     }
