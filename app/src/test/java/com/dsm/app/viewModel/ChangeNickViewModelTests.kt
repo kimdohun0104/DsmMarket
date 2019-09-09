@@ -46,21 +46,10 @@ class ChangeNickViewModelTests {
     fun `change nick success (200)`() {
         viewModel.nick.value = "NICK"
 
-        `when`(changeNickUseCase.create(viewModel.nick.value!!)).thenReturn(Flowable.just(200))
+        `when`(changeNickUseCase.create(viewModel.nick.value!!)).thenReturn(Flowable.just(Unit))
 
         viewModel.changeNick()
 
         viewModel.finishActivityEvent.test().assertHasValue()
-    }
-
-    @Test
-    fun `already exist name (403)`() {
-        viewModel.nick.value = "NICK"
-
-        `when`(changeNickUseCase.create(viewModel.nick.value!!)).thenReturn(Flowable.just(403))
-
-        viewModel.changeNick()
-
-        viewModel.toastExistentNickEvent.test().assertHasValue()
     }
 }

@@ -56,7 +56,7 @@ class SendPasswordCodeViewModelTests {
         viewModel.email.value = "example@test.com"
 
         `when`(sendPasswordCodeUseCase.create(viewModel.email.value!!))
-            .thenReturn(Flowable.just(200))
+            .thenReturn(Flowable.just(Unit))
 
         viewModel.sendPasswordCode()
 

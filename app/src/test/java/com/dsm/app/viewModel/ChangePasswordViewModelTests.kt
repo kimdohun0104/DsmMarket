@@ -67,30 +67,10 @@ class ChangePasswordViewModelTests {
                         "password" to viewModel.newPassword.value
                     )
                 )
-        ).thenReturn(Flowable.just(200))
+        ).thenReturn(Flowable.just(Unit))
 
         viewModel.changePassword("EMAIL@example.com", 0)
 
         viewModel.finishActivityEvent.test().assertHasValue()
-    }
-
-    @Test
-    fun `change password failed`() {
-        viewModel.newPassword.value = "NEW_PASSWORD"
-        viewModel.reType.value = "NEW_PASSWORD"
-
-        `when`(changePasswordUseCase
-            .create(
-                mapOf(
-                    "email" to "EMAIL@example.com",
-                    "authCode" to 0,
-                    "password" to viewModel.newPassword.value
-                )
-            )
-        ).thenReturn(Flowable.just(400))
-
-        viewModel.changePassword("EMAIL@example.com", 0)
-
-        viewModel.toastServerErrorEvent.test().assertHasValue()
     }
 }

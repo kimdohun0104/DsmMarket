@@ -12,7 +12,6 @@ import org.junit.Rule
 import org.junit.Test
 import org.mockito.Mockito.`when`
 import org.mockito.Mockito.mock
-import retrofit2.Response
 
 class SignUpViewModelTests {
 
@@ -88,8 +87,7 @@ class SignUpViewModelTests {
             "gender" to viewModel.gender.value,
             "grade" to viewModel.grade.value
         )
-        val response = mapOf("message" to 1)
-        `when`(signUpUseCase.create(request)).thenReturn(Flowable.just(Response.success(response)))
+        `when`(signUpUseCase.create(request)).thenReturn(Flowable.just(Unit))
 
         viewModel.signUp()
 
