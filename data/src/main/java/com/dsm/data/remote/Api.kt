@@ -10,6 +10,7 @@ import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.Field
+import retrofit2.http.FieldMap
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
 import retrofit2.http.Multipart
@@ -92,4 +93,7 @@ interface Api {
         @Query("postId") postId: Int,
         @Query("type") type: Int
     ): Flowable<Response<RentDetailEntity>>
+
+    @POST("comment")
+    fun postComment(@Body params: Any): Flowable<Response<Unit>>
 }

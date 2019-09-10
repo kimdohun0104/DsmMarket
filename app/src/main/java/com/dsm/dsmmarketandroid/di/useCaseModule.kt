@@ -10,6 +10,7 @@ import com.dsm.domain.usecase.GetRentDetailUseCase
 import com.dsm.domain.usecase.GetUserNickUseCase
 import com.dsm.domain.usecase.LoginUseCase
 import com.dsm.domain.usecase.PasswordCodeConfirmUseCase
+import com.dsm.domain.usecase.PostCommentUseCase
 import com.dsm.domain.usecase.PostPurchaseUseCase
 import com.dsm.domain.usecase.PostRentUseCase
 import com.dsm.domain.usecase.RefreshTokenUseCase
@@ -47,4 +48,6 @@ val useCaseModule = module {
     factory { GetPurchaseDetailUseCase(get()) }
 
     factory { GetRentDetailUseCase(get()) }
+
+    factory { PostCommentUseCase(get()) }
 }
