@@ -49,12 +49,6 @@ class PurchaseDetailViewModelTests {
 
         val result = purchaseDetailModelMapper.mapFrom(response)
 
-        viewModel.author.test().assertValue(result.author)
-        viewModel.createdAt.test().assertValue(result.createdAt)
-        viewModel.price.test().assertValue(result.price)
-        viewModel.title.test().assertValue(result.title)
-        viewModel.commentCount.test().assertValue(result.commentCount)
-        viewModel.content.test().assertValue(result.content)
-        viewModel.imageList.test().assertValue(result.img)
+        viewModel.purchaseDetail.test().assertValue(result)
     }
 }
