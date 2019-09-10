@@ -3,8 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.dsm.dsmmarketandroid">
 
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:name=".presentation.BaseApp"
@@ -17,6 +18,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
+        <activity android:name=".presentation.ui.rentDetail.RentDetailActivity" />
         <activity android:name=".presentation.ui.password.passwordConfirm.PasswordConfirmActivity" />
         <activity android:name=".presentation.ui.splash.SplashActivity">
             <intent-filter>

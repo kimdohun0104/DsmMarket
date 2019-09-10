@@ -12,9 +12,11 @@ import com.dsm.dsmmarketandroid.presentation.ui.adapter.RentListAdapter
 import com.dsm.dsmmarketandroid.presentation.ui.base.BaseFragment
 import com.dsm.dsmmarketandroid.presentation.ui.category.CategoryActivity
 import com.dsm.dsmmarketandroid.presentation.ui.interest.InterestActivity
+import com.dsm.dsmmarketandroid.presentation.ui.rentDetail.RentDetailActivity
 import com.dsm.dsmmarketandroid.presentation.ui.search.SearchActivity
 import kotlinx.android.synthetic.main.fragment_rent.*
 import org.jetbrains.anko.startActivity
+import org.jetbrains.anko.support.v4.startActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class RentFragment : BaseFragment<FragmentRentBinding>() {
@@ -28,12 +30,16 @@ class RentFragment : BaseFragment<FragmentRentBinding>() {
         setHasOptionsMenu(true)
         activity?.setTitle(R.string.rent)
 
-        val adapter = RentListAdapter()
+        val adapter = RentListAdapter(viewModel)
         rv_rent.adapter = adapter
 
         viewModel.rentListItems.observe(this, Observer { adapter.submitList(it) })
 
         viewModel.networkState.observe(this, Observer { adapter.setNetworkState(it) })
+
+        viewModel.intentRentDetail.observe(this, Observer { startActivity<RentDetailActivity>("post_id" to it) })
+
+        binding.viewModel = viewModel
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

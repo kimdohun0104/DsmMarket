@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.dsm.dsmmarketandroid.presentation.ui.purchaseDetail.PurchaseDetailViewModel" />
+    </data>
+
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:bind="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".presentation.ui.purchaseDetail.PurchaseDetailActivity">
@@ -15,11 +24,11 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/iv_product"
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/vp_detail_image"
                 android:layout_width="match_parent"
                 android:layout_height="310dp"
-                android:scaleType="centerCrop" />
+                bind:detailImages="@{viewModel.purchaseDetail.img}"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -28,7 +37,8 @@
                 android:textStyle="bold"
                 android:textColor="@color/black"
                 android:layout_marginStart="18dp"
-                android:layout_marginTop="18dp" />
+                android:layout_marginTop="18dp"
+                android:text="@{viewModel.purchaseDetail.title}"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -42,7 +52,8 @@
                     android:layout_marginStart="16sp"
                     android:textSize="13sp"
                     android:textStyle="bold"
-                    android:textColor="@color/colorGrey" />
+                    android:textColor="@color/colorGrey"
+                    android:text="@{viewModel.purchaseDetail.createdAt}"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -50,7 +61,8 @@
                     android:textSize="13sp"
                     android:textStyle="bold"
                     android:layout_marginStart="18dp"
-                    android:textColor="@color/colorGrey" />
+                    android:textColor="@color/colorGrey"
+                    android:text="@{viewModel.purchaseDetail.author}"/>
             </LinearLayout>
 
             <TextView
@@ -59,7 +71,38 @@
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 android:layout_marginStart="18dp"
-                android:layout_marginTop="20dp" />
+                android:layout_marginTop="20dp"
+                android:text="@{viewModel.purchaseDetail.content}" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:orientation="horizontal"
+                android:layout_marginStart="18dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/price"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:layout_marginEnd="2dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/colon"
+                    android:textSize="15sp"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{viewModel.purchaseDetail.price}"
+                    android:textSize="15sp"
+                    android:textColor="@color/black"
+                    android:layout_marginStart="4dp"/>
+            </LinearLayout>
 
             <Button
                 android:id="@+id/btn_deal_with_chat"
@@ -98,7 +141,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"
+                    android:text="@{String.valueOf(viewModel.purchaseDetail.commentCount)}"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -182,6 +226,7 @@
         android:background="@color/white"
         app:layout_behavior=".custom.ToolbarAlphaScrollBehavior"
         app:navigationIcon="@drawable/ic_back_white"
-        app:title="" />
+        app:title="@{viewModel.purchaseDetail.title}" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

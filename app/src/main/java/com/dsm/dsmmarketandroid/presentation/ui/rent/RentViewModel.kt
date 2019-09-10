@@ -1,6 +1,7 @@
 package com.dsm.dsmmarketandroid.presentation.ui.rent
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
@@ -18,6 +19,8 @@ class RentViewModel(
 
     val networkState: LiveData<NetworkState>
     val rentListItems: LiveData<PagedList<ProductModel>>
+
+    val intentRentDetail = MutableLiveData<Int>()
 
     init {
         val executor = Executors.newFixedThreadPool(5)
