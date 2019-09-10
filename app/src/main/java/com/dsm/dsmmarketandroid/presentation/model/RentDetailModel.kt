@@ -1,8 +1,6 @@
-package com.dsm.data.remote.entity
+package com.dsm.dsmmarketandroid.presentation.model
 
-import com.google.gson.annotations.SerializedName
-
-data class RentDetailEntity(
+data class RentDetailModel(
     val img: String,
 
     val author: String,
@@ -17,9 +15,7 @@ data class RentDetailEntity(
 
     val price: String,
 
-    @SerializedName("possible_time")
     val possibleTime: String,
 
-    @SerializedName("comments")
     val commentCount: Int
 )

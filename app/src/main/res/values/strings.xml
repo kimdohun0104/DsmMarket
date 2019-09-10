@@ -75,6 +75,7 @@
     <string name="max_image">이미지는 최대 5개입니다</string>
     <string name="start">시작</string>
     <string name="end">끝</string>
+    <string name="possible_time">대여 가능 시간</string>
 
     <!--category-->
     <string name="book">책</string>

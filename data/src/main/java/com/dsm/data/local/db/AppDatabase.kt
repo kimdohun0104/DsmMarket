@@ -6,8 +6,9 @@ import androidx.room.TypeConverters
 import com.dsm.data.local.db.dao.PurchaseDao
 import com.dsm.data.local.db.dao.RentDao
 import com.dsm.data.local.db.entity.PurchaseDetailRoomEntity
+import com.dsm.data.local.db.entity.RentDetailRoomEntity
 
-@Database(entities = [PurchaseDetailRoomEntity::class], version = 1)
+@Database(entities = [PurchaseDetailRoomEntity::class, RentDetailRoomEntity::class], version = 1)
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
 

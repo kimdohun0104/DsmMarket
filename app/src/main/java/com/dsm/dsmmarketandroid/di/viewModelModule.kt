@@ -13,6 +13,7 @@ import com.dsm.dsmmarketandroid.presentation.ui.postCategory.PostCategoryViewMod
 import com.dsm.dsmmarketandroid.presentation.ui.purchase.PurchaseViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.purchaseDetail.PurchaseDetailViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.rent.RentViewModel
+import com.dsm.dsmmarketandroid.presentation.ui.rentDetail.RentDetailViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.signUp.SignUpViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.splash.SplashViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -48,4 +49,6 @@ val viewModelModule = module {
     viewModel { PasswordConfirmViewModel(get()) }
 
     viewModel { PurchaseDetailViewModel(get(), get()) }
+
+    viewModel { RentDetailViewModel(get(), get()) }
 }

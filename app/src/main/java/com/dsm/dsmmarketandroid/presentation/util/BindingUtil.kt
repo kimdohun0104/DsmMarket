@@ -1,6 +1,7 @@
 package com.dsm.dsmmarketandroid.presentation.util
 
 import android.graphics.drawable.ColorDrawable
+import android.widget.ImageView
 import android.widget.NumberPicker
 import android.widget.Spinner
 import androidx.databinding.BindingAdapter
@@ -8,6 +9,7 @@ import androidx.databinding.BindingConversion
 import androidx.lifecycle.MutableLiveData
 import androidx.viewpager2.widget.ViewPager2
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.DetailImagePagerAdapter
+import com.squareup.picasso.Picasso
 
 
 object BindingUtil {
@@ -42,8 +44,14 @@ object BindingUtil {
 
     @JvmStatic
     @BindingAdapter("bind:detailImages")
-    fun bindDetailImages(view: ViewPager2, value: MutableLiveData<List<String>>) {
+    fun bindDetailImages(view: ViewPager2, value: List<String>?) {
         val adapter = view.adapter as DetailImagePagerAdapter
-        value.value?.let { adapter.imageList = it }
+        value?.let { adapter.imageList = it }
+    }
+
+    @JvmStatic
+    @BindingAdapter("bind:image")
+    fun bindImage(view: ImageView, value: String?) {
+        value?.let { Picasso.get().load(it).into(view) }
     }
 }
