@@ -8,7 +8,9 @@ import com.dsm.dsmmarketandroid.databinding.ActivityLoginBinding
 import com.dsm.dsmmarketandroid.presentation.ui.base.BaseActivity
 import com.dsm.dsmmarketandroid.presentation.ui.main.MainActivity
 import com.dsm.dsmmarketandroid.presentation.ui.password.sendPasswordCode.SendPasswordCodeActivity
-import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.activity_login.btn_login
+import kotlinx.android.synthetic.main.activity_login.tb_login
+import kotlinx.android.synthetic.main.activity_login.tv_forget_password
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 import org.koin.androidx.viewmodel.ext.android.viewModel

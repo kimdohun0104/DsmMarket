@@ -8,7 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.ui.login.LoginActivity
 import com.dsm.dsmmarketandroid.presentation.ui.signUp.SignUpActivity
-import kotlinx.android.synthetic.main.activity_start.*
+import kotlinx.android.synthetic.main.activity_start.btn_login
+import kotlinx.android.synthetic.main.activity_start.btn_sign_up
 
 class StartActivity : AppCompatActivity() {
 

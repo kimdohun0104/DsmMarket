@@ -6,7 +6,7 @@ import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.ActivityPasswordConfirmBinding
 import com.dsm.dsmmarketandroid.presentation.ui.base.BaseActivity
 import com.dsm.dsmmarketandroid.presentation.ui.password.changePassword.ChangePasswordActivity
-import kotlinx.android.synthetic.main.activity_password_confirm.*
+import kotlinx.android.synthetic.main.activity_password_confirm.tb_password_confirm
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 import org.koin.androidx.viewmodel.ext.android.viewModel

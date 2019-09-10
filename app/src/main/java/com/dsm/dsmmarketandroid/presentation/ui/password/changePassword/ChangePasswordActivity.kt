@@ -6,7 +6,8 @@ import androidx.lifecycle.Observer
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.ActivityChangePasswordBinding
 import com.dsm.dsmmarketandroid.presentation.ui.base.BaseActivity
-import kotlinx.android.synthetic.main.activity_change_password.*
+import kotlinx.android.synthetic.main.activity_change_password.tb_change_password
+import kotlinx.android.synthetic.main.activity_change_password.view_ring
 import org.jetbrains.anko.toast
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

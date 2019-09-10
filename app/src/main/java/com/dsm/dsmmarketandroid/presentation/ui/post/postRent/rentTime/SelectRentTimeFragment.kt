@@ -8,7 +8,9 @@ import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.RentTimePagerAdapter
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.tabs.TabLayout
-import kotlinx.android.synthetic.main.fragment_select_rent_time.view.*
+import kotlinx.android.synthetic.main.fragment_select_rent_time.view.btn_confirm
+import kotlinx.android.synthetic.main.fragment_select_rent_time.view.tl_rent_time
+import kotlinx.android.synthetic.main.fragment_select_rent_time.view.vp_rent_time
 
 class SelectRentTimeFragment : BottomSheetDialogFragment() {
 

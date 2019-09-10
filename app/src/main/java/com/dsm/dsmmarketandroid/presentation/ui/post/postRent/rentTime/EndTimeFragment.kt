@@ -7,7 +7,8 @@ import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.FragmentEndTimeBinding
 import com.dsm.dsmmarketandroid.presentation.ui.base.BaseFragment
 import com.dsm.dsmmarketandroid.presentation.ui.post.postRent.PostRentViewModel
-import kotlinx.android.synthetic.main.fragment_end_time.*
+import kotlinx.android.synthetic.main.fragment_end_time.np_hour
+import kotlinx.android.synthetic.main.fragment_end_time.np_minute
 
 class EndTimeFragment : BaseFragment<FragmentEndTimeBinding>() {
     override val layoutResourceId: Int

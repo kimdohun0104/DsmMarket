@@ -8,7 +8,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.trash_model.ChatModel
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.ChatListAdapter
-import kotlinx.android.synthetic.main.activity_chat.*
+import kotlinx.android.synthetic.main.activity_chat.rv_chat
+import kotlinx.android.synthetic.main.activity_chat.tb_chat
 
 class ChatActivity : AppCompatActivity() {
 
@@ -34,9 +35,9 @@ class ChatActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
+//        when (item.itemId) {
 //            R.id.report ->
-        }
+//        }
         return super.onOptionsItemSelected(item)
     }
 }

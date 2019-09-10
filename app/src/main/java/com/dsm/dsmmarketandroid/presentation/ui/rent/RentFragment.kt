@@ -14,7 +14,7 @@ import com.dsm.dsmmarketandroid.presentation.ui.category.CategoryActivity
 import com.dsm.dsmmarketandroid.presentation.ui.interest.InterestActivity
 import com.dsm.dsmmarketandroid.presentation.ui.rentDetail.RentDetailActivity
 import com.dsm.dsmmarketandroid.presentation.ui.search.SearchActivity
-import kotlinx.android.synthetic.main.fragment_rent.*
+import kotlinx.android.synthetic.main.fragment_rent.rv_rent
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.support.v4.startActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel

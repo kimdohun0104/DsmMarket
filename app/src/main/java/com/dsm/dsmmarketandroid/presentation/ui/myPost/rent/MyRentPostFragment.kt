@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.trash_model.ProductModel
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.MyPostRentListAdapter
-import kotlinx.android.synthetic.main.fragment_my_post_rent.view.*
+import kotlinx.android.synthetic.main.fragment_my_post_rent.view.rv_my_post_rent
 
 class MyRentPostFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

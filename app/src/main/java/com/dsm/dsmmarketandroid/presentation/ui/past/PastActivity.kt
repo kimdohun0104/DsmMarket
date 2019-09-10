@@ -5,7 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.trash_model.ProductModel
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.PastListAdapter
-import kotlinx.android.synthetic.main.activity_past.*
+import kotlinx.android.synthetic.main.activity_past.rv_past
+import kotlinx.android.synthetic.main.activity_past.tb_past
 
 class PastActivity : AppCompatActivity() {
 

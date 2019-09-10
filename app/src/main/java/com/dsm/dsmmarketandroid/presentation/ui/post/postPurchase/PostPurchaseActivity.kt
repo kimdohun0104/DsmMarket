@@ -13,7 +13,10 @@ import com.dsm.dsmmarketandroid.presentation.ui.postCategory.PostCategoryActivit
 import com.dsm.dsmmarketandroid.presentation.util.PermissionUtil
 import com.esafirm.imagepicker.features.ImagePicker
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.activity_post_purchase.*
+import kotlinx.android.synthetic.main.activity_post_purchase.cl_category
+import kotlinx.android.synthetic.main.activity_post_purchase.iv_select_image
+import kotlinx.android.synthetic.main.activity_post_purchase.rv_post_image
+import kotlinx.android.synthetic.main.activity_post_purchase.tb_post_purchase
 import org.jetbrains.anko.toast
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

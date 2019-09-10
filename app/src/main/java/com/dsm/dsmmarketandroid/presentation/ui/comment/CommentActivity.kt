@@ -8,7 +8,8 @@ import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.trash_model.CommentModel
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.CommentListAdapter
 import com.dsm.dsmmarketandroid.presentation.ui.addComment.AddCommentActivity
-import kotlinx.android.synthetic.main.activity_comment.*
+import kotlinx.android.synthetic.main.activity_comment.rv_comment
+import kotlinx.android.synthetic.main.activity_comment.tb_comment
 import org.jetbrains.anko.startActivity
 
 class CommentActivity : AppCompatActivity() {

@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.trash_model.ProductModel
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.MyPostPurchaseListAdapter
-import kotlinx.android.synthetic.main.fragment_my_purchase_post.view.*
+import kotlinx.android.synthetic.main.fragment_my_purchase_post.view.rv_my_post_purchase
 
 class MyPurchasePostFragment : Fragment() {
 

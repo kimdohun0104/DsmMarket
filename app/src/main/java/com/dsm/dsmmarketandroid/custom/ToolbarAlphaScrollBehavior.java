@@ -3,11 +3,9 @@ package com.dsm.dsmmarketandroid.custom;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
-
 import com.dsm.dsmmarketandroid.R;
 
 public class ToolbarAlphaScrollBehavior extends CoordinatorLayout.Behavior<androidx.appcompat.widget.Toolbar> {

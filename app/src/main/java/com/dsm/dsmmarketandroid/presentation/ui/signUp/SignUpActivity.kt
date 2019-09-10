@@ -6,7 +6,9 @@ import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.ActivitySignUpBinding
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.SignUpPagerAdapter
 import com.dsm.dsmmarketandroid.presentation.ui.base.BaseActivity
-import kotlinx.android.synthetic.main.activity_sign_up.*
+import kotlinx.android.synthetic.main.activity_sign_up.ci_sign_up
+import kotlinx.android.synthetic.main.activity_sign_up.tb_sign_up
+import kotlinx.android.synthetic.main.activity_sign_up.vp_sign_up
 import org.jetbrains.anko.toast
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

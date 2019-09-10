@@ -3,7 +3,6 @@ package com.dsm.dsmmarketandroid.custom;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
-
 import androidx.viewpager.widget.ViewPager;
 
 public class MeasuredViewPager extends ViewPager {

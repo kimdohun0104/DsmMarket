@@ -6,7 +6,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.trash_model.CommentModel
-import kotlinx.android.synthetic.main.item_comment.view.*
+import kotlinx.android.synthetic.main.item_comment.view.tv_content
+import kotlinx.android.synthetic.main.item_comment.view.tv_date
+import kotlinx.android.synthetic.main.item_comment.view.tv_name
 
 class CommentListAdapter : RecyclerView.Adapter<CommentListAdapter.ViewHolder>() {
 

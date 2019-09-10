@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.InterestPagerAdapter
 import com.google.android.material.tabs.TabLayout
-import kotlinx.android.synthetic.main.activity_interest.*
+import kotlinx.android.synthetic.main.activity_interest.tb_interest
+import kotlinx.android.synthetic.main.activity_interest.tl_interest
+import kotlinx.android.synthetic.main.activity_interest.vp_interest
 
 class InterestActivity : AppCompatActivity() {
 

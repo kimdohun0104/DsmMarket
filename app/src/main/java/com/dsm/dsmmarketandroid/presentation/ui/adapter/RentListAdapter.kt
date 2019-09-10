@@ -7,11 +7,9 @@ import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.dsm.data.paging.NetworkState
-import com.dsm.dsmmarketandroid.R
+import com.dsm.dsmmarketandroid.databinding.ItemProductBinding
 import com.dsm.dsmmarketandroid.presentation.model.ProductModel
 import com.dsm.dsmmarketandroid.presentation.ui.rent.RentViewModel
-import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.item_product.view.*
 
 class RentListAdapter(private val viewModel: RentViewModel) : PagedListAdapter<ProductModel, RecyclerView.ViewHolder>(DIFF_CALLBACK) {
 
@@ -32,8 +30,8 @@ class RentListAdapter(private val viewModel: RentViewModel) : PagedListAdapter<P
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
         when (viewType) {
-            TYPE_ITEM -> ItemHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_product, parent, false))
-            else -> ItemHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_product, parent, false))
+            TYPE_ITEM -> ItemHolder(ItemProductBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+            else -> ItemHolder(ItemProductBinding.inflate(LayoutInflater.from(parent.context), parent, false))
         }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) =
@@ -71,13 +69,10 @@ class RentListAdapter(private val viewModel: RentViewModel) : PagedListAdapter<P
         }
     }
 
-    inner class ItemHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ItemHolder(private val binding: ItemProductBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: ProductModel?) {
-            Picasso.get().load(item?.img).into(itemView.iv_product)
-            itemView.tv_title.text = item?.title
-            itemView.tv_product_date.text = item?.createdAt
-            itemView.tv_product_price.text = item?.price
-            itemView.cl_parent.setOnClickListener { viewModel.intentRentDetail.value = item?.postId }
+            binding.product = item
+            binding.clParent.setOnClickListener { viewModel.intentRentDetail.value = item?.postId }
         }
     }
 

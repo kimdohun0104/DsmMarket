@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.trash_model.ProductModel
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.InterestRentListAdapter
-import kotlinx.android.synthetic.main.fragment_interest_rent.view.*
+import kotlinx.android.synthetic.main.fragment_interest_rent.view.rv_interest_rent
 
 class InterestRentFragment : Fragment() {
     override fun onCreateView(

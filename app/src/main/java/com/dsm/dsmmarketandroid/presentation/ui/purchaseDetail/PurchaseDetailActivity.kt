@@ -10,7 +10,10 @@ import com.dsm.dsmmarketandroid.presentation.ui.adapter.DetailImagePagerAdapter
 import com.dsm.dsmmarketandroid.presentation.ui.base.BaseActivity
 import com.dsm.dsmmarketandroid.presentation.ui.chat.ChatActivity
 import com.dsm.dsmmarketandroid.presentation.ui.comment.CommentActivity
-import kotlinx.android.synthetic.main.activity_purchase_detail.*
+import kotlinx.android.synthetic.main.activity_purchase_detail.btn_deal_with_chat
+import kotlinx.android.synthetic.main.activity_purchase_detail.ll_comment
+import kotlinx.android.synthetic.main.activity_purchase_detail.tb_purchase_detail
+import kotlinx.android.synthetic.main.activity_purchase_detail.vp_detail_image
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 import org.koin.androidx.viewmodel.ext.android.viewModel

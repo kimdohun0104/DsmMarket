@@ -4,7 +4,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.RecentSearchListAdapter
-import kotlinx.android.synthetic.main.activity_search.*
+import kotlinx.android.synthetic.main.activity_search.ib_back
+import kotlinx.android.synthetic.main.activity_search.rv_recent_search
 
 class SearchActivity : AppCompatActivity() {
 

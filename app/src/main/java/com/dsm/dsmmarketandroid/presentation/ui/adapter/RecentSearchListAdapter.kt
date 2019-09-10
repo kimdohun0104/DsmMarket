@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.dsm.dsmmarketandroid.R
-import kotlinx.android.synthetic.main.item_recent_search.view.*
+import kotlinx.android.synthetic.main.item_recent_search.view.tv_search_word
 
 class RecentSearchListAdapter : RecyclerView.Adapter<RecentSearchListAdapter.ViewHolder>() {
 
