@@ -1,11 +1,13 @@
 package com.dsm.dsmmarketandroid.di
 
 import com.dsm.data.repository.AccountRepositoryImpl
+import com.dsm.data.repository.CommentRepositoryImpl
 import com.dsm.data.repository.PasswordRepositoryImpl
 import com.dsm.data.repository.PostRepositoryImpl
 import com.dsm.data.repository.PurchaseRepositoryImpl
 import com.dsm.data.repository.RentRepositoryImpl
 import com.dsm.domain.repository.AccountRepository
+import com.dsm.domain.repository.CommentRepository
 import com.dsm.domain.repository.PasswordRepository
 import com.dsm.domain.repository.PostRepository
 import com.dsm.domain.repository.PurchaseRepository
@@ -22,4 +24,6 @@ val repositoryModule = module {
     factory<PurchaseRepository> { PurchaseRepositoryImpl(get()) }
 
     factory<RentRepository> { RentRepositoryImpl(get()) }
+
+    factory<CommentRepository> { CommentRepositoryImpl(get()) }
 }

@@ -1,5 +1,6 @@
 package com.dsm.data.remote
 
+import com.dsm.data.remote.entity.CommentEntity
 import com.dsm.data.remote.entity.PostCategoryListEntity
 import com.dsm.data.remote.entity.ProductListEntity
 import com.dsm.data.remote.entity.PurchaseDetailEntity
@@ -10,6 +11,7 @@ import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.Field
+import retrofit2.http.FieldMap
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
 import retrofit2.http.Multipart
@@ -92,4 +94,13 @@ interface Api {
         @Query("postId") postId: Int,
         @Query("type") type: Int
     ): Flowable<Response<RentDetailEntity>>
+
+    @POST("comment")
+    fun postComment(@Body params: Any): Flowable<Response<Unit>>
+
+    @GET("comment")
+    fun getComment(
+        @Query("postId") postId: Int,
+        @Query("type") type: Int
+    ): Flowable<CommentEntity>
 }
