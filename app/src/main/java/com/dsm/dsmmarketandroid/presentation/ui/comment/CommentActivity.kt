@@ -20,12 +20,13 @@ class CommentActivity : BaseActivity<ActivityCommentBinding>() {
 
     private val viewModel: CommentViewModel by viewModel()
 
+    private val postId: Int by lazy { intent.getIntExtra("post_id", -1) }
+    private val type: Int by lazy { intent.getIntExtra("type", -1) }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         tb_comment.setNavigationOnClickListener { finish() }
         setSupportActionBar(tb_comment)
-        val postId = intent.getIntExtra("post_id", -1)
-        val type = intent.getIntExtra("type", -1)
 
         val adapter = CommentListAdapter()
         rv_comment.adapter = adapter
@@ -46,7 +47,7 @@ class CommentActivity : BaseActivity<ActivityCommentBinding>() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.add_comment -> startActivity<AddCommentActivity>()
+            R.id.add_comment -> startActivity<AddCommentActivity>("post_id" to postId, "type" to type)
         }
         return super.onOptionsItemSelected(item)
     }
