@@ -18,5 +18,8 @@ data class PurchaseDetailEntity(
     @SerializedName("comments")
     val commentCount: Int,
 
-    val author: String
+    val author: String,
+
+    @SerializedName("interest")
+    val isInterest: Boolean
 )

@@ -21,5 +21,8 @@ data class RentDetailEntity(
     val possibleTime: String,
 
     @SerializedName("comments")
-    val commentCount: Int
+    val commentCount: Int,
+
+    @SerializedName("interest")
+    val isInterest: Boolean
 )

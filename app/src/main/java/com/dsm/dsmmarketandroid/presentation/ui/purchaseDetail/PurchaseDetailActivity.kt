@@ -3,6 +3,7 @@ package com.dsm.dsmmarketandroid.presentation.ui.purchaseDetail
 import android.os.Bundle
 import android.view.Menu
 import androidx.core.content.ContextCompat
+import androidx.core.view.get
 import androidx.lifecycle.Observer
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.ActivityPurchaseDetailBinding
@@ -42,6 +43,10 @@ class PurchaseDetailActivity : BaseActivity<ActivityPurchaseDetailBinding>() {
         viewModel.finishActivityEvent.observe(this, Observer { finish() })
 
         viewModel.toastServerErrorEvent.observe(this, Observer { toast(getString(R.string.fail_server_error)) })
+
+        viewModel.isInterest.observe(this, Observer {
+            if (it) tb_purchase_detail.menu[0].icon = getDrawable(R.drawable.ic_heart_full_red)
+        })
 
         binding.viewModel = viewModel
     }

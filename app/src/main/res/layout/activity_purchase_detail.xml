@@ -228,6 +228,7 @@
             android:background="@color/white"
             app:layout_behavior=".custom.ToolbarAlphaScrollBehavior"
             app:navigationIcon="@drawable/ic_back_white"
+            app:titleTextColor="@color/white"
             app:title="@{viewModel.purchaseDetail.title}" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
