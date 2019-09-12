@@ -2,6 +2,7 @@ package com.dsm.dsmmarketandroid.presentation.ui.purchaseDetail
 
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import androidx.core.content.ContextCompat
 import androidx.core.view.get
 import androidx.lifecycle.Observer
@@ -54,5 +55,10 @@ class PurchaseDetailActivity : BaseActivity<ActivityPurchaseDetailBinding>() {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_product_detail_toolbar, menu)
         return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        return super.onOptionsItemSelected(item)
     }
 }

@@ -37,4 +37,8 @@ val useCaseModule = module {
     factory { PostCommentUseCase(get()) }
 
     factory { GetCommentUseCase(get()) }
+
+    factory { InterestUseCase(get()) }
+
+    factory { UnInterestUseCase(get()) }
 }
