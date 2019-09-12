@@ -5,9 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.MyPostPagerAdapter
 import com.google.android.material.tabs.TabLayout
-import kotlinx.android.synthetic.main.activity_my_post.tb_my_post
-import kotlinx.android.synthetic.main.activity_my_post.tl_my_post
-import kotlinx.android.synthetic.main.activity_my_post.vp_my_post
+import kotlinx.android.synthetic.main.activity_my_post.*
 
 class MyPostActivity : AppCompatActivity() {
 

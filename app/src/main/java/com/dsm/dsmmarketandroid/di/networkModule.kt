@@ -1,3 +1,4 @@
+
 package com.dsm.dsmmarketandroid.di
 
 import com.dsm.data.remote.Api
@@ -18,7 +19,7 @@ val networkModule = module {
 
     single {
         Retrofit.Builder()
-            .baseUrl("http://192.168.0.10:1234/")
+            .baseUrl("http://192.168.1.85:1234/")
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .client(get())

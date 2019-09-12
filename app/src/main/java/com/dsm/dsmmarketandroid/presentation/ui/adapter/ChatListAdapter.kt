@@ -6,9 +6,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.trash_model.ChatModel
-import kotlinx.android.synthetic.main.item_date.view.tv_date
-import kotlinx.android.synthetic.main.item_my_chat.view.tv_message
-import kotlinx.android.synthetic.main.item_my_chat.view.tv_time
+import kotlinx.android.synthetic.main.item_date.view.*
+import kotlinx.android.synthetic.main.item_my_chat.view.*
 
 class ChatListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 

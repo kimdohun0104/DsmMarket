@@ -8,10 +8,7 @@ import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.trash_model.ChatRoomModel
 import com.dsm.dsmmarketandroid.presentation.ui.chat.ChatActivity
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.item_chat_room.view.cl_chat_room
-import kotlinx.android.synthetic.main.item_chat_room.view.iv_chat_room
-import kotlinx.android.synthetic.main.item_chat_room.view.tv_chat_last_message
-import kotlinx.android.synthetic.main.item_chat_room.view.tv_chat_room_name
+import kotlinx.android.synthetic.main.item_chat_room.view.*
 import org.jetbrains.anko.startActivity
 
 class ChatRoomListAdapter : RecyclerView.Adapter<ChatRoomListAdapter.ViewHolder>() {

@@ -11,11 +11,7 @@ import com.dsm.dsmmarketandroid.presentation.ui.interest.InterestActivity
 import com.dsm.dsmmarketandroid.presentation.ui.myPost.MyPostActivity
 import com.dsm.dsmmarketandroid.presentation.ui.password.passwordConfirm.PasswordConfirmActivity
 import com.dsm.dsmmarketandroid.presentation.ui.past.PastActivity
-import kotlinx.android.synthetic.main.fragment_me.cl_change_name
-import kotlinx.android.synthetic.main.fragment_me.cl_change_password
-import kotlinx.android.synthetic.main.fragment_me.cl_interest
-import kotlinx.android.synthetic.main.fragment_me.cl_past_product
-import kotlinx.android.synthetic.main.fragment_me.cl_post_product
+import kotlinx.android.synthetic.main.fragment_me.*
 import org.jetbrains.anko.startActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

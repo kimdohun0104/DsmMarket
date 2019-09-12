@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.dsm.dsmmarketandroid.R
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.item_detail_image.view.iv_image
+import kotlinx.android.synthetic.main.item_detail_image.view.*
 
 class DetailImagePagerAdapter : RecyclerView.Adapter<DetailImagePagerAdapter.ViewHolder>() {
 

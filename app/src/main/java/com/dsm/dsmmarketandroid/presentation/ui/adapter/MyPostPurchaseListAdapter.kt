@@ -7,10 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.trash_model.ProductModel
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.item_interesting_product.view.iv_product
-import kotlinx.android.synthetic.main.item_interesting_product.view.tv_product_date
-import kotlinx.android.synthetic.main.item_interesting_product.view.tv_product_price
-import kotlinx.android.synthetic.main.item_interesting_product.view.tv_title
+import kotlinx.android.synthetic.main.item_interesting_product.view.*
 
 class MyPostPurchaseListAdapter : RecyclerView.Adapter<MyPostPurchaseListAdapter.ViewHolder>() {
 

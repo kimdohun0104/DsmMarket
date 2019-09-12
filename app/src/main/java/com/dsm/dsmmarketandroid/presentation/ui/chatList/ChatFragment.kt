@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.trash_model.ChatRoomModel
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.ChatRoomListAdapter
-import kotlinx.android.synthetic.main.fragment_chat.view.rv_chat_room
+import kotlinx.android.synthetic.main.fragment_chat.view.*
 
 class ChatFragment : Fragment() {
     override fun onCreateView(

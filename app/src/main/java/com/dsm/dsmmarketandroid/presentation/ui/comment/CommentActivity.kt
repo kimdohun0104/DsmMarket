@@ -3,49 +3,40 @@ package com.dsm.dsmmarketandroid.presentation.ui.comment
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import com.dsm.dsmmarketandroid.R
-import com.dsm.dsmmarketandroid.presentation.trash_model.CommentModel
+import com.dsm.dsmmarketandroid.databinding.ActivityCommentBinding
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.CommentListAdapter
 import com.dsm.dsmmarketandroid.presentation.ui.addComment.AddCommentActivity
-import kotlinx.android.synthetic.main.activity_comment.rv_comment
-import kotlinx.android.synthetic.main.activity_comment.tb_comment
+import com.dsm.dsmmarketandroid.presentation.ui.base.BaseActivity
+import kotlinx.android.synthetic.main.activity_comment.*
 import org.jetbrains.anko.startActivity
+import org.jetbrains.anko.toast
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class CommentActivity : AppCompatActivity() {
+class CommentActivity : BaseActivity<ActivityCommentBinding>() {
+    override val layoutResourceId: Int
+        get() = R.layout.activity_comment
+
+    private val viewModel: CommentViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_comment)
         tb_comment.setNavigationOnClickListener { finish() }
         setSupportActionBar(tb_comment)
+        val postId = intent.getIntExtra("post_id", -1)
+        val type = intent.getIntExtra("type", -1)
 
         val adapter = CommentListAdapter()
         rv_comment.adapter = adapter
-        adapter.addItems(
-            listOf(
-                CommentModel(
-                    "소동현", "2019-03-01", "저 정말 지옥참마도 가지고 싶었는데...\n" +
-                            "제가 통장에 돈이 999원 밖에 없네요... \n" +
-                            "하... 엄마한테 돈이라도 빌려야하나...."
-                ),
-                CommentModel(
-                    "소동현", "2019-03-01", "저 정말 지옥참마도 가지고 싶었는데...\n" +
-                            "제가 통장에 돈이 999원 밖에 없네요... \n" +
-                            "하... 엄마한테 돈이라도 빌려야하나...."
-                ),
-                CommentModel(
-                    "소동현", "2019-03-01", "저 정말 지옥참마도 가지고 싶었는데...\n" +
-                            "제가 통장에 돈이 999원 밖에 없네요... \n" +
-                            "하... 엄마한테 돈이라도 빌려야하나...."
-                ),
-                CommentModel(
-                    "소동현", "2019-03-01", "저 정말 지옥참마도 가지고 싶었는데...\n" +
-                            "제가 통장에 돈이 999원 밖에 없네요... \n" +
-                            "하... 엄마한테 돈이라도 빌려야하나...."
-                )
-            )
-        )
+
+        viewModel.getCommentList(postId, type)
+
+        viewModel.listItems.observe(this, Observer { adapter.setItems(it) })
+
+        viewModel.toastServerErrorEvent.observe(this, Observer { toast(getString(R.string.fail_server_error)) })
+
+        binding.viewModel = viewModel
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

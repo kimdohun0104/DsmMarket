@@ -8,8 +8,7 @@ import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.ui.post.postPurchase.PostPurchaseActivity
 import com.dsm.dsmmarketandroid.presentation.ui.post.postRent.PostRentActivity
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import kotlinx.android.synthetic.main.fragment_post_bottom.view.cl_purchase
-import kotlinx.android.synthetic.main.fragment_post_bottom.view.cl_rent
+import kotlinx.android.synthetic.main.fragment_post_bottom.view.*
 import org.jetbrains.anko.support.v4.startActivity
 
 class PostBottomFragment : BottomSheetDialogFragment() {
