@@ -13,10 +13,7 @@ import com.dsm.dsmmarketandroid.presentation.ui.postCategory.PostCategoryActivit
 import com.dsm.dsmmarketandroid.presentation.util.PermissionUtil
 import com.esafirm.imagepicker.features.ImagePicker
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.activity_post_rent.btn_select_time
-import kotlinx.android.synthetic.main.activity_post_rent.cl_category
-import kotlinx.android.synthetic.main.activity_post_rent.iv_select_image
-import kotlinx.android.synthetic.main.activity_post_rent.tb_post_rent
+import kotlinx.android.synthetic.main.activity_post_rent.*
 import org.jetbrains.anko.toast
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

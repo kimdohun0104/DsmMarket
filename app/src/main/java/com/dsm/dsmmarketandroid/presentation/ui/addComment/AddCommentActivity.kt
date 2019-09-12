@@ -3,7 +3,7 @@ package com.dsm.dsmmarketandroid.presentation.ui.addComment
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.dsm.dsmmarketandroid.R
-import kotlinx.android.synthetic.main.activity_add_comment.tb_add_comment
+import kotlinx.android.synthetic.main.activity_add_comment.*
 
 class AddCommentActivity : AppCompatActivity() {
 

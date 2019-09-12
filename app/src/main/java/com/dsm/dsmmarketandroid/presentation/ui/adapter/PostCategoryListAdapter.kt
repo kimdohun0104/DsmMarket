@@ -9,9 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.model.PostCategoryModel
 import com.dsm.dsmmarketandroid.presentation.ui.postCategory.PostCategoryViewModel
-import kotlinx.android.synthetic.main.item_child_category.view.cl_child_parent
-import kotlinx.android.synthetic.main.item_child_category.view.tv_child_category
-import kotlinx.android.synthetic.main.item_parent_category.view.tv_parent_category
+import kotlinx.android.synthetic.main.item_child_category.view.*
+import kotlinx.android.synthetic.main.item_parent_category.view.*
 
 class PostCategoryListAdapter(private val viewModel: PostCategoryViewModel) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 

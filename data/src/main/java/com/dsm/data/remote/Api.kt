@@ -1,25 +1,11 @@
 package com.dsm.data.remote
 
-import com.dsm.data.remote.entity.CommentEntity
-import com.dsm.data.remote.entity.PostCategoryListEntity
-import com.dsm.data.remote.entity.ProductListEntity
-import com.dsm.data.remote.entity.PurchaseDetailEntity
-import com.dsm.data.remote.entity.RentDetailEntity
+import com.dsm.data.remote.entity.*
 import io.reactivex.Flowable
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.Field
-import retrofit2.http.FieldMap
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.GET
-import retrofit2.http.Multipart
-import retrofit2.http.PATCH
-import retrofit2.http.POST
-import retrofit2.http.Part
-import retrofit2.http.PartMap
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface Api {
 
@@ -102,5 +88,5 @@ interface Api {
     fun getComment(
         @Query("postId") postId: Int,
         @Query("type") type: Int
-    ): Flowable<CommentEntity>
+    ): Flowable<CommentListEntity>
 }

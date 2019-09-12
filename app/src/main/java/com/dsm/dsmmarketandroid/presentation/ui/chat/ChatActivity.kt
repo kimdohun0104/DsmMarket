@@ -8,8 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.trash_model.ChatModel
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.ChatListAdapter
-import kotlinx.android.synthetic.main.activity_chat.rv_chat
-import kotlinx.android.synthetic.main.activity_chat.tb_chat
+import kotlinx.android.synthetic.main.activity_chat.*
 
 class ChatActivity : AppCompatActivity() {
 

@@ -7,7 +7,5 @@ interface CommentRepository {
 
     fun postComment(params: Any): Flowable<Unit>
 
-    fun getPurchaseComment(postId: Int): Flowable<Comment>
-
-    fun getRentComment(postId: Int): Flowable<Comment>
+    fun getCommentList(postId: Int, type: Int): Flowable<List<Comment>>
 }

@@ -7,8 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.ui.post.postPurchase.PostPurchaseViewModel
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.item_post_image.view.iv_delete_image
-import kotlinx.android.synthetic.main.item_post_image.view.iv_image
+import kotlinx.android.synthetic.main.item_post_image.view.*
 import java.io.File
 
 class PostImageListAdapter(private val viewModel: PostPurchaseViewModel) : RecyclerView.Adapter<PostImageListAdapter.ViewHolder>() {

@@ -9,8 +9,7 @@ import com.dsm.dsmmarketandroid.presentation.ui.me.MeFragment
 import com.dsm.dsmmarketandroid.presentation.ui.post.PostBottomFragment
 import com.dsm.dsmmarketandroid.presentation.ui.purchase.PurchaseFragment
 import com.dsm.dsmmarketandroid.presentation.ui.rent.RentFragment
-import kotlinx.android.synthetic.main.activity_main.bnv_main
-import kotlinx.android.synthetic.main.activity_main.tb_main
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 

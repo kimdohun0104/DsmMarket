@@ -13,9 +13,6 @@ class CommentRepositoryImpl(private val commentDataSource: CommentDataSource) : 
     override fun postComment(params: Any): Flowable<Unit> =
         commentDataSource.postComment(params).map {  }
 
-    override fun getPurchaseComment(postId: Int): Flowable<Comment> =
-        commentDataSource.getPurchaseComment(postId).map(commentMapper::mapFrom)
-
-    override fun getRentComment(postId: Int): Flowable<Comment> =
-        commentDataSource.getRentComment(postId).map(commentMapper::mapFrom)
+    override fun getCommentList(postId: Int, type: Int): Flowable<List<Comment>> =
+        commentDataSource.getCommentList(postId, type).map(commentMapper::mapFrom)
 }

@@ -7,8 +7,7 @@ import com.dsm.dsmmarketandroid.databinding.ActivitySendPasswordCodeBinding
 import com.dsm.dsmmarketandroid.presentation.ui.base.BaseActivity
 import com.dsm.dsmmarketandroid.presentation.ui.password.changePassword.ChangePasswordActivity
 import com.dsm.dsmmarketandroid.presentation.ui.password.passwordCodeConfirm.PasswordCodeConfirmActivity
-import kotlinx.android.synthetic.main.activity_send_password_code.btn_find_password
-import kotlinx.android.synthetic.main.activity_send_password_code.tb_login
+import kotlinx.android.synthetic.main.activity_send_password_code.*
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 import org.koin.androidx.viewmodel.ext.android.viewModel

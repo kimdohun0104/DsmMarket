@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.trash_model.ProductModel
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.InterestPurchaseListAdapter
-import kotlinx.android.synthetic.main.fragment_interest_purchase.view.rv_interest_purchase
+import kotlinx.android.synthetic.main.fragment_interest_purchase.view.*
 
 class InterestPurchaseFragment : Fragment() {
     override fun onCreateView(

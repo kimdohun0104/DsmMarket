@@ -1,6 +1,6 @@
-package com.dsm.data.remote.entity
+package com.dsm.dsmmarketandroid.presentation.model
 
-data class CommentEntity(
+data class CommentModel(
     val nick: String,
 
     val content: String,
