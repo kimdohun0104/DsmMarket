@@ -213,13 +213,14 @@
         </androidx.core.widget.NestedScrollView>
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/tb_purchase_detail"
+            android:id="@+id/tb_rent_detail"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/white"
             app:layout_behavior=".custom.ToolbarAlphaScrollBehavior"
             app:navigationIcon="@drawable/ic_back_white"
             app:title="@{viewModel.rentDetail.title}"
-            app:titleTextColor="@color/white"/>
+            app:titleTextColor="@color/white"
+            app:menu="@menu/menu_product_detail_toolbar"/>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout></layout>
