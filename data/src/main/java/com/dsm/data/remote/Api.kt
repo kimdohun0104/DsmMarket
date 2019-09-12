@@ -81,7 +81,7 @@ interface Api {
         @Query("type") type: Int
     ): Flowable<Response<RentDetailEntity>>
 
-    @POST("comment")
+    @POST("post/comment")
     fun postComment(@Body params: Any): Flowable<Response<Unit>>
 
     @GET("comment")
