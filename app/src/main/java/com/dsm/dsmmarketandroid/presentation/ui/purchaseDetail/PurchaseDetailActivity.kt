@@ -23,13 +23,14 @@ class PurchaseDetailActivity : BaseActivity<ActivityPurchaseDetailBinding>() {
 
     private val viewModel: PurchaseDetailViewModel by viewModel()
 
+    private val postId: Int by lazy { intent.getIntExtra("post_id", -1) }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setSupportActionBar(tb_purchase_detail)
         tb_purchase_detail.background.alpha = 0
         tb_purchase_detail.setNavigationOnClickListener { finish() }
         tb_purchase_detail.overflowIcon = ContextCompat.getDrawable(this, R.drawable.ic_menu)
-        val postId = intent.getIntExtra("post_id", 0)
 
         vp_detail_image.adapter = DetailImagePagerAdapter()
 
@@ -47,7 +48,12 @@ class PurchaseDetailActivity : BaseActivity<ActivityPurchaseDetailBinding>() {
 
         viewModel.isInterest.observe(this, Observer {
             if (it) tb_purchase_detail.menu[0].icon = getDrawable(R.drawable.ic_heart_full_red)
+            else tb_purchase_detail.menu[0].icon = getDrawable(R.drawable.ic_heart_white)
         })
+
+        viewModel.toastInterestEvent.observe(this, Observer { toast(getString(R.string.interest)) })
+
+        viewModel.toastUnInterestEvent.observe(this, Observer { toast(getString(R.string.un_interest)) })
 
         binding.viewModel = viewModel
     }
@@ -58,7 +64,9 @@ class PurchaseDetailActivity : BaseActivity<ActivityPurchaseDetailBinding>() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
+        when (item.itemId) {
+            R.id.interest -> viewModel.onClickInterest(postId)
+        }
         return super.onOptionsItemSelected(item)
     }
 }
