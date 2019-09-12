@@ -17,5 +17,7 @@ data class RentDetail(
 
     val possibleTime: String,
 
-    val commentCount: Int
+    val commentCount: Int,
+
+    val isInterest: Boolean
 )

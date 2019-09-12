@@ -89,4 +89,18 @@ interface Api {
         @Query("postId") postId: Int,
         @Query("type") type: Int
     ): Flowable<CommentListEntity>
+
+    @FormUrlEncoded
+    @PATCH("post/interest")
+    fun interest(
+        @Field("postId") postId: Int,
+        @Field("type") type: Int
+    ): Flowable<Response<Unit>>
+
+    @FormUrlEncoded
+    @PATCH("post/uninterest")
+    fun unInterest(
+        @Field("postId") postId: Int,
+        @Field("type") type: Int
+    ): Flowable<Response<Unit>>
 }

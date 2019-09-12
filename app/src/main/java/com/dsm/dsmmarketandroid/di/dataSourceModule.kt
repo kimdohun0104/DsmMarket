@@ -4,6 +4,8 @@ import com.dsm.data.dataSource.account.AccountDataSource
 import com.dsm.data.dataSource.account.AccountDataSourceImpl
 import com.dsm.data.dataSource.comment.CommentDataSource
 import com.dsm.data.dataSource.comment.CommentDataSourceImpl
+import com.dsm.data.dataSource.interest.InterestDataSource
+import com.dsm.data.dataSource.interest.InterestDataSourceImpl
 import com.dsm.data.dataSource.password.PasswordDataSource
 import com.dsm.data.dataSource.password.PasswordDataSourceImpl
 import com.dsm.data.dataSource.post.PostDataSource
@@ -26,4 +28,6 @@ val dataSourceModule = module {
     factory<RentDataSource> { RentDataSourceImpl(get(), get()) }
 
     factory<CommentDataSource> { CommentDataSourceImpl(get()) }
+
+    factory<InterestDataSource> { InterestDataSourceImpl(get()) }
 }

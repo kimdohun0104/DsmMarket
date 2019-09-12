@@ -15,5 +15,7 @@ data class PurchaseDetail(
 
     val commentCount: Int,
 
-    val author: String
+    val author: String,
+
+    val isInterest: Boolean
 )

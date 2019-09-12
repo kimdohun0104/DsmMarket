@@ -14,7 +14,8 @@ class RentDetailModelMapper : Mapper<RentDetail,RentDetailModel> {
         createdAt = from.createdAt,
         price = from.price,
         possibleTime = from.possibleTime,
-        commentCount = from.commentCount
+        commentCount = from.commentCount,
+        isInterest = from.isInterest
     )
 
 }

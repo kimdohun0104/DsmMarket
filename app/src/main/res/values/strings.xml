@@ -52,6 +52,8 @@
     <string name="report">신고하기</string>
     <string name="related_product">관련 상품</string>
     <string name="recommend_product">추천 상품</string>
+    <string name="interest">관심 상품에 등록했습니다</string>
+    <string name="un_interest">관심 상품에서 해제했습니다</string>
 
     <!--comment-->
     <string name="all">총</string>
