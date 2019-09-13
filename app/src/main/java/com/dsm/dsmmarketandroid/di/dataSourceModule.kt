@@ -12,6 +12,8 @@ import com.dsm.data.dataSource.post.PostDataSource
 import com.dsm.data.dataSource.post.PostDataSourceImpl
 import com.dsm.data.dataSource.purchase.PurchaseDataSource
 import com.dsm.data.dataSource.purchase.PurchaseDataSourceImpl
+import com.dsm.data.dataSource.recent.RecentDataSource
+import com.dsm.data.dataSource.recent.RecentDataSourceImpl
 import com.dsm.data.dataSource.rent.RentDataSource
 import com.dsm.data.dataSource.rent.RentDataSourceImpl
 import org.koin.dsl.module
@@ -30,4 +32,6 @@ val dataSourceModule = module {
     factory<CommentDataSource> { CommentDataSourceImpl(get()) }
 
     factory<InterestDataSource> { InterestDataSourceImpl(get()) }
+
+    factory<RecentDataSource> { RecentDataSourceImpl(get(), get()) }
 }

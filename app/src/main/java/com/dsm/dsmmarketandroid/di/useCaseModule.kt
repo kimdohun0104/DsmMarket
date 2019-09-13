@@ -41,4 +41,8 @@ val useCaseModule = module {
     factory { InterestUseCase(get()) }
 
     factory { UnInterestUseCase(get()) }
+
+    factory { GetRecentPurchaseUseCase(get()) }
+
+    factory { GetRecentRentUseCase(get()) }
 }
