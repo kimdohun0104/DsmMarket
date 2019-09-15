@@ -14,6 +14,6 @@ class RecentRepositoryImpl(private val recentDataSource: RecentDataSource) : Rec
         recentDataSource.getRecentPurchase().map(recentMapper::mapFrom)
 
     override fun getRecentRent(): Flowable<List<Recent>> =
-        recentDataSource.getRecentRent().map(recentMapper::mapFrom)
+        recentDataSource.getRecentRent().map(recentMapper::mapFromRent)
 
 }

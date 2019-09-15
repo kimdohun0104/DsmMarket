@@ -1,6 +1,6 @@
-package com.dsm.domain.entity
+package com.dsm.data.local.db.entity
 
-data class Recent(
+data class RecentRentRoomEntity(
     val id: Int,
 
     val title: String,

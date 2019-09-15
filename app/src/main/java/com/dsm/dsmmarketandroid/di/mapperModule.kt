@@ -13,4 +13,6 @@ val mapperModule = module {
     factory { RentDetailModelMapper() }
 
     factory { CommentModelMapper() }
+
+    factory { RecentMapper() }
 }
