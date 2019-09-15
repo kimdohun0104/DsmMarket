@@ -5,17 +5,14 @@ import com.dsm.domain.base.Mapper
 import com.dsm.domain.entity.Product
 
 class ProductMapper : Mapper<ProductListEntity, List<Product>> {
-    override fun mapFrom(from: ProductListEntity): List<Product> {
-        val list = arrayListOf<Product>()
-        from.productList.forEach {
-            list.add(Product(
+    override fun mapFrom(from: ProductListEntity): List<Product> =
+        from.productList.map {
+            Product(
                 postId = it.postId,
                 createdAt = it.createdAt,
-                img = it.img,
                 price = it.price,
-                title = it.title
-            ))
+                title = it.title,
+                img = it.img
+            )
         }
-        return list
-    }
 }

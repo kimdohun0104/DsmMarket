@@ -5,16 +5,12 @@ import com.dsm.domain.entity.Comment
 import com.dsm.dsmmarketandroid.presentation.model.CommentModel
 
 class CommentModelMapper : Mapper<List<Comment>, List<CommentModel>> {
-    override fun mapFrom(from: List<Comment>): List<CommentModel> {
-        val list = arrayListOf<CommentModel>()
-        from.forEach {
-            list.add(CommentModel(
+    override fun mapFrom(from: List<Comment>): List<CommentModel> =
+        from.map {
+            CommentModel(
                 nick = it.nick,
-                content = it.content,
-                createdAt = it.createdAt
-            ))
+                createdAt = it.createdAt,
+                content = it.content
+            )
         }
-        return list
-    }
-
 }
