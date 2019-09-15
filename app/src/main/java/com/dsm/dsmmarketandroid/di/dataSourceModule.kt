@@ -16,6 +16,8 @@ import com.dsm.data.dataSource.recent.RecentDataSource
 import com.dsm.data.dataSource.recent.RecentDataSourceImpl
 import com.dsm.data.dataSource.rent.RentDataSource
 import com.dsm.data.dataSource.rent.RentDataSourceImpl
+import com.dsm.data.dataSource.search.SearchDataSource
+import com.dsm.data.dataSource.search.SearchDataSourceImpl
 import org.koin.dsl.module
 
 val dataSourceModule = module {
@@ -34,4 +36,6 @@ val dataSourceModule = module {
     factory<InterestDataSource> { InterestDataSourceImpl(get()) }
 
     factory<RecentDataSource> { RecentDataSourceImpl(get(), get()) }
+
+    factory<SearchDataSource> { SearchDataSourceImpl(get()) }
 }

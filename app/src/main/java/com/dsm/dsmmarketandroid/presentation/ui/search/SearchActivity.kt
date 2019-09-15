@@ -1,21 +1,36 @@
 package com.dsm.dsmmarketandroid.presentation.ui.search
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import com.dsm.dsmmarketandroid.R
-import com.dsm.dsmmarketandroid.presentation.ui.adapter.RecentSearchListAdapter
+import com.dsm.dsmmarketandroid.databinding.ActivitySearchBinding
+import com.dsm.dsmmarketandroid.presentation.ui.adapter.SearchHistoryListAdapter
+import com.dsm.dsmmarketandroid.presentation.ui.base.BaseActivity
+import com.dsm.dsmmarketandroid.presentation.ui.searchResult.SearchResultActivity
 import kotlinx.android.synthetic.main.activity_search.*
+import org.jetbrains.anko.startActivity
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class SearchActivity : AppCompatActivity() {
+class SearchActivity : BaseActivity<ActivitySearchBinding>() {
+    override val layoutResourceId: Int
+        get() = R.layout.activity_search
+
+    private val viewModel: SearchViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_search)
 
         ib_back.setOnClickListener { finish() }
 
-        val adapter = RecentSearchListAdapter()
+        val adapter = SearchHistoryListAdapter(viewModel)
         rv_recent_search.adapter = adapter
-        adapter.addItems(listOf("간장", "고추장", "춘장", "된장"))
+
+        viewModel.getSearchHistory()
+
+        viewModel.searchHistoryList.observe(this, Observer { adapter.setItems(it) })
+
+        viewModel.intentSearchResult.observe(this, Observer { startActivity<SearchResultActivity>("search" to it) })
+
+        binding.viewModel = viewModel
     }
 }
