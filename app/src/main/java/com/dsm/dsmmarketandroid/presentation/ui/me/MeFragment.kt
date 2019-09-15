@@ -10,7 +10,7 @@ import com.dsm.dsmmarketandroid.presentation.ui.changeNick.ChangeNickActivity
 import com.dsm.dsmmarketandroid.presentation.ui.interest.InterestActivity
 import com.dsm.dsmmarketandroid.presentation.ui.myPost.MyPostActivity
 import com.dsm.dsmmarketandroid.presentation.ui.password.passwordConfirm.PasswordConfirmActivity
-import com.dsm.dsmmarketandroid.presentation.ui.past.PastActivity
+import com.dsm.dsmmarketandroid.presentation.ui.recent.RecentActivity
 import kotlinx.android.synthetic.main.fragment_me.*
 import org.jetbrains.anko.startActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -26,7 +26,7 @@ class MeFragment : BaseFragment<FragmentMeBinding>() {
 
         cl_interest.setOnClickListener { activity?.startActivity<InterestActivity>() }
         cl_post_product.setOnClickListener { activity?.startActivity<MyPostActivity>() }
-        cl_past_product.setOnClickListener { activity?.startActivity<PastActivity>() }
+        cl_past_product.setOnClickListener { activity?.startActivity<RecentActivity>() }
         cl_change_name.setOnClickListener { activity?.startActivity<ChangeNickActivity>("nick" to activity?.title) }
         cl_change_password.setOnClickListener { activity?.startActivity<PasswordConfirmActivity>() }
 

@@ -18,4 +18,6 @@ val repositoryModule = module {
     factory<CommentRepository> { CommentRepositoryImpl(get()) }
 
     factory<InterestRepository> { InterestRepositoryImpl(get()) }
+
+    factory<RecentRepository> { RecentRepositoryImpl(get()) }
 }

@@ -43,7 +43,7 @@
         <activity android:name=".presentation.ui.purchaseDetail.PurchaseDetailActivity" />
         <activity android:name=".presentation.ui.category.CategoryActivity" />
         <activity android:name=".presentation.ui.search.SearchActivity" />
-        <activity android:name=".presentation.ui.past.PastActivity" />
+        <activity android:name=".presentation.ui.recent.RecentActivity" />
         <activity android:name=".presentation.ui.myPost.MyPostActivity" />
         <activity android:name=".presentation.ui.interest.InterestActivity" />
         <activity android:name=".presentation.ui.changeNick.ChangeNickActivity" />
