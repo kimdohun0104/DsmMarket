@@ -23,5 +23,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
         viewModel.intentMainActivityEvent.observe(this, Observer { startActivity<MainActivity>() })
 
         viewModel.intentStartActivity.observe(this, Observer { startActivity<StartActivity>() })
+
+        viewModel.finishActivityEvent.observe(this, Observer { finish() })
     }
 }

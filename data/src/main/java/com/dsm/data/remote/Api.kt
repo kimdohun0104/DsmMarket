@@ -117,4 +117,7 @@ interface Api {
         @Query("pagesize") pageSize: Int,
         @Query("search") search: String
     ): Flowable<ProductListEntity>
+
+    @GET("list/interest")
+    fun getInterest(@Query("type") type: Int): Flowable<ProductListEntity>
 }

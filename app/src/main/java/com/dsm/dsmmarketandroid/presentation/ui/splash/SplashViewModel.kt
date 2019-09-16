@@ -8,11 +8,13 @@ class SplashViewModel(private val autoLoginUseCase: AutoLoginUseCase) : BaseView
 
     val intentMainActivityEvent = SingleLiveEvent<Any>()
     val intentStartActivity = SingleLiveEvent<Any>()
+    val finishActivityEvent = SingleLiveEvent<Any>()
 
     fun login() {
         addDisposable(
             autoLoginUseCase.create(Unit).subscribe({
                 intentMainActivityEvent.call()
+                finishActivityEvent.call()
             }, {
                 intentStartActivity.call()
             })

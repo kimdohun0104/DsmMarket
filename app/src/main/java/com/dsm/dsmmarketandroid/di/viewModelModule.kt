@@ -3,6 +3,7 @@ package com.dsm.dsmmarketandroid.di
 import com.dsm.dsmmarketandroid.presentation.ui.addComment.AddCommentViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.changeNick.ChangeNickViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.comment.CommentViewModel
+import com.dsm.dsmmarketandroid.presentation.ui.interest.InterestViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.login.LoginViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.me.MeViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.password.changePassword.ChangePasswordViewModel
@@ -66,4 +67,6 @@ val viewModelModule = module {
     viewModel { SearchViewModel(get(), get(), get(), get()) }
 
     viewModel { SearchResultViewModel(get(), get()) }
+
+    viewModel { InterestViewModel(get(), get()) }
 }
