@@ -42,14 +42,6 @@ class SearchViewModel(
         intentSearchResult.value = content
     }
 
-    fun deleteSearchHistory(content: String) {
-        addDisposable(
-            deleteSearchHistoryUseCase.create(content)
-                .subscribe({
-
-                }, {
-
-                })
-        )
-    }
+    fun deleteSearchHistory(content: String) =
+        addDisposable(deleteSearchHistoryUseCase.create(content).subscribe())
 }

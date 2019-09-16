@@ -10,7 +10,7 @@ import com.dsm.dsmmarketandroid.presentation.model.ProductModel
 class RecentViewModel(
     private val getRecentPurchaseUseCase: GetRecentPurchaseUseCase,
     private val getRecentRentUseCase: GetRecentRentUseCase,
-    private val recentModelMapper: RecentMapper
+    private val recentMapper: RecentMapper
 ) : BaseViewModel() {
 
     val purchaseList = MutableLiveData<List<ProductModel>>()
@@ -23,10 +23,10 @@ class RecentViewModel(
         addDisposable(
             getRecentPurchaseUseCase.create(Unit)
                 .flatMap {
-                    purchaseList.value = recentModelMapper.mapFrom(it)
+                    purchaseList.value = recentMapper.mapFrom(it)
                     getRecentRentUseCase.create(Unit)
                 }.subscribe({
-                    rentList.value = recentModelMapper.mapFrom(it)
+                    rentList.value = recentMapper.mapFrom(it)
                 }, {
                 })
         )
