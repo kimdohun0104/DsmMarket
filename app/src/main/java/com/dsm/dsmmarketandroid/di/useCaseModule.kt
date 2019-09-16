@@ -53,4 +53,8 @@ val useCaseModule = module {
     factory { DeleteSearchHistoryUseCase(get()) }
 
     factory { GetInterestUseCase(get()) }
+
+    factory { GetMyPurchaseUseCase(get())}
+
+    factory { GetMyRentUseCase(get()) }
 }
