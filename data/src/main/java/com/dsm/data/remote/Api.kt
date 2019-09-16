@@ -120,4 +120,10 @@ interface Api {
 
     @GET("list/interest")
     fun getInterest(@Query("type") type: Int): Flowable<ProductListEntity>
+
+    @GET("user/list/deal")
+    fun getMyPurchase(): Flowable<ProductListEntity>
+
+    @GET("user/list/rent")
+    fun getMyRent(): Flowable<ProductListEntity>
 }

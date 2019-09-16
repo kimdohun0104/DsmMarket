@@ -4,8 +4,8 @@ import android.annotation.SuppressLint
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import com.dsm.dsmmarketandroid.presentation.ui.myPost.purchase.MyPurchasePostFragment
-import com.dsm.dsmmarketandroid.presentation.ui.myPost.rent.MyRentPostFragment
+import com.dsm.dsmmarketandroid.presentation.ui.myPost.purchase.MyPurchaseFragment
+import com.dsm.dsmmarketandroid.presentation.ui.myPost.rent.MyRentFragment
 
 @SuppressLint("WrongConstant")
 class MyPostPagerAdapter(fragmentManager: FragmentManager) :
@@ -13,9 +13,9 @@ class MyPostPagerAdapter(fragmentManager: FragmentManager) :
 
     override fun getItem(position: Int): Fragment =
         when (position) {
-            0 -> MyPurchasePostFragment()
-            1 -> MyRentPostFragment()
-            else -> MyPurchasePostFragment()
+            0 -> MyPurchaseFragment()
+            1 -> MyRentFragment()
+            else -> MyPurchaseFragment()
         }
 
     override fun getCount(): Int = 2
