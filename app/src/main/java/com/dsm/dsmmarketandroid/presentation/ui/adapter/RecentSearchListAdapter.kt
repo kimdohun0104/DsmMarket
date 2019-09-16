@@ -5,14 +5,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.dsm.dsmmarketandroid.R
-import kotlinx.android.synthetic.main.item_recent_search.view.*
+import kotlinx.android.synthetic.main.item_search_history.view.*
 
 class RecentSearchListAdapter : RecyclerView.Adapter<RecentSearchListAdapter.ViewHolder>() {
 
     private val listItems = arrayListOf<String>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
-        ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_recent_search, parent, false))
+        ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_search_history, parent, false))
 
     override fun getItemCount(): Int = listItems.size
 
