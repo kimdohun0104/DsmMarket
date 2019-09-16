@@ -18,6 +18,7 @@ import com.dsm.dsmmarketandroid.presentation.ui.recent.RecentViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.rent.RentViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.rentDetail.RentDetailViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.search.SearchViewModel
+import com.dsm.dsmmarketandroid.presentation.ui.searchResult.SearchResultViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.signUp.SignUpViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.splash.SplashViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -63,4 +64,6 @@ val viewModelModule = module {
     viewModel { RecentViewModel(get(), get(), get()) }
 
     viewModel { SearchViewModel(get(), get(), get(), get()) }
+
+    viewModel { SearchResultViewModel(get(), get()) }
 }
