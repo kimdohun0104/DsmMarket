@@ -51,4 +51,6 @@ val useCaseModule = module {
     factory { GetSearchHistoryUseCase(get()) }
 
     factory { DeleteSearchHistoryUseCase(get()) }
+
+    factory { GetInterestUseCase(get()) }
 }
