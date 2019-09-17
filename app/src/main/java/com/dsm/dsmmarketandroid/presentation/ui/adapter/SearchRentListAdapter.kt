@@ -1,12 +1,12 @@
 package com.dsm.dsmmarketandroid.presentation.ui.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.dsm.data.paging.NetworkState
+import com.dsm.dsmmarketandroid.databinding.ItemLoadingBinding
 import com.dsm.dsmmarketandroid.databinding.ItemProductBinding
 import com.dsm.dsmmarketandroid.presentation.model.ProductModel
 import com.dsm.dsmmarketandroid.presentation.ui.searchResult.SearchResultViewModel
@@ -31,15 +31,12 @@ class SearchRentListAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
         when (viewType) {
             TYPE_ITEM -> ItemHolder(ItemProductBinding.inflate(LayoutInflater.from(parent.context), parent, false))
-            else -> ItemHolder(ItemProductBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+            else -> LoadingHolder(ItemLoadingBinding.inflate(LayoutInflater.from(parent.context), parent, false))
         }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) =
-        when (holder) {
-            is LoadingHolder -> holder.bind()
-            is ItemHolder -> holder.bind(getItem(position))
-            else -> (holder as ItemHolder).bind(getItem(position))
-        }
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        if (holder is ItemHolder) holder.bind(getItem(position))
+    }
 
     override fun getItemViewType(position: Int): Int =
         if (hasExtraRow() && position == itemCount - 1) TYPE_LOADING else TYPE_ITEM
@@ -64,11 +61,7 @@ class SearchRentListAdapter(
         }
     }
 
-    inner class LoadingHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind() {
-
-        }
-    }
+    inner class LoadingHolder(binding: ItemLoadingBinding) : RecyclerView.ViewHolder(binding.root)
 
     inner class ItemHolder(private val binding: ItemProductBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: ProductModel?) {

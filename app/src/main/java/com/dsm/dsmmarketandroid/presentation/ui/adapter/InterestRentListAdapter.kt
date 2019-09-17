@@ -3,7 +3,7 @@ package com.dsm.dsmmarketandroid.presentation.ui.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.dsm.dsmmarketandroid.databinding.ItemProductBinding
+import com.dsm.dsmmarketandroid.databinding.ItemInterestBinding
 import com.dsm.dsmmarketandroid.presentation.model.ProductModel
 import com.dsm.dsmmarketandroid.presentation.ui.interest.InterestViewModel
 
@@ -12,7 +12,7 @@ class InterestRentListAdapter(private val viewModel: InterestViewModel) : Recycl
     private var listItems = listOf<ProductModel>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
-        ViewHolder(ItemProductBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+        ViewHolder(ItemInterestBinding.inflate(LayoutInflater.from(parent.context), parent, false))
 
     override fun getItemCount(): Int = listItems.size
 
@@ -23,7 +23,7 @@ class InterestRentListAdapter(private val viewModel: InterestViewModel) : Recycl
         notifyDataSetChanged()
     }
 
-    inner class ViewHolder(private val binding: ItemProductBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder(private val binding: ItemInterestBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind() {
             val item = listItems[adapterPosition]
             binding.product = item
