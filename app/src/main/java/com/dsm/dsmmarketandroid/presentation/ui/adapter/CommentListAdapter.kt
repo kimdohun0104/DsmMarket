@@ -5,8 +5,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.dsm.dsmmarketandroid.databinding.ItemCommentBinding
 import com.dsm.dsmmarketandroid.presentation.model.CommentModel
+import com.dsm.dsmmarketandroid.presentation.ui.comment.CommentViewModel
 
-class CommentListAdapter : RecyclerView.Adapter<CommentListAdapter.ViewHolder>() {
+class CommentListAdapter(
+    private val viewModel: CommentViewModel
+) : RecyclerView.Adapter<CommentListAdapter.ViewHolder>() {
 
     private var listItems = listOf<CommentModel>()
 
@@ -21,6 +24,7 @@ class CommentListAdapter : RecyclerView.Adapter<CommentListAdapter.ViewHolder>()
         fun bind() {
             val item = listItems[adapterPosition]
             binding.comment = item
+            binding.ivReport.setOnClickListener { viewModel.fragmentReportCommentEvent.call() }
         }
     }
 

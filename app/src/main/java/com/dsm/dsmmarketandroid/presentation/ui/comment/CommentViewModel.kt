@@ -17,6 +17,8 @@ class CommentViewModel(
 
     val toastServerErrorEvent = SingleLiveEvent<Any>()
 
+    val fragmentReportCommentEvent = SingleLiveEvent<Any>()
+
     fun getCommentList(postId: Int, type: Int) {
         addDisposable(
             getPurchaseCommentUseCase.create(GetCommentUseCase.Params(postId, type))
