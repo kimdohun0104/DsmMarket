@@ -16,6 +16,8 @@ import com.dsm.data.dataSource.purchase.PurchaseDataSource
 import com.dsm.data.dataSource.purchase.PurchaseDataSourceImpl
 import com.dsm.data.dataSource.recent.RecentDataSource
 import com.dsm.data.dataSource.recent.RecentDataSourceImpl
+import com.dsm.data.dataSource.recommend.RecommendDataSource
+import com.dsm.data.dataSource.recommend.RecommendDataSourceImpl
 import com.dsm.data.dataSource.rent.RentDataSource
 import com.dsm.data.dataSource.rent.RentDataSourceImpl
 import com.dsm.data.dataSource.report.ReportDataSource
@@ -46,4 +48,6 @@ val dataSourceModule = module {
     factory<MyPostDataSource> { MyPostDataSourceImpl(get()) }
 
     factory<ReportDataSource> { ReportDataSourceImpl(get()) }
+
+    factory<RecommendDataSource> { RecommendDataSourceImpl(get()) }
 }
