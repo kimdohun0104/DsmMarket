@@ -1,12 +1,13 @@
 package com.dsm.dsmmarketandroid.presentation.ui.purchaseDetail
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import com.dsm.domain.usecase.GetPurchaseDetailUseCase
-import com.dsm.domain.usecase.InterestUseCase
-import com.dsm.domain.usecase.UnInterestUseCase
+import com.dsm.domain.usecase.*
 import com.dsm.dsmmarketandroid.presentation.base.BaseViewModel
 import com.dsm.dsmmarketandroid.presentation.mapper.PurchaseDetailModelMapper
+import com.dsm.dsmmarketandroid.presentation.mapper.RecommendModelMapper
 import com.dsm.dsmmarketandroid.presentation.model.PurchaseDetailModel
+import com.dsm.dsmmarketandroid.presentation.model.RecommendModel
 import com.dsm.dsmmarketandroid.presentation.util.SingleLiveEvent
 import retrofit2.HttpException
 
@@ -14,11 +15,16 @@ class PurchaseDetailViewModel(
     private val getPurchaseDetailUseCase: GetPurchaseDetailUseCase,
     private val interestUseCase: InterestUseCase,
     private val unInterestUseCase: UnInterestUseCase,
-    private val purchaseDetailModelMapper: PurchaseDetailModelMapper
+    private val getRecommendUseCase: GetRecommendUseCase,
+    private val getRelatedUseCase: GetRelatedUseCase,
+    private val purchaseDetailModelMapper: PurchaseDetailModelMapper,
+    private val recommendModelMapper: RecommendModelMapper
 ) : BaseViewModel() {
 
     val purchaseDetail = MutableLiveData<PurchaseDetailModel>()
     val isInterest = MutableLiveData<Boolean>()
+
+    val recommendList = MutableLiveData<List<RecommendModel>>()
 
     val toastNonExistEvent = SingleLiveEvent<Any>()
     val finishActivityEvent = SingleLiveEvent<Any>()
@@ -67,5 +73,17 @@ class PurchaseDetailViewModel(
                     })
             )
         }
+    }
+
+    fun getRecommendProduct(postId: Int) {
+        addDisposable(
+            getRecommendUseCase.create(postId)
+                .subscribe({
+                    recommendList.value = recommendModelMapper.mapFrom(it)
+                }, {
+                    Log.d("DEBUGLOG", it.message.toString())
+                    toastServerErrorEvent.call()
+                })
+        )
     }
 }

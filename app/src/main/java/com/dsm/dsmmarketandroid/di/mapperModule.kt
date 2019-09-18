@@ -17,4 +17,6 @@ val mapperModule = module {
     factory { RecentMapper() }
 
     factory { SearchHistoryModelMapper() }
+
+    factory { RecommendModelMapper() }
 }

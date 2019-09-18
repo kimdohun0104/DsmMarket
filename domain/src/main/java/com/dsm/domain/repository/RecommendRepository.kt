@@ -5,7 +5,7 @@ import io.reactivex.Flowable
 
 interface RecommendRepository {
 
-    fun getRecommendProduct(category: String): Flowable<List<Recommend>>
+    fun getRecommendProduct(postId: Int): Flowable<List<Recommend>>
 
-    fun getRelatedProduct(category: String, type: Int): Flowable<List<Recommend>>
+    fun getRelatedProduct(postId: Int, type: Int): Flowable<List<Recommend>>
 }

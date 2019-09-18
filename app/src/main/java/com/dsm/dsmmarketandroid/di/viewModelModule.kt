@@ -55,7 +55,7 @@ val viewModelModule = module {
 
     viewModel { PasswordConfirmViewModel(get()) }
 
-    viewModel { PurchaseDetailViewModel(get(), get(), get(), get()) }
+    viewModel { PurchaseDetailViewModel(get(), get(), get(), get(), get(), get(), get()) }
 
     viewModel { RentDetailViewModel(get(), get(), get(), get()) }
 

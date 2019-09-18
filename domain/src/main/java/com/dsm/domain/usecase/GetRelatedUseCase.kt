@@ -7,7 +7,7 @@ import io.reactivex.Flowable
 
 class GetRelatedUseCase(private val recommendRepository: RecommendRepository) : UseCase<GetRelatedUseCase.Params, List<Recommend>>() {
     override fun create(data: Params): Flowable<List<Recommend>> =
-        recommendRepository.getRelatedProduct(data.category, data.type)
+        recommendRepository.getRelatedProduct(data.postId, data.type)
 
-    data class Params(val category: String, val type: Int)
+    data class Params(val postId: Int, val type: Int)
 }
