@@ -50,6 +50,7 @@
             android:text="@{comment.content}"/>
 
         <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_report"
             android:layout_width="22dp"
             android:layout_height="22dp"
             android:layout_marginEnd="16dp"

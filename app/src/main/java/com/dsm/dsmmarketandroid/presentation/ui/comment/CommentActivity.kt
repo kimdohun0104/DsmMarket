@@ -9,6 +9,7 @@ import com.dsm.dsmmarketandroid.databinding.ActivityCommentBinding
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.CommentListAdapter
 import com.dsm.dsmmarketandroid.presentation.ui.addComment.AddCommentActivity
 import com.dsm.dsmmarketandroid.presentation.ui.base.BaseActivity
+import com.dsm.dsmmarketandroid.presentation.ui.report.ReportCommentDialog
 import kotlinx.android.synthetic.main.activity_comment.*
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
@@ -28,7 +29,7 @@ class CommentActivity : BaseActivity<ActivityCommentBinding>() {
         tb_comment.setNavigationOnClickListener { finish() }
         setSupportActionBar(tb_comment)
 
-        val adapter = CommentListAdapter()
+        val adapter = CommentListAdapter(viewModel)
         rv_comment.adapter = adapter
 
         viewModel.getCommentList(postId, type)
@@ -36,6 +37,16 @@ class CommentActivity : BaseActivity<ActivityCommentBinding>() {
         viewModel.listItems.observe(this, Observer { adapter.setItems(it) })
 
         viewModel.toastServerErrorEvent.observe(this, Observer { toast(getString(R.string.fail_server_error)) })
+
+        viewModel.fragmentReportCommentEvent.observe(this, Observer {
+            val args = Bundle()
+            args.putInt("post_id", postId)
+            args.putInt("type", type)
+            args.putString("nick", it)
+            val fragment = ReportCommentDialog()
+            fragment.arguments = args
+            fragment.show(supportFragmentManager, "")
+        })
 
         binding.viewModel = viewModel
     }

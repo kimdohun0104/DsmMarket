@@ -10,6 +10,7 @@ import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.ActivityRentDetailBinding
 import com.dsm.dsmmarketandroid.presentation.ui.base.BaseActivity
 import com.dsm.dsmmarketandroid.presentation.ui.comment.CommentActivity
+import com.dsm.dsmmarketandroid.presentation.ui.report.ReportPostDialog
 import kotlinx.android.synthetic.main.activity_rent_detail.*
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
@@ -54,6 +55,14 @@ class RentDetailActivity : BaseActivity<ActivityRentDetailBinding>() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.interest -> viewModel.onClickInterest(postId)
+            R.id.report -> {
+                val args = Bundle()
+                args.putInt("post_id", postId)
+                args.putInt("type", 1)
+                val fragment = ReportPostDialog()
+                fragment.arguments = args
+                fragment.show(supportFragmentManager, "")
+            }
         }
         return super.onOptionsItemSelected(item)
     }
