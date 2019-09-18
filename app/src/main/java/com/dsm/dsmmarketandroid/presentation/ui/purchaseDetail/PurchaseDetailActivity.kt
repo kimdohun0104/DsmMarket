@@ -37,7 +37,7 @@ class PurchaseDetailActivity : BaseActivity<ActivityPurchaseDetailBinding>() {
 
         vp_detail_image.adapter = DetailImagePagerAdapter()
 
-        val recommendListAdapter = RecommendListAdapter()
+        val recommendListAdapter = RecommendListAdapter(this)
         (rv_recommend.layoutManager as LinearLayoutManager).orientation = LinearLayoutManager.HORIZONTAL
         rv_recommend.adapter = recommendListAdapter
 

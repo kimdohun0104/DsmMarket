@@ -1,12 +1,15 @@
 package com.dsm.dsmmarketandroid.presentation.ui.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.dsm.dsmmarketandroid.databinding.ItemRecommendBinding
 import com.dsm.dsmmarketandroid.presentation.model.RecommendModel
+import com.dsm.dsmmarketandroid.presentation.ui.purchaseDetail.PurchaseDetailActivity
+import org.jetbrains.anko.startActivity
 
-class RecommendListAdapter : RecyclerView.Adapter<RecommendListAdapter.ViewHolder>() {
+class RecommendListAdapter(private val context: Context) : RecyclerView.Adapter<RecommendListAdapter.ViewHolder>() {
 
     private var listItems = listOf<RecommendModel>()
 
@@ -26,6 +29,7 @@ class RecommendListAdapter : RecyclerView.Adapter<RecommendListAdapter.ViewHolde
         fun bind() {
             val item = listItems[adapterPosition]
             binding.recommend = item
+            binding.clParent.setOnClickListener { context.startActivity<PurchaseDetailActivity>("post_id" to item.postId) }
         }
     }
 }
