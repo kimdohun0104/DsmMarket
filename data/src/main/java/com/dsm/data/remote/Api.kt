@@ -126,4 +126,10 @@ interface Api {
 
     @GET("user/list/rent")
     fun getMyRent(): Flowable<ProductListEntity>
+
+    @POST("report/post")
+    fun reportPost(@Body params: Any): Flowable<Response<Unit>>
+
+    @POST("report/comment")
+    fun reportComment(@Body params: Any): Flowable<Response<Unit>>
 }

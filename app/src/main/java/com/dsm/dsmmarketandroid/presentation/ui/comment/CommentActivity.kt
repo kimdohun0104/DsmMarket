@@ -41,7 +41,8 @@ class CommentActivity : BaseActivity<ActivityCommentBinding>() {
         viewModel.fragmentReportCommentEvent.observe(this, Observer {
             val args = Bundle()
             args.putInt("post_id", postId)
-            args.putInt("post_id", type)
+            args.putInt("type", type)
+            args.putString("nick", it)
             val fragment = ReportCommentDialog()
             fragment.arguments = args
             fragment.show(supportFragmentManager, "")

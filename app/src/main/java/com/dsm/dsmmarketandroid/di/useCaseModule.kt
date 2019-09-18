@@ -57,4 +57,8 @@ val useCaseModule = module {
     factory { GetMyPurchaseUseCase(get())}
 
     factory { GetMyRentUseCase(get()) }
+
+    factory { ReportPostUseCase(get()) }
+
+    factory { ReportCommentUseCase(get()) }
 }

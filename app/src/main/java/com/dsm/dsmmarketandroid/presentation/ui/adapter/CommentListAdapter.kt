@@ -24,7 +24,7 @@ class CommentListAdapter(
         fun bind() {
             val item = listItems[adapterPosition]
             binding.comment = item
-            binding.ivReport.setOnClickListener { viewModel.fragmentReportCommentEvent.call() }
+            binding.ivReport.setOnClickListener { viewModel.fragmentReportCommentEvent.value = item.nick }
         }
     }
 

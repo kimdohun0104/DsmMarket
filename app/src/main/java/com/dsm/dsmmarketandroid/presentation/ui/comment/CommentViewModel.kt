@@ -17,7 +17,7 @@ class CommentViewModel(
 
     val toastServerErrorEvent = SingleLiveEvent<Any>()
 
-    val fragmentReportCommentEvent = SingleLiveEvent<Any>()
+    val fragmentReportCommentEvent = MutableLiveData<String>()
 
     fun getCommentList(postId: Int, type: Int) {
         addDisposable(
