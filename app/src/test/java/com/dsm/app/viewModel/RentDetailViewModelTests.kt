@@ -1,10 +1,13 @@
 package com.dsm.app.viewModel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.dsm.domain.entity.Recommend
 import com.dsm.domain.entity.RentDetail
+import com.dsm.domain.usecase.GetRelatedUseCase
 import com.dsm.domain.usecase.GetRentDetailUseCase
 import com.dsm.domain.usecase.InterestUseCase
 import com.dsm.domain.usecase.UnInterestUseCase
+import com.dsm.dsmmarketandroid.presentation.mapper.RecommendModelMapper
 import com.dsm.dsmmarketandroid.presentation.mapper.RentDetailModelMapper
 import com.dsm.dsmmarketandroid.presentation.ui.rentDetail.RentDetailViewModel
 import com.jraska.livedata.test
@@ -14,8 +17,9 @@ import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.mockito.Mock
 import org.mockito.Mockito.`when`
-import org.mockito.Mockito.mock
+import org.mockito.MockitoAnnotations
 
 class RentDetailViewModelTests {
 
@@ -23,19 +27,28 @@ class RentDetailViewModelTests {
     @JvmField
     val instantTaskExecutorRule = InstantTaskExecutorRule()
 
+    @Mock
     private lateinit var getRentDetailUseCase: GetRentDetailUseCase
+
+    @Mock
     private lateinit var interestUseCase: InterestUseCase
+
+    @Mock
+    private lateinit var getRelatedUseCase: GetRelatedUseCase
+
+    @Mock
     private lateinit var unInterestUseCase: UnInterestUseCase
-    private lateinit var rentDetailModelMapper: RentDetailModelMapper
+
+
+    private val rentDetailModelMapper = RentDetailModelMapper()
+    private val recommendModelMapper = RecommendModelMapper()
+
     private lateinit var viewModel: RentDetailViewModel
 
     @Before
     fun init() {
-        getRentDetailUseCase = mock(GetRentDetailUseCase::class.java)
-        interestUseCase = mock(InterestUseCase::class.java)
-        unInterestUseCase = mock(UnInterestUseCase::class.java)
-        rentDetailModelMapper = RentDetailModelMapper()
-        viewModel = RentDetailViewModel(getRentDetailUseCase, interestUseCase, unInterestUseCase, rentDetailModelMapper)
+        MockitoAnnotations.initMocks(this)
+        viewModel = RentDetailViewModel(getRentDetailUseCase, interestUseCase, unInterestUseCase, getRelatedUseCase, recommendModelMapper, rentDetailModelMapper)
     }
 
     @Test
@@ -85,5 +98,19 @@ class RentDetailViewModelTests {
 
         assertFalse(viewModel.isInterest.test().value())
         viewModel.toastUnInterestEvent.test().assertHasValue()
+    }
+
+    @Test
+    fun getRelatedProductSuccess() {
+        val response = listOf(
+            Recommend(0, "TITLE", "IMG")
+        )
+
+        `when`(getRelatedUseCase.create(GetRelatedUseCase.Params(0, 1)))
+            .thenReturn(Flowable.just(response))
+
+        viewModel.getRelatedProduct(0)
+
+        viewModel.relatedList.test().assertValue(recommendModelMapper.mapFrom(response))
     }
 }
