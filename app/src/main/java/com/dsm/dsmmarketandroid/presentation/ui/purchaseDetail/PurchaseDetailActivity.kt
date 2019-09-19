@@ -37,9 +37,13 @@ class PurchaseDetailActivity : BaseActivity<ActivityPurchaseDetailBinding>() {
 
         vp_detail_image.adapter = DetailImagePagerAdapter()
 
-        val recommendListAdapter = RecommendListAdapter(this)
+        val recommendListAdapter = RecommendListAdapter(this, 0)
         (rv_recommend.layoutManager as LinearLayoutManager).orientation = LinearLayoutManager.HORIZONTAL
         rv_recommend.adapter = recommendListAdapter
+
+        val relatedListAdapter = RecommendListAdapter(this, 0)
+        (rv_related.layoutManager as LinearLayoutManager).orientation = LinearLayoutManager.HORIZONTAL
+        rv_related.adapter = relatedListAdapter
 
         ll_comment.setOnClickListener { startActivity<CommentActivity>("post_id" to postId, "type" to 0) }
 
@@ -47,6 +51,7 @@ class PurchaseDetailActivity : BaseActivity<ActivityPurchaseDetailBinding>() {
 
         viewModel.getPurchaseDetail(postId)
         viewModel.getRecommendProduct(postId)
+        viewModel.getRelatedProduct(postId)
 
         viewModel.toastNonExistEvent.observe(this, Observer { toast(getString(R.string.fail_non_exist_post)) })
 
@@ -64,6 +69,8 @@ class PurchaseDetailActivity : BaseActivity<ActivityPurchaseDetailBinding>() {
         viewModel.toastUnInterestEvent.observe(this, Observer { toast(getString(R.string.un_interest)) })
 
         viewModel.recommendList.observe(this, Observer { recommendListAdapter.setItems(it) })
+
+        viewModel.relatedList.observe(this, Observer { relatedListAdapter.setItems(it) })
 
         binding.viewModel = viewModel
     }

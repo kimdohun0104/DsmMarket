@@ -57,7 +57,7 @@ val viewModelModule = module {
 
     viewModel { PurchaseDetailViewModel(get(), get(), get(), get(), get(), get(), get()) }
 
-    viewModel { RentDetailViewModel(get(), get(), get(), get()) }
+    viewModel { RentDetailViewModel(get(), get(), get(), get(), get(), get()) }
 
     viewModel { CommentViewModel(get(), get()) }
 

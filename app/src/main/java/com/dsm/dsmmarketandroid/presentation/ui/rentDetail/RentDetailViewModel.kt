@@ -1,11 +1,14 @@
 package com.dsm.dsmmarketandroid.presentation.ui.rentDetail
 
 import androidx.lifecycle.MutableLiveData
+import com.dsm.domain.usecase.GetRelatedUseCase
 import com.dsm.domain.usecase.GetRentDetailUseCase
 import com.dsm.domain.usecase.InterestUseCase
 import com.dsm.domain.usecase.UnInterestUseCase
 import com.dsm.dsmmarketandroid.presentation.base.BaseViewModel
+import com.dsm.dsmmarketandroid.presentation.mapper.RecommendModelMapper
 import com.dsm.dsmmarketandroid.presentation.mapper.RentDetailModelMapper
+import com.dsm.dsmmarketandroid.presentation.model.RecommendModel
 import com.dsm.dsmmarketandroid.presentation.model.RentDetailModel
 import com.dsm.dsmmarketandroid.presentation.util.SingleLiveEvent
 import retrofit2.HttpException
@@ -14,11 +17,15 @@ class RentDetailViewModel(
     private val getRentDetailUseCase: GetRentDetailUseCase,
     private val interestUseCase: InterestUseCase,
     private val unInterestUseCase: UnInterestUseCase,
+    private val getRelatedUseCase: GetRelatedUseCase,
+    private val recommendModelMapper: RecommendModelMapper,
     private val rentDetailModelMapper: RentDetailModelMapper
 ) : BaseViewModel() {
 
     val rentDetail = MutableLiveData<RentDetailModel>()
     val isInterest = MutableLiveData<Boolean>()
+
+    val relatedList = MutableLiveData<List<RecommendModel>>()
 
     val toastServerErrorEvent = SingleLiveEvent<Any>()
 
@@ -63,5 +70,16 @@ class RentDetailViewModel(
                     })
             )
         }
+    }
+
+    fun getRelatedProduct(postId: Int) {
+        addDisposable(
+            getRelatedUseCase.create(GetRelatedUseCase.Params(postId, 1))
+                .subscribe({
+                    relatedList.value = recommendModelMapper.mapFrom(it)
+                }, {
+                    toastServerErrorEvent.call()
+                })
+        )
     }
 }
