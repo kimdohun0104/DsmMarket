@@ -10,21 +10,24 @@ import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.mockito.Mock
 import org.mockito.Mockito.`when`
-import org.mockito.Mockito.mock
+import org.mockito.MockitoAnnotations
 
 class LoginViewModelTests {
-
-    private lateinit var loginUseCase: LoginUseCase
-    private lateinit var viewModel: LoginViewModel
 
     @Rule
     @JvmField
     val instantTaskExecutorRule = InstantTaskExecutorRule()
 
+    @Mock
+    private lateinit var loginUseCase: LoginUseCase
+
+    private lateinit var viewModel: LoginViewModel
+
     @Before
     fun init() {
-        loginUseCase = mock(LoginUseCase::class.java)
+        MockitoAnnotations.initMocks(this)
         viewModel = LoginViewModel(loginUseCase)
     }
 

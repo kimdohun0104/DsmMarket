@@ -9,7 +9,8 @@ import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.mockito.Mockito.mock
+import org.mockito.Mock
+import org.mockito.MockitoAnnotations
 
 class PostRentViewModelTests {
 
@@ -17,12 +18,14 @@ class PostRentViewModelTests {
     @JvmField
     val instantTaskExecutorRule = InstantTaskExecutorRule()
 
+    @Mock
     private lateinit var postRentUseCase: PostRentUseCase
+
     private lateinit var viewModel: PostRentViewModel
 
     @Before
     fun init() {
-        postRentUseCase = mock(PostRentUseCase::class.java)
+        MockitoAnnotations.initMocks(this)
         viewModel = PostRentViewModel(postRentUseCase)
     }
 

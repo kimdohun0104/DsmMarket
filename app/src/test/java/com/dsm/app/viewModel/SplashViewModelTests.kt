@@ -8,8 +8,9 @@ import io.reactivex.Flowable
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.mockito.Mock
 import org.mockito.Mockito.`when`
-import org.mockito.Mockito.mock
+import org.mockito.MockitoAnnotations
 
 class SplashViewModelTests {
 
@@ -17,12 +18,14 @@ class SplashViewModelTests {
     @JvmField
     val instantTaskExecutorRule = InstantTaskExecutorRule()
 
+    @Mock
     private lateinit var loginUseCase: AutoLoginUseCase
+
     private lateinit var viewModel: SplashViewModel
 
     @Before
     fun init() {
-        loginUseCase = mock(AutoLoginUseCase::class.java)
+        MockitoAnnotations.initMocks(this)
         viewModel = SplashViewModel(loginUseCase)
     }
 

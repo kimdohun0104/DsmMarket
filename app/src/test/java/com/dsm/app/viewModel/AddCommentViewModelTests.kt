@@ -10,8 +10,9 @@ import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.mockito.Mock
 import org.mockito.Mockito.`when`
-import org.mockito.Mockito.mock
+import org.mockito.MockitoAnnotations
 
 class AddCommentViewModelTests {
 
@@ -19,12 +20,14 @@ class AddCommentViewModelTests {
     @JvmField
     val instantTaskExecutorRule = InstantTaskExecutorRule()
 
+    @Mock
     private lateinit var postCommentUseCase: PostCommentUseCase
+
     private lateinit var viewModel: AddCommentViewModel
 
     @Before
     fun init() {
-        postCommentUseCase = mock(PostCommentUseCase::class.java)
+        MockitoAnnotations.initMocks(this)
         viewModel = AddCommentViewModel(postCommentUseCase)
     }
 

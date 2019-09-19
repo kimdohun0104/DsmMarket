@@ -9,7 +9,8 @@ import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.mockito.Mockito.mock
+import org.mockito.Mock
+import org.mockito.MockitoAnnotations
 
 class PasswordCodeConfirmViewModelTests {
 
@@ -17,12 +18,14 @@ class PasswordCodeConfirmViewModelTests {
     @JvmField
     val instantTaskExecutorRule = InstantTaskExecutorRule()
 
+    @Mock
     private lateinit var passwordCodeConfirmUseCase: PasswordCodeConfirmUseCase
+
     private lateinit var viewModel: PasswordCodeConfirmViewModel
 
     @Before
     fun init() {
-        passwordCodeConfirmUseCase = mock(PasswordCodeConfirmUseCase::class.java)
+        MockitoAnnotations.initMocks(this)
         viewModel = PasswordCodeConfirmViewModel(passwordCodeConfirmUseCase)
     }
 

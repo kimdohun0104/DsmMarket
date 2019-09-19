@@ -11,8 +11,9 @@ import io.reactivex.Flowable
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.mockito.Mock
 import org.mockito.Mockito.`when`
-import org.mockito.Mockito.mock
+import org.mockito.MockitoAnnotations
 
 class MyPostViewModelTests {
 
@@ -20,16 +21,19 @@ class MyPostViewModelTests {
     @JvmField
     val instantTaskExecutorRule = InstantTaskExecutorRule()
 
+    @Mock
     private lateinit var getMyPurchaseUseCase: GetMyPurchaseUseCase
+
+    @Mock
     private lateinit var getMyRentUseCase: GetMyRentUseCase
-    private lateinit var productModelMapper: ProductModelMapper
+
+    private val productModelMapper = ProductModelMapper()
+
     private lateinit var viewModel: MyPostViewModel
 
     @Before
     fun init() {
-        getMyPurchaseUseCase = mock(GetMyPurchaseUseCase::class.java)
-        getMyRentUseCase = mock(GetMyRentUseCase::class.java)
-        productModelMapper = ProductModelMapper()
+        MockitoAnnotations.initMocks(this)
         viewModel = MyPostViewModel(getMyPurchaseUseCase, getMyRentUseCase, productModelMapper)
     }
 

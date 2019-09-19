@@ -10,8 +10,9 @@ import io.reactivex.Flowable
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.mockito.Mock
 import org.mockito.Mockito.`when`
-import org.mockito.Mockito.mock
+import org.mockito.MockitoAnnotations
 
 class CommentViewModelTests {
 
@@ -19,14 +20,16 @@ class CommentViewModelTests {
     @JvmField
     val instantTaskExecutorRule = InstantTaskExecutorRule()
 
+    @Mock
     private lateinit var getCommentUseCase: GetCommentUseCase
-    private lateinit var commentModelMapper: CommentModelMapper
+
+    private val commentModelMapper = CommentModelMapper()
+
     private lateinit var viewModel: CommentViewModel
 
     @Before
     fun init() {
-        getCommentUseCase = mock(GetCommentUseCase::class.java)
-        commentModelMapper = CommentModelMapper()
+        MockitoAnnotations.initMocks(this)
         viewModel = CommentViewModel(getCommentUseCase, commentModelMapper)
     }
 

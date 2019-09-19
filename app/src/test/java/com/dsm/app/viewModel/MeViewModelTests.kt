@@ -8,8 +8,9 @@ import io.reactivex.Flowable
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.mockito.Mock
 import org.mockito.Mockito.`when`
-import org.mockito.Mockito.mock
+import org.mockito.MockitoAnnotations
 
 class MeViewModelTests {
 
@@ -17,12 +18,14 @@ class MeViewModelTests {
     @JvmField
     val instantTaskExecutorRule = InstantTaskExecutorRule()
 
+    @Mock
     private lateinit var getUserNickUseCase: GetUserNickUseCase
+
     private lateinit var viewModel: MeViewModel
 
     @Before
     fun init() {
-        getUserNickUseCase = mock(GetUserNickUseCase::class.java)
+        MockitoAnnotations.initMocks(this)
         viewModel = MeViewModel(getUserNickUseCase)
     }
 

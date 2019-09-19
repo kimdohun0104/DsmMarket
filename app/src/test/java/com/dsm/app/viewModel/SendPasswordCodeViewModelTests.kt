@@ -10,8 +10,9 @@ import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.mockito.Mock
 import org.mockito.Mockito.`when`
-import org.mockito.Mockito.mock
+import org.mockito.MockitoAnnotations
 
 class SendPasswordCodeViewModelTests {
 
@@ -19,12 +20,14 @@ class SendPasswordCodeViewModelTests {
     @JvmField
     val instantTaskExecutorRule = InstantTaskExecutorRule()
 
+    @Mock
     private lateinit var sendPasswordCodeUseCase: SendPasswordCodeUseCase
+
     private lateinit var viewModel: SendPasswordCodeViewModel
 
     @Before
     fun init() {
-        sendPasswordCodeUseCase = mock(SendPasswordCodeUseCase::class.java)
+        MockitoAnnotations.initMocks(this)
         viewModel = SendPasswordCodeViewModel(sendPasswordCodeUseCase)
     }
 

@@ -10,8 +10,9 @@ import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.mockito.Mock
 import org.mockito.Mockito.`when`
-import org.mockito.Mockito.mock
+import org.mockito.MockitoAnnotations
 
 class ChangeNickViewModelTests {
 
@@ -19,12 +20,14 @@ class ChangeNickViewModelTests {
     @JvmField
     val instantTaskExecutorRule = InstantTaskExecutorRule()
 
+    @Mock
     private lateinit var changeNickUseCase: ChangeNickUseCase
+
     private lateinit var viewModel: ChangeNickViewModel
 
     @Before
     fun init() {
-        changeNickUseCase = mock(ChangeNickUseCase::class.java)
+        MockitoAnnotations.initMocks(this)
         viewModel = ChangeNickViewModel(changeNickUseCase)
     }
 

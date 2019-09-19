@@ -13,8 +13,9 @@ import io.reactivex.Flowable
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.mockito.Mock
 import org.mockito.Mockito.`when`
-import org.mockito.Mockito.mock
+import org.mockito.MockitoAnnotations
 
 class SearchViewModelTests {
 
@@ -22,19 +23,23 @@ class SearchViewModelTests {
     @JvmField
     val instantTaskExecutorRule = InstantTaskExecutorRule()
 
+    @Mock
     private lateinit var addSearchHistoryUseCase: AddSearchHistoryUseCase
+
+    @Mock
     private lateinit var getSearchHistoryUseCase: GetSearchHistoryUseCase
-    private lateinit var deleteSearchHistoryUsecase: DeleteSearchHistoryUseCase
-    private lateinit var searchHistoryModelMapper: SearchHistoryModelMapper
+
+    @Mock
+    private lateinit var deleteSearchHistoryUseCase: DeleteSearchHistoryUseCase
+
+    private val searchHistoryModelMapper = SearchHistoryModelMapper()
+
     private lateinit var viewModel: SearchViewModel
 
     @Before
     fun init() {
-        addSearchHistoryUseCase = mock(AddSearchHistoryUseCase::class.java)
-        getSearchHistoryUseCase = mock(GetSearchHistoryUseCase::class.java)
-        deleteSearchHistoryUsecase = mock(DeleteSearchHistoryUseCase::class.java)
-        searchHistoryModelMapper = SearchHistoryModelMapper()
-        viewModel = SearchViewModel(addSearchHistoryUseCase, getSearchHistoryUseCase, deleteSearchHistoryUsecase, searchHistoryModelMapper)
+        MockitoAnnotations.initMocks(this)
+        viewModel = SearchViewModel(addSearchHistoryUseCase, getSearchHistoryUseCase, deleteSearchHistoryUseCase, searchHistoryModelMapper)
     }
 
     @Test

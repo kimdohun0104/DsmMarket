@@ -10,8 +10,9 @@ import io.reactivex.Flowable
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.mockito.Mock
 import org.mockito.Mockito.`when`
-import org.mockito.Mockito.mock
+import org.mockito.MockitoAnnotations
 
 class PostCategoryViewModelTests {
 
@@ -19,14 +20,16 @@ class PostCategoryViewModelTests {
     @JvmField
     val instantTaskExecutorRule = InstantTaskExecutorRule()
 
+    @Mock
     private lateinit var getPostCategoryUseCase: GetPostCategoryUseCase
-    private lateinit var postCategoryModelMapper: PostCategoryModelMapper
+
+    private val postCategoryModelMapper = PostCategoryModelMapper()
+
     private lateinit var viewModel: PostCategoryViewModel
 
     @Before
     fun init() {
-        getPostCategoryUseCase = mock(GetPostCategoryUseCase::class.java)
-        postCategoryModelMapper = PostCategoryModelMapper()
+        MockitoAnnotations.initMocks(this)
         viewModel = PostCategoryViewModel(getPostCategoryUseCase, postCategoryModelMapper)
     }
 

@@ -8,8 +8,9 @@ import io.reactivex.Flowable
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.mockito.Mock
 import org.mockito.Mockito.`when`
-import org.mockito.Mockito.mock
+import org.mockito.MockitoAnnotations
 
 class PasswordConfirmViewModelTests {
 
@@ -17,12 +18,14 @@ class PasswordConfirmViewModelTests {
     @JvmField
     val instantTaskExecutorRule = InstantTaskExecutorRule()
 
+    @Mock
     private lateinit var confirmPasswordUseCase: ConfirmPasswordUseCase
+
     private lateinit var viewModel: PasswordConfirmViewModel
 
     @Before
     fun init() {
-        confirmPasswordUseCase = mock(ConfirmPasswordUseCase::class.java)
+        MockitoAnnotations.initMocks(this)
         viewModel = PasswordConfirmViewModel(confirmPasswordUseCase)
     }
 
