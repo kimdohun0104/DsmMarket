@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="recommend"
+            type="com.dsm.dsmmarketandroid.presentation.model.RecommendModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:id="@+id/cl_parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_recommend"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            bind:image="@{recommend.img}"
+            app:layout_constraintRight_toRightOf="parent"
+            android:scaleType="centerCrop"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{recommend.title}"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toBottomOf="@id/iv_recommend"
+            app:layout_constraintLeft_toLeftOf="@id/iv_recommend"
+            app:layout_constraintRight_toRightOf="@id/iv_recommend"
+            android:textSize="16sp"
+            android:layout_marginTop="4dp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

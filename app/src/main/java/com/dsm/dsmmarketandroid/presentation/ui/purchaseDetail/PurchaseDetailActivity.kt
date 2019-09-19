@@ -6,9 +6,11 @@ import android.view.MenuItem
 import androidx.core.content.ContextCompat
 import androidx.core.view.get
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.ActivityPurchaseDetailBinding
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.DetailImagePagerAdapter
+import com.dsm.dsmmarketandroid.presentation.ui.adapter.RecommendListAdapter
 import com.dsm.dsmmarketandroid.presentation.ui.base.BaseActivity
 import com.dsm.dsmmarketandroid.presentation.ui.chat.ChatActivity
 import com.dsm.dsmmarketandroid.presentation.ui.comment.CommentActivity
@@ -35,11 +37,21 @@ class PurchaseDetailActivity : BaseActivity<ActivityPurchaseDetailBinding>() {
 
         vp_detail_image.adapter = DetailImagePagerAdapter()
 
+        val recommendListAdapter = RecommendListAdapter(this, 0)
+        (rv_recommend.layoutManager as LinearLayoutManager).orientation = LinearLayoutManager.HORIZONTAL
+        rv_recommend.adapter = recommendListAdapter
+
+        val relatedListAdapter = RecommendListAdapter(this, 0)
+        (rv_related.layoutManager as LinearLayoutManager).orientation = LinearLayoutManager.HORIZONTAL
+        rv_related.adapter = relatedListAdapter
+
         ll_comment.setOnClickListener { startActivity<CommentActivity>("post_id" to postId, "type" to 0) }
 
         btn_deal_with_chat.setOnClickListener { startActivity<ChatActivity>() }
 
         viewModel.getPurchaseDetail(postId)
+        viewModel.getRecommendProduct(postId)
+        viewModel.getRelatedProduct(postId)
 
         viewModel.toastNonExistEvent.observe(this, Observer { toast(getString(R.string.fail_non_exist_post)) })
 
@@ -55,6 +67,10 @@ class PurchaseDetailActivity : BaseActivity<ActivityPurchaseDetailBinding>() {
         viewModel.toastInterestEvent.observe(this, Observer { toast(getString(R.string.interest)) })
 
         viewModel.toastUnInterestEvent.observe(this, Observer { toast(getString(R.string.un_interest)) })
+
+        viewModel.recommendList.observe(this, Observer { recommendListAdapter.setItems(it) })
+
+        viewModel.relatedList.observe(this, Observer { relatedListAdapter.setItems(it) })
 
         binding.viewModel = viewModel
     }

@@ -26,4 +26,6 @@ val repositoryModule = module {
     factory<MyPostRepository> { MyPostRepositoryImpl(get()) }
 
     factory<ReportRepository> { ReportRepositoryImpl(get()) }
+
+    factory<RecommendRepository> { RecommendRepositoryImpl(get()) }
 }

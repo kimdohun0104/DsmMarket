@@ -61,4 +61,8 @@ val useCaseModule = module {
     factory { ReportPostUseCase(get()) }
 
     factory { ReportCommentUseCase(get()) }
+
+    factory { GetRecommendUseCase(get()) }
+
+    factory { GetRelatedUseCase(get()) }
 }

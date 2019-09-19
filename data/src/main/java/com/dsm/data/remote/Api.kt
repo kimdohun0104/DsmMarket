@@ -127,6 +127,15 @@ interface Api {
     @GET("user/list/rent")
     fun getMyRent(): Flowable<ProductListEntity>
 
+    @GET("list/related")
+    fun getRelatedProduct(
+        @Query("postId") postId: Int,
+        @Query("type") type: Int
+    ): Flowable<RecommendListEntity>
+
+    @GET("list/recommend")
+    fun getRecommendProduct(@Query("postId") postId: Int): Flowable<RecommendListEntity>
+
     @POST("report/post")
     fun reportPost(@Body params: Any): Flowable<Response<Unit>>
 

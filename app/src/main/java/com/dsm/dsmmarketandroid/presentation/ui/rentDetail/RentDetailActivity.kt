@@ -6,8 +6,10 @@ import android.view.MenuItem
 import androidx.core.content.ContextCompat
 import androidx.core.view.get
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.ActivityRentDetailBinding
+import com.dsm.dsmmarketandroid.presentation.ui.adapter.RecommendListAdapter
 import com.dsm.dsmmarketandroid.presentation.ui.base.BaseActivity
 import com.dsm.dsmmarketandroid.presentation.ui.comment.CommentActivity
 import com.dsm.dsmmarketandroid.presentation.ui.report.ReportPostDialog
@@ -33,7 +35,12 @@ class RentDetailActivity : BaseActivity<ActivityRentDetailBinding>() {
 
         ll_comment.setOnClickListener { startActivity<CommentActivity>("post_id" to postId, "type" to 1) }
 
+        val relatedListAdapter = RecommendListAdapter(this, 1)
+        (rv_related.layoutManager as LinearLayoutManager).orientation = LinearLayoutManager.HORIZONTAL
+        rv_related.adapter = relatedListAdapter
+
         viewModel.getRentDetail(postId)
+        viewModel.getRelatedProduct(postId)
 
         viewModel.isInterest.observe(this, Observer {
             if (it) tb_rent_detail.menu[0].icon = getDrawable(R.drawable.ic_heart_full_red)
@@ -43,6 +50,8 @@ class RentDetailActivity : BaseActivity<ActivityRentDetailBinding>() {
         viewModel.toastInterestEvent.observe(this, Observer { toast(getString(R.string.interest)) })
 
         viewModel.toastUnInterestEvent.observe(this, Observer { toast(getString(R.string.un_interest)) })
+
+        viewModel.relatedList.observe(this, Observer { relatedListAdapter.setItems(it) })
 
         binding.viewModel = viewModel
     }
