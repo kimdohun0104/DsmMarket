@@ -4,8 +4,8 @@
     <data>
 
         <variable
-            name="searchHistoryModel"
-            type="com.dsm.dsmmarketandroid.presentation.model.SearchHistoryModel" />
+            name="search"
+            type="String" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_marginTop="12dp"
-            android:text="@{searchHistoryModel.content}"
+            android:text="@{search}"
             android:textColor="@color/black"
             android:textSize="14sp"
             android:textStyle="bold"

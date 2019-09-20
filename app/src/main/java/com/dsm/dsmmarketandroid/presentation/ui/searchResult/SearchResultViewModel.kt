@@ -8,15 +8,12 @@ import androidx.paging.PagedList
 import com.dsm.data.paging.NetworkState
 import com.dsm.data.paging.search.purchase.SearchPurchaseDataFactory
 import com.dsm.data.paging.search.rent.SearchRentDataFactory
-import com.dsm.domain.entity.SearchHistory
-import com.dsm.domain.usecase.AddSearchHistoryUseCase
 import com.dsm.dsmmarketandroid.presentation.base.BaseViewModel
 import com.dsm.dsmmarketandroid.presentation.mapper.ProductModelMapper
 import com.dsm.dsmmarketandroid.presentation.model.ProductModel
 import java.util.concurrent.Executors
 
 class SearchResultViewModel(
-    private val addSearchHistoryUseCase: AddSearchHistoryUseCase,
     private val productModelMapper: ProductModelMapper
 ) : BaseViewModel() {
 
@@ -31,6 +28,8 @@ class SearchResultViewModel(
     val intentPurchaseDetail = MutableLiveData<Int>()
     val intentRentDetail = MutableLiveData<Int>()
     val intentSearchResult = MutableLiveData<String>()
+
+    val isSearchEnable = Transformations.map(search) { it != "" }
 
     private val executor = Executors.newFixedThreadPool(5)
     private val pagedListConfig = PagedList.Config.Builder()
@@ -60,8 +59,6 @@ class SearchResultViewModel(
     }
 
     fun search() {
-        val search = search.value!!
-        addSearchHistoryUseCase.create(SearchHistory(search)).subscribe()
-        intentSearchResult.value = search
+        intentSearchResult.value = search.value!!
     }
 }

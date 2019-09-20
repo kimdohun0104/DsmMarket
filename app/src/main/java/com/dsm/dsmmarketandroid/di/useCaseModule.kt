@@ -46,8 +46,6 @@ val useCaseModule = module {
 
     factory { GetRecentRentUseCase(get()) }
 
-    factory { AddSearchHistoryUseCase(get()) }
-
     factory { GetSearchHistoryUseCase(get()) }
 
     factory { DeleteSearchHistoryUseCase(get()) }

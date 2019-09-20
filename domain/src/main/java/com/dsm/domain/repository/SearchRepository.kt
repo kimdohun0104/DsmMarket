@@ -1,14 +1,11 @@
 package com.dsm.domain.repository
 
 import com.dsm.domain.entity.Product
-import com.dsm.domain.entity.SearchHistory
 import io.reactivex.Completable
 import io.reactivex.Flowable
 
 interface SearchRepository {
-    fun addSearchHistory(searchHistory: SearchHistory): Completable
-
-    fun getSearchHistory(): Flowable<List<SearchHistory>>
+    fun getSearchHistory(): Flowable<List<String>>
 
     fun deleteSearchHistory(content: String): Completable
 
