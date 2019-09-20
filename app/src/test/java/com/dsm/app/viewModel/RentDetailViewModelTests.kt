@@ -63,7 +63,8 @@ class RentDetailViewModelTests {
             title = "TITLE",
             author = "AUTHOR",
             img = "IMG",
-            isInterest = true
+            isInterest = true,
+            category = "CATEGORY"
         )
         `when`(getRentDetailUseCase.create(0)).thenReturn(Flowable.just(response))
 

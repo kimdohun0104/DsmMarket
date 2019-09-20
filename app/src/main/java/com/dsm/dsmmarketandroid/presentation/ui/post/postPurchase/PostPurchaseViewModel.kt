@@ -19,7 +19,6 @@ class PostPurchaseViewModel(private val postPurchaseUseCase: PostPurchaseUseCase
     val price = MutableLiveData<String>()
     val content = MutableLiveData<String>()
     val category = MutableLiveData<String>()
-    val tag = MutableLiveData<String>()
     val imageList = ListLiveData<String>()
 
     val isCategorySelected: LiveData<Boolean> = Transformations.map(category) { it != "" }
@@ -27,14 +26,12 @@ class PostPurchaseViewModel(private val postPurchaseUseCase: PostPurchaseUseCase
     private fun MutableLiveData<String>.isValueBlank() = this.value.isNullOrBlank()
 
     private fun isBlankExist() = title.isValueBlank() || price.isValueBlank()
-            || content.isValueBlank() || tag.isValueBlank()
-            || imageList.value?.size == 0 || category.isValueBlank()
+        || content.isValueBlank() || imageList.value?.size == 0 || category.isValueBlank()
 
     val isPostEnable = MediatorLiveData<Boolean>().apply {
         addSource(title) { value = !isBlankExist() }
         addSource(price) { value = !isBlankExist() }
         addSource(content) { value = !isBlankExist() }
-        addSource(tag) { value = !isBlankExist() }
         addSource(imageList) { value = !isBlankExist() }
         addSource(category) { value = isBlankExist() }
     }
@@ -57,8 +54,7 @@ class PostPurchaseViewModel(private val postPurchaseUseCase: PostPurchaseUseCase
                         "title" to RequestBody.create(MediaType.parse("text/plain"), title.value!!),
                         "content" to RequestBody.create(MediaType.parse("text/plain"), content.value!!),
                         "price" to RequestBody.create(MediaType.parse("text/plain"), price.value!!),
-                        "category" to RequestBody.create(MediaType.parse("text/plain"), " ${tag.value!!.trim()}".trimEnd().replace(" ", "#")),
-                        "tag" to RequestBody.create(MediaType.parse("text/plain"), tag.value!!)
+                        "category" to RequestBody.create(MediaType.parse("text/plain"), category.value!!)
                     )
                 )
             ).subscribe({

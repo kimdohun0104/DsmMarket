@@ -19,5 +19,7 @@ data class RentDetail(
 
     val commentCount: Int,
 
-    val isInterest: Boolean
+    val isInterest: Boolean,
+
+    val category: String
 )

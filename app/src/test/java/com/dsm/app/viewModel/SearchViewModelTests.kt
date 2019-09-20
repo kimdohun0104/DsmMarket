@@ -45,7 +45,7 @@ class SearchViewModelTests {
     }
 
     @Test
-    fun getSearchHistorySuccess() {
+   fun getSearchHistorySuccess() {
         val response = listOf("CONTENT")
         `when`(getSearchHistoryUseCase.create(Unit))
             .thenReturn(Flowable.just(response))

@@ -61,7 +61,8 @@ class PurchaseDetailViewModelTests {
             commentCount = 0,
             content = "CONTENT",
             img = listOf("IMAGE1", "asdf"),
-            isInterest = true
+            isInterest = true,
+            category = "CATEGORY"
         )
         `when`(getPurchaseDetailUseCase.create(0))
             .thenReturn(Flowable.just(response))

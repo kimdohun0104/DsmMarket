@@ -14,7 +14,8 @@ class PurchaseDetailModelMapper : Mapper<PurchaseDetail, PurchaseDetailModel> {
         createdAt = from.createdAt,
         id = from.id,
         author = from.author,
-        isInterest = from.isInterest
+        isInterest = from.isInterest,
+        category = from.category
     )
 
 }
