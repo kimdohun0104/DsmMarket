@@ -3,14 +3,14 @@ package com.dsm.data.mapper
 import com.dsm.data.local.db.entity.RecentPurchaseRoomEntity
 import com.dsm.data.local.db.entity.RecentRentRoomEntity
 import com.dsm.domain.base.Mapper
-import com.dsm.domain.entity.Recent
+import com.dsm.domain.entity.Product
 
-class RecentMapper : Mapper<List<RecentPurchaseRoomEntity>, List<Recent>> {
+class RecentMapper : Mapper<List<RecentPurchaseRoomEntity>, List<Product>> {
 
-    override fun mapFrom(from: List<RecentPurchaseRoomEntity>): List<Recent> =
+    override fun mapFrom(from: List<RecentPurchaseRoomEntity>): List<Product> =
         from.map {
-            Recent(
-                id = it.id,
+            Product(
+                postId = it.id,
                 createdAt = it.createdAt,
                 price = it.price,
                 title = it.title,
@@ -19,10 +19,10 @@ class RecentMapper : Mapper<List<RecentPurchaseRoomEntity>, List<Recent>> {
         }
 
 
-    fun mapFromRent(from: List<RecentRentRoomEntity>) : List<Recent> =
+    fun mapFromRent(from: List<RecentRentRoomEntity>) : List<Product> =
         from.map {
-            Recent(
-                id = it.id,
+            Product(
+                postId = it.id,
                 createdAt = it.createdAt,
                 price = it.price,
                 title = it.title,
