@@ -1,17 +1,21 @@
 package com.dsm.dsmmarketandroid.presentation.ui.adapter
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dsm.dsmmarketandroid.databinding.ItemMyPostBinding
 import com.dsm.dsmmarketandroid.presentation.model.ProductModel
+import com.dsm.dsmmarketandroid.presentation.ui.myPost.CompleteRentDialog
 import com.dsm.dsmmarketandroid.presentation.ui.myPost.MyPostViewModel
 
 class MyRentListAdapter(
-    private val viewModel: MyPostViewModel
+    private val viewModel: MyPostViewModel,
+    private val fragmentManager: FragmentManager
 ) : RecyclerView.Adapter<MyRentListAdapter.ViewHolder>() {
 
-    private var listItems = listOf<ProductModel>()
+    private var listItems = arrayListOf<ProductModel>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         ViewHolder(ItemMyPostBinding.inflate(LayoutInflater.from(parent.context), parent, false))
@@ -21,8 +25,13 @@ class MyRentListAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind()
 
     fun setItems(items: List<ProductModel>) {
-        listItems = items
+        listItems = items as ArrayList<ProductModel>
         notifyDataSetChanged()
+    }
+
+    fun deleteAt(position: Int) {
+        listItems.removeAt(position)
+        notifyItemRemoved(position)
     }
 
     inner class ViewHolder(private val binding: ItemMyPostBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -31,6 +40,13 @@ class MyRentListAdapter(
             binding.product = item
             binding.clParent.setOnClickListener { viewModel.intentRentDetail.value = item.postId }
             binding.ivEdit.setOnClickListener { viewModel.intentRentModify.value = item.postId }
+            binding.ivComplete.setOnClickListener {
+                val dialog = CompleteRentDialog()
+                val args = Bundle()
+                args.putInt("position", adapterPosition)
+                dialog.arguments = args
+                dialog.show(fragmentManager, "")
+            }
         }
     }
 }

@@ -65,4 +65,8 @@ val useCaseModule = module {
     factory { GetRecommendUseCase(get()) }
 
     factory { GetRelatedUseCase(get()) }
+
+    factory { CompletePurchaseUseCase(get()) }
+
+    factory { CompleteRentUseCase(get()) }
 }

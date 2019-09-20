@@ -71,5 +71,5 @@ val viewModelModule = module {
 
     viewModel { InterestViewModel(get(), get()) }
 
-    viewModel { MyPostViewModel(get(), get(), get()) }
+    viewModel { MyPostViewModel(get(), get(), get(), get(), get()) }
 }

@@ -141,4 +141,10 @@ interface Api {
 
     @POST("report/comment")
     fun reportComment(@Body params: Any): Flowable<Response<Unit>>
+
+    @DELETE("post/deal/{postId}")
+    fun completePurchase(@Path("postId") postId: Int): Flowable<Response<Unit>>
+
+    @DELETE("post/rent/{postId}")
+    fun completeRent(@Path("postId") postId: Int): Flowable<Response<Unit>>
 }

@@ -1,4 +1,4 @@
-package com.dsm.dsmmarketandroid.presentation.ui.myPost.rent
+package com.dsm.dsmmarketandroid.presentation.ui.myPost
 
 import android.os.Bundle
 import android.view.View
@@ -8,7 +8,6 @@ import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.FragmentMyRentBinding
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.MyRentListAdapter
 import com.dsm.dsmmarketandroid.presentation.ui.base.BaseFragment
-import com.dsm.dsmmarketandroid.presentation.ui.myPost.MyPostViewModel
 import kotlinx.android.synthetic.main.fragment_my_rent.*
 
 class MyRentFragment : BaseFragment<FragmentMyRentBinding>() {
@@ -20,11 +19,13 @@ class MyRentFragment : BaseFragment<FragmentMyRentBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = MyRentListAdapter(viewModel)
+        val adapter = MyRentListAdapter(viewModel, childFragmentManager)
         rv_my_post_rent.adapter = adapter
 
         viewModel.getMyRent()
 
         viewModel.rentList.observe(this, Observer { adapter.setItems(it) })
+
+        viewModel.deletePositionFromRent.observe(this, Observer { adapter.deleteAt(it) })
     }
 }

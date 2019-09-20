@@ -4,8 +4,8 @@ import android.annotation.SuppressLint
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import com.dsm.dsmmarketandroid.presentation.ui.myPost.purchase.MyPurchaseFragment
-import com.dsm.dsmmarketandroid.presentation.ui.myPost.rent.MyRentFragment
+import com.dsm.dsmmarketandroid.presentation.ui.myPost.MyPurchaseFragment
+import com.dsm.dsmmarketandroid.presentation.ui.myPost.MyRentFragment
 
 @SuppressLint("WrongConstant")
 class MyPostPagerAdapter(fragmentManager: FragmentManager) :
