@@ -8,7 +8,7 @@ import io.reactivex.Flowable
 import retrofit2.Response
 
 interface PurchaseDataSource {
-    fun getRemotePurchaseList(page: Int, pageSize: Int): Flowable<ProductListEntity>
+    fun getPurchaseList(page: Int, pageSize: Int, search: String, category: String): Flowable<ProductListEntity>
 
     fun getRemotePurchaseDetail(postId: Int): Flowable<Response<PurchaseDetailEntity>>
 

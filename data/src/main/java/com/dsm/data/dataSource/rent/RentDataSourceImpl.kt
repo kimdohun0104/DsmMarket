@@ -14,8 +14,8 @@ class RentDataSourceImpl(
     private val api: Api,
     private val rentDao: RentDao
 ) : RentDataSource {
-    override fun getRemoteRentList(page: Int, pageSize: Int): Flowable<ProductListEntity> =
-        api.getRentList(page, pageSize).addSchedulers()
+    override fun getRentList(page: Int, pageSize: Int, search: String, category: String): Flowable<ProductListEntity> =
+        api.getRentList(page, pageSize, search, category).addSchedulers()
 
     override fun getRemoteRentDetail(postId: Int): Flowable<Response<RentDetailEntity>> =
         api.getRentDetail(postId, 1).addSchedulers()

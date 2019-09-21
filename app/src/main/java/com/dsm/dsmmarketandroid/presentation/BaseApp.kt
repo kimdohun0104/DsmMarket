@@ -19,8 +19,7 @@ class BaseApp : Application() {
                     networkModule,
                     repositoryModule,
                     useCaseModule,
-                    viewModelModule,
-                    pagingModule
+                    viewModelModule
                 )
             )
         }

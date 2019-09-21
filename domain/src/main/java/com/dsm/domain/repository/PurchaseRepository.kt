@@ -6,7 +6,7 @@ import io.reactivex.Flowable
 
 interface PurchaseRepository {
 
-    fun getPurchaseList(page: Int, pageSize: Int): Flowable<List<Product>>
+    fun getPurchaseList(page: Int, pageSize: Int, search: String, category: String): Flowable<List<Product>>
 
     fun getPurchaseDetail(postId: Int): Flowable<PurchaseDetail>
 }

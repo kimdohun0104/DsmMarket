@@ -14,8 +14,8 @@ class RentRepositoryImpl(private val rentDataSource: RentDataSource) : RentRepos
     private val productMapper = ProductMapper()
     private val rentDetailMapper = RentDetailMapper()
 
-    override fun getRentList(page: Int, pageSize: Int): Flowable<List<Product>> =
-        rentDataSource.getRemoteRentList(page, pageSize).map(productMapper::mapFrom)
+    override fun getRentList(page: Int, pageSize: Int, search: String, category: String): Flowable<List<Product>> =
+        rentDataSource.getRentList(page, pageSize, search, category).map(productMapper::mapFrom)
 
     override fun getRentDetail(postId: Int): Flowable<RentDetail> =
         rentDataSource.getRemoteRentDetail(postId).map {

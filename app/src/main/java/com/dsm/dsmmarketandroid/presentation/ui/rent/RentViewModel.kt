@@ -13,7 +13,6 @@ import com.dsm.dsmmarketandroid.presentation.model.ProductModel
 import java.util.concurrent.Executors
 
 class RentViewModel(
-    rentDataFactory: RentDataFactory,
     productModelMapper: ProductModelMapper
 ) : BaseViewModel() {
 
@@ -24,16 +23,17 @@ class RentViewModel(
 
     init {
         val executor = Executors.newFixedThreadPool(5)
-        networkState = Transformations.switchMap(rentDataFactory.mutableLiveData) { it.networkState }
-        val productModelDataFactory = rentDataFactory.mapByPage(productModelMapper::mapFrom)
-
         val pagedListConfig = PagedList.Config.Builder()
             .setEnablePlaceholders(false)
             .setInitialLoadSizeHint(20)
             .setPageSize(15)
             .build()
 
-        rentListItems = LivePagedListBuilder(productModelDataFactory, pagedListConfig)
+        val rentDataFactory = RentDataFactory()
+        val rentModelDataFactory = rentDataFactory.mapByPage(productModelMapper::mapFrom)
+        networkState = Transformations.switchMap(rentDataFactory.mutableLiveData) { it.networkState }
+
+        rentListItems = LivePagedListBuilder(rentModelDataFactory, pagedListConfig)
             .setFetchExecutor(executor)
             .build()
     }

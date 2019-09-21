@@ -6,8 +6,8 @@ import androidx.lifecycle.Transformations
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.dsm.data.paging.NetworkState
-import com.dsm.data.paging.search.purchase.SearchPurchaseDataFactory
-import com.dsm.data.paging.search.rent.SearchRentDataFactory
+import com.dsm.data.paging.purchase.PurchaseDataFactory
+import com.dsm.data.paging.rent.RentDataFactory
 import com.dsm.dsmmarketandroid.presentation.base.BaseViewModel
 import com.dsm.dsmmarketandroid.presentation.mapper.ProductModelMapper
 import com.dsm.dsmmarketandroid.presentation.model.ProductModel
@@ -39,7 +39,7 @@ class SearchResultViewModel(
         .build()
 
     fun purchaseInit(search: String) {
-        val purchaseDataFactory = SearchPurchaseDataFactory(search)
+        val purchaseDataFactory = PurchaseDataFactory(search)
         val purchaseModelDataFactory = purchaseDataFactory.mapByPage(productModelMapper::mapFrom)
         purchaseNetworkState = Transformations.switchMap(purchaseDataFactory.mutableLiveData) { it.networkState }
 
@@ -49,7 +49,7 @@ class SearchResultViewModel(
     }
 
     fun rentInit(search: String) {
-        val rentDataFactory = SearchRentDataFactory(search)
+        val rentDataFactory = RentDataFactory(search)
         val rentModelDataFactory = rentDataFactory.mapByPage(productModelMapper::mapFrom)
         rentNetworkState = Transformations.switchMap(rentDataFactory.mutableLiveData) { it.networkState }
 

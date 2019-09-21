@@ -15,8 +15,8 @@ class PurchaseDataSourceImpl(
     private val purchaseDao: PurchaseDao
 ) : PurchaseDataSource {
 
-    override fun getRemotePurchaseList(page: Int, pageSize: Int): Flowable<ProductListEntity> =
-        api.getPurchaseList(page, pageSize).addSchedulers()
+    override fun getPurchaseList(page: Int, pageSize: Int, search: String, category: String): Flowable<ProductListEntity> =
+        api.getPurchaseList(page, pageSize, search, category).addSchedulers()
 
     override fun getRemotePurchaseDetail(postId: Int): Flowable<Response<PurchaseDetailEntity>> =
         api.getPurchaseDetail(postId, 0).addSchedulers()

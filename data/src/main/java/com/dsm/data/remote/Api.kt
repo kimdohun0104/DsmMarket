@@ -60,13 +60,17 @@ interface Api {
     @GET("list/deal")
     fun getPurchaseList(
         @Query("page") page: Int,
-        @Query("pagesize") pageSize: Int
+        @Query("pagesize") pageSize: Int,
+        @Query("search") search: String,
+        @Query("category") category: String
     ): Flowable<ProductListEntity>
 
     @GET("list/rent")
     fun getRentList(
         @Query("page") page: Int,
-        @Query("pagesize") pageSize: Int
+        @Query("pagesize") pageSize: Int,
+        @Query("search") search: String,
+        @Query("category") category: String
     ): Flowable<ProductListEntity>
 
     @GET("post")
@@ -103,20 +107,6 @@ interface Api {
         @Field("postId") postId: Int,
         @Field("type") type: Int
     ): Flowable<Response<Unit>>
-
-    @GET("list/deal")
-    fun searchPurchase(
-        @Query("page") page: Int,
-        @Query("pagesize") pageSize: Int,
-        @Query("search") search: String
-    ): Flowable<ProductListEntity>
-
-    @GET("list/rent")
-    fun searchRent(
-        @Query("page") page: Int,
-        @Query("pagesize") pageSize: Int,
-        @Query("search") search: String
-    ): Flowable<ProductListEntity>
 
     @GET("list/interest")
     fun getInterest(@Query("type") type: Int): Flowable<ProductListEntity>
