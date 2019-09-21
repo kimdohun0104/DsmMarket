@@ -14,8 +14,8 @@ class PurchaseRepositoryImpl(private val purchaseDataSource: PurchaseDataSource)
     private val productMapper = ProductMapper()
     private val purchaseDetailMapper = PurchaseDetailMapper()
 
-    override fun getPurchaseList(page: Int, pageSize: Int): Flowable<List<Product>> =
-        purchaseDataSource.getRemotePurchaseList(page, pageSize).map(productMapper::mapFrom)
+    override fun getPurchaseList(page: Int, pageSize: Int, search: String, category: String): Flowable<List<Product>> =
+        purchaseDataSource.getPurchaseList(page, pageSize, search, category).map(productMapper::mapFrom)
 
     override fun getPurchaseDetail(postId: Int): Flowable<PurchaseDetail> =
         purchaseDataSource.getRemotePurchaseDetail(postId).map {

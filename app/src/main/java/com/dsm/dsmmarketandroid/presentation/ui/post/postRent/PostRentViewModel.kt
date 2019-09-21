@@ -18,21 +18,18 @@ class PostRentViewModel(private val postRentUseCase: PostRentUseCase) : BaseView
     val price = MutableLiveData<String>()
     val photo = MutableLiveData<String>()
     val content = MutableLiveData<String>()
-    val tag = MutableLiveData<String>()
     val category = MutableLiveData<String>()
 
     private fun MutableLiveData<String>.isValueBlank() = this.value.isNullOrBlank()
 
     private fun isBlankExist() = title.isValueBlank() || price.isValueBlank()
-            || photo.value == null || content.isValueBlank()
-            || tag.isValueBlank() || category.isValueBlank()
+        || photo.value == null || content.isValueBlank() || category.isValueBlank()
 
     val isPostEnable = MediatorLiveData<Boolean>().apply {
         addSource(title) { value = !isBlankExist() }
         addSource(price) { value = !isBlankExist() }
         addSource(photo) { value = !isBlankExist() }
         addSource(content) { value = !isBlankExist() }
-        addSource(tag) { value = !isBlankExist() }
         addSource(category) { value = !isBlankExist() }
     }
 
@@ -66,7 +63,6 @@ class PostRentViewModel(private val postRentUseCase: PostRentUseCase) : BaseView
                         "content" to RequestBody.create(MediaType.parse("text/plain"), content.value!!),
                         "price" to RequestBody.create(MediaType.parse("text/plain"), price.value!!),
                         "category" to RequestBody.create(MediaType.parse("text/plain"), category.value!!),
-                        "tag" to RequestBody.create(MediaType.parse("text/plain"), " ${tag.value!!.trim()}".trimEnd().replace(" ", "#")),
                         "possible_time" to RequestBody.create(MediaType.parse("text/plain"), rentTime.value ?: "")
                     )
                 )

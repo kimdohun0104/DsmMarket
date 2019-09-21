@@ -16,7 +16,8 @@ class RentDetailMapper : Mapper<RentDetailEntity, RentDetail> {
         price = from.price,
         possibleTime = from.possibleTime,
         commentCount = from.commentCount,
-        isInterest = from.isInterest
+        isInterest = from.isInterest,
+        category = from.category
     )
 
     fun mapFrom(from: RentDetail) = RentDetailRoomEntity(
@@ -42,6 +43,7 @@ class RentDetailMapper : Mapper<RentDetailEntity, RentDetail> {
         price = from.price,
         possibleTime = from.possibleTime,
         commentCount = from.commentCount,
-        isInterest = from.isInterest
+        isInterest = from.isInterest,
+        category = ""
     )
 }

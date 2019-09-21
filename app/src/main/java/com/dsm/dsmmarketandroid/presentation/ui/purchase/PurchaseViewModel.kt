@@ -13,7 +13,6 @@ import com.dsm.dsmmarketandroid.presentation.model.ProductModel
 import java.util.concurrent.Executors
 
 class PurchaseViewModel(
-    purchaseDataFactory: PurchaseDataFactory,
     productModelMapper: ProductModelMapper
 ) : BaseViewModel() {
 
@@ -24,18 +23,18 @@ class PurchaseViewModel(
 
     init {
         val executor = Executors.newFixedThreadPool(5)
-        networkState = Transformations.switchMap(purchaseDataFactory.mutableLiveData) { it.networkState }
-        val productModelDataFactory = purchaseDataFactory.mapByPage(productModelMapper::mapFrom)
-
         val pagedListConfig = PagedList.Config.Builder()
             .setEnablePlaceholders(false)
             .setInitialLoadSizeHint(20)
             .setPageSize(15)
             .build()
 
-        purchaseListItems = LivePagedListBuilder(productModelDataFactory, pagedListConfig)
+        val purchaseDataFactory = PurchaseDataFactory()
+        val purchaseModelDataFactory = purchaseDataFactory.mapByPage(productModelMapper::mapFrom)
+        networkState = Transformations.switchMap(purchaseDataFactory.mutableLiveData) { it.networkState }
+
+        purchaseListItems = LivePagedListBuilder(purchaseModelDataFactory, pagedListConfig)
             .setFetchExecutor(executor)
             .build()
-
     }
 }

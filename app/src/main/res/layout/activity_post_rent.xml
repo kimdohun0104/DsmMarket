@@ -183,37 +183,11 @@
             android:gravity="top"
             android:hint="@string/input_content"
             android:paddingTop="16dp"
-            app:layout_constraintBottom_toTopOf="@id/et_tag"
+            app:layout_constraintBottom_toTopOf="@id/btn_post"
             app:layout_constraintLeft_toLeftOf="@id/et_price"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/view_picture_line"
             android:text="@={viewModel.content}"/>
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0.3dp"
-            android:background="@color/colorGrey"
-            app:layout_constraintBottom_toTopOf="@id/et_tag"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent" />
-
-        <mabbas007.tagsedittext.TagsEditText
-            android:id="@+id/et_tag"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:background="@null"
-            android:hint="@string/tag"
-            app:allowSpaceInTag="true"
-            app:layout_constraintBottom_toTopOf="@id/btn_post"
-            app:layout_constraintLeft_toLeftOf="@id/et_price"
-            app:layout_constraintRight_toRightOf="parent"
-            app:tagsBackground="@drawable/bg_primary_light_rounded"
-            app:tagsCloseImageRight="@drawable/ic_x_white"
-            app:tagsPaddingBottom="4dp"
-            app:tagsPaddingLeft="8dp"
-            app:tagsPaddingRight="8dp"
-            app:tagsPaddingTop="4dp"
-            android:text="@={viewModel.tag}"/>
 
         <Button
             android:id="@+id/btn_post"

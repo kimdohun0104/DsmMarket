@@ -1,10 +1,10 @@
 package com.dsm.app.viewModel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.dsm.domain.entity.Recent
+import com.dsm.domain.entity.Product
 import com.dsm.domain.usecase.GetRecentPurchaseUseCase
 import com.dsm.domain.usecase.GetRecentRentUseCase
-import com.dsm.dsmmarketandroid.presentation.mapper.RecentMapper
+import com.dsm.dsmmarketandroid.presentation.mapper.ProductModelMapper
 import com.dsm.dsmmarketandroid.presentation.ui.recent.RecentViewModel
 import com.jraska.livedata.test
 import io.reactivex.Flowable
@@ -27,7 +27,7 @@ class RecentViewModelTests {
     @Mock
     private lateinit var getRecentRentUseCase: GetRecentRentUseCase
 
-    private val recentModelMapper = RecentMapper()
+    private val recentModelMapper = ProductModelMapper()
 
     private lateinit var viewModel: RecentViewModel
 
@@ -39,7 +39,7 @@ class RecentViewModelTests {
 
     @Test
     fun getRecentProductSuccess() {
-        val response = listOf(Recent(0, "TITLE", "CREATED_AT", "PRICE", "IMG"))
+        val response = listOf(Product(0, "TITLE", "CREATED_AT", "PRICE", "IMG"))
         `when`(getRecentPurchaseUseCase.create(Unit))
             .thenReturn(Flowable.just(response))
         `when`(getRecentRentUseCase.create(Unit))

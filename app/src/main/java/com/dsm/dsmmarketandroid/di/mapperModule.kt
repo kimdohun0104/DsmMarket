@@ -14,9 +14,5 @@ val mapperModule = module {
 
     factory { CommentModelMapper() }
 
-    factory { RecentMapper() }
-
-    factory { SearchHistoryModelMapper() }
-
     factory { RecommendModelMapper() }
 }

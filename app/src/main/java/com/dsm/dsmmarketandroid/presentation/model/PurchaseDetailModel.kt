@@ -17,5 +17,7 @@ data class PurchaseDetailModel(
 
     val author: String,
 
-    val isInterest: Boolean
+    val isInterest: Boolean,
+
+    val category: String
 )

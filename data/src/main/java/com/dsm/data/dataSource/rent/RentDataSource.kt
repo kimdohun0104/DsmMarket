@@ -8,7 +8,7 @@ import io.reactivex.Flowable
 import retrofit2.Response
 
 interface RentDataSource {
-    fun getRemoteRentList(page: Int, pageSize: Int): Flowable<ProductListEntity>
+    fun getRentList(page: Int, pageSize: Int, search: String, category: String): Flowable<ProductListEntity>
 
     fun getRemoteRentDetail(postId: Int): Flowable<Response<RentDetailEntity>>
 

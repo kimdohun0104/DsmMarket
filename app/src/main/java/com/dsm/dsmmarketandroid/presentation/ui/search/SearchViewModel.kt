@@ -1,38 +1,32 @@
 package com.dsm.dsmmarketandroid.presentation.ui.search
 
 import androidx.lifecycle.MutableLiveData
-import com.dsm.domain.entity.SearchHistory
-import com.dsm.domain.usecase.AddSearchHistoryUseCase
+import androidx.lifecycle.Transformations
 import com.dsm.domain.usecase.DeleteSearchHistoryUseCase
 import com.dsm.domain.usecase.GetSearchHistoryUseCase
 import com.dsm.dsmmarketandroid.presentation.base.BaseViewModel
-import com.dsm.dsmmarketandroid.presentation.mapper.SearchHistoryModelMapper
-import com.dsm.dsmmarketandroid.presentation.model.SearchHistoryModel
 
 class SearchViewModel(
-    private val addSearchHistoryUseCase: AddSearchHistoryUseCase,
     private val getSearchHistoryUseCase: GetSearchHistoryUseCase,
-    private val deleteSearchHistoryUseCase: DeleteSearchHistoryUseCase,
-    private val searchHistoryModelMapper: SearchHistoryModelMapper
+    private val deleteSearchHistoryUseCase: DeleteSearchHistoryUseCase
 ) : BaseViewModel() {
 
     val searchText = MutableLiveData<String>()
 
-    val searchHistoryList = MutableLiveData<List<SearchHistoryModel>>()
-
+    val searchHistoryList = MutableLiveData<List<String>>()
     val intentSearchResult = MutableLiveData<String>()
 
+    val isSearchEnable = Transformations.map(searchText) { it != "" }
+
     fun search() {
-        val searchText = searchText.value!!
-        addDisposable(addSearchHistoryUseCase.create(SearchHistory(searchText)).subscribe())
-        intentSearchResult.value = searchText
+        intentSearchResult.value = searchText.value!!
     }
 
     fun getSearchHistory() {
         addDisposable(
             getSearchHistoryUseCase.create(Unit)
                 .subscribe({
-                    searchHistoryList.value = searchHistoryModelMapper.mapFrom(it)
+                    searchHistoryList.value = it
                 }, {
                 })
         )

@@ -35,7 +35,6 @@ class PostRentViewModelTests {
         viewModel.price.value = "PRICE"
         viewModel.photo.value = "PHOTO"
         viewModel.content.value = "CONTENT"
-        viewModel.tag.value = "TAG"
         viewModel.category.value = "CATEGORY"
 
         assertTrue(viewModel.isPostEnable.test().value())
