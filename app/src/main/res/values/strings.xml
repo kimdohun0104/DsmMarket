@@ -80,7 +80,12 @@
     <string name="possible_time">대여 가능 시간</string>
 
     <!--category-->
-    <string name="book">책</string>
+    <string name="book">도서</string>
+    <string name="food">식품</string>
+    <string name="sports">운동기구</string>
+    <string name="necessity">생필품</string>
+    <string name="device">전자기기</string>
+    <string name="cloth">의류</string>
 
     <string name="fail_login">이메일 또는 비밀번호가 틀렸습니다</string>
 

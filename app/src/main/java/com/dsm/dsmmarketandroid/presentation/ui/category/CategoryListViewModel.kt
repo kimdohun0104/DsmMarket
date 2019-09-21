@@ -1,4 +1,4 @@
-package com.dsm.dsmmarketandroid.presentation.ui.searchResult
+package com.dsm.dsmmarketandroid.presentation.ui.category
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -13,23 +13,16 @@ import com.dsm.dsmmarketandroid.presentation.mapper.ProductModelMapper
 import com.dsm.dsmmarketandroid.presentation.model.ProductModel
 import java.util.concurrent.Executors
 
-class SearchResultViewModel(
-    private val productModelMapper: ProductModelMapper
-) : BaseViewModel() {
-
-    val search = MutableLiveData<String>()
-
-    lateinit var purchaseNetworkState: LiveData<NetworkState>
-    lateinit var purchaseListItems: LiveData<PagedList<ProductModel>>
-
-    lateinit var rentNetworkState: LiveData<NetworkState>
-    lateinit var rentListItems: LiveData<PagedList<ProductModel>>
+class CategoryListViewModel(private val productModelMapper: ProductModelMapper) : BaseViewModel() {
 
     val intentPurchaseDetail = MutableLiveData<Int>()
     val intentRentDetail = MutableLiveData<Int>()
-    val intentSearchResult = MutableLiveData<String>()
 
-    val isSearchEnable = Transformations.map(search) { it != "" }
+    lateinit var purchaseNetworkState: LiveData<NetworkState>
+    lateinit var purchaseList: LiveData<PagedList<ProductModel>>
+
+    lateinit var rentNetworkState: LiveData<NetworkState>
+    lateinit var rentList: LiveData<PagedList<ProductModel>>
 
     private val executor = Executors.newFixedThreadPool(5)
     private val pagedListConfig = PagedList.Config.Builder()
@@ -38,27 +31,23 @@ class SearchResultViewModel(
         .setPageSize(15)
         .build()
 
-    fun purchaseInit(search: String) {
-        val purchaseDataFactory = PurchaseDataFactory(search = search)
+    fun purchaseInit(category: String) {
+        val purchaseDataFactory = PurchaseDataFactory(category = category)
         val purchaseModelDataFactory = purchaseDataFactory.mapByPage(productModelMapper::mapFrom)
         purchaseNetworkState = Transformations.switchMap(purchaseDataFactory.mutableLiveData) { it.networkState }
 
-        purchaseListItems = LivePagedListBuilder(purchaseModelDataFactory, pagedListConfig)
+        purchaseList = LivePagedListBuilder(purchaseModelDataFactory, pagedListConfig)
             .setFetchExecutor(executor)
             .build()
     }
 
-    fun rentInit(search: String) {
-        val rentDataFactory = RentDataFactory(search = search)
+    fun rentInit(category: String) {
+        val rentDataFactory = RentDataFactory(category = category)
         val rentModelDataFactory = rentDataFactory.mapByPage(productModelMapper::mapFrom)
         rentNetworkState = Transformations.switchMap(rentDataFactory.mutableLiveData) { it.networkState }
 
-        rentListItems = LivePagedListBuilder(rentModelDataFactory, pagedListConfig)
+        rentList = LivePagedListBuilder(rentModelDataFactory, pagedListConfig)
             .setFetchExecutor(executor)
             .build()
-    }
-
-    fun search() {
-        intentSearchResult.value = search.value!!
     }
 }

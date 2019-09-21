@@ -1,6 +1,7 @@
 package com.dsm.dsmmarketandroid.di
 
 import com.dsm.dsmmarketandroid.presentation.ui.addComment.AddCommentViewModel
+import com.dsm.dsmmarketandroid.presentation.ui.category.CategoryListViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.changeNick.ChangeNickViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.comment.CommentViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.interest.InterestViewModel
@@ -72,4 +73,6 @@ val viewModelModule = module {
     viewModel { InterestViewModel(get(), get()) }
 
     viewModel { MyPostViewModel(get(), get(), get(), get(), get()) }
+
+    viewModel { CategoryListViewModel(get()) }
 }
