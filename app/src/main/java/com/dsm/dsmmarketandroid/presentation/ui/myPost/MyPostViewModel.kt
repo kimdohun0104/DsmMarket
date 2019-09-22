@@ -28,11 +28,15 @@ class MyPostViewModel(
     val deletePositionFromPurchase = MutableLiveData<Int>()
     val deletePositionFromRent = MutableLiveData<Int>()
 
+    val hidePurchaseLoadingEvent = SingleLiveEvent<Any>()
+    val hideRentLoadingEvent = SingleLiveEvent<Any>()
+
     fun getMyPurchase() {
         addDisposable(
             getMyPurchaseUseCase.create(Unit)
                 .subscribe({
                     purchaseList.value = productModelMapper.mapFrom(it)
+                    hidePurchaseLoadingEvent.call()
                 }, {
                     toastServerErrorEvent.call()
                 })
@@ -44,6 +48,7 @@ class MyPostViewModel(
             getMyRentUseCase.create(Unit)
                 .subscribe({
                     rentList.value = productModelMapper.mapFrom(it)
+                    hideRentLoadingEvent.call()
                 }, {
                     toastServerErrorEvent.call()
                 })

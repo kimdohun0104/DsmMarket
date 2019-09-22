@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.dsm.data.paging.NetworkState
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.FragmentSearchPurchaseBinding
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.PurchaseListAdapter
@@ -22,7 +23,10 @@ class SearchPurchaseFragment : BaseFragment<FragmentSearchPurchaseBinding>() {
         val adapter = PurchaseListAdapter(activity!!)
         rv_purchase.adapter = adapter
 
-        viewModel.purchaseNetworkState.observe(this, Observer { adapter.setNetworkState(it) })
+        viewModel.purchaseNetworkState.observe(this, Observer {
+            if (it == NetworkState.LOADED) pb_loading.visibility = View.GONE
+            adapter.setNetworkState(it)
+        })
 
         viewModel.purchaseListItems.observe(this, Observer { adapter.submitList(it) })
 

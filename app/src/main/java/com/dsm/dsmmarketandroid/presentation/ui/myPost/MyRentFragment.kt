@@ -27,5 +27,7 @@ class MyRentFragment : BaseFragment<FragmentMyRentBinding>() {
         viewModel.rentList.observe(this, Observer { adapter.setItems(it) })
 
         viewModel.deletePositionFromRent.observe(this, Observer { adapter.deleteAt(it) })
+
+        viewModel.hideRentLoadingEvent.observe(this, Observer { pb_loading.visibility = View.GONE })
     }
 }

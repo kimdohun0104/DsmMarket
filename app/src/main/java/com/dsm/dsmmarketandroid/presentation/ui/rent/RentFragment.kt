@@ -1,11 +1,13 @@
 package com.dsm.dsmmarketandroid.presentation.ui.rent
 
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import androidx.lifecycle.Observer
+import com.dsm.data.paging.NetworkState
 import com.dsm.data.paging.rent.RentDataFactory
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.FragmentRentBinding
@@ -40,7 +42,10 @@ class RentFragment : BaseFragment<FragmentRentBinding>() {
 
         viewModel.rentListItems.observe(this, Observer { adapter.submitList(it) })
 
-        viewModel.networkState.observe(this, Observer { adapter.setNetworkState(it) })
+        viewModel.networkState.observe(this, Observer {
+            if (it == NetworkState.LOADED) pb_loading.visibility = View.GONE
+            adapter.setNetworkState(it)
+        })
 
         viewModel.intentRentDetail.observe(this, Observer { startActivity<RentDetailActivity>("post_id" to it) })
 

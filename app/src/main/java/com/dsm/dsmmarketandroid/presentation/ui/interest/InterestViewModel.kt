@@ -15,6 +15,9 @@ class InterestViewModel(
     val purchaseList = MutableLiveData<List<ProductModel>>()
     val rentList = MutableLiveData<List<ProductModel>>()
 
+    val hidePurchaseProgressEvent = SingleLiveEvent<Any>()
+    val hideRentProgressEvent = SingleLiveEvent<Any>()
+
     val toastServerErrorEvent = SingleLiveEvent<Any>()
 
     fun getInterestPurchase() {
@@ -22,6 +25,7 @@ class InterestViewModel(
             getInterestUseCase.create(0)
                 .subscribe({
                     purchaseList.value = productModelMapper.mapFrom(it)
+                    hidePurchaseProgressEvent.call()
                 }, {
                     toastServerErrorEvent.call()
                 })
@@ -33,6 +37,7 @@ class InterestViewModel(
             getInterestUseCase.create(1)
                 .subscribe({
                     rentList.value = productModelMapper.mapFrom(it)
+                    hideRentProgressEvent.call()
                 }, {
                     toastServerErrorEvent.call()
                 })

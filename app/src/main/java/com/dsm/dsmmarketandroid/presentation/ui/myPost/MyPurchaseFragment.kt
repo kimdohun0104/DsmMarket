@@ -27,5 +27,7 @@ class MyPurchaseFragment : BaseFragment<FragmentMyPurchaseBinding>() {
         viewModel.purchaseList.observe(this, Observer { adapter.setItems(it) })
 
         viewModel.deletePositionFromPurchase.observe(this, Observer { adapter.deleteAt(it) })
+
+        viewModel.hidePurchaseLoadingEvent.observe(this, Observer { pb_loading.visibility = View.GONE })
     }
 }

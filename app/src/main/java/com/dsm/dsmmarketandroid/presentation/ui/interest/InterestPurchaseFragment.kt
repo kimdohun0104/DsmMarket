@@ -25,5 +25,7 @@ class InterestPurchaseFragment : BaseFragment<FragmentInterestPurchaseBinding>()
         viewModel.getInterestPurchase()
 
         viewModel.purchaseList.observe(this, Observer { adapter.setItems(it) })
+
+        viewModel.hidePurchaseProgressEvent.observe(this, Observer { pb_loading.visibility = View.GONE })
     }
 }

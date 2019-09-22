@@ -6,6 +6,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import androidx.lifecycle.Observer
+import com.dsm.data.paging.NetworkState
 import com.dsm.data.paging.purchase.PurchaseDataFactory
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.FragmentPurchaseBinding
@@ -37,7 +38,10 @@ class PurchaseFragment : BaseFragment<FragmentPurchaseBinding>() {
 
         viewModel.purchaseListItems.observe(this, Observer { adapter.submitList(it) })
 
-        viewModel.networkState.observe(this, Observer { adapter.setNetworkState(it) })
+        viewModel.networkState.observe(this, Observer {
+            if (it == NetworkState.LOADED) pb_loading.visibility = View.GONE
+            adapter.setNetworkState(it)
+        })
 
         binding.viewModel = viewModel
     }

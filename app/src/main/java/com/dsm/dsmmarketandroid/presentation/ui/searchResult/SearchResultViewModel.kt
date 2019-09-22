@@ -11,6 +11,7 @@ import com.dsm.data.paging.rent.RentDataFactory
 import com.dsm.dsmmarketandroid.presentation.base.BaseViewModel
 import com.dsm.dsmmarketandroid.presentation.mapper.ProductModelMapper
 import com.dsm.dsmmarketandroid.presentation.model.ProductModel
+import com.dsm.dsmmarketandroid.presentation.util.SingleLiveEvent
 import java.util.concurrent.Executors
 
 class SearchResultViewModel(
