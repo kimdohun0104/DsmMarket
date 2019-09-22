@@ -1,5 +1,6 @@
 package com.dsm.dsmmarketandroid.presentation.ui.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
@@ -9,9 +10,10 @@ import com.dsm.data.paging.NetworkState
 import com.dsm.dsmmarketandroid.databinding.ItemLoadingBinding
 import com.dsm.dsmmarketandroid.databinding.ItemProductBinding
 import com.dsm.dsmmarketandroid.presentation.model.ProductModel
-import com.dsm.dsmmarketandroid.presentation.ui.category.CategoryListViewModel
+import com.dsm.dsmmarketandroid.presentation.ui.purchaseDetail.PurchaseDetailActivity
+import org.jetbrains.anko.startActivity
 
-class PurchaseCategoryListAdapter(private val viewModel: CategoryListViewModel) : PagedListAdapter<ProductModel, RecyclerView.ViewHolder>(DIFF_CALLBACK) {
+class PurchaseCategoryListAdapter(private val context: Context) : PagedListAdapter<ProductModel, RecyclerView.ViewHolder>(DIFF_CALLBACK) {
     companion object {
         var DIFF_CALLBACK = object : DiffUtil.ItemCallback<ProductModel>() {
             override fun areItemsTheSame(oldItem: ProductModel, newItem: ProductModel): Boolean =
@@ -66,7 +68,7 @@ class PurchaseCategoryListAdapter(private val viewModel: CategoryListViewModel) 
     inner class ItemHolder(private val binding: ItemProductBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: ProductModel?) {
             binding.product = item
-            binding.clParent.setOnClickListener { viewModel.intentPurchaseDetail.value = item?.postId }
+            binding.clParent.setOnClickListener { context.startActivity<PurchaseDetailActivity>("post_id" to item?.postId) }
         }
     }
 }

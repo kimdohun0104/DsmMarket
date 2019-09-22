@@ -12,11 +12,9 @@ import com.dsm.dsmmarketandroid.presentation.ui.adapter.PurchaseListAdapter
 import com.dsm.dsmmarketandroid.presentation.ui.base.BaseFragment
 import com.dsm.dsmmarketandroid.presentation.ui.category.CategoryActivity
 import com.dsm.dsmmarketandroid.presentation.ui.interest.InterestActivity
-import com.dsm.dsmmarketandroid.presentation.ui.purchaseDetail.PurchaseDetailActivity
 import com.dsm.dsmmarketandroid.presentation.ui.search.SearchActivity
 import kotlinx.android.synthetic.main.fragment_purchase.*
 import org.jetbrains.anko.startActivity
-import org.jetbrains.anko.support.v4.startActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PurchaseFragment : BaseFragment<FragmentPurchaseBinding>() {
@@ -30,14 +28,12 @@ class PurchaseFragment : BaseFragment<FragmentPurchaseBinding>() {
         setHasOptionsMenu(true)
         activity?.setTitle(R.string.purchase)
 
-        val adapter = PurchaseListAdapter(viewModel)
+        val adapter = PurchaseListAdapter(activity!!)
         rv_purchase.adapter = adapter
 
         viewModel.purchaseListItems.observe(this, Observer { adapter.submitList(it) })
 
         viewModel.networkState.observe(this, Observer { adapter.setNetworkState(it) })
-
-        viewModel.intentPurchaseDetail.observe(this, Observer { startActivity<PurchaseDetailActivity>("post_id" to it) })
 
         binding.viewModel = viewModel
     }

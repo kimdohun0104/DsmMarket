@@ -19,7 +19,7 @@ class MyRentFragment : BaseFragment<FragmentMyRentBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = MyRentListAdapter(viewModel, childFragmentManager)
+        val adapter = MyRentListAdapter(activity!!, childFragmentManager)
         rv_my_post_rent.adapter = adapter
 
         viewModel.getMyRent()

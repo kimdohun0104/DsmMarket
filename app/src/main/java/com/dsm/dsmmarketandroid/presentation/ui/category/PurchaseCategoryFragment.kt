@@ -20,7 +20,7 @@ class PurchaseCategoryFragment : BaseFragment<FragmentPurchaseCategoryBinding>()
         super.onViewCreated(view, savedInstanceState)
         val category = activity?.intent?.getStringExtra("category") ?: ""
 
-        val adapter = PurchaseCategoryListAdapter(viewModel)
+        val adapter = PurchaseCategoryListAdapter(activity!!)
         rv_category_purchase.adapter = adapter
 
         viewModel.purchaseInit(category)

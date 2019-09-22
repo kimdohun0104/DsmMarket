@@ -25,8 +25,6 @@ class SearchResultViewModel(
     lateinit var rentNetworkState: LiveData<NetworkState>
     lateinit var rentListItems: LiveData<PagedList<ProductModel>>
 
-    val intentPurchaseDetail = MutableLiveData<Int>()
-    val intentRentDetail = MutableLiveData<Int>()
     val intentSearchResult = MutableLiveData<String>()
 
     val isSearchEnable = Transformations.map(search) { it != "" }

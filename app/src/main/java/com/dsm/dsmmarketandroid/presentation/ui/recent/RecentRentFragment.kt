@@ -19,7 +19,7 @@ class RecentRentFragment : BaseFragment<FragmentRecentRentBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = RecentListAdapter(1, viewModel)
+        val adapter = RecentListAdapter(1, activity!!)
         rv_recent_rent.adapter = adapter
 
         viewModel.rentList.observe(this, Observer { adapter.setItems(it) })

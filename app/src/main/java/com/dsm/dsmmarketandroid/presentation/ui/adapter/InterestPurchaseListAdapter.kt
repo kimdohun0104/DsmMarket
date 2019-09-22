@@ -1,13 +1,15 @@
 package com.dsm.dsmmarketandroid.presentation.ui.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.dsm.dsmmarketandroid.databinding.ItemInterestBinding
 import com.dsm.dsmmarketandroid.presentation.model.ProductModel
-import com.dsm.dsmmarketandroid.presentation.ui.interest.InterestViewModel
+import com.dsm.dsmmarketandroid.presentation.ui.purchaseDetail.PurchaseDetailActivity
+import org.jetbrains.anko.startActivity
 
-class InterestPurchaseListAdapter(private val viewModel: InterestViewModel) : RecyclerView.Adapter<InterestPurchaseListAdapter.ViewHolder>() {
+class InterestPurchaseListAdapter(private val context: Context) : RecyclerView.Adapter<InterestPurchaseListAdapter.ViewHolder>() {
 
     private var listItems = listOf<ProductModel>()
 
@@ -27,7 +29,7 @@ class InterestPurchaseListAdapter(private val viewModel: InterestViewModel) : Re
         fun bind() {
             val item = listItems[adapterPosition]
             binding.product = item
-            binding.clParent.setOnClickListener { viewModel.intentPurchaseDetail(item.postId) }
+            binding.clParent.setOnClickListener { context.startActivity<PurchaseDetailActivity>("post_id" to item.postId) }
         }
     }
 }

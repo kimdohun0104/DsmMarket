@@ -1,13 +1,15 @@
 package com.dsm.dsmmarketandroid.presentation.ui.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.dsm.dsmmarketandroid.databinding.ItemInterestBinding
 import com.dsm.dsmmarketandroid.presentation.model.ProductModel
-import com.dsm.dsmmarketandroid.presentation.ui.interest.InterestViewModel
+import com.dsm.dsmmarketandroid.presentation.ui.rentDetail.RentDetailActivity
+import org.jetbrains.anko.startActivity
 
-class InterestRentListAdapter(private val viewModel: InterestViewModel) : RecyclerView.Adapter<InterestRentListAdapter.ViewHolder>() {
+class InterestRentListAdapter(private val context: Context) : RecyclerView.Adapter<InterestRentListAdapter.ViewHolder>() {
 
     private var listItems = listOf<ProductModel>()
 
@@ -27,7 +29,7 @@ class InterestRentListAdapter(private val viewModel: InterestViewModel) : Recycl
         fun bind() {
             val item = listItems[adapterPosition]
             binding.product = item
-            binding.clParent.setOnClickListener { viewModel.intentRentDetail(item.postId) }
+            binding.clParent.setOnClickListener { context.startActivity<RentDetailActivity>("post_id" to item.postId) }
         }
     }
 }

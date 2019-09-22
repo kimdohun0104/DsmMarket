@@ -30,7 +30,7 @@ class RentFragment : BaseFragment<FragmentRentBinding>() {
         setHasOptionsMenu(true)
         activity?.setTitle(R.string.rent)
 
-        val adapter = RentListAdapter(viewModel)
+        val adapter = RentListAdapter(activity!!)
         rv_rent.adapter = adapter
 
         viewModel.rentListItems.observe(this, Observer { adapter.submitList(it) })

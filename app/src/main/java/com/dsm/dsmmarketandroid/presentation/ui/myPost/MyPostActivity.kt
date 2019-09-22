@@ -6,13 +6,8 @@ import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.ActivityMyPostBinding
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.MyPostPagerAdapter
 import com.dsm.dsmmarketandroid.presentation.ui.base.BaseActivity
-import com.dsm.dsmmarketandroid.presentation.ui.modify.ModifyPurchaseActivity
-import com.dsm.dsmmarketandroid.presentation.ui.modify.ModifyRentActivity
-import com.dsm.dsmmarketandroid.presentation.ui.purchaseDetail.PurchaseDetailActivity
-import com.dsm.dsmmarketandroid.presentation.ui.rentDetail.RentDetailActivity
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_my_post.*
-import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -44,14 +39,6 @@ class MyPostActivity : BaseActivity<ActivityMyPostBinding>() {
         })
 
         viewModel.toastServerErrorEvent.observe(this, Observer { toast(getString(R.string.fail_server_error)) })
-
-        viewModel.intentPurchaseDetail.observe(this, Observer { startActivity<PurchaseDetailActivity>("post_id" to it) })
-
-        viewModel.intentPurchaseModify.observe(this, Observer { startActivity<ModifyPurchaseActivity>("post_id" to it) })
-
-        viewModel.intentRentDetail.observe(this, Observer { startActivity<RentDetailActivity>("post_id" to it) })
-
-        viewModel.intentRentModify.observe(this, Observer { startActivity<ModifyRentActivity>("post_id" to it) })
 
         binding.viewModel
     }

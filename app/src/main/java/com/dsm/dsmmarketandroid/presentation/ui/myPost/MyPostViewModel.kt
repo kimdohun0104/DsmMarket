@@ -25,15 +25,8 @@ class MyPostViewModel(
 
     val toastServerErrorEvent = SingleLiveEvent<Any>()
 
-    val intentPurchaseDetail = MutableLiveData<Int>()
-    val intentRentDetail = MutableLiveData<Int>()
-
-    val intentPurchaseModify = MutableLiveData<Int>()
-    val intentRentModify = MutableLiveData<Int>()
-
     val deletePositionFromPurchase = MutableLiveData<Int>()
     val deletePositionFromRent = MutableLiveData<Int>()
-
 
     fun getMyPurchase() {
         addDisposable(

@@ -19,7 +19,7 @@ class RecentPurchaseFragment : BaseFragment<FragmentRecentPurchaseBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = RecentListAdapter(0, viewModel)
+        val adapter = RecentListAdapter(0, activity!!)
         rv_recent_purchase.adapter = adapter
 
         viewModel.purchaseList.observe(this, Observer { adapter.setItems(it) })

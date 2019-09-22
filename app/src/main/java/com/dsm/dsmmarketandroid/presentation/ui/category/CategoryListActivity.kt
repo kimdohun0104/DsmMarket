@@ -1,16 +1,12 @@
 package com.dsm.dsmmarketandroid.presentation.ui.category
 
 import android.os.Bundle
-import androidx.lifecycle.Observer
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.ActivityCategoryListBinding
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.CategoryPagerAdapter
 import com.dsm.dsmmarketandroid.presentation.ui.base.BaseActivity
-import com.dsm.dsmmarketandroid.presentation.ui.purchaseDetail.PurchaseDetailActivity
-import com.dsm.dsmmarketandroid.presentation.ui.rentDetail.RentDetailActivity
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_category_list.*
-import org.jetbrains.anko.startActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CategoryListActivity : BaseActivity<ActivityCategoryListBinding>() {
@@ -42,10 +38,6 @@ class CategoryListActivity : BaseActivity<ActivityCategoryListBinding>() {
             }
 
         })
-
-        viewModel.intentPurchaseDetail.observe(this, Observer { startActivity<PurchaseDetailActivity>("post_id" to it) })
-
-        viewModel.intentRentDetail.observe(this, Observer { startActivity<RentDetailActivity>("post_id" to it) })
 
         binding.viewModel = viewModel
     }

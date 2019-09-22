@@ -20,7 +20,7 @@ class RentCategoryFragment : BaseFragment<FragmentRentCategoryBinding>() {
         super.onViewCreated(view, savedInstanceState)
         val category = activity?.intent?.getStringExtra("category") ?: ""
 
-        val adapter = RentCategoryListAdapter(viewModel)
+        val adapter = RentCategoryListAdapter(activity!!)
         rv_category_rent.adapter = adapter
 
         viewModel.rentInit(category)

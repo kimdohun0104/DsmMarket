@@ -1,7 +1,6 @@
 package com.dsm.dsmmarketandroid.presentation.ui.category
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
@@ -14,9 +13,6 @@ import com.dsm.dsmmarketandroid.presentation.model.ProductModel
 import java.util.concurrent.Executors
 
 class CategoryListViewModel(private val productModelMapper: ProductModelMapper) : BaseViewModel() {
-
-    val intentPurchaseDetail = MutableLiveData<Int>()
-    val intentRentDetail = MutableLiveData<Int>()
 
     lateinit var purchaseNetworkState: LiveData<NetworkState>
     lateinit var purchaseList: LiveData<PagedList<ProductModel>>

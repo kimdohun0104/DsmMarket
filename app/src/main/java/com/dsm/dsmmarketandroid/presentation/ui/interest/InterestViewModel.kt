@@ -17,9 +17,6 @@ class InterestViewModel(
 
     val toastServerErrorEvent = SingleLiveEvent<Any>()
 
-    val intentPurchaseDetail = MutableLiveData<Int>()
-    val intentRentDetail = MutableLiveData<Int>()
-
     fun getInterestPurchase() {
         addDisposable(
             getInterestUseCase.create(0)
@@ -40,13 +37,5 @@ class InterestViewModel(
                     toastServerErrorEvent.call()
                 })
         )
-    }
-
-    fun intentPurchaseDetail(id: Int) {
-        intentPurchaseDetail.value = id
-    }
-
-    fun intentRentDetail(id: Int) {
-        intentRentDetail.value = id
     }
 }

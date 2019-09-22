@@ -6,11 +6,8 @@ import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.ActivityInterestBinding
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.InterestPagerAdapter
 import com.dsm.dsmmarketandroid.presentation.ui.base.BaseActivity
-import com.dsm.dsmmarketandroid.presentation.ui.purchaseDetail.PurchaseDetailActivity
-import com.dsm.dsmmarketandroid.presentation.ui.rentDetail.RentDetailActivity
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_interest.*
-import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -42,10 +39,6 @@ class InterestActivity : BaseActivity<ActivityInterestBinding>() {
         })
 
         viewModel.toastServerErrorEvent.observe(this, Observer { toast(getString(R.string.fail_server_error)) })
-
-        viewModel.intentPurchaseDetail.observe(this, Observer { startActivity<PurchaseDetailActivity>("post_id" to it) })
-
-        viewModel.intentRentDetail.observe(this, Observer { startActivity<RentDetailActivity>("post_id" to it) })
 
         binding.viewModel = viewModel
     }

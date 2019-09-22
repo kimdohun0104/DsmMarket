@@ -16,9 +16,6 @@ class RecentViewModel(
     val purchaseList = MutableLiveData<List<ProductModel>>()
     val rentList = MutableLiveData<List<ProductModel>>()
 
-    val intentPurchaseDetail = MutableLiveData<Int>()
-    val intentRentDetail = MutableLiveData<Int>()
-
     fun getRecentProduct() {
         addDisposable(
             getRecentPurchaseUseCase.create(Unit)

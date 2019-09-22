@@ -1,4 +1,4 @@
-package com.dsm.dsmmarketandroid.presentation.ui.interest.rent
+package com.dsm.dsmmarketandroid.presentation.ui.interest
 
 import android.os.Bundle
 import android.view.View
@@ -8,7 +8,6 @@ import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.FragmentInterestRentBinding
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.InterestRentListAdapter
 import com.dsm.dsmmarketandroid.presentation.ui.base.BaseFragment
-import com.dsm.dsmmarketandroid.presentation.ui.interest.InterestViewModel
 import kotlinx.android.synthetic.main.fragment_interest_rent.*
 
 class InterestRentFragment : BaseFragment<FragmentInterestRentBinding>() {
@@ -20,7 +19,7 @@ class InterestRentFragment : BaseFragment<FragmentInterestRentBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = InterestRentListAdapter(viewModel)
+        val adapter = InterestRentListAdapter(activity!!)
         rv_interest_rent.adapter = adapter
 
         viewModel.getInterestRent()

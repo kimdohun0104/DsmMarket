@@ -38,7 +38,7 @@ class CommentActivity : BaseActivity<ActivityCommentBinding>() {
 
         viewModel.toastServerErrorEvent.observe(this, Observer { toast(getString(R.string.fail_server_error)) })
 
-        viewModel.fragmentReportCommentEvent.observe(this, Observer {
+        viewModel.dialogReportComment.observe(this, Observer {
             val args = Bundle()
             args.putInt("post_id", postId)
             args.putInt("type", type)

@@ -19,7 +19,7 @@ class MyPurchaseFragment : BaseFragment<FragmentMyPurchaseBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = MyPurchaseListAdapter(viewModel, childFragmentManager)
+        val adapter = MyPurchaseListAdapter(activity!!, childFragmentManager)
         rv_my_post_purchase.adapter = adapter
 
         viewModel.getMyPurchase()

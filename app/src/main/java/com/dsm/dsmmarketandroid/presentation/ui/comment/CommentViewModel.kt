@@ -17,7 +17,7 @@ class CommentViewModel(
 
     val toastServerErrorEvent = SingleLiveEvent<Any>()
 
-    val fragmentReportCommentEvent = MutableLiveData<String>()
+    val dialogReportComment = MutableLiveData<String>()
 
     fun getCommentList(postId: Int, type: Int) {
         addDisposable(
@@ -30,5 +30,9 @@ class CommentViewModel(
                     toastServerErrorEvent.call()
                 })
         )
+    }
+
+    fun reportComment(nick: String) {
+        dialogReportComment.value = nick
     }
 }
