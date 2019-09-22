@@ -1,13 +1,17 @@
 package com.dsm.dsmmarketandroid.presentation.ui.adapter
 
+import android.app.Activity
+import android.app.ActivityOptions
 import android.content.Context
+import android.content.Intent
+import android.util.Pair
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.dsm.dsmmarketandroid.databinding.ItemInterestBinding
 import com.dsm.dsmmarketandroid.presentation.model.ProductModel
 import com.dsm.dsmmarketandroid.presentation.ui.rentDetail.RentDetailActivity
-import org.jetbrains.anko.startActivity
 
 class InterestRentListAdapter(private val context: Context) : RecyclerView.Adapter<InterestRentListAdapter.ViewHolder>() {
 
@@ -29,7 +33,16 @@ class InterestRentListAdapter(private val context: Context) : RecyclerView.Adapt
         fun bind() {
             val item = listItems[adapterPosition]
             binding.product = item
-            binding.clParent.setOnClickListener { context.startActivity<RentDetailActivity>("post_id" to item.postId) }
+            binding.clParent.setOnClickListener {
+                val intent = Intent(context, RentDetailActivity::class.java)
+                intent.putExtra("post_id", item.postId)
+                val options = ActivityOptions.makeSceneTransitionAnimation(
+                    context as Activity,
+                    Pair.create(binding.ivProduct as View, "image"),
+                    Pair.create(binding.tvTitle as View, "title")
+                )
+                context.startActivity(intent, options.toBundle())
+            }
         }
     }
 }

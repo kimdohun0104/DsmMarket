@@ -1,7 +1,12 @@
 package com.dsm.dsmmarketandroid.presentation.ui.adapter
 
+import android.app.Activity
+import android.app.ActivityOptions
 import android.content.Context
+import android.content.Intent
+import android.util.Pair
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
@@ -11,7 +16,6 @@ import com.dsm.dsmmarketandroid.databinding.ItemLoadingBinding
 import com.dsm.dsmmarketandroid.databinding.ItemProductBinding
 import com.dsm.dsmmarketandroid.presentation.model.ProductModel
 import com.dsm.dsmmarketandroid.presentation.ui.rentDetail.RentDetailActivity
-import org.jetbrains.anko.startActivity
 
 class RentListAdapter(private val context: Context) : PagedListAdapter<ProductModel, RecyclerView.ViewHolder>(DIFF_CALLBACK) {
 
@@ -68,8 +72,16 @@ class RentListAdapter(private val context: Context) : PagedListAdapter<ProductMo
     inner class ItemHolder(private val binding: ItemProductBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: ProductModel?) {
             binding.product = item
-            binding.clParent.setOnClickListener { context.startActivity<RentDetailActivity>("post_id" to item?.postId) }
+            binding.clParent.setOnClickListener {
+                val intent = Intent(context, RentDetailActivity::class.java)
+                intent.putExtra("post_id", item?.postId)
+                val options = ActivityOptions.makeSceneTransitionAnimation(
+                    context as Activity,
+                    Pair.create(binding.ivProduct as View, "image"),
+                    Pair.create(binding.tvTitle as View, "title")
+                )
+                context.startActivity(intent, options.toBundle())
+            }
         }
     }
-
 }

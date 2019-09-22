@@ -29,7 +29,8 @@
                     android:id="@+id/vp_detail_image"
                     android:layout_width="match_parent"
                     android:layout_height="310dp"
-                    bind:detailImages="@{viewModel.purchaseDetail.img}" />
+                    bind:detailImages="@{viewModel.purchaseDetail.img}"
+                    android:transitionName="image"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -39,7 +40,8 @@
                     android:text="@{viewModel.purchaseDetail.title}"
                     android:textColor="@color/black"
                     android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:transitionName="title"/>
 
                 <LinearLayout
                     android:layout_width="wrap_content"

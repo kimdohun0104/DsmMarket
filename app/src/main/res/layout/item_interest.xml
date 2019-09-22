@@ -13,7 +13,8 @@
         xmlns:bind="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/cl_parent">
+        android:id="@+id/cl_parent"
+        android:background="?android:attr/selectableItemBackground">
 
         <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/iv_product"
@@ -29,7 +30,8 @@
             app:riv_border_width="0dp"
             app:riv_corner_radius="3dp"
             app:riv_oval="false"
-            bind:image="@{product.img}"/>
+            bind:image="@{product.img}"
+            android:transitionName="image"/>
 
         <TextView
             android:id="@+id/tv_title"
@@ -44,7 +46,8 @@
             app:layout_constraintLeft_toRightOf="@id/iv_product"
             app:layout_constraintRight_toLeftOf="@id/ib_interest"
             app:layout_constraintTop_toTopOf="@id/iv_product"
-            android:text="@{product.title}"/>
+            android:text="@{product.title}"
+            android:transitionName="title"/>
 
         <TextView
             android:id="@+id/tv_post_date"
