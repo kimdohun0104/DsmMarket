@@ -1,5 +1,7 @@
 package com.dsm.dsmmarketandroid.di
 
+import com.dsm.data.paging.purchase.PurchaseDataFactory
+import com.dsm.data.paging.rent.RentDataFactory
 import com.dsm.dsmmarketandroid.presentation.ui.addComment.AddCommentViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.category.CategoryListViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.changeNick.ChangeNickViewModel
@@ -50,9 +52,9 @@ val viewModelModule = module {
 
     viewModel { PostRentViewModel(get()) }
 
-    viewModel { PurchaseViewModel(get()) }
+    viewModel { (purchaseDataFactory: PurchaseDataFactory) -> PurchaseViewModel(purchaseDataFactory, get()) }
 
-    viewModel { RentViewModel(get()) }
+    viewModel { (rentDataFactory: RentDataFactory) -> RentViewModel(rentDataFactory, get()) }
 
     viewModel { PasswordConfirmViewModel(get()) }
 
@@ -68,11 +70,11 @@ val viewModelModule = module {
 
     viewModel { SearchViewModel(get(), get()) }
 
-    viewModel { SearchResultViewModel(get()) }
+    viewModel { (purchaseDataFactory: PurchaseDataFactory, rentDataFactory: RentDataFactory) -> SearchResultViewModel(purchaseDataFactory, rentDataFactory, get()) }
 
     viewModel { InterestViewModel(get(), get()) }
 
     viewModel { MyPostViewModel(get(), get(), get(), get(), get()) }
 
-    viewModel { CategoryListViewModel(get()) }
+    viewModel { (purchaseDataFactory: PurchaseDataFactory, rentDataFactory: RentDataFactory) -> CategoryListViewModel(purchaseDataFactory, rentDataFactory, get()) }
 }

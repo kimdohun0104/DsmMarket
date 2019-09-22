@@ -6,6 +6,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import androidx.lifecycle.Observer
+import com.dsm.data.paging.rent.RentDataFactory
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.FragmentRentBinding
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.RentListAdapter
@@ -17,13 +18,17 @@ import com.dsm.dsmmarketandroid.presentation.ui.search.SearchActivity
 import kotlinx.android.synthetic.main.fragment_rent.*
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.support.v4.startActivity
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
+
 
 class RentFragment : BaseFragment<FragmentRentBinding>() {
     override val layoutResourceId: Int
         get() = R.layout.fragment_rent
 
-    private val viewModel: RentViewModel by viewModel()
+    private val rentDataFactory: RentDataFactory by inject { parametersOf("", "") }
+    private val viewModel: RentViewModel by viewModel { parametersOf(rentDataFactory) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

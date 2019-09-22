@@ -4,13 +4,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.paging.DataSource
 import com.dsm.domain.entity.Product
 import com.dsm.domain.repository.PurchaseRepository
-import org.koin.core.KoinComponent
-import org.koin.core.inject
 
 
-class PurchaseDataFactory(private val search: String = "", private val category: String = "") : DataSource.Factory<Int, Product>(), KoinComponent {
-
-    private val purchaseRepository: PurchaseRepository by inject()
+class PurchaseDataFactory(
+    private val purchaseRepository: PurchaseRepository,
+    private val search: String,
+    private val category: String
+) : DataSource.Factory<Int, Product>() {
 
     val mutableLiveData = MutableLiveData<PurchaseKeyedDataSource>()
 

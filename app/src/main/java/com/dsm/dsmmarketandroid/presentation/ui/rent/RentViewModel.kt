@@ -13,6 +13,7 @@ import com.dsm.dsmmarketandroid.presentation.model.ProductModel
 import java.util.concurrent.Executors
 
 class RentViewModel(
+    rentDataFactory: RentDataFactory,
     productModelMapper: ProductModelMapper
 ) : BaseViewModel() {
 
@@ -29,7 +30,6 @@ class RentViewModel(
             .setPageSize(15)
             .build()
 
-        val rentDataFactory = RentDataFactory()
         val rentModelDataFactory = rentDataFactory.mapByPage(productModelMapper::mapFrom)
         networkState = Transformations.switchMap(rentDataFactory.mutableLiveData) { it.networkState }
 

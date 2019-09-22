@@ -18,12 +18,9 @@ class SearchPurchaseFragment : BaseFragment<FragmentSearchPurchaseBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val search = activity?.intent?.getStringExtra("search")!!
 
         val adapter = PurchaseListAdapter(activity!!)
         rv_purchase.adapter = adapter
-
-        viewModel.purchaseInit(search)
 
         viewModel.purchaseNetworkState.observe(this, Observer { adapter.setNetworkState(it) })
 

@@ -12,6 +12,7 @@ import com.dsm.dsmmarketandroid.presentation.model.ProductModel
 import java.util.concurrent.Executors
 
 class PurchaseViewModel(
+    purchaseDataFactory: PurchaseDataFactory,
     productModelMapper: ProductModelMapper
 ) : BaseViewModel() {
 
@@ -26,7 +27,6 @@ class PurchaseViewModel(
             .setPageSize(15)
             .build()
 
-        val purchaseDataFactory = PurchaseDataFactory()
         val purchaseModelDataFactory = purchaseDataFactory.mapByPage(productModelMapper::mapFrom)
         networkState = Transformations.switchMap(purchaseDataFactory.mutableLiveData) { it.networkState }
 

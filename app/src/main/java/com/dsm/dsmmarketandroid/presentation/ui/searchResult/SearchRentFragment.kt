@@ -18,12 +18,9 @@ class SearchRentFragment : BaseFragment<FragmentSearchRentBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val search = activity?.intent?.getStringExtra("search")!!
 
         val adapter = RentListAdapter(activity!!)
         rv_rent.adapter = adapter
-
-        viewModel.rentInit(search)
 
         viewModel.rentNetworkState.observe(this, Observer { adapter.setNetworkState(it) })
 

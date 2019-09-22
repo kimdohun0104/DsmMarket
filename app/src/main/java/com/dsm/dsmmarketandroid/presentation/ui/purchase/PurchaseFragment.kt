@@ -6,6 +6,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import androidx.lifecycle.Observer
+import com.dsm.data.paging.purchase.PurchaseDataFactory
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.FragmentPurchaseBinding
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.PurchaseListAdapter
@@ -15,13 +16,16 @@ import com.dsm.dsmmarketandroid.presentation.ui.interest.InterestActivity
 import com.dsm.dsmmarketandroid.presentation.ui.search.SearchActivity
 import kotlinx.android.synthetic.main.fragment_purchase.*
 import org.jetbrains.anko.startActivity
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 class PurchaseFragment : BaseFragment<FragmentPurchaseBinding>() {
     override val layoutResourceId: Int
         get() = R.layout.fragment_purchase
 
-    private val viewModel: PurchaseViewModel by viewModel()
+    private val purchaseDataFactory: PurchaseDataFactory by inject { parametersOf("", "") }
+    private val viewModel: PurchaseViewModel by viewModel { parametersOf(purchaseDataFactory) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

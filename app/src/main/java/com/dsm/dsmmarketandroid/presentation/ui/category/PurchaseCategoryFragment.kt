@@ -18,12 +18,9 @@ class PurchaseCategoryFragment : BaseFragment<FragmentPurchaseCategoryBinding>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val category = activity?.intent?.getStringExtra("category") ?: ""
 
         val adapter = PurchaseListAdapter(activity!!)
         rv_category_purchase.adapter = adapter
-
-        viewModel.purchaseInit(category)
 
         viewModel.purchaseNetworkState.observe(this, Observer { adapter.setNetworkState(it) })
 

@@ -14,40 +14,38 @@ import com.dsm.dsmmarketandroid.presentation.model.ProductModel
 import java.util.concurrent.Executors
 
 class SearchResultViewModel(
-    private val productModelMapper: ProductModelMapper
+    purchaseDataFactory: PurchaseDataFactory,
+    rentDataFactory: RentDataFactory,
+    productModelMapper: ProductModelMapper
 ) : BaseViewModel() {
 
     val search = MutableLiveData<String>()
 
-    lateinit var purchaseNetworkState: LiveData<NetworkState>
-    lateinit var purchaseListItems: LiveData<PagedList<ProductModel>>
+    val purchaseNetworkState: LiveData<NetworkState>
+    val purchaseListItems: LiveData<PagedList<ProductModel>>
 
-    lateinit var rentNetworkState: LiveData<NetworkState>
-    lateinit var rentListItems: LiveData<PagedList<ProductModel>>
+    val rentNetworkState: LiveData<NetworkState>
+    val rentListItems: LiveData<PagedList<ProductModel>>
 
     val intentSearchResult = MutableLiveData<String>()
 
     val isSearchEnable = Transformations.map(search) { it != "" }
 
-    private val executor = Executors.newFixedThreadPool(5)
-    private val pagedListConfig = PagedList.Config.Builder()
-        .setEnablePlaceholders(false)
-        .setInitialLoadSizeHint(20)
-        .setPageSize(15)
-        .build()
+    init {
+        val executor = Executors.newFixedThreadPool(5)
+        val pagedListConfig = PagedList.Config.Builder()
+            .setEnablePlaceholders(false)
+            .setInitialLoadSizeHint(20)
+            .setPageSize(15)
+            .build()
 
-    fun purchaseInit(search: String) {
-        val purchaseDataFactory = PurchaseDataFactory(search = search)
         val purchaseModelDataFactory = purchaseDataFactory.mapByPage(productModelMapper::mapFrom)
         purchaseNetworkState = Transformations.switchMap(purchaseDataFactory.mutableLiveData) { it.networkState }
 
         purchaseListItems = LivePagedListBuilder(purchaseModelDataFactory, pagedListConfig)
             .setFetchExecutor(executor)
             .build()
-    }
 
-    fun rentInit(search: String) {
-        val rentDataFactory = RentDataFactory(search = search)
         val rentModelDataFactory = rentDataFactory.mapByPage(productModelMapper::mapFrom)
         rentNetworkState = Transformations.switchMap(rentDataFactory.mutableLiveData) { it.networkState }
 
