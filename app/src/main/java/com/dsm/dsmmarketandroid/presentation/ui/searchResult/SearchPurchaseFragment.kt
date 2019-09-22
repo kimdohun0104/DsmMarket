@@ -6,7 +6,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.FragmentSearchPurchaseBinding
-import com.dsm.dsmmarketandroid.presentation.ui.adapter.SearchPurchaseListAdapter
+import com.dsm.dsmmarketandroid.presentation.ui.adapter.PurchaseListAdapter
 import com.dsm.dsmmarketandroid.presentation.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_search_purchase.*
 
@@ -20,7 +20,7 @@ class SearchPurchaseFragment : BaseFragment<FragmentSearchPurchaseBinding>() {
         super.onViewCreated(view, savedInstanceState)
         val search = activity?.intent?.getStringExtra("search")!!
 
-        val adapter = SearchPurchaseListAdapter(activity!!)
+        val adapter = PurchaseListAdapter(activity!!)
         rv_purchase.adapter = adapter
 
         viewModel.purchaseInit(search)

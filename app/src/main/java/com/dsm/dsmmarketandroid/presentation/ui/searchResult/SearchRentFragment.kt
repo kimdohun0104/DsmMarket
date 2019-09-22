@@ -6,7 +6,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.FragmentSearchRentBinding
-import com.dsm.dsmmarketandroid.presentation.ui.adapter.SearchRentListAdapter
+import com.dsm.dsmmarketandroid.presentation.ui.adapter.RentListAdapter
 import com.dsm.dsmmarketandroid.presentation.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_search_rent.*
 
@@ -20,7 +20,7 @@ class SearchRentFragment : BaseFragment<FragmentSearchRentBinding>() {
         super.onViewCreated(view, savedInstanceState)
         val search = activity?.intent?.getStringExtra("search")!!
 
-        val adapter = SearchRentListAdapter(activity!!)
+        val adapter = RentListAdapter(activity!!)
         rv_rent.adapter = adapter
 
         viewModel.rentInit(search)

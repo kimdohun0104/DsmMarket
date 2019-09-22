@@ -6,7 +6,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.FragmentPurchaseCategoryBinding
-import com.dsm.dsmmarketandroid.presentation.ui.adapter.PurchaseCategoryListAdapter
+import com.dsm.dsmmarketandroid.presentation.ui.adapter.PurchaseListAdapter
 import com.dsm.dsmmarketandroid.presentation.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_purchase_category.*
 
@@ -20,7 +20,7 @@ class PurchaseCategoryFragment : BaseFragment<FragmentPurchaseCategoryBinding>()
         super.onViewCreated(view, savedInstanceState)
         val category = activity?.intent?.getStringExtra("category") ?: ""
 
-        val adapter = PurchaseCategoryListAdapter(activity!!)
+        val adapter = PurchaseListAdapter(activity!!)
         rv_category_purchase.adapter = adapter
 
         viewModel.purchaseInit(category)

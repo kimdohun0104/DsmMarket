@@ -5,7 +5,7 @@ import android.view.View
 import androidx.lifecycle.Observer
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.FragmentRentCategoryBinding
-import com.dsm.dsmmarketandroid.presentation.ui.adapter.RentCategoryListAdapter
+import com.dsm.dsmmarketandroid.presentation.ui.adapter.RentListAdapter
 import com.dsm.dsmmarketandroid.presentation.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_rent_category.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -20,7 +20,7 @@ class RentCategoryFragment : BaseFragment<FragmentRentCategoryBinding>() {
         super.onViewCreated(view, savedInstanceState)
         val category = activity?.intent?.getStringExtra("category") ?: ""
 
-        val adapter = RentCategoryListAdapter(activity!!)
+        val adapter = RentListAdapter(activity!!)
         rv_category_rent.adapter = adapter
 
         viewModel.rentInit(category)
