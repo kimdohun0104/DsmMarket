@@ -23,7 +23,10 @@ class MainActivity : AppCompatActivity() {
             when (it.itemId) {
                 R.id.purchase -> replaceView(PurchaseFragment())
                 R.id.rent -> replaceView(RentFragment())
-                R.id.post -> PostBottomFragment().show(supportFragmentManager, "")
+                R.id.post -> {
+                    PostBottomFragment().show(supportFragmentManager, "")
+                    return@setOnNavigationItemSelectedListener false
+                }
                 R.id.chatting -> replaceView(ChatFragment())
                 R.id.me -> replaceView(MeFragment())
             }
@@ -34,3 +37,4 @@ class MainActivity : AppCompatActivity() {
     private fun replaceView(fragment: Fragment) =
         supportFragmentManager.beginTransaction().replace(R.id.ll_container, fragment).commit()
 }
+

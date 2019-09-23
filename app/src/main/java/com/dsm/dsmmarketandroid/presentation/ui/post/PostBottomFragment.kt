@@ -19,9 +19,15 @@ class PostBottomFragment : BottomSheetDialogFragment() {
     ): View? {
         val rootView = inflater.inflate(R.layout.fragment_post_bottom, container, false)
 
-        rootView.cl_purchase.setOnClickListener { startActivity<PostPurchaseActivity>() }
+        rootView.cl_purchase.setOnClickListener {
+            dismiss()
+            startActivity<PostPurchaseActivity>()
+        }
 
-        rootView.cl_rent.setOnClickListener { startActivity<PostRentActivity>() }
+        rootView.cl_rent.setOnClickListener {
+            dismiss()
+            startActivity<PostRentActivity>()
+        }
 
         return rootView
     }
