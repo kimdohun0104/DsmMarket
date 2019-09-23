@@ -18,7 +18,7 @@ val networkModule = module {
 
     single {
         Retrofit.Builder()
-            .baseUrl("http://192.168.0.10:1234/")
+            .baseUrl("http://192.168.137.234:1234/")
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .client(get())

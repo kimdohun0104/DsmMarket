@@ -15,4 +15,6 @@ interface RentDataSource {
     fun getLocalRentDetail(postId: Int): RentDetailRoomEntity
 
     fun addLocalRentDetail(rentDetailRoomEntity: RentDetailRoomEntity): Completable
+
+    fun modifyRent(params: Any): Flowable<Response<Unit>>
 }
