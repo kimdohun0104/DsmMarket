@@ -25,4 +25,7 @@ class RentDataSourceImpl(
 
     override fun addLocalRentDetail(rentDetailRoomEntity: RentDetailRoomEntity): Completable =
         rentDao.addRentDetail(rentDetailRoomEntity).addSchedulers()
+
+    override fun modifyRent(params: Any): Flowable<Response<Unit>> =
+        api.modifyRent(params).addSchedulers()
 }

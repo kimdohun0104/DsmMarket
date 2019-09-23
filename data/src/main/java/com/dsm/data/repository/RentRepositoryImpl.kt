@@ -24,4 +24,7 @@ class RentRepositoryImpl(private val rentDataSource: RentDataSource) : RentRepos
         }
             .doOnNext { rentDataSource.addLocalRentDetail(rentDetailMapper.mapFrom(it)).subscribe() }
             .onErrorReturn { rentDetailMapper.mapFrom(rentDataSource.getLocalRentDetail(postId)) }
+
+    override fun modifyRent(params: Any): Flowable<Unit> =
+        rentDataSource.modifyRent(params).map { if (it.code() != 200) throw HttpException(it) }
 }

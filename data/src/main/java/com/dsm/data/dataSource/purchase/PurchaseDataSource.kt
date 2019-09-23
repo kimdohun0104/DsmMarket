@@ -15,4 +15,6 @@ interface PurchaseDataSource {
     fun getLocalPurchaseDetail(postId: Int): PurchaseDetailRoomEntity
 
     fun addLocalPurchaseDetail(postDetailRoomEntity: PurchaseDetailRoomEntity): Completable
+
+    fun modifyPurchase(params: Any): Flowable<Response<Unit>>
 }

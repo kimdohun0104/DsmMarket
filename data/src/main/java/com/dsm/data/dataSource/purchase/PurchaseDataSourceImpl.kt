@@ -26,4 +26,7 @@ class PurchaseDataSourceImpl(
 
     override fun addLocalPurchaseDetail(postDetailRoomEntity: PurchaseDetailRoomEntity): Completable =
         purchaseDao.addPurchaseDetail(postDetailRoomEntity).addSchedulers()
+
+    override fun modifyPurchase(params: Any): Flowable<Response<Unit>> =
+        api.modifyPurchase(params).addSchedulers()
 }

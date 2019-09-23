@@ -115,6 +115,8 @@
     <string name="ask_rent_complete">대여를 그만하시겠습니까?</string>
     <string name="complete">완료</string>
 
+    <string name="modify_purchase">구매글 수정</string>
+
     <!--report-->
     <string name="report_comment">댓글 신고</string>
     <string name="report_post">게시물 신고</string>

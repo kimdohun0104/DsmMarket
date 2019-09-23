@@ -13,7 +13,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dsm.dsmmarketandroid.databinding.ItemMyPostBinding
 import com.dsm.dsmmarketandroid.presentation.model.ProductModel
-import com.dsm.dsmmarketandroid.presentation.ui.modify.ModifyPurchaseActivity
+import com.dsm.dsmmarketandroid.presentation.ui.modify.purchase.ModifyPurchaseActivity
 import com.dsm.dsmmarketandroid.presentation.ui.myPost.CompletePurchaseDialog
 import com.dsm.dsmmarketandroid.presentation.ui.purchaseDetail.PurchaseDetailActivity
 import org.jetbrains.anko.startActivity
