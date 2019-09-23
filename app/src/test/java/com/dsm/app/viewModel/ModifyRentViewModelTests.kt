@@ -111,7 +111,7 @@ class ModifyRentViewModelTests {
                         "postId" to 0,
                         "title" to title.value,
                         "content" to content.value,
-                        "price" to price.value,
+                        "price" to unit.value + "/" + price.value,
                         "category" to category.value,
                         "possible_time" to rentTime.value
                     )

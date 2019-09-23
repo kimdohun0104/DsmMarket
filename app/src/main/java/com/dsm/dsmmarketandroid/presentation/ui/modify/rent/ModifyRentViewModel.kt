@@ -20,6 +20,8 @@ class ModifyRentViewModel(
     val content = MutableLiveData<String>()
     val category = MutableLiveData<String>()
 
+    val unit = MutableLiveData<String>().apply { value = "0" }
+
     val finishActivityEvent = SingleLiveEvent<Any>()
 
     val toastServerErrorEvent = SingleLiveEvent<Any>()
@@ -75,7 +77,7 @@ class ModifyRentViewModel(
                     "postId" to postId,
                     "title" to title.value,
                     "content" to content.value,
-                    "price" to price.value,
+                    "price" to unit.value + "/" + price.value,
                     "category" to category.value,
                     "possible_time" to rentTime.value
                 )
@@ -85,5 +87,9 @@ class ModifyRentViewModel(
                 toastServerErrorEvent.call()
             })
         )
+    }
+
+    fun selectPriceUnit(unit: Int) {
+        this.unit.value = unit.toString()
     }
 }

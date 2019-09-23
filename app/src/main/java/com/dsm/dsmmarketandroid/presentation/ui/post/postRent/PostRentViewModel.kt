@@ -20,6 +20,8 @@ class PostRentViewModel(private val postRentUseCase: PostRentUseCase) : BaseView
     val content = MutableLiveData<String>()
     val category = MutableLiveData<String>()
 
+    val unit = MutableLiveData<String>().apply { value = "0" }
+
     private fun MutableLiveData<String>.isValueBlank() = this.value.isNullOrBlank()
 
     private fun isBlankExist() = title.isValueBlank() || price.isValueBlank()
@@ -61,7 +63,7 @@ class PostRentViewModel(private val postRentUseCase: PostRentUseCase) : BaseView
                     mapOf(
                         "title" to RequestBody.create(MediaType.parse("text/plain"), title.value!!),
                         "content" to RequestBody.create(MediaType.parse("text/plain"), content.value!!),
-                        "price" to RequestBody.create(MediaType.parse("text/plain"), price.value!!),
+                        "price" to RequestBody.create(MediaType.parse("text/plain"), unit.value + "/" + price.value),
                         "category" to RequestBody.create(MediaType.parse("text/plain"), category.value!!),
                         "possible_time" to RequestBody.create(MediaType.parse("text/plain"), rentTime.value ?: "")
                     )
@@ -72,5 +74,9 @@ class PostRentViewModel(private val postRentUseCase: PostRentUseCase) : BaseView
                 toastServerErrorEvent.call()
             })
         )
+    }
+
+    fun selectPriceUnit(unit: Int) {
+        this.unit.value = unit.toString()
     }
 }
