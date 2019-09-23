@@ -9,6 +9,7 @@ import com.dsm.dsmmarketandroid.presentation.ui.comment.CommentViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.interest.InterestViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.login.LoginViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.me.MeViewModel
+import com.dsm.dsmmarketandroid.presentation.ui.modify.purchase.ModifyPurchaseViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.myPost.MyPostViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.password.changePassword.ChangePasswordViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.password.passwordCodeConfirm.PasswordCodeConfirmViewModel
@@ -77,4 +78,6 @@ val viewModelModule = module {
     viewModel { MyPostViewModel(get(), get(), get(), get(), get()) }
 
     viewModel { (purchaseDataFactory: PurchaseDataFactory, rentDataFactory: RentDataFactory) -> CategoryListViewModel(purchaseDataFactory, rentDataFactory, get()) }
+
+    viewModel { ModifyPurchaseViewModel(get(), get(), get()) }
 }

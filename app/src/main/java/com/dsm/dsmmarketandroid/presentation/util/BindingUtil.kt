@@ -7,8 +7,10 @@ import android.widget.Spinner
 import androidx.databinding.BindingAdapter
 import androidx.databinding.BindingConversion
 import androidx.lifecycle.MutableLiveData
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.DetailImagePagerAdapter
+import com.dsm.dsmmarketandroid.presentation.ui.adapter.ModifyImageListAdapter
 import com.squareup.picasso.Picasso
 
 
@@ -53,5 +55,12 @@ object BindingUtil {
     @BindingAdapter("bind:image")
     fun bindImage(view: ImageView, value: String?) {
         value?.let { Picasso.get().load(it).into(view) }
+    }
+
+    @JvmStatic
+    @BindingAdapter("bind:modifyImages")
+    fun bindModifyImages(view: RecyclerView, value: ListLiveData<String>?) {
+        val adapter = view.adapter as ModifyImageListAdapter
+        value?.let { adapter.setItems(it.value!!) }
     }
 }

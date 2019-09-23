@@ -137,4 +137,10 @@ interface Api {
 
     @DELETE("post/rent/{postId}")
     fun completeRent(@Path("postId") postId: Int): Flowable<Response<Unit>>
+
+    @PATCH("post/deal")
+    fun modifyPurchase(@Body params: Any): Flowable<Response<Unit>>
+
+    @PATCH("post/rent")
+    fun modifyRent(@Body params: Any): Flowable<Response<Unit>>
 }

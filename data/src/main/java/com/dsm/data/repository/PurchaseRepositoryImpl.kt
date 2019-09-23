@@ -24,4 +24,7 @@ class PurchaseRepositoryImpl(private val purchaseDataSource: PurchaseDataSource)
         }
             .doOnNext { purchaseDataSource.addLocalPurchaseDetail(purchaseDetailMapper.mapFrom(it)).subscribe() }
             .onErrorReturn { purchaseDetailMapper.mapFrom(purchaseDataSource.getLocalPurchaseDetail(postId)) }
+
+    override fun modifyPurchase(params: Any): Flowable<Unit> =
+        purchaseDataSource.modifyPurchase(params).map { if (it.code() != 200) throw HttpException(it) }
 }
