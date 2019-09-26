@@ -30,7 +30,7 @@
             app:riv_border_width="0dp"
             app:riv_corner_radius="3dp"
             app:riv_oval="false"
-            bind:image="@{product.img}"/>
+            bind:image="@{product.img}" />
 
         <TextView
             android:id="@+id/tv_title"

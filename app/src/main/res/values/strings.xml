@@ -88,18 +88,15 @@
     <string name="possible_time">대여 가능 시간</string>
 
     <!--category-->
-    <string name="book">도서</string>
-    <string name="food">식품</string>
-    <string name="sports">운동기구</string>
-    <string name="necessity">생필품</string>
-    <string name="device">전자기기</string>
-    <string name="cloth">의류</string>
+    <string name="book" translatable="false">도서</string>
+    <string name="food" translatable="false">식품</string>
+    <string name="sports" translatable="false">운동기구</string>
+    <string name="necessity" translatable="false">생필품</string>
+    <string name="device" translatable="false">전자기기</string>
+    <string name="cloth" translatable="false">의류</string>
 
     <string name="fail_login">이메일 또는 비밀번호가 틀렸습니다</string>
-
     <string name="fail_invalid_email">유효하지 않은 이메일입니다</string>
-
-    <!--fail-->
     <string name="fail_diff_password">비밀번호가 일치하지 않습니다</string>
     <string name="fail_sign_up">회원가입에 실패했습니다</string>
     <string name="fail_existent_email">이미 존재하는 이메일입니다</string>
@@ -112,12 +109,10 @@
     <string name="fail_permission_denied">권한이 필요합니다</string>
     <string name="fail_non_exist_post">존재하지 않는 글입니다</string>
 
-    <string name="tilde">~</string>
+    <string name="tilde" translatable="false">~</string>
     <string name="confirm">확인</string>
 
-    <string name="colon">:</string>
-
-    <string name="etc">기타</string>
+    <string name="colon" translatable="false">:</string>
 
     <string name="ask_purchase_complete">정말 판매 완료 하시겠습니까?</string>
     <string name="ask_rent_complete">대여를 그만하시겠습니까?</string>
@@ -133,19 +128,27 @@
     <string name="one_time">1회</string>
     <string name="one_hour">1시간</string>
 
+    <string name="male">남성</string>
+    <string name="female">여성</string>
+    <string name="not_reveal">밝히지 않음</string>
+    
+    <string name="slander_or_abuse">비방 및 욕설</string>
+    <string name="advertisement">광고</string>
+    <string name="etc">기타</string>
+
     <string-array name="grade">
         <item>1</item>
         <item>2</item>
         <item>3</item>
     </string-array>
     <string-array name="gender">
-        <item>남성</item>
-        <item>여성</item>
-        <item>밝히지 않음</item>
+        <item>@string/male</item>
+        <item>@string/female</item>
+        <item>@string/not_reveal</item>
     </string-array>
     <string-array name="report">
-        <item>비방 및 욕설</item>
-        <item>광고글</item>
-        <item>기타</item>
+        <item>@string/slander_or_abuse</item>
+        <item>@string/advertisement</item>
+        <item>@string/etc</item>
     </string-array>
 </resources>
