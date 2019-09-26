@@ -79,6 +79,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:hint="@string/email"
+                    android:inputType="textWebEmailAddress"
+                    android:nextFocusDown="@id/et_password"
+                    android:singleLine="true"
                     android:text="@={viewModel.email}" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -96,7 +99,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:hint="@string/password"
-                    android:text="@={viewModel.password}" />
+                    android:inputType="textPassword"
+                    android:singleLine="true"
+                    android:text="@={viewModel.password}"
+                    android:imeOptions="actionDone" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView

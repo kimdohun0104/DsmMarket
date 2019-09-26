@@ -9,9 +9,26 @@ import com.dsm.dsmmarketandroid.presentation.ui.me.MeFragment
 import com.dsm.dsmmarketandroid.presentation.ui.post.PostBottomFragment
 import com.dsm.dsmmarketandroid.presentation.ui.purchase.PurchaseFragment
 import com.dsm.dsmmarketandroid.presentation.ui.rent.RentFragment
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.subjects.BehaviorSubject
 import kotlinx.android.synthetic.main.activity_main.*
+import org.jetbrains.anko.toast
 
 class MainActivity : AppCompatActivity() {
+
+    private val backSubject = BehaviorSubject.createDefault(0L).toSerialized()
+
+    private val backSubjectDisposable =
+        backSubject.buffer(2, 1)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                if (it[1] - it[0] <= 1500) finish()
+                else toast(getString(R.string.back_to_exit))
+            }
+
+    override fun onBackPressed() {
+        backSubject.onNext(System.currentTimeMillis())
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,5 +53,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun replaceView(fragment: Fragment) =
         supportFragmentManager.beginTransaction().replace(R.id.ll_container, fragment).commit()
+
+    override fun onDestroy() {
+        backSubjectDisposable.dispose()
+        super.onDestroy()
+    }
 }
 

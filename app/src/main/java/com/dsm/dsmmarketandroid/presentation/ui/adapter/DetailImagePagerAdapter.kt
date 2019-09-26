@@ -4,8 +4,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.dsm.dsmmarketandroid.R
-import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_detail_image.view.*
 
 class DetailImagePagerAdapter : RecyclerView.Adapter<DetailImagePagerAdapter.ViewHolder>() {
@@ -25,7 +25,11 @@ class DetailImagePagerAdapter : RecyclerView.Adapter<DetailImagePagerAdapter.Vie
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind() {
-            Picasso.get().load(imageList[adapterPosition]).into(itemView.iv_image)
+            Glide.with(itemView)
+                .load(imageList[adapterPosition])
+                .placeholder(R.drawable.image_placeholder)
+                .error(R.drawable.image_error)
+                .into(itemView.iv_image)
         }
     }
 }

@@ -36,6 +36,11 @@ class RentFragment : BaseFragment<FragmentRentBinding>() {
         setHasOptionsMenu(true)
         activity?.setTitle(R.string.rent)
 
+        srl_rent.setOnRefreshListener {
+            viewModel.refreshList()
+            srl_rent.isRefreshing = false
+        }
+
         val adapter = RentListAdapter(activity!!)
         rv_rent.adapter = adapter
 

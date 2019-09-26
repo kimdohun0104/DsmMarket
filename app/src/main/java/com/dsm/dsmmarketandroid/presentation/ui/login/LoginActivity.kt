@@ -2,6 +2,7 @@ package com.dsm.dsmmarketandroid.presentation.ui.login
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.inputmethod.EditorInfo
 import androidx.lifecycle.Observer
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.ActivityLoginBinding
@@ -27,7 +28,12 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
 
         tv_forget_password.setOnClickListener { startActivity<SendPasswordCodeActivity>() }
 
-        btn_login.setOnClickListener { startActivity<MainActivity>() }
+        et_password.setOnEditorActionListener { v, actionId, event ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                viewModel.login()
+                true
+            } else false
+        }
 
         viewModel.intentMainActivityEvent.observe(this, Observer {
             val intent = Intent(this, MainActivity::class.java)

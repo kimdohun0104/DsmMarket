@@ -1,6 +1,7 @@
 package com.dsm.dsmmarketandroid.presentation.ui.searchResult
 
 import android.os.Bundle
+import android.view.inputmethod.EditorInfo
 import androidx.lifecycle.Observer
 import com.dsm.data.paging.purchase.PurchaseDataFactory
 import com.dsm.data.paging.rent.RentDataFactory
@@ -29,6 +30,13 @@ class SearchResultActivity : BaseActivity<ActivitySearchResultBinding>() {
         ib_back.setOnClickListener { finish() }
         binding.search = search
 
+        et_search.setOnEditorActionListener { v, actionId, event ->
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                viewModel.search()
+                true
+            } else false
+        }
+
         tl_search.addTab(tl_search.newTab().setText(getString(R.string.purchase)))
         tl_search.addTab(tl_search.newTab().setText(getString(R.string.rent)))
         vp_search.adapter = SearchPagerAdapter(supportFragmentManager)
@@ -46,6 +54,8 @@ class SearchResultActivity : BaseActivity<ActivitySearchResultBinding>() {
         })
 
         viewModel.intentSearchResult.observe(this, Observer { startActivity<SearchResultActivity>("search" to it) })
+
+        viewModel.finishActivityEvent.observe(this, Observer { finish() })
 
         binding.viewModel = viewModel
     }

@@ -22,6 +22,8 @@ class MyPurchaseFragment : BaseFragment<FragmentMyPurchaseBinding>() {
         val adapter = MyPurchaseListAdapter(activity!!, childFragmentManager)
         rv_my_post_purchase.adapter = adapter
 
+        srl_my_purchase.setOnRefreshListener { viewModel.getMyPurchase() }
+
         viewModel.getMyPurchase()
 
         viewModel.purchaseList.observe(this, Observer { adapter.setItems(it) })
@@ -29,5 +31,9 @@ class MyPurchaseFragment : BaseFragment<FragmentMyPurchaseBinding>() {
         viewModel.deletePositionFromPurchase.observe(this, Observer { adapter.deleteAt(it) })
 
         viewModel.hidePurchaseLoadingEvent.observe(this, Observer { pb_loading.visibility = View.GONE })
+
+        viewModel.hidePurchaseRefresh.observe(this, Observer { srl_my_purchase.isRefreshing = false })
+
+        binding.viewModel = viewModel
     }
 }

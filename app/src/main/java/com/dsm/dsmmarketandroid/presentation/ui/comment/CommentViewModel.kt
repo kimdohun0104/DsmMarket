@@ -1,5 +1,6 @@
 package com.dsm.dsmmarketandroid.presentation.ui.comment
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.dsm.domain.usecase.GetCommentUseCase
 import com.dsm.dsmmarketandroid.presentation.base.BaseViewModel
@@ -22,11 +23,12 @@ class CommentViewModel(
     fun getCommentList(postId: Int, type: Int) {
         addDisposable(
             getPurchaseCommentUseCase.create(GetCommentUseCase.Params(postId, type))
+                .map(commentModelMapper::mapFrom)
                 .subscribe({
-                    val commentList = commentModelMapper.mapFrom(it)
-                    listItems.value = commentList
-                    commentCount.value = commentList.size
+                    listItems.value = it
+                    commentCount.value = it.size
                 }, {
+                    Log.d("DEBUGLOG", it.message.toString())
                     toastServerErrorEvent.call()
                 })
         )

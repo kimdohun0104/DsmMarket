@@ -1,6 +1,7 @@
 package com.dsm.dsmmarketandroid.presentation.ui.password.passwordConfirm
 
 import android.os.Bundle
+import android.view.inputmethod.EditorInfo
 import androidx.lifecycle.Observer
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.ActivityPasswordConfirmBinding
@@ -20,6 +21,13 @@ class PasswordConfirmActivity : BaseActivity<ActivityPasswordConfirmBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         tb_password_confirm.setNavigationOnClickListener { finish() }
+
+        et_original_password.setOnEditorActionListener { v, actionId, event ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                viewModel.confirmPassword()
+                true
+            } else false
+        }
 
         viewModel.intentChangePassword.observe(this, Observer {
             startActivity<ChangePasswordActivity>("email" to it.first, "authCode" to it.second)

@@ -12,7 +12,7 @@ class SendPasswordCodeViewModel(
     private val sendPasswordCodeUseCase: SendPasswordCodeUseCase
 ) : BaseViewModel() {
 
-    val email = MutableLiveData<String>()
+    val email = MutableLiveData<String>().apply { value = "" }
 
     val isSendPasswordCodeEnable: LiveData<Boolean> = Transformations.map(email) { it != "" }
 
@@ -22,6 +22,8 @@ class SendPasswordCodeViewModel(
     val finishActivityResult = SingleLiveEvent<Any>()
 
     fun sendPasswordCode() {
+        if (!isSendPasswordCodeEnable.value!!) return
+
         if (!Validator.validEmail(email.value!!)) {
             toastInvalidEmailEvent.call()
             return

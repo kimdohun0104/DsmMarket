@@ -1,5 +1,6 @@
 package com.dsm.data.remote.token
 
+import android.util.Log
 import com.dsm.data.local.pref.PrefHelper
 import com.dsm.domain.usecase.RefreshTokenUseCase
 import okhttp3.Interceptor
@@ -13,6 +14,7 @@ class TokenInterceptor(private val prefHelper: PrefHelper) : Interceptor, KoinCo
     private val refreshTokenUseCase: RefreshTokenUseCase by inject()
 
     override fun intercept(chain: Interceptor.Chain): Response {
+        Log.d("DEBUGLOG", prefHelper.getAccessToken()!!)
         val request = chain.request().newBuilder().run {
             addHeader("authorization", prefHelper.getAccessToken()!!)
             build()

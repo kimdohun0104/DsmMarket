@@ -50,6 +50,7 @@ class ChangePasswordViewModelTests {
     fun `when password different`() {
         viewModel.newPassword.value = "NEW_PASSWORD"
         viewModel.reType.value = "DIFF_PASSWORD"
+        viewModel.isChangePasswordEnable.value = true
 
         viewModel.changePassword("", 0)
 
@@ -60,6 +61,7 @@ class ChangePasswordViewModelTests {
     fun `change password success (200)`() {
         viewModel.newPassword.value = "NEW_PASSWORD"
         viewModel.reType.value = "NEW_PASSWORD"
+        viewModel.isChangePasswordEnable.value = true
 
         `when`(
             changePasswordUseCase

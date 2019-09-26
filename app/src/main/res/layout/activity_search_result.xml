@@ -41,6 +41,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/et_search"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_marginStart="16dp"
@@ -56,7 +57,9 @@
                     app:layout_constraintLeft_toRightOf="@id/ib_back"
                     app:layout_constraintRight_toLeftOf="@id/ib_search"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:text="@={viewModel.search}"/>
+                    android:text="@={viewModel.search}"
+                    android:singleLine="true"
+                    android:imeOptions="actionSearch" />
 
                 <androidx.appcompat.widget.AppCompatImageButton
                     android:id="@+id/ib_search"

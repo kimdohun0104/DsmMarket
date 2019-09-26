@@ -34,4 +34,8 @@ class PurchaseViewModel(
             .setFetchExecutor(executor)
             .build()
     }
+
+    fun refreshList() {
+        purchaseListItems.value?.dataSource?.invalidate()
+    }
 }

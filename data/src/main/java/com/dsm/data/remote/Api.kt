@@ -37,7 +37,7 @@ interface Api {
     @GET("token")
     fun refreshToken(@Query("refresh_token") refreshToken: String): Flowable<Response<Map<String, Any>>>
 
-    @GET("user")
+    @GET("user/nick")
     fun getUserNick(): Flowable<Response<Map<String, String>>>
 
     @GET("category")

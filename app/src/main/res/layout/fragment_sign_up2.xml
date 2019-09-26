@@ -27,7 +27,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="@string/name"
-                android:text="@={viewModel.name}"/>
+                android:text="@={viewModel.name}"
+                android:imeOptions="actionDone"
+                android:singleLine="true"
+                android:inputType="text"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
@@ -46,7 +49,7 @@
             android:layout_width="0dp"
             android:layout_height="30dp"
             android:layout_marginStart="16dp"
-            android:entries="@array/grade"
+            android:entries="@array/gender"
             app:layout_constraintBottom_toBottomOf="@id/tv_gender"
             app:layout_constraintLeft_toRightOf="@id/tv_gender"
             app:layout_constraintRight_toRightOf="@id/til_name"
@@ -67,7 +70,7 @@
         <Spinner
             android:layout_width="0dp"
             android:layout_height="30dp"
-            android:entries="@array/gender"
+            android:entries="@array/grade"
             app:layout_constraintBottom_toBottomOf="@id/tv_grade"
             app:layout_constraintLeft_toLeftOf="@id/spn_gender"
             app:layout_constraintRight_toRightOf="@id/spn_gender"

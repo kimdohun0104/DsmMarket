@@ -44,10 +44,14 @@
             app:layout_constraintTop_toBottomOf="@id/tb_change_name">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_nick"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="@{nick}"
-                android:text="@={viewModel.nick}"/>
+                android:text="@={viewModel.nick}"
+                android:singleLine="true"
+                android:inputType="text"
+                android:imeOptions="actionDone" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button

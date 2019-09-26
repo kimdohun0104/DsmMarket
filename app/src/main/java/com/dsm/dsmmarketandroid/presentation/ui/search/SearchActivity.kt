@@ -1,6 +1,7 @@
 package com.dsm.dsmmarketandroid.presentation.ui.search
 
 import android.os.Bundle
+import android.view.inputmethod.EditorInfo
 import androidx.lifecycle.Observer
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.ActivitySearchBinding
@@ -25,11 +26,20 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
         val adapter = SearchHistoryListAdapter(viewModel)
         rv_recent_search.adapter = adapter
 
+        et_search.setOnEditorActionListener { v, actionId, event ->
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                viewModel.search()
+                true
+            } else false
+        }
+
         viewModel.getSearchHistory()
 
         viewModel.searchHistoryList.observe(this, Observer { adapter.setItems(it) })
 
         viewModel.intentSearchResult.observe(this, Observer { startActivity<SearchResultActivity>("search" to it) })
+
+        viewModel.finishActivityEvent.observe(this, Observer { finish() })
 
         binding.viewModel = viewModel
     }

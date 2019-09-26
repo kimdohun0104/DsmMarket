@@ -27,7 +27,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="@string/email"
-                android:text="@={viewModel.email}"/>
+                android:text="@={viewModel.email}"
+                android:inputType="textWebEmailAddress"
+                android:nextFocusDown="@id/et_password"
+                android:singleLine="true"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -44,7 +47,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="@string/password"
-                android:text="@={viewModel.password}"/>
+                android:text="@={viewModel.password}"
+                android:inputType="textPassword"
+                android:nextFocusDown="@id/et_password_confirm"
+                android:singleLine="true"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -61,7 +67,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="@string/password_confirm"
-                android:text="@={viewModel.reType}"/>
+                android:text="@={viewModel.reType}"
+                android:inputType="textPassword"
+                android:singleLine="true"/>
         </com.google.android.material.textfield.TextInputLayout>
 
 

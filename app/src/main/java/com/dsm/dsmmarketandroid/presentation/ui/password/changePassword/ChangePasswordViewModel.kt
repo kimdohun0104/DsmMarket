@@ -16,6 +16,7 @@ class ChangePasswordViewModel(
     val isChangePasswordEnable = MediatorLiveData<Boolean>().apply {
         addSource(newPassword) { value = !newPassword.value.isNullOrBlank() && !reType.value.isNullOrBlank() }
         addSource(reType) { value = !newPassword.value.isNullOrBlank() && !reType.value.isNullOrBlank() }
+        value = false
     }
 
     val toastPasswordDiffEvent = SingleLiveEvent<Any>()
@@ -24,6 +25,8 @@ class ChangePasswordViewModel(
     val finishActivityEvent = SingleLiveEvent<Any>()
 
     fun changePassword(email: String, authCode: Int) {
+        if (!isChangePasswordEnable.value!!) return
+
         if (newPassword.value != reType.value) {
             toastPasswordDiffEvent.call()
             return

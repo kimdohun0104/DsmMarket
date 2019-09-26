@@ -79,9 +79,6 @@ dependencies {
     // anko
     implementation dependencies.anko
 
-    // picasso
-    implementation dependencies.picasso
-
     // koin
     implementation dependencies.koinAndroid
     implementation dependencies.koinViewModel
@@ -102,6 +99,13 @@ dependencies {
 
     // paging
     implementation dependencies.paging
+
+    // glide
+    implementation dependencies.glide
+    kapt dependencies.glideCompiler
+
+    // rxJava
+    implementation dependencies.rxAndroid
 }
 
 apply plugin: 'com.google.gms.google-services'

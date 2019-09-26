@@ -27,15 +27,17 @@
             android:scaleType="centerCrop"/>
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:textAlignment="center"
             android:text="@{recommend.title}"
+            android:singleLine="true"
             android:textColor="@color/black"
             app:layout_constraintTop_toBottomOf="@id/iv_recommend"
             app:layout_constraintLeft_toLeftOf="@id/iv_recommend"
             app:layout_constraintRight_toRightOf="@id/iv_recommend"
             android:textSize="16sp"
-            android:layout_marginTop="4dp"/>
+            android:layout_marginTop="4dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

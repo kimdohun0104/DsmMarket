@@ -88,17 +88,6 @@
             app:layout_constraintLeft_toLeftOf="@id/tv_post_date"
             tools:layout_editor_absoluteY="73dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
-            android:text="@string/won"
-            android:textColor="@color/black"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            app:layout_constraintLeft_toRightOf="@id/tv_product_price"
-            app:layout_constraintTop_toTopOf="@id/tv_product_price" />
-
         <View
             android:layout_width="0dp"
             android:layout_height="0.3dp"

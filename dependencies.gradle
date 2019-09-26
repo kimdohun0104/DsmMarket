@@ -5,7 +5,6 @@ ext {
     firebaseCoreVersion = '17.1.0'
     crashlyticsVersion = '2.10.1'
     ankoVersion = '0.10.8'
-    picassoVersion = '2.71828'
     retrofitVersion = '2.6.1'
     rxJavaVersion = '2.2.12'
     rxAndroidVersion = '2.1.1'
@@ -13,6 +12,7 @@ ext {
     lifecycleVersion = '2.0.0'
     roomVersion = '2.2.0-alpha02'
     pagingVersion = '1.0.1'
+    glideVersion = '4.9.0'
 
     // testing
     junitVersion = '4.12'
@@ -48,7 +48,6 @@ ext {
             firebaseCore: "com.google.firebase:firebase-core:$firebaseCoreVersion",
             crashlytics: "com.crashlytics.sdk.android:crashlytics:$crashlyticsVersion",
             anko: "org.jetbrains.anko:anko:$ankoVersion",
-            picasso: "com.squareup.picasso:picasso:$picassoVersion",
             koinAndroid: "org.koin:koin-android:$koinVersion",
             retrofit: "com.squareup.retrofit2:retrofit:$retrofitVersion",
             retrofitGson: "com.squareup.retrofit2:converter-gson:$retrofitVersion",
@@ -59,7 +58,10 @@ ext {
             koinViewModel: "org.koin:koin-androidx-viewmodel:$koinVersion",
             roomRuntime: "androidx.room:room-runtime:$roomVersion",
             roomCompiler: "androidx.room:room-compiler:$roomVersion",
-            paging: "android.arch.paging:runtime:$pagingVersion"
+            paging: "android.arch.paging:runtime:$pagingVersion",
+            glide: "com.github.bumptech.glide:glide:$glideVersion",
+            glideCompiler: "com.github.bumptech.glide:compiler:$glideVersion",
+            rxAndroid: "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
     ]
 
     dataTestDependencies = [

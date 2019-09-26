@@ -33,6 +33,11 @@ class PurchaseFragment : BaseFragment<FragmentPurchaseBinding>() {
         setHasOptionsMenu(true)
         activity?.setTitle(R.string.purchase)
 
+        srl_purchase.setOnRefreshListener {
+            viewModel.refreshList()
+            srl_purchase.isRefreshing = false
+        }
+
         val adapter = PurchaseListAdapter(activity!!)
         rv_purchase.adapter = adapter
 

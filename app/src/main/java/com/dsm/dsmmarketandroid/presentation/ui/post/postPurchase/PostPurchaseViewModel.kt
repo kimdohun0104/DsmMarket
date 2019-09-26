@@ -43,7 +43,7 @@ class PostPurchaseViewModel(private val postPurchaseUseCase: PostPurchaseUseCase
         val multipartImageList = arrayListOf<MultipartBody.Part>()
         imageList.value!!.forEach {
             val imageFile = File(it)
-            multipartImageList.add(MultipartBody.Part.createFormData("file", imageFile.name, RequestBody.create(MediaType.parse("image/*"), imageFile)))
+            multipartImageList.add(MultipartBody.Part.createFormData("img", imageFile.name, RequestBody.create(MediaType.parse("image/*"), imageFile)))
         }
 
         addDisposable(

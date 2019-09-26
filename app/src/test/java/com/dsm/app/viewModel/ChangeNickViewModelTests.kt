@@ -4,14 +4,12 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.dsm.domain.usecase.ChangeNickUseCase
 import com.dsm.dsmmarketandroid.presentation.ui.changeNick.ChangeNickViewModel
 import com.jraska.livedata.test
-import io.reactivex.Flowable
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.mockito.Mock
-import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 
 class ChangeNickViewModelTests {
@@ -43,16 +41,5 @@ class ChangeNickViewModelTests {
         viewModel.nick.value = ""
 
         assertFalse(viewModel.isChangeNickEnable.test().value())
-    }
-
-    @Test
-    fun `change nick success (200)`() {
-        viewModel.nick.value = "NICK"
-
-        `when`(changeNickUseCase.create(viewModel.nick.value!!)).thenReturn(Flowable.just(Unit))
-
-        viewModel.changeNick()
-
-        viewModel.finishActivityEvent.test().assertHasValue()
     }
 }

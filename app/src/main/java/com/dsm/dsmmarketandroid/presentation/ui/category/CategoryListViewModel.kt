@@ -46,4 +46,12 @@ class CategoryListViewModel(
             .setFetchExecutor(executor)
             .build()
     }
+
+    fun refreshPurchase() {
+        purchaseList.value?.dataSource?.invalidate()
+    }
+
+    fun refreshRent() {
+        rentList.value?.dataSource?.invalidate()
+    }
 }

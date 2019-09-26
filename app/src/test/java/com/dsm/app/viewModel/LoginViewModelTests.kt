@@ -54,6 +54,7 @@ class LoginViewModelTests {
     fun `login success (200)`() {
         viewModel.email.value = "test@test.com"
         viewModel.password.value = "testPassword"
+        viewModel.isLoginEnable.value = true
 
         val request = hashMapOf(
             "email" to viewModel.email.value,

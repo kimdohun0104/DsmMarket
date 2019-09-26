@@ -72,6 +72,8 @@ class RentDetailViewModelTests {
 
         val result = rentDetailModelMapper.mapFrom(response)
 
+        Thread.sleep(90)
+
         viewModel.rentDetail.test().assertValue(result)
     }
 

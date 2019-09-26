@@ -11,6 +11,7 @@ import com.dsm.data.paging.rent.RentDataFactory
 import com.dsm.dsmmarketandroid.presentation.base.BaseViewModel
 import com.dsm.dsmmarketandroid.presentation.mapper.ProductModelMapper
 import com.dsm.dsmmarketandroid.presentation.model.ProductModel
+import com.dsm.dsmmarketandroid.presentation.util.SingleLiveEvent
 import java.util.concurrent.Executors
 
 class SearchResultViewModel(
@@ -19,7 +20,7 @@ class SearchResultViewModel(
     productModelMapper: ProductModelMapper
 ) : BaseViewModel() {
 
-    val search = MutableLiveData<String>()
+    val search = MutableLiveData<String>().apply { value = "" }
 
     val purchaseNetworkState: LiveData<NetworkState>
     val purchaseListItems: LiveData<PagedList<ProductModel>>
@@ -30,6 +31,8 @@ class SearchResultViewModel(
     val intentSearchResult = MutableLiveData<String>()
 
     val isSearchEnable = Transformations.map(search) { it != "" }
+
+    val finishActivityEvent = SingleLiveEvent<Any>()
 
     init {
         val executor = Executors.newFixedThreadPool(5)
@@ -55,6 +58,16 @@ class SearchResultViewModel(
     }
 
     fun search() {
+        if (!isSearchEnable.value!!) return
         intentSearchResult.value = search.value!!
+        finishActivityEvent.call()
+    }
+
+    fun refreshPurchase() {
+        purchaseListItems.value?.dataSource?.invalidate()
+    }
+
+    fun refreshRent() {
+        rentListItems.value?.dataSource?.invalidate()
     }
 }

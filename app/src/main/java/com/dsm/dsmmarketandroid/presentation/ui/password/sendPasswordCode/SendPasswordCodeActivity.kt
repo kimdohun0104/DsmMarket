@@ -1,11 +1,11 @@
 package com.dsm.dsmmarketandroid.presentation.ui.password.sendPasswordCode
 
 import android.os.Bundle
+import android.view.inputmethod.EditorInfo
 import androidx.lifecycle.Observer
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.ActivitySendPasswordCodeBinding
 import com.dsm.dsmmarketandroid.presentation.ui.base.BaseActivity
-import com.dsm.dsmmarketandroid.presentation.ui.password.changePassword.ChangePasswordActivity
 import com.dsm.dsmmarketandroid.presentation.ui.password.passwordCodeConfirm.PasswordCodeConfirmActivity
 import kotlinx.android.synthetic.main.activity_send_password_code.*
 import org.jetbrains.anko.startActivity
@@ -23,7 +23,12 @@ class SendPasswordCodeActivity : BaseActivity<ActivitySendPasswordCodeBinding>()
 
         tb_login.setNavigationOnClickListener { finish() }
 
-        btn_find_password.setOnClickListener { startActivity<ChangePasswordActivity>() }
+        et_email.setOnEditorActionListener { v, actionId, event ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                viewModel.sendPasswordCode()
+                true
+            } else false
+        }
 
         viewModel.toastInvalidEmailEvent.observe(this, Observer { toast(getString(R.string.fail_invalid_email)) })
 

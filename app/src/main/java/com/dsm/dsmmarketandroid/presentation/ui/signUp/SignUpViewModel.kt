@@ -60,7 +60,7 @@ class SignUpViewModel(private val signUpUseCase: SignUpUseCase) : BaseViewModel(
                     "email" to email.value,
                     "password" to password.value,
                     "nick" to name.value,
-                    "grade" to grade.value,
+                    "grade" to grade.value!!.toInt(),
                     "gender" to gender.value
                 )
             ).subscribe({
@@ -75,7 +75,7 @@ class SignUpViewModel(private val signUpUseCase: SignUpUseCase) : BaseViewModel(
                             else
                                 toastExistentNameEvent.call()
                         }
-                    }
+                    } else toastServerErrorEvent.call()
                 } else toastServerErrorEvent.call()
             })
         )

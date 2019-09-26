@@ -9,9 +9,10 @@ import androidx.databinding.BindingConversion
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
+import com.bumptech.glide.Glide
+import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.DetailImagePagerAdapter
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.ModifyImageListAdapter
-import com.squareup.picasso.Picasso
 
 
 object BindingUtil {
@@ -54,7 +55,8 @@ object BindingUtil {
     @JvmStatic
     @BindingAdapter("bind:image")
     fun bindImage(view: ImageView, value: String?) {
-        value?.let { Picasso.get().load(it).into(view) }
+//        value?.let { Picasso.get().load(it).into(view) }
+        value?.let { Glide.with(view).load(it).placeholder(R.drawable.image_placeholder).error(R.drawable.image_error).into(view) }
     }
 
     @JvmStatic

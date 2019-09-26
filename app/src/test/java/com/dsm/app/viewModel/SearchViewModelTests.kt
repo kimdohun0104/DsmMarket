@@ -35,16 +35,6 @@ class SearchViewModelTests {
     }
 
     @Test
-    fun searchSuccess() {
-        val searchText = "SEARCH_TEXT"
-        viewModel.searchText.value = searchText
-
-        viewModel.search()
-
-        viewModel.intentSearchResult.test().assertValue(searchText)
-    }
-
-    @Test
    fun getSearchHistorySuccess() {
         val response = listOf("CONTENT")
         `when`(getSearchHistoryUseCase.create(Unit))

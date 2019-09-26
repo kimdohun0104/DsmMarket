@@ -2,7 +2,9 @@ package com.dsm.data.dataSource.purchase
 
 import com.dsm.data.addSchedulers
 import com.dsm.data.local.db.dao.PurchaseDao
+import com.dsm.data.local.db.dao.SearchDao
 import com.dsm.data.local.db.entity.PurchaseDetailRoomEntity
+import com.dsm.data.local.db.entity.SearchHistoryRoomEntity
 import com.dsm.data.remote.Api
 import com.dsm.data.remote.entity.ProductListEntity
 import com.dsm.data.remote.entity.PurchaseDetailEntity
@@ -12,7 +14,8 @@ import retrofit2.Response
 
 class PurchaseDataSourceImpl(
     private val api: Api,
-    private val purchaseDao: PurchaseDao
+    private val purchaseDao: PurchaseDao,
+    private val searchDao: SearchDao
 ) : PurchaseDataSource {
 
     override fun getPurchaseList(page: Int, pageSize: Int, search: String, category: String): Flowable<ProductListEntity> =
@@ -29,4 +32,7 @@ class PurchaseDataSourceImpl(
 
     override fun modifyPurchase(params: Any): Flowable<Response<Unit>> =
         api.modifyPurchase(params).addSchedulers()
+
+    override fun addSearchHistory(search: String): Completable =
+        searchDao.addSearchHistory(SearchHistoryRoomEntity(search)).addSchedulers()
 }

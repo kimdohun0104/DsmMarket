@@ -6,7 +6,7 @@ import io.reactivex.Flowable
 
 class UnInterestUseCase(private val interestRepository: InterestRepository) : UseCase<UnInterestUseCase.Params, Unit>() {
     override fun create(data: Params): Flowable<Unit> =
-        interestRepository.interest(data.postId, data.type)
+        interestRepository.unInterest(data.postId, data.type)
 
     data class Params(val postId: Int, val type: Int)
 }

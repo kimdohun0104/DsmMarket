@@ -2,6 +2,7 @@
 <layout>
 
     <data>
+
         <variable
             name="viewModel"
             type="com.dsm.dsmmarketandroid.presentation.ui.post.postPurchase.PostPurchaseViewModel" />
@@ -11,6 +12,7 @@
             type="Boolean" />
 
         <import type="android.view.View" />
+
         <import type="com.dsm.dsmmarketandroid.presentation.util.BindingUtil" />
     </data>
 
@@ -41,10 +43,13 @@
             android:layout_marginStart="30dp"
             android:background="@null"
             android:hint="@string/title"
+            android:inputType="text"
+            android:nextFocusDown="@id/et_price"
+            android:singleLine="true"
+            android:text="@={viewModel.title}"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tb_post_purchase"
-            android:text="@={viewModel.title}"/>
+            app:layout_constraintTop_toBottomOf="@id/tb_post_purchase" />
 
         <View
             android:layout_width="0dp"
@@ -59,11 +64,15 @@
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:background="@null"
+            android:digits="1234567890"
             android:hint="@string/price"
+            android:inputType="number"
+            android:singleLine="true"
+            android:text="@={viewModel.price}"
             app:layout_constraintLeft_toLeftOf="@id/et_title"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/et_title"
-            android:text="@={viewModel.price}"/>
+            android:nextFocusDown="@id/cl_category"/>
 
         <View
             android:layout_width="0dp"
@@ -89,20 +98,20 @@
                 android:text="@string/category"
                 android:textColor="@color/colorGrey"
                 android:textSize="16sp"
+                android:visibility="@{viewModel.isCategorySelected ? View.INVISIBLE : View.VISIBLE}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:visibility="@{viewModel.isCategorySelected ? View.INVISIBLE : View.VISIBLE}" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintLeft_toLeftOf="@id/tv_category"
-                app:layout_constraintTop_toTopOf="@id/tv_category"
-                app:layout_constraintBottom_toBottomOf="@id/tv_category"
-                android:textSize="18sp"
+                android:text="@{viewModel.category}"
                 android:textColor="@color/black"
-                android:text="@{viewModel.category}"/>
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@id/tv_category"
+                app:layout_constraintLeft_toLeftOf="@id/tv_category"
+                app:layout_constraintTop_toTopOf="@id/tv_category" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="21dp"
@@ -148,10 +157,10 @@
             android:id="@+id/rv_post_image"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/iv_select_image"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@id/iv_select_image"
-            app:layout_constraintBottom_toBottomOf="@id/iv_select_image" />
+            app:layout_constraintTop_toTopOf="@id/iv_select_image" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_select_image"
@@ -159,9 +168,9 @@
             android:layout_height="42dp"
             android:layout_marginTop="13dp"
             android:src="@drawable/ic_select_picture"
+            android:visibility="@{isImageSelectVisible ? View.VISIBLE : View.INVISIBLE}"
             app:layout_constraintLeft_toLeftOf="@id/tv_picture"
-            app:layout_constraintTop_toBottomOf="@id/tv_picture"
-            android:visibility="@{isImageSelectVisible ? View.VISIBLE : View.INVISIBLE}"/>
+            app:layout_constraintTop_toBottomOf="@id/tv_picture" />
 
         <View
             android:id="@+id/view_picture_line"
@@ -181,25 +190,25 @@
             android:gravity="top"
             android:hint="@string/input_content"
             android:paddingTop="16dp"
+            android:text="@={viewModel.content}"
             app:layout_constraintBottom_toTopOf="@id/btn_post"
             app:layout_constraintLeft_toLeftOf="@id/et_price"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/view_picture_line"
-            android:text="@={viewModel.content}"/>
+            app:layout_constraintTop_toBottomOf="@id/view_picture_line" />
 
         <Button
             android:id="@+id/btn_post"
             android:layout_width="0dp"
             android:layout_height="46dp"
+            android:background="@{viewModel.isPostEnable ? @drawable/bg_gradient_primary : BindingUtil.convertColorToDrawable(@color/colorGrey_3) }"
+            android:clickable="@{viewModel.isPostEnable}"
+            android:onClick="@{() -> viewModel.post()}"
             android:text="@string/post_product"
             android:textColor="@color/white"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            android:onClick="@{() -> viewModel.post()}"
-            android:background="@{viewModel.isPostEnable ? @drawable/bg_gradient_primary : BindingUtil.convertColorToDrawable(@color/colorGrey_3) }"
-            android:clickable="@{viewModel.isPostEnable}"/>
+            app:layout_constraintRight_toRightOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

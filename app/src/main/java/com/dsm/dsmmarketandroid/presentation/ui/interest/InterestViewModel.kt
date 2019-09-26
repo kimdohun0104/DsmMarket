@@ -1,6 +1,7 @@
 package com.dsm.dsmmarketandroid.presentation.ui.interest
 
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import com.dsm.domain.usecase.GetInterestUseCase
 import com.dsm.dsmmarketandroid.presentation.base.BaseViewModel
 import com.dsm.dsmmarketandroid.presentation.mapper.ProductModelMapper
@@ -20,12 +21,19 @@ class InterestViewModel(
 
     val toastServerErrorEvent = SingleLiveEvent<Any>()
 
+    val hidePurchaseRefresh = SingleLiveEvent<Any>()
+    val hideRentRefresh = SingleLiveEvent<Any>()
+
+    val isPurchaseEmpty = Transformations.map(purchaseList) { it.isEmpty() }
+    val isRentEmpty = Transformations.map(rentList) { it.isEmpty() }
+
     fun getInterestPurchase() {
         addDisposable(
             getInterestUseCase.create(0)
                 .subscribe({
                     purchaseList.value = productModelMapper.mapFrom(it)
                     hidePurchaseProgressEvent.call()
+                    hidePurchaseRefresh.call()
                 }, {
                     toastServerErrorEvent.call()
                 })
@@ -38,6 +46,7 @@ class InterestViewModel(
                 .subscribe({
                     rentList.value = productModelMapper.mapFrom(it)
                     hideRentProgressEvent.call()
+                    hideRentRefresh.call()
                 }, {
                     toastServerErrorEvent.call()
                 })

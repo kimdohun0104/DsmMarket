@@ -40,7 +40,10 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tb_post_rent"
-            android:text="@={viewModel.title}"/>
+            android:text="@={viewModel.title}"
+            android:singleLine="true"
+            android:inputType="text"
+            android:nextFocusDown="@id/et_price"/>
 
         <View
             android:layout_width="0dp"
@@ -59,7 +62,10 @@
             app:layout_constraintLeft_toLeftOf="@id/et_title"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/et_title"
-            android:text="@={viewModel.price}"/>
+            android:text="@={viewModel.price}"
+            android:digits="0123456789"
+            android:inputType="number"
+            android:nextFocusDown="@id/cl_category"/>
 
         <TextView
             android:id="@+id/tv_one_time"

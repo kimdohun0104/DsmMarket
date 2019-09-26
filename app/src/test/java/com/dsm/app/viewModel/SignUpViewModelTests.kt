@@ -82,13 +82,14 @@ class SignUpViewModelTests {
         viewModel.name.value = "김도훈"
         viewModel.gender.value = "남성"
         viewModel.grade.value = "1"
+        viewModel.isSignUpEnable.value = true
 
         val request = hashMapOf(
             "email" to viewModel.email.value,
             "password" to viewModel.password.value,
             "nick" to viewModel.name.value,
             "gender" to viewModel.gender.value,
-            "grade" to viewModel.grade.value
+            "grade" to viewModel.grade.value!!.toInt()
         )
         `when`(signUpUseCase.create(request)).thenReturn(Flowable.just(Unit))
 

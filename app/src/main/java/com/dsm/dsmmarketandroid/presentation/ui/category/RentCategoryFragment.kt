@@ -23,6 +23,11 @@ class RentCategoryFragment : BaseFragment<FragmentRentCategoryBinding>() {
         val adapter = RentListAdapter(activity!!)
         rv_category_rent.adapter = adapter
 
+        srl_category_rent.setOnRefreshListener {
+            viewModel.refreshRent()
+            srl_category_rent.isRefreshing = false
+        }
+
         viewModel.rentNetworkState.observe(this, Observer {
             if (it == NetworkState.LOADED) pb_loading.visibility = View.GONE
             adapter.setNetworkState(it)

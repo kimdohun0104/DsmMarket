@@ -12,7 +12,7 @@ class PasswordCodeConfirmViewModel(
     private val passwordCodeConfirmUseCase: PasswordCodeConfirmUseCase
 ) : BaseViewModel() {
 
-    val passwordCode = MutableLiveData<String>()
+    val passwordCode = MutableLiveData<String>().apply { value = "" }
 
     val isConfirmPasswordCodeEnable: LiveData<Boolean> = Transformations.map(passwordCode) { it != "" }
 
@@ -23,6 +23,8 @@ class PasswordCodeConfirmViewModel(
     val toastServerErrorEvent = SingleLiveEvent<Any>()
 
     fun confirmPasswordCode(email: String) {
+        if (!isConfirmPasswordCodeEnable.value!!) return
+
         addDisposable(
             passwordCodeConfirmUseCase.create(
                 hashMapOf(
@@ -36,6 +38,7 @@ class PasswordCodeConfirmViewModel(
                 if (it is HttpException) {
                     if (it.code() == 403)
                         toastConfirmCodeFailEvent.call()
+                    else toastServerErrorEvent.call()
                 } else toastServerErrorEvent.call()
             })
         )

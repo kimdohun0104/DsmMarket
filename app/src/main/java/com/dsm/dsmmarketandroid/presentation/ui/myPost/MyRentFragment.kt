@@ -22,6 +22,8 @@ class MyRentFragment : BaseFragment<FragmentMyRentBinding>() {
         val adapter = MyRentListAdapter(activity!!, childFragmentManager)
         rv_my_post_rent.adapter = adapter
 
+        srl_my_rent.setOnRefreshListener { viewModel.getMyRent() }
+
         viewModel.getMyRent()
 
         viewModel.rentList.observe(this, Observer { adapter.setItems(it) })
@@ -29,5 +31,9 @@ class MyRentFragment : BaseFragment<FragmentMyRentBinding>() {
         viewModel.deletePositionFromRent.observe(this, Observer { adapter.deleteAt(it) })
 
         viewModel.hideRentLoadingEvent.observe(this, Observer { pb_loading.visibility = View.GONE })
+
+        viewModel.hideRentRefresh.observe(this, Observer { srl_my_rent.isRefreshing = false })
+
+        binding.viewModel = viewModel
     }
 }

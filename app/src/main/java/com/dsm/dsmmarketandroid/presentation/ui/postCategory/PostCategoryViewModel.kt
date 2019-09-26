@@ -18,10 +18,13 @@ class PostCategoryViewModel(
 
     val serverErrorEvent = SingleLiveEvent<Any>()
 
+    val isProgressVisible = MutableLiveData<Boolean>().apply { value = true }
+
     fun getPostCategory() {
         addDisposable(
             getPostCategoryUseCase.create(Unit).subscribe({
                 categoryList.addAll(postCategoryModelMapper.mapFrom(it))
+                isProgressVisible.value = false
             }, {
                 serverErrorEvent.call()
             })

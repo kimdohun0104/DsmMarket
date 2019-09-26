@@ -1,6 +1,7 @@
 package com.dsm.dsmmarketandroid.presentation.ui.myPost
 
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import com.dsm.domain.usecase.CompletePurchaseUseCase
 import com.dsm.domain.usecase.CompleteRentUseCase
 import com.dsm.domain.usecase.GetMyPurchaseUseCase
@@ -31,12 +32,19 @@ class MyPostViewModel(
     val hidePurchaseLoadingEvent = SingleLiveEvent<Any>()
     val hideRentLoadingEvent = SingleLiveEvent<Any>()
 
+    val isPurchaseEmpty = Transformations.map(purchaseList) { it.isEmpty() }
+    val isRentEmpty = Transformations.map(rentList) { it.isEmpty() }
+
+    val hidePurchaseRefresh = SingleLiveEvent<Any>()
+    val hideRentRefresh = SingleLiveEvent<Any>()
+
     fun getMyPurchase() {
         addDisposable(
             getMyPurchaseUseCase.create(Unit)
                 .subscribe({
                     purchaseList.value = productModelMapper.mapFrom(it)
                     hidePurchaseLoadingEvent.call()
+                    hidePurchaseRefresh.call()
                 }, {
                     toastServerErrorEvent.call()
                 })
@@ -49,6 +57,7 @@ class MyPostViewModel(
                 .subscribe({
                     rentList.value = productModelMapper.mapFrom(it)
                     hideRentLoadingEvent.call()
+                    hideRentRefresh.call()
                 }, {
                     toastServerErrorEvent.call()
                 })

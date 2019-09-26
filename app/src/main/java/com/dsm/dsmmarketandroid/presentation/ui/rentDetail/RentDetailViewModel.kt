@@ -12,6 +12,7 @@ import com.dsm.dsmmarketandroid.presentation.model.RecommendModel
 import com.dsm.dsmmarketandroid.presentation.model.RentDetailModel
 import com.dsm.dsmmarketandroid.presentation.util.SingleLiveEvent
 import retrofit2.HttpException
+import java.util.concurrent.TimeUnit
 
 class RentDetailViewModel(
     private val getRentDetailUseCase: GetRentDetailUseCase,
@@ -35,10 +36,11 @@ class RentDetailViewModel(
     fun getRentDetail(postId: Int) {
         addDisposable(
             getRentDetailUseCase.create(postId)
+                .map(rentDetailModelMapper::mapFrom)
+                .delay(70, TimeUnit.MILLISECONDS)
                 .subscribe({
-                    val result = rentDetailModelMapper.mapFrom(it)
-                    isInterest.value = result.isInterest
-                    rentDetail.value = result
+                    isInterest.postValue(it.isInterest)
+                    rentDetail.postValue(it)
                 }, {
                     if (it is HttpException) {
                         if (it.code() == 410)

@@ -10,7 +10,7 @@ import retrofit2.HttpException
 
 class ChangeNickViewModel(private val changeNickUseCase: ChangeNickUseCase) : BaseViewModel() {
 
-    val nick = MutableLiveData<String>()
+    val nick = MutableLiveData<String>().apply { value = "" }
 
     val isChangeNickEnable: LiveData<Boolean> = Transformations.map(nick) { it != "" }
 
@@ -19,6 +19,8 @@ class ChangeNickViewModel(private val changeNickUseCase: ChangeNickUseCase) : Ba
     val toastServerErrorEvent = SingleLiveEvent<Any>()
 
     fun changeNick() {
+        if (!isChangeNickEnable.value!!) return
+
         addDisposable(
             changeNickUseCase.create(nick.value!!)
                 .subscribe({

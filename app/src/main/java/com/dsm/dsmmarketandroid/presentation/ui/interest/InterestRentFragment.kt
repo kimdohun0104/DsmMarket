@@ -22,10 +22,16 @@ class InterestRentFragment : BaseFragment<FragmentInterestRentBinding>() {
         val adapter = InterestRentListAdapter(activity!!)
         rv_interest_rent.adapter = adapter
 
+        srl_interest_rent.setOnRefreshListener { viewModel.getInterestRent() }
+
         viewModel.getInterestRent()
 
         viewModel.rentList.observe(this, Observer { adapter.setItems(it) })
 
         viewModel.hideRentProgressEvent.observe(this, Observer { pb_loading.visibility = View.GONE })
+
+        viewModel.hideRentRefresh.observe(this, Observer { srl_interest_rent.isRefreshing = false })
+
+        binding.viewModel = viewModel
     }
 }

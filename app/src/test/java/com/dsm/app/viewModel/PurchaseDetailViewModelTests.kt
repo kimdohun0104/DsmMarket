@@ -71,6 +71,8 @@ class PurchaseDetailViewModelTests {
 
         val result = purchaseDetailModelMapper.mapFrom(response)
 
+        Thread.sleep(90)
+
         viewModel.purchaseDetail.test().assertValue(result)
     }
 

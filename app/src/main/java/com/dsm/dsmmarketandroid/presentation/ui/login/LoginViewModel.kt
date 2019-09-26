@@ -15,6 +15,7 @@ class LoginViewModel(private val loginUseCase: LoginUseCase) : BaseViewModel() {
     val isLoginEnable = MediatorLiveData<Boolean>().apply {
         addSource(email) { value = !email.value.isNullOrBlank() && !password.value.isNullOrBlank() }
         addSource(password) { value = !email.value.isNullOrBlank() && !password.value.isNullOrBlank() }
+        value = false
     }
 
     val intentMainActivityEvent = SingleLiveEvent<Any>()
@@ -22,6 +23,8 @@ class LoginViewModel(private val loginUseCase: LoginUseCase) : BaseViewModel() {
     val toastServerErrorEvent = SingleLiveEvent<Any>()
 
     fun login() {
+        if (!isLoginEnable.value!!) return
+
         addDisposable(
             loginUseCase.create(
                 hashMapOf(

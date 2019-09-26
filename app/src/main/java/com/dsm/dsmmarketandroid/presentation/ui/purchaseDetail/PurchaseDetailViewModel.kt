@@ -9,6 +9,7 @@ import com.dsm.dsmmarketandroid.presentation.model.PurchaseDetailModel
 import com.dsm.dsmmarketandroid.presentation.model.RecommendModel
 import com.dsm.dsmmarketandroid.presentation.util.SingleLiveEvent
 import retrofit2.HttpException
+import java.util.concurrent.TimeUnit
 
 class PurchaseDetailViewModel(
     private val getPurchaseDetailUseCase: GetPurchaseDetailUseCase,
@@ -36,10 +37,11 @@ class PurchaseDetailViewModel(
     fun getPurchaseDetail(postId: Int) {
         addDisposable(
             getPurchaseDetailUseCase.create(postId)
+                .delay(80, TimeUnit.MILLISECONDS)
                 .subscribe({
                     val result = purchaseDetailModelMapper.mapFrom(it)
-                    isInterest.value = result.isInterest
-                    purchaseDetail.value = result
+                    isInterest.postValue(result.isInterest)
+                    purchaseDetail.postValue(result)
                 }, {
                     if (it is HttpException) {
                         if (it.code() == 410) {

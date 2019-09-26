@@ -23,6 +23,11 @@ class SearchRentFragment : BaseFragment<FragmentSearchRentBinding>() {
         val adapter = RentListAdapter(activity!!)
         rv_rent.adapter = adapter
 
+        srl_search_rents.setOnRefreshListener {
+            viewModel.refreshRent()
+            srl_search_rents.isRefreshing = false
+        }
+
         viewModel.rentNetworkState.observe(this, Observer {
             if (it == NetworkState.LOADED) pb_loading.visibility = View.GONE
             adapter.setNetworkState(it)

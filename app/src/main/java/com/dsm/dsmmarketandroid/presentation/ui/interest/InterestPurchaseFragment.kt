@@ -22,10 +22,16 @@ class InterestPurchaseFragment : BaseFragment<FragmentInterestPurchaseBinding>()
         val adapter = InterestPurchaseListAdapter(activity!!)
         rv_interest_purchase.adapter = adapter
 
+        srl_interest_purchase.setOnRefreshListener { viewModel.getInterestPurchase() }
+
         viewModel.getInterestPurchase()
 
         viewModel.purchaseList.observe(this, Observer { adapter.setItems(it) })
 
         viewModel.hidePurchaseProgressEvent.observe(this, Observer { pb_loading.visibility = View.GONE })
+
+        viewModel.hidePurchaseRefresh.observe(this, Observer { srl_interest_purchase.isRefreshing = false })
+
+        binding.viewModel = viewModel
     }
 }

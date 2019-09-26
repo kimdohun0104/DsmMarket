@@ -2,6 +2,7 @@ package com.dsm.dsmmarketandroid.presentation.ui.password.changePassword
 
 import android.os.Bundle
 import android.view.animation.AnimationUtils
+import android.view.inputmethod.EditorInfo
 import androidx.lifecycle.Observer
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.ActivityChangePasswordBinding
@@ -19,8 +20,17 @@ class ChangePasswordActivity : BaseActivity<ActivityChangePasswordBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         tb_change_password.setNavigationOnClickListener { finish() }
-        binding.authCode = intent.getIntExtra("authCode", 0)
-        binding.email = intent.getStringExtra("email")
+        val authCode = intent.getIntExtra("authCode", 0)
+        val email = intent.getStringExtra("email") ?: ""
+        binding.authCode = authCode
+        binding.email = email
+
+        et_new_password_confirm.setOnEditorActionListener { v, actionId, event ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                viewModel.changePassword(email, authCode)
+                true
+            } else false
+        }
 
         val rotateAnim = AnimationUtils.loadAnimation(this, R.anim.anim_rotate)
         view_ring.startAnimation(rotateAnim)

@@ -16,6 +16,7 @@ class RentRepositoryImpl(private val rentDataSource: RentDataSource) : RentRepos
 
     override fun getRentList(page: Int, pageSize: Int, search: String, category: String): Flowable<List<Product>> =
         rentDataSource.getRentList(page, pageSize, search, category).map(productMapper::mapFrom)
+            .doOnNext { if (search.isNotBlank()) rentDataSource.addSearchHistory(search).subscribe() }
 
     override fun getRentDetail(postId: Int): Flowable<RentDetail> =
         rentDataSource.getRemoteRentDetail(postId).map {

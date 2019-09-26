@@ -37,4 +37,8 @@ class RentViewModel(
             .setFetchExecutor(executor)
             .build()
     }
+
+    fun refreshList() {
+        rentListItems.value?.dataSource?.invalidate()
+    }
 }

@@ -9,7 +9,7 @@ import retrofit2.HttpException
 
 class PasswordConfirmViewModel(private val confirmPasswordUseCase: ConfirmPasswordUseCase) : BaseViewModel() {
 
-    val originalPassword = MutableLiveData<String>()
+    val originalPassword = MutableLiveData<String>().apply { value = "" }
 
     val isConfirmEnable = Transformations.map(originalPassword) { it != "" }
 
@@ -19,6 +19,8 @@ class PasswordConfirmViewModel(private val confirmPasswordUseCase: ConfirmPasswo
     val toastServerErrorEvent = SingleLiveEvent<Any>()
 
     fun confirmPassword() {
+        if (!isConfirmEnable.value!!) return
+
         addDisposable(
             confirmPasswordUseCase.create(originalPassword.value!!)
                 .subscribe({

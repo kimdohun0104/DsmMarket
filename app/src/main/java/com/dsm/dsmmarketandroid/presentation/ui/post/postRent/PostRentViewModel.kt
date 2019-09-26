@@ -59,7 +59,7 @@ class PostRentViewModel(private val postRentUseCase: PostRentUseCase) : BaseView
         addDisposable(
             postRentUseCase.create(
                 PostRentUseCase.Params(
-                    MultipartBody.Part.createFormData("file", imageFile.name, RequestBody.create(MediaType.parse("image/*"), imageFile)),
+                    MultipartBody.Part.createFormData("img", imageFile.name, RequestBody.create(MediaType.parse("image/*"), imageFile)),
                     mapOf(
                         "title" to RequestBody.create(MediaType.parse("text/plain"), title.value!!),
                         "content" to RequestBody.create(MediaType.parse("text/plain"), content.value!!),

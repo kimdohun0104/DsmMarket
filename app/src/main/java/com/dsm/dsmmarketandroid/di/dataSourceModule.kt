@@ -33,9 +33,9 @@ val dataSourceModule = module {
 
     factory<PostDataSource> { PostDataSourceImpl(get()) }
 
-    factory<PurchaseDataSource> { PurchaseDataSourceImpl(get(), get()) }
+    factory<PurchaseDataSource> { PurchaseDataSourceImpl(get(), get(), get()) }
 
-    factory<RentDataSource> { RentDataSourceImpl(get(), get()) }
+    factory<RentDataSource> { RentDataSourceImpl(get(), get(), get()) }
 
     factory<CommentDataSource> { CommentDataSourceImpl(get()) }
 

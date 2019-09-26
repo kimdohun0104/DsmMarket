@@ -23,6 +23,11 @@ class SearchPurchaseFragment : BaseFragment<FragmentSearchPurchaseBinding>() {
         val adapter = PurchaseListAdapter(activity!!)
         rv_purchase.adapter = adapter
 
+        srl_search_purchase.setOnRefreshListener {
+            viewModel.refreshPurchase()
+            srl_search_purchase.isRefreshing = false
+        }
+
         viewModel.purchaseNetworkState.observe(this, Observer {
             if (it == NetworkState.LOADED) pb_loading.visibility = View.GONE
             adapter.setNetworkState(it)

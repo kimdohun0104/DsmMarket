@@ -17,4 +17,6 @@ interface RentDataSource {
     fun addLocalRentDetail(rentDetailRoomEntity: RentDetailRoomEntity): Completable
 
     fun modifyRent(params: Any): Flowable<Response<Unit>>
+
+    fun addSearchHistory(search: String): Completable
 }
