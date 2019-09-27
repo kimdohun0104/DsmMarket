@@ -32,6 +32,8 @@ class CommentActivity : BaseActivity<ActivityCommentBinding>() {
         val adapter = CommentListAdapter(viewModel)
         rv_comment.adapter = adapter
 
+        srl_comment.setOnRefreshListener { viewModel.getCommentList(postId, type) }
+
         viewModel.getCommentList(postId, type)
 
         viewModel.listItems.observe(this, Observer { adapter.setItems(it) })
@@ -47,6 +49,8 @@ class CommentActivity : BaseActivity<ActivityCommentBinding>() {
             fragment.arguments = args
             fragment.show(supportFragmentManager, "")
         })
+
+        viewModel.hideRefreshEvent.observe(this, Observer { srl_comment.isRefreshing = false })
 
         binding.viewModel = viewModel
     }

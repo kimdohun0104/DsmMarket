@@ -1,6 +1,5 @@
 package com.dsm.dsmmarketandroid.presentation.ui.comment
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.dsm.domain.usecase.GetCommentUseCase
 import com.dsm.dsmmarketandroid.presentation.base.BaseViewModel
@@ -20,6 +19,8 @@ class CommentViewModel(
 
     val dialogReportComment = MutableLiveData<String>()
 
+    val hideRefreshEvent = SingleLiveEvent<Any>()
+
     fun getCommentList(postId: Int, type: Int) {
         addDisposable(
             getPurchaseCommentUseCase.create(GetCommentUseCase.Params(postId, type))
@@ -27,8 +28,8 @@ class CommentViewModel(
                 .subscribe({
                     listItems.value = it
                     commentCount.value = it.size
+                    hideRefreshEvent.call()
                 }, {
-                    Log.d("DEBUGLOG", it.message.toString())
                     toastServerErrorEvent.call()
                 })
         )
