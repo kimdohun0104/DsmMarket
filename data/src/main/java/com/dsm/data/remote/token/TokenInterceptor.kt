@@ -14,7 +14,8 @@ class TokenInterceptor(private val prefHelper: PrefHelper) : Interceptor, KoinCo
     private val refreshTokenUseCase: RefreshTokenUseCase by inject()
 
     override fun intercept(chain: Interceptor.Chain): Response {
-        Log.d("DEBUGLOG", prefHelper.getAccessToken()!!)
+        Log.d("DEBUGLOG", "access token: " + prefHelper.getAccessToken().toString())
+
         val request = chain.request().newBuilder().run {
             addHeader("authorization", prefHelper.getAccessToken()!!)
             build()
@@ -29,10 +30,12 @@ class TokenInterceptor(private val prefHelper: PrefHelper) : Interceptor, KoinCo
         }
 
         if (response.code() == 401 && errorCode != 4) {
+            Log.d("DEBUGLOG", "access token expired")
             val refreshResponse = refreshTokenUseCase.create(prefHelper.getRefreshToken()!!).blockingFirst()
 
             return if (refreshResponse.code() == 200) {
                 val accessToken = refreshResponse.body()!!["access_token"] as String
+                Log.d("DEBUGLOG", "refresh token success: $accessToken")
                 prefHelper.setAccessToken(accessToken)
                 val newRequest = request.newBuilder().run {
                     removeHeader("authorization")

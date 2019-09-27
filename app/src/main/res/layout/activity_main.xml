@@ -25,18 +25,16 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tb_main"
         app:layout_constraintBottom_toTopOf="@id/bnv_main"
-        android:orientation="vertical"
-        app:layout_constraintVertical_weight="11" />
+        android:orientation="vertical" />
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
+    <com.dsm.dsmmarketandroid.custom.RichBottomNavigationView
         android:id="@+id/bnv_main"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="?actionBarSize"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ll_container"
-        app:layout_constraintVertical_weight="1"
         app:backgroundTint="@color/colorPrimaryLight"
         app:menu="@menu/menu_main_navigation"
         app:itemIconTint="@color/color_main_navigation"

@@ -35,7 +35,7 @@ interface Api {
     fun changeUserNick(@Field("nick") nick: String): Flowable<Response<Unit>>
 
     @GET("token")
-    fun refreshToken(@Query("refresh_token") refreshToken: String): Flowable<Response<Map<String, Any>>>
+    fun refreshToken(@Header("authorization") refreshToken: String): Flowable<Response<Map<String, Any>>>
 
     @GET("user/nick")
     fun getUserNick(): Flowable<Response<Map<String, String>>>

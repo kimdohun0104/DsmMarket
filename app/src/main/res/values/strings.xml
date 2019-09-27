@@ -2,6 +2,7 @@
     <string name="app_name">대마장터</string>
     <string name="app_intro">평화로운 거래, 새로운 만남 대마장터</string>
 
+    <string name="loading">로딩중입니다…</string>
     <string name="back_to_exit">뒤로 버튼을 한번 더 누르시면 종료됩니다.</string>
 
     <string name="empty_post">아직 등록하신 상품이 없습니다.</string>
@@ -9,6 +10,8 @@
 
     <!--account-->
     <string name="login">로그인</string>
+    <string name="logout">로그아웃</string>
+    <string name="ask_logout">정말로 로그아웃 하시겠습니까?</string>
     <string name="sign_up">회원가입</string>
     <string name="id">아이디</string>
     <string name="password">비밀번호</string>
@@ -46,11 +49,14 @@
     <string name="past_saw_product">최근 본 상품</string>
     <string name="user_info">회원 정보</string>
     <string name="modify_name">닉네임 변경</string>
+    <string name="change_language">언어 변경</string>
     <string name="modify_password">비밀번호 변경</string>
     <string name="open_source">오픈소스 라이센스</string>
     <string name="version_info">버전 정보</string>
     <string name="current_version">현재 버전: </string>
 
+    <string name="korean" translatable="false">한국어</string>
+    <string name="english" translatable="false">English</string>
 
     <string name="post_date">등록일:</string>
     <string name="won">원</string>
@@ -131,7 +137,7 @@
     <string name="male">남성</string>
     <string name="female">여성</string>
     <string name="not_reveal">밝히지 않음</string>
-    
+
     <string name="slander_or_abuse">비방 및 욕설</string>
     <string name="advertisement">광고</string>
     <string name="etc">기타</string>

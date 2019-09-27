@@ -12,6 +12,7 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import java.io.File
 
+
 class PostRentViewModel(private val postRentUseCase: PostRentUseCase) : BaseViewModel() {
 
     val title = MutableLiveData<String>()

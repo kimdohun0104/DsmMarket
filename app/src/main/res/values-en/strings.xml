@@ -3,12 +3,15 @@
 	<string name="app_name">DSM Market</string>
 	<string name="app_intro">A peaceful deal, a new meeting</string>
 
+	<string name="loading">loading…</string>
 	<string name="back_to_exit">Back button again to exit</string>
 
 	<string name="empty_post">There are no items you posted yet.</string>
 	<string name="empty_interest">There is no product that you wished.</string>
 
 	<string name="login">login</string>
+	<string name="logout">logout</string>
+	<string name="ask_logout">Are you sure you want to log out?</string>
 	<string name="sign_up">Sign Up</string>
 	<string name="id">ID</string>
 	<string name="password">password</string>
@@ -44,6 +47,7 @@
 	<string name="user_info">Profile</string>
 	<string name="modify_name">Change Nickname</string>
 	<string name="modify_password">Change Password</string>
+    <string name="change_language">Change Language</string>
 	<string name="open_source">Open source licenses</string>
 	<string name="version_info">Version Information</string>
 	<string name="current_version">Current version:</string>
