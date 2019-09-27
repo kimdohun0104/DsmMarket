@@ -19,191 +19,207 @@
         app:title="@string/category"
         app:titleTextColor="@color/black" />
 
-    <LinearLayout
-        android:id="@+id/ll_book"
+    <ScrollView
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="18dp"
-        android:layout_marginEnd="18dp"
-        android:background="#A4E3D9"
-        android:orientation="vertical"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/ll_device"
-        app:layout_constraintTop_toBottomOf="@id/tb_category"
-        android:onClick="onClickCategory">
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="13dp"
-            android:src="@drawable/ic_food" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="18dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="13dp"
-            android:text="@string/food"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/ll_device"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:background="#9FBEF1"
-        android:orientation="vertical"
-        app:layout_constraintLeft_toRightOf="@id/ll_book"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@id/ll_book"
-        android:onClick="onClickCategory">
+        app:layout_constraintTop_toBottomOf="@id/tb_category">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="13dp"
-            android:src="@drawable/ic_book" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="18dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="13dp"
-            android:text="@string/book"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-    </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ll_book"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="18dp"
+                android:layout_marginEnd="18dp"
+                android:background="#A4E3D9"
+                android:onClick="onClickCategory"
+                android:orientation="vertical"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/ll_device"
+                app:layout_constraintTop_toTopOf="parent">
 
-    <LinearLayout
-        android:id="@+id/ll_sports"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="18dp"
-        android:background="#FCA88B"
-        android:orientation="vertical"
-        app:layout_constraintLeft_toLeftOf="@id/ll_book"
-        app:layout_constraintRight_toRightOf="@id/ll_book"
-        app:layout_constraintTop_toBottomOf="@id/ll_book"
-        android:onClick="onClickCategory">
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="13dp"
+                    android:src="@drawable/ic_food" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="13dp"
-            android:src="@drawable/ic_sports" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="13dp"
+                    android:text="@string/food"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="18dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="13dp"
-            android:text="@string/sports"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            </LinearLayout>
 
-    </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ll_device"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:background="#9FBEF1"
+                android:onClick="onClickCategory"
+                android:orientation="vertical"
+                app:layout_constraintLeft_toRightOf="@id/ll_book"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@id/ll_book">
 
-    <LinearLayout
-        android:id="@+id/ll_food"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="#FFD282"
-        android:orientation="vertical"
-        app:layout_constraintLeft_toLeftOf="@id/ll_device"
-        app:layout_constraintRight_toRightOf="@id/ll_device"
-        app:layout_constraintTop_toTopOf="@id/ll_sports"
-        android:onClick="onClickCategory">
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="13dp"
+                    android:src="@drawable/ic_book" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="13dp"
-            android:src="@drawable/ic_necessity" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="13dp"
+                    android:text="@string/book"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="18dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="13dp"
-            android:text="@string/necessity"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-    </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ll_sports"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:background="#FCA88B"
+                android:onClick="onClickCategory"
+                android:orientation="vertical"
+                app:layout_constraintLeft_toLeftOf="@id/ll_book"
+                app:layout_constraintRight_toRightOf="@id/ll_book"
+                app:layout_constraintTop_toBottomOf="@id/ll_book">
 
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="18dp"
-        android:background="#9695FB"
-        android:orientation="vertical"
-        app:layout_constraintLeft_toLeftOf="@id/ll_sports"
-        app:layout_constraintRight_toRightOf="@id/ll_sports"
-        app:layout_constraintTop_toBottomOf="@id/ll_sports"
-        android:onClick="onClickCategory">
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="13dp"
+                    android:src="@drawable/ic_sports" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="13dp"
-            android:src="@drawable/ic_device" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="13dp"
+                    android:text="@string/sports"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="18dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="13dp"
-            android:text="@string/device"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-    </LinearLayout>
+            </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="18dp"
-        android:background="#F9A1D7"
-        android:orientation="vertical"
-        app:layout_constraintLeft_toLeftOf="@id/ll_food"
-        app:layout_constraintRight_toRightOf="@id/ll_food"
-        app:layout_constraintTop_toBottomOf="@id/ll_food"
-        android:onClick="onClickCategory">
+            <LinearLayout
+                android:id="@+id/ll_food"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="#FFD282"
+                android:onClick="onClickCategory"
+                android:orientation="vertical"
+                app:layout_constraintLeft_toLeftOf="@id/ll_device"
+                app:layout_constraintRight_toRightOf="@id/ll_device"
+                app:layout_constraintTop_toTopOf="@id/ll_sports">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="13dp"
-            android:src="@drawable/ic_cloth" />
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="13dp"
+                    android:src="@drawable/ic_necessity" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="18dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="13dp"
-            android:text="@string/cloth"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-    </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="13dp"
+                    android:text="@string/necessity"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:background="#9695FB"
+                android:onClick="onClickCategory"
+                android:orientation="vertical"
+                app:layout_constraintLeft_toLeftOf="@id/ll_sports"
+                app:layout_constraintRight_toRightOf="@id/ll_sports"
+                app:layout_constraintTop_toBottomOf="@id/ll_sports"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="18dp">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="13dp"
+                    android:src="@drawable/ic_device" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="13dp"
+                    android:text="@string/device"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:background="#F9A1D7"
+                android:onClick="onClickCategory"
+                android:orientation="vertical"
+                app:layout_constraintLeft_toLeftOf="@id/ll_food"
+                app:layout_constraintRight_toRightOf="@id/ll_food"
+                app:layout_constraintTop_toBottomOf="@id/ll_food">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="13dp"
+                    android:src="@drawable/ic_cloth" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="13dp"
+                    android:text="@string/cloth"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

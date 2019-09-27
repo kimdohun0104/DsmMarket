@@ -53,7 +53,7 @@
 	<string name="current_version">Current version:</string>
 
 	<string name="post_date">Registered:</string>
-	<string name="won">$</string>
+	<string name="won">₩</string>
 	<string name="deal_with_chatting">Deal with chat</string>
 	<string name="comment">comment</string>
 	<string name="count"> </string>
@@ -83,6 +83,8 @@
 	<string name="start">start</string>
 	<string name="end">End</string>
 	<string name="possible_time">Rental time</string>
+
+	<string name="change_language_to">Do you want to change it?</string>
 
 	<string name="fail_login">It gave a framework email or password</string>
 	<string name="fail_invalid_email">Invalid E-mail</string>

@@ -58,6 +58,8 @@
     <string name="korean" translatable="false">한국어</string>
     <string name="english" translatable="false">English</string>
 
+    <string name="change_language_to">변경하시겠습니까?</string>
+
     <string name="post_date">등록일:</string>
     <string name="won">원</string>
     <string name="deal_with_chatting">채팅으로 거래하기</string>

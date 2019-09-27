@@ -22,8 +22,7 @@
         <activity android:name=".presentation.ui.category.CategoryListActivity" />
         <activity android:name=".presentation.ui.modify.rent.ModifyRentActivity" />
         <activity android:name=".presentation.ui.modify.purchase.ModifyPurchaseActivity" />
-        <activity android:name=".presentation.ui.rentDetail.RentDetailActivity"
-            android:screenOrientation="portrait"/>
+        <activity android:name=".presentation.ui.rentDetail.RentDetailActivity" />
         <activity android:name=".presentation.ui.password.passwordConfirm.PasswordConfirmActivity" />
         <activity android:name=".presentation.ui.splash.SplashActivity">
             <intent-filter>
@@ -45,8 +44,7 @@
             android:name=".presentation.ui.addComment.AddCommentActivity"
             android:windowSoftInputMode="adjustResize" />
         <activity android:name=".presentation.ui.comment.CommentActivity" />
-        <activity android:name=".presentation.ui.purchaseDetail.PurchaseDetailActivity"
-            android:screenOrientation="portrait"/>
+        <activity android:name=".presentation.ui.purchaseDetail.PurchaseDetailActivity" />
         <activity android:name=".presentation.ui.category.CategoryActivity" />
         <activity android:name=".presentation.ui.search.SearchActivity" />
         <activity android:name=".presentation.ui.recent.RecentActivity" />
