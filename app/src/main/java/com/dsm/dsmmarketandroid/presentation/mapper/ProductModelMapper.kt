@@ -12,7 +12,7 @@ class ProductModelMapper : Mapper<List<Product>, List<ProductModel>> {
                 title = it.title,
                 price = it.price,
                 img = it.img,
-                createdAt = it.createdAt
+                createdAt = it.createdAt.split("T")[0]
             )
         }
 }

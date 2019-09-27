@@ -9,7 +9,7 @@ class CommentModelMapper : Mapper<List<Comment>, List<CommentModel>> {
         from.map {
             CommentModel(
                 nick = it.nick,
-                createdAt = it.createdAt,
+                createdAt = it.createdAt.split("T")[0],
                 content = it.content
             )
         }

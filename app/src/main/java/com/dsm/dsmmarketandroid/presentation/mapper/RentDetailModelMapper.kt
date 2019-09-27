@@ -11,7 +11,7 @@ class RentDetailModelMapper : Mapper<RentDetail,RentDetailModel> {
         id = from.id,
         title = from.title,
         content = from.content,
-        createdAt = from.createdAt,
+        createdAt = from.createdAt.split("T")[0],
         price = from.price,
         possibleTime = from.possibleTime,
         commentCount = from.commentCount,

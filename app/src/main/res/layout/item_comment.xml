@@ -2,6 +2,7 @@
 <layout>
 
     <data>
+
         <variable
             name="comment"
             type="com.dsm.dsmmarketandroid.presentation.model.CommentModel" />
@@ -22,7 +23,7 @@
             android:textSize="18sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:text="@{comment.nick}"/>
+            android:text="@{comment.nick}" />
 
         <TextView
             android:id="@+id/tv_date"
@@ -33,7 +34,7 @@
             app:layout_constraintBottom_toBottomOf="@id/tv_name"
             app:layout_constraintLeft_toRightOf="@id/tv_name"
             app:layout_constraintTop_toTopOf="@id/tv_name"
-            android:text="@{comment.createdAt}"/>
+            android:text="@{comment.createdAt}" />
 
         <TextView
             android:id="@+id/tv_content"
@@ -47,7 +48,7 @@
             app:layout_constraintLeft_toLeftOf="@id/tv_name"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_name"
-            android:text="@{comment.content}"/>
+            android:text="@{comment.content}" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_report"

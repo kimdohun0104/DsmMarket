@@ -11,7 +11,7 @@ class PurchaseDetailModelMapper : Mapper<PurchaseDetail, PurchaseDetailModel> {
         commentCount = from.commentCount,
         title = from.title,
         price = from.price,
-        createdAt = from.createdAt,
+        createdAt = from.createdAt.split("T")[0],
         id = from.id,
         author = from.author,
         isInterest = from.isInterest,
