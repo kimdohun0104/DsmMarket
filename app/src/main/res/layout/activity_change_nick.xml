@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.dsm.dsmmarketandroid.presentation.ui.changeNick.ChangeNickViewModel" />
+
+        <variable
+            name="nick"
+            type="String" />
+
+        <import type="com.dsm.dsmmarketandroid.presentation.util.BindingUtil" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".presentation.ui.changeNick.ChangeNickActivity">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/tb_change_name"
+            style="@style/ToolBarStyle.Event"
+            android:layout_width="0dp"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/white"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navigationIcon="@drawable/ic_back_black"
+            app:title="@string/modify_name"
+            app:titleTextColor="@color/black" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="45dp"
+            android:layout_marginEnd="60dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tb_change_name">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_nick"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@{nick}"
+                android:text="@={viewModel.nick}"
+                android:singleLine="true"
+                android:inputType="text"
+                android:imeOptions="actionDone" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="46dp"
+            android:text="@string/modify_name"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:background="@{viewModel.isChangeNickEnable ? @drawable/bg_gradient_primary : BindingUtil.convertColorToDrawable(@color/colorGrey_3)}"
+            android:clickable="@{viewModel.isChangeNickEnable}"
+            android:onClick="@{() -> viewModel.changeNick()}"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

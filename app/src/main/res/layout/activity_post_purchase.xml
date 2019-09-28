@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.dsm.dsmmarketandroid.presentation.ui.post.postPurchase.PostPurchaseViewModel" />
+
+        <variable
+            name="isImageSelectVisible"
+            type="Boolean" />
+
+        <import type="android.view.View" />
+
+        <import type="com.dsm.dsmmarketandroid.presentation.util.BindingUtil" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".presentation.ui.post.postPurchase.PostPurchaseActivity">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/tb_post_purchase"
+            style="@style/ToolBarStyle.Event"
+            android:layout_width="0dp"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/white"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navigationIcon="@drawable/ic_back_black"
+            app:title="@string/post_purchase_product"
+            app:titleTextColor="@color/black" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_title"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="30dp"
+            android:background="@null"
+            android:hint="@string/title"
+            android:inputType="text"
+            android:nextFocusDown="@id/et_price"
+            android:singleLine="true"
+            android:text="@={viewModel.title}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tb_post_purchase" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0.3dp"
+            android:background="@color/colorGrey"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/et_title" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_price"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:background="@null"
+            android:digits="1234567890"
+            android:hint="@string/price"
+            android:inputType="number"
+            android:singleLine="true"
+            android:text="@={viewModel.price}"
+            app:layout_constraintLeft_toLeftOf="@id/et_title"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/et_title"
+            android:nextFocusDown="@id/cl_category"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0.3dp"
+            android:background="@color/colorGrey"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/et_price" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_category"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/et_price">
+
+            <TextView
+                android:id="@+id/tv_category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:text="@string/category"
+                android:textColor="@color/colorGrey"
+                android:textSize="16sp"
+                android:visibility="@{viewModel.isCategorySelected ? View.INVISIBLE : View.VISIBLE}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{viewModel.category}"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@id/tv_category"
+                app:layout_constraintLeft_toLeftOf="@id/tv_category"
+                app:layout_constraintTop_toTopOf="@id/tv_category" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="21dp"
+                android:layout_height="21dp"
+                android:layout_marginEnd="18dp"
+                android:src="@drawable/ic_down_arrow_grey"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0.3dp"
+            android:background="@color/colorGrey"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cl_category" />
+
+        <TextView
+            android:id="@+id/tv_picture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/picture"
+            android:textColor="@color/colorGrey"
+            android:textSize="16sp"
+            app:layout_constraintLeft_toLeftOf="@id/et_price"
+            app:layout_constraintTop_toBottomOf="@id/cl_category" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:text="@string/max_5"
+            android:textColor="@color/colorGrey"
+            android:textSize="13sp"
+            app:layout_constraintBottom_toBottomOf="@id/tv_picture"
+            app:layout_constraintLeft_toRightOf="@id/tv_picture"
+            app:layout_constraintTop_toTopOf="@id/tv_picture" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_post_image"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/iv_select_image"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/iv_select_image" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_select_image"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:layout_marginTop="13dp"
+            android:src="@drawable/ic_select_picture"
+            android:visibility="@{isImageSelectVisible ? View.VISIBLE : View.INVISIBLE}"
+            app:layout_constraintLeft_toLeftOf="@id/tv_picture"
+            app:layout_constraintTop_toBottomOf="@id/tv_picture" />
+
+        <View
+            android:id="@+id/view_picture_line"
+            android:layout_width="0dp"
+            android:layout_height="0.3dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/colorGrey"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_select_image" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="30dp"
+            android:background="@null"
+            android:gravity="top"
+            android:hint="@string/input_content"
+            android:paddingTop="16dp"
+            android:text="@={viewModel.content}"
+            app:layout_constraintBottom_toTopOf="@id/btn_post"
+            app:layout_constraintLeft_toLeftOf="@id/et_price"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view_picture_line" />
+
+        <Button
+            android:id="@+id/btn_post"
+            android:layout_width="0dp"
+            android:layout_height="46dp"
+            android:background="@{viewModel.isPostEnable ? @drawable/bg_gradient_primary : BindingUtil.convertColorToDrawable(@color/colorGrey_3) }"
+            android:clickable="@{viewModel.isPostEnable}"
+            android:onClick="@{() -> viewModel.post()}"
+            android:text="@string/post_product"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

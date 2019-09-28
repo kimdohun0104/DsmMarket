@@ -2,9 +2,11 @@ apply plugin: 'com.android.library'
 
 apply plugin: 'kotlin-android'
 
+apply plugin: 'kotlin-kapt'
+
 android {
     compileSdkVersion 29
-    buildToolsVersion "29.0.0"
+    buildToolsVersion "29.0.2"
 
 
     defaultConfig {
@@ -33,7 +35,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(path: ':domain')
 
-    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
 
     // kotlin
     implementation dependencies.kotlin
@@ -42,4 +44,22 @@ dependencies {
     testImplementation testDependencies.junit
     androidTestImplementation testDependencies.testRunner
 
+    // retrofit
+    implementation dependencies.retrofit
+    implementation dependencies.retrofitGson
+
+    // rxJava
+    implementation dependencies.rxJava
+    implementation dependencies.rxAndroid
+
+    // koin
+    implementation dependencies.koinAndroid
+
+    // room
+    implementation dependencies.roomRuntime
+    kapt dependencies.roomCompiler
+    implementation dependencies.roomRxJava
+
+    // paging
+    implementation dependencies.paging
 }

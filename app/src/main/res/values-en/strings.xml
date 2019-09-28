@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+	<string name="app_name">DSM Market</string>
+	<string name="app_intro">A peaceful deal, a new meeting</string>
+
+	<string name="loading">loading…</string>
+	<string name="back_to_exit">Back button again to exit</string>
+
+	<string name="empty_post">There are no items you posted yet.</string>
+	<string name="empty_interest">There is no product that you wished.</string>
+
+	<string name="login">login</string>
+	<string name="logout">logout</string>
+	<string name="ask_logout">Are you sure you want to log out?</string>
+	<string name="sign_up">Sign Up</string>
+	<string name="id">ID</string>
+	<string name="password">password</string>
+	<string name="password_confirm">Confirm Password</string>
+	<string name="forget_password">Forgot your password?</string>
+	<string name="find_password">Forgot your password</string>
+	<string name="change_password">Change Password</string>
+	<string name="new_password">New password</string>
+	<string name="new_password_confirm">New password confirmation</string>
+	<string name="name">nickname</string>
+	<string name="gender">gender</string>
+	<string name="grade">grade</string>
+	<string name="email">e-mail</string>
+	<string name="mail_confirm">Check authentication code</string>
+	<string name="confirm_code">Authentication Code</string>
+	<string name="original_password_confirm">Original password confirm</string>
+	<string name="original_password">original password</string>
+
+	<string name="description_logo">App logo</string>
+
+	<string name="purchase">purchase</string>
+	<string name="rent">rent</string>
+	<string name="post">post</string>
+	<string name="chatting">chatting</string>
+	<string name="me">ME!</string>
+
+	<string name="post_purchase_product">Purchase Product Registration</string>
+	<string name="post_rent_product">Rent Product Registration</string>
+
+	<string name="interest_product">Wish List</string>
+	<string name="my_post_product">My Registered Products</string>
+	<string name="past_saw_product">Recently Viewed Products</string>
+	<string name="user_info">Profile</string>
+	<string name="modify_name">Change Nickname</string>
+	<string name="modify_password">Change Password</string>
+    <string name="change_language">Change Language</string>
+	<string name="open_source">Open source licenses</string>
+	<string name="version_info">Version Information</string>
+	<string name="current_version">Current version:</string>
+
+	<string name="post_date">Registered:</string>
+	<string name="won">₩</string>
+	<string name="deal_with_chatting">Deal with chat</string>
+	<string name="comment">comment</string>
+	<string name="count"> </string>
+	<string name="report">Report</string>
+	<string name="related_product">Related Items</string>
+	<string name="recommend_product">Featured Products</string>
+	<string name="interest">Registered on the Wish List</string>
+	<string name="un_interest">Taken it off the Wish List</string>
+
+	<string name="all">All</string>
+	<string name="add_comment">Add comment</string>
+	<string name="content">Contents</string>
+
+	<string name="input_content">Please enter your details…</string>
+	<string name="input_search">Please enter a search…</string>
+	<string name="recent_search_word">Recent searches</string>
+
+	<string name="title">title</string>
+	<string name="price">price</string>
+	<string name="category">category</string>
+	<string name="picture">Picture</string>
+	<string name="max_5">Up to 5</string>
+	<string name="tag">tag</string>
+	<string name="post_product">Product Registration</string>
+	<string name="rental_time">Rental time (optional)</string>
+	<string name="max_image">The image is up to five</string>
+	<string name="start">start</string>
+	<string name="end">End</string>
+	<string name="possible_time">Rental time</string>
+
+	<string name="change_language_to">Do you want to change it?</string>
+
+	<string name="fail_login">It gave a framework email or password</string>
+	<string name="fail_invalid_email">Invalid E-mail</string>
+	<string name="fail_diff_password">Passwords do not match</string>
+	<string name="fail_sign_up">Failed to Register</string>
+	<string name="fail_existent_email">Email already exists</string>
+	<string name="fail_existent_nick">A nickname that already exists</string>
+	<string name="fail_send_email">It failed to send email</string>
+	<string name="fail_confirm_code">You can not check the authentication code</string>
+	<string name="fail_invalid_confirm_code">An authorization code is not valid</string>
+	<string name="fail_server_error">There was a problem with the server</string>
+	<string name="fail_change_password">Failed to change password</string>
+	<string name="fail_permission_denied">You need permission</string>
+	<string name="fail_non_exist_post">The post does not exist</string>
+
+	<string name="confirm">Confirm</string>
+
+	<string name="ask_purchase_complete">Do you really want to sell finished?</string>
+	<string name="ask_rent_complete">Are you sure you want to quit your rental?</string>
+	<string name="complete">complete</string>
+
+	<string name="modify_purchase">Buying edit your posts</string>
+
+	<string name="report_comment">Report Comment</string>
+	<string name="report_post">Posts Report</string>
+	<string name="report_reason">Report Reason</string>
+
+	<string name="cancel" tools:ignore="ButtonCase">cancel</string>
+	<string name="one_time">1 time</string>
+	<string name="one_hour">1 hours</string>
+
+	<string name="male">male</string>
+	<string name="female">female</string>
+	<string name="not_reveal">not reveal</string>
+
+	<string name="slander_or_abuse">slander or abuse</string>
+	<string name="advertisement">advertisement</string>
+	<string name="etc">etc</string>
+</resources>

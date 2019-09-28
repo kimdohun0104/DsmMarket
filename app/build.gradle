@@ -4,19 +4,21 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'kotlin-kapt'
+
 apply plugin: 'io.fabric'
 
 android {
     compileSdkVersion 29
-    buildToolsVersion "29.0.0"
+    buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "com.dsm.dsmmarketandroid"
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
-        versionName "1.0"
+        versionName "1.0-beta0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        resConfigs "kr"
+        resConfigs "kr", "en"
     }
     buildTypes {
         release {
@@ -34,6 +36,9 @@ android {
         sourceCompatibility 1.8
         targetCompatibility 1.8
     }
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {
@@ -44,9 +49,16 @@ dependencies {
     implementation project(path: ':domain')
     implementation project(path: ':data')
 
-    implementation 'androidx.appcompat:appcompat:1.0.2'
-    implementation 'androidx.core:core-ktx:1.0.2'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.core:core-ktx:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'com.google.android.material:material:1.1.0-alpha10'
+    implementation 'com.pm10:indicator:1.0.2'
+    implementation 'com.makeramen:roundedimageview:2.3.0'
+    implementation 'de.hdodenhof:circleimageview:3.0.1'
+    implementation 'net.cachapa.expandablelayout:expandablelayout:2.9.2'
+    implementation 'com.github.esafirm.android-image-picker:imagepicker:2.1.0'
+    implementation 'com.jsibbold:zoomage:1.3.0'
 
     // kotlin
     implementation dependencies.kotlin
@@ -55,10 +67,46 @@ dependencies {
     testImplementation testDependencies.junit
     androidTestImplementation testDependencies.testRunner
     androidTestImplementation testDependencies.espressoCore
+    androidTestImplementation testDependencies.mockitoAndroid
+    testImplementation testDependencies.mockitoCore
+    testImplementation testDependencies.mockitoInline
+    testImplementation testDependencies.liveDataTestingKtx
+    testImplementation testDependencies.coreTesting
 
     // firebase
-    implementation 'com.google.firebase:firebase-core:17.1.0'
-    implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
+    implementation dependencies.firebaseCore
+    implementation dependencies.crashlytics
+
+    // anko
+    implementation dependencies.anko
+
+    // koin
+    implementation dependencies.koinAndroid
+    implementation dependencies.koinViewModel
+
+    // retrofit
+    implementation dependencies.retrofit
+    implementation dependencies.retrofitGson
+    implementation dependencies.retrofitRxJava
+
+    // lifecycle
+    implementation dependencies.lifecycleRuntime
+    implementation dependencies.lifecycleExtensions
+    kapt dependencies.lifecycleCompiler
+
+    // room
+    implementation presentationDependencies.roomRuntime
+    kapt presentationDependencies.roomCompiler
+
+    // paging
+    implementation dependencies.paging
+
+    // glide
+    implementation dependencies.glide
+    kapt dependencies.glideCompiler
+
+    // rxJava
+    implementation dependencies.rxAndroid
 }
 
 apply plugin: 'com.google.gms.google-services'
