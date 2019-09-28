@@ -16,14 +16,13 @@ android {
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
-        versionName "1.0-beta0"
+        versionName "1.0.0-beta0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        resConfigs "kr", "en"
+        resConfigs "kr"
     }
     buildTypes {
         release {
-            minifyEnabled true
-            shrinkResources true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
 

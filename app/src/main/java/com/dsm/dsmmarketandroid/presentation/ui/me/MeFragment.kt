@@ -36,7 +36,7 @@ class MeFragment : BaseFragment<FragmentMeBinding>() {
         cl_change_name.setOnClickListener { activity?.startActivity<ChangeNickActivity>("nick" to activity?.title) }
         cl_change_password.setOnClickListener { activity?.startActivity<PasswordConfirmActivity>() }
         cl_open_source.setOnClickListener { activity?.startActivity<OpenSourceActivity>() }
-        cl_language.setOnClickListener { activity?.startActivity<ChangeLanguageActivity>() }
+//        cl_language.setOnClickListener { activity?.startActivity<ChangeLanguageActivity>() }
         cl_logout.setOnClickListener { LogoutDialog().show(childFragmentManager, "") }
 
         viewModel.userNick.observe(this, Observer { activity?.title = it })
