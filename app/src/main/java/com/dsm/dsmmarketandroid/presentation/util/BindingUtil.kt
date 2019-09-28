@@ -55,7 +55,6 @@ object BindingUtil {
     @JvmStatic
     @BindingAdapter("bind:image")
     fun bindImage(view: ImageView, value: String?) {
-//        value?.let { Picasso.get().load(it).into(view) }
         value?.let { Glide.with(view).load(it).placeholder(R.drawable.image_placeholder).error(R.drawable.image_error).into(view) }
     }
 

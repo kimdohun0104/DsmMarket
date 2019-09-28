@@ -28,4 +28,7 @@ class RentRepositoryImpl(private val rentDataSource: RentDataSource) : RentRepos
 
     override fun modifyRent(params: Any): Flowable<Unit> =
         rentDataSource.modifyRent(params).map { if (it.code() != 200) throw HttpException(it) }
+
+    override fun getRentImage(postId: Int): Flowable<String> =
+        rentDataSource.getRentImage(postId).map { it.image }
 }

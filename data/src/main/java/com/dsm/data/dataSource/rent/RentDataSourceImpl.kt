@@ -8,6 +8,7 @@ import com.dsm.data.local.db.entity.SearchHistoryRoomEntity
 import com.dsm.data.remote.Api
 import com.dsm.data.remote.entity.ProductListEntity
 import com.dsm.data.remote.entity.RentDetailEntity
+import com.dsm.data.remote.entity.RentImageEntity
 import io.reactivex.Completable
 import io.reactivex.Flowable
 import retrofit2.Response
@@ -34,4 +35,7 @@ class RentDataSourceImpl(
 
     override fun addSearchHistory(search: String): Completable =
         searchDao.addSearchHistory(SearchHistoryRoomEntity(search)).addSchedulers()
+
+    override fun getRentImage(postId: Int): Flowable<RentImageEntity> =
+        api.getRentImage(postId).addSchedulers()
 }

@@ -17,6 +17,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
+        <activity android:name=".presentation.ui.rentImage.RentImageActivity" />
         <activity android:name=".presentation.ui.language.ChangeLanguageActivity" />
         <activity android:name=".presentation.ui.openSource.OpenSourceActivity" />
         <activity android:name=".presentation.ui.category.CategoryListActivity" />

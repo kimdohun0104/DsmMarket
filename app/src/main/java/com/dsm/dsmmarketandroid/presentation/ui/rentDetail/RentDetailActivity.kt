@@ -12,6 +12,7 @@ import com.dsm.dsmmarketandroid.databinding.ActivityRentDetailBinding
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.RecommendListAdapter
 import com.dsm.dsmmarketandroid.presentation.ui.base.BaseActivity
 import com.dsm.dsmmarketandroid.presentation.ui.comment.CommentActivity
+import com.dsm.dsmmarketandroid.presentation.ui.rentImage.RentImageActivity
 import com.dsm.dsmmarketandroid.presentation.ui.report.ReportPostDialog
 import kotlinx.android.synthetic.main.activity_rent_detail.*
 import org.jetbrains.anko.startActivity
@@ -34,6 +35,8 @@ class RentDetailActivity : BaseActivity<ActivityRentDetailBinding>() {
         tb_rent_detail.overflowIcon = ContextCompat.getDrawable(this, R.drawable.ic_menu)
 
         ll_comment.setOnClickListener { startActivity<CommentActivity>("post_id" to postId, "type" to 1) }
+
+        iv_rent_image.setOnClickListener { startActivity<RentImageActivity>("post_id" to postId) }
 
         val relatedListAdapter = RecommendListAdapter(this, 1)
         (rv_related.layoutManager as LinearLayoutManager).orientation = LinearLayoutManager.HORIZONTAL

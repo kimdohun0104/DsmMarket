@@ -10,4 +10,6 @@ interface RentRepository {
     fun getRentDetail(postId: Int): Flowable<RentDetail>
 
     fun modifyRent(params: Any): Flowable<Unit>
+
+    fun getRentImage(postId: Int): Flowable<String>
 }

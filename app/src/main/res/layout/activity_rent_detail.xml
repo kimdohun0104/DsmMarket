@@ -26,6 +26,7 @@
                 android:orientation="vertical">
 
                 <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_rent_image"
                     android:layout_width="match_parent"
                     android:layout_height="310dp"
                     android:transitionName="image"
