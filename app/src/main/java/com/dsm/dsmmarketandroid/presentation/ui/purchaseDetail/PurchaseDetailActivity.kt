@@ -7,9 +7,11 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.get
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.PagerSnapHelper
 import com.dsm.dsmmarketandroid.R
+import com.dsm.dsmmarketandroid.custom.LinePagerIndicatorDecoration
 import com.dsm.dsmmarketandroid.databinding.ActivityPurchaseDetailBinding
-import com.dsm.dsmmarketandroid.presentation.ui.adapter.DetailImagePagerAdapter
+import com.dsm.dsmmarketandroid.presentation.ui.adapter.DetailImageListAdapter
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.RecommendListAdapter
 import com.dsm.dsmmarketandroid.presentation.ui.base.BaseActivity
 import com.dsm.dsmmarketandroid.presentation.ui.chat.ChatActivity
@@ -35,7 +37,10 @@ class PurchaseDetailActivity : BaseActivity<ActivityPurchaseDetailBinding>() {
         tb_purchase_detail.setNavigationOnClickListener { finish() }
         tb_purchase_detail.overflowIcon = ContextCompat.getDrawable(this, R.drawable.ic_menu)
 
-        vp_detail_image.adapter = DetailImagePagerAdapter()
+        rv_detail_image.adapter = DetailImageListAdapter(this, postId)
+        (rv_detail_image.layoutManager as LinearLayoutManager).orientation = LinearLayoutManager.HORIZONTAL
+        PagerSnapHelper().attachToRecyclerView(rv_detail_image)
+        rv_detail_image.addItemDecoration(LinePagerIndicatorDecoration())
 
         val recommendListAdapter = RecommendListAdapter(this, 0)
         (rv_recommend.layoutManager as LinearLayoutManager).orientation = LinearLayoutManager.HORIZONTAL

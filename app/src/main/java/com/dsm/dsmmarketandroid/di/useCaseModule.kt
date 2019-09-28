@@ -73,4 +73,6 @@ val useCaseModule = module {
     factory { ModifyRentUseCase(get()) }
 
     factory { GetRentImageUseCase(get()) }
+
+    factory { GetPurchaseImageUseCase(get()) }
 }

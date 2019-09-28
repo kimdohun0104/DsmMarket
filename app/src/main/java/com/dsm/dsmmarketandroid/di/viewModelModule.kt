@@ -21,6 +21,7 @@ import com.dsm.dsmmarketandroid.presentation.ui.post.postRent.PostRentViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.postCategory.PostCategoryViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.purchase.PurchaseViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.purchaseDetail.PurchaseDetailViewModel
+import com.dsm.dsmmarketandroid.presentation.ui.purchaseImage.PurchaseImageViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.recent.RecentViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.rent.RentViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.rentDetail.RentDetailViewModel
@@ -86,4 +87,6 @@ val viewModelModule = module {
     viewModel { ModifyRentViewModel(get(), get(), get()) }
 
     viewModel { RentImageViewModel(get()) }
+
+    viewModel { PurchaseImageViewModel(get()) }
 }

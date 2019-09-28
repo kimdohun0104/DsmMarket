@@ -8,6 +8,7 @@ import com.dsm.data.local.db.entity.SearchHistoryRoomEntity
 import com.dsm.data.remote.Api
 import com.dsm.data.remote.entity.ProductListEntity
 import com.dsm.data.remote.entity.PurchaseDetailEntity
+import com.dsm.data.remote.entity.PurchaseImageEntity
 import io.reactivex.Completable
 import io.reactivex.Flowable
 import retrofit2.Response
@@ -35,4 +36,7 @@ class PurchaseDataSourceImpl(
 
     override fun addSearchHistory(search: String): Completable =
         searchDao.addSearchHistory(SearchHistoryRoomEntity(search)).addSchedulers()
+
+    override fun getPurchaseImage(postId: Int): Flowable<PurchaseImageEntity> =
+        api.getPurchaseImage(postId).addSchedulers()
 }

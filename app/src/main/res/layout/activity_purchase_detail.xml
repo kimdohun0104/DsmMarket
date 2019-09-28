@@ -25,12 +25,13 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <androidx.viewpager2.widget.ViewPager2
-                    android:id="@+id/vp_detail_image"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_detail_image"
                     android:layout_width="match_parent"
                     android:layout_height="310dp"
                     bind:detailImages="@{viewModel.purchaseDetail.img}"
-                    android:transitionName="image"/>
+                    android:transitionName="image"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
                 <TextView
                     android:layout_width="wrap_content"

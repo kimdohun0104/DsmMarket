@@ -28,4 +28,7 @@ class PurchaseRepositoryImpl(private val purchaseDataSource: PurchaseDataSource)
 
     override fun modifyPurchase(params: Any): Flowable<Unit> =
         purchaseDataSource.modifyPurchase(params).map { if (it.code() != 200) throw HttpException(it) }
+
+    override fun getPurchaseImage(postId: Int): Flowable<List<String>> =
+        purchaseDataSource.getPurchaseImage(postId).map { it.images }
 }

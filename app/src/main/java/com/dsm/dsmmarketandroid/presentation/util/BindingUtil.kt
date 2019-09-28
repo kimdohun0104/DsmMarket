@@ -8,10 +8,9 @@ import androidx.databinding.BindingAdapter
 import androidx.databinding.BindingConversion
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
-import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.dsm.dsmmarketandroid.R
-import com.dsm.dsmmarketandroid.presentation.ui.adapter.DetailImagePagerAdapter
+import com.dsm.dsmmarketandroid.presentation.ui.adapter.DetailImageListAdapter
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.ModifyImageListAdapter
 
 
@@ -47,9 +46,9 @@ object BindingUtil {
 
     @JvmStatic
     @BindingAdapter("bind:detailImages")
-    fun bindDetailImages(view: ViewPager2, value: List<String>?) {
-        val adapter = view.adapter as DetailImagePagerAdapter
-        value?.let { adapter.imageList = it }
+    fun bindDetailImages(view: RecyclerView, value: List<String>?) {
+        val adapter = view.adapter as DetailImageListAdapter
+        value?.let { adapter.listItems = it }
     }
 
     @JvmStatic

@@ -11,4 +11,6 @@ interface PurchaseRepository {
     fun getPurchaseDetail(postId: Int): Flowable<PurchaseDetail>
 
     fun modifyPurchase(params: Any): Flowable<Unit>
+
+    fun getPurchaseImage(postId: Int): Flowable<List<String>>
 }

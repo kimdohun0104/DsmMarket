@@ -144,6 +144,9 @@ interface Api {
     @PATCH("post/rent")
     fun modifyRent(@Body params: Any): Flowable<Response<Unit>>
 
+    @GET("deal/img")
+    fun getPurchaseImage(@Query("postId") postId: Int): Flowable<PurchaseImageEntity>
+
     @GET("rent/img")
     fun getRentImage(@Query("postId") postId: Int): Flowable<RentImageEntity>
 }
