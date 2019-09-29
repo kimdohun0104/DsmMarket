@@ -17,6 +17,7 @@ class SplashViewModel(private val autoLoginUseCase: AutoLoginUseCase) : BaseView
                 finishActivityEvent.call()
             }, {
                 intentStartActivity.call()
+                finishActivityEvent.call()
             })
         )
     }

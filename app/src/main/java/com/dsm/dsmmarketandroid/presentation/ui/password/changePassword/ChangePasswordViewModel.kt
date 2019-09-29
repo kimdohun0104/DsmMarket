@@ -39,11 +39,12 @@ class ChangePasswordViewModel(
                     "authCode" to authCode,
                     "password" to newPassword.value
                 )
-            ).subscribe({
-                finishActivityEvent.call()
-            }, {
-                toastServerErrorEvent.call()
-            })
+            )
+                .subscribe({
+                    finishActivityEvent.call()
+                }, {
+                    toastServerErrorEvent.call()
+                })
         )
     }
 }

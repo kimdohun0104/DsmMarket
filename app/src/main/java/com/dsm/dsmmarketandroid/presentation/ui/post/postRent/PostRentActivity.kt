@@ -10,6 +10,7 @@ import com.dsm.dsmmarketandroid.databinding.ActivityPostRentBinding
 import com.dsm.dsmmarketandroid.presentation.ui.base.BaseActivity
 import com.dsm.dsmmarketandroid.presentation.ui.post.postRent.rentTime.SelectRentTimeFragment
 import com.dsm.dsmmarketandroid.presentation.ui.postCategory.PostCategoryActivity
+import com.dsm.dsmmarketandroid.presentation.util.LoadingDialog
 import com.dsm.dsmmarketandroid.presentation.util.PermissionUtil
 import com.esafirm.imagepicker.features.ImagePicker
 import com.google.android.material.snackbar.Snackbar
@@ -50,6 +51,10 @@ class PostRentActivity : BaseActivity<ActivityPostRentBinding>() {
         viewModel.finishActivityEvent.observe(this, Observer { finish() })
 
         viewModel.toastServerErrorEvent.observe(this, Observer { toast(getString(R.string.fail_server_error)) })
+
+        viewModel.showLoadingDialogEvent.observe(this, Observer { LoadingDialog.show(supportFragmentManager) })
+
+        viewModel.hideLoadingDialogEvent.observe(this, Observer { LoadingDialog.hide() })
 
         binding.viewModel = viewModel
     }

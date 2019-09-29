@@ -39,12 +39,17 @@ class PostPurchaseViewModel(private val postPurchaseUseCase: PostPurchaseUseCase
     val finishActivityEvent = SingleLiveEvent<Any>()
     val toastServerErrorEvent = SingleLiveEvent<Any>()
 
+    val showLoadingDialogEvent = SingleLiveEvent<Any>()
+    val hideLoadingDialogEvent = SingleLiveEvent<Any>()
+
     fun post() {
         val multipartImageList = arrayListOf<MultipartBody.Part>()
         imageList.value!!.forEach {
             val imageFile = File(it)
             multipartImageList.add(MultipartBody.Part.createFormData("img", imageFile.name, RequestBody.create(MediaType.parse("image/*"), imageFile)))
         }
+
+        showLoadingDialogEvent.call()
 
         addDisposable(
             postPurchaseUseCase.create(
@@ -57,11 +62,14 @@ class PostPurchaseViewModel(private val postPurchaseUseCase: PostPurchaseUseCase
                         "category" to RequestBody.create(MediaType.parse("text/plain"), category.value!!)
                     )
                 )
-            ).subscribe({
-                finishActivityEvent.call()
-            }, {
-                toastServerErrorEvent.call()
-            })
+            )
+                .subscribe({
+                    hideLoadingDialogEvent.call()
+                    finishActivityEvent.call()
+                }, {
+                    hideLoadingDialogEvent.call()
+                    toastServerErrorEvent.call()
+                })
         )
     }
 

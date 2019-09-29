@@ -6,6 +6,7 @@ import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.ActivitySignUpBinding
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.SignUpPagerAdapter
 import com.dsm.dsmmarketandroid.presentation.ui.base.BaseActivity
+import com.dsm.dsmmarketandroid.presentation.util.LoadingDialog
 import kotlinx.android.synthetic.main.activity_sign_up.*
 import org.jetbrains.anko.toast
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -35,6 +36,10 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() {
         viewModel.toastExistentNameEvent.observe(this, Observer { toast(getString(R.string.fail_existent_nick)) })
 
         viewModel.toastServerErrorEvent.observe(this, Observer { toast(getString(R.string.fail_server_error)) })
+
+        viewModel.showLoadingDialogEvent.observe(this, Observer { LoadingDialog.show(supportFragmentManager) })
+
+        viewModel.hideLoadingDialogEvent.observe(this, Observer { LoadingDialog.hide() })
 
         binding.viewModel = viewModel
     }

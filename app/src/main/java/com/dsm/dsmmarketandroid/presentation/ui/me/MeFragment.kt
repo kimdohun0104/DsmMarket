@@ -9,7 +9,6 @@ import com.dsm.dsmmarketandroid.databinding.FragmentMeBinding
 import com.dsm.dsmmarketandroid.presentation.ui.base.BaseFragment
 import com.dsm.dsmmarketandroid.presentation.ui.changeNick.ChangeNickActivity
 import com.dsm.dsmmarketandroid.presentation.ui.interest.InterestActivity
-import com.dsm.dsmmarketandroid.presentation.ui.language.ChangeLanguageActivity
 import com.dsm.dsmmarketandroid.presentation.ui.logout.LogoutDialog
 import com.dsm.dsmmarketandroid.presentation.ui.myPost.MyPostActivity
 import com.dsm.dsmmarketandroid.presentation.ui.openSource.OpenSourceActivity
