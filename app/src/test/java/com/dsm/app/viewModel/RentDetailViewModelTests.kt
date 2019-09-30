@@ -2,7 +2,6 @@ package com.dsm.app.viewModel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.dsm.domain.entity.Recommend
-import com.dsm.domain.entity.RentDetail
 import com.dsm.domain.usecase.GetRelatedUseCase
 import com.dsm.domain.usecase.GetRentDetailUseCase
 import com.dsm.domain.usecase.InterestUseCase
@@ -49,32 +48,6 @@ class RentDetailViewModelTests {
     fun init() {
         MockitoAnnotations.initMocks(this)
         viewModel = RentDetailViewModel(getRentDetailUseCase, interestUseCase, unInterestUseCase, getRelatedUseCase, recommendModelMapper, rentDetailModelMapper)
-    }
-
-    @Test
-    fun getRentDetailSuccess() {
-        val response = RentDetail(
-            id = 0,
-            commentCount = 0,
-            possibleTime = "POSSIBLE_TIME",
-            price = "PRICE",
-            createdAt = "CREATED_AT",
-            content = "CONTENT",
-            title = "TITLE",
-            author = "AUTHOR",
-            img = "IMG",
-            isInterest = true,
-            category = "CATEGORY"
-        )
-        `when`(getRentDetailUseCase.create(0)).thenReturn(Flowable.just(response))
-
-        viewModel.getRentDetail(0)
-
-        val result = rentDetailModelMapper.mapFrom(response)
-
-        Thread.sleep(90)
-
-        viewModel.rentDetail.test().assertValue(result)
     }
 
     @Test

@@ -33,9 +33,11 @@ class PurchaseDetailActivity : BaseActivity<ActivityPurchaseDetailBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setSupportActionBar(tb_purchase_detail)
+
         tb_purchase_detail.background.alpha = 0
         tb_purchase_detail.setNavigationOnClickListener { finish() }
         tb_purchase_detail.overflowIcon = ContextCompat.getDrawable(this, R.drawable.ic_menu)
+
 
         rv_detail_image.adapter = DetailImageListAdapter(this, postId)
         (rv_detail_image.layoutManager as LinearLayoutManager).orientation = LinearLayoutManager.HORIZONTAL

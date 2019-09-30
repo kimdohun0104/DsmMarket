@@ -1,7 +1,6 @@
 package com.dsm.app.viewModel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.dsm.domain.entity.PurchaseDetail
 import com.dsm.domain.usecase.GetPurchaseDetailUseCase
 import com.dsm.domain.usecase.ModifyPurchaseUseCase
 import com.dsm.dsmmarketandroid.presentation.mapper.PurchaseDetailModelMapper
@@ -64,35 +63,6 @@ class ModifyPurchaseViewModelTests {
         }
 
         assertTrue(viewModel.isModifyEnable.test().value())
-    }
-
-    @Test
-    fun getPurchaseDetailSuccess() {
-        val response = PurchaseDetail(
-            id = 0,
-            category = "CATEGORY",
-            img = listOf("img1", "img2"),
-            title = "TITLE",
-            content = "CONTENT",
-            createdAt = "CREATED_AT",
-            price = "PRICE",
-            isInterest = true,
-            author = "AUTHOR",
-            commentCount = 4
-        )
-        `when`(getPurchaseDetailUseCase.create(0))
-            .thenReturn(Flowable.just(response))
-
-        viewModel.getPurchaseDetail(0)
-
-        val afterMap = purchaseDetailModelMapper.mapFrom(response)
-
-        viewModel.run {
-            title.test().assertValue(afterMap.title)
-            price.test().assertValue(afterMap.price)
-            category.test().assertValue(afterMap.category)
-            content.test().assertValue(afterMap.content)
-        }
     }
 
     @Test

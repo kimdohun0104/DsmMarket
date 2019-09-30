@@ -54,6 +54,7 @@
     <string name="open_source">오픈소스 라이센스</string>
     <string name="version_info">버전 정보</string>
     <string name="current_version">현재 버전: </string>
+    <string name="my_page">님의 마이페이지</string>
 
     <string name="korean" translatable="false">한국어</string>
     <string name="english" translatable="false">English</string>

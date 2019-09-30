@@ -1,7 +1,6 @@
 package com.dsm.app.viewModel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.dsm.domain.entity.PurchaseDetail
 import com.dsm.domain.entity.Recommend
 import com.dsm.domain.usecase.*
 import com.dsm.dsmmarketandroid.presentation.mapper.PurchaseDetailModelMapper
@@ -48,32 +47,6 @@ class PurchaseDetailViewModelTests {
     fun init() {
         MockitoAnnotations.initMocks(this)
         viewModel = PurchaseDetailViewModel(getPurchaseDetailUseCase, interestUseCase, unInterestUseCase, getRecommendUseCase, getRelatedUseCase, purchaseDetailModelMapper, recommendModelMapper)
-    }
-
-    @Test
-    fun getPurchaseDetailSuccess() {
-        val response = PurchaseDetail(
-            id = 0,
-            author = "AUTHOR",
-            createdAt = "CREATED_AT",
-            price = "PRICE",
-            title = "TITLE",
-            commentCount = 0,
-            content = "CONTENT",
-            img = listOf("IMAGE1", "asdf"),
-            isInterest = true,
-            category = "CATEGORY"
-        )
-        `when`(getPurchaseDetailUseCase.create(0))
-            .thenReturn(Flowable.just(response))
-
-        viewModel.getPurchaseDetail(0)
-
-        val result = purchaseDetailModelMapper.mapFrom(response)
-
-        Thread.sleep(90)
-
-        viewModel.purchaseDetail.test().assertValue(result)
     }
 
     @Test

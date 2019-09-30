@@ -26,19 +26,23 @@ class MeFragment : BaseFragment<FragmentMeBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        var title = ""
 
         tv_version.text = BuildConfig.VERSION_NAME
 
         cl_interest.setOnClickListener { activity?.startActivity<InterestActivity>() }
         cl_post_product.setOnClickListener { activity?.startActivity<MyPostActivity>() }
         cl_past_product.setOnClickListener { activity?.startActivity<RecentActivity>() }
-        cl_change_name.setOnClickListener { activity?.startActivity<ChangeNickActivity>("nick" to activity?.title) }
+        cl_change_name.setOnClickListener { activity?.startActivity<ChangeNickActivity>("nick" to title) }
         cl_change_password.setOnClickListener { activity?.startActivity<PasswordConfirmActivity>() }
         cl_open_source.setOnClickListener { activity?.startActivity<OpenSourceActivity>() }
 //        cl_language.setOnClickListener { activity?.startActivity<ChangeLanguageActivity>() }
         cl_logout.setOnClickListener { LogoutDialog().show(childFragmentManager, "") }
 
-        viewModel.userNick.observe(this, Observer { activity?.title = it })
+        viewModel.userNick.observe(this, Observer {
+            title = it
+            activity?.title = it + getString(R.string.my_page)
+        })
 
         binding.viewModel = viewModel
     }

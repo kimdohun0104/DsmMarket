@@ -20,14 +20,24 @@
         <activity android:name=".presentation.ui.purchaseImage.PurchaseImageActivity" />
         <activity android:name=".presentation.ui.rentImage.RentImageActivity" />
         <activity android:name=".presentation.ui.language.ChangeLanguageActivity" />
-        <activity android:name=".presentation.ui.openSource.OpenSourceActivity" />
+        <activity
+            android:name=".presentation.ui.openSource.OpenSourceActivity"
+            android:theme="@style/WhiteAppTheme" />
         <activity android:name=".presentation.ui.category.CategoryListActivity" />
-        <activity android:name=".presentation.ui.modify.rent.ModifyRentActivity" />
-        <activity android:name=".presentation.ui.modify.purchase.ModifyPurchaseActivity" />
+        <activity
+            android:name=".presentation.ui.modify.rent.ModifyRentActivity"
+            android:theme="@style/WhiteAppTheme" />
+        <activity
+            android:name=".presentation.ui.modify.purchase.ModifyPurchaseActivity"
+            android:theme="@style/WhiteAppTheme" />
         <activity android:name=".presentation.ui.rentDetail.RentDetailActivity" />
-        <activity android:name=".presentation.ui.password.passwordConfirm.PasswordConfirmActivity"
-            android:windowSoftInputMode="adjustResize"/>
-        <activity android:name=".presentation.ui.splash.SplashActivity">
+        <activity
+            android:name=".presentation.ui.password.passwordConfirm.PasswordConfirmActivity"
+            android:theme="@style/WhiteAppTheme"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".presentation.ui.splash.SplashActivity"
+            android:theme="@style/WhiteAppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
@@ -35,31 +45,58 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".presentation.ui.password.passwordCodeConfirm.PasswordCodeConfirmActivity" />
-        <activity android:name=".presentation.ui.postCategory.PostCategoryActivity" />
-        <activity android:name=".presentation.ui.searchResult.SearchResultActivity" />
-        <activity android:name=".presentation.ui.chat.ChatActivity" />
-        <activity android:name=".presentation.ui.post.postRent.PostRentActivity" />
+        <activity
+            android:name=".presentation.ui.password.passwordCodeConfirm.PasswordCodeConfirmActivity"
+            android:theme="@style/WhiteAppTheme" />
+        <activity
+            android:name=".presentation.ui.postCategory.PostCategoryActivity"
+            android:theme="@style/WhiteAppTheme" />
+        <activity
+            android:name=".presentation.ui.searchResult.SearchResultActivity"
+            android:theme="@style/WhiteAppTheme" />
+        <activity
+            android:name=".presentation.ui.chat.ChatActivity"
+            android:theme="@style/WhiteAppTheme" />
+        <activity
+            android:name=".presentation.ui.post.postRent.PostRentActivity"
+            android:theme="@style/WhiteAppTheme" />
         <activity
             android:name=".presentation.ui.post.postPurchase.PostPurchaseActivity"
+            android:theme="@style/WhiteAppTheme"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".presentation.ui.addComment.AddCommentActivity"
             android:windowSoftInputMode="adjustResize" />
         <activity android:name=".presentation.ui.comment.CommentActivity" />
         <activity android:name=".presentation.ui.purchaseDetail.PurchaseDetailActivity" />
-        <activity android:name=".presentation.ui.category.CategoryActivity" />
-        <activity android:name=".presentation.ui.search.SearchActivity" />
+        <activity
+            android:name=".presentation.ui.category.CategoryActivity"
+            android:theme="@style/WhiteAppTheme" />
+        <activity
+            android:name=".presentation.ui.search.SearchActivity"
+            android:theme="@style/WhiteAppTheme" />
         <activity android:name=".presentation.ui.recent.RecentActivity" />
         <activity android:name=".presentation.ui.myPost.MyPostActivity" />
         <activity android:name=".presentation.ui.interest.InterestActivity" />
-        <activity android:name=".presentation.ui.changeNick.ChangeNickActivity"
-            android:windowSoftInputMode="adjustResize"/>
-        <activity android:name=".presentation.ui.password.changePassword.ChangePasswordActivity" />
-        <activity android:name=".presentation.ui.password.sendPasswordCode.SendPasswordCodeActivity" />
-        <activity android:name=".presentation.ui.login.LoginActivity" />
-        <activity android:name=".presentation.ui.start.StartActivity" />
-        <activity android:name=".presentation.ui.signUp.SignUpActivity" />
+        <activity
+            android:name=".presentation.ui.changeNick.ChangeNickActivity"
+            android:theme="@style/WhiteAppTheme"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".presentation.ui.password.changePassword.ChangePasswordActivity"
+            android:theme="@style/WhiteAppTheme" />
+        <activity
+            android:name=".presentation.ui.password.sendPasswordCode.SendPasswordCodeActivity"
+            android:theme="@style/WhiteAppTheme" />
+        <activity
+            android:name=".presentation.ui.login.LoginActivity"
+            android:theme="@style/WhiteAppTheme" />
+        <activity
+            android:name=".presentation.ui.start.StartActivity"
+            android:theme="@style/WhiteAppTheme" />
+        <activity
+            android:name=".presentation.ui.signUp.SignUpActivity"
+            android:theme="@style/WhiteAppTheme" />
         <activity android:name=".presentation.ui.main.MainActivity" />
     </application>
 

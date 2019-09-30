@@ -3,6 +3,8 @@ package com.dsm.dsmmarketandroid.presentation.ui.splash
 import com.dsm.domain.usecase.AutoLoginUseCase
 import com.dsm.dsmmarketandroid.presentation.base.BaseViewModel
 import com.dsm.dsmmarketandroid.presentation.util.SingleLiveEvent
+import io.reactivex.android.schedulers.AndroidSchedulers
+import java.util.concurrent.TimeUnit
 
 class SplashViewModel(private val autoLoginUseCase: AutoLoginUseCase) : BaseViewModel() {
 
@@ -12,13 +14,16 @@ class SplashViewModel(private val autoLoginUseCase: AutoLoginUseCase) : BaseView
 
     fun login() {
         addDisposable(
-            autoLoginUseCase.create(Unit).subscribe({
-                intentMainActivityEvent.call()
-                finishActivityEvent.call()
-            }, {
-                intentStartActivity.call()
-                finishActivityEvent.call()
-            })
+            autoLoginUseCase.create(Unit)
+                .delay(1, TimeUnit.SECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    intentMainActivityEvent.call()
+                    finishActivityEvent.call()
+                }, {
+                    intentStartActivity.call()
+                    finishActivityEvent.call()
+                })
         )
     }
 }

@@ -8,6 +8,7 @@ import com.dsm.dsmmarketandroid.presentation.mapper.RecommendModelMapper
 import com.dsm.dsmmarketandroid.presentation.model.PurchaseDetailModel
 import com.dsm.dsmmarketandroid.presentation.model.RecommendModel
 import com.dsm.dsmmarketandroid.presentation.util.SingleLiveEvent
+import io.reactivex.android.schedulers.AndroidSchedulers
 import retrofit2.HttpException
 import java.util.concurrent.TimeUnit
 
@@ -37,11 +38,12 @@ class PurchaseDetailViewModel(
     fun getPurchaseDetail(postId: Int) {
         addDisposable(
             getPurchaseDetailUseCase.create(postId)
+                .map(purchaseDetailModelMapper::mapFrom)
                 .delay(80, TimeUnit.MILLISECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    val result = purchaseDetailModelMapper.mapFrom(it)
-                    isInterest.postValue(result.isInterest)
-                    purchaseDetail.postValue(result)
+                    isInterest.value = it.isInterest
+                    purchaseDetail.value = it
                 }, {
                     if (it is HttpException) {
                         if (it.code() == 410) {

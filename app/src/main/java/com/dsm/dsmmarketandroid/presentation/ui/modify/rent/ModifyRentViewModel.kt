@@ -59,7 +59,7 @@ class ModifyRentViewModel(
                 .map(rentDetailModelMapper::mapFrom)
                 .subscribe({
                     title.value = it.title
-                    price.value = it.price
+                    price.value = it.price.split(" ")[2].substring(0, it.price.split(" ")[2].length - 1)
                     photo.value = it.img
                     content.value = it.content
                     category.value = it.category
