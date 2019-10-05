@@ -10,13 +10,16 @@ val localModule = module {
     single<PrefHelper> { PrefHelperImpl(get()) }
 
     single {
-        Room.databaseBuilder(get(), AppDatabase::class.java, "application.db")
-            .allowMainThreadQueries().build()
+        Room.inMemoryDatabaseBuilder(get(), AppDatabase::class.java).allowMainThreadQueries().build()
     }
 
     factory { get<AppDatabase>().purchaseDao() }
 
     factory { get<AppDatabase>().rentDao() }
 
-    factory { get<AppDatabase>().searchDao() }
+    factory {
+        Room.databaseBuilder(get(), AppDatabase::class.java, "application.db")
+            .allowMainThreadQueries()
+            .build().searchDao()
+    }
 }
