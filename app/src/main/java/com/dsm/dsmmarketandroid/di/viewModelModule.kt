@@ -8,7 +8,6 @@ import com.dsm.dsmmarketandroid.presentation.ui.changeNick.ChangeNickViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.comment.CommentViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.interest.InterestViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.login.LoginViewModel
-import com.dsm.dsmmarketandroid.presentation.ui.me.MeViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.modify.purchase.ModifyPurchaseViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.modify.rent.ModifyRentViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.myPost.MyPostViewModel
@@ -43,8 +42,6 @@ val viewModelModule = module {
     viewModel { PasswordCodeConfirmViewModel(get()) }
 
     viewModel { ChangePasswordViewModel(get()) }
-
-    viewModel { MeViewModel(get()) }
 
     viewModel { ChangeNickViewModel(get()) }
 

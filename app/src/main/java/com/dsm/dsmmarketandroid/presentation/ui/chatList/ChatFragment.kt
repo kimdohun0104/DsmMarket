@@ -17,7 +17,6 @@ class ChatFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val rootView = inflater.inflate(R.layout.fragment_chat, container, false)
-        activity?.setTitle(R.string.chatting)
 
         val adapter = ChatRoomListAdapter()
         rootView.rv_chat_room.adapter = adapter
