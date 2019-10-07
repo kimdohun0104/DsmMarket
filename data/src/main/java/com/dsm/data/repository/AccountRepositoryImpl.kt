@@ -18,6 +18,7 @@ class AccountRepositoryImpl(
                 val response = it.body()!!
                 prefHelper.setAccessToken(response["access_token"] ?: "")
                 prefHelper.setRefreshToken(response["refresh_token"] ?: "")
+                prefHelper.setUserNick(response["nick"] ?: "")
             } else throw HttpException(it)
         }
 

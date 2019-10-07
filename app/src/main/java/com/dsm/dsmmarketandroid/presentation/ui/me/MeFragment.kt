@@ -9,6 +9,7 @@ import com.dsm.dsmmarketandroid.databinding.FragmentMeBinding
 import com.dsm.dsmmarketandroid.presentation.ui.base.BaseFragment
 import com.dsm.dsmmarketandroid.presentation.ui.changeNick.ChangeNickActivity
 import com.dsm.dsmmarketandroid.presentation.ui.interest.InterestActivity
+import com.dsm.dsmmarketandroid.presentation.ui.language.ChangeLanguageActivity
 import com.dsm.dsmmarketandroid.presentation.ui.logout.LogoutDialog
 import com.dsm.dsmmarketandroid.presentation.ui.myPost.MyPostActivity
 import com.dsm.dsmmarketandroid.presentation.ui.openSource.OpenSourceActivity
@@ -35,7 +36,7 @@ class MeFragment : BaseFragment<FragmentMeBinding>() {
         cl_change_name.setOnClickListener { activity?.startActivity<ChangeNickActivity>("nick" to prefHelper.getUserNick()) }
         cl_change_password.setOnClickListener { activity?.startActivity<PasswordConfirmActivity>() }
         cl_open_source.setOnClickListener { activity?.startActivity<OpenSourceActivity>() }
-//        cl_language.setOnClickListener { activity?.startActivity<ChangeLanguageActivity>() }
+        cl_language.setOnClickListener { activity?.startActivity<ChangeLanguageActivity>() }
         cl_logout.setOnClickListener { LogoutDialog().show(childFragmentManager, "") }
     }
 
