@@ -24,8 +24,6 @@ class InterestRentFragment : BaseFragment<FragmentInterestRentBinding>() {
 
         srl_interest_rent.setOnRefreshListener { viewModel.getInterestRent() }
 
-        viewModel.getInterestRent()
-
         viewModel.rentList.observe(this, Observer { adapter.setItems(it) })
 
         viewModel.hideRentProgressEvent.observe(this, Observer { pb_loading.visibility = View.GONE })

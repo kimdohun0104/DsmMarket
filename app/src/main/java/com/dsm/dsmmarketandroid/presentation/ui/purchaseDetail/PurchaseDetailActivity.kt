@@ -57,8 +57,8 @@ class PurchaseDetailActivity : BaseActivity<ActivityPurchaseDetailBinding>() {
         btn_deal_with_chat.setOnClickListener { startActivity<ChatActivity>() }
 
         viewModel.getPurchaseDetail(postId)
-        viewModel.getRecommendProduct(postId)
         viewModel.getRelatedProduct(postId)
+//        viewModel.getRecommendProduct(postId)
 
         viewModel.toastNonExistEvent.observe(this, Observer { toast(getString(R.string.fail_non_exist_post)) })
 

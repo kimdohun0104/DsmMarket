@@ -21,6 +21,8 @@ class InterestActivity : BaseActivity<ActivityInterestBinding>() {
         super.onCreate(savedInstanceState)
         tb_interest.setNavigationOnClickListener { finish() }
 
+        var isRentLoaded = false
+
         tl_interest.addTab(tl_interest.newTab().setText(R.string.purchase))
         tl_interest.addTab(tl_interest.newTab().setText(R.string.rent))
         vp_interest.adapter = InterestPagerAdapter(supportFragmentManager)
@@ -34,6 +36,12 @@ class InterestActivity : BaseActivity<ActivityInterestBinding>() {
 
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 vp_interest.currentItem = tab!!.position
+                if (tab.position == 1) {
+                    if (!isRentLoaded) {
+                        viewModel.getInterestRent()
+                        isRentLoaded = true
+                    }
+                }
             }
 
         })
