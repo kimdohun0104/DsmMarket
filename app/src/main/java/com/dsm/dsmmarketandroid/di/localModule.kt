@@ -9,17 +9,11 @@ import org.koin.dsl.module
 val localModule = module {
     single<PrefHelper> { PrefHelperImpl(get()) }
 
-    single {
-        Room.inMemoryDatabaseBuilder(get(), AppDatabase::class.java).allowMainThreadQueries().build()
-    }
+    single { Room.databaseBuilder(get(), AppDatabase::class.java, "dsmmarket.db").allowMainThreadQueries().build() }
 
     factory { get<AppDatabase>().purchaseDao() }
 
     factory { get<AppDatabase>().rentDao() }
 
-    factory {
-        Room.databaseBuilder(get(), AppDatabase::class.java, "application.db")
-            .allowMainThreadQueries()
-            .build().searchDao()
-    }
+    factory { get<AppDatabase>().searchDao() }
 }
