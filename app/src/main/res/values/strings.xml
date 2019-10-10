@@ -29,6 +29,8 @@
     <string name="confirm_code">인증코드</string>
     <string name="original_password_confirm">기존 비밀번호 확인</string>
     <string name="original_password">기존 비밀번호</string>
+    <string name="send_temp_password">임시 비밀번호 발송</string>
+    <string name="send_temp_password_success">임시 비밀번호 발송에 성공했습니다</string>
 
     <!--content description-->
     <string name="description_logo">앱 로고</string>

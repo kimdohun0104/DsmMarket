@@ -17,6 +17,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
+        <activity android:name=".presentation.ui.password.forgotPassword.ForgotPasswordActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".presentation.ui.purchaseImage.PurchaseImageActivity"
             android:screenOrientation="portrait" />
@@ -60,10 +62,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".presentation.ui.password.passwordCodeConfirm.PasswordCodeConfirmActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/WhiteAppTheme" />
         <activity
             android:name=".presentation.ui.postCategory.PostCategoryActivity"
             android:screenOrientation="portrait"
@@ -119,10 +117,6 @@
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".presentation.ui.password.changePassword.ChangePasswordActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/WhiteAppTheme" />
-        <activity
-            android:name=".presentation.ui.password.sendPasswordCode.SendPasswordCodeActivity"
             android:screenOrientation="portrait"
             android:theme="@style/WhiteAppTheme" />
         <activity

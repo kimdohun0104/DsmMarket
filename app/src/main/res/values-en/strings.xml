@@ -29,6 +29,8 @@
 	<string name="confirm_code">Authentication Code</string>
 	<string name="original_password_confirm">Original password confirm</string>
 	<string name="original_password">original password</string>
+	<string name="send_temp_password">Send temp password</string>
+	<string name="send_temp_password_success">Sending temporary password succeeded</string>
 
 	<string name="description_logo">App logo</string>
 
@@ -37,6 +39,7 @@
 	<string name="post">post</string>
 	<string name="chatting">chatting</string>
 	<string name="me">ME!</string>
+	<string name="my_page">\'s my page</string>
 
 	<string name="post_purchase_product">Purchase Product Registration</string>
 	<string name="post_rent_product">Rent Product Registration</string>

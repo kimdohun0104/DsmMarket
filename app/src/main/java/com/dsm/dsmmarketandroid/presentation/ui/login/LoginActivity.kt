@@ -10,7 +10,7 @@ import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.ActivityLoginBinding
 import com.dsm.dsmmarketandroid.presentation.ui.base.BaseActivity
 import com.dsm.dsmmarketandroid.presentation.ui.main.MainActivity
-import com.dsm.dsmmarketandroid.presentation.ui.password.sendPasswordCode.SendPasswordCodeActivity
+import com.dsm.dsmmarketandroid.presentation.ui.password.forgotPassword.ForgotPasswordActivity
 import com.dsm.dsmmarketandroid.presentation.util.LoadingDialog
 import kotlinx.android.synthetic.main.activity_login.*
 import org.jetbrains.anko.startActivity
@@ -29,7 +29,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
 
         tb_login.setNavigationOnClickListener { finish() }
 
-        tv_forget_password.setOnClickListener { startActivity<SendPasswordCodeActivity>() }
+        tv_forget_password.setOnClickListener { startActivity<ForgotPasswordActivity>() }
 
         et_password.setOnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {

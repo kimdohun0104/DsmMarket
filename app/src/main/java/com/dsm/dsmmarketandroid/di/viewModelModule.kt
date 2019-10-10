@@ -12,9 +12,8 @@ import com.dsm.dsmmarketandroid.presentation.ui.modify.purchase.ModifyPurchaseVi
 import com.dsm.dsmmarketandroid.presentation.ui.modify.rent.ModifyRentViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.myPost.MyPostViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.password.changePassword.ChangePasswordViewModel
-import com.dsm.dsmmarketandroid.presentation.ui.password.passwordCodeConfirm.PasswordCodeConfirmViewModel
+import com.dsm.dsmmarketandroid.presentation.ui.password.forgotPassword.ForgotPasswordViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.password.passwordConfirm.PasswordConfirmViewModel
-import com.dsm.dsmmarketandroid.presentation.ui.password.sendPasswordCode.SendPasswordCodeViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.post.postPurchase.PostPurchaseViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.post.postRent.PostRentViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.postCategory.PostCategoryViewModel
@@ -36,10 +35,6 @@ val viewModelModule = module {
     viewModel { LoginViewModel(get()) }
 
     viewModel { SignUpViewModel(get()) }
-
-    viewModel { SendPasswordCodeViewModel(get()) }
-
-    viewModel { PasswordCodeConfirmViewModel(get()) }
 
     viewModel { ChangePasswordViewModel(get()) }
 
@@ -86,4 +81,6 @@ val viewModelModule = module {
     viewModel { RentImageViewModel(get()) }
 
     viewModel { PurchaseImageViewModel(get()) }
+
+    viewModel { ForgotPasswordViewModel(get()) }
 }

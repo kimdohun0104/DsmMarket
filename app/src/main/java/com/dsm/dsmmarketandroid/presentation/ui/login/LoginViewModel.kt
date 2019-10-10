@@ -7,7 +7,8 @@ import com.dsm.dsmmarketandroid.presentation.base.BaseViewModel
 import com.dsm.dsmmarketandroid.presentation.util.SingleLiveEvent
 import retrofit2.HttpException
 
-class LoginViewModel(private val loginUseCase: LoginUseCase) : BaseViewModel() {
+class
+LoginViewModel(private val loginUseCase: LoginUseCase) : BaseViewModel() {
 
     val email = MutableLiveData<String>()
     val password = MutableLiveData<String>()
