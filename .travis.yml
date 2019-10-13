@@ -51,6 +51,7 @@ deploy:
   skip_cleanup: true
   overwrite: true
   file: "app/build/outputs/apk/release/app-release.apk"
+  api_key: ad7ce99d5dc4492b3a9cdb3b6b363620e295a70e
   on:
     branch:
       - master
