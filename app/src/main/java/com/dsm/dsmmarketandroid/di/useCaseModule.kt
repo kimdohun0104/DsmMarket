@@ -12,13 +12,7 @@ val useCaseModule = module {
 
     factory { RefreshTokenUseCase(get()) }
 
-    factory { SendPasswordCodeUseCase(get()) }
-
-    factory { PasswordCodeConfirmUseCase(get()) }
-
     factory { ChangePasswordUseCase(get()) }
-
-    factory { GetUserNickUseCase(get()) }
 
     factory { ChangeNickUseCase(get()) }
 
@@ -75,4 +69,6 @@ val useCaseModule = module {
     factory { GetRentImageUseCase(get()) }
 
     factory { GetPurchaseImageUseCase(get()) }
+
+    factory { SendTempPasswordUseCase(get()) }
 }

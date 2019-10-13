@@ -1,7 +1,6 @@
 package com.dsm.app.viewModel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.dsm.domain.entity.RentDetail
 import com.dsm.domain.usecase.GetRentDetailUseCase
 import com.dsm.domain.usecase.ModifyRentUseCase
 import com.dsm.dsmmarketandroid.presentation.mapper.RentDetailModelMapper
@@ -63,37 +62,6 @@ class ModifyRentViewModelTests {
         }
 
         assertTrue(viewModel.isModifyEnable.test().value())
-    }
-
-    @Test
-    fun getRentDetailSuccess() {
-        val response = RentDetail(
-            id = 0,
-            commentCount = 0,
-            author = "AUTHOR",
-            isInterest = true,
-            price = "PRICE",
-            createdAt = "CREATED_AT",
-            content = "CONTENT",
-            title = "TITLE",
-            img = "IMG",
-            category = "CATEGORY",
-            possibleTime = "POSSIBLE_TIME"
-        )
-        `when`(getRentDetailUseCase.create(0))
-            .thenReturn(Flowable.just(response))
-
-        viewModel.getRentDetail(0)
-        val afterMap = rentDetailModelMapper.mapFrom(response)
-
-        viewModel.run {
-            title.test().assertValue(afterMap.title)
-            price.test().assertValue(afterMap.price)
-            photo.test().assertValue(afterMap.img)
-            content.test().assertValue(afterMap.content)
-            category.test().assertValue(afterMap.category)
-            rentTime.test().assertValue(afterMap.possibleTime)
-        }
     }
 
     @Test

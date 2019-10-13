@@ -55,8 +55,14 @@ class PostRentViewModel(private val postRentUseCase: PostRentUseCase) : BaseView
     val finishActivityEvent = SingleLiveEvent<Any>()
     val toastServerErrorEvent = SingleLiveEvent<Any>()
 
+    val showLoadingDialogEvent = SingleLiveEvent<Any>()
+    val hideLoadingDialogEvent = SingleLiveEvent<Any>()
+
     fun post() {
         val imageFile = File(photo.value!!)
+
+        showLoadingDialogEvent.call()
+
         addDisposable(
             postRentUseCase.create(
                 PostRentUseCase.Params(
@@ -69,11 +75,14 @@ class PostRentViewModel(private val postRentUseCase: PostRentUseCase) : BaseView
                         "possible_time" to RequestBody.create(MediaType.parse("text/plain"), rentTime.value ?: "")
                     )
                 )
-            ).subscribe({
-                finishActivityEvent.call()
-            }, {
-                toastServerErrorEvent.call()
-            })
+            )
+                .subscribe({
+                    hideLoadingDialogEvent.call()
+                    finishActivityEvent.call()
+                }, {
+                    hideLoadingDialogEvent.call()
+                    toastServerErrorEvent.call()
+                })
         )
     }
 

@@ -11,6 +11,7 @@ import com.dsm.dsmmarketandroid.presentation.mapper.RentDetailModelMapper
 import com.dsm.dsmmarketandroid.presentation.model.RecommendModel
 import com.dsm.dsmmarketandroid.presentation.model.RentDetailModel
 import com.dsm.dsmmarketandroid.presentation.util.SingleLiveEvent
+import io.reactivex.android.schedulers.AndroidSchedulers
 import retrofit2.HttpException
 import java.util.concurrent.TimeUnit
 
@@ -38,9 +39,10 @@ class RentDetailViewModel(
             getRentDetailUseCase.create(postId)
                 .map(rentDetailModelMapper::mapFrom)
                 .delay(70, TimeUnit.MILLISECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    isInterest.postValue(it.isInterest)
-                    rentDetail.postValue(it)
+                    isInterest.value = it.isInterest
+                    rentDetail.value = it
                 }, {
                     if (it is HttpException) {
                         if (it.code() == 410)

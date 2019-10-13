@@ -18,7 +18,7 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/tb_search"
             android:layout_width="0dp"
-            android:layout_height="?attr/actionBarSize"
+            android:layout_height="56dp"
             android:background="@color/white"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -31,7 +31,7 @@
                 <androidx.appcompat.widget.AppCompatImageButton
                     android:id="@+id/ib_back"
                     android:layout_width="21dp"
-                    android:layout_height="21dp"
+                    android:layout_height="22dp"
                     android:background="@null"
                     android:src="@drawable/ic_back_black"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -54,7 +54,7 @@
                     android:paddingEnd="10dp"
                     android:singleLine="true"
                     android:text="@={viewModel.searchText}"
-                    android:textSize="14sp"
+                    android:textSize="15sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toRightOf="@id/ib_back"
                     app:layout_constraintRight_toLeftOf="@id/ib_search"

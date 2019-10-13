@@ -29,6 +29,8 @@
     <string name="confirm_code">인증코드</string>
     <string name="original_password_confirm">기존 비밀번호 확인</string>
     <string name="original_password">기존 비밀번호</string>
+    <string name="send_temp_password">임시 비밀번호 발송</string>
+    <string name="send_temp_password_success">임시 비밀번호 발송에 성공했습니다</string>
 
     <!--content description-->
     <string name="description_logo">앱 로고</string>
@@ -54,6 +56,7 @@
     <string name="open_source">오픈소스 라이센스</string>
     <string name="version_info">버전 정보</string>
     <string name="current_version">현재 버전: </string>
+    <string name="my_page">님의 마이페이지</string>
 
     <string name="korean" translatable="false">한국어</string>
     <string name="english" translatable="false">English</string>

@@ -17,16 +17,44 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".presentation.ui.purchaseImage.PurchaseImageActivity"></activity>
-        <activity android:name=".presentation.ui.rentImage.RentImageActivity" />
-        <activity android:name=".presentation.ui.language.ChangeLanguageActivity" />
-        <activity android:name=".presentation.ui.openSource.OpenSourceActivity" />
-        <activity android:name=".presentation.ui.category.CategoryListActivity" />
-        <activity android:name=".presentation.ui.modify.rent.ModifyRentActivity" />
-        <activity android:name=".presentation.ui.modify.purchase.ModifyPurchaseActivity" />
-        <activity android:name=".presentation.ui.rentDetail.RentDetailActivity" />
-        <activity android:name=".presentation.ui.password.passwordConfirm.PasswordConfirmActivity" />
-        <activity android:name=".presentation.ui.splash.SplashActivity">
+        <activity android:name=".presentation.ui.password.forgotPassword.ForgotPasswordActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".presentation.ui.purchaseImage.PurchaseImageActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".presentation.ui.rentImage.RentImageActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".presentation.ui.language.ChangeLanguageActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".presentation.ui.openSource.OpenSourceActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/WhiteAppTheme" />
+        <activity
+            android:name=".presentation.ui.category.CategoryListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".presentation.ui.modify.rent.ModifyRentActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/WhiteAppTheme" />
+        <activity
+            android:name=".presentation.ui.modify.purchase.ModifyPurchaseActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/WhiteAppTheme" />
+        <activity
+            android:name=".presentation.ui.rentDetail.RentDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".presentation.ui.password.passwordConfirm.PasswordConfirmActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/WhiteAppTheme"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".presentation.ui.splash.SplashActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/WhiteAppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
@@ -34,31 +62,78 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".presentation.ui.password.passwordCodeConfirm.PasswordCodeConfirmActivity" />
-        <activity android:name=".presentation.ui.postCategory.PostCategoryActivity" />
-        <activity android:name=".presentation.ui.searchResult.SearchResultActivity" />
-        <activity android:name=".presentation.ui.chat.ChatActivity" />
-        <activity android:name=".presentation.ui.post.postRent.PostRentActivity" />
+        <activity
+            android:name=".presentation.ui.postCategory.PostCategoryActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/WhiteAppTheme" />
+        <activity
+            android:name=".presentation.ui.searchResult.SearchResultActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/WhiteAppTheme" />
+        <activity
+            android:name=".presentation.ui.chat.ChatActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/WhiteAppTheme" />
+        <activity
+            android:name=".presentation.ui.post.postRent.PostRentActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/WhiteAppTheme" />
         <activity
             android:name=".presentation.ui.post.postPurchase.PostPurchaseActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/WhiteAppTheme"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".presentation.ui.addComment.AddCommentActivity"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
-        <activity android:name=".presentation.ui.comment.CommentActivity" />
-        <activity android:name=".presentation.ui.purchaseDetail.PurchaseDetailActivity" />
-        <activity android:name=".presentation.ui.category.CategoryActivity" />
-        <activity android:name=".presentation.ui.search.SearchActivity" />
-        <activity android:name=".presentation.ui.recent.RecentActivity" />
-        <activity android:name=".presentation.ui.myPost.MyPostActivity" />
-        <activity android:name=".presentation.ui.interest.InterestActivity" />
-        <activity android:name=".presentation.ui.changeNick.ChangeNickActivity" />
-        <activity android:name=".presentation.ui.password.changePassword.ChangePasswordActivity" />
-        <activity android:name=".presentation.ui.password.sendPasswordCode.SendPasswordCodeActivity" />
-        <activity android:name=".presentation.ui.login.LoginActivity" />
-        <activity android:name=".presentation.ui.start.StartActivity" />
-        <activity android:name=".presentation.ui.signUp.SignUpActivity" />
-        <activity android:name=".presentation.ui.main.MainActivity" />
+        <activity
+            android:name=".presentation.ui.comment.CommentActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".presentation.ui.purchaseDetail.PurchaseDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".presentation.ui.category.CategoryActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/WhiteAppTheme" />
+        <activity
+            android:name=".presentation.ui.search.SearchActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/WhiteAppTheme" />
+        <activity
+            android:name=".presentation.ui.recent.RecentActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".presentation.ui.myPost.MyPostActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".presentation.ui.interest.InterestActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".presentation.ui.changeNick.ChangeNickActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/WhiteAppTheme"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".presentation.ui.password.changePassword.ChangePasswordActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/WhiteAppTheme" />
+        <activity
+            android:name=".presentation.ui.login.LoginActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/WhiteAppTheme" />
+        <activity
+            android:name=".presentation.ui.start.StartActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/WhiteAppTheme" />
+        <activity
+            android:name=".presentation.ui.signUp.SignUpActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/WhiteAppTheme" />
+        <activity
+            android:name=".presentation.ui.main.MainActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

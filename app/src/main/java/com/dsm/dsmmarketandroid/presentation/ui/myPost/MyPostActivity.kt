@@ -21,6 +21,8 @@ class MyPostActivity : BaseActivity<ActivityMyPostBinding>() {
         super.onCreate(savedInstanceState)
         tb_my_post.setNavigationOnClickListener { finish() }
 
+        var isRentLoaded = false
+
         tl_my_post.addTab(tl_my_post.newTab().setText(R.string.purchase))
         tl_my_post.addTab(tl_my_post.newTab().setText(R.string.rent))
         vp_my_post.adapter = MyPostPagerAdapter(supportFragmentManager)
@@ -34,6 +36,12 @@ class MyPostActivity : BaseActivity<ActivityMyPostBinding>() {
 
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 vp_my_post.currentItem = tab!!.position
+                if (tab.position == 1) {
+                    if (!isRentLoaded) {
+                        viewModel.getMyRent()
+                        isRentLoaded = true
+                    }
+                }
             }
 
         })

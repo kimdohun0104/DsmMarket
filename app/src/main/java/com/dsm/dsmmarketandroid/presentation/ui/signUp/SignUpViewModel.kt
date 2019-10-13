@@ -28,8 +28,8 @@ class SignUpViewModel(private val signUpUseCase: SignUpUseCase) : BaseViewModel(
     }
 
     private fun isBlankExist() = email.isValueBlank() || password.isValueBlank()
-            || reType.isValueBlank() || name.isValueBlank()
-            || grade.isValueBlank() || gender.isValueBlank()
+        || reType.isValueBlank() || name.isValueBlank()
+        || grade.isValueBlank() || gender.isValueBlank()
 
     private fun MutableLiveData<String>.isValueBlank() = this.value.isNullOrBlank()
 
@@ -43,6 +43,9 @@ class SignUpViewModel(private val signUpUseCase: SignUpUseCase) : BaseViewModel(
 
     val toastServerErrorEvent = SingleLiveEvent<Any>()
 
+    val showLoadingDialogEvent = SingleLiveEvent<Any>()
+    val hideLoadingDialogEvent = SingleLiveEvent<Any>()
+
     fun signUp() {
         if (!Validator.validEmail(email.value!!)) {
             toastEmailInvalidEvent.call()
@@ -54,6 +57,8 @@ class SignUpViewModel(private val signUpUseCase: SignUpUseCase) : BaseViewModel(
             return
         }
 
+        showLoadingDialogEvent.call()
+
         addDisposable(
             signUpUseCase.create(
                 hashMapOf(
@@ -63,21 +68,24 @@ class SignUpViewModel(private val signUpUseCase: SignUpUseCase) : BaseViewModel(
                     "grade" to grade.value!!.toInt(),
                     "gender" to gender.value
                 )
-            ).subscribe({
-                finishActivityEvent.call()
-            }, {
-                if (it is HttpException) {
-                    if (it.code() == 403) {
-                        val errorResponse = JSONObject(it.response()?.errorBody()?.string()!!)
-                        if (errorResponse.has("errorCode")) {
-                            if (errorResponse.getInt("errorCode") == 0)
-                                toastExistentEmailEvent.call()
-                            else
-                                toastExistentNameEvent.call()
-                        }
+            )
+                .subscribe({
+                    hideLoadingDialogEvent.call()
+                    finishActivityEvent.call()
+                }, {
+                    hideLoadingDialogEvent.call()
+                    if (it is HttpException) {
+                        if (it.code() == 403) {
+                            val errorResponse = JSONObject(it.response()?.errorBody()?.string()!!)
+                            if (errorResponse.has("errorCode")) {
+                                if (errorResponse.getInt("errorCode") == 0)
+                                    toastExistentEmailEvent.call()
+                                else
+                                    toastExistentNameEvent.call()
+                            }
+                        } else toastServerErrorEvent.call()
                     } else toastServerErrorEvent.call()
-                } else toastServerErrorEvent.call()
-            })
+                })
         )
     }
 }

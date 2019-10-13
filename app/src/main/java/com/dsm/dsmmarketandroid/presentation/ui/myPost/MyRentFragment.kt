@@ -24,8 +24,6 @@ class MyRentFragment : BaseFragment<FragmentMyRentBinding>() {
 
         srl_my_rent.setOnRefreshListener { viewModel.getMyRent() }
 
-        viewModel.getMyRent()
-
         viewModel.rentList.observe(this, Observer { adapter.setItems(it) })
 
         viewModel.deletePositionFromRent.observe(this, Observer { adapter.deleteAt(it) })

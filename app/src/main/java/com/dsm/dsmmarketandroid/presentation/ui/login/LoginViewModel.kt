@@ -7,7 +7,8 @@ import com.dsm.dsmmarketandroid.presentation.base.BaseViewModel
 import com.dsm.dsmmarketandroid.presentation.util.SingleLiveEvent
 import retrofit2.HttpException
 
-class LoginViewModel(private val loginUseCase: LoginUseCase) : BaseViewModel() {
+class
+LoginViewModel(private val loginUseCase: LoginUseCase) : BaseViewModel() {
 
     val email = MutableLiveData<String>()
     val password = MutableLiveData<String>()
@@ -21,9 +22,14 @@ class LoginViewModel(private val loginUseCase: LoginUseCase) : BaseViewModel() {
     val intentMainActivityEvent = SingleLiveEvent<Any>()
     val toastLoginFailEvent = SingleLiveEvent<Any>()
     val toastServerErrorEvent = SingleLiveEvent<Any>()
+    val hideKeyboardEvent = SingleLiveEvent<Any>()
+    val showLoadingDialogEvent = SingleLiveEvent<Any>()
+    val hideLoadingDialogEvent = SingleLiveEvent<Any>()
 
     fun login() {
         if (!isLoginEnable.value!!) return
+
+        showLoadingDialogEvent.call()
 
         addDisposable(
             loginUseCase.create(
@@ -31,15 +37,19 @@ class LoginViewModel(private val loginUseCase: LoginUseCase) : BaseViewModel() {
                     "email" to email.value,
                     "password" to password.value
                 )
-            ).subscribe({
-                intentMainActivityEvent.call()
-            }, {
-                if (it is HttpException) {
-                    if (it.code() == 403) {
-                        toastLoginFailEvent.call()
-                    }
-                } else toastServerErrorEvent.call()
-            })
+            )
+                .subscribe({
+                    hideLoadingDialogEvent.call()
+                    hideKeyboardEvent.call()
+                    intentMainActivityEvent.call()
+                }, {
+                    hideLoadingDialogEvent.call()
+                    if (it is HttpException) {
+                        if (it.code() == 403) {
+                            toastLoginFailEvent.call()
+                        } else toastServerErrorEvent.call()
+                    } else toastServerErrorEvent.call()
+                })
         )
     }
 }

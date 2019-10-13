@@ -14,20 +14,13 @@ class PasswordRepositoryImpl(private val passwordDataSource: PasswordDataSource)
             Pair(response["email"] ?: "", (response["authCode"] ?: "").toInt())
         }
 
-    override fun sendPasswordCode(email: String): Flowable<Unit> =
-        passwordDataSource.sendPasswordCode(email).map {
-            if (it.code() != 200) throw HttpException(it)
-        }
-
-    override fun passwordCodeConfirm(body: Any): Flowable<Int> =
-        passwordDataSource.passwordCodeConfirm(body).map {
-            if (it.code() != 200) throw HttpException(it)
-            it.body()!!["authCode"]
-        }
-
     override fun changePassword(params: Any): Flowable<Unit> =
         passwordDataSource.changePassword(params).map {
             if (it.code() != 200) throw HttpException(it)
         }
 
+    override fun sendTempPassword(email: String): Flowable<Unit> =
+        passwordDataSource.sendTempPassword(email).map {
+            if (it.code() != 200) throw HttpException(it)
+        }
 }

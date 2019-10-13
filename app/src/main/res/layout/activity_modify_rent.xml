@@ -60,7 +60,9 @@
             app:layout_constraintLeft_toLeftOf="@id/et_title"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/et_title"
-            android:text="@={viewModel.price}"/>
+            android:text="@={viewModel.price}"
+            android:digits="0123456789"
+            android:inputType="number"/>
 
         <TextView
             android:layout_width="wrap_content"

@@ -31,7 +31,6 @@ class PurchaseFragment : BaseFragment<FragmentPurchaseBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
-        activity?.setTitle(R.string.purchase)
 
         srl_purchase.setOnRefreshListener {
             viewModel.refreshList()

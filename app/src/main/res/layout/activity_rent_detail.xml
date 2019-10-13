@@ -29,8 +29,8 @@
                     android:id="@+id/iv_rent_image"
                     android:layout_width="match_parent"
                     android:layout_height="310dp"
-                    android:transitionName="image"
                     android:scaleType="centerCrop"
+                    android:transitionName="image"
                     bind:image="@{viewModel.rentDetail.img}" />
 
                 <TextView
@@ -39,8 +39,10 @@
                     android:layout_marginStart="18dp"
                     android:layout_marginTop="18dp"
                     android:text="@{viewModel.rentDetail.title}"
+                    android:layout_marginEnd="20dp"
                     android:textColor="@color/black"
-                    android:textSize="16sp"
+                    android:textSize="21sp"
+                    android:maxLines="2"
                     android:textStyle="bold"
                     android:transitionName="title" />
 
@@ -48,7 +50,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginBottom="4dp"
                     android:orientation="horizontal">
 
                     <TextView
@@ -57,7 +59,7 @@
                         android:layout_marginStart="16sp"
                         android:text="@{viewModel.rentDetail.createdAt}"
                         android:textColor="@color/colorGrey"
-                        android:textSize="13sp"
+                        android:textSize="16sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -66,8 +68,40 @@
                         android:layout_marginStart="18dp"
                         android:text="@{viewModel.rentDetail.author}"
                         android:textColor="@color/colorGrey"
-                        android:textSize="13sp"
+                        android:textSize="16sp"
                         android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="4dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="18dp"
+                        android:layout_marginEnd="2dp"
+                        android:text="@string/price"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/colon"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:text="@{viewModel.rentDetail.price}"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -82,14 +116,14 @@
                         android:layout_marginEnd="2dp"
                         android:text="@string/possible_time"
                         android:textColor="@color/black"
-                        android:textSize="14sp" />
+                        android:textSize="15sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/colon"
                         android:textColor="@color/black"
-                        android:textSize="14sp" />
+                        android:textSize="15sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -97,7 +131,7 @@
                         android:layout_marginStart="4dp"
                         android:text="@{viewModel.rentDetail.possibleTime}"
                         android:textColor="@color/black"
-                        android:textSize="14sp" />
+                        android:textSize="15sp" />
                 </LinearLayout>
 
                 <TextView
@@ -107,38 +141,8 @@
                     android:layout_marginTop="20dp"
                     android:text="@{viewModel.rentDetail.content}"
                     android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    android:textSize="18sp" />
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="18dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="18dp"
-                        android:layout_marginEnd="2dp"
-                        android:text="@string/price"
-                        android:textColor="@color/black"
-                        android:textSize="15sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/colon"
-                        android:textColor="@color/black"
-                        android:textSize="15sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="4dp"
-                        android:text="@{viewModel.rentDetail.price}"
-                        android:textColor="@color/black"
-                        android:textSize="15sp" />
-                </LinearLayout>
 
                 <Button
                     android:id="@+id/btn_deal_with_chat"
@@ -161,7 +165,7 @@
                 <LinearLayout
                     android:id="@+id/ll_comment"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="50dp"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
@@ -172,19 +176,19 @@
                         android:layout_marginEnd="10dp"
                         android:text="@string/comment"
                         android:textColor="@color/black"
-                        android:textSize="15sp" />
+                        android:textSize="17sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@{String.valueOf(viewModel.rentDetail.commentCount)}"
-                        android:textSize="12sp" />
+                        android:textSize="14sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/count"
-                        android:textSize="12sp" />
+                        android:textSize="14sp" />
 
                     <View
                         android:layout_width="0dp"
@@ -211,7 +215,7 @@
                     android:layout_marginBottom="15dp"
                     android:text="@string/related_product"
                     android:textColor="@color/black"
-                    android:textSize="16sp" />
+                    android:textSize="18sp" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_related"

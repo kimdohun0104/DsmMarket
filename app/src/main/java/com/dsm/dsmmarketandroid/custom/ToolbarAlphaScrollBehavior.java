@@ -42,9 +42,7 @@ public class ToolbarAlphaScrollBehavior extends CoordinatorLayout.Behavior<andro
         } else if (offset >= endOffset) {
             child.getBackground().setAlpha(255);
         }
-
         MenuItem menuItem = child.getMenu().getItem(0);
-
         if (offset > 400) {
             child.setNavigationIcon(R.drawable.ic_back_black);
             child.setTitleTextColor(context.getResources().getColor(R.color.black));

@@ -34,7 +34,6 @@ class RentFragment : BaseFragment<FragmentRentBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
-        activity?.setTitle(R.string.rent)
 
         srl_rent.setOnRefreshListener {
             viewModel.refreshList()
