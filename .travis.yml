@@ -2,6 +2,11 @@ language: android
 sudo: required
 dist: trusty
 
+branches:
+  only:
+  - master
+  - dev
+
 android:
   components:
   - build-tools-29.0.2
@@ -10,7 +15,7 @@ android:
   - tools
   - platform-tools
   lisences:
-    - android-sdk-license-.+
+  - android-sdk-license-.+
   
 before_install:
   - chmod +x gradlew
@@ -43,8 +48,7 @@ deploy:
   provider: releases
   skip_cleanup: true
   overwrite: true
-  script: sh script/deploy.sh
   file: "app/build/outputs/apk/release/app-release.apk"
   on:
     branch:
-      -master
+      - master
