@@ -33,7 +33,9 @@ cache:
     - $HOME/.android/build-cache
 
 notifications:
-  slack: awesomeplanb:pwlilBY08nuCZqbCTX09meOq
+  slack:
+    rooms:
+      - awesomeplanb:pwlilBY08nuCZqbCTX09meOq#android
     on_success: always
     on_failure: always
   email:
