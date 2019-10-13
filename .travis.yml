@@ -1,19 +1,55 @@
 language: android
 sudo: required
 dist: trusty
+
+branches:
+  only:
+    - master
+    - dev
+
 android:
   components:
   - build-tools-29.0.2
   - android-29
   - tools
+  - tools
   - platform-tools
-  - extra-android-m2repository
-  - extra-google-m2repository
-  - extra-google-google_play_services
+  lisences:
+    - android-sdk-license-.+
+  
 before_install:
   - chmod +x gradlew
   - yes | sdkmanager --update
   - yes | sdkmanager --licenses
+  
 script:
-    - ./gradlew androidDependencies
-    - ./gradlew build
+  - "./gradlew androidDependencies clean build test"
+  
+before_cache:
+  - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+
+cache:
+  directories:
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
+    - $HOME/.android/build-cache
+
+notifications:
+  slack:
+    on_success: always
+    slack: awesomeplanb:pwlilBY08nuCZqbCTX09meOq
+  email:
+    on_success: never
+    on_failure: always
+    - dikolight203@gmail.com
+
+deploy:
+  provider: releases
+  skip_cleanup: true
+  overwrite: true
+  script: sh script/deploy.sh
+  file: "app/build/outputs/apk/release/app-release.apk"
+  on:
+    branch:
+      -master
