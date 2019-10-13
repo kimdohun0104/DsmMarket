@@ -38,6 +38,7 @@ cache:
 notifications:
   slack:
     on_success: always
+    on_failure: always
     slack: awesomeplanb:pwlilBY08nuCZqbCTX09meOq
   email:
     recipients:
@@ -53,6 +54,7 @@ deploy:
   file: "app/build/outputs/apk/release/app-release.apk"
   user: "kimdohun0104"
   password: "$PASSWORD"
+  api_key: 69b73feaf661011ab8d9e6b25f8aec39a800f240
   on:
     branch:
       - master
