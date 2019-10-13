@@ -40,9 +40,11 @@ notifications:
     on_success: always
     slack: awesomeplanb:pwlilBY08nuCZqbCTX09meOq
   email:
+    recipients:
+      - dikolight203@gmail.com
     on_success: never
     on_failure: always
-    - dikolight203@gmail.com
+    
 
 deploy:
   provider: releases
