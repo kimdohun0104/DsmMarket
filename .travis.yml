@@ -33,10 +33,9 @@ cache:
     - $HOME/.android/build-cache
 
 notifications:
-  slack:
+  slack: awesomeplanb:pwlilBY08nuCZqbCTX09meOq
     on_success: always
     on_failure: always
-    slack: awesomeplanb:pwlilBY08nuCZqbCTX09meOq
   email:
     recipients:
       - dikolight203@gmail.com
