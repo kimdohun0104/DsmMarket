@@ -2,11 +2,6 @@ language: android
 sudo: required
 dist: trusty
 
-branches:
-  only:
-    - master
-    - dev
-
 android:
   components:
   - build-tools-29.0.2
