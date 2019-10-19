@@ -7,6 +7,7 @@ import com.dsm.domain.usecase.ModifyRentUseCase
 import com.dsm.dsmmarketandroid.presentation.base.BaseViewModel
 import com.dsm.dsmmarketandroid.presentation.mapper.RentDetailModelMapper
 import com.dsm.dsmmarketandroid.presentation.util.SingleLiveEvent
+import com.dsm.dsmmarketandroid.presentation.util.isValueBlank
 
 class ModifyRentViewModel(
     private val getRentDetailUseCase: GetRentDetailUseCase,
@@ -25,8 +26,6 @@ class ModifyRentViewModel(
     val finishActivityEvent = SingleLiveEvent<Any>()
 
     val toastServerErrorEvent = SingleLiveEvent<Any>()
-
-    private fun MutableLiveData<String>.isValueBlank() = this.value.isNullOrBlank()
 
     private fun isBlankExist() = title.isValueBlank() || price.isValueBlank()
         || photo.value == null || content.isValueBlank() || category.isValueBlank()
@@ -53,6 +52,7 @@ class ModifyRentViewModel(
         addSource(endMinute) { value = getFormattedTime() }
     }
 
+    // TODO 차라리 모델 하나 더 만들어서 이렇게 하나 하나 value설정해주는거 말고 다른 방법 찾아보자
     fun getRentDetail(postId: Int) {
         addDisposable(
             getRentDetailUseCase.create(postId)

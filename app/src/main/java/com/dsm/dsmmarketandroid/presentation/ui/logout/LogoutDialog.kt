@@ -20,12 +20,15 @@ class LogoutDialog : DialogFragment() {
         val rootView = inflater.inflate(R.layout.dialog_logout, container, false)
 
         rootView.btn_confirm.setOnClickListener {
-            prefHelper.deleteAccessToken()
-            prefHelper.deleteRefreshToken()
-            prefHelper.deleteUserNick()
-            val intent = Intent(activity!!, StartActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            startActivity(intent)
+            prefHelper.run {
+                deleteAccessToken()
+                deleteRefreshToken()
+                deleteUserNick()
+            }
+            Intent(activity!!, StartActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(this)
+            }
         }
 
         rootView.btn_cancel.setOnClickListener { dismiss() }

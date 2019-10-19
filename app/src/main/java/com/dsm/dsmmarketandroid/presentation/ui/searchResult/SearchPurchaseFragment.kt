@@ -14,8 +14,9 @@ class SearchPurchaseFragment : BaseFragment<FragmentSearchPurchaseBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val purchaseListFragment = PurchaseListFragment()
-        purchaseListFragment.arguments = Bundle().apply { putString("search", activity?.intent?.getStringExtra("search")) }
+        val purchaseListFragment = PurchaseListFragment().apply {
+            arguments = Bundle().apply { putString("search", activity?.intent?.getStringExtra("search")) }
+        }
         childFragmentManager.beginTransaction().replace(R.id.fl_purchase_container, purchaseListFragment).commit()
     }
 }

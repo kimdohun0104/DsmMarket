@@ -32,10 +32,11 @@ class PostCategoryActivity : BaseActivity<ActivityPostCategoryBinding>() {
         viewModel.serverErrorEvent.observe(this, Observer { toast(getString(R.string.fail_server_error)) })
 
         viewModel.selectedCategory.observe(this, Observer {
-            val resultIntent = Intent()
-            resultIntent.putExtra("category", it)
-            setResult(Activity.RESULT_OK, resultIntent)
-            finish()
+            Intent().apply {
+                putExtra("category", it)
+                setResult(Activity.RESULT_OK, this)
+                finish()
+            }
         })
 
         binding.viewModel = viewModel

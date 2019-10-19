@@ -28,9 +28,10 @@ class ChangeLanguageDialog : DialogFragment() {
 
         rootView.btn_complete.setOnClickListener {
             BaseApp.localeManager?.setNewLocale(activity!!, lang)
-            val intent = Intent(activity!!, MainActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-            startActivity(intent)
+            Intent(activity!!, MainActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(this)
+            }
         }
 
         rootView.btn_cancel.setOnClickListener { dismiss() }

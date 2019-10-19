@@ -6,7 +6,8 @@ import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.ActivitySearchResultBinding
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.SearchPagerAdapter
 import com.dsm.dsmmarketandroid.presentation.ui.base.BaseActivity
-import com.google.android.material.tabs.TabLayout
+import com.dsm.dsmmarketandroid.presentation.util.addOnTabSelectedListener
+import com.dsm.dsmmarketandroid.presentation.util.setEditorActionListener
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_search_result.*
 import org.jetbrains.anko.startActivity
@@ -22,12 +23,7 @@ class SearchResultActivity : BaseActivity<ActivitySearchResultBinding>() {
         ib_back.setOnClickListener { finish() }
         et_search.hint = search
 
-        et_search.setOnEditorActionListener { v, actionId, event ->
-            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                startNewSearchResult()
-                true
-            } else false
-        }
+        et_search.setEditorActionListener(EditorInfo.IME_ACTION_SEARCH) { startNewSearchResult() }
 
         ib_search.setOnClickListener { startNewSearchResult() }
 
@@ -38,17 +34,8 @@ class SearchResultActivity : BaseActivity<ActivitySearchResultBinding>() {
                 1 -> tab.text = getString(R.string.rent)
             }
         }.attach()
-        tl_search.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-            override fun onTabReselected(tab: TabLayout.Tab?) {
-            }
 
-            override fun onTabUnselected(tab: TabLayout.Tab?) {
-            }
-
-            override fun onTabSelected(tab: TabLayout.Tab?) {
-                vp_search.currentItem = tab!!.position
-            }
-        })
+        tl_search.addOnTabSelectedListener { vp_search.currentItem = it.position }
     }
 
     private fun startNewSearchResult() {

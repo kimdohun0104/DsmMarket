@@ -7,6 +7,7 @@ import androidx.lifecycle.Transformations
 import com.dsm.domain.usecase.PostRentUseCase
 import com.dsm.dsmmarketandroid.presentation.base.BaseViewModel
 import com.dsm.dsmmarketandroid.presentation.util.SingleLiveEvent
+import com.dsm.dsmmarketandroid.presentation.util.isValueBlank
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -22,8 +23,6 @@ class PostRentViewModel(private val postRentUseCase: PostRentUseCase) : BaseView
     val category = MutableLiveData<String>()
 
     val unit = MutableLiveData<String>().apply { value = "0" }
-
-    private fun MutableLiveData<String>.isValueBlank() = this.value.isNullOrBlank()
 
     private fun isBlankExist() = title.isValueBlank() || price.isValueBlank()
         || photo.value == null || content.isValueBlank() || category.isValueBlank()
@@ -75,14 +74,13 @@ class PostRentViewModel(private val postRentUseCase: PostRentUseCase) : BaseView
                         "possible_time" to RequestBody.create(MediaType.parse("text/plain"), rentTime.value ?: "")
                     )
                 )
-            )
-                .subscribe({
-                    hideLoadingDialogEvent.call()
-                    finishActivityEvent.call()
-                }, {
-                    hideLoadingDialogEvent.call()
-                    toastServerErrorEvent.call()
-                })
+            ).subscribe({
+                hideLoadingDialogEvent.call()
+                finishActivityEvent.call()
+            }, {
+                hideLoadingDialogEvent.call()
+                toastServerErrorEvent.call()
+            })
         )
     }
 

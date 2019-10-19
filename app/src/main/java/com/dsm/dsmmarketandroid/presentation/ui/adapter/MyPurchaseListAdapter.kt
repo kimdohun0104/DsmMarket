@@ -59,11 +59,12 @@ class MyPurchaseListAdapter(
             }
             binding.ivEdit.setOnClickListener { context.startActivity<ModifyPurchaseActivity>("post_id" to item.postId) }
             binding.ivComplete.setOnClickListener {
-                val dialog = CompletePurchaseDialog()
-                val args = Bundle()
-                args.putInt("position", adapterPosition)
-                dialog.arguments = args
-                dialog.show(fragmentManager, "")
+                CompletePurchaseDialog().apply {
+                    arguments = Bundle().apply {
+                        putInt("position", adapterPosition)
+                    }
+                    show(fragmentManager!!, "")
+                }
             }
         }
     }

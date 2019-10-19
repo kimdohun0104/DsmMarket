@@ -27,6 +27,7 @@ class ModifyImageListAdapter : RecyclerView.Adapter<ModifyImageListAdapter.ViewH
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind() {
+            // TODO glide placeholder와 error와 같은거 묶어서 처리할 수 없나?
             Glide.with(itemView)
                 .load(listItems[adapterPosition])
                 .placeholder(R.drawable.image_placeholder)

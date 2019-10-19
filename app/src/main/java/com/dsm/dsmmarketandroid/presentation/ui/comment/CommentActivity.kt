@@ -40,15 +40,15 @@ class CommentActivity : BaseActivity<ActivityCommentBinding>() {
 
         viewModel.toastServerErrorEvent.observe(this, Observer { toast(getString(R.string.fail_server_error)) })
 
-        // TODO 이런 코드들 apply를 이용
         viewModel.dialogReportComment.observe(this, Observer {
-            val args = Bundle()
-            args.putInt("post_id", postId)
-            args.putInt("type", type)
-            args.putString("nick", it)
-            val fragment = ReportCommentDialog()
-            fragment.arguments = args
-            fragment.show(supportFragmentManager, "")
+            ReportCommentDialog().apply {
+                arguments = Bundle().apply {
+                    putInt("post_id", postId)
+                    putInt("type", type)
+                    putString("nick", it)
+                }
+                show(supportFragmentManager, "")
+            }
         })
 
         viewModel.hideRefreshEvent.observe(this, Observer { srl_comment.isRefreshing = false })

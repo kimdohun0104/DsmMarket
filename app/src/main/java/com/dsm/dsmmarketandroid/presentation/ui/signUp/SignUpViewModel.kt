@@ -6,6 +6,7 @@ import com.dsm.domain.usecase.SignUpUseCase
 import com.dsm.dsmmarketandroid.presentation.base.BaseViewModel
 import com.dsm.dsmmarketandroid.presentation.util.SingleLiveEvent
 import com.dsm.dsmmarketandroid.presentation.util.Validator
+import com.dsm.dsmmarketandroid.presentation.util.isValueBlank
 import org.json.JSONObject
 import retrofit2.HttpException
 
@@ -30,9 +31,6 @@ class SignUpViewModel(private val signUpUseCase: SignUpUseCase) : BaseViewModel(
     private fun isBlankExist() = email.isValueBlank() || password.isValueBlank()
         || reType.isValueBlank() || name.isValueBlank()
         || grade.isValueBlank() || gender.isValueBlank()
-
-    // TODO 이런 패턴이 여러군데에서 나오니깐 Extenstions라는 파일로 만들자
-    private fun MutableLiveData<String>.isValueBlank() = this.value.isNullOrBlank()
 
     val toastEmailInvalidEvent = SingleLiveEvent<Any>()
     val toastPasswordDiffEvent = SingleLiveEvent<Any>()

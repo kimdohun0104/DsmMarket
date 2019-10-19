@@ -34,8 +34,8 @@ class PostPurchaseActivity : BaseActivity<ActivityPostPurchaseBinding>() {
         PermissionUtil.requestReadExternalStorage(this)
         binding.isImageSelectVisible = true
 
-        rv_post_image.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         val adapter = PostImageListAdapter(viewModel)
+        rv_post_image.layoutManager = LinearLayoutManager(this@PostPurchaseActivity, LinearLayoutManager.HORIZONTAL, false)
         rv_post_image.adapter = adapter
 
         tb_post_purchase.setNavigationOnClickListener { finish() }

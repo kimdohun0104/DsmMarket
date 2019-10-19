@@ -7,6 +7,7 @@ import androidx.lifecycle.Observer
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.ActivityChangePasswordBinding
 import com.dsm.dsmmarketandroid.presentation.ui.base.BaseActivity
+import com.dsm.dsmmarketandroid.presentation.util.setEditorActionListener
 import kotlinx.android.synthetic.main.activity_change_password.*
 import org.jetbrains.anko.toast
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -25,15 +26,10 @@ class ChangePasswordActivity : BaseActivity<ActivityChangePasswordBinding>() {
         binding.authCode = authCode
         binding.email = email
 
-        et_new_password_confirm.setOnEditorActionListener { v, actionId, event ->
-            if (actionId == EditorInfo.IME_ACTION_DONE) {
-                viewModel.changePassword(email, authCode)
-                true
-            } else false
-        }
-
         val rotateAnim = AnimationUtils.loadAnimation(this, R.anim.anim_rotate)
         view_ring.startAnimation(rotateAnim)
+
+        et_new_password_confirm.setEditorActionListener(EditorInfo.IME_ACTION_DONE) { viewModel.changePassword(email, authCode) }
 
         viewModel.toastPasswordDiffEvent.observe(this, Observer { toast(getString(R.string.fail_diff_password)) })
 

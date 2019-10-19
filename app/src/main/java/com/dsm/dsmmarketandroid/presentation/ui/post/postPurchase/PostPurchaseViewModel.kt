@@ -8,6 +8,7 @@ import com.dsm.domain.usecase.PostPurchaseUseCase
 import com.dsm.dsmmarketandroid.presentation.base.BaseViewModel
 import com.dsm.dsmmarketandroid.presentation.util.ListLiveData
 import com.dsm.dsmmarketandroid.presentation.util.SingleLiveEvent
+import com.dsm.dsmmarketandroid.presentation.util.isValueBlank
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -22,8 +23,6 @@ class PostPurchaseViewModel(private val postPurchaseUseCase: PostPurchaseUseCase
     val imageList = ListLiveData<String>()
 
     val isCategorySelected: LiveData<Boolean> = Transformations.map(category) { it != "" }
-
-    private fun MutableLiveData<String>.isValueBlank() = this.value.isNullOrBlank()
 
     private fun isBlankExist() = title.isValueBlank() || price.isValueBlank()
         || content.isValueBlank() || imageList.value?.size == 0 || category.isValueBlank()
@@ -62,14 +61,13 @@ class PostPurchaseViewModel(private val postPurchaseUseCase: PostPurchaseUseCase
                         "category" to RequestBody.create(MediaType.parse("text/plain"), category.value!!)
                     )
                 )
-            )
-                .subscribe({
-                    hideLoadingDialogEvent.call()
-                    finishActivityEvent.call()
-                }, {
-                    hideLoadingDialogEvent.call()
-                    toastServerErrorEvent.call()
-                })
+            ).subscribe({
+                hideLoadingDialogEvent.call()
+                finishActivityEvent.call()
+            }, {
+                hideLoadingDialogEvent.call()
+                toastServerErrorEvent.call()
+            })
         )
     }
 

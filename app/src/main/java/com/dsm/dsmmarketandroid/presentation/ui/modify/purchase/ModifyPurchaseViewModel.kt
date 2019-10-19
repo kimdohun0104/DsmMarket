@@ -8,6 +8,7 @@ import com.dsm.dsmmarketandroid.presentation.base.BaseViewModel
 import com.dsm.dsmmarketandroid.presentation.mapper.PurchaseDetailModelMapper
 import com.dsm.dsmmarketandroid.presentation.util.ListLiveData
 import com.dsm.dsmmarketandroid.presentation.util.SingleLiveEvent
+import com.dsm.dsmmarketandroid.presentation.util.isValueBlank
 
 class ModifyPurchaseViewModel(
     private val getPurchaseDetailUseCase: GetPurchaseDetailUseCase,
@@ -25,8 +26,6 @@ class ModifyPurchaseViewModel(
 
     val toastServerErrorEvent = SingleLiveEvent<Any>()
 
-    private fun MutableLiveData<String>.isValueBlank() = this.value.isNullOrBlank()
-
     private fun isBlankExist() = title.isValueBlank() || price.isValueBlank()
         || content.isValueBlank() || category.isValueBlank()
 
@@ -37,6 +36,7 @@ class ModifyPurchaseViewModel(
         addSource(category) { value = !isBlankExist() }
     }
 
+    // TODO 차라리 모델 하나 더 만들어서 이렇게 하나 하나 value설정해주는거 말고 다른 방법 찾아보자
     fun getPurchaseDetail(postId: Int) {
         addDisposable(
             getPurchaseDetailUseCase.create(postId)

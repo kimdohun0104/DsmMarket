@@ -6,7 +6,7 @@ import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.ActivityMyPostBinding
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.MyPostPagerAdapter
 import com.dsm.dsmmarketandroid.presentation.ui.base.BaseActivity
-import com.google.android.material.tabs.TabLayout
+import com.dsm.dsmmarketandroid.presentation.util.addOnTabSelectedListener
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_my_post.*
 import org.jetbrains.anko.toast
@@ -31,24 +31,15 @@ class MyPostActivity : BaseActivity<ActivityMyPostBinding>() {
             }
         }.attach()
 
-        tl_my_post.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-            override fun onTabReselected(tab: TabLayout.Tab?) {
-            }
-
-            override fun onTabUnselected(tab: TabLayout.Tab?) {
-            }
-
-            override fun onTabSelected(tab: TabLayout.Tab?) {
-                vp_my_post.currentItem = tab!!.position
-                if (tab.position == 1) {
-                    if (!isRentLoaded) {
-                        viewModel.getMyRent()
-                        isRentLoaded = true
-                    }
+        tl_my_post.addOnTabSelectedListener {
+            vp_my_post.currentItem = it.position
+            if (it.position == 1) {
+                if (!isRentLoaded) {
+                    viewModel.getMyRent()
+                    isRentLoaded = true
                 }
             }
-
-        })
+        }
 
         viewModel.toastServerErrorEvent.observe(this, Observer { toast(getString(R.string.fail_server_error)) })
 

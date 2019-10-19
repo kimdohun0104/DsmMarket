@@ -32,9 +32,8 @@ class ModifyPurchaseActivity : BaseActivity<ActivityModifyPurchaseBinding>() {
         PermissionUtil.requestReadExternalStorage(this)
         tb_modify_purchase.setNavigationOnClickListener { finish() }
 
-        // TODO apply
-        rv_modify_image.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         val adapter = ModifyImageListAdapter()
+        rv_modify_image.layoutManager = LinearLayoutManager(this@ModifyPurchaseActivity, LinearLayoutManager.HORIZONTAL, false)
         rv_modify_image.adapter = adapter
 
         cl_category.setOnClickListener { startActivityForResult(Intent(this, PostCategoryActivity::class.java), CATEGORY) }

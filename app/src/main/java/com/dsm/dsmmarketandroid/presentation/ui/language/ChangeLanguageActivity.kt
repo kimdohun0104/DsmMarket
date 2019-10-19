@@ -15,18 +15,19 @@ class ChangeLanguageActivity : AppCompatActivity() {
         tb_change_language.setNavigationOnClickListener { finish() }
 
         val changeLanguageDialog = ChangeLanguageDialog()
-        val arg = Bundle()
 
         cl_korean.setOnClickListener {
-            arg.putString("lang", LANGUAGE_KOREAN)
-            changeLanguageDialog.arguments = arg
-            changeLanguageDialog.show(supportFragmentManager, "")
+            changeLanguageDialog.apply {
+                arguments = Bundle().apply { putString("lang", LANGUAGE_KOREAN) }
+                show(supportFragmentManager, "")
+            }
         }
 
         cl_english.setOnClickListener {
-            arg.putString("lang", LANGUAGE_ENGLISH)
-            changeLanguageDialog.arguments = arg
-            changeLanguageDialog.show(supportFragmentManager, "")
+            changeLanguageDialog.apply {
+                arguments = Bundle().apply { putString("lang", LANGUAGE_ENGLISH) }
+                show(supportFragmentManager, "")
+            }
         }
     }
 }

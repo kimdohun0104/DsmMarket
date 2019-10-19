@@ -41,8 +41,9 @@ class MyPostViewModel(
     fun getMyPurchase() {
         addDisposable(
             getMyPurchaseUseCase.create(Unit)
+                .map(productModelMapper::mapFrom)
                 .subscribe({
-                    purchaseList.value = productModelMapper.mapFrom(it)
+                    purchaseList.value = it
                     hidePurchaseLoadingEvent.call()
                     hidePurchaseRefresh.call()
                 }, {
@@ -54,8 +55,9 @@ class MyPostViewModel(
     fun getMyRent() {
         addDisposable(
             getMyRentUseCase.create(Unit)
+                .map(productModelMapper::mapFrom)
                 .subscribe({
-                    rentList.value = productModelMapper.mapFrom(it)
+                    rentList.value = it
                     hideRentLoadingEvent.call()
                     hideRentRefresh.call()
                 }, {

@@ -22,12 +22,14 @@ class PostCategoryViewModel(
 
     fun getPostCategory() {
         addDisposable(
-            getPostCategoryUseCase.create(Unit).subscribe({
-                categoryList.addAll(postCategoryModelMapper.mapFrom(it))
-                isProgressVisible.value = false
-            }, {
-                serverErrorEvent.call()
-            })
+            getPostCategoryUseCase.create(Unit)
+                .map(postCategoryModelMapper::mapFrom)
+                .subscribe({
+                    categoryList.addAll(it)
+                    isProgressVisible.value = false
+                }, {
+                    serverErrorEvent.call()
+                })
         )
     }
 
