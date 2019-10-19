@@ -1,26 +1,16 @@
 package com.dsm.dsmmarketandroid.presentation.ui.category
 
 import android.os.Bundle
-import com.dsm.data.paging.purchase.PurchaseDataFactory
-import com.dsm.data.paging.rent.RentDataFactory
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.ActivityCategoryListBinding
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.CategoryPagerAdapter
 import com.dsm.dsmmarketandroid.presentation.ui.base.BaseActivity
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_category_list.*
-import org.koin.android.ext.android.inject
-import org.koin.androidx.viewmodel.ext.android.viewModel
-import org.koin.core.parameter.parametersOf
 
 class CategoryListActivity : BaseActivity<ActivityCategoryListBinding>() {
     override val layoutResourceId: Int
         get() = R.layout.activity_category_list
-
-    private val category: String by lazy { intent.getStringExtra("category") }
-    private val purchaseDataFactory: PurchaseDataFactory by inject { parametersOf("", category) }
-    private val rentDataFactory: RentDataFactory by inject { parametersOf("", category) }
-    private val viewModel: CategoryListViewModel by viewModel { parametersOf(purchaseDataFactory, rentDataFactory) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,7 +35,5 @@ class CategoryListActivity : BaseActivity<ActivityCategoryListBinding>() {
             }
 
         })
-
-        binding.viewModel = viewModel
     }
 }
