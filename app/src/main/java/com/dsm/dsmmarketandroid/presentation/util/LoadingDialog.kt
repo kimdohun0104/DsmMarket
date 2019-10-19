@@ -22,9 +22,6 @@ class LoadingDialog : DialogFragment() {
         fun hide() = dialog.dismiss()
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val rootView = inflater.inflate(R.layout.dialog_loading, container, false)
-        return rootView
-    }
-
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
+        inflater.inflate(R.layout.dialog_loading, container, false)
 }
