@@ -74,4 +74,12 @@ class PostPurchaseViewModel(private val postPurchaseUseCase: PostPurchaseUseCase
     fun imageRemovedAt(index: Int) {
         imageList.removeAt(index)
     }
+
+    fun setImageList(imageList: ArrayList<String>) {
+        this.imageList.value = imageList
+    }
+
+    fun setCategory(category: String) {
+        this.category.value = category
+    }
 }

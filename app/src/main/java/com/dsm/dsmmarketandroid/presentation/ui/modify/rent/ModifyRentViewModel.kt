@@ -92,4 +92,8 @@ class ModifyRentViewModel(
     fun selectPriceUnit(unit: Int) {
         this.unit.value = unit.toString()
     }
+
+    fun setCategory(category: String) {
+        this.category.value = category
+    }
 }

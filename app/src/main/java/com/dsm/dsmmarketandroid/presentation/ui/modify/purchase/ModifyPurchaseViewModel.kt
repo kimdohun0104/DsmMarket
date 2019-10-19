@@ -70,4 +70,8 @@ class ModifyPurchaseViewModel(
             })
         )
     }
+
+    fun setCategory(category: String) {
+        this.category.value = category
+    }
 }

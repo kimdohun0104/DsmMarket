@@ -47,12 +47,11 @@ class ModifyPurchaseActivity : BaseActivity<ActivityModifyPurchaseBinding>() {
         binding.viewModel = viewModel
     }
 
-    // TODO 직접 ViewModel의 값을 변경시키지 않고 따로 함수를 만들기
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == CATEGORY) {
-                viewModel.category.value = data?.getStringExtra("category")
+                viewModel.setCategory(data?.getStringExtra("category") ?: "")
             }
         }
     }

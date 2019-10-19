@@ -40,7 +40,6 @@ class ModifyRentActivity : BaseActivity<ActivityModifyRentBinding>() {
 
         viewModel.finishActivityEvent.observe(this, Observer { finish() })
 
-
         binding.viewModel = viewModel
     }
 
@@ -48,7 +47,7 @@ class ModifyRentActivity : BaseActivity<ActivityModifyRentBinding>() {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == CATEGORY) {
-                viewModel.category.value = data?.getStringExtra("category")
+                viewModel.setCategory(data?.getStringExtra("category") ?: "")
             }
         }
     }

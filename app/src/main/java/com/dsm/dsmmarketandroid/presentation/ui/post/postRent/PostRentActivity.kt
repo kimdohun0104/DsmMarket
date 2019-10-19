@@ -65,9 +65,9 @@ class PostRentActivity : BaseActivity<ActivityPostRentBinding>() {
             if (requestCode == SELECT_IMAGE) {
                 val imagePath = ImagePicker.getFirstImageOrNull(data).path
                 iv_select_image.setImageBitmap(BitmapFactory.decodeFile(imagePath))
-                viewModel.photo.value = imagePath
+                viewModel.setPhoto(imagePath)
             } else if (requestCode == CATEGORY) {
-                viewModel.category.value = data?.getStringExtra("category")
+                viewModel.setCategory(data?.getStringExtra("category") ?: "")
             }
         }
     }

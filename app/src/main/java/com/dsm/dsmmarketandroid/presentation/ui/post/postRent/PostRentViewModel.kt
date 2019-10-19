@@ -87,4 +87,12 @@ class PostRentViewModel(private val postRentUseCase: PostRentUseCase) : BaseView
     fun selectPriceUnit(unit: Int) {
         this.unit.value = unit.toString()
     }
+
+    fun setPhoto(photo: String) {
+        this.photo.value = photo
+    }
+
+    fun setCategory(category: String) {
+        this.category.value = category
+    }
 }
