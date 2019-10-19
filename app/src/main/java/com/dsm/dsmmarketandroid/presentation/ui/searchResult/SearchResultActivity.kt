@@ -7,6 +7,7 @@ import com.dsm.dsmmarketandroid.databinding.ActivitySearchResultBinding
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.SearchPagerAdapter
 import com.dsm.dsmmarketandroid.presentation.ui.base.BaseActivity
 import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_search_result.*
 import org.jetbrains.anko.startActivity
 
@@ -30,10 +31,13 @@ class SearchResultActivity : BaseActivity<ActivitySearchResultBinding>() {
 
         ib_search.setOnClickListener { startNewSearchResult() }
 
-        tl_search.addTab(tl_search.newTab().setText(getString(R.string.purchase)))
-        tl_search.addTab(tl_search.newTab().setText(getString(R.string.rent)))
-        vp_search.adapter = SearchPagerAdapter(supportFragmentManager)
-        vp_search.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tl_search))
+        vp_search.adapter = SearchPagerAdapter(supportFragmentManager, lifecycle)
+        TabLayoutMediator(tl_search, vp_search, true) { tab, position ->
+            when (position) {
+                0 -> tab.text = getString(R.string.purchase)
+                1 -> tab.text = getString(R.string.rent)
+            }
+        }.attach()
         tl_search.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabReselected(tab: TabLayout.Tab?) {
             }

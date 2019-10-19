@@ -15,7 +15,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:background="@color/colorPrimary"
-        app:titleTextColor="@color/white" />
+        app:titleTextColor="@color/colorWhite" />
 
     <LinearLayout
         android:id="@+id/ll_container"
@@ -38,6 +38,6 @@
         app:backgroundTint="@color/colorPrimaryLight"
         app:menu="@menu/menu_main_navigation"
         app:itemIconTint="@color/color_main_navigation"
-        app:itemTextColor="@color/white" />
+        app:itemTextColor="@color/colorWhite" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

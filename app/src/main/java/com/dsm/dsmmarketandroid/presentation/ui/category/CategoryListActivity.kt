@@ -5,7 +5,7 @@ import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.ActivityCategoryListBinding
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.CategoryPagerAdapter
 import com.dsm.dsmmarketandroid.presentation.ui.base.BaseActivity
-import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_category_list.*
 
 class CategoryListActivity : BaseActivity<ActivityCategoryListBinding>() {
@@ -19,21 +19,12 @@ class CategoryListActivity : BaseActivity<ActivityCategoryListBinding>() {
         supportActionBar?.title = category
         tb_category_list.setNavigationOnClickListener { finish() }
 
-        tl_category_list.addTab(tl_category_list.newTab().setText(getString(R.string.purchase)))
-        tl_category_list.addTab(tl_category_list.newTab().setText(getString(R.string.rent)))
-        vp_category_list.adapter = CategoryPagerAdapter(supportFragmentManager)
-        vp_category_list.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tl_category_list))
-        tl_category_list.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener {
-            override fun onTabReselected(tab: TabLayout.Tab?) {
+        vp_category_list.adapter = CategoryPagerAdapter(supportFragmentManager, lifecycle)
+        TabLayoutMediator(tl_category_list, vp_category_list, true) { tab, position ->
+            when (position) {
+                0 -> tab.text = getString(R.string.purchase)
+                1 -> tab.text = getString(R.string.rent)
             }
-
-            override fun onTabUnselected(tab: TabLayout.Tab?) {
-            }
-
-            override fun onTabSelected(tab: TabLayout.Tab?) {
-                vp_category_list.currentItem = tab!!.position
-            }
-
-        })
+        }.attach()
     }
 }

@@ -35,7 +35,7 @@
             android:paddingTop="9dp"
             android:paddingEnd="11dp"
             android:paddingBottom="9dp"
-            android:textColor="@color/white"
+            android:textColor="@color/colorWhite"
             android:textSize="14sp" />
 
         <TextView

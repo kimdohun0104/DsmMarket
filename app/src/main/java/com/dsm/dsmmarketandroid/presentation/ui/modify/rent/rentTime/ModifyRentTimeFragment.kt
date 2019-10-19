@@ -7,32 +7,23 @@ import android.view.ViewGroup
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.ModifyRentTimePagerAdapter
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.fragment_select_rent_time.view.*
 
 // TODO Post와 Modify 시간 선택 관련 통일하기
+// TODO onViewCreated로 분리
 class ModifyRentTimeFragment : BottomSheetDialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.fragment_select_rent_time, container, false)
 
-        rootView.tl_rent_time.addTab(rootView.tl_rent_time.newTab().setText(getString(R.string.start)))
-        rootView.tl_rent_time.addTab(rootView.tl_rent_time.newTab().setText(getString(R.string.end)))
-        rootView.vp_rent_time.adapter = ModifyRentTimePagerAdapter(childFragmentManager)
-        rootView.vp_rent_time.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(rootView.tl_rent_time))
-        rootView.tl_rent_time.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener {
-            override fun onTabReselected(tab: TabLayout.Tab?) {
+        rootView.vp_rent_time.adapter = ModifyRentTimePagerAdapter(childFragmentManager, lifecycle)
+        TabLayoutMediator(rootView.tl_rent_time, rootView.vp_rent_time, true) { tab, position ->
+            when (position) {
+                0 -> tab.text = getString(R.string.start)
+                1 -> tab.text = getString(R.string.end)
             }
-
-            override fun onTabUnselected(tab: TabLayout.Tab?) {
-            }
-
-            override fun onTabSelected(tab: TabLayout.Tab?) {
-                rootView.vp_rent_time.currentItem = tab!!.position
-            }
-
-        })
-
+        }.attach()
         rootView.btn_confirm.setOnClickListener { dismiss() }
 
         return rootView

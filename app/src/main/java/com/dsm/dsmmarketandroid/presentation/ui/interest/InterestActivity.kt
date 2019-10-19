@@ -7,6 +7,7 @@ import com.dsm.dsmmarketandroid.databinding.ActivityInterestBinding
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.InterestPagerAdapter
 import com.dsm.dsmmarketandroid.presentation.ui.base.BaseActivity
 import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_interest.*
 import org.jetbrains.anko.toast
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -23,10 +24,14 @@ class InterestActivity : BaseActivity<ActivityInterestBinding>() {
 
         var isRentLoaded = false
 
-        tl_interest.addTab(tl_interest.newTab().setText(R.string.purchase))
-        tl_interest.addTab(tl_interest.newTab().setText(R.string.rent))
-        vp_interest.adapter = InterestPagerAdapter(supportFragmentManager)
-        vp_interest.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tl_interest))
+        vp_interest.adapter = InterestPagerAdapter(supportFragmentManager, lifecycle)
+        TabLayoutMediator(tl_interest, vp_interest, true) { tab, position ->
+            when (position) {
+                0 -> tab.text = getString(R.string.purchase)
+                1 -> tab.text = getString(R.string.rent)
+            }
+        }.attach()
+        // TODO 확장함수로 빼기
         tl_interest.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabReselected(tab: TabLayout.Tab?) {
             }

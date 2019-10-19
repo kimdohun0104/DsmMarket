@@ -6,6 +6,7 @@ import com.dsm.dsmmarketandroid.databinding.ActivityRecentBinding
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.RecentPagerAdapter
 import com.dsm.dsmmarketandroid.presentation.ui.base.BaseActivity
 import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_recent.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -19,10 +20,13 @@ class RecentActivity : BaseActivity<ActivityRecentBinding>() {
         super.onCreate(savedInstanceState)
         tb_past.setNavigationOnClickListener { finish() }
 
-        tl_recent.addTab(tl_recent.newTab().setText(getString(R.string.purchase)))
-        tl_recent.addTab(tl_recent.newTab().setText(getString(R.string.rent)))
-        vp_recent.adapter = RecentPagerAdapter(supportFragmentManager)
-        vp_recent.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tl_recent))
+        vp_recent.adapter = RecentPagerAdapter(supportFragmentManager, lifecycle)
+        TabLayoutMediator(tl_recent, vp_recent, true) { tab, position ->
+            when (position) {
+                0 -> tab.text = getString(R.string.purchase)
+                1 -> tab.text = getString(R.string.rent)
+            }
+        }.attach()
         tl_recent.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener {
             override fun onTabReselected(tab: TabLayout.Tab?) {
             }
