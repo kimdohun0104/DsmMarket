@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.dsm.dsmmarketandroid.R
 import kotlinx.android.synthetic.main.dialog_complete_purchase.view.*
 
+// TODO purchase와 rent 패키지 나누기
 class CompletePurchaseDialog : DialogFragment() {
 
     private val viewModel: MyPostViewModel by lazy { ViewModelProviders.of(activity!!)[MyPostViewModel::class.java] }

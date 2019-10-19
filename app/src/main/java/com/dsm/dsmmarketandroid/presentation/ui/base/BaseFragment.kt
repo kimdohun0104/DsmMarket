@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 
+// TODO Base Activity, Fragment를 상위 패키지의 base로 빼도 좋을 듯
 abstract class BaseFragment<T : ViewDataBinding> : Fragment() {
 
     lateinit var binding: T

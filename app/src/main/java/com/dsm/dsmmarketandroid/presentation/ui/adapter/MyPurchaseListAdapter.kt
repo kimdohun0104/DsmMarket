@@ -18,6 +18,7 @@ import com.dsm.dsmmarketandroid.presentation.ui.myPost.CompletePurchaseDialog
 import com.dsm.dsmmarketandroid.presentation.ui.purchaseDetail.PurchaseDetailActivity
 import org.jetbrains.anko.startActivity
 
+// TODO MyPurchase, MyRent ListAdapter 생각해보기
 class MyPurchaseListAdapter(
     private val context: Context,
     private val fragmentManager: FragmentManager

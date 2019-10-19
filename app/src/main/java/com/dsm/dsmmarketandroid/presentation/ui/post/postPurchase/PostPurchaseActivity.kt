@@ -71,6 +71,7 @@ class PostPurchaseActivity : BaseActivity<ActivityPostPurchaseBinding>() {
         binding.viewModel = viewModel
     }
 
+    // TODO ViewModel에 함수를 만들어 값 변경
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {

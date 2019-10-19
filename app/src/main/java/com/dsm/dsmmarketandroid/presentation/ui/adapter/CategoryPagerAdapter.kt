@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentPagerAdapter
 import com.dsm.dsmmarketandroid.presentation.ui.category.PurchaseCategoryFragment
 import com.dsm.dsmmarketandroid.presentation.ui.category.RentCategoryFragment
 
+// TODO ViewPager2를 적용하기
 @SuppressLint("WrongConstant")
 class CategoryPagerAdapter(fragmentManager: FragmentManager) :
     FragmentPagerAdapter(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {

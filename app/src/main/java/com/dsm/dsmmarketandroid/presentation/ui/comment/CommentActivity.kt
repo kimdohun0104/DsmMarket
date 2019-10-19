@@ -40,6 +40,7 @@ class CommentActivity : BaseActivity<ActivityCommentBinding>() {
 
         viewModel.toastServerErrorEvent.observe(this, Observer { toast(getString(R.string.fail_server_error)) })
 
+        // TODO 이런 코드들 apply를 이용
         viewModel.dialogReportComment.observe(this, Observer {
             val args = Bundle()
             args.putInt("post_id", postId)

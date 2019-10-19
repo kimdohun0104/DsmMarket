@@ -21,6 +21,7 @@ class ChangeNickActivity : BaseActivity<ActivityChangeNickBinding>() {
         tb_change_name.setNavigationOnClickListener { finish() }
         binding.nick = intent.getStringExtra("nick")
 
+        // TODO 이런 코드들 확장함수를 이용해 더 간단하게 표현하기
         et_nick.setOnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 viewModel.changeNick()

@@ -32,6 +32,7 @@ class ModifyPurchaseActivity : BaseActivity<ActivityModifyPurchaseBinding>() {
         PermissionUtil.requestReadExternalStorage(this)
         tb_modify_purchase.setNavigationOnClickListener { finish() }
 
+        // TODO apply
         rv_modify_image.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         val adapter = ModifyImageListAdapter()
         rv_modify_image.adapter = adapter
@@ -47,6 +48,7 @@ class ModifyPurchaseActivity : BaseActivity<ActivityModifyPurchaseBinding>() {
         binding.viewModel = viewModel
     }
 
+    // TODO 직접 ViewModel의 값을 변경시키지 않고 따로 함수를 만들기
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {

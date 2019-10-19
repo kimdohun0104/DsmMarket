@@ -8,6 +8,7 @@ import com.bumptech.glide.Glide
 import com.dsm.dsmmarketandroid.R
 import kotlinx.android.synthetic.main.item_post_image.view.*
 
+// TODO modifyImage, postImage list adapter 생각해보기
 class ModifyImageListAdapter : RecyclerView.Adapter<ModifyImageListAdapter.ViewHolder>() {
 
     private var listItems = arrayListOf<String>()

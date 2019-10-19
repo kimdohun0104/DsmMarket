@@ -17,6 +17,7 @@ import com.dsm.dsmmarketandroid.databinding.ItemProductBinding
 import com.dsm.dsmmarketandroid.presentation.model.ProductModel
 import com.dsm.dsmmarketandroid.presentation.ui.purchaseDetail.PurchaseDetailActivity
 
+// TODO 공통된 함수들 따로 빼서 Purchase, Rent 사용하게 하기
 class PurchaseListAdapter(private val context: Context) : PagedListAdapter<ProductModel, RecyclerView.ViewHolder>(DIFF_CALLBACK) {
 
     companion object {

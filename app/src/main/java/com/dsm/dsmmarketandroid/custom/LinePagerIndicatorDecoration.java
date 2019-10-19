@@ -15,6 +15,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
+// TODO CustomView들 Kotlin으로 컨버팅, deprecated 관리
 public class LinePagerIndicatorDecoration extends RecyclerView.ItemDecoration {
 
   private int colorActive = 0xFF4CAF50;

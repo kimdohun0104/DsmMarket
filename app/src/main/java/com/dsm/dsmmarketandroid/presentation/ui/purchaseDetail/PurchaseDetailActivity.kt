@@ -87,6 +87,7 @@ class PurchaseDetailActivity : BaseActivity<ActivityPurchaseDetailBinding>() {
         return true
     }
 
+    // TODO apply
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.interest -> viewModel.onClickInterest(postId)

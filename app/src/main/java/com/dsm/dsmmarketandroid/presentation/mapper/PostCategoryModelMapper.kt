@@ -4,6 +4,7 @@ import com.dsm.domain.base.Mapper
 import com.dsm.domain.entity.PostCategory
 import com.dsm.dsmmarketandroid.presentation.model.PostCategoryModel
 
+// TODO from.map 으로 변경
 class PostCategoryModelMapper : Mapper<List<PostCategory>, List<PostCategoryModel>> {
     override fun mapFrom(from: List<PostCategory>): List<PostCategoryModel> {
         val list = arrayListOf<PostCategoryModel>()

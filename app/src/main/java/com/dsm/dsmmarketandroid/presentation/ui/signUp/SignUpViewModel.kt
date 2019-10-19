@@ -31,6 +31,7 @@ class SignUpViewModel(private val signUpUseCase: SignUpUseCase) : BaseViewModel(
         || reType.isValueBlank() || name.isValueBlank()
         || grade.isValueBlank() || gender.isValueBlank()
 
+    // TODO 이런 패턴이 여러군데에서 나오니깐 Extenstions라는 파일로 만들자
     private fun MutableLiveData<String>.isValueBlank() = this.value.isNullOrBlank()
 
     val toastEmailInvalidEvent = SingleLiveEvent<Any>()

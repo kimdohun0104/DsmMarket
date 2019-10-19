@@ -12,6 +12,7 @@ import com.dsm.dsmmarketandroid.presentation.ui.postCategory.PostCategoryViewMod
 import kotlinx.android.synthetic.main.item_child_category.view.*
 import kotlinx.android.synthetic.main.item_parent_category.view.*
 
+// TODO 이거 이해하고 정리해보기
 class PostCategoryListAdapter(private val viewModel: PostCategoryViewModel) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {

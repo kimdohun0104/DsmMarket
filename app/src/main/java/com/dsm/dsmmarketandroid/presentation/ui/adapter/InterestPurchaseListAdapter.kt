@@ -13,6 +13,7 @@ import com.dsm.dsmmarketandroid.databinding.ItemInterestBinding
 import com.dsm.dsmmarketandroid.presentation.model.ProductModel
 import com.dsm.dsmmarketandroid.presentation.ui.purchaseDetail.PurchaseDetailActivity
 
+// TODO InterestPurchased, InterestRent ListAdapter 통합 생각해보기
 class InterestPurchaseListAdapter(private val context: Context) : RecyclerView.Adapter<InterestPurchaseListAdapter.ViewHolder>() {
 
     private var listItems = listOf<ProductModel>()

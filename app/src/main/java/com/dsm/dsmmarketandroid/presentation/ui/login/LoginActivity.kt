@@ -38,6 +38,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
             } else false
         }
 
+        // TODO apply
         viewModel.intentMainActivityEvent.observe(this, Observer {
             val intent = Intent(this, MainActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
