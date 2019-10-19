@@ -7,8 +7,8 @@ import androidx.recyclerview.widget.PagerSnapHelper
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.custom.LinePagerIndicatorDecoration
 import com.dsm.dsmmarketandroid.databinding.ActivityPurchaseImageBinding
+import com.dsm.dsmmarketandroid.presentation.base.BaseActivity
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.PurchaseImageDetailListAdapter
-import com.dsm.dsmmarketandroid.presentation.ui.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_purchase_image.*
 import org.jetbrains.anko.toast
 import org.koin.androidx.viewmodel.ext.android.viewModel

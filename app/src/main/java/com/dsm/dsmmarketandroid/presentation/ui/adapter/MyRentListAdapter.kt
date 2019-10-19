@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.dsm.dsmmarketandroid.databinding.ItemMyPostBinding
 import com.dsm.dsmmarketandroid.presentation.model.ProductModel
 import com.dsm.dsmmarketandroid.presentation.ui.modify.rent.ModifyRentActivity
-import com.dsm.dsmmarketandroid.presentation.ui.myPost.CompleteRentDialog
+import com.dsm.dsmmarketandroid.presentation.ui.myPost.rent.CompleteRentDialog
 import com.dsm.dsmmarketandroid.presentation.ui.rentDetail.RentDetailActivity
 import org.jetbrains.anko.startActivity
 

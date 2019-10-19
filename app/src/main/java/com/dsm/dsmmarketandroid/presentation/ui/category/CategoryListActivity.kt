@@ -3,8 +3,8 @@ package com.dsm.dsmmarketandroid.presentation.ui.category
 import android.os.Bundle
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.ActivityCategoryListBinding
+import com.dsm.dsmmarketandroid.presentation.base.BaseActivity
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.CategoryPagerAdapter
-import com.dsm.dsmmarketandroid.presentation.ui.base.BaseActivity
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_category_list.*
 

@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.View
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.FragmentSearchPurchaseBinding
-import com.dsm.dsmmarketandroid.presentation.ui.base.BaseFragment
+import com.dsm.dsmmarketandroid.presentation.base.BaseFragment
 import com.dsm.dsmmarketandroid.presentation.ui.purchaseList.PurchaseListFragment
 
 class SearchPurchaseFragment : BaseFragment<FragmentSearchPurchaseBinding>() {

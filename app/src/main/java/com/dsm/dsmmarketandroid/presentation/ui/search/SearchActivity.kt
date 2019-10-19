@@ -5,8 +5,8 @@ import android.view.inputmethod.EditorInfo
 import androidx.lifecycle.Observer
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.ActivitySearchBinding
+import com.dsm.dsmmarketandroid.presentation.base.BaseActivity
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.SearchHistoryListAdapter
-import com.dsm.dsmmarketandroid.presentation.ui.base.BaseActivity
 import com.dsm.dsmmarketandroid.presentation.ui.searchResult.SearchResultActivity
 import com.dsm.dsmmarketandroid.presentation.util.setEditorActionListener
 import kotlinx.android.synthetic.main.activity_search.*

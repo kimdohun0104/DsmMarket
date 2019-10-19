@@ -6,7 +6,7 @@ import android.view.inputmethod.EditorInfo
 import androidx.lifecycle.Observer
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.ActivityChangePasswordBinding
-import com.dsm.dsmmarketandroid.presentation.ui.base.BaseActivity
+import com.dsm.dsmmarketandroid.presentation.base.BaseActivity
 import com.dsm.dsmmarketandroid.presentation.util.setEditorActionListener
 import kotlinx.android.synthetic.main.activity_change_password.*
 import org.jetbrains.anko.toast

@@ -1,4 +1,4 @@
-package com.dsm.dsmmarketandroid.presentation.ui.base
+package com.dsm.dsmmarketandroid.presentation.base
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,7 +8,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 
-// TODO Base Activity, Fragment를 상위 패키지의 base로 빼도 좋을 듯
 abstract class BaseFragment<T : ViewDataBinding> : Fragment() {
 
     lateinit var binding: T

@@ -6,9 +6,9 @@ import android.view.MenuItem
 import androidx.lifecycle.Observer
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.ActivityCommentBinding
+import com.dsm.dsmmarketandroid.presentation.base.BaseActivity
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.CommentListAdapter
 import com.dsm.dsmmarketandroid.presentation.ui.addComment.AddCommentActivity
-import com.dsm.dsmmarketandroid.presentation.ui.base.BaseActivity
 import com.dsm.dsmmarketandroid.presentation.ui.report.ReportCommentDialog
 import kotlinx.android.synthetic.main.activity_comment.*
 import org.jetbrains.anko.startActivity

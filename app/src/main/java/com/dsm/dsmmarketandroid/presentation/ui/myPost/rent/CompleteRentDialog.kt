@@ -1,4 +1,4 @@
-package com.dsm.dsmmarketandroid.presentation.ui.myPost
+package com.dsm.dsmmarketandroid.presentation.ui.myPost.rent
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,6 +8,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.dsm.dsmmarketandroid.R
+import com.dsm.dsmmarketandroid.presentation.ui.myPost.MyPostViewModel
 import kotlinx.android.synthetic.main.dialog_complete_rent.*
 
 class CompleteRentDialog : DialogFragment() {

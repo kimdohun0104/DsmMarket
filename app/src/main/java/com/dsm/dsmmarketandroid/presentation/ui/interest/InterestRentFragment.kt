@@ -6,8 +6,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.FragmentInterestRentBinding
+import com.dsm.dsmmarketandroid.presentation.base.BaseFragment
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.InterestRentListAdapter
-import com.dsm.dsmmarketandroid.presentation.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_interest_rent.*
 
 class InterestRentFragment : BaseFragment<FragmentInterestRentBinding>() {

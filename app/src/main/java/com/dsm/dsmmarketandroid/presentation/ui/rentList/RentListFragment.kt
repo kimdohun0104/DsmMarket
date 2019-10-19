@@ -7,8 +7,8 @@ import com.dsm.data.paging.NetworkState
 import com.dsm.data.paging.rent.RentDataFactory
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.FragmentRentListBinding
+import com.dsm.dsmmarketandroid.presentation.base.BaseFragment
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.RentListAdapter
-import com.dsm.dsmmarketandroid.presentation.ui.base.BaseFragment
 import com.dsm.dsmmarketandroid.presentation.ui.rentDetail.RentDetailActivity
 import kotlinx.android.synthetic.main.fragment_rent_list.*
 import org.jetbrains.anko.support.v4.startActivity

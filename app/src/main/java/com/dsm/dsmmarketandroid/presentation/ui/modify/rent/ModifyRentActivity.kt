@@ -6,7 +6,7 @@ import android.os.Bundle
 import androidx.lifecycle.Observer
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.ActivityModifyRentBinding
-import com.dsm.dsmmarketandroid.presentation.ui.base.BaseActivity
+import com.dsm.dsmmarketandroid.presentation.base.BaseActivity
 import com.dsm.dsmmarketandroid.presentation.ui.modify.rent.rentTime.ModifyRentTimeFragment
 import com.dsm.dsmmarketandroid.presentation.ui.postCategory.PostCategoryActivity
 import kotlinx.android.synthetic.main.activity_modify_rent.*

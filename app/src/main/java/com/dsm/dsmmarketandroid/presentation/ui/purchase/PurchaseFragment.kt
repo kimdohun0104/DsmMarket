@@ -7,7 +7,7 @@ import android.view.MenuItem
 import android.view.View
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.FragmentPurchaseBinding
-import com.dsm.dsmmarketandroid.presentation.ui.base.BaseFragment
+import com.dsm.dsmmarketandroid.presentation.base.BaseFragment
 import com.dsm.dsmmarketandroid.presentation.ui.category.CategoryActivity
 import com.dsm.dsmmarketandroid.presentation.ui.interest.InterestActivity
 import com.dsm.dsmmarketandroid.presentation.ui.purchaseList.PurchaseListFragment

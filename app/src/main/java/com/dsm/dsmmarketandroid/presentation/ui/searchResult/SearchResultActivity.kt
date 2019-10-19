@@ -4,8 +4,8 @@ import android.os.Bundle
 import android.view.inputmethod.EditorInfo
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.ActivitySearchResultBinding
+import com.dsm.dsmmarketandroid.presentation.base.BaseActivity
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.SearchPagerAdapter
-import com.dsm.dsmmarketandroid.presentation.ui.base.BaseActivity
 import com.dsm.dsmmarketandroid.presentation.util.addOnTabSelectedListener
 import com.dsm.dsmmarketandroid.presentation.util.setEditorActionListener
 import com.google.android.material.tabs.TabLayoutMediator

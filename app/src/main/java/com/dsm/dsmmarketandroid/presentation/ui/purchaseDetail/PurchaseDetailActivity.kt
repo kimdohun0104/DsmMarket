@@ -11,9 +11,9 @@ import androidx.recyclerview.widget.PagerSnapHelper
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.custom.LinePagerIndicatorDecoration
 import com.dsm.dsmmarketandroid.databinding.ActivityPurchaseDetailBinding
+import com.dsm.dsmmarketandroid.presentation.base.BaseActivity
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.DetailImageListAdapter
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.RecommendListAdapter
-import com.dsm.dsmmarketandroid.presentation.ui.base.BaseActivity
 import com.dsm.dsmmarketandroid.presentation.ui.chat.ChatActivity
 import com.dsm.dsmmarketandroid.presentation.ui.comment.CommentActivity
 import com.dsm.dsmmarketandroid.presentation.ui.report.ReportPostDialog

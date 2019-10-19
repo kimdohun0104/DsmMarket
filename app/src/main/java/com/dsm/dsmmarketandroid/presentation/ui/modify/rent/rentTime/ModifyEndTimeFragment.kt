@@ -5,7 +5,7 @@ import android.view.View
 import androidx.lifecycle.ViewModelProviders
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.FragmentModifyEndTimeBinding
-import com.dsm.dsmmarketandroid.presentation.ui.base.BaseFragment
+import com.dsm.dsmmarketandroid.presentation.base.BaseFragment
 import com.dsm.dsmmarketandroid.presentation.ui.modify.rent.ModifyRentViewModel
 import kotlinx.android.synthetic.main.fragment_end_time.*
 
