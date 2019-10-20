@@ -14,7 +14,6 @@ import com.dsm.dsmmarketandroid.presentation.model.ProductModel
 import com.dsm.dsmmarketandroid.presentation.ui.purchaseDetail.PurchaseDetailActivity
 import com.dsm.dsmmarketandroid.presentation.ui.rentDetail.RentDetailActivity
 
-// TODO ProductType같은거 Enum이라도 만들어서 써야할듯
 class RecentListAdapter(
     private val productType: Int,
     private val context: Context
