@@ -4,8 +4,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.dsm.dsmmarketandroid.R
+import com.dsm.dsmmarketandroid.presentation.util.GlideApp
 import kotlinx.android.synthetic.main.item_purchase_image_detail.view.*
 
 class PurchaseImageDetailListAdapter : RecyclerView.Adapter<PurchaseImageDetailListAdapter.ViewHolder>() {
@@ -25,11 +25,7 @@ class PurchaseImageDetailListAdapter : RecyclerView.Adapter<PurchaseImageDetailL
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind() {
-            Glide.with(itemView)
-                .load(listItems[adapterPosition])
-                .error(R.drawable.image_error)
-                .placeholder(R.drawable.image_placeholder)
-                .into(itemView.iv_image)
+            GlideApp.with(itemView).load(listItems[adapterPosition]).into(itemView.iv_image)
         }
     }
 }

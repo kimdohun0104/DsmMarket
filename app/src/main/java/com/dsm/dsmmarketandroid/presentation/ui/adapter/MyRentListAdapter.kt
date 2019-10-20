@@ -62,7 +62,7 @@ class MyRentListAdapter(
                     arguments = Bundle().apply {
                         putInt("position", adapterPosition)
                     }
-                    show(fragmentManager!!, "")
+                    show(this@MyRentListAdapter.fragmentManager, "")
                 }
             }
         }

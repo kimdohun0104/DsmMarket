@@ -10,7 +10,6 @@ import com.dsm.dsmmarketandroid.presentation.ui.purchaseDetail.PurchaseDetailAct
 import com.dsm.dsmmarketandroid.presentation.ui.rentDetail.RentDetailActivity
 import org.jetbrains.anko.startActivity
 
-// TODO 관련 상품과 추천 상품이 공통으로 사용하는 Adapter인데 명확하지가 않음
 class RecommendListAdapter(
     private val context: Context,
     private val type: Int

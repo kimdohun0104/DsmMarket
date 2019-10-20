@@ -4,11 +4,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.dsm.dsmmarketandroid.R
+import com.dsm.dsmmarketandroid.presentation.util.GlideApp
 import kotlinx.android.synthetic.main.item_post_image.view.*
 
-// TODO modifyImage, postImage list adapter 생각해보기
 class ModifyImageListAdapter : RecyclerView.Adapter<ModifyImageListAdapter.ViewHolder>() {
 
     private var listItems = arrayListOf<String>()
@@ -27,12 +26,7 @@ class ModifyImageListAdapter : RecyclerView.Adapter<ModifyImageListAdapter.ViewH
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind() {
-            // TODO glide placeholder와 error와 같은거 묶어서 처리할 수 없나?
-            Glide.with(itemView)
-                .load(listItems[adapterPosition])
-                .placeholder(R.drawable.image_placeholder)
-                .error(R.drawable.image_error)
-                .into(itemView.iv_image)
+            GlideApp.with(itemView).load(listItems[adapterPosition]).into(itemView.iv_image)
         }
     }
 }

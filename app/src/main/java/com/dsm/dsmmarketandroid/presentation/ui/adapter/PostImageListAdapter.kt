@@ -4,9 +4,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.ui.post.postPurchase.PostPurchaseViewModel
+import com.dsm.dsmmarketandroid.presentation.util.GlideApp
 import kotlinx.android.synthetic.main.item_post_image.view.*
 import java.io.File
 
@@ -23,11 +23,7 @@ class PostImageListAdapter(private val viewModel: PostPurchaseViewModel) : Recyc
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind() {
-            Glide.with(itemView)
-                .load(File(listItems[adapterPosition]))
-                .placeholder(R.drawable.image_placeholder)
-                .error(R.drawable.image_error)
-                .into(itemView.iv_image)
+            GlideApp.with(itemView).load(File(listItems[adapterPosition])).into(itemView.iv_image)
             itemView.iv_delete_image.setOnClickListener {
                 viewModel.imageRemovedAt(adapterPosition)
                 notifyItemRemoved(adapterPosition)
