@@ -7,35 +7,25 @@ import android.view.ViewGroup
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.RentTimePagerAdapter
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.google.android.material.tabs.TabLayout
-import kotlinx.android.synthetic.main.fragment_select_rent_time.view.*
+import com.google.android.material.tabs.TabLayoutMediator
+import kotlinx.android.synthetic.main.fragment_select_rent_time.*
 
 class SelectRentTimeFragment : BottomSheetDialogFragment() {
 
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
+        inflater.inflate(R.layout.fragment_select_rent_time, container, false)
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val rootView = inflater.inflate(R.layout.fragment_select_rent_time, container, false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        rootView.tl_rent_time.addTab(rootView.tl_rent_time.newTab().setText(R.string.start))
-        rootView.tl_rent_time.addTab(rootView.tl_rent_time.newTab().setText(R.string.end))
-        rootView.vp_rent_time.adapter = RentTimePagerAdapter(childFragmentManager)
-        rootView.vp_rent_time.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(rootView.tl_rent_time))
-        rootView.tl_rent_time.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener {
-            override fun onTabReselected(tab: TabLayout.Tab?) {
+        vp_rent_time.adapter = RentTimePagerAdapter(childFragmentManager, lifecycle)
+        TabLayoutMediator(tl_rent_time, vp_rent_time, true) { tab, position ->
+            when (position) {
+                0 -> tab.text = getString(R.string.start)
+                1 -> tab.text = getString(R.string.end)
             }
+        }.attach()
 
-            override fun onTabUnselected(tab: TabLayout.Tab?) {
-            }
-
-            override fun onTabSelected(tab: TabLayout.Tab?) {
-                rootView.vp_rent_time.currentItem = tab!!.position
-            }
-
-        })
-
-        rootView.btn_confirm.setOnClickListener { dismiss() }
-
-        return rootView
+        btn_confirm.setOnClickListener { dismiss() }
     }
-
 }

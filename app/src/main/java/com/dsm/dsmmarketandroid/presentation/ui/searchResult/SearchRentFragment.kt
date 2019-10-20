@@ -2,40 +2,21 @@ package com.dsm.dsmmarketandroid.presentation.ui.searchResult
 
 import android.os.Bundle
 import android.view.View
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
-import com.dsm.data.paging.NetworkState
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.FragmentSearchRentBinding
-import com.dsm.dsmmarketandroid.presentation.ui.adapter.RentListAdapter
-import com.dsm.dsmmarketandroid.presentation.ui.base.BaseFragment
-import kotlinx.android.synthetic.main.fragment_search_rent.*
+import com.dsm.dsmmarketandroid.presentation.base.BaseFragment
+import com.dsm.dsmmarketandroid.presentation.ui.rentList.RentListFragment
 
 class SearchRentFragment : BaseFragment<FragmentSearchRentBinding>() {
     override val layoutResourceId: Int
         get() = R.layout.fragment_search_rent
 
-    private val viewModel: SearchResultViewModel by lazy { ViewModelProviders.of(activity!!)[SearchResultViewModel::class.java] }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = RentListAdapter(activity!!)
-        rv_rent.adapter = adapter
-
-        srl_search_rents.setOnRefreshListener {
-            viewModel.refreshRent()
-            srl_search_rents.isRefreshing = false
+        val rentListFragment = RentListFragment().apply {
+            arguments = Bundle().apply { putString("search", activity?.intent?.getStringExtra("search")) }
         }
-
-        viewModel.rentNetworkState.observe(this, Observer {
-            if (it == NetworkState.LOADED) pb_loading.visibility = View.GONE
-            adapter.setNetworkState(it)
-        })
-
-        viewModel.rentListItems.observe(this, Observer { adapter.submitList(it) })
-
-        binding.viewModel = viewModel
+        childFragmentManager.beginTransaction().replace(R.id.fl_rent_container, rentListFragment).commit()
     }
-
 }

@@ -3,7 +3,7 @@ package com.dsm.dsmmarketandroid.presentation.ui.rentImage
 import android.os.Bundle
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.ActivityRentImageBinding
-import com.dsm.dsmmarketandroid.presentation.ui.base.BaseActivity
+import com.dsm.dsmmarketandroid.presentation.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_rent_image.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

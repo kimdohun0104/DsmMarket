@@ -3,9 +3,10 @@ package com.dsm.dsmmarketandroid.presentation.ui.signUp
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import com.dsm.dsmmarketandroid.R
+import com.dsm.dsmmarketandroid.custom.LinePagerIndicatorDecoration
 import com.dsm.dsmmarketandroid.databinding.ActivitySignUpBinding
+import com.dsm.dsmmarketandroid.presentation.base.BaseActivity
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.SignUpPagerAdapter
-import com.dsm.dsmmarketandroid.presentation.ui.base.BaseActivity
 import com.dsm.dsmmarketandroid.presentation.util.LoadingDialog
 import kotlinx.android.synthetic.main.activity_sign_up.*
 import org.jetbrains.anko.toast
@@ -22,8 +23,8 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() {
 
         tb_sign_up.setNavigationOnClickListener { finish() }
 
-        vp_sign_up.adapter = SignUpPagerAdapter(supportFragmentManager)
-        ci_sign_up.setupWithViewPager(vp_sign_up)
+        vp_sign_up.adapter = SignUpPagerAdapter(supportFragmentManager, lifecycle)
+        vp_sign_up.addItemDecoration(LinePagerIndicatorDecoration())
 
         viewModel.toastEmailInvalidEvent.observe(this, Observer { toast(getString(R.string.fail_invalid_email)) })
 

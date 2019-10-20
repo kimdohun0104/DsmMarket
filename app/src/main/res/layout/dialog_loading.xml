@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:text="@string/loading"
         android:textSize="22sp"
-        android:textColor="@color/black"
+        android:textColor="@color/colorBlack"
         app:layout_constraintLeft_toRightOf="@id/pb_loading"
         app:layout_constraintTop_toTopOf="@id/pb_loading"
         app:layout_constraintRight_toRightOf="parent"

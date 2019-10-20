@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.dsm.dsmmarketandroid.databinding.ItemMyPostBinding
 import com.dsm.dsmmarketandroid.presentation.model.ProductModel
 import com.dsm.dsmmarketandroid.presentation.ui.modify.rent.ModifyRentActivity
-import com.dsm.dsmmarketandroid.presentation.ui.myPost.CompleteRentDialog
+import com.dsm.dsmmarketandroid.presentation.ui.myPost.rent.CompleteRentDialog
 import com.dsm.dsmmarketandroid.presentation.ui.rentDetail.RentDetailActivity
 import org.jetbrains.anko.startActivity
 
@@ -58,11 +58,12 @@ class MyRentListAdapter(
             }
             binding.ivEdit.setOnClickListener { context.startActivity<ModifyRentActivity>("post_id" to item.postId) }
             binding.ivComplete.setOnClickListener {
-                val dialog = CompleteRentDialog()
-                val args = Bundle()
-                args.putInt("position", adapterPosition)
-                dialog.arguments = args
-                dialog.show(fragmentManager, "")
+                CompleteRentDialog().apply {
+                    arguments = Bundle().apply {
+                        putInt("position", adapterPosition)
+                    }
+                    show(this@MyRentListAdapter.fragmentManager, "")
+                }
             }
         }
     }

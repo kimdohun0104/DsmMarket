@@ -17,8 +17,10 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".presentation.ui.password.forgotPassword.ForgotPasswordActivity"
-            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".presentation.ui.password.forgotPassword.ForgotPasswordActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".presentation.ui.purchaseImage.PurchaseImageActivity"
             android:screenOrientation="portrait" />

@@ -2,61 +2,47 @@ package com.dsm.dsmmarketandroid.presentation.ui.searchResult
 
 import android.os.Bundle
 import android.view.inputmethod.EditorInfo
-import androidx.lifecycle.Observer
-import com.dsm.data.paging.purchase.PurchaseDataFactory
-import com.dsm.data.paging.rent.RentDataFactory
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.ActivitySearchResultBinding
+import com.dsm.dsmmarketandroid.presentation.base.BaseActivity
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.SearchPagerAdapter
-import com.dsm.dsmmarketandroid.presentation.ui.base.BaseActivity
-import com.google.android.material.tabs.TabLayout
+import com.dsm.dsmmarketandroid.presentation.util.addOnTabSelectedListener
+import com.dsm.dsmmarketandroid.presentation.util.setEditorActionListener
+import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_search_result.*
 import org.jetbrains.anko.startActivity
-import org.koin.android.ext.android.inject
-import org.koin.androidx.viewmodel.ext.android.viewModel
-import org.koin.core.parameter.parametersOf
 
 class SearchResultActivity : BaseActivity<ActivitySearchResultBinding>() {
     override val layoutResourceId: Int
         get() = R.layout.activity_search_result
 
     private val search: String by lazy { intent.getStringExtra("search") }
-    private val purchaseDataFactory: PurchaseDataFactory by inject { parametersOf(search, "") }
-    private val rentDataFactory: RentDataFactory by inject { parametersOf(search, "") }
-    private val viewModel: SearchResultViewModel by viewModel { parametersOf(purchaseDataFactory, rentDataFactory) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         ib_back.setOnClickListener { finish() }
-        binding.search = search
+        et_search.hint = search
 
-        et_search.setOnEditorActionListener { v, actionId, event ->
-            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                viewModel.search()
-                true
-            } else false
+        et_search.setEditorActionListener(EditorInfo.IME_ACTION_SEARCH) { startNewSearchResult() }
+
+        ib_search.setOnClickListener { startNewSearchResult() }
+
+        vp_search.adapter = SearchPagerAdapter(supportFragmentManager, lifecycle)
+        TabLayoutMediator(tl_search, vp_search, true) { tab, position ->
+            when (position) {
+                0 -> tab.text = getString(R.string.purchase)
+                1 -> tab.text = getString(R.string.rent)
+            }
+        }.attach()
+
+        tl_search.addOnTabSelectedListener { vp_search.currentItem = it.position }
+    }
+
+    private fun startNewSearchResult() {
+        val search = et_search.text.toString().trim()
+        if (search.isNotBlank()) {
+            startActivity<SearchResultActivity>("search" to search)
+            finish()
         }
-
-        tl_search.addTab(tl_search.newTab().setText(getString(R.string.purchase)))
-        tl_search.addTab(tl_search.newTab().setText(getString(R.string.rent)))
-        vp_search.adapter = SearchPagerAdapter(supportFragmentManager)
-        vp_search.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tl_search))
-        tl_search.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener {
-            override fun onTabReselected(tab: TabLayout.Tab?) {
-            }
-
-            override fun onTabUnselected(tab: TabLayout.Tab?) {
-            }
-
-            override fun onTabSelected(tab: TabLayout.Tab?) {
-                vp_search.currentItem = tab!!.position
-            }
-        })
-
-        viewModel.intentSearchResult.observe(this, Observer { startActivity<SearchResultActivity>("search" to it) })
-
-        viewModel.finishActivityEvent.observe(this, Observer { finish() })
-
-        binding.viewModel = viewModel
     }
 }

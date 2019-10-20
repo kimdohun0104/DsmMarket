@@ -15,8 +15,6 @@ class CategoryActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_category)
         tb_category.setNavigationOnClickListener { finish() }
-
-
     }
 
     fun onClickCategory(v: View) {

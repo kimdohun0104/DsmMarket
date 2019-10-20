@@ -19,11 +19,14 @@ class RecentViewModel(
     fun getRecentProduct() {
         addDisposable(
             getRecentPurchaseUseCase.create(Unit)
+                .map(recentMapper::mapFrom)
                 .flatMap {
-                    purchaseList.value = recentMapper.mapFrom(it)
+                    purchaseList.value = it
                     getRecentRentUseCase.create(Unit)
-                }.subscribe({
-                    rentList.value = recentMapper.mapFrom(it)
+                }
+                .map(recentMapper::mapFrom)
+                .subscribe({
+                    rentList.value = it
                 }, {
                 })
         )

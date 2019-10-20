@@ -18,7 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/report_post"
-        android:textColor="@color/black"
+        android:textColor="@color/colorBlack"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintLeft_toRightOf="@id/iv_siren"
@@ -31,7 +31,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/report_reason"
-        android:textColor="@color/black"
+        android:textColor="@color/colorBlack"
         android:textSize="14sp"
         app:layout_constraintTop_toBottomOf="@id/iv_siren"
         app:layout_constraintLeft_toLeftOf="@id/iv_siren"
@@ -76,7 +76,7 @@
         app:layout_constraintRight_toLeftOf="@id/btn_cancel"
         android:background="@color/colorPrimaryLight"
         android:text="@string/confirm"
-        android:textColor="@color/white"/>
+        android:textColor="@color/colorWhite"/>
 
     <Button
         android:id="@+id/btn_cancel"
@@ -86,7 +86,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@id/btn_confirm"
         android:background="#c4c4c4"
-        android:textColor="@color/white"
+        android:textColor="@color/colorWhite"
         android:text="@string/cancel"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.dsm.domain.usecase.LoginUseCase
 import com.dsm.dsmmarketandroid.presentation.base.BaseViewModel
 import com.dsm.dsmmarketandroid.presentation.util.SingleLiveEvent
+import com.dsm.dsmmarketandroid.presentation.util.isValueBlank
 import retrofit2.HttpException
 
 class
@@ -14,8 +15,8 @@ LoginViewModel(private val loginUseCase: LoginUseCase) : BaseViewModel() {
     val password = MutableLiveData<String>()
 
     val isLoginEnable = MediatorLiveData<Boolean>().apply {
-        addSource(email) { value = !email.value.isNullOrBlank() && !password.value.isNullOrBlank() }
-        addSource(password) { value = !email.value.isNullOrBlank() && !password.value.isNullOrBlank() }
+        addSource(email) { value = !email.isValueBlank() && !password.isValueBlank() }
+        addSource(password) { value = !email.isValueBlank() && !password.isValueBlank() }
         value = false
     }
 
@@ -37,19 +38,18 @@ LoginViewModel(private val loginUseCase: LoginUseCase) : BaseViewModel() {
                     "email" to email.value,
                     "password" to password.value
                 )
-            )
-                .subscribe({
-                    hideLoadingDialogEvent.call()
-                    hideKeyboardEvent.call()
-                    intentMainActivityEvent.call()
-                }, {
-                    hideLoadingDialogEvent.call()
-                    if (it is HttpException) {
-                        if (it.code() == 403) {
-                            toastLoginFailEvent.call()
-                        } else toastServerErrorEvent.call()
+            ).subscribe({
+                hideLoadingDialogEvent.call()
+                hideKeyboardEvent.call()
+                intentMainActivityEvent.call()
+            }, {
+                hideLoadingDialogEvent.call()
+                if (it is HttpException) {
+                    if (it.code() == 403) {
+                        toastLoginFailEvent.call()
                     } else toastServerErrorEvent.call()
-                })
+                } else toastServerErrorEvent.call()
+            })
         )
     }
 }

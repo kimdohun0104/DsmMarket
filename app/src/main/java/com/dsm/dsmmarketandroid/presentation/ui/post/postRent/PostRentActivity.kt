@@ -7,7 +7,7 @@ import android.os.Bundle
 import androidx.lifecycle.Observer
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.ActivityPostRentBinding
-import com.dsm.dsmmarketandroid.presentation.ui.base.BaseActivity
+import com.dsm.dsmmarketandroid.presentation.base.BaseActivity
 import com.dsm.dsmmarketandroid.presentation.ui.post.postRent.rentTime.SelectRentTimeFragment
 import com.dsm.dsmmarketandroid.presentation.ui.postCategory.PostCategoryActivity
 import com.dsm.dsmmarketandroid.presentation.util.LoadingDialog
@@ -65,9 +65,9 @@ class PostRentActivity : BaseActivity<ActivityPostRentBinding>() {
             if (requestCode == SELECT_IMAGE) {
                 val imagePath = ImagePicker.getFirstImageOrNull(data).path
                 iv_select_image.setImageBitmap(BitmapFactory.decodeFile(imagePath))
-                viewModel.photo.value = imagePath
+                viewModel.setPhoto(imagePath)
             } else if (requestCode == CATEGORY) {
-                viewModel.category.value = data?.getStringExtra("category")
+                viewModel.setCategory(data?.getStringExtra("category") ?: "")
             }
         }
     }

@@ -7,9 +7,10 @@ import androidx.recyclerview.widget.PagerSnapHelper
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.custom.LinePagerIndicatorDecoration
 import com.dsm.dsmmarketandroid.databinding.ActivityPurchaseImageBinding
+import com.dsm.dsmmarketandroid.presentation.base.BaseActivity
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.PurchaseImageDetailListAdapter
-import com.dsm.dsmmarketandroid.presentation.ui.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_purchase_image.*
+import org.jetbrains.anko.toast
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PurchaseImageActivity : BaseActivity<ActivityPurchaseImageBinding>() {
@@ -25,14 +26,18 @@ class PurchaseImageActivity : BaseActivity<ActivityPurchaseImageBinding>() {
         tb_purchase_image.setNavigationOnClickListener { finish() }
 
         val adapter = PurchaseImageDetailListAdapter()
-        rv_purchase_image.adapter = adapter
-        (rv_purchase_image.layoutManager as LinearLayoutManager).orientation = LinearLayoutManager.HORIZONTAL
-        PagerSnapHelper().attachToRecyclerView(rv_purchase_image)
-        rv_purchase_image.addItemDecoration(LinePagerIndicatorDecoration())
+        rv_purchase_image.run {
+            setAdapter(adapter)
+            (layoutManager as LinearLayoutManager).orientation = LinearLayoutManager.HORIZONTAL
+            rv_purchase_image.addItemDecoration(LinePagerIndicatorDecoration())
+            PagerSnapHelper().attachToRecyclerView(this)
+        }
 
         viewModel.getPurchaseImage(postId)
 
         viewModel.imageList.observe(this, Observer { adapter.listItems = it })
+
+        viewModel.toastServerError.observe(this, Observer { toast(getString(R.string.fail_server_error)) })
 
         binding.viewModel = viewModel
     }

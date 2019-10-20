@@ -45,13 +45,13 @@ public class ToolbarAlphaScrollBehavior extends CoordinatorLayout.Behavior<andro
         MenuItem menuItem = child.getMenu().getItem(0);
         if (offset > 400) {
             child.setNavigationIcon(R.drawable.ic_back_black);
-            child.setTitleTextColor(context.getResources().getColor(R.color.black));
+            child.setTitleTextColor(context.getResources().getColor(R.color.colorBlack));
             child.setOverflowIcon(context.getDrawable(R.drawable.ic_menu_black));
             if (!Objects.equals(menuItem.getIcon().getConstantState(), Objects.requireNonNull(context.getDrawable(R.drawable.ic_heart_full_red)).getConstantState()))
                 menuItem.setIcon(R.drawable.ic_heart_empty_black);
         } else {
             child.setNavigationIcon(R.drawable.ic_back_white);
-            child.setTitleTextColor(context.getResources().getColor(R.color.white));
+            child.setTitleTextColor(context.getResources().getColor(R.color.colorWhite));
             child.setOverflowIcon(context.getDrawable(R.drawable.ic_menu));
             if (!Objects.equals(menuItem.getIcon().getConstantState(), Objects.requireNonNull(context.getDrawable(R.drawable.ic_heart_full_red)).getConstantState()))
                 menuItem.setIcon(R.drawable.ic_heart_white);

@@ -6,7 +6,7 @@ import android.os.Bundle
 import androidx.lifecycle.Observer
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.ActivityModifyRentBinding
-import com.dsm.dsmmarketandroid.presentation.ui.base.BaseActivity
+import com.dsm.dsmmarketandroid.presentation.base.BaseActivity
 import com.dsm.dsmmarketandroid.presentation.ui.modify.rent.rentTime.ModifyRentTimeFragment
 import com.dsm.dsmmarketandroid.presentation.ui.postCategory.PostCategoryActivity
 import kotlinx.android.synthetic.main.activity_modify_rent.*
@@ -40,7 +40,6 @@ class ModifyRentActivity : BaseActivity<ActivityModifyRentBinding>() {
 
         viewModel.finishActivityEvent.observe(this, Observer { finish() })
 
-
         binding.viewModel = viewModel
     }
 
@@ -48,7 +47,7 @@ class ModifyRentActivity : BaseActivity<ActivityModifyRentBinding>() {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == CATEGORY) {
-                viewModel.category.value = data?.getStringExtra("category")
+                viewModel.setCategory(data?.getStringExtra("category") ?: "")
             }
         }
     }

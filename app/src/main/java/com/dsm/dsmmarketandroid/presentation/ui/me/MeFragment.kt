@@ -6,7 +6,7 @@ import com.dsm.data.local.pref.PrefHelper
 import com.dsm.dsmmarketandroid.BuildConfig
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.FragmentMeBinding
-import com.dsm.dsmmarketandroid.presentation.ui.base.BaseFragment
+import com.dsm.dsmmarketandroid.presentation.base.BaseFragment
 import com.dsm.dsmmarketandroid.presentation.ui.changeNick.ChangeNickActivity
 import com.dsm.dsmmarketandroid.presentation.ui.interest.InterestActivity
 import com.dsm.dsmmarketandroid.presentation.ui.language.ChangeLanguageActivity

@@ -5,9 +5,10 @@ import android.view.inputmethod.EditorInfo
 import androidx.lifecycle.Observer
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.ActivitySearchBinding
+import com.dsm.dsmmarketandroid.presentation.base.BaseActivity
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.SearchHistoryListAdapter
-import com.dsm.dsmmarketandroid.presentation.ui.base.BaseActivity
 import com.dsm.dsmmarketandroid.presentation.ui.searchResult.SearchResultActivity
+import com.dsm.dsmmarketandroid.presentation.util.setEditorActionListener
 import kotlinx.android.synthetic.main.activity_search.*
 import org.jetbrains.anko.startActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -26,12 +27,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
         val adapter = SearchHistoryListAdapter(viewModel)
         rv_recent_search.adapter = adapter
 
-        et_search.setOnEditorActionListener { v, actionId, event ->
-            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                viewModel.search()
-                true
-            } else false
-        }
+        et_search.setEditorActionListener(EditorInfo.IME_ACTION_SEARCH) { viewModel.search() }
 
         viewModel.getSearchHistory()
 

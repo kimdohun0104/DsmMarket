@@ -8,10 +8,11 @@ import android.view.inputmethod.InputMethodManager
 import androidx.lifecycle.Observer
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.ActivityLoginBinding
-import com.dsm.dsmmarketandroid.presentation.ui.base.BaseActivity
+import com.dsm.dsmmarketandroid.presentation.base.BaseActivity
 import com.dsm.dsmmarketandroid.presentation.ui.main.MainActivity
 import com.dsm.dsmmarketandroid.presentation.ui.password.forgotPassword.ForgotPasswordActivity
 import com.dsm.dsmmarketandroid.presentation.util.LoadingDialog
+import com.dsm.dsmmarketandroid.presentation.util.setEditorActionListener
 import kotlinx.android.synthetic.main.activity_login.*
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
@@ -31,18 +32,13 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
 
         tv_forget_password.setOnClickListener { startActivity<ForgotPasswordActivity>() }
 
-        et_password.setOnEditorActionListener { v, actionId, event ->
-            if (actionId == EditorInfo.IME_ACTION_DONE) {
-                viewModel.login()
-                true
-            } else false
-        }
+        et_password.setEditorActionListener(EditorInfo.IME_ACTION_DONE) { viewModel.login() }
 
         viewModel.intentMainActivityEvent.observe(this, Observer {
-            val intent = Intent(this, MainActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-            startActivity(intent)
+            Intent(this, MainActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(this)
+            }
         })
 
         viewModel.toastLoginFailEvent.observe(this, Observer { toast(getString(R.string.fail_login)) })

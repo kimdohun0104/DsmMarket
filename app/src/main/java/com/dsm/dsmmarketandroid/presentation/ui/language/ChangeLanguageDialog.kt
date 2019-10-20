@@ -11,30 +11,31 @@ import com.dsm.dsmmarketandroid.presentation.BaseApp
 import com.dsm.dsmmarketandroid.presentation.ui.main.MainActivity
 import com.dsm.dsmmarketandroid.presentation.util.LocaleManager.LANGUAGE_ENGLISH
 import com.dsm.dsmmarketandroid.presentation.util.LocaleManager.LANGUAGE_KOREAN
-import kotlinx.android.synthetic.main.dialog_change_language.view.*
+import kotlinx.android.synthetic.main.dialog_change_language.*
 
 class ChangeLanguageDialog : DialogFragment() {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val rootView = inflater.inflate(R.layout.dialog_change_language, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
+        inflater.inflate(R.layout.dialog_change_language, container, false)
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         val lang = arguments?.getString("lang")
 
         if (lang == LANGUAGE_ENGLISH) {
-            rootView.tv_language.text = getString(R.string.english)
+            tv_language.text = getString(R.string.english)
         } else if (lang == LANGUAGE_KOREAN) {
-            rootView.tv_language.text = getString(R.string.korean)
+            tv_language.text = getString(R.string.korean)
         }
 
-        rootView.btn_complete.setOnClickListener {
+        btn_complete.setOnClickListener {
             BaseApp.localeManager?.setNewLocale(activity!!, lang)
-            val intent = Intent(activity!!, MainActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-            startActivity(intent)
+            Intent(activity!!, MainActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(this)
+            }
         }
 
-        rootView.btn_cancel.setOnClickListener { dismiss() }
-
-        return rootView
+        btn_cancel.setOnClickListener { dismiss() }
     }
 }

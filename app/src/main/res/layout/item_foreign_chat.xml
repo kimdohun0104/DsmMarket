@@ -33,7 +33,7 @@
             android:paddingTop="9dp"
             android:paddingEnd="11dp"
             android:paddingBottom="9dp"
-            android:textColor="@color/black"
+            android:textColor="@color/colorBlack"
             android:textSize="14sp"
             android:layout_marginEnd="10dp" />
 

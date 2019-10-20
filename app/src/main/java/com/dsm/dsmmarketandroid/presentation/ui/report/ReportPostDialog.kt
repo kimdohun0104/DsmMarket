@@ -4,13 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import androidx.fragment.app.DialogFragment
 import com.dsm.domain.usecase.ReportPostUseCase
 import com.dsm.dsmmarketandroid.R
+import com.dsm.dsmmarketandroid.presentation.util.onItemSelectedListener
 import io.reactivex.disposables.CompositeDisposable
-import kotlinx.android.synthetic.main.dialog_comment_report.view.*
-import org.jetbrains.anko.toast
+import kotlinx.android.synthetic.main.dialog_post_report.*
+import org.jetbrains.anko.support.v4.toast
 import org.koin.android.ext.android.inject
 
 class ReportPostDialog : DialogFragment() {
@@ -19,34 +19,30 @@ class ReportPostDialog : DialogFragment() {
 
     private val compositeDisposable = CompositeDisposable()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val rootView = inflater.inflate(R.layout.dialog_post_report, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
+        inflater.inflate(R.layout.dialog_post_report, container, false)
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         var isEtc = false
 
-        rootView.btn_cancel.setOnClickListener { dismiss() }
+        btn_cancel.setOnClickListener { dismiss() }
 
-        rootView.spn_reason.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(parent: AdapterView<*>?) {
+        spn_reason.onItemSelectedListener { position ->
+            if (position != 2) {
+                isEtc = false
+                til_reason.visibility = View.GONE
+            } else {
+                isEtc = true
+                til_reason.visibility = View.INVISIBLE
             }
-
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                if (position != 2) {
-                    isEtc = false
-                    rootView.til_reason.visibility = View.GONE
-                } else {
-                    isEtc = true
-                    rootView.til_reason.visibility = View.VISIBLE
-                }
-            }
-
         }
 
-        rootView.btn_confirm.setOnClickListener {
+        btn_confirm.setOnClickListener {
             val reason = if (isEtc) {
-                rootView.et_reason.text.toString().trim()
+                et_reason.text.toString().trim()
             } else {
-                rootView.spn_reason.selectedItem.toString()
+                spn_reason.selectedItem.toString()
             }
 
             compositeDisposable.add(
@@ -59,12 +55,10 @@ class ReportPostDialog : DialogFragment() {
                 ).subscribe({
                     dismiss()
                 }, {
-                    activity?.toast(getString(R.string.fail_server_error))
+                    toast(getString(R.string.fail_server_error))
                 })
             )
         }
-
-        return rootView
     }
 
     override fun onDestroy() {

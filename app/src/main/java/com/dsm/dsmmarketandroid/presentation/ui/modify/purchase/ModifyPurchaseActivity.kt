@@ -7,8 +7,8 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.ActivityModifyPurchaseBinding
+import com.dsm.dsmmarketandroid.presentation.base.BaseActivity
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.ModifyImageListAdapter
-import com.dsm.dsmmarketandroid.presentation.ui.base.BaseActivity
 import com.dsm.dsmmarketandroid.presentation.ui.postCategory.PostCategoryActivity
 import com.dsm.dsmmarketandroid.presentation.util.PermissionUtil
 import kotlinx.android.synthetic.main.activity_modify_purchase.*
@@ -32,8 +32,8 @@ class ModifyPurchaseActivity : BaseActivity<ActivityModifyPurchaseBinding>() {
         PermissionUtil.requestReadExternalStorage(this)
         tb_modify_purchase.setNavigationOnClickListener { finish() }
 
-        rv_modify_image.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         val adapter = ModifyImageListAdapter()
+        rv_modify_image.layoutManager = LinearLayoutManager(this@ModifyPurchaseActivity, LinearLayoutManager.HORIZONTAL, false)
         rv_modify_image.adapter = adapter
 
         cl_category.setOnClickListener { startActivityForResult(Intent(this, PostCategoryActivity::class.java), CATEGORY) }
@@ -51,7 +51,7 @@ class ModifyPurchaseActivity : BaseActivity<ActivityModifyPurchaseBinding>() {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == CATEGORY) {
-                viewModel.category.value = data?.getStringExtra("category")
+                viewModel.setCategory(data?.getStringExtra("category") ?: "")
             }
         }
     }
