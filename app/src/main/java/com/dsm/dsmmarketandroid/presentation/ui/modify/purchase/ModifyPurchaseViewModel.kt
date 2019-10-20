@@ -36,7 +36,6 @@ class ModifyPurchaseViewModel(
         addSource(category) { value = !isBlankExist() }
     }
 
-    // TODO 차라리 모델 하나 더 만들어서 이렇게 하나 하나 value설정해주는거 말고 다른 방법 찾아보자
     fun getPurchaseDetail(postId: Int) {
         addDisposable(
             getPurchaseDetailUseCase.create(postId)
