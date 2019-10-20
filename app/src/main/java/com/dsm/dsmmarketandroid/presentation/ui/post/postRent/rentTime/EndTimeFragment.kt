@@ -15,7 +15,7 @@ class EndTimeFragment : BaseFragment<FragmentEndTimeBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val viewModel = ViewModelProviders.of(activity!!).get(PostRentViewModel::class.java)
+        val viewModel = ViewModelProviders.of(activity!!)[PostRentViewModel::class.java]
 
         np_hour.minValue = 0
         np_hour.maxValue = 23
