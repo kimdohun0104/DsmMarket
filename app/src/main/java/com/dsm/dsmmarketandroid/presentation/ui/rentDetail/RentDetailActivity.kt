@@ -11,6 +11,7 @@ import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.ActivityRentDetailBinding
 import com.dsm.dsmmarketandroid.presentation.base.BaseActivity
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.RecommendListAdapter
+import com.dsm.dsmmarketandroid.presentation.ui.chat.ChatActivity
 import com.dsm.dsmmarketandroid.presentation.ui.comment.CommentActivity
 import com.dsm.dsmmarketandroid.presentation.ui.rentImage.RentImageActivity
 import com.dsm.dsmmarketandroid.presentation.ui.report.ReportPostDialog
@@ -41,6 +42,8 @@ class RentDetailActivity : BaseActivity<ActivityRentDetailBinding>() {
 
         iv_rent_image.setOnClickListener { startActivity<RentImageActivity>("post_id" to postId) }
 
+        btn_deal_with_chat.setOnClickListener { viewModel.createRoom(postId) }
+
         val relatedListAdapter = RecommendListAdapter(this, 1)
         (rv_related.layoutManager as LinearLayoutManager).orientation = LinearLayoutManager.HORIZONTAL
         rv_related.adapter = relatedListAdapter
@@ -58,6 +61,8 @@ class RentDetailActivity : BaseActivity<ActivityRentDetailBinding>() {
         viewModel.toastUnInterestEvent.observe(this, Observer { toast(getString(R.string.un_interest)) })
 
         viewModel.relatedList.observe(this, Observer { relatedListAdapter.setItems(it) })
+
+        viewModel.startChatActivity.observe(this, Observer { startActivity<ChatActivity>("nameSpace" to it) })
 
         binding.viewModel = viewModel
     }

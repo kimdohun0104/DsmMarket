@@ -57,7 +57,7 @@ class PurchaseDetailActivity : BaseActivity<ActivityPurchaseDetailBinding>() {
 
         ll_comment.setOnClickListener { startActivity<CommentActivity>("post_id" to postId, "type" to 0) }
 
-        btn_deal_with_chat.setOnClickListener { startActivity<ChatActivity>() }
+        btn_deal_with_chat.setOnClickListener { viewModel.createRoom(postId) }
 
         viewModel.getPurchaseDetail(postId)
         viewModel.getRelatedProduct(postId)
@@ -81,6 +81,8 @@ class PurchaseDetailActivity : BaseActivity<ActivityPurchaseDetailBinding>() {
         viewModel.recommendList.observe(this, Observer { recommendListAdapter.setItems(it) })
 
         viewModel.relatedList.observe(this, Observer { relatedListAdapter.setItems(it) })
+
+        viewModel.startChatActivity.observe(this, Observer { startActivity<ChatActivity>("nameSpace" to it) })
 
         binding.viewModel = viewModel
     }

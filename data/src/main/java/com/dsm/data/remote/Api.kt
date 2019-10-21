@@ -146,4 +146,14 @@ interface Api {
 
     @GET("rent/img")
     fun getRentImage(@Query("postId") postId: Int): Flowable<RentImageEntity>
+
+    @FormUrlEncoded
+    @POST("room")
+    fun createRoom(
+        @Field("postId") postId: Int,
+        @Field("type") type: Int
+    ): Flowable<Map<String, String>>
+
+    @GET("room")
+    fun getChatRoom(): Flowable<ChatRoomListEntity>
 }

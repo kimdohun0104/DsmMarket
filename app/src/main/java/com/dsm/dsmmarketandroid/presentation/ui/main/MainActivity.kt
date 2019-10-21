@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.dsm.data.local.pref.PrefHelper
 import com.dsm.dsmmarketandroid.R
-import com.dsm.dsmmarketandroid.presentation.ui.chatList.ChatFragment
+import com.dsm.dsmmarketandroid.presentation.ui.chatList.ChatListFragment
 import com.dsm.dsmmarketandroid.presentation.ui.me.MeFragment
 import com.dsm.dsmmarketandroid.presentation.ui.post.PostBottomFragment
 import com.dsm.dsmmarketandroid.presentation.ui.purchase.PurchaseFragment
@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         backSubject.onNext(System.currentTimeMillis())
     }
 
-    private val fragments = listOf(PurchaseFragment(), RentFragment(), ChatFragment(), MeFragment())
+    private val fragments = listOf(PurchaseFragment(), RentFragment(), ChatListFragment(), MeFragment())
     private var currentPosition = -1
 
     private val prefHelper: PrefHelper by inject()
