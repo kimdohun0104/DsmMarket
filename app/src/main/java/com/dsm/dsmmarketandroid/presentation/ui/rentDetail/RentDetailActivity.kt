@@ -38,7 +38,7 @@ class RentDetailActivity : BaseActivity<ActivityRentDetailBinding>() {
             overflowIcon = ContextCompat.getDrawable(this@RentDetailActivity, R.drawable.ic_menu)
         }
 
-        ll_comment.setOnClickListener { startActivity<CommentActivity>("post_id" to postId, "type" to 1) }
+        ll_comment.setOnClickListener { startActivity<CommentActivity>("post_id" to postId, "type" to ProductType.RENT) }
 
         iv_rent_image.setOnClickListener { startActivity<RentImageActivity>("post_id" to postId) }
 
@@ -75,7 +75,7 @@ class RentDetailActivity : BaseActivity<ActivityRentDetailBinding>() {
                 ReportPostDialog().apply {
                     arguments = Bundle().apply {
                         putInt("post_id", postId)
-                        putInt("type", 1)
+                        putInt("type", ProductType.RENT)
                     }
                     show(supportFragmentManager, "")
                 }

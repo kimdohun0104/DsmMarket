@@ -56,7 +56,7 @@ class PurchaseDetailActivity : BaseActivity<ActivityPurchaseDetailBinding>() {
         (rv_related.layoutManager as LinearLayoutManager).orientation = LinearLayoutManager.HORIZONTAL
         rv_related.adapter = relatedListAdapter
 
-        ll_comment.setOnClickListener { startActivity<CommentActivity>("post_id" to postId, "type" to 0) }
+        ll_comment.setOnClickListener { startActivity<CommentActivity>("post_id" to postId, "type" to ProductType.PURCHASE) }
 
         btn_deal_with_chat.setOnClickListener { startActivity<ChatActivity>() }
 
@@ -98,7 +98,7 @@ class PurchaseDetailActivity : BaseActivity<ActivityPurchaseDetailBinding>() {
                 ReportPostDialog().apply {
                     arguments = Bundle().apply {
                         putInt("post_id", postId)
-                        putInt("type", 0)
+                        putInt("type", ProductType.PURCHASE)
                     }
                     show(supportFragmentManager, "")
                 }
