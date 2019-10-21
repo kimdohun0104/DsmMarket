@@ -14,6 +14,7 @@ import com.dsm.dsmmarketandroid.presentation.ui.adapter.RecommendListAdapter
 import com.dsm.dsmmarketandroid.presentation.ui.comment.CommentActivity
 import com.dsm.dsmmarketandroid.presentation.ui.rentImage.RentImageActivity
 import com.dsm.dsmmarketandroid.presentation.ui.report.ReportPostDialog
+import com.dsm.dsmmarketandroid.presentation.util.ProductType
 import kotlinx.android.synthetic.main.activity_rent_detail.*
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
@@ -41,7 +42,7 @@ class RentDetailActivity : BaseActivity<ActivityRentDetailBinding>() {
 
         iv_rent_image.setOnClickListener { startActivity<RentImageActivity>("post_id" to postId) }
 
-        val relatedListAdapter = RecommendListAdapter(this, 1)
+        val relatedListAdapter = RecommendListAdapter(ProductType.RENT)
         (rv_related.layoutManager as LinearLayoutManager).orientation = LinearLayoutManager.HORIZONTAL
         rv_related.adapter = relatedListAdapter
 

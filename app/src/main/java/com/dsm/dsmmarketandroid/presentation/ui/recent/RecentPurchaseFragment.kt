@@ -8,6 +8,7 @@ import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.FragmentRecentPurchaseBinding
 import com.dsm.dsmmarketandroid.presentation.base.BaseFragment
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.RecentListAdapter
+import com.dsm.dsmmarketandroid.presentation.util.ProductType
 import kotlinx.android.synthetic.main.fragment_recent_purchase.*
 
 class RecentPurchaseFragment : BaseFragment<FragmentRecentPurchaseBinding>() {
@@ -19,7 +20,7 @@ class RecentPurchaseFragment : BaseFragment<FragmentRecentPurchaseBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = RecentListAdapter(0, activity!!)
+        val adapter = RecentListAdapter(ProductType.PURCHASE)
         rv_recent_purchase.adapter = adapter
 
         viewModel.purchaseList.observe(this, Observer { adapter.setItems(it) })

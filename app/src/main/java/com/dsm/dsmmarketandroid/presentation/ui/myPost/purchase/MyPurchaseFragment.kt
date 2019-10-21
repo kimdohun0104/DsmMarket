@@ -7,8 +7,9 @@ import androidx.lifecycle.ViewModelProviders
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.FragmentMyPurchaseBinding
 import com.dsm.dsmmarketandroid.presentation.base.BaseFragment
-import com.dsm.dsmmarketandroid.presentation.ui.adapter.MyPurchaseListAdapter
+import com.dsm.dsmmarketandroid.presentation.ui.adapter.MyProductListAdapter
 import com.dsm.dsmmarketandroid.presentation.ui.myPost.MyPostViewModel
+import com.dsm.dsmmarketandroid.presentation.util.ProductType
 import kotlinx.android.synthetic.main.fragment_my_purchase.*
 
 class MyPurchaseFragment : BaseFragment<FragmentMyPurchaseBinding>() {
@@ -20,7 +21,7 @@ class MyPurchaseFragment : BaseFragment<FragmentMyPurchaseBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = MyPurchaseListAdapter(activity!!, childFragmentManager)
+        val adapter = MyProductListAdapter(ProductType.PURCHASE, childFragmentManager)
         rv_my_post_purchase.adapter = adapter
 
         srl_my_purchase.setOnRefreshListener { viewModel.getMyPurchase() }

@@ -17,6 +17,7 @@ import com.dsm.dsmmarketandroid.presentation.ui.adapter.RecommendListAdapter
 import com.dsm.dsmmarketandroid.presentation.ui.chat.ChatActivity
 import com.dsm.dsmmarketandroid.presentation.ui.comment.CommentActivity
 import com.dsm.dsmmarketandroid.presentation.ui.report.ReportPostDialog
+import com.dsm.dsmmarketandroid.presentation.util.ProductType
 import kotlinx.android.synthetic.main.activity_purchase_detail.*
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
@@ -42,16 +43,16 @@ class PurchaseDetailActivity : BaseActivity<ActivityPurchaseDetailBinding>() {
 
         rv_detail_image.run {
             (layoutManager as LinearLayoutManager).orientation = LinearLayoutManager.HORIZONTAL
-            adapter = DetailImageListAdapter(this@PurchaseDetailActivity, postId)
+            adapter = DetailImageListAdapter(postId)
             addItemDecoration(LinePagerIndicatorDecoration())
             PagerSnapHelper().attachToRecyclerView(this)
         }
 
-        val recommendListAdapter = RecommendListAdapter(this, 0)
+        val recommendListAdapter = RecommendListAdapter(ProductType.PURCHASE)
         (rv_recommend.layoutManager as LinearLayoutManager).orientation = LinearLayoutManager.HORIZONTAL
         rv_recommend.adapter = recommendListAdapter
 
-        val relatedListAdapter = RecommendListAdapter(this, 0)
+        val relatedListAdapter = RecommendListAdapter(ProductType.PURCHASE)
         (rv_related.layoutManager as LinearLayoutManager).orientation = LinearLayoutManager.HORIZONTAL
         rv_related.adapter = relatedListAdapter
 
