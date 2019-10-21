@@ -8,7 +8,8 @@ import com.dsm.data.paging.purchase.PurchaseDataFactory
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.FragmentPurchaseListBinding
 import com.dsm.dsmmarketandroid.presentation.base.BaseFragment
-import com.dsm.dsmmarketandroid.presentation.ui.adapter.PurchaseListAdapter
+import com.dsm.dsmmarketandroid.presentation.ui.adapter.ProductListAdapter
+import com.dsm.dsmmarketandroid.presentation.util.ProductType
 import kotlinx.android.synthetic.main.fragment_purchase_list.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -31,7 +32,7 @@ class PurchaseListFragment : BaseFragment<FragmentPurchaseListBinding>() {
             srl_purchase_list.isRefreshing = false
         }
 
-        val adapter = PurchaseListAdapter(activity!!)
+        val adapter = ProductListAdapter(ProductType.PURCHASE)
         rv_purchase_list.adapter = adapter
 
         viewModel.purchaseListItems.observe(this, Observer { adapter.submitList(it) })

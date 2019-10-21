@@ -2,7 +2,6 @@ package com.dsm.dsmmarketandroid.presentation.ui.adapter
 
 import android.app.Activity
 import android.app.ActivityOptions
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Pair
@@ -16,12 +15,14 @@ import com.dsm.dsmmarketandroid.presentation.model.ProductModel
 import com.dsm.dsmmarketandroid.presentation.ui.modify.purchase.ModifyPurchaseActivity
 import com.dsm.dsmmarketandroid.presentation.ui.myPost.purchase.CompletePurchaseDialog
 import com.dsm.dsmmarketandroid.presentation.ui.purchaseDetail.PurchaseDetailActivity
+import com.dsm.dsmmarketandroid.presentation.ui.rentDetail.RentDetailActivity
+import com.dsm.dsmmarketandroid.presentation.util.ProductType
 import org.jetbrains.anko.startActivity
 
-class MyPurchaseListAdapter(
-    private val context: Context,
+class MyProductListAdapter(
+    private val type: Int,
     private val fragmentManager: FragmentManager
-) : RecyclerView.Adapter<MyPurchaseListAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<MyProductListAdapter.ViewHolder>() {
 
     private var listItems = arrayListOf<ProductModel>()
 
@@ -45,9 +46,14 @@ class MyPurchaseListAdapter(
     inner class ViewHolder(private val binding: ItemMyPostBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind() {
             val item = listItems[adapterPosition]
+            val context = binding.root.context
             binding.product = item
             binding.clParent.setOnClickListener {
-                val intent = Intent(context, PurchaseDetailActivity::class.java)
+                val intent =
+                    if (type == ProductType.PURCHASE)
+                        Intent(context, PurchaseDetailActivity::class.java)
+                    else
+                        Intent(context, RentDetailActivity::class.java)
                 intent.putExtra("post_id", item.postId)
                 val options = ActivityOptions.makeSceneTransitionAnimation(
                     context as Activity,
@@ -62,7 +68,7 @@ class MyPurchaseListAdapter(
                     arguments = Bundle().apply {
                         putInt("position", adapterPosition)
                     }
-                    show(this@MyPurchaseListAdapter.fragmentManager, "")
+                    show(this@MyProductListAdapter.fragmentManager, "")
                 }
             }
         }

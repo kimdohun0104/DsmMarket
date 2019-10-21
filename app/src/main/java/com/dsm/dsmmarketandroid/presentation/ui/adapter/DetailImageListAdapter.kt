@@ -1,6 +1,5 @@
 package com.dsm.dsmmarketandroid.presentation.ui.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,10 +10,7 @@ import com.dsm.dsmmarketandroid.presentation.util.GlideApp
 import kotlinx.android.synthetic.main.item_detail_image.view.*
 import org.jetbrains.anko.startActivity
 
-class DetailImageListAdapter(
-    private val context: Context,
-    private val postId: Int
-) : RecyclerView.Adapter<DetailImageListAdapter.ViewHolder>() {
+class DetailImageListAdapter(private val postId: Int) : RecyclerView.Adapter<DetailImageListAdapter.ViewHolder>() {
 
     var listItems = listOf<String>()
         set(value) {
@@ -31,6 +27,7 @@ class DetailImageListAdapter(
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind() {
+            val context = itemView.context
             GlideApp.with(itemView).load(listItems[adapterPosition]).into(itemView.iv_image)
 
             itemView.setOnClickListener {

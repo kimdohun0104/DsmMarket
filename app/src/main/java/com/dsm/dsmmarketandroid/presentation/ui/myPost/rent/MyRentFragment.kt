@@ -7,8 +7,9 @@ import androidx.lifecycle.ViewModelProviders
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.FragmentMyRentBinding
 import com.dsm.dsmmarketandroid.presentation.base.BaseFragment
-import com.dsm.dsmmarketandroid.presentation.ui.adapter.MyRentListAdapter
+import com.dsm.dsmmarketandroid.presentation.ui.adapter.MyProductListAdapter
 import com.dsm.dsmmarketandroid.presentation.ui.myPost.MyPostViewModel
+import com.dsm.dsmmarketandroid.presentation.util.ProductType
 import kotlinx.android.synthetic.main.fragment_my_rent.*
 
 class MyRentFragment : BaseFragment<FragmentMyRentBinding>() {
@@ -20,7 +21,7 @@ class MyRentFragment : BaseFragment<FragmentMyRentBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = MyRentListAdapter(activity!!, childFragmentManager)
+        val adapter = MyProductListAdapter(ProductType.RENT, childFragmentManager)
         rv_my_post_rent.adapter = adapter
 
         srl_my_rent.setOnRefreshListener { viewModel.getMyRent() }

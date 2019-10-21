@@ -2,7 +2,6 @@ package com.dsm.dsmmarketandroid.presentation.ui.adapter
 
 import android.app.Activity
 import android.app.ActivityOptions
-import android.content.Context
 import android.content.Intent
 import android.util.Pair
 import android.view.LayoutInflater
@@ -13,11 +12,9 @@ import com.dsm.dsmmarketandroid.databinding.ItemProductBinding
 import com.dsm.dsmmarketandroid.presentation.model.ProductModel
 import com.dsm.dsmmarketandroid.presentation.ui.purchaseDetail.PurchaseDetailActivity
 import com.dsm.dsmmarketandroid.presentation.ui.rentDetail.RentDetailActivity
+import com.dsm.dsmmarketandroid.presentation.util.ProductType
 
-class RecentListAdapter(
-    private val productType: Int,
-    private val context: Context
-) : RecyclerView.Adapter<RecentListAdapter.ViewHolder>() {
+class RecentListAdapter(private val productType: Int) : RecyclerView.Adapter<RecentListAdapter.ViewHolder>() {
 
     private var listItems = listOf<ProductModel>()
 
@@ -36,10 +33,11 @@ class RecentListAdapter(
     inner class ViewHolder(private val binding: ItemProductBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind() {
             val item = listItems[adapterPosition]
+            val context = binding.root.context
             binding.product = item
             binding.clParent.setOnClickListener {
                 val intent =
-                    if (productType == 0) Intent(context, PurchaseDetailActivity::class.java)
+                    if (productType == ProductType.PURCHASE) Intent(context, PurchaseDetailActivity::class.java)
                     else Intent(context, RentDetailActivity::class.java)
                 intent.putExtra("post_id", item.postId)
                 val options = ActivityOptions.makeSceneTransitionAnimation(

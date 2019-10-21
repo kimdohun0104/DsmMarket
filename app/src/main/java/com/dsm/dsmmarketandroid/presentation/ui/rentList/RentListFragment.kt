@@ -8,8 +8,9 @@ import com.dsm.data.paging.rent.RentDataFactory
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.FragmentRentListBinding
 import com.dsm.dsmmarketandroid.presentation.base.BaseFragment
-import com.dsm.dsmmarketandroid.presentation.ui.adapter.RentListAdapter
+import com.dsm.dsmmarketandroid.presentation.ui.adapter.ProductListAdapter
 import com.dsm.dsmmarketandroid.presentation.ui.rentDetail.RentDetailActivity
+import com.dsm.dsmmarketandroid.presentation.util.ProductType
 import kotlinx.android.synthetic.main.fragment_rent_list.*
 import org.jetbrains.anko.support.v4.startActivity
 import org.koin.android.ext.android.inject
@@ -33,7 +34,7 @@ class RentListFragment : BaseFragment<FragmentRentListBinding>() {
             srl_rent_list.isRefreshing = false
         }
 
-        val adapter = RentListAdapter(activity!!)
+        val adapter = ProductListAdapter(ProductType.RENT)
         rv_rent_list.adapter = adapter
 
         viewModel.rentListItems.observe(this, Observer { adapter.submitList(it) })
