@@ -1,11 +1,6 @@
 language: android
 dist: trusty
 
-branches:
-  only:
-  - master
-  - dev
-
 android:
   components:
   - build-tools-29.0.2
@@ -13,23 +8,39 @@ android:
   - tools
   - tools
   - platform-tools
+  - extra-google-google_play_services
+  - extra-google-m2repository
+  - extra-android-m2repository
   
 before_install:
   - chmod +x gradlew
   - yes | sdkmanager --update
   - yes | sdkmanager --licenses
   
+skip_cleanup: true  
+  
 script:
-  - "./gradlew androidDependencies clean build test"
+  - ./gradlew androidDependencies
+  - ./gradlew clean
+  - ./gradlew build
+  - ./gradlew test
   
 before_cache:
+  # Do not cache a few Gradle files/directories (see https://docs.travis-ci.com/user/languages/java/#Caching)
   - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
   - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
 
 cache:
   directories:
+    # Android SDK
+    - $HOME/android-sdk-dl
+    - $HOME/android-sdk
+    
+    # Gradle dependencies
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
+    
+    # Android build cache (see http://tools.android.com/tech-docs/build-cache)
     - $HOME/.android/build-cache
 
 notifications:
@@ -38,8 +49,13 @@ notifications:
       - awesomeplanb:pwlilBY08nuCZqbCTX09meOq#android
     on_success: always
     on_failure: always
-  email:
-    recipients:
-      - dikolight203@gmail.com
-    on_success: never
-    on_failure: always
+    
+deploy:
+  provider: script
+  skip_cleanup: true
+  script:
+    - "sh script/deploy.sh"
+  on:
+    branch:
+      - dev
+      - master
