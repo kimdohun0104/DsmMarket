@@ -55,8 +55,10 @@ dependencies {
     implementation 'com.makeramen:roundedimageview:2.3.0'
     implementation 'de.hdodenhof:circleimageview:3.0.1'
     implementation 'net.cachapa.expandablelayout:expandablelayout:2.9.2'
-    implementation 'com.github.esafirm.android-image-picker:imagepicker:2.1.0'
     implementation 'com.github.chrisbanes:PhotoView:2.3.0'
+
+    // image
+    implementation 'com.github.kimdohun0104:MediaPicker:1.0.3'
 
     // kotlin
     implementation dependencies.kotlin

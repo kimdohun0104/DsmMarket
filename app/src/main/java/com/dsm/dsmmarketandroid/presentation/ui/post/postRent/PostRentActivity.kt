@@ -12,7 +12,8 @@ import com.dsm.dsmmarketandroid.presentation.ui.post.postRent.rentTime.SelectRen
 import com.dsm.dsmmarketandroid.presentation.ui.postCategory.PostCategoryActivity
 import com.dsm.dsmmarketandroid.presentation.util.LoadingDialog
 import com.dsm.dsmmarketandroid.presentation.util.PermissionUtil
-import com.esafirm.imagepicker.features.ImagePicker
+import com.dsm.mediapicker.MediaPicker
+import com.dsm.mediapicker.enum.PickerOrientation
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_post_rent.*
 import org.jetbrains.anko.toast
@@ -43,7 +44,13 @@ class PostRentActivity : BaseActivity<ActivityPostRentBinding>() {
                 Snackbar.make(iv_select_image, getString(R.string.fail_permission_denied), Snackbar.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            ImagePicker.create(this@PostRentActivity).single().start(SELECT_IMAGE)
+            MediaPicker.createImage(this@PostRentActivity)
+                .single()
+                .theme(R.style.AppTheme)
+                .toolbarBackgroundColor(R.color.colorPrimary)
+                .toolbarTextColor(R.color.colorWhite)
+                .orientation(PickerOrientation.PORTRAIT)
+                .start(SELECT_IMAGE)
         }
 
         btn_select_time.setOnClickListener { SelectRentTimeFragment().show(supportFragmentManager, "") }
@@ -63,7 +70,7 @@ class PostRentActivity : BaseActivity<ActivityPostRentBinding>() {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == SELECT_IMAGE) {
-                val imagePath = ImagePicker.getFirstImageOrNull(data).path
+                val imagePath = MediaPicker.getResult(data)[0]
                 iv_select_image.setImageBitmap(BitmapFactory.decodeFile(imagePath))
                 viewModel.setPhoto(imagePath)
             } else if (requestCode == CATEGORY) {
