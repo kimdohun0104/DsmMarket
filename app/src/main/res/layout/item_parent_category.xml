@@ -13,7 +13,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:textSize="21sp"
-        android:textColor="@color/black"
+        android:textColor="@color/colorBlack"
         android:textStyle="bold"
         android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"

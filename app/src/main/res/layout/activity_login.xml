@@ -20,13 +20,13 @@
             style="@style/ToolBarStyle.Event"
             android:layout_width="0dp"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/white"
+            android:background="@color/colorWhite"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:navigationIcon="@drawable/ic_back_black"
             app:title="@string/login"
-            app:titleTextColor="@color/black" />
+            app:titleTextColor="@color/colorBlack" />
 
         <View
             android:layout_width="0dp"

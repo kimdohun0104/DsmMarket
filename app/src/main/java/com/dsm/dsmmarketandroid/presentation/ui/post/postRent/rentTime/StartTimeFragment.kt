@@ -5,7 +5,7 @@ import android.view.View
 import androidx.lifecycle.ViewModelProviders
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.FragmentStartTimeBinding
-import com.dsm.dsmmarketandroid.presentation.ui.base.BaseFragment
+import com.dsm.dsmmarketandroid.presentation.base.BaseFragment
 import com.dsm.dsmmarketandroid.presentation.ui.post.postRent.PostRentViewModel
 import kotlinx.android.synthetic.main.fragment_end_time.*
 
@@ -15,7 +15,7 @@ class StartTimeFragment : BaseFragment<FragmentStartTimeBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val viewModel = ViewModelProviders.of(activity!!).get(PostRentViewModel::class.java)
+        val viewModel = ViewModelProviders.of(activity!!)[PostRentViewModel::class.java]
 
         np_hour.minValue = 0
         np_hour.maxValue = 23
@@ -26,5 +26,4 @@ class StartTimeFragment : BaseFragment<FragmentStartTimeBinding>() {
 
         binding.viewModel = viewModel
     }
-
 }

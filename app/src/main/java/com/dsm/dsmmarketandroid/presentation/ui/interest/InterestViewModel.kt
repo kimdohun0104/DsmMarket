@@ -30,8 +30,9 @@ class InterestViewModel(
     fun getInterestPurchase() {
         addDisposable(
             getInterestUseCase.create(0)
+                .map(productModelMapper::mapFrom)
                 .subscribe({
-                    purchaseList.value = productModelMapper.mapFrom(it)
+                    purchaseList.value = it
                     hidePurchaseProgressEvent.call()
                     hidePurchaseRefresh.call()
                 }, {
@@ -43,8 +44,9 @@ class InterestViewModel(
     fun getInterestRent() {
         addDisposable(
             getInterestUseCase.create(1)
+                .map(productModelMapper::mapFrom)
                 .subscribe({
-                    rentList.value = productModelMapper.mapFrom(it)
+                    rentList.value = it
                     hideRentProgressEvent.call()
                     hideRentRefresh.call()
                 }, {

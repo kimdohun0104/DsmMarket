@@ -5,7 +5,8 @@ import android.view.inputmethod.EditorInfo
 import androidx.lifecycle.Observer
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.ActivityChangeNickBinding
-import com.dsm.dsmmarketandroid.presentation.ui.base.BaseActivity
+import com.dsm.dsmmarketandroid.presentation.base.BaseActivity
+import com.dsm.dsmmarketandroid.presentation.util.setEditorActionListener
 import kotlinx.android.synthetic.main.activity_change_nick.*
 import org.jetbrains.anko.toast
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -21,12 +22,7 @@ class ChangeNickActivity : BaseActivity<ActivityChangeNickBinding>() {
         tb_change_name.setNavigationOnClickListener { finish() }
         binding.nick = intent.getStringExtra("nick")
 
-        et_nick.setOnEditorActionListener { v, actionId, event ->
-            if (actionId == EditorInfo.IME_ACTION_DONE) {
-                viewModel.changeNick()
-                true
-            } else false
-        }
+        et_nick.setEditorActionListener(EditorInfo.IME_ACTION_DONE) { viewModel.changeNick() }
 
         viewModel.finishActivityEvent.observe(this, Observer { finish() })
 

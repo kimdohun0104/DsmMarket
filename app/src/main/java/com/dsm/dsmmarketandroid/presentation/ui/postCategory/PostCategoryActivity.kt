@@ -6,8 +6,8 @@ import android.os.Bundle
 import androidx.lifecycle.Observer
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.ActivityPostCategoryBinding
+import com.dsm.dsmmarketandroid.presentation.base.BaseActivity
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.PostCategoryListAdapter
-import com.dsm.dsmmarketandroid.presentation.ui.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_post_category.*
 import org.jetbrains.anko.toast
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -32,10 +32,11 @@ class PostCategoryActivity : BaseActivity<ActivityPostCategoryBinding>() {
         viewModel.serverErrorEvent.observe(this, Observer { toast(getString(R.string.fail_server_error)) })
 
         viewModel.selectedCategory.observe(this, Observer {
-            val resultIntent = Intent()
-            resultIntent.putExtra("category", it)
-            setResult(Activity.RESULT_OK, resultIntent)
-            finish()
+            Intent().apply {
+                putExtra("category", it)
+                setResult(Activity.RESULT_OK, this)
+                finish()
+            }
         })
 
         binding.viewModel = viewModel

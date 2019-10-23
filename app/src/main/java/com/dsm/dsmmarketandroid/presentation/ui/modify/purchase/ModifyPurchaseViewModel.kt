@@ -8,6 +8,7 @@ import com.dsm.dsmmarketandroid.presentation.base.BaseViewModel
 import com.dsm.dsmmarketandroid.presentation.mapper.PurchaseDetailModelMapper
 import com.dsm.dsmmarketandroid.presentation.util.ListLiveData
 import com.dsm.dsmmarketandroid.presentation.util.SingleLiveEvent
+import com.dsm.dsmmarketandroid.presentation.util.isValueBlank
 
 class ModifyPurchaseViewModel(
     private val getPurchaseDetailUseCase: GetPurchaseDetailUseCase,
@@ -24,8 +25,6 @@ class ModifyPurchaseViewModel(
     val finishActivityEvent = SingleLiveEvent<Any>()
 
     val toastServerErrorEvent = SingleLiveEvent<Any>()
-
-    private fun MutableLiveData<String>.isValueBlank() = this.value.isNullOrBlank()
 
     private fun isBlankExist() = title.isValueBlank() || price.isValueBlank()
         || content.isValueBlank() || category.isValueBlank()
@@ -69,5 +68,9 @@ class ModifyPurchaseViewModel(
                 toastServerErrorEvent.call()
             })
         )
+    }
+
+    fun setCategory(category: String) {
+        this.category.value = category
     }
 }

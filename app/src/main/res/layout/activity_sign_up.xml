@@ -19,13 +19,13 @@
             style="@style/ToolBarStyle.Event"
             android:layout_width="0dp"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/white"
+            android:background="@color/colorWhite"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:navigationIcon="@drawable/ic_back_black"
             app:title="@string/sign_up"
-            app:titleTextColor="@color/black" />
+            app:titleTextColor="@color/colorBlack" />
 
         <View
             android:layout_width="0dp"
@@ -62,7 +62,7 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_logo">
 
-            <com.dsm.dsmmarketandroid.custom.MeasuredViewPager
+            <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/vp_sign_up"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -70,21 +70,6 @@
                 app:layout_constraintLeft_toLeftOf="@id/cl_parent"
                 app:layout_constraintRight_toRightOf="@id/cl_parent"
                 app:layout_constraintTop_toTopOf="@id/cl_parent" />
-
-            <com.pm10.library.CircleIndicator
-                android:id="@+id/ci_sign_up"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                app:layout_constraintLeft_toLeftOf="@id/vp_sign_up"
-                app:layout_constraintRight_toRightOf="@id/vp_sign_up"
-                app:layout_constraintTop_toBottomOf="@id/vp_sign_up"
-                app:p_defaultColor="@color/white"
-                app:p_gap="18dp"
-                app:p_radius="4dp"
-                app:p_selectedColor="@color/colorPrimary"
-                app:p_strokeColor="@color/colorPrimary"
-                app:p_strokeWidth="2dp" />
 
             <Button
                 android:id="@+id/btn_sign_up"
@@ -94,12 +79,12 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="25dp"
                 android:text="@string/sign_up"
-                android:textColor="@color/white"
+                android:textColor="@color/colorWhite"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintLeft_toLeftOf="@id/cl_parent"
                 app:layout_constraintRight_toRightOf="@id/cl_parent"
-                app:layout_constraintTop_toBottomOf="@id/ci_sign_up"
+                app:layout_constraintTop_toBottomOf="@id/vp_sign_up"
                 android:background="@{viewModel.isSignUpEnable ? @drawable/bg_primary_rounded : @drawable/bg_grey_rounded}"
                 android:clickable="@{viewModel.isSignUpEnable}"
                 android:onClick="@{() -> viewModel.signUp()}"/>

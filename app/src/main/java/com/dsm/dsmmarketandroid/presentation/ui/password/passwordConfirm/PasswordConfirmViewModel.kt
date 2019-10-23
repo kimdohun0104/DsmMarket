@@ -27,11 +27,10 @@ class PasswordConfirmViewModel(private val confirmPasswordUseCase: ConfirmPasswo
                     intentChangePassword.value = it
                     finishActivityEvent.call()
                 }, {
-                    if (it is HttpException) {
-                        if (it.code() == 401)
-                            toastInvalidPasswordEvent.call()
-                        else toastServerErrorEvent.call()
-                    } else toastServerErrorEvent.call()
+                    if (it is HttpException && it.code() == 401)
+                        toastInvalidPasswordEvent.call()
+                    else
+                        toastServerErrorEvent.call()
                 })
         )
     }

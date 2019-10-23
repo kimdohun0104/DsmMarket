@@ -8,8 +8,6 @@ import androidx.databinding.BindingAdapter
 import androidx.databinding.BindingConversion
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.DetailImageListAdapter
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.ModifyImageListAdapter
 
@@ -54,7 +52,7 @@ object BindingUtil {
     @JvmStatic
     @BindingAdapter("bind:image")
     fun bindImage(view: ImageView, value: String?) {
-        value?.let { Glide.with(view).load(it).placeholder(R.drawable.image_placeholder).error(R.drawable.image_error).into(view) }
+        value?.let { GlideApp.with(view).load(it).into(view) }
     }
 
     @JvmStatic

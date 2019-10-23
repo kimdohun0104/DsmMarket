@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.dsm.domain.usecase.ChangePasswordUseCase
 import com.dsm.dsmmarketandroid.presentation.base.BaseViewModel
 import com.dsm.dsmmarketandroid.presentation.util.SingleLiveEvent
+import com.dsm.dsmmarketandroid.presentation.util.isValueBlank
 
 class ChangePasswordViewModel(
     private val changePasswordUseCase: ChangePasswordUseCase
@@ -14,8 +15,8 @@ class ChangePasswordViewModel(
     val reType = MutableLiveData<String>()
 
     val isChangePasswordEnable = MediatorLiveData<Boolean>().apply {
-        addSource(newPassword) { value = !newPassword.value.isNullOrBlank() && !reType.value.isNullOrBlank() }
-        addSource(reType) { value = !newPassword.value.isNullOrBlank() && !reType.value.isNullOrBlank() }
+        addSource(newPassword) { value = !newPassword.isValueBlank() && !reType.isValueBlank() }
+        addSource(reType) { value = !newPassword.isValueBlank()&& !reType.isValueBlank() }
         value = false
     }
 
@@ -39,12 +40,11 @@ class ChangePasswordViewModel(
                     "authCode" to authCode,
                     "password" to newPassword.value
                 )
-            )
-                .subscribe({
-                    finishActivityEvent.call()
-                }, {
-                    toastServerErrorEvent.call()
-                })
+            ).subscribe({
+                finishActivityEvent.call()
+            }, {
+                toastServerErrorEvent.call()
+            })
         )
     }
 }

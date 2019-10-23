@@ -6,8 +6,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.FragmentInterestPurchaseBinding
-import com.dsm.dsmmarketandroid.presentation.ui.adapter.InterestPurchaseListAdapter
-import com.dsm.dsmmarketandroid.presentation.ui.base.BaseFragment
+import com.dsm.dsmmarketandroid.presentation.base.BaseFragment
+import com.dsm.dsmmarketandroid.presentation.ui.adapter.InterestListAdapter
+import com.dsm.dsmmarketandroid.presentation.util.ProductType
 import kotlinx.android.synthetic.main.fragment_interest_purchase.*
 
 class InterestPurchaseFragment : BaseFragment<FragmentInterestPurchaseBinding>() {
@@ -19,7 +20,7 @@ class InterestPurchaseFragment : BaseFragment<FragmentInterestPurchaseBinding>()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = InterestPurchaseListAdapter(activity!!)
+        val adapter = InterestListAdapter(ProductType.PURCHASE)
         rv_interest_purchase.adapter = adapter
 
         srl_interest_purchase.setOnRefreshListener { viewModel.getInterestPurchase() }

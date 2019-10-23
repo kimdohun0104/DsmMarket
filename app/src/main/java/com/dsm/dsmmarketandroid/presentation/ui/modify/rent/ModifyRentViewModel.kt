@@ -7,6 +7,7 @@ import com.dsm.domain.usecase.ModifyRentUseCase
 import com.dsm.dsmmarketandroid.presentation.base.BaseViewModel
 import com.dsm.dsmmarketandroid.presentation.mapper.RentDetailModelMapper
 import com.dsm.dsmmarketandroid.presentation.util.SingleLiveEvent
+import com.dsm.dsmmarketandroid.presentation.util.isValueBlank
 
 class ModifyRentViewModel(
     private val getRentDetailUseCase: GetRentDetailUseCase,
@@ -25,8 +26,6 @@ class ModifyRentViewModel(
     val finishActivityEvent = SingleLiveEvent<Any>()
 
     val toastServerErrorEvent = SingleLiveEvent<Any>()
-
-    private fun MutableLiveData<String>.isValueBlank() = this.value.isNullOrBlank()
 
     private fun isBlankExist() = title.isValueBlank() || price.isValueBlank()
         || photo.value == null || content.isValueBlank() || category.isValueBlank()
@@ -91,5 +90,9 @@ class ModifyRentViewModel(
 
     fun selectPriceUnit(unit: Int) {
         this.unit.value = unit.toString()
+    }
+
+    fun setCategory(category: String) {
+        this.category.value = category
     }
 }

@@ -1,4 +1,4 @@
-package com.dsm.dsmmarketandroid.presentation.ui.base
+package com.dsm.dsmmarketandroid.presentation.base
 
 import android.os.Bundle
 import android.view.LayoutInflater

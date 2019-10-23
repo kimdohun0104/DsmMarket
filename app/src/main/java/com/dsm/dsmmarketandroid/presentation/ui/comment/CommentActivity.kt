@@ -6,9 +6,9 @@ import android.view.MenuItem
 import androidx.lifecycle.Observer
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.ActivityCommentBinding
+import com.dsm.dsmmarketandroid.presentation.base.BaseActivity
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.CommentListAdapter
 import com.dsm.dsmmarketandroid.presentation.ui.addComment.AddCommentActivity
-import com.dsm.dsmmarketandroid.presentation.ui.base.BaseActivity
 import com.dsm.dsmmarketandroid.presentation.ui.report.ReportCommentDialog
 import kotlinx.android.synthetic.main.activity_comment.*
 import org.jetbrains.anko.startActivity
@@ -41,13 +41,14 @@ class CommentActivity : BaseActivity<ActivityCommentBinding>() {
         viewModel.toastServerErrorEvent.observe(this, Observer { toast(getString(R.string.fail_server_error)) })
 
         viewModel.dialogReportComment.observe(this, Observer {
-            val args = Bundle()
-            args.putInt("post_id", postId)
-            args.putInt("type", type)
-            args.putString("nick", it)
-            val fragment = ReportCommentDialog()
-            fragment.arguments = args
-            fragment.show(supportFragmentManager, "")
+            ReportCommentDialog().apply {
+                arguments = Bundle().apply {
+                    putInt("post_id", postId)
+                    putInt("type", type)
+                    putString("nick", it)
+                }
+                show(supportFragmentManager, "")
+            }
         })
 
         viewModel.hideRefreshEvent.observe(this, Observer { srl_comment.isRefreshing = false })

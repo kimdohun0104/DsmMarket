@@ -6,8 +6,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.FragmentRecentRentBinding
+import com.dsm.dsmmarketandroid.presentation.base.BaseFragment
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.RecentListAdapter
-import com.dsm.dsmmarketandroid.presentation.ui.base.BaseFragment
+import com.dsm.dsmmarketandroid.presentation.util.ProductType
 import kotlinx.android.synthetic.main.fragment_recent_rent.*
 
 class RecentRentFragment : BaseFragment<FragmentRecentRentBinding>() {
@@ -19,7 +20,7 @@ class RecentRentFragment : BaseFragment<FragmentRecentRentBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = RecentListAdapter(1, activity!!)
+        val adapter = RecentListAdapter(ProductType.RENT)
         rv_recent_rent.adapter = adapter
 
         viewModel.rentList.observe(this, Observer { adapter.setItems(it) })

@@ -1,4 +1,4 @@
-package com.dsm.dsmmarketandroid.presentation.ui.rent
+package com.dsm.dsmmarketandroid.presentation.ui.rentList
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -10,9 +10,8 @@ import com.dsm.data.paging.rent.RentDataFactory
 import com.dsm.dsmmarketandroid.presentation.base.BaseViewModel
 import com.dsm.dsmmarketandroid.presentation.mapper.ProductModelMapper
 import com.dsm.dsmmarketandroid.presentation.model.ProductModel
-import java.util.concurrent.Executors
 
-class RentViewModel(
+class RentListViewModel(
     rentDataFactory: RentDataFactory,
     productModelMapper: ProductModelMapper
 ) : BaseViewModel() {
@@ -23,7 +22,6 @@ class RentViewModel(
     val intentRentDetail = MutableLiveData<Int>()
 
     init {
-        val executor = Executors.newFixedThreadPool(5)
         val pagedListConfig = PagedList.Config.Builder()
             .setEnablePlaceholders(false)
             .setInitialLoadSizeHint(20)
@@ -33,9 +31,7 @@ class RentViewModel(
         val rentModelDataFactory = rentDataFactory.mapByPage(productModelMapper::mapFrom)
         networkState = Transformations.switchMap(rentDataFactory.mutableLiveData) { it.networkState }
 
-        rentListItems = LivePagedListBuilder(rentModelDataFactory, pagedListConfig)
-            .setFetchExecutor(executor)
-            .build()
+        rentListItems = LivePagedListBuilder(rentModelDataFactory, pagedListConfig).build()
     }
 
     fun refreshList() {
