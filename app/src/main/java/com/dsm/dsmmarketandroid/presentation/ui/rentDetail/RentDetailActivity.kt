@@ -15,6 +15,7 @@ import com.dsm.dsmmarketandroid.presentation.ui.chat.ChatActivity
 import com.dsm.dsmmarketandroid.presentation.ui.comment.CommentActivity
 import com.dsm.dsmmarketandroid.presentation.ui.rentImage.RentImageActivity
 import com.dsm.dsmmarketandroid.presentation.ui.report.ReportPostDialog
+import com.dsm.dsmmarketandroid.presentation.util.ProductType
 import kotlinx.android.synthetic.main.activity_rent_detail.*
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
@@ -38,14 +39,14 @@ class RentDetailActivity : BaseActivity<ActivityRentDetailBinding>() {
             overflowIcon = ContextCompat.getDrawable(this@RentDetailActivity, R.drawable.ic_menu)
         }
 
-        ll_comment.setOnClickListener { startActivity<CommentActivity>("post_id" to postId, "type" to 1) }
+        ll_comment.setOnClickListener { startActivity<CommentActivity>("post_id" to postId, "type" to ProductType.RENT) }
 
         iv_rent_image.setOnClickListener { startActivity<RentImageActivity>("post_id" to postId) }
 
         btn_deal_with_chat.setOnClickListener { viewModel.createRoom(postId) }
 
-        val relatedListAdapter = RecommendListAdapter(this, 1)
-        (rv_related.layoutManager as LinearLayoutManager).orientation = LinearLayoutManager.HORIZONTAL
+       val relatedListAdapter = RecommendListAdapter(ProductType.RENT)
+       (rv_related.layoutManager as LinearLayoutManager).orientation = LinearLayoutManager.HORIZONTAL
         rv_related.adapter = relatedListAdapter
 
         viewModel.getRentDetail(postId)
@@ -79,7 +80,7 @@ class RentDetailActivity : BaseActivity<ActivityRentDetailBinding>() {
                 ReportPostDialog().apply {
                     arguments = Bundle().apply {
                         putInt("post_id", postId)
-                        putInt("type", 1)
+                        putInt("type", ProductType.RENT)
                     }
                     show(supportFragmentManager, "")
                 }

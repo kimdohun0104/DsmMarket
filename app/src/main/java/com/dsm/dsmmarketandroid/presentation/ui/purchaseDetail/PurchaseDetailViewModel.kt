@@ -7,6 +7,7 @@ import com.dsm.dsmmarketandroid.presentation.mapper.PurchaseDetailModelMapper
 import com.dsm.dsmmarketandroid.presentation.mapper.RecommendModelMapper
 import com.dsm.dsmmarketandroid.presentation.model.PurchaseDetailModel
 import com.dsm.dsmmarketandroid.presentation.model.RecommendModel
+import com.dsm.dsmmarketandroid.presentation.util.ProductType
 import com.dsm.dsmmarketandroid.presentation.util.SingleLiveEvent
 import io.reactivex.android.schedulers.AndroidSchedulers
 import retrofit2.HttpException
@@ -61,7 +62,7 @@ class PurchaseDetailViewModel(
     fun onClickInterest(postId: Int) {
         if (isInterest.value!!) {
             addDisposable(
-                unInterestUseCase.create(UnInterestUseCase.Params(postId, 0))
+                unInterestUseCase.create(UnInterestUseCase.Params(postId, ProductType.PURCHASE))
                     .subscribe({
                         isInterest.value = false
                         toastUnInterestEvent.call()
@@ -71,7 +72,7 @@ class PurchaseDetailViewModel(
             )
         } else {
             addDisposable(
-                interestUseCase.create(InterestUseCase.Params(postId, 0))
+                interestUseCase.create(InterestUseCase.Params(postId, ProductType.PURCHASE))
                     .subscribe({
                         isInterest.value = true
                         toastInterestEvent.call()
@@ -95,7 +96,7 @@ class PurchaseDetailViewModel(
 
     fun getRelatedProduct(postId: Int) {
         addDisposable(
-            getRelatedUseCase.create(GetRelatedUseCase.Params(postId, 0))
+            getRelatedUseCase.create(GetRelatedUseCase.Params(postId, ProductType.PURCHASE))
                 .subscribe({
                     relatedList.value = recommendModelMapper.mapFrom(it)
                 }, {

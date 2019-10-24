@@ -7,6 +7,7 @@ import com.dsm.dsmmarketandroid.presentation.mapper.RecommendModelMapper
 import com.dsm.dsmmarketandroid.presentation.mapper.RentDetailModelMapper
 import com.dsm.dsmmarketandroid.presentation.model.RecommendModel
 import com.dsm.dsmmarketandroid.presentation.model.RentDetailModel
+import com.dsm.dsmmarketandroid.presentation.util.ProductType
 import com.dsm.dsmmarketandroid.presentation.util.SingleLiveEvent
 import io.reactivex.android.schedulers.AndroidSchedulers
 import retrofit2.HttpException
@@ -55,7 +56,7 @@ class RentDetailViewModel(
     fun onClickInterest(postId: Int) {
         if (isInterest.value!!) {
             addDisposable(
-                unInterestUseCase.create(UnInterestUseCase.Params(postId, 1))
+                unInterestUseCase.create(UnInterestUseCase.Params(postId, ProductType.RENT))
                     .subscribe({
                         isInterest.value = false
                         toastUnInterestEvent.call()
@@ -65,7 +66,7 @@ class RentDetailViewModel(
             )
         } else {
             addDisposable(
-                interestUseCase.create(InterestUseCase.Params(postId, 1))
+                interestUseCase.create(InterestUseCase.Params(postId, ProductType.RENT))
                     .subscribe({
                         isInterest.value = true
                         toastInterestEvent.call()
@@ -78,7 +79,7 @@ class RentDetailViewModel(
 
     fun getRelatedProduct(postId: Int) {
         addDisposable(
-            getRelatedUseCase.create(GetRelatedUseCase.Params(postId, 1))
+            getRelatedUseCase.create(GetRelatedUseCase.Params(postId, ProductType.RENT))
                 .subscribe({
                     relatedList.value = recommendModelMapper.mapFrom(it)
                 }, {
