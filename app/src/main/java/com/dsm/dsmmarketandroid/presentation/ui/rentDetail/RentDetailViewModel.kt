@@ -1,10 +1,7 @@
 package com.dsm.dsmmarketandroid.presentation.ui.rentDetail
 
 import androidx.lifecycle.MutableLiveData
-import com.dsm.domain.usecase.GetRelatedUseCase
-import com.dsm.domain.usecase.GetRentDetailUseCase
-import com.dsm.domain.usecase.InterestUseCase
-import com.dsm.domain.usecase.UnInterestUseCase
+import com.dsm.domain.usecase.*
 import com.dsm.dsmmarketandroid.presentation.base.BaseViewModel
 import com.dsm.dsmmarketandroid.presentation.mapper.RecommendModelMapper
 import com.dsm.dsmmarketandroid.presentation.mapper.RentDetailModelMapper
@@ -21,6 +18,7 @@ class RentDetailViewModel(
     private val interestUseCase: InterestUseCase,
     private val unInterestUseCase: UnInterestUseCase,
     private val getRelatedUseCase: GetRelatedUseCase,
+    private val createRoomUseCase: CreateRoomUseCase,
     private val recommendModelMapper: RecommendModelMapper,
     private val rentDetailModelMapper: RentDetailModelMapper
 ) : BaseViewModel() {
@@ -34,6 +32,8 @@ class RentDetailViewModel(
 
     val toastInterestEvent = SingleLiveEvent<Any>()
     val toastUnInterestEvent = SingleLiveEvent<Any>()
+
+    val startChatActivity = MutableLiveData<String>()
 
     fun getRentDetail(postId: Int) {
         addDisposable(
@@ -82,6 +82,17 @@ class RentDetailViewModel(
             getRelatedUseCase.create(GetRelatedUseCase.Params(postId, ProductType.RENT))
                 .subscribe({
                     relatedList.value = recommendModelMapper.mapFrom(it)
+                }, {
+                    toastServerErrorEvent.call()
+                })
+        )
+    }
+
+    fun createRoom(postId: Int) {
+        addDisposable(
+            createRoomUseCase.create(CreateRoomUseCase.Params(postId, 1))
+                .subscribe({
+                    startChatActivity.value = it
                 }, {
                     toastServerErrorEvent.call()
                 })

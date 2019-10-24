@@ -123,7 +123,8 @@
         <activity
             android:name=".presentation.ui.login.LoginActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/WhiteAppTheme" />
+            android:theme="@style/WhiteAppTheme"
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".presentation.ui.start.StartActivity"
             android:screenOrientation="portrait"
@@ -131,7 +132,8 @@
         <activity
             android:name=".presentation.ui.signUp.SignUpActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/WhiteAppTheme" />
+            android:theme="@style/WhiteAppTheme"
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".presentation.ui.main.MainActivity"
             android:screenOrientation="portrait" />

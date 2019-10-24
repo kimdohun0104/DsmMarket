@@ -28,4 +28,6 @@ val repositoryModule = module {
     factory<ReportRepository> { ReportRepositoryImpl(get()) }
 
     factory<RecommendRepository> { RecommendRepositoryImpl(get()) }
+
+    factory<ChatRepository> { ChatRepositoryImpl(get()) }
 }

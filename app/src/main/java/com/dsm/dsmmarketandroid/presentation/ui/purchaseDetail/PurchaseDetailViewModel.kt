@@ -19,6 +19,7 @@ class PurchaseDetailViewModel(
     private val unInterestUseCase: UnInterestUseCase,
     private val getRecommendUseCase: GetRecommendUseCase,
     private val getRelatedUseCase: GetRelatedUseCase,
+    private val createRoomUseCase: CreateRoomUseCase,
     private val purchaseDetailModelMapper: PurchaseDetailModelMapper,
     private val recommendModelMapper: RecommendModelMapper
 ) : BaseViewModel() {
@@ -35,6 +36,8 @@ class PurchaseDetailViewModel(
 
     val toastInterestEvent = SingleLiveEvent<Any>()
     val toastUnInterestEvent = SingleLiveEvent<Any>()
+
+    val startChatActivity = MutableLiveData<String>()
 
     fun getPurchaseDetail(postId: Int) {
         addDisposable(
@@ -96,6 +99,17 @@ class PurchaseDetailViewModel(
             getRelatedUseCase.create(GetRelatedUseCase.Params(postId, ProductType.PURCHASE))
                 .subscribe({
                     relatedList.value = recommendModelMapper.mapFrom(it)
+                }, {
+                    toastServerErrorEvent.call()
+                })
+        )
+    }
+
+    fun createRoom(postId: Int) {
+        addDisposable(
+            createRoomUseCase.create(CreateRoomUseCase.Params(postId, 0))
+                .subscribe({
+                    startChatActivity.value = it
                 }, {
                     toastServerErrorEvent.call()
                 })
