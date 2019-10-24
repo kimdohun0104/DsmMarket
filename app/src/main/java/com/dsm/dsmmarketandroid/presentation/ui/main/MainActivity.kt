@@ -55,8 +55,6 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
-
-        toast("성공했네요!")
     }
 
     private fun switchFragment(index: Int) {
