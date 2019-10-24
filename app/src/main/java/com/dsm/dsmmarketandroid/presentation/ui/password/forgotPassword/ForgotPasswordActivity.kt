@@ -21,13 +21,11 @@ class ForgotPasswordActivity : BaseActivity<ActivityForgotPasswordBinding>() {
         super.onCreate(savedInstanceState)
         tb_forgot_password.setNavigationOnClickListener { finish() }
 
-        et_email.setEditorActionListener(EditorInfo.IME_ACTION_DONE) { viewModel.sendTempPassword() }
+        et_email.setEditorActionListener(EditorInfo.IME_ACTION_DONE) { if (btn_find_password.isClickable) viewModel.sendTempPassword() }
 
         viewModel.finishActivityEvent.observe(this, Observer { finish() })
 
-        viewModel.toastSendTempPasswordSuccess.observe(this, Observer { toast(getString(R.string.send_temp_password_success)) })
-
-        viewModel.toastServerError.observe(this, Observer { toast(getString(R.string.fail_server_error)) })
+        viewModel.toastEvent.observe(this, Observer { toast(it) })
 
         binding.viewModel = viewModel
     }

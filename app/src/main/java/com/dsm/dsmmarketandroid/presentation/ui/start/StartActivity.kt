@@ -19,15 +19,17 @@ class StartActivity : AppCompatActivity() {
         val ivLogo = findViewById<View>(R.id.iv_logo)
 
         btn_login.setOnClickListener {
-            val options = ActivityOptions.makeSceneTransitionAnimation(this, ivLogo, "logo")
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent, options.toBundle())
+            startActivity(
+                Intent(this, LoginActivity::class.java),
+                ActivityOptions.makeSceneTransitionAnimation(this, ivLogo, "logo").toBundle()
+            )
         }
 
         btn_sign_up.setOnClickListener {
-            val options = ActivityOptions.makeSceneTransitionAnimation(this, ivLogo, "logo")
-            val intent = Intent(this, SignUpActivity::class.java)
-            startActivity(intent, options.toBundle())
+            startActivity(
+                Intent(this, SignUpActivity::class.java),
+                ActivityOptions.makeSceneTransitionAnimation(this, ivLogo, "logo").toBundle()
+            )
         }
     }
 }
