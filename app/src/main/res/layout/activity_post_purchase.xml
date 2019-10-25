@@ -7,10 +7,6 @@
             name="viewModel"
             type="com.dsm.dsmmarketandroid.presentation.ui.post.postPurchase.PostPurchaseViewModel" />
 
-        <variable
-            name="isImageSelectVisible"
-            type="Boolean" />
-
         <import type="android.view.View" />
 
         <import type="com.dsm.dsmmarketandroid.presentation.util.BindingUtil" />
@@ -168,7 +164,6 @@
             android:layout_height="42dp"
             android:layout_marginTop="13dp"
             android:src="@drawable/ic_select_picture"
-            android:visibility="@{isImageSelectVisible ? View.VISIBLE : View.INVISIBLE}"
             app:layout_constraintLeft_toLeftOf="@id/tv_picture"
             app:layout_constraintTop_toBottomOf="@id/tv_picture" />
 

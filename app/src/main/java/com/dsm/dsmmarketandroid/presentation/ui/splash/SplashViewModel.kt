@@ -18,7 +18,7 @@ class SplashViewModel(private val autoLoginUseCase: AutoLoginUseCase) : BaseView
             autoLoginUseCase.create(Unit)
                 .delay(1, TimeUnit.SECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnNext { finishActivityEvent.call() }
+                .doFinally { finishActivityEvent.call() }
                 .subscribe({
                     intentMainActivityEvent.call()
                 }, {

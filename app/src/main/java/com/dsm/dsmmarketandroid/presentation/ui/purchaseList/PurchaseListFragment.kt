@@ -16,10 +16,11 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
 class PurchaseListFragment : BaseFragment<FragmentPurchaseListBinding>() {
+
     override val layoutResourceId: Int
         get() = R.layout.fragment_purchase_list
 
-    private val search: String by lazy { arguments?.getString("search") ?: "" }
+    private val search: String by lazy { arguments?.getString("search") ?: ""  }
     private val category: String by lazy { arguments?.getString("category") ?: "" }
     private val purchaseDataFactory: PurchaseDataFactory by inject { parametersOf(search, category) }
     private val viewModel: PurchaseListViewModel by viewModel { parametersOf(purchaseDataFactory) }
@@ -35,11 +36,11 @@ class PurchaseListFragment : BaseFragment<FragmentPurchaseListBinding>() {
         val adapter = ProductListAdapter(ProductType.PURCHASE)
         rv_purchase_list.adapter = adapter
 
-        viewModel.purchaseListItems.observe(this, Observer { adapter.submitList(it) })
-
         viewModel.networkState.observe(this, Observer {
             if (it == NetworkState.LOADED) pb_loading.visibility = View.GONE
             adapter.setNetworkState(it)
         })
+
+        viewModel.purchaseItems.observe(this, Observer { adapter.submitList(it) })
     }
 }

@@ -9,15 +9,14 @@ import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.FragmentRentListBinding
 import com.dsm.dsmmarketandroid.presentation.base.BaseFragment
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.ProductListAdapter
-import com.dsm.dsmmarketandroid.presentation.ui.rentDetail.RentDetailActivity
 import com.dsm.dsmmarketandroid.presentation.util.ProductType
 import kotlinx.android.synthetic.main.fragment_rent_list.*
-import org.jetbrains.anko.support.v4.startActivity
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
 class RentListFragment : BaseFragment<FragmentRentListBinding>() {
+
     override val layoutResourceId: Int
         get() = R.layout.fragment_rent_list
 
@@ -37,13 +36,11 @@ class RentListFragment : BaseFragment<FragmentRentListBinding>() {
         val adapter = ProductListAdapter(ProductType.RENT)
         rv_rent_list.adapter = adapter
 
-        viewModel.rentListItems.observe(this, Observer { adapter.submitList(it) })
-
         viewModel.networkState.observe(this, Observer {
             if (it == NetworkState.LOADED) pb_loading.visibility = View.GONE
             adapter.setNetworkState(it)
         })
 
-        viewModel.intentRentDetail.observe(this, Observer { startActivity<RentDetailActivity>("post_id" to it) })
+        viewModel.rentItems.observe(this, Observer { adapter.submitList(it) })
     }
 }

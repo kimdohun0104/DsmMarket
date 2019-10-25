@@ -62,7 +62,7 @@ class PurchaseDetailActivity : BaseActivity<ActivityPurchaseDetailBinding>() {
 
         viewModel.getPurchaseDetail(postId)
         viewModel.getRelatedProduct(postId)
-//        viewModel.getRecommendProduct(postId)
+        viewModel.getRecommendProduct(postId)
 
         viewModel.toastNonExistEvent.observe(this, Observer { toast(getString(R.string.fail_non_exist_post)) })
 
