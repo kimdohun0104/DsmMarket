@@ -4,9 +4,9 @@ import io.reactivex.Flowable
 import retrofit2.Response
 
 interface PasswordDataSource {
-    fun confirmPassword(password: String): Flowable<Response<Map<String, String>>>
+    fun confirmPassword(password: String): Flowable<Response<Unit>>
 
-    fun changePassword(params: Any): Flowable<Response<Unit>>
+    fun changePassword(password: String): Flowable<Response<Unit>>
 
     fun sendTempPassword(email: String): Flowable<Response<Unit>>
 }

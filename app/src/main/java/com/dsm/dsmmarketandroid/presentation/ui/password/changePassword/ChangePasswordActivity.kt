@@ -13,6 +13,7 @@ import org.jetbrains.anko.toast
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ChangePasswordActivity : BaseActivity<ActivityChangePasswordBinding>() {
+
     override val layoutResourceId: Int
         get() = R.layout.activity_change_password
 
@@ -21,19 +22,13 @@ class ChangePasswordActivity : BaseActivity<ActivityChangePasswordBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         tb_change_password.setNavigationOnClickListener { finish() }
-        val authCode = intent.getIntExtra("authCode", 0)
-        val email = intent.getStringExtra("email") ?: ""
-        binding.authCode = authCode
-        binding.email = email
 
         val rotateAnim = AnimationUtils.loadAnimation(this, R.anim.anim_rotate)
         view_ring.startAnimation(rotateAnim)
 
-        et_new_password_confirm.setEditorActionListener(EditorInfo.IME_ACTION_DONE) { viewModel.changePassword(email, authCode) }
+        et_new_password_confirm.setEditorActionListener(EditorInfo.IME_ACTION_DONE) { if (btn_change_password.isClickable) viewModel.changePassword() }
 
-        viewModel.toastPasswordDiffEvent.observe(this, Observer { toast(getString(R.string.fail_diff_password)) })
-
-        viewModel.toastServerErrorEvent.observe(this, Observer { toast(getString(R.string.fail_server_error)) })
+        viewModel.toastEvent.observe(this, Observer { toast(it) })
 
         viewModel.finishActivityEvent.observe(this, Observer { finish() })
 

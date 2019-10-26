@@ -16,13 +16,14 @@ interface Api {
     fun autoLogin(): Flowable<Response<Unit>>
 
     @GET("auth/login")
-    fun confirmPassword(@Query("password") password: String): Flowable<Response<Map<String, String>>>
+    fun confirmPassword(@Query("password") password: String): Flowable<Response<Unit>>
 
     @GET("auth/mail")
     fun sendTempPassword(@Query("email") email: String): Flowable<Response<Unit>>
 
+    @FormUrlEncoded
     @PATCH("account/password")
-    fun changePassword(@Body params: Any): Flowable<Response<Unit>>
+    fun changePassword(@Field("password") password: String): Flowable<Response<Unit>>
 
     @POST("account/join")
     fun signUp(@Body body: Any): Flowable<Response<Map<String, Int>>>

@@ -3,34 +3,32 @@ package com.dsm.dsmmarketandroid.presentation.ui.password.passwordConfirm
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import com.dsm.domain.usecase.ConfirmPasswordUseCase
+import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.base.BaseViewModel
 import com.dsm.dsmmarketandroid.presentation.util.SingleLiveEvent
 import retrofit2.HttpException
 
 class PasswordConfirmViewModel(private val confirmPasswordUseCase: ConfirmPasswordUseCase) : BaseViewModel() {
 
-    val originalPassword = MutableLiveData<String>().apply { value = "" }
+    val originalPassword = MutableLiveData<String>()
 
     val isConfirmEnable = Transformations.map(originalPassword) { it != "" }
 
-    val intentChangePassword = MutableLiveData<Pair<String, Int>>()
+    val intentChangePasswordEvent = SingleLiveEvent<Any>()
     val finishActivityEvent = SingleLiveEvent<Any>()
-    val toastInvalidPasswordEvent = SingleLiveEvent<Any>()
-    val toastServerErrorEvent = SingleLiveEvent<Any>()
+    val toastEvent = SingleLiveEvent<Int>()
 
     fun confirmPassword() {
-        if (!isConfirmEnable.value!!) return
-
         addDisposable(
             confirmPasswordUseCase.create(originalPassword.value!!)
                 .subscribe({
-                    intentChangePassword.value = it
+                    intentChangePasswordEvent.call()
                     finishActivityEvent.call()
                 }, {
                     if (it is HttpException && it.code() == 401)
-                        toastInvalidPasswordEvent.call()
+                        toastEvent.value = R.string.fail_diff_password
                     else
-                        toastServerErrorEvent.call()
+                        toastEvent.value = R.string.fail_server_error
                 })
         )
     }
