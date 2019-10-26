@@ -13,6 +13,7 @@ import org.jetbrains.anko.toast
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MyPostActivity : BaseActivity<ActivityMyPostBinding>() {
+
     override val layoutResourceId: Int
         get() = R.layout.activity_my_post
 
@@ -41,7 +42,7 @@ class MyPostActivity : BaseActivity<ActivityMyPostBinding>() {
             }
         }
 
-        viewModel.toastServerErrorEvent.observe(this, Observer { toast(getString(R.string.fail_server_error)) })
+        viewModel.toastEvent.observe(this, Observer { toast(it) })
 
         binding.viewModel
     }
