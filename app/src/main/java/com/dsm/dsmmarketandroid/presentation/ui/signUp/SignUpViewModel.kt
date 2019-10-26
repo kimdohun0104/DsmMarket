@@ -63,11 +63,10 @@ class SignUpViewModel(private val signUpUseCase: SignUpUseCase) : BaseViewModel(
                     "gender" to gender.value
                 )
             )
+                .doFinally { hideLoadingDialogEvent.call() }
                 .subscribe({
-                    hideLoadingDialogEvent.call()
                     finishActivityEvent.call()
                 }, {
-                    hideLoadingDialogEvent.call()
                     if (it is HttpException && it.code() == 403) {
                         val errorResponse = JSONObject(it.response()?.errorBody()?.string()!!)
                         if (errorResponse.has("errorCode")) {

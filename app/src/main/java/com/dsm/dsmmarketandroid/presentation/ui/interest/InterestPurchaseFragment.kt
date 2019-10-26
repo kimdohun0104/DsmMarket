@@ -12,6 +12,7 @@ import com.dsm.dsmmarketandroid.presentation.util.ProductType
 import kotlinx.android.synthetic.main.fragment_interest_purchase.*
 
 class InterestPurchaseFragment : BaseFragment<FragmentInterestPurchaseBinding>() {
+
     override val layoutResourceId: Int
         get() = R.layout.fragment_interest_purchase
 

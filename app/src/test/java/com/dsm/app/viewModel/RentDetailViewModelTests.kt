@@ -2,10 +2,7 @@ package com.dsm.app.viewModel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.dsm.domain.entity.Recommend
-import com.dsm.domain.usecase.GetRelatedUseCase
-import com.dsm.domain.usecase.GetRentDetailUseCase
-import com.dsm.domain.usecase.InterestUseCase
-import com.dsm.domain.usecase.UnInterestUseCase
+import com.dsm.domain.usecase.*
 import com.dsm.dsmmarketandroid.presentation.mapper.RecommendModelMapper
 import com.dsm.dsmmarketandroid.presentation.mapper.RentDetailModelMapper
 import com.dsm.dsmmarketandroid.presentation.ui.rentDetail.RentDetailViewModel
@@ -38,6 +35,8 @@ class RentDetailViewModelTests {
     @Mock
     private lateinit var unInterestUseCase: UnInterestUseCase
 
+    @Mock
+    private lateinit var createRoomUseCase: CreateRoomUseCase
 
     private val rentDetailModelMapper = RentDetailModelMapper()
     private val recommendModelMapper = RecommendModelMapper()
@@ -47,7 +46,7 @@ class RentDetailViewModelTests {
     @Before
     fun init() {
         MockitoAnnotations.initMocks(this)
-        viewModel = RentDetailViewModel(getRentDetailUseCase, interestUseCase, unInterestUseCase, getRelatedUseCase, recommendModelMapper, rentDetailModelMapper)
+        viewModel = RentDetailViewModel(getRentDetailUseCase, interestUseCase, unInterestUseCase, getRelatedUseCase, createRoomUseCase, recommendModelMapper, rentDetailModelMapper)
     }
 
     @Test

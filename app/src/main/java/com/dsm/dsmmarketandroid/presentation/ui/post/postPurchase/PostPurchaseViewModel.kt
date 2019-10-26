@@ -33,7 +33,7 @@ class PostPurchaseViewModel(private val postPurchaseUseCase: PostPurchaseUseCase
         addSource(price) { value = !isBlankExist() }
         addSource(content) { value = !isBlankExist() }
         addSource(imageList) { value = !isBlankExist() }
-        addSource(category) { value = isBlankExist() }
+        addSource(category) { value = !isBlankExist() }
     }
 
     val finishActivityEvent = SingleLiveEvent<Any>()

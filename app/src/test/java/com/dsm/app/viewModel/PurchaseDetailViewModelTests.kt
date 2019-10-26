@@ -38,6 +38,9 @@ class PurchaseDetailViewModelTests {
     @Mock
     private lateinit var getRelatedUseCase: GetRelatedUseCase
 
+    @Mock
+    private lateinit var createRoomUseCase: CreateRoomUseCase
+
     private val purchaseDetailModelMapper = PurchaseDetailModelMapper()
     private val recommendModelMapper = RecommendModelMapper()
 
@@ -46,7 +49,7 @@ class PurchaseDetailViewModelTests {
     @Before
     fun init() {
         MockitoAnnotations.initMocks(this)
-        viewModel = PurchaseDetailViewModel(getPurchaseDetailUseCase, interestUseCase, unInterestUseCase, getRecommendUseCase, getRelatedUseCase, purchaseDetailModelMapper, recommendModelMapper)
+        viewModel = PurchaseDetailViewModel(getPurchaseDetailUseCase, interestUseCase, unInterestUseCase, getRecommendUseCase, getRelatedUseCase, createRoomUseCase, purchaseDetailModelMapper, recommendModelMapper)
     }
 
     @Test
