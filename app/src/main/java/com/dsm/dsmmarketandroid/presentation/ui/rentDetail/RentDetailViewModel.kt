@@ -2,6 +2,7 @@ package com.dsm.dsmmarketandroid.presentation.ui.rentDetail
 
 import androidx.lifecycle.MutableLiveData
 import com.dsm.domain.usecase.*
+import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.base.BaseViewModel
 import com.dsm.dsmmarketandroid.presentation.mapper.RecommendModelMapper
 import com.dsm.dsmmarketandroid.presentation.mapper.RentDetailModelMapper
@@ -28,12 +29,8 @@ class RentDetailViewModel(
 
     val relatedList = MutableLiveData<List<RecommendModel>>()
 
-    val toastServerErrorEvent = SingleLiveEvent<Any>()
-
-    val toastInterestEvent = SingleLiveEvent<Any>()
-    val toastUnInterestEvent = SingleLiveEvent<Any>()
-
-    val startChatActivity = MutableLiveData<String>()
+    val toastEvent = SingleLiveEvent<Int>()
+    val startChatActivityEvent = SingleLiveEvent<Int>()
 
     fun getRentDetail(postId: Int) {
         addDisposable(
@@ -45,10 +42,10 @@ class RentDetailViewModel(
                     isInterest.value = it.isInterest
                     rentDetail.value = it
                 }, {
-                    if (it is HttpException) {
-                        if (it.code() == 410)
-                            toastServerErrorEvent.call()
-                    } else toastServerErrorEvent.call()
+                    if (it is HttpException && it.code() == 410)
+                        toastEvent.value = R.string.fail_non_exist_post
+                    else
+                        toastEvent.value = R.string.fail_server_error
                 })
         )
     }
@@ -59,9 +56,9 @@ class RentDetailViewModel(
                 unInterestUseCase.create(UnInterestUseCase.Params(postId, ProductType.RENT))
                     .subscribe({
                         isInterest.value = false
-                        toastUnInterestEvent.call()
+                        toastEvent.value = R.string.un_interest
                     }, {
-                        toastServerErrorEvent.call()
+                        toastEvent.value = R.string.fail_server_error
                     })
             )
         } else {
@@ -69,9 +66,9 @@ class RentDetailViewModel(
                 interestUseCase.create(InterestUseCase.Params(postId, ProductType.RENT))
                     .subscribe({
                         isInterest.value = true
-                        toastInterestEvent.call()
+                        toastEvent.value = R.string.interest
                     }, {
-                        toastServerErrorEvent.call()
+                        toastEvent.value = R.string.fail_server_error
                     })
             )
         }
@@ -80,10 +77,11 @@ class RentDetailViewModel(
     fun getRelatedProduct(postId: Int) {
         addDisposable(
             getRelatedUseCase.create(GetRelatedUseCase.Params(postId, ProductType.RENT))
+                .map(recommendModelMapper::mapFrom)
                 .subscribe({
-                    relatedList.value = recommendModelMapper.mapFrom(it)
+                    relatedList.value = it
                 }, {
-                    toastServerErrorEvent.call()
+                    toastEvent.value = R.string.fail_server_error
                 })
         )
     }
@@ -92,9 +90,9 @@ class RentDetailViewModel(
         addDisposable(
             createRoomUseCase.create(CreateRoomUseCase.Params(postId, 1))
                 .subscribe({
-                    startChatActivity.value = it
+                    startChatActivityEvent.value = it
                 }, {
-                    toastServerErrorEvent.call()
+                    toastEvent.value = R.string.fail_server_error
                 })
         )
     }

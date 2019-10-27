@@ -22,6 +22,7 @@ import org.jetbrains.anko.toast
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class RentDetailActivity : BaseActivity<ActivityRentDetailBinding>() {
+
     override val layoutResourceId: Int
         get() = R.layout.activity_rent_detail
 
@@ -57,13 +58,11 @@ class RentDetailActivity : BaseActivity<ActivityRentDetailBinding>() {
             else tb_rent_detail.menu[0].icon = getDrawable(R.drawable.ic_heart_white)
         })
 
-        viewModel.toastInterestEvent.observe(this, Observer { toast(getString(R.string.interest)) })
-
-        viewModel.toastUnInterestEvent.observe(this, Observer { toast(getString(R.string.un_interest)) })
-
         viewModel.relatedList.observe(this, Observer { relatedListAdapter.setItems(it) })
 
-        viewModel.startChatActivity.observe(this, Observer { startActivity<ChatActivity>("nameSpace" to it) })
+        viewModel.toastEvent.observe(this, Observer { toast(it) })
+
+        viewModel.startChatActivityEvent.observe(this, Observer { startActivity<ChatActivity>("roomId" to it) })
 
         binding.viewModel = viewModel
     }

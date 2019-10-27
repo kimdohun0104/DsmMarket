@@ -153,7 +153,7 @@ interface Api {
     fun createRoom(
         @Field("postId") postId: Int,
         @Field("type") type: Int
-    ): Flowable<Map<String, String>>
+    ): Flowable<Map<String, Int>>
 
     @GET("room")
     fun getChatRoom(): Flowable<ChatRoomListEntity>

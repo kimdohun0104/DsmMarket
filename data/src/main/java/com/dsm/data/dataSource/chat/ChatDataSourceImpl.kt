@@ -8,7 +8,7 @@ import io.reactivex.Flowable
 
 class ChatDataSourceImpl(private val api: Api) : ChatDataSource {
 
-    override fun createRoom(postId: Int, type: Int): Flowable<Map<String, String>> =
+    override fun createRoom(postId: Int, type: Int): Flowable<Map<String, Int>> =
         api.createRoom(postId, type).addSchedulers()
 
     override fun getChatRoom(): Flowable<ChatRoomListEntity> =

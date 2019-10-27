@@ -10,7 +10,7 @@ class ChatRepositoryImpl(private val chatDataSource: ChatDataSource) : ChatRepos
 
     private val chatRoomMapper = ChatRoomMapper()
 
-    override fun createRoom(postId: Int, type: Int): Flowable<String> =
+    override fun createRoom(postId: Int, type: Int): Flowable<Int> =
         chatDataSource.createRoom(postId, type).map { it["roomId"] }
 
     override fun getChatRoom(): Flowable<List<ChatRoom>> =

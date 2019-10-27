@@ -5,7 +5,7 @@ import io.reactivex.Flowable
 
 interface ChatRepository {
 
-    fun createRoom(postId: Int, type: Int): Flowable<String>
+    fun createRoom(postId: Int, type: Int): Flowable<Int>
 
     fun getChatRoom(): Flowable<List<ChatRoom>>
 }

@@ -6,7 +6,7 @@ import io.reactivex.Flowable
 
 interface ChatDataSource {
 
-    fun createRoom(postId: Int, type: Int): Flowable<Map<String, String>>
+    fun createRoom(postId: Int, type: Int): Flowable<Map<String, Int>>
 
     fun getChatRoom(): Flowable<ChatRoomListEntity>
 }
