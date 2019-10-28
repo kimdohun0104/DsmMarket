@@ -14,6 +14,7 @@ import org.jetbrains.anko.startActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SearchActivity : BaseActivity<ActivitySearchBinding>() {
+
     override val layoutResourceId: Int
         get() = R.layout.activity_search
 
@@ -24,10 +25,10 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
 
         ib_back.setOnClickListener { finish() }
 
+        et_search.setEditorActionListener(EditorInfo.IME_ACTION_SEARCH) { if (ib_search.isClickable) viewModel.search() }
+
         val adapter = SearchHistoryListAdapter(viewModel)
         rv_recent_search.adapter = adapter
-
-        et_search.setEditorActionListener(EditorInfo.IME_ACTION_SEARCH) { viewModel.search() }
 
         viewModel.getSearchHistory()
 

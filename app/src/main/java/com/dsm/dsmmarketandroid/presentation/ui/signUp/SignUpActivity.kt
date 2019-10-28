@@ -13,6 +13,7 @@ import org.jetbrains.anko.toast
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SignUpActivity : BaseActivity<ActivitySignUpBinding>() {
+
     override val layoutResourceId: Int
         get() = R.layout.activity_sign_up
 
@@ -26,21 +27,13 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() {
         vp_sign_up.adapter = SignUpPagerAdapter(supportFragmentManager, lifecycle)
         vp_sign_up.addItemDecoration(LinePagerIndicatorDecoration())
 
-        viewModel.toastEmailInvalidEvent.observe(this, Observer { toast(getString(R.string.fail_invalid_email)) })
-
-        viewModel.toastPasswordDiffEvent.observe(this, Observer { toast(getString(R.string.fail_diff_password)) })
+        viewModel.showLoadingDialogEvent.observe(this, Observer { LoadingDialog.show(supportFragmentManager) })
 
         viewModel.finishActivityEvent.observe(this, Observer { finish() })
 
-        viewModel.toastExistentEmailEvent.observe(this, Observer { toast(getString(R.string.fail_existent_email)) })
-
-        viewModel.toastExistentNameEvent.observe(this, Observer { toast(getString(R.string.fail_existent_nick)) })
-
-        viewModel.toastServerErrorEvent.observe(this, Observer { toast(getString(R.string.fail_server_error)) })
-
-        viewModel.showLoadingDialogEvent.observe(this, Observer { LoadingDialog.show(supportFragmentManager) })
-
         viewModel.hideLoadingDialogEvent.observe(this, Observer { LoadingDialog.hide() })
+
+        viewModel.toastEvent.observe(this, Observer { toast(it) })
 
         binding.viewModel = viewModel
     }

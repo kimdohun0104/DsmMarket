@@ -2,6 +2,7 @@ package com.dsm.dsmmarketandroid.presentation.ui.postCategory
 
 import androidx.lifecycle.MutableLiveData
 import com.dsm.domain.usecase.GetPostCategoryUseCase
+import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.base.BaseViewModel
 import com.dsm.dsmmarketandroid.presentation.mapper.PostCategoryModelMapper
 import com.dsm.dsmmarketandroid.presentation.model.PostCategoryModel
@@ -16,7 +17,7 @@ class PostCategoryViewModel(
     val categoryList = ListLiveData<PostCategoryModel>()
     val selectedCategory = MutableLiveData<String>()
 
-    val serverErrorEvent = SingleLiveEvent<Any>()
+    val toastEvent = SingleLiveEvent<Int>()
 
     val isProgressVisible = MutableLiveData<Boolean>().apply { value = true }
 
@@ -28,7 +29,7 @@ class PostCategoryViewModel(
                     categoryList.addAll(it)
                     isProgressVisible.value = false
                 }, {
-                    serverErrorEvent.call()
+                    toastEvent.value = R.string.fail_server_error
                 })
         )
     }

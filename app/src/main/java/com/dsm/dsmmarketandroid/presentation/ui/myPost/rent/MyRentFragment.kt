@@ -13,6 +13,7 @@ import com.dsm.dsmmarketandroid.presentation.util.ProductType
 import kotlinx.android.synthetic.main.fragment_my_rent.*
 
 class MyRentFragment : BaseFragment<FragmentMyRentBinding>() {
+
     override val layoutResourceId: Int
         get() = R.layout.fragment_my_rent
 

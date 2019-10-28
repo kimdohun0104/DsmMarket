@@ -1,7 +1,9 @@
 package com.dsm.dsmmarketandroid.presentation.ui.purchaseDetail
 
+import android.os.Bundle
 import androidx.lifecycle.MutableLiveData
 import com.dsm.domain.usecase.*
+import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.base.BaseViewModel
 import com.dsm.dsmmarketandroid.presentation.mapper.PurchaseDetailModelMapper
 import com.dsm.dsmmarketandroid.presentation.mapper.RecommendModelMapper
@@ -19,6 +21,8 @@ class PurchaseDetailViewModel(
     private val unInterestUseCase: UnInterestUseCase,
     private val getRecommendUseCase: GetRecommendUseCase,
     private val getRelatedUseCase: GetRelatedUseCase,
+    private val createRoomUseCase: CreateRoomUseCase,
+    private val joinRoomUseCase: JoinRoomUseCase,
     private val purchaseDetailModelMapper: PurchaseDetailModelMapper,
     private val recommendModelMapper: RecommendModelMapper
 ) : BaseViewModel() {
@@ -29,12 +33,9 @@ class PurchaseDetailViewModel(
     val recommendList = MutableLiveData<List<RecommendModel>>()
     val relatedList = MutableLiveData<List<RecommendModel>>()
 
-    val toastNonExistEvent = SingleLiveEvent<Any>()
+    val toastEvent = SingleLiveEvent<Int>()
     val finishActivityEvent = SingleLiveEvent<Any>()
-    val toastServerErrorEvent = SingleLiveEvent<Any>()
-
-    val toastInterestEvent = SingleLiveEvent<Any>()
-    val toastUnInterestEvent = SingleLiveEvent<Any>()
+    val intentChatActivityEvent = SingleLiveEvent<Bundle>()
 
     fun getPurchaseDetail(postId: Int) {
         addDisposable(
@@ -46,12 +47,10 @@ class PurchaseDetailViewModel(
                     isInterest.value = it.isInterest
                     purchaseDetail.value = it
                 }, {
-                    if (it is HttpException) {
-                        if (it.code() == 410) {
-                            toastNonExistEvent.call()
-                            finishActivityEvent.call()
-                        }
-                    } else toastServerErrorEvent.call()
+                    if (it is HttpException && it.code() == 410) {
+                        toastEvent.value = R.string.fail_non_exist_post
+                        finishActivityEvent.call()
+                    } else toastEvent.value = R.string.fail_server_error
                 })
         )
     }
@@ -62,9 +61,9 @@ class PurchaseDetailViewModel(
                 unInterestUseCase.create(UnInterestUseCase.Params(postId, ProductType.PURCHASE))
                     .subscribe({
                         isInterest.value = false
-                        toastUnInterestEvent.call()
+                        toastEvent.value = R.string.un_interest
                     }, {
-                        toastServerErrorEvent.call()
+                        toastEvent.value = R.string.fail_server_error
                     })
             )
         } else {
@@ -72,9 +71,9 @@ class PurchaseDetailViewModel(
                 interestUseCase.create(InterestUseCase.Params(postId, ProductType.PURCHASE))
                     .subscribe({
                         isInterest.value = true
-                        toastInterestEvent.call()
+                        toastEvent.value = R.string.interest
                     }, {
-                        toastServerErrorEvent.call()
+                        toastEvent.value = R.string.fail_server_error
                     })
             )
         }
@@ -83,10 +82,11 @@ class PurchaseDetailViewModel(
     fun getRecommendProduct(postId: Int) {
         addDisposable(
             getRecommendUseCase.create(postId)
+                .map(recommendModelMapper::mapFrom)
                 .subscribe({
-                    recommendList.value = recommendModelMapper.mapFrom(it)
+                    recommendList.value = it
                 }, {
-                    toastServerErrorEvent.call()
+                    toastEvent.value = R.string.fail_server_error
                 })
         )
     }
@@ -94,10 +94,31 @@ class PurchaseDetailViewModel(
     fun getRelatedProduct(postId: Int) {
         addDisposable(
             getRelatedUseCase.create(GetRelatedUseCase.Params(postId, ProductType.PURCHASE))
+                .map(recommendModelMapper::mapFrom)
                 .subscribe({
-                    relatedList.value = recommendModelMapper.mapFrom(it)
+                    relatedList.value = it
                 }, {
-                    toastServerErrorEvent.call()
+                    toastEvent.value = R.string.fail_server_error
+                })
+        )
+    }
+
+    fun createRoom(postId: Int) {
+        addDisposable(
+            createRoomUseCase.create(CreateRoomUseCase.Params(postId, 0))
+                .map { roomId ->
+                    joinRoomUseCase.create(roomId)
+                        .subscribe({ email ->
+                            intentChatActivityEvent.value = Bundle().apply {
+                                putString("email", email)
+                                putInt("roomId", roomId)
+                            }
+                        }, {
+                            toastEvent.value = R.string.fail_server_error
+                        })
+                }.subscribe({
+                }, {
+                    toastEvent.value = R.string.fail_server_error
                 })
         )
     }

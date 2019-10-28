@@ -11,6 +11,7 @@ import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.ActivityRentDetailBinding
 import com.dsm.dsmmarketandroid.presentation.base.BaseActivity
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.RecommendListAdapter
+import com.dsm.dsmmarketandroid.presentation.ui.chat.ChatActivity
 import com.dsm.dsmmarketandroid.presentation.ui.comment.CommentActivity
 import com.dsm.dsmmarketandroid.presentation.ui.rentImage.RentImageActivity
 import com.dsm.dsmmarketandroid.presentation.ui.report.ReportPostDialog
@@ -21,6 +22,7 @@ import org.jetbrains.anko.toast
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class RentDetailActivity : BaseActivity<ActivityRentDetailBinding>() {
+
     override val layoutResourceId: Int
         get() = R.layout.activity_rent_detail
 
@@ -42,8 +44,10 @@ class RentDetailActivity : BaseActivity<ActivityRentDetailBinding>() {
 
         iv_rent_image.setOnClickListener { startActivity<RentImageActivity>("post_id" to postId) }
 
-        val relatedListAdapter = RecommendListAdapter(ProductType.RENT)
-        (rv_related.layoutManager as LinearLayoutManager).orientation = LinearLayoutManager.HORIZONTAL
+        btn_deal_with_chat.setOnClickListener { viewModel.createRoom(postId) }
+
+       val relatedListAdapter = RecommendListAdapter(ProductType.RENT)
+       (rv_related.layoutManager as LinearLayoutManager).orientation = LinearLayoutManager.HORIZONTAL
         rv_related.adapter = relatedListAdapter
 
         viewModel.getRentDetail(postId)
@@ -54,11 +58,11 @@ class RentDetailActivity : BaseActivity<ActivityRentDetailBinding>() {
             else tb_rent_detail.menu[0].icon = getDrawable(R.drawable.ic_heart_white)
         })
 
-        viewModel.toastInterestEvent.observe(this, Observer { toast(getString(R.string.interest)) })
-
-        viewModel.toastUnInterestEvent.observe(this, Observer { toast(getString(R.string.un_interest)) })
-
         viewModel.relatedList.observe(this, Observer { relatedListAdapter.setItems(it) })
+
+        viewModel.toastEvent.observe(this, Observer { toast(it) })
+
+        viewModel.startChatActivityEvent.observe(this, Observer { startActivity<ChatActivity>("bundle" to it) })
 
         binding.viewModel = viewModel
     }

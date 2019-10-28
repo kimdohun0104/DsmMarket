@@ -36,7 +36,7 @@ class ModifyRentActivity : BaseActivity<ActivityModifyRentBinding>() {
 
         viewModel.getRentDetail(postId)
 
-        viewModel.toastServerErrorEvent.observe(this, Observer { toast(getString(R.string.fail_server_error)) })
+        viewModel.toastEvent.observe(this, Observer { toast(it) })
 
         viewModel.finishActivityEvent.observe(this, Observer { finish() })
 

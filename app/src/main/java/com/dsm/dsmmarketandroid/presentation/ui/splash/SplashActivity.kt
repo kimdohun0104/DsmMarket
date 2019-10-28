@@ -18,6 +18,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         viewModel.login()
 
         viewModel.intentMainActivityEvent.observe(this, Observer { startActivity<MainActivity>() })

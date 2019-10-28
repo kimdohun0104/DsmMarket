@@ -10,6 +10,7 @@
         <item name="android:spinnerItemStyle">@style/spinnerItemStyle</item>
         <item name="android:spinnerDropDownItemStyle">@style/spinnerDropDownItemStyle</item>
         <item name="bottomSheetDialogTheme">@style/PeekBottomSheetDialog</item>
+        <item name="android:forceDarkAllowed">true</item>
     </style>
 
     <style name="WhiteAppTheme" parent="AppTheme">

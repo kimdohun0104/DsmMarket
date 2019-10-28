@@ -1,8 +1,10 @@
 package com.dsm.app.viewModel
 
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.dsm.app.BaseTest
+import com.dsm.domain.entity.PurchaseDetail
 import com.dsm.domain.usecase.GetPurchaseDetailUseCase
 import com.dsm.domain.usecase.ModifyPurchaseUseCase
+import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.mapper.PurchaseDetailModelMapper
 import com.dsm.dsmmarketandroid.presentation.ui.modify.purchase.ModifyPurchaseViewModel
 import com.jraska.livedata.test
@@ -10,17 +12,11 @@ import io.reactivex.Flowable
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
-import org.mockito.MockitoAnnotations
 
-class ModifyPurchaseViewModelTests {
-
-    @Rule
-    @JvmField
-    val instantTaskExecutorRule = InstantTaskExecutorRule()
+class ModifyPurchaseViewModelTests : BaseTest() {
 
     @Mock
     private lateinit var getPurchaseDetailUseCase: GetPurchaseDetailUseCase
@@ -34,12 +30,11 @@ class ModifyPurchaseViewModelTests {
 
     @Before
     fun init() {
-        MockitoAnnotations.initMocks(this)
         viewModel = ModifyPurchaseViewModel(getPurchaseDetailUseCase, modifyPurchaseUseCase, purchaseDetailModelMapper)
     }
 
     @Test
-    fun `when there's blank isModifyEnable == false`() {
+    fun `modify button disable test`() {
         viewModel.run {
             title.value = ""
             price.value = "PRICE"
@@ -52,7 +47,7 @@ class ModifyPurchaseViewModelTests {
     }
 
     @Test
-    fun `when there's no blank isModifyEnable == true`() {
+    fun `modify button enable test`() {
         viewModel.title.value = "TITLE"
         viewModel.run {
             title.value = "TITLE"
@@ -63,6 +58,50 @@ class ModifyPurchaseViewModelTests {
         }
 
         assertTrue(viewModel.isModifyEnable.test().value())
+    }
+
+    @Test
+    fun `get purchase detail success test`() {
+        val response = PurchaseDetail(
+            title = "TITLE",
+            isInterest = true,
+            price = "PRICE원",
+            createdAt = "CREATED_AT",
+            img = listOf(),
+            category = "CATEGORY",
+            content = "CONTENT",
+            author = "AUTHOR",
+            commentCount = 0,
+            id = 0
+        )
+        `when`(getPurchaseDetailUseCase.create(0))
+            .thenReturn(Flowable.just(response))
+
+        val mapped = purchaseDetailModelMapper.mapFrom(response)
+
+        viewModel.run {
+            getPurchaseDetail(0)
+
+            title.test().assertValue(mapped.title)
+            price.test().assertValue(mapped.price.substring(0, mapped.price.length - 1))
+            category.test().assertValue(mapped.category)
+            content.test().assertValue(mapped.content)
+            imageList.test().assertValue(arrayListOf<String>().apply {
+                mapped.img.forEach { add(it) }
+            })
+        }
+    }
+
+    @Test
+    fun `get purchase detail failed test`() {
+        `when`(getPurchaseDetailUseCase.create(0))
+            .thenReturn(Flowable.error(Exception()))
+
+        viewModel.run {
+            getPurchaseDetail(0)
+
+            toastEvent.test().assertValue(R.string.fail_server_error)
+        }
     }
 
     @Test
@@ -88,5 +127,38 @@ class ModifyPurchaseViewModelTests {
         viewModel.modifyPurchase(0)
 
         viewModel.finishActivityEvent.test().assertHasValue()
+    }
+
+    @Test
+    fun `modify purchase failed test`() {
+        viewModel.run {
+            title.value = "TITLE"
+            content.value = "CONTENT"
+            price.value = "PRICE"
+            category.value = "CATEGORY"
+        }
+
+        `when`(
+            modifyPurchaseUseCase.create(
+                hashMapOf(
+                    "postId" to 0,
+                    "title" to viewModel.title.value,
+                    "content" to viewModel.content.value,
+                    "price" to viewModel.price.value,
+                    "category" to viewModel.category.value
+                )
+            )
+        ).thenReturn(Flowable.error(Exception()))
+
+        viewModel.modifyPurchase(0)
+
+        viewModel.toastEvent.test().assertValue(R.string.fail_server_error)
+    }
+
+    @Test
+    fun `setCategory test`() {
+        viewModel.setCategory("CATEGORY")
+
+        viewModel.category.test().assertValue("CATEGORY")
     }
 }

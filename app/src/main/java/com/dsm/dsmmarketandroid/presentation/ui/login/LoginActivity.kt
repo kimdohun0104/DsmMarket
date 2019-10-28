@@ -32,7 +32,9 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
 
         tv_forget_password.setOnClickListener { startActivity<ForgotPasswordActivity>() }
 
-        et_password.setEditorActionListener(EditorInfo.IME_ACTION_DONE) { viewModel.login() }
+        et_password.setEditorActionListener(EditorInfo.IME_ACTION_DONE) { if (btn_login.isClickable) viewModel.login() }
+
+        viewModel.showLoadingDialogEvent.observe(this, Observer { LoadingDialog.show(supportFragmentManager) })
 
         viewModel.intentMainActivityEvent.observe(this, Observer {
             Intent(this, MainActivity::class.java).apply {
@@ -41,17 +43,13 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
             }
         })
 
-        viewModel.toastLoginFailEvent.observe(this, Observer { toast(getString(R.string.fail_login)) })
-
-        viewModel.toastServerErrorEvent.observe(this, Observer { toast(getString(R.string.fail_server_error)) })
-
-        viewModel.showLoadingDialogEvent.observe(this, Observer { LoadingDialog.show(supportFragmentManager) })
-
-        viewModel.hideLoadingDialogEvent.observe(this, Observer { LoadingDialog.hide() })
-
         viewModel.hideKeyboardEvent.observe(this, Observer {
             (getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).hideSoftInputFromWindow(et_password.windowToken, 0)
         })
+
+        viewModel.hideLoadingDialogEvent.observe(this, Observer { LoadingDialog.hide() })
+
+        viewModel.toastEvent.observe(this, Observer { toast(it) })
 
         binding.viewModel = viewModel
     }

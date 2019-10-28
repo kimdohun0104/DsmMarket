@@ -5,6 +5,7 @@ import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import com.dsm.domain.usecase.PostRentUseCase
+import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.base.BaseViewModel
 import com.dsm.dsmmarketandroid.presentation.util.SingleLiveEvent
 import com.dsm.dsmmarketandroid.presentation.util.isValueBlank
@@ -52,7 +53,8 @@ class PostRentViewModel(private val postRentUseCase: PostRentUseCase) : BaseView
     val isCategorySelected: LiveData<Boolean> = Transformations.map(category) { it != "" }
 
     val finishActivityEvent = SingleLiveEvent<Any>()
-    val toastServerErrorEvent = SingleLiveEvent<Any>()
+
+    val toastEvent = SingleLiveEvent<Int>()
 
     val showLoadingDialogEvent = SingleLiveEvent<Any>()
     val hideLoadingDialogEvent = SingleLiveEvent<Any>()
@@ -67,22 +69,25 @@ class PostRentViewModel(private val postRentUseCase: PostRentUseCase) : BaseView
                 PostRentUseCase.Params(
                     MultipartBody.Part.createFormData("img", imageFile.name, RequestBody.create(MediaType.parse("image/*"), imageFile)),
                     mapOf(
-                        "title" to RequestBody.create(MediaType.parse("text/plain"), title.value!!),
-                        "content" to RequestBody.create(MediaType.parse("text/plain"), content.value!!),
-                        "price" to RequestBody.create(MediaType.parse("text/plain"), unit.value + "/" + price.value),
-                        "category" to RequestBody.create(MediaType.parse("text/plain"), category.value!!),
-                        "possible_time" to RequestBody.create(MediaType.parse("text/plain"), rentTime.value ?: "")
+                        "title" to createTextPlain(title.value),
+                        "content" to createTextPlain(content.value),
+                        "price" to createTextPlain(unit.value + "/" + price.value),
+                        "category" to createTextPlain(category.value),
+                        "possible_time" to createTextPlain(rentTime.value)
                     )
                 )
-            ).subscribe({
-                hideLoadingDialogEvent.call()
-                finishActivityEvent.call()
-            }, {
-                hideLoadingDialogEvent.call()
-                toastServerErrorEvent.call()
-            })
+            )
+                .doFinally { hideLoadingDialogEvent.call() }
+                .subscribe({
+                    finishActivityEvent.call()
+                }, {
+                    toastEvent.value = R.string.fail_server_error
+                })
         )
     }
+
+    private fun createTextPlain(value: String?): RequestBody =
+        RequestBody.create(MediaType.parse("text/plain"), value ?: "")
 
     fun selectPriceUnit(unit: Int) {
         this.unit.value = unit.toString()

@@ -71,4 +71,10 @@ val useCaseModule = module {
     factory { GetPurchaseImageUseCase(get()) }
 
     factory { SendTempPasswordUseCase(get()) }
+
+    factory { CreateRoomUseCase(get()) }
+
+    factory { GetChatRoomUseCase(get()) }
+
+    factory { JoinRoomUseCase(get()) }
 }

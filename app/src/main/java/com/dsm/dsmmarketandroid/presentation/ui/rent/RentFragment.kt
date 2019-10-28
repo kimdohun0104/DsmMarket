@@ -16,6 +16,7 @@ import org.jetbrains.anko.startActivity
 
 
 class RentFragment : BaseFragment<FragmentRentBinding>() {
+
     override val layoutResourceId: Int
         get() = R.layout.fragment_rent
 

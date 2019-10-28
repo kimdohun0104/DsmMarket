@@ -1,24 +1,20 @@
 package com.dsm.app.viewModel
 
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.dsm.app.BaseTest
+import com.dsm.app.createHttpException
 import com.dsm.domain.usecase.SignUpUseCase
+import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.ui.signUp.SignUpViewModel
 import com.jraska.livedata.test
 import io.reactivex.Flowable
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
-import org.mockito.MockitoAnnotations
 
-class SignUpViewModelTests {
-
-    @Rule
-    @JvmField
-    val instantTaskExecutorRule = InstantTaskExecutorRule()
+class SignUpViewModelTests : BaseTest() {
 
     @Mock
     private lateinit var signUpUseCase: SignUpUseCase
@@ -27,12 +23,11 @@ class SignUpViewModelTests {
 
     @Before
     fun init() {
-        MockitoAnnotations.initMocks(this)
         viewModel = SignUpViewModel(signUpUseCase)
     }
 
     @Test
-    fun `when there's no blank isSignUpEnable == true`() {
+    fun `sign up button enable test`() {
         val isSignUpEnable = viewModel.isSignUpEnable.test()
 
         viewModel.email.value = "example@test.com"
@@ -46,7 +41,7 @@ class SignUpViewModelTests {
     }
 
     @Test
-    fun `when there's blank isSignUpEnable == false`() {
+    fun `sign up button disable test`() {
         val isSignUpEnable = viewModel.isSignUpEnable.test()
 
         viewModel.email.value = "example@test.com"
@@ -60,7 +55,7 @@ class SignUpViewModelTests {
 
         viewModel.signUp()
 
-        viewModel.toastEmailInvalidEvent.test().assertHasValue()
+        viewModel.toastEvent.test().assertValue(R.string.fail_invalid_email)
     }
 
     @Test
@@ -71,18 +66,19 @@ class SignUpViewModelTests {
 
         viewModel.signUp()
 
-        viewModel.toastPasswordDiffEvent.test().assertHasValue()
+        viewModel.toastEvent.test().assertValue(R.string.fail_diff_password)
     }
 
     @Test
-    fun `sign up success 200`() {
-        viewModel.email.value = "example@test.com"
-        viewModel.password.value = "testPassword"
-        viewModel.reType.value =  "testPassword"
-        viewModel.name.value = "김도훈"
-        viewModel.gender.value = "남성"
-        viewModel.grade.value = "1"
-        viewModel.isSignUpEnable.value = true
+    fun `sign up success test`() {
+        viewModel.run {
+            email.value = "example@test.com"
+            password.value = "testPassword"
+            reType.value = "testPassword"
+            name.value = "김도훈"
+            gender.value = "남성"
+            grade.value = "1"
+        }
 
         val request = hashMapOf(
             "email" to viewModel.email.value,
@@ -96,5 +92,60 @@ class SignUpViewModelTests {
         viewModel.signUp()
 
         viewModel.finishActivityEvent.test().assertHasValue()
+        viewModel.hideLoadingDialogEvent.test().assertHasValue()
+    }
+
+    @Test
+    fun `already exist email test`() {
+        viewModel.run {
+            email.value = "example@test.com"
+            password.value = "testPassword"
+            reType.value = "testPassword"
+            name.value = "김도훈"
+            gender.value = "남성"
+            grade.value = "1"
+        }
+
+        val request = hashMapOf(
+            "email" to viewModel.email.value,
+            "password" to viewModel.password.value,
+            "nick" to viewModel.name.value,
+            "gender" to viewModel.gender.value,
+            "grade" to viewModel.grade.value!!.toInt()
+        )
+        `when`(signUpUseCase.create(request))
+            .thenReturn(Flowable.error(createHttpException(403, "{\"errorCode\": 0}")))
+
+        viewModel.signUp()
+
+        viewModel.toastEvent.test().assertValue(R.string.fail_existent_email)
+        viewModel.hideLoadingDialogEvent.test().assertHasValue()
+    }
+
+    @Test
+    fun `already exist name test`() {
+        viewModel.run {
+            email.value = "example@test.com"
+            password.value = "testPassword"
+            reType.value = "testPassword"
+            name.value = "김도훈"
+            gender.value = "남성"
+            grade.value = "1"
+        }
+
+        val request = hashMapOf(
+            "email" to viewModel.email.value,
+            "password" to viewModel.password.value,
+            "nick" to viewModel.name.value,
+            "gender" to viewModel.gender.value,
+            "grade" to viewModel.grade.value!!.toInt()
+        )
+        `when`(signUpUseCase.create(request))
+            .thenReturn(Flowable.error(createHttpException(403, "{\"errorCode\": 1}")))
+
+        viewModel.signUp()
+
+        viewModel.toastEvent.test().assertValue(R.string.fail_existent_nick)
+        viewModel.hideLoadingDialogEvent.test().assertHasValue()
     }
 }

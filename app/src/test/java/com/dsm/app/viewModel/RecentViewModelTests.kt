@@ -1,6 +1,6 @@
 package com.dsm.app.viewModel
 
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.dsm.app.BaseTest
 import com.dsm.domain.entity.Product
 import com.dsm.domain.usecase.GetRecentPurchaseUseCase
 import com.dsm.domain.usecase.GetRecentRentUseCase
@@ -9,17 +9,11 @@ import com.dsm.dsmmarketandroid.presentation.ui.recent.RecentViewModel
 import com.jraska.livedata.test
 import io.reactivex.Flowable
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
-import org.mockito.MockitoAnnotations
 
-class RecentViewModelTests {
-
-    @Rule
-    @JvmField
-    val instantTaskExecutorRule = InstantTaskExecutorRule()
+class RecentViewModelTests : BaseTest() {
 
     @Mock
     private lateinit var getRecentPurchaseUseCase: GetRecentPurchaseUseCase
@@ -33,7 +27,6 @@ class RecentViewModelTests {
 
     @Before
     fun init() {
-        MockitoAnnotations.initMocks(this)
         viewModel = RecentViewModel(getRecentPurchaseUseCase, getRecentRentUseCase, recentModelMapper)
     }
 
