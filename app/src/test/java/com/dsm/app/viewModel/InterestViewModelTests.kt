@@ -1,27 +1,23 @@
 package com.dsm.app.viewModel
 
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.dsm.app.BaseTest
 import com.dsm.domain.entity.Product
 import com.dsm.domain.usecase.GetInterestUseCase
+import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.mapper.ProductModelMapper
 import com.dsm.dsmmarketandroid.presentation.model.ProductModel
 import com.dsm.dsmmarketandroid.presentation.ui.interest.InterestViewModel
+import com.dsm.dsmmarketandroid.presentation.util.ProductType
 import com.jraska.livedata.test
 import io.reactivex.Flowable
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
-import org.mockito.MockitoAnnotations
 
-class InterestViewModelTests {
-
-    @Rule
-    @JvmField
-    val instantTaskExecutorRule = InstantTaskExecutorRule()
+class InterestViewModelTests : BaseTest() {
 
     @Mock
     private lateinit var getInterestUseCase: GetInterestUseCase
@@ -32,7 +28,6 @@ class InterestViewModelTests {
 
     @Before
     fun init() {
-        MockitoAnnotations.initMocks(this)
         viewModel = InterestViewModel(getInterestUseCase, productModelMapper)
     }
 
@@ -76,6 +71,16 @@ class InterestViewModelTests {
     }
 
     @Test
+    fun `get interest purchase failed test`() {
+        `when`(getInterestUseCase.create(ProductType.PURCHASE))
+            .thenReturn(Flowable.error(Exception()))
+
+        viewModel.getInterestPurchase()
+
+        viewModel.toastEvent.test().assertValue(R.string.fail_server_error)
+    }
+
+    @Test
     fun getInterestRent() {
         val response = listOf(
             Product(0, "TITLE", "IMG", "CREATED_AT", "PRICE"),
@@ -93,4 +98,14 @@ class InterestViewModelTests {
 
         viewModel.rentList.test().assertValue(productModelMapper.mapFrom(response))
     }
+
+     @Test
+     fun `get interest rent failed test`() {
+         `when`(getInterestUseCase.create(ProductType.RENT))
+             .thenReturn(Flowable.error(Exception()))
+
+         viewModel.getInterestRent()
+
+         viewModel.toastEvent.test().assertValue(R.string.fail_server_error)
+     }
 }

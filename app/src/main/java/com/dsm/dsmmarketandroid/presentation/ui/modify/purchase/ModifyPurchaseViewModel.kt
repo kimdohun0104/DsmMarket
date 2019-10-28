@@ -4,6 +4,7 @@ import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import com.dsm.domain.usecase.GetPurchaseDetailUseCase
 import com.dsm.domain.usecase.ModifyPurchaseUseCase
+import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.base.BaseViewModel
 import com.dsm.dsmmarketandroid.presentation.mapper.PurchaseDetailModelMapper
 import com.dsm.dsmmarketandroid.presentation.util.ListLiveData
@@ -24,7 +25,7 @@ class ModifyPurchaseViewModel(
 
     val finishActivityEvent = SingleLiveEvent<Any>()
 
-    val toastServerErrorEvent = SingleLiveEvent<Any>()
+    val toastEvent = SingleLiveEvent<Int>()
 
     private fun isBlankExist() = title.isValueBlank() || price.isValueBlank()
         || content.isValueBlank() || category.isValueBlank()
@@ -47,7 +48,7 @@ class ModifyPurchaseViewModel(
                     content.value = it.content
                     imageList.value = it.img as ArrayList<String>
                 }, {
-                    toastServerErrorEvent.call()
+                    toastEvent.value = R.string.fail_server_error
                 })
         )
     }
@@ -65,7 +66,7 @@ class ModifyPurchaseViewModel(
             ).subscribe({
                 finishActivityEvent.call()
             }, {
-                toastServerErrorEvent.call()
+                toastEvent.value = R.string.fail_server_error
             })
         )
     }

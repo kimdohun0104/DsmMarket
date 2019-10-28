@@ -8,7 +8,7 @@ import com.dsm.dsmmarketandroid.presentation.model.CommentModel
 import com.dsm.dsmmarketandroid.presentation.util.SingleLiveEvent
 
 class CommentViewModel(
-    private val getPurchaseCommentUseCase: GetCommentUseCase,
+    private val getCommentUseCase: GetCommentUseCase,
     private val commentModelMapper: CommentModelMapper
 ) : BaseViewModel() {
 
@@ -23,7 +23,7 @@ class CommentViewModel(
 
     fun getCommentList(postId: Int, type: Int) {
         addDisposable(
-            getPurchaseCommentUseCase.create(GetCommentUseCase.Params(postId, type))
+            getCommentUseCase.create(GetCommentUseCase.Params(postId, type))
                 .map(commentModelMapper::mapFrom)
                 .subscribe({
                     listItems.value = it

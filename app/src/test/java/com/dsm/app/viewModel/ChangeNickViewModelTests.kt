@@ -1,6 +1,6 @@
 package com.dsm.app.viewModel
 
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.dsm.app.BaseTest
 import com.dsm.app.createHttpException
 import com.dsm.domain.usecase.ChangeNickUseCase
 import com.dsm.dsmmarketandroid.R
@@ -10,18 +10,12 @@ import io.reactivex.Flowable
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
-import org.mockito.MockitoAnnotations
 import java.io.IOException
 
-class ChangeNickViewModelTests {
-
-    @Rule
-    @JvmField
-    val instantTaskExecutorRule = InstantTaskExecutorRule()
+class ChangeNickViewModelTests : BaseTest() {
 
     @Mock
     private lateinit var changeNickUseCase: ChangeNickUseCase
@@ -30,7 +24,6 @@ class ChangeNickViewModelTests {
 
     @Before
     fun init() {
-        MockitoAnnotations.initMocks(this)
         viewModel = ChangeNickViewModel(changeNickUseCase)
     }
 
