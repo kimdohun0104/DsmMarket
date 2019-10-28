@@ -55,12 +55,12 @@ notifications:
     on_success: always
     on_failure: always
     
-#deploy:
-#  provider: script
-#  skip_cleanup: true
-#  script:
-#    - "sh script/deploy.sh"
-#  on:
-#    branch:
-#      - dev
-#      - master
+deploy:
+  provider: script
+  skip_cleanup: true
+  script:
+    - "sh script/deploy.sh"
+  on:
+    branch:
+      - dev
+      - master
