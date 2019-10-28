@@ -1,5 +1,6 @@
 package com.dsm.dsmmarketandroid.presentation.ui.purchaseDetail
 
+import android.os.Bundle
 import androidx.lifecycle.MutableLiveData
 import com.dsm.domain.usecase.*
 import com.dsm.dsmmarketandroid.R
@@ -21,6 +22,7 @@ class PurchaseDetailViewModel(
     private val getRecommendUseCase: GetRecommendUseCase,
     private val getRelatedUseCase: GetRelatedUseCase,
     private val createRoomUseCase: CreateRoomUseCase,
+    private val joinRoomUseCase: JoinRoomUseCase,
     private val purchaseDetailModelMapper: PurchaseDetailModelMapper,
     private val recommendModelMapper: RecommendModelMapper
 ) : BaseViewModel() {
@@ -33,7 +35,7 @@ class PurchaseDetailViewModel(
 
     val toastEvent = SingleLiveEvent<Int>()
     val finishActivityEvent = SingleLiveEvent<Any>()
-    val startChatActivityEvent = SingleLiveEvent<Int>()
+    val intentChatActivityEvent = SingleLiveEvent<Bundle>()
 
     fun getPurchaseDetail(postId: Int) {
         addDisposable(
@@ -104,8 +106,17 @@ class PurchaseDetailViewModel(
     fun createRoom(postId: Int) {
         addDisposable(
             createRoomUseCase.create(CreateRoomUseCase.Params(postId, 0))
-                .subscribe({
-                    startChatActivityEvent.value = it
+                .map { roomId ->
+                    joinRoomUseCase.create(roomId)
+                        .subscribe({ email ->
+                            intentChatActivityEvent.value = Bundle().apply {
+                                putString("email", email)
+                                putInt("roomId", roomId)
+                            }
+                        }, {
+                            toastEvent.value = R.string.fail_server_error
+                        })
+                }.subscribe({
                 }, {
                     toastEvent.value = R.string.fail_server_error
                 })

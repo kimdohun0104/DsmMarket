@@ -62,7 +62,7 @@ class RentDetailActivity : BaseActivity<ActivityRentDetailBinding>() {
 
         viewModel.toastEvent.observe(this, Observer { toast(it) })
 
-        viewModel.startChatActivityEvent.observe(this, Observer { startActivity<ChatActivity>("roomId" to it) })
+        viewModel.startChatActivityEvent.observe(this, Observer { startActivity<ChatActivity>("bundle" to it) })
 
         binding.viewModel = viewModel
     }

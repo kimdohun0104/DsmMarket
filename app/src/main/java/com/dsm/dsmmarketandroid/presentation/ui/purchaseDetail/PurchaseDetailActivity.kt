@@ -78,7 +78,7 @@ class PurchaseDetailActivity : BaseActivity<ActivityPurchaseDetailBinding>() {
 
         viewModel.finishActivityEvent.observe(this, Observer { finish() })
 
-        viewModel.startChatActivityEvent.observe(this, Observer { startActivity<ChatActivity>("roomId" to it) })
+        viewModel.intentChatActivityEvent.observe(this, Observer { startActivity<ChatActivity>("bundle" to it) })
 
         binding.viewModel = viewModel
     }

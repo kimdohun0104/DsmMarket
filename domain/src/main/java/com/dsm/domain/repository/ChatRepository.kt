@@ -8,4 +8,6 @@ interface ChatRepository {
     fun createRoom(postId: Int, type: Int): Flowable<Int>
 
     fun getChatRoom(): Flowable<List<ChatRoom>>
+
+    fun joinRoom(roomId: Int): Flowable<String>
 }

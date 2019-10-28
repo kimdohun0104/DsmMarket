@@ -5,8 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.dsm.dsmmarketandroid.databinding.ItemChatRoomBinding
 import com.dsm.dsmmarketandroid.presentation.model.ChatRoomModel
+import com.dsm.dsmmarketandroid.presentation.ui.chatList.ChatListViewModel
 
-class ChatRoomListAdapter : RecyclerView.Adapter<ChatRoomListAdapter.ChatRoomHolder>() {
+class ChatRoomListAdapter(private val viewModel: ChatListViewModel) : RecyclerView.Adapter<ChatRoomListAdapter.ChatRoomHolder>() {
 
     private val listItems = arrayListOf<ChatRoomModel>()
 
@@ -25,6 +26,9 @@ class ChatRoomListAdapter : RecyclerView.Adapter<ChatRoomListAdapter.ChatRoomHol
     inner class ChatRoomHolder(private val binding: ItemChatRoomBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind() {
             binding.chatRoom = listItems[adapterPosition]
+            binding.root.setOnClickListener {
+                viewModel.joinRoom(listItems[adapterPosition].roomId)
+            }
         }
     }
 }

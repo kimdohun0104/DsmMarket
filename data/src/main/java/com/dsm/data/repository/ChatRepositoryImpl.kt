@@ -5,6 +5,7 @@ import com.dsm.data.mapper.ChatRoomMapper
 import com.dsm.domain.entity.ChatRoom
 import com.dsm.domain.repository.ChatRepository
 import io.reactivex.Flowable
+import retrofit2.HttpException
 
 class ChatRepositoryImpl(private val chatDataSource: ChatDataSource) : ChatRepository {
 
@@ -15,4 +16,10 @@ class ChatRepositoryImpl(private val chatDataSource: ChatDataSource) : ChatRepos
 
     override fun getChatRoom(): Flowable<List<ChatRoom>> =
         chatDataSource.getChatRoom().map(chatRoomMapper::mapFrom)
+
+    override fun joinRoom(roomId: Int): Flowable<String> =
+        chatDataSource.joinRoom(roomId).map {
+            if (it.code() != 200) throw HttpException(it)
+            it.body()?.get("email") ?: ""
+        }
 }

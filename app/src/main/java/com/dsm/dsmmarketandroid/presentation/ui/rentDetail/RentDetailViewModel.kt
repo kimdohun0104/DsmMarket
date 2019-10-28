@@ -1,5 +1,6 @@
 package com.dsm.dsmmarketandroid.presentation.ui.rentDetail
 
+import android.os.Bundle
 import androidx.lifecycle.MutableLiveData
 import com.dsm.domain.usecase.*
 import com.dsm.dsmmarketandroid.R
@@ -20,6 +21,7 @@ class RentDetailViewModel(
     private val unInterestUseCase: UnInterestUseCase,
     private val getRelatedUseCase: GetRelatedUseCase,
     private val createRoomUseCase: CreateRoomUseCase,
+    private val joinRoomUseCase: JoinRoomUseCase,
     private val recommendModelMapper: RecommendModelMapper,
     private val rentDetailModelMapper: RentDetailModelMapper
 ) : BaseViewModel() {
@@ -30,7 +32,7 @@ class RentDetailViewModel(
     val relatedList = MutableLiveData<List<RecommendModel>>()
 
     val toastEvent = SingleLiveEvent<Int>()
-    val startChatActivityEvent = SingleLiveEvent<Int>()
+    val startChatActivityEvent = SingleLiveEvent<Bundle>()
 
     fun getRentDetail(postId: Int) {
         addDisposable(
@@ -88,9 +90,18 @@ class RentDetailViewModel(
 
     fun createRoom(postId: Int) {
         addDisposable(
-            createRoomUseCase.create(CreateRoomUseCase.Params(postId, 1))
-                .subscribe({
-                    startChatActivityEvent.value = it
+            createRoomUseCase.create(CreateRoomUseCase.Params(postId, 0))
+                .map { roomId ->
+                    joinRoomUseCase.create(roomId)
+                        .subscribe({ email ->
+                            startChatActivityEvent.value = Bundle().apply {
+                                putString("email", email)
+                                putInt("roomId", roomId)
+                            }
+                        }, {
+                            toastEvent.value = R.string.fail_server_error
+                        })
+                }.subscribe({
                 }, {
                     toastEvent.value = R.string.fail_server_error
                 })

@@ -36,6 +36,9 @@ class RentDetailViewModelTests : BaseTest() {
     @Mock
     private lateinit var createRoomUseCase: CreateRoomUseCase
 
+    @Mock
+    private lateinit var joinRoomUseCase: JoinRoomUseCase
+
     private val rentDetailModelMapper = RentDetailModelMapper()
     private val recommendModelMapper = RecommendModelMapper()
 
@@ -43,7 +46,7 @@ class RentDetailViewModelTests : BaseTest() {
 
     @Before
     fun init() {
-        viewModel = RentDetailViewModel(getRentDetailUseCase, interestUseCase, unInterestUseCase, getRelatedUseCase, createRoomUseCase, recommendModelMapper, rentDetailModelMapper)
+        viewModel = RentDetailViewModel(getRentDetailUseCase, interestUseCase, unInterestUseCase, getRelatedUseCase, createRoomUseCase, joinRoomUseCase, recommendModelMapper, rentDetailModelMapper)
     }
 
     @Test

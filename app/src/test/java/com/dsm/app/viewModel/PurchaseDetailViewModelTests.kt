@@ -39,6 +39,9 @@ class PurchaseDetailViewModelTests : BaseTest() {
     @Mock
     private lateinit var createRoomUseCase: CreateRoomUseCase
 
+    @Mock
+    private lateinit var joinRoomUseCase: JoinRoomUseCase
+
     private val purchaseDetailModelMapper = PurchaseDetailModelMapper()
     private val recommendModelMapper = RecommendModelMapper()
 
@@ -53,6 +56,7 @@ class PurchaseDetailViewModelTests : BaseTest() {
             getRecommendUseCase,
             getRelatedUseCase,
             createRoomUseCase,
+            joinRoomUseCase,
             purchaseDetailModelMapper,
             recommendModelMapper
         )
@@ -207,9 +211,11 @@ class PurchaseDetailViewModelTests : BaseTest() {
         `when`(createRoomUseCase.create(CreateRoomUseCase.Params(0, ProductType.PURCHASE)))
             .thenReturn(Flowable.just(0))
 
+        `when`(joinRoomUseCase.create(0)).thenReturn(Flowable.just("EMAIL"))
+
         viewModel.createRoom(0)
 
-        viewModel.startChatActivityEvent.test().assertValue(0)
+        viewModel.intentChatActivityEvent.test().assertHasValue()
     }
 
     @Test
