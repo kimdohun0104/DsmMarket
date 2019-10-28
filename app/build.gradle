@@ -38,6 +38,9 @@ android {
     dataBinding {
         enabled = true
     }
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
 }
 
 dependencies {
@@ -57,6 +60,9 @@ dependencies {
     implementation 'net.cachapa.expandablelayout:expandablelayout:2.9.2'
     implementation 'com.github.chrisbanes:PhotoView:2.3.0'
 
+    // socket
+    implementation('io.socket:socket.io-client:1.0.0') { exclude group: 'org.json', module: 'json' }
+
     // image
     implementation 'com.github.kimdohun0104:MediaPicker:1.0.3'
 
@@ -72,6 +78,7 @@ dependencies {
     testImplementation testDependencies.mockitoInline
     testImplementation testDependencies.liveDataTestingKtx
     testImplementation testDependencies.coreTesting
+    testImplementation "org.json:json:20140107"
 
     // firebase
     implementation dependencies.firebaseCore

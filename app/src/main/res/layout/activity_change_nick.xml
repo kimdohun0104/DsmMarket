@@ -55,6 +55,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
+            android:id="@+id/btn_change_nick"
             android:layout_width="0dp"
             android:layout_height="46dp"
             android:text="@string/modify_name"

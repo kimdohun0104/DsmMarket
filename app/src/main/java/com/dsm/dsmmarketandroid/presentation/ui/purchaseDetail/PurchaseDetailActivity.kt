@@ -24,6 +24,7 @@ import org.jetbrains.anko.toast
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PurchaseDetailActivity : BaseActivity<ActivityPurchaseDetailBinding>() {
+
     override val layoutResourceId: Int
         get() = R.layout.activity_purchase_detail
 
@@ -62,28 +63,22 @@ class PurchaseDetailActivity : BaseActivity<ActivityPurchaseDetailBinding>() {
 
         viewModel.getPurchaseDetail(postId)
         viewModel.getRelatedProduct(postId)
-//        viewModel.getRecommendProduct(postId)
-
-        viewModel.toastNonExistEvent.observe(this, Observer { toast(getString(R.string.fail_non_exist_post)) })
-
-        viewModel.finishActivityEvent.observe(this, Observer { finish() })
-
-        viewModel.toastServerErrorEvent.observe(this, Observer { toast(getString(R.string.fail_server_error)) })
+        viewModel.getRecommendProduct(postId)
 
         viewModel.isInterest.observe(this, Observer {
             if (it) tb_purchase_detail.menu[0].icon = getDrawable(R.drawable.ic_heart_full_red)
             else tb_purchase_detail.menu[0].icon = getDrawable(R.drawable.ic_heart_white)
         })
 
-        viewModel.toastInterestEvent.observe(this, Observer { toast(getString(R.string.interest)) })
-
-        viewModel.toastUnInterestEvent.observe(this, Observer { toast(getString(R.string.un_interest)) })
-
         viewModel.recommendList.observe(this, Observer { recommendListAdapter.setItems(it) })
 
         viewModel.relatedList.observe(this, Observer { relatedListAdapter.setItems(it) })
 
-        viewModel.startChatActivity.observe(this, Observer { startActivity<ChatActivity>("nameSpace" to it) })
+        viewModel.toastEvent.observe(this, Observer { toast(it) })
+
+        viewModel.finishActivityEvent.observe(this, Observer { finish() })
+
+        viewModel.intentChatActivityEvent.observe(this, Observer { startActivity<ChatActivity>("bundle" to it) })
 
         binding.viewModel = viewModel
     }

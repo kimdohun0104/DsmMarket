@@ -3,6 +3,7 @@ package com.dsm.dsmmarketandroid.presentation.ui.post.postPurchase
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dsm.dsmmarketandroid.R
@@ -20,6 +21,7 @@ import org.jetbrains.anko.toast
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PostPurchaseActivity : BaseActivity<ActivityPostPurchaseBinding>() {
+
     override val layoutResourceId: Int
         get() = R.layout.activity_post_purchase
 
@@ -33,10 +35,9 @@ class PostPurchaseActivity : BaseActivity<ActivityPostPurchaseBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         PermissionUtil.requestReadExternalStorage(this)
-        binding.isImageSelectVisible = true
 
         val adapter = PostImageListAdapter(viewModel)
-        rv_post_image.layoutManager = LinearLayoutManager(this@PostPurchaseActivity, LinearLayoutManager.HORIZONTAL, false)
+        rv_post_image.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         rv_post_image.adapter = adapter
 
         tb_post_purchase.setNavigationOnClickListener { finish() }
@@ -60,16 +61,16 @@ class PostPurchaseActivity : BaseActivity<ActivityPostPurchaseBinding>() {
 
         viewModel.imageList.observe(this, Observer {
             if (it.size == 0) {
-                binding.isImageSelectVisible = true
+                iv_select_image.visibility = View.VISIBLE
             } else {
                 adapter.setItems(it)
-                binding.isImageSelectVisible = false
+                iv_select_image.visibility = View.INVISIBLE
             }
         })
 
         viewModel.finishActivityEvent.observe(this, Observer { finish() })
 
-        viewModel.toastServerErrorEvent.observe(this, Observer { toast(getString(R.string.fail_server_error)) })
+        viewModel.toastEvent.observe(this, Observer { toast(it) })
 
         viewModel.showLoadingDialogEvent.observe(this, Observer { LoadingDialog.show(supportFragmentManager) })
 
@@ -81,11 +82,12 @@ class PostPurchaseActivity : BaseActivity<ActivityPostPurchaseBinding>() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
-            if (requestCode == SELECT_IMAGE) {
-                viewModel.setImageList(MediaPicker.getResult(data) as ArrayList<String>)
-            } else if (requestCode == CATEGORY) {
+            if (requestCode == SELECT_IMAGE)
+                viewModel.setImageList(arrayListOf<String>().apply {
+                    MediaPicker.getResult(data).forEach { add(it) }
+                })
+            else if (requestCode == CATEGORY)
                 viewModel.setCategory(data?.getStringExtra("category") ?: "")
-            }
         }
     }
 }

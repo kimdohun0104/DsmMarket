@@ -1,4 +1,4 @@
-package com.dsm.dsmmarketandroid.presentation.trash_model
+package com.dsm.dsmmarketandroid.presentation.model
 
 sealed class ChatModel {
     data class MyChat(val content: String, val time: String) : ChatModel()

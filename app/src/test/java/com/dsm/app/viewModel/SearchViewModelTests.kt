@@ -1,23 +1,18 @@
 package com.dsm.app.viewModel
 
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.dsm.app.BaseTest
 import com.dsm.domain.usecase.DeleteSearchHistoryUseCase
 import com.dsm.domain.usecase.GetSearchHistoryUseCase
 import com.dsm.dsmmarketandroid.presentation.ui.search.SearchViewModel
 import com.jraska.livedata.test
+import io.reactivex.Completable
 import io.reactivex.Flowable
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
-import org.mockito.MockitoAnnotations
 
-class SearchViewModelTests {
-
-    @Rule
-    @JvmField
-    val instantTaskExecutorRule = InstantTaskExecutorRule()
+class SearchViewModelTests : BaseTest() {
 
     @Mock
     private lateinit var getSearchHistoryUseCase: GetSearchHistoryUseCase
@@ -25,12 +20,10 @@ class SearchViewModelTests {
     @Mock
     private lateinit var deleteSearchHistoryUseCase: DeleteSearchHistoryUseCase
 
-
     private lateinit var viewModel: SearchViewModel
 
     @Before
     fun init() {
-        MockitoAnnotations.initMocks(this)
         viewModel = SearchViewModel(getSearchHistoryUseCase, deleteSearchHistoryUseCase)
     }
 
@@ -43,5 +36,37 @@ class SearchViewModelTests {
         viewModel.getSearchHistory()
 
         viewModel.searchHistoryList.test().assertValue(response)
+    }
+
+    @Test
+    fun `search test`() {
+        viewModel.run {
+            searchText.value = "SEARCH"
+
+            search()
+
+            intentSearchResult.test().assertValue(searchText.value!!)
+            finishActivityEvent.test().assertHasValue()
+        }
+    }
+
+    @Test
+    fun `onClickSearchHistory test`() {
+        viewModel.run {
+            onClickSearchHistory("CONTENT")
+
+            intentSearchResult.test().assertValue("CONTENT")
+            finishActivityEvent.test().assertHasValue()
+        }
+    }
+
+    @Test
+    fun deleteSearchHistoryTest() {
+        `when`(deleteSearchHistoryUseCase.create("CONTENT"))
+            .thenReturn(Completable.complete())
+
+        viewModel.run {
+            deleteSearchHistory("CONTENT")
+        }
     }
 }

@@ -16,7 +16,7 @@ class PurchaseListViewModel(
 ) : BaseViewModel() {
 
     val networkState: LiveData<NetworkState>
-    val purchaseListItems: LiveData<PagedList<ProductModel>>
+    val purchaseItems: LiveData<PagedList<ProductModel>>
 
     init {
         val pagedListConfig = PagedList.Config.Builder()
@@ -28,10 +28,10 @@ class PurchaseListViewModel(
         val purchaseModelDataFactory = purchaseDataFactory.mapByPage(productModelMapper::mapFrom)
         networkState = Transformations.switchMap(purchaseDataFactory.mutableLiveData) { it.networkState }
 
-        purchaseListItems = LivePagedListBuilder(purchaseModelDataFactory, pagedListConfig).build()
+        purchaseItems = LivePagedListBuilder(purchaseModelDataFactory, pagedListConfig).build()
     }
 
     fun refreshList() {
-        purchaseListItems.value?.dataSource?.invalidate()
+        purchaseItems.value?.dataSource?.invalidate()
     }
 }

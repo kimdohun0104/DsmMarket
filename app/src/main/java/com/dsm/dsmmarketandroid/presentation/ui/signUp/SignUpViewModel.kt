@@ -3,6 +3,7 @@ package com.dsm.dsmmarketandroid.presentation.ui.signUp
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import com.dsm.domain.usecase.SignUpUseCase
+import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.base.BaseViewModel
 import com.dsm.dsmmarketandroid.presentation.util.SingleLiveEvent
 import com.dsm.dsmmarketandroid.presentation.util.Validator
@@ -32,27 +33,21 @@ class SignUpViewModel(private val signUpUseCase: SignUpUseCase) : BaseViewModel(
         || reType.isValueBlank() || name.isValueBlank()
         || grade.isValueBlank() || gender.isValueBlank()
 
-    val toastEmailInvalidEvent = SingleLiveEvent<Any>()
-    val toastPasswordDiffEvent = SingleLiveEvent<Any>()
-
-    val toastExistentEmailEvent = SingleLiveEvent<Any>()
-    val toastExistentNameEvent = SingleLiveEvent<Any>()
+    val showLoadingDialogEvent = SingleLiveEvent<Any>()
 
     val finishActivityEvent = SingleLiveEvent<Any>()
-
-    val toastServerErrorEvent = SingleLiveEvent<Any>()
-
-    val showLoadingDialogEvent = SingleLiveEvent<Any>()
     val hideLoadingDialogEvent = SingleLiveEvent<Any>()
+
+    val toastEvent = SingleLiveEvent<Int>()
 
     fun signUp() {
         if (!Validator.validEmail(email.value!!)) {
-            toastEmailInvalidEvent.call()
+            toastEvent.value = R.string.fail_invalid_email
             return
         }
 
         if (password.value != reType.value) {
-            toastPasswordDiffEvent.call()
+            toastEvent.value = R.string.fail_diff_password
             return
         }
 
@@ -64,26 +59,23 @@ class SignUpViewModel(private val signUpUseCase: SignUpUseCase) : BaseViewModel(
                     "email" to email.value,
                     "password" to password.value,
                     "nick" to name.value,
-                    "grade" to grade.value!!.toInt(),
+                    "grade" to grade.value?.toInt(),
                     "gender" to gender.value
                 )
             )
+                .doFinally { hideLoadingDialogEvent.call() }
                 .subscribe({
-                    hideLoadingDialogEvent.call()
                     finishActivityEvent.call()
                 }, {
-                    hideLoadingDialogEvent.call()
-                    if (it is HttpException) {
-                        if (it.code() == 403) {
-                            val errorResponse = JSONObject(it.response()?.errorBody()?.string()!!)
-                            if (errorResponse.has("errorCode")) {
-                                if (errorResponse.getInt("errorCode") == 0)
-                                    toastExistentEmailEvent.call()
-                                else
-                                    toastExistentNameEvent.call()
-                            }
-                        } else toastServerErrorEvent.call()
-                    } else toastServerErrorEvent.call()
+                    if (it is HttpException && it.code() == 403) {
+                        val errorResponse = JSONObject(it.response()?.errorBody()?.string()!!)
+                        if (errorResponse.has("errorCode")) {
+                            if (errorResponse.getInt("errorCode") == 0)
+                                toastEvent.value = R.string.fail_existent_email
+                            else
+                                toastEvent.value = R.string.fail_existent_nick
+                        }
+                    } else toastEvent.value = R.string.fail_server_error
                 })
         )
     }

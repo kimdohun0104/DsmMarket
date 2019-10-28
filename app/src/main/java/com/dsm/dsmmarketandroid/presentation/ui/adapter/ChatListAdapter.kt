@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.dsm.dsmmarketandroid.R
-import com.dsm.dsmmarketandroid.presentation.trash_model.ChatModel
+import com.dsm.dsmmarketandroid.presentation.model.ChatModel
 import kotlinx.android.synthetic.main.item_date.view.*
 import kotlinx.android.synthetic.main.item_my_chat.view.*
 

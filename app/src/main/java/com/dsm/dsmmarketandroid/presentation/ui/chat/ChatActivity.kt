@@ -6,26 +6,51 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dsm.dsmmarketandroid.R
-import com.dsm.dsmmarketandroid.presentation.trash_model.ChatModel
+import com.dsm.dsmmarketandroid.presentation.model.ChatModel
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.ChatListAdapter
+import io.socket.client.IO
+import io.socket.emitter.Emitter
 import kotlinx.android.synthetic.main.activity_chat.*
+import org.json.JSONObject
 
 class ChatActivity : AppCompatActivity() {
+
+    private val adapter = ChatListAdapter()
+    private val socket = IO.socket("https://dsm-market.ga")
+
+    private val roomId: Int by lazy { intent.getBundleExtra("bundle")?.getInt("roomId") ?: 0 }
+    private val email: String by lazy { intent.getBundleExtra("bundle")?.getString("email") ?: "" }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat)
+        if (!socket.connected()) {
+            socket.connect()
+        }
         tb_chat.setNavigationOnClickListener { finish() }
 
-        val adapter = ChatListAdapter()
         rv_chat.adapter = adapter
-        adapter.addDateItem(ChatModel.Date("2019-03-04"))
-        adapter.addMyChatItem(ChatModel.MyChat("안녕하세요 반갑습니다", "10:30"))
-        adapter.addMyChatItem(ChatModel.MyChat("이것은 겁나 긴 텍스트 테스트 ㅁㄴㅇ럼ㄴ;ㅇ란ㄻ넝;리마넝ㄹ;ㅁㄴ아ㅓㄻ;나이ㅓㄹ;ㅁ나이러;민아ㅓㄹ;민아러;밍나러;밍나러;ㅁㅇ니ㅏ러;ㅁㅇ나ㅣ러;ㅁㄴ아ㅣ러;ㅁ니아러;ㅁ니아럼;ㅇㄴ러ㅏ", "10:30"))
-        adapter.addForeignChatItem(ChatModel.ForeignChat("안녕하세요 반갑습니다", "10:30"))
-        adapter.addForeignChatItem(ChatModel.ForeignChat("이것은 겁나 긴 텍스트 테스트 ㅁㄴ;ㅇ럼;ㅇ니람ㅇㄴㄹ;ㅣㅏㅁㅇㄹ;ㅇ냐ㅓㄹ;ㅁㄴ야러ㅏㅣㅁㅇ나러민아러민ㅇ라먼ㅇ라ㅣㅁ넝리망너리망너리ㅏㅁㅇ너리망널밍나러밍나러민아러민아럼니런ㅇ미라ㅓㅣㅏㅓ", "10:30"))
+        rv_chat.layoutManager = LinearLayoutManager(this).apply { stackFromEnd = true }
 
-        (rv_chat.layoutManager as LinearLayoutManager).stackFromEnd = true
+        socket.emit("joinRoom", JSONObject().apply {
+            put("room", roomId)
+            put("email", email)
+        })
+
+        socket.on("broadcastMessage", broadcastMessage)
+
+        iv_send_chat.setOnClickListener {
+            val msg = et_chat.text.toString().trim()
+            socket.emit("sendMessage", JSONObject().apply { put("msg", msg) })
+            adapter.addMyChatItem(ChatModel.MyChat(msg, ""))
+        }
+    }
+
+    private val broadcastMessage = Emitter.Listener {
+        runOnUiThread {
+            val data = it[0] as JSONObject
+            adapter.addForeignChatItem(ChatModel.ForeignChat(data.getString("msg"), ""))
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -38,5 +63,12 @@ class ChatActivity : AppCompatActivity() {
 //            R.id.report ->
 //        }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onDestroy() {
+        if (socket.connected()) {
+            socket.disconnect()
+        }
+        super.onDestroy()
     }
 }

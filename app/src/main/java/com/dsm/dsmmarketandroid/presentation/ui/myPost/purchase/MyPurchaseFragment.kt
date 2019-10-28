@@ -13,6 +13,7 @@ import com.dsm.dsmmarketandroid.presentation.util.ProductType
 import kotlinx.android.synthetic.main.fragment_my_purchase.*
 
 class MyPurchaseFragment : BaseFragment<FragmentMyPurchaseBinding>() {
+
     override val layoutResourceId: Int
         get() = R.layout.fragment_my_purchase
 

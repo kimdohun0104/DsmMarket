@@ -8,10 +8,9 @@ class ChatRoomMapper : Mapper<ChatRoomListEntity, List<ChatRoom>> {
     override fun mapFrom(from: ChatRoomListEntity): List<ChatRoom> =
         from.list.map {
             ChatRoom(
-                roomName = it.roomName,
-                recentChat = it.recentChat,
+                title = it.title,
                 picture = it.picture,
-                nameSpace = it.nameSpace
+                roomId = it.roomId
             )
         }
 

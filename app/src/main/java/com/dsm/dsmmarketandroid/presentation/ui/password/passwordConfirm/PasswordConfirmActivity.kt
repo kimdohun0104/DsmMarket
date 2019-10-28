@@ -14,6 +14,7 @@ import org.jetbrains.anko.toast
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PasswordConfirmActivity : BaseActivity<ActivityPasswordConfirmBinding>() {
+
     override val layoutResourceId: Int
         get() = R.layout.activity_password_confirm
 
@@ -23,17 +24,13 @@ class PasswordConfirmActivity : BaseActivity<ActivityPasswordConfirmBinding>() {
         super.onCreate(savedInstanceState)
         tb_password_confirm.setNavigationOnClickListener { finish() }
 
-        et_original_password.setEditorActionListener(EditorInfo.IME_ACTION_DONE) { viewModel.confirmPassword() }
+        et_original_password.setEditorActionListener(EditorInfo.IME_ACTION_DONE) { if (btn_confirm_password.isClickable) viewModel.confirmPassword() }
 
-        viewModel.intentChangePassword.observe(this, Observer {
-            startActivity<ChangePasswordActivity>("email" to it.first, "authCode" to it.second)
-        })
+        viewModel.intentChangePasswordEvent.observe(this, Observer { startActivity<ChangePasswordActivity>() })
 
         viewModel.finishActivityEvent.observe(this, Observer { finish() })
 
-        viewModel.toastInvalidPasswordEvent.observe(this, Observer { toast(getString(R.string.fail_diff_password)) })
-
-        viewModel.toastServerErrorEvent.observe(this, Observer { toast(getString(R.string.fail_server_error)) })
+        viewModel.toastEvent.observe(this, Observer { toast(it) })
 
         binding.viewModel = viewModel
     }

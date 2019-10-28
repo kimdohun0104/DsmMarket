@@ -12,6 +12,7 @@ import org.jetbrains.anko.toast
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ChangeNickActivity : BaseActivity<ActivityChangeNickBinding>() {
+
     override val layoutResourceId: Int
         get() = R.layout.activity_change_nick
 
@@ -22,13 +23,11 @@ class ChangeNickActivity : BaseActivity<ActivityChangeNickBinding>() {
         tb_change_name.setNavigationOnClickListener { finish() }
         binding.nick = intent.getStringExtra("nick")
 
-        et_nick.setEditorActionListener(EditorInfo.IME_ACTION_DONE) { viewModel.changeNick() }
+        et_nick.setEditorActionListener(EditorInfo.IME_ACTION_DONE) { if (btn_change_nick.isClickable) viewModel.changeNick() }
 
         viewModel.finishActivityEvent.observe(this, Observer { finish() })
 
-        viewModel.toastExistentNickEvent.observe(this, Observer { toast(getString(R.string.fail_existent_nick)) })
-
-        viewModel.toastServerErrorEvent.observe(this, Observer { toast(getString(R.string.fail_server_error)) })
+        viewModel.toastEvent.observe(this, Observer { toast(it) })
 
         binding.viewModel = viewModel
     }

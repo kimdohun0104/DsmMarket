@@ -40,8 +40,10 @@ class MeFragment : BaseFragment<FragmentMeBinding>() {
         cl_logout.setOnClickListener { LogoutDialog().show(childFragmentManager, "") }
     }
 
-    override fun onResume() {
-        activity?.title = prefHelper.getUserNick() + getString(R.string.my_page)
-        super.onResume()
+    override fun onHiddenChanged(hidden: Boolean) {
+        if (!hidden) {
+            activity?.title = prefHelper.getUserNick() + getString(R.string.my_page)
+        }
+        super.onHiddenChanged(hidden)
     }
 }

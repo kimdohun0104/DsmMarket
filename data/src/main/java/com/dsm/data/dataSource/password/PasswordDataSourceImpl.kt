@@ -6,11 +6,11 @@ import io.reactivex.Flowable
 import retrofit2.Response
 
 class PasswordDataSourceImpl(private val api: Api) : PasswordDataSource {
-    override fun confirmPassword(password: String): Flowable<Response<Map<String, String>>> =
+    override fun confirmPassword(password: String): Flowable<Response<Unit>> =
         api.confirmPassword(password).addSchedulers()
 
-    override fun changePassword(params: Any): Flowable<Response<Unit>> =
-        api.changePassword(params).addSchedulers()
+    override fun changePassword(password: String): Flowable<Response<Unit>> =
+        api.changePassword(password).addSchedulers()
 
     override fun sendTempPassword(email: String): Flowable<Response<Unit>> =
         api.sendTempPassword(email).addSchedulers()

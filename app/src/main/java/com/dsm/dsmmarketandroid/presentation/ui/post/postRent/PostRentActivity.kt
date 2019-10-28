@@ -20,6 +20,7 @@ import org.jetbrains.anko.toast
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PostRentActivity : BaseActivity<ActivityPostRentBinding>() {
+
     override val layoutResourceId: Int
         get() = R.layout.activity_post_rent
 
@@ -57,7 +58,7 @@ class PostRentActivity : BaseActivity<ActivityPostRentBinding>() {
 
         viewModel.finishActivityEvent.observe(this, Observer { finish() })
 
-        viewModel.toastServerErrorEvent.observe(this, Observer { toast(getString(R.string.fail_server_error)) })
+        viewModel.toastEvent.observe(this, Observer { toast(it) })
 
         viewModel.showLoadingDialogEvent.observe(this, Observer { LoadingDialog.show(supportFragmentManager) })
 
@@ -70,9 +71,12 @@ class PostRentActivity : BaseActivity<ActivityPostRentBinding>() {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == SELECT_IMAGE) {
-                val imagePath = MediaPicker.getResult(data)[0]
-                iv_select_image.setImageBitmap(BitmapFactory.decodeFile(imagePath))
-                viewModel.setPhoto(imagePath)
+                val result = MediaPicker.getResult(data)
+                if (result.isNotEmpty()) {
+                    val imagePath = MediaPicker.getResult(data)[0]
+                    iv_select_image.setImageBitmap(BitmapFactory.decodeFile(imagePath))
+                    viewModel.setPhoto(imagePath)
+                }
             } else if (requestCode == CATEGORY) {
                 viewModel.setCategory(data?.getStringExtra("category") ?: "")
             }

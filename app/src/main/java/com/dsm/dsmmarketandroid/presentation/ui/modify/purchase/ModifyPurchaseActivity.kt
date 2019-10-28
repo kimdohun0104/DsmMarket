@@ -42,7 +42,7 @@ class ModifyPurchaseActivity : BaseActivity<ActivityModifyPurchaseBinding>() {
 
         viewModel.finishActivityEvent.observe(this, Observer { finish() })
 
-        viewModel.toastServerErrorEvent.observe(this, Observer { toast(getString(R.string.fail_server_error)) })
+        viewModel.toastEvent.observe(this, Observer { toast(it) })
 
         binding.viewModel = viewModel
     }

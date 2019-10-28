@@ -13,7 +13,7 @@ class SearchViewModel(
     private val deleteSearchHistoryUseCase: DeleteSearchHistoryUseCase
 ) : BaseViewModel() {
 
-    val searchText = MutableLiveData<String>().apply { value = "" }
+    val searchText = MutableLiveData<String>()
 
     val searchHistoryList = MutableLiveData<List<String>>()
     val intentSearchResult = MutableLiveData<String>()
@@ -23,7 +23,6 @@ class SearchViewModel(
     val finishActivityEvent = SingleLiveEvent<Any>()
 
     fun search() {
-        if (!isSearchEnable.value!!) return
         intentSearchResult.value = searchText.value!!
         finishActivityEvent.call()
     }

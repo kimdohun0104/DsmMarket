@@ -5,13 +5,16 @@ import com.dsm.data.remote.Api
 import com.dsm.data.remote.entity.ChatRoomEntity
 import com.dsm.data.remote.entity.ChatRoomListEntity
 import io.reactivex.Flowable
+import retrofit2.Response
 
 class ChatDataSourceImpl(private val api: Api) : ChatDataSource {
 
-    override fun createRoom(postId: Int, type: Int): Flowable<Map<String, String>> =
+    override fun createRoom(postId: Int, type: Int): Flowable<Map<String, Int>> =
         api.createRoom(postId, type).addSchedulers()
 
     override fun getChatRoom(): Flowable<ChatRoomListEntity> =
         api.getChatRoom().addSchedulers()
 
+    override fun joinRoom(roomId: Int): Flowable<Response<HashMap<String, String>>> =
+        api.joinRoom(roomId).addSchedulers()
 }

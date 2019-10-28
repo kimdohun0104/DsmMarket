@@ -29,7 +29,7 @@ class PostCategoryActivity : BaseActivity<ActivityPostCategoryBinding>() {
 
         viewModel.categoryList.observe(this, Observer { adapter.addItems(it) })
 
-        viewModel.serverErrorEvent.observe(this, Observer { toast(getString(R.string.fail_server_error)) })
+        viewModel.toastEvent.observe(this, Observer { toast(it) })
 
         viewModel.selectedCategory.observe(this, Observer {
             Intent().apply {

@@ -1,7 +1,6 @@
 package com.dsm.dsmmarketandroid.presentation.ui.rentList
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
@@ -17,9 +16,7 @@ class RentListViewModel(
 ) : BaseViewModel() {
 
     val networkState: LiveData<NetworkState>
-    val rentListItems: LiveData<PagedList<ProductModel>>
-
-    val intentRentDetail = MutableLiveData<Int>()
+    val rentItems: LiveData<PagedList<ProductModel>>
 
     init {
         val pagedListConfig = PagedList.Config.Builder()
@@ -31,10 +28,10 @@ class RentListViewModel(
         val rentModelDataFactory = rentDataFactory.mapByPage(productModelMapper::mapFrom)
         networkState = Transformations.switchMap(rentDataFactory.mutableLiveData) { it.networkState }
 
-        rentListItems = LivePagedListBuilder(rentModelDataFactory, pagedListConfig).build()
+        rentItems = LivePagedListBuilder(rentModelDataFactory, pagedListConfig).build()
     }
 
     fun refreshList() {
-        rentListItems.value?.dataSource?.invalidate()
+        rentItems.value?.dataSource?.invalidate()
     }
 }

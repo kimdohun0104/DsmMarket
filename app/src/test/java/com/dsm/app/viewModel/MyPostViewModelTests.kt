@@ -1,28 +1,26 @@
 package com.dsm.app.viewModel
 
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.dsm.app.BaseTest
 import com.dsm.domain.entity.Product
 import com.dsm.domain.usecase.CompletePurchaseUseCase
 import com.dsm.domain.usecase.CompleteRentUseCase
 import com.dsm.domain.usecase.GetMyPurchaseUseCase
 import com.dsm.domain.usecase.GetMyRentUseCase
+import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.mapper.ProductModelMapper
 import com.dsm.dsmmarketandroid.presentation.model.ProductModel
 import com.dsm.dsmmarketandroid.presentation.ui.myPost.MyPostViewModel
 import com.jraska.livedata.test
 import io.reactivex.Flowable
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertTrue
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
-import org.mockito.MockitoAnnotations
+import java.io.IOException
 
-class MyPostViewModelTests {
-
-    @Rule
-    @JvmField
-    val instantTaskExecutorRule = InstantTaskExecutorRule()
+class MyPostViewModelTests : BaseTest() {
 
     @Mock
     private lateinit var getMyPurchaseUseCase: GetMyPurchaseUseCase
@@ -42,30 +40,79 @@ class MyPostViewModelTests {
 
     @Before
     fun init() {
-        MockitoAnnotations.initMocks(this)
         viewModel = MyPostViewModel(getMyPurchaseUseCase, getMyRentUseCase, completePurchaseUseCase, completeRentUseCase, productModelMapper)
     }
 
     @Test
-    fun getMyPurchase() {
+    fun `isPurchaseEmpty value test`() {
+        viewModel.run {
+            purchaseList.value = listOf(ProductModel(0, "", "", "", ""))
+            assertFalse(isPurchaseEmpty.test().value())
+
+            purchaseList.value = listOf()
+            assertTrue(isPurchaseEmpty.test().value())
+        }
+    }
+
+    @Test
+    fun `isRentEmpty value test`() {
+        viewModel.run {
+            rentList.value = listOf(ProductModel(0, "", "", "", ""))
+            assertFalse(isRentEmpty.test().value())
+
+            rentList.value = listOf()
+            assertTrue(isRentEmpty.test().value())
+        }
+    }
+
+    @Test
+    fun `get my purchase success test`() {
         val response = listOf(Product(0, "TITLE", "IMG", "CREATED_AT", "PRICE"))
         `when`(getMyPurchaseUseCase.create(Unit))
             .thenReturn(Flowable.just(response))
 
         viewModel.getMyPurchase()
 
-        viewModel.purchaseList.test().assertValue(productModelMapper.mapFrom(response))
+        viewModel.run {
+            purchaseList.test().assertValue(productModelMapper.mapFrom(response))
+            hidePurchaseRefresh.test().assertHasValue()
+            hidePurchaseLoadingEvent.test().assertHasValue()
+        }
     }
 
     @Test
-    fun getMyRent() {
+    fun `get my purchase failed test`() {
+        `when`(getMyPurchaseUseCase.create(Unit))
+            .thenReturn(Flowable.error(IOException()))
+
+        viewModel.getMyPurchase()
+
+        viewModel.toastEvent.test().assertValue(R.string.fail_server_error)
+    }
+
+    @Test
+    fun `get my rent success test`() {
         val response = listOf(Product(0, "TITLE", "IMG", "CREATED_AT", "PRICE"))
         `when`(getMyRentUseCase.create(Unit))
             .thenReturn(Flowable.just(response))
 
         viewModel.getMyRent()
 
-        viewModel.rentList.test().assertValue(productModelMapper.mapFrom(response))
+        viewModel.run {
+            rentList.test().assertValue(productModelMapper.mapFrom(response))
+            hideRentLoadingEvent.test().assertHasValue()
+            hideRentRefresh.test().assertHasValue()
+        }
+    }
+
+    @Test
+    fun `get my rent failed test`() {
+        `when`(getMyRentUseCase.create(Unit))
+            .thenReturn(Flowable.error(IOException()))
+
+        viewModel.getMyRent()
+
+        viewModel.toastEvent.test().assertValue(R.string.fail_server_error)
     }
 
     @Test
@@ -83,6 +130,19 @@ class MyPostViewModelTests {
     }
 
     @Test
+    fun `complete purchase failed test`() {
+        val purchaseList = listOf(ProductModel(0, "", "", "", ""))
+        viewModel.purchaseList.value = purchaseList
+
+        `when`(completePurchaseUseCase.create(purchaseList[0].postId))
+            .thenReturn(Flowable.error(IOException()))
+
+        viewModel.completePurchase(0)
+
+        viewModel.toastEvent.test().assertValue(R.string.fail_server_error)
+    }
+
+    @Test
     fun completeRentSuccess() {
         val rentList = listOf(ProductModel(0, "TITLE", "IMG", "CREATED_AT", "PRICE"))
         viewModel.rentList.value = rentList
@@ -94,5 +154,18 @@ class MyPostViewModelTests {
 
         viewModel.dismissEvent.test().assertHasValue()
         viewModel.deletePositionFromRent.test().assertValue(0)
+    }
+
+    @Test
+    fun `complete rent failed test`() {
+        val rentList = listOf(ProductModel(0, "", "", "", ""))
+        viewModel.rentList.value = rentList
+
+        `when`(completeRentUseCase.create(rentList[0].postId))
+            .thenReturn(Flowable.error(IOException()))
+
+        viewModel.completeRent(0)
+
+        viewModel.toastEvent.test().assertValue(R.string.fail_server_error)
     }
 }

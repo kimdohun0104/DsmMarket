@@ -40,6 +40,7 @@
 	<string name="chatting">chatting</string>
 	<string name="me">ME!</string>
 	<string name="my_page">\'s my page</string>
+	<string name="success_change_nick">Success for change nick</string>
 
 	<string name="post_purchase_product">Purchase Product Registration</string>
 	<string name="post_rent_product">Rent Product Registration</string>

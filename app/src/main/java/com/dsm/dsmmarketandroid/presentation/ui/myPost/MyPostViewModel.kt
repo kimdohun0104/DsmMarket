@@ -6,6 +6,7 @@ import com.dsm.domain.usecase.CompletePurchaseUseCase
 import com.dsm.domain.usecase.CompleteRentUseCase
 import com.dsm.domain.usecase.GetMyPurchaseUseCase
 import com.dsm.domain.usecase.GetMyRentUseCase
+import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.base.BaseViewModel
 import com.dsm.dsmmarketandroid.presentation.mapper.ProductModelMapper
 import com.dsm.dsmmarketandroid.presentation.model.ProductModel
@@ -24,7 +25,7 @@ class MyPostViewModel(
 
     val dismissEvent = SingleLiveEvent<Any>()
 
-    val toastServerErrorEvent = SingleLiveEvent<Any>()
+    val toastEvent = SingleLiveEvent<Int>()
 
     val deletePositionFromPurchase = MutableLiveData<Int>()
     val deletePositionFromRent = MutableLiveData<Int>()
@@ -47,7 +48,7 @@ class MyPostViewModel(
                     hidePurchaseLoadingEvent.call()
                     hidePurchaseRefresh.call()
                 }, {
-                    toastServerErrorEvent.call()
+                    toastEvent.value = R.string.fail_server_error
                 })
         )
     }
@@ -61,7 +62,7 @@ class MyPostViewModel(
                     hideRentLoadingEvent.call()
                     hideRentRefresh.call()
                 }, {
-                    toastServerErrorEvent.call()
+                    toastEvent.value = R.string.fail_server_error
                 })
         )
     }
@@ -73,7 +74,7 @@ class MyPostViewModel(
                     dismissEvent.call()
                     deletePositionFromPurchase.value = position
                 }, {
-                    toastServerErrorEvent.call()
+                    toastEvent.value = R.string.fail_server_error
                 })
         )
     }
@@ -85,7 +86,7 @@ class MyPostViewModel(
                     dismissEvent.call()
                     deletePositionFromRent.value = position
                 }, {
-                    toastServerErrorEvent.call()
+                    toastEvent.value = R.string.fail_server_error
                 })
         )
     }

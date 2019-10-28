@@ -4,6 +4,7 @@ import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import com.dsm.domain.usecase.GetRentDetailUseCase
 import com.dsm.domain.usecase.ModifyRentUseCase
+import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.base.BaseViewModel
 import com.dsm.dsmmarketandroid.presentation.mapper.RentDetailModelMapper
 import com.dsm.dsmmarketandroid.presentation.util.SingleLiveEvent
@@ -25,7 +26,7 @@ class ModifyRentViewModel(
 
     val finishActivityEvent = SingleLiveEvent<Any>()
 
-    val toastServerErrorEvent = SingleLiveEvent<Any>()
+    val toastEvent = SingleLiveEvent<Int>()
 
     private fun isBlankExist() = title.isValueBlank() || price.isValueBlank()
         || photo.value == null || content.isValueBlank() || category.isValueBlank()
@@ -64,7 +65,7 @@ class ModifyRentViewModel(
                     category.value = it.category
                     rentTime.value = it.possibleTime
                 }, {
-                    toastServerErrorEvent.call()
+                    toastEvent.value = R.string.fail_server_error
                 })
         )
     }
@@ -83,7 +84,7 @@ class ModifyRentViewModel(
             ).subscribe({
                 finishActivityEvent.call()
             }, {
-                toastServerErrorEvent.call()
+                toastEvent.value = R.string.fail_server_error
             })
         )
     }
