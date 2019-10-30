@@ -19,13 +19,13 @@
             style="@style/ToolBarStyle.Event"
             android:layout_width="0dp"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorWhite"
+            android:background="@color/colorWhiteBlack"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:navigationIcon="@drawable/ic_back_black"
             app:title="@string/sign_up"
-            app:titleTextColor="@color/colorBlack" />
+            app:titleTextColor="@color/colorBlackWhite" />
 
         <View
             android:layout_width="0dp"

@@ -26,8 +26,8 @@ class CommentActivity : BaseActivity<ActivityCommentBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        tb_comment.setNavigationOnClickListener { finish() }
-        setSupportActionBar(tb_comment)
+        tb_comment_list.setNavigationOnClickListener { finish() }
+        setSupportActionBar(tb_comment_list)
 
         val adapter = CommentListAdapter(viewModel)
         rv_comment.adapter = adapter

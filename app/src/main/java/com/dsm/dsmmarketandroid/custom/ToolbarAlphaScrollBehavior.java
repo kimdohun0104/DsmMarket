@@ -1,6 +1,7 @@
 package com.dsm.dsmmarketandroid.custom;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.util.AttributeSet;
 import android.view.MenuItem;
 import android.view.View;
@@ -45,14 +46,17 @@ public class ToolbarAlphaScrollBehavior extends CoordinatorLayout.Behavior<andro
         MenuItem menuItem = child.getMenu().getItem(0);
         if (offset > 400) {
             child.setNavigationIcon(R.drawable.ic_back_black);
-            child.setTitleTextColor(context.getResources().getColor(R.color.colorBlack));
-            child.setOverflowIcon(context.getDrawable(R.drawable.ic_menu_black));
+            child.setTitleTextColor(context.getResources().getColor(R.color.colorBlackWhite));
+            if (!((context.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES)) {
+                child.setOverflowIcon(context.getDrawable(R.drawable.ic_menu_black));
+            }
+
             if (!Objects.equals(menuItem.getIcon().getConstantState(), Objects.requireNonNull(context.getDrawable(R.drawable.ic_heart_full_red)).getConstantState()))
-                menuItem.setIcon(R.drawable.ic_heart_empty_black);
+                menuItem.setIcon(R.drawable.ic_heart_black);
         } else {
             child.setNavigationIcon(R.drawable.ic_back_white);
             child.setTitleTextColor(context.getResources().getColor(R.color.colorWhite));
-            child.setOverflowIcon(context.getDrawable(R.drawable.ic_menu));
+            child.setOverflowIcon(context.getDrawable(R.drawable.ic_menu_white));
             if (!Objects.equals(menuItem.getIcon().getConstantState(), Objects.requireNonNull(context.getDrawable(R.drawable.ic_heart_full_red)).getConstantState()))
                 menuItem.setIcon(R.drawable.ic_heart_white);
         }

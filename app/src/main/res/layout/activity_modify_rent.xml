@@ -23,13 +23,13 @@
             style="@style/ToolBarStyle.Event"
             android:layout_width="0dp"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorWhite"
+            android:background="@color/colorWhiteBlack"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:navigationIcon="@drawable/ic_back_black"
             app:title="@string/post_rent_product"
-            app:titleTextColor="@color/colorBlack" />
+            app:titleTextColor="@color/colorBlackWhite" />
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/et_title"
@@ -68,7 +68,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/one_time"
-            android:textColor="@{viewModel.unit.equals(String.valueOf(0)) ? @color/colorBlack : @color/colorGrey}"
+            android:textColor="@{viewModel.unit.equals(String.valueOf(0)) ? @color/colorBlackWhite : @color/colorGrey}"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintRight_toLeftOf="@id/tv_one_hour"
@@ -84,7 +84,7 @@
             android:text="@string/one_hour"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:textColor="@{viewModel.unit.equals(String.valueOf(1)) ? @color/colorBlack : @color/colorGrey}"
+            android:textColor="@{viewModel.unit.equals(String.valueOf(1)) ? @color/colorBlackWhite : @color/colorGrey}"
             app:layout_constraintRight_toRightOf="@id/et_price"
             app:layout_constraintTop_toTopOf="@id/et_price"
             app:layout_constraintBottom_toBottomOf="@id/et_price"
@@ -111,7 +111,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{viewModel.category}"
-                android:textColor="@color/colorBlack"
+                android:textColor="@color/colorBlackWhite"
                 android:textSize="18sp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent"

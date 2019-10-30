@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#101010</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorPrimaryLight">#2c2c2c</color>
+
+    <color name="colorPrimaryGrey">#51565b</color>
+    <color name="colorPrimaryDarkGreyDark">#7d8388</color>
+
+    <color name="colorWhiteBlack">#000000</color>
+    <color name="colorBlackWhite">#ffffff</color>
+    <color name="colorWhitePrimaryLight">#2c2c2c</color>
+
+    <color name="colorRed">#c97b63</color>
+    <color name="colorSky">#82b3c9</color>
+    <color name="colorGreen">#88c399</color>
+
+    <color name="colorFoodCategory">#73b1a8</color>
+    <color name="colorBookCategory">#6e8ebe</color>
+    <color name="colorSportsCategory">#c6785e</color>
+    <color name="colorNecessityCategory">#caa154</color>
+    <color name="colorDeviceCategory">#6367c7</color>
+    <color name="colorClothCategory">#c571a6</color>
+    <color name="colorEtcCategory">#58a9c7</color>
+</resources>
