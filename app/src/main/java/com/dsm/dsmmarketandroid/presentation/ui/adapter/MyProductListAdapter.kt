@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.dsm.dsmmarketandroid.databinding.ItemMyPostBinding
 import com.dsm.dsmmarketandroid.presentation.model.ProductModel
 import com.dsm.dsmmarketandroid.presentation.ui.modify.purchase.ModifyPurchaseActivity
+import com.dsm.dsmmarketandroid.presentation.ui.modify.rent.ModifyRentActivity
 import com.dsm.dsmmarketandroid.presentation.ui.myPost.CompleteDialog
 import com.dsm.dsmmarketandroid.presentation.ui.purchaseDetail.PurchaseDetailActivity
 import com.dsm.dsmmarketandroid.presentation.ui.rentDetail.RentDetailActivity
@@ -62,7 +63,13 @@ class MyProductListAdapter(
                 )
                 context.startActivity(intent, options.toBundle())
             }
-            binding.ivEdit.setOnClickListener { context.startActivity<ModifyPurchaseActivity>("post_id" to item.postId) }
+            binding.ivEdit.setOnClickListener {
+                if (type == ProductType.PURCHASE)
+                    context.startActivity<ModifyPurchaseActivity>("post_id" to item.postId)
+                else
+                    context.startActivity<ModifyRentActivity>("post_id" to item.postId)
+            }
+
 
             binding.ivComplete.setOnClickListener {
                 CompleteDialog().apply {

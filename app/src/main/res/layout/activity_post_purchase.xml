@@ -24,13 +24,13 @@
             style="@style/ToolBarStyle.Event"
             android:layout_width="0dp"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorWhite"
+            android:background="@color/colorWhiteBlack"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:navigationIcon="@drawable/ic_back_black"
             app:title="@string/post_purchase_product"
-            app:titleTextColor="@color/colorBlack" />
+            app:titleTextColor="@color/colorBlackWhite" />
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/et_title"
@@ -103,7 +103,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{viewModel.category}"
-                android:textColor="@color/colorBlack"
+                android:textColor="@color/colorBlackWhite"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="@id/tv_category"
                 app:layout_constraintLeft_toLeftOf="@id/tv_category"

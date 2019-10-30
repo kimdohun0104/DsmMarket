@@ -21,7 +21,7 @@
             android:layout_marginStart="14dp"
             android:layout_marginTop="14dp"
             android:text="@{search}"
-            android:textColor="@color/colorBlack"
+            android:textColor="@color/colorBlackWhite"
             android:textSize="16sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

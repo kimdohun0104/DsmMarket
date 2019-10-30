@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:text="@string/ask_purchase_complete"
         android:textSize="18sp"
-        android:textColor="@color/colorBlack"
+        android:textColor="@color/colorBlackWhite"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
