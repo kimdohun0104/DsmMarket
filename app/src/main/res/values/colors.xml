@@ -4,10 +4,17 @@
     <color name="colorPrimaryDark">#087f23</color>
     <color name="colorPrimaryLight">#80e27e</color>
 
+    <color name="colorPrimaryGrey">#4caf50</color>
+    <color name="colorPrimaryDarkGreyDark">#087f23</color>
+
     <color name="colorAccent">#4caf50</color>
 
     <color name="colorBlack">#000000</color>
     <color name="colorWhite">#ffffff</color>
+
+    <color name="colorWhiteBlack">#ffffff</color>
+    <color name="colorBlackWhite">#000000</color>
+    <color name="colorWhitePrimaryLight">#ffffff</color>
 
     <color name="colorGrey">#9e9e9e</color>
     <color name="colorGrey_3">#BDBDBD</color>
@@ -16,4 +23,12 @@
     <color name="colorRed">#ffab91</color>
     <color name="colorSky">#b3e5fc</color>
     <color name="colorGreen">#b9f6ca</color>
+
+    <color name="colorFoodCategory">#A4E3D9</color>
+    <color name="colorBookCategory">#9FBEF1</color>
+    <color name="colorSportsCategory">#FCA88B</color>
+    <color name="colorNecessityCategory">#FFD282</color>
+    <color name="colorDeviceCategory">#9695FB</color>
+    <color name="colorClothCategory">#F9A1D7</color>
+    <color name="colorEtcCategory">#8CDBFA</color>
 </resources>

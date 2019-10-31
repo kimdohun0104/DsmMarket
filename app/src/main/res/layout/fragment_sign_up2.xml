@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:text="@string/gender"
-            android:textColor="@color/colorBlack"
+            android:textColor="@color/colorBlackWhite"
             android:textSize="16sp"
             app:layout_constraintLeft_toLeftOf="@id/til_name"
             app:layout_constraintTop_toBottomOf="@id/til_name" />
@@ -62,7 +62,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:text="@string/grade"
-            android:textColor="@color/colorBlack"
+            android:textColor="@color/colorBlackWhite"
             android:textSize="16sp"
             app:layout_constraintLeft_toLeftOf="@id/tv_gender"
             app:layout_constraintTop_toBottomOf="@id/tv_gender" />

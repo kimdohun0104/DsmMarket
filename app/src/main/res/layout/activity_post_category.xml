@@ -22,13 +22,13 @@
             style="@style/ToolBarStyle.Event"
             android:layout_width="0dp"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorWhite"
+            android:background="@color/colorWhiteBlack"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:navigationIcon="@drawable/ic_back_black"
             app:title="@string/category"
-            app:titleTextColor="@color/colorBlack" />
+            app:titleTextColor="@color/colorBlackWhite" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_post_category"

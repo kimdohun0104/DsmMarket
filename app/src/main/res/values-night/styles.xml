@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppDarkTheme" parent="AppTheme">
+        <item name="android:statusBarColor">@color/colorPrimaryDark</item>
+        <item name="android:windowBackground">#121212</item>
+    </style>
+
+    <style name="WhiteAppTheme" parent="AppTheme">
+        <item name="android:statusBarColor">@color/colorPrimaryDark</item>
+    </style>
+</resources>

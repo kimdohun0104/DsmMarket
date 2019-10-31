@@ -29,22 +29,22 @@
                     android:id="@+id/rv_detail_image"
                     android:layout_width="match_parent"
                     android:layout_height="310dp"
-                    bind:detailImages="@{viewModel.purchaseDetail.img}"
                     android:transitionName="image"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    bind:detailImages="@{viewModel.purchaseDetail.img}" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="18dp"
                     android:layout_marginTop="18dp"
+                    android:layout_marginEnd="20dp"
+                    android:maxLines="2"
                     android:text="@{viewModel.purchaseDetail.title}"
-                    android:textColor="@color/colorBlack"
+                    android:textColor="@color/colorBlackWhite"
                     android:textSize="21sp"
                     android:textStyle="bold"
-                    android:transitionName="title"
-                    android:layout_marginEnd="20dp"
-                    android:maxLines="2"/>
+                    android:transitionName="title" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -75,22 +75,22 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="18dp"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="4dp">
+                    android:layout_marginTop="4dp"
+                    android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="2dp"
                         android:text="@string/price"
-                        android:textColor="@color/colorBlack"
+                        android:textColor="@color/colorBlackWhite"
                         android:textSize="16sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/colon"
-                        android:textColor="@color/colorBlack"
+                        android:textColor="@color/colorBlackWhite"
                         android:textSize="16sp" />
 
                     <TextView
@@ -98,7 +98,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="4dp"
                         android:text="@{viewModel.purchaseDetail.price}"
-                        android:textColor="@color/colorBlack"
+                        android:textColor="@color/colorBlackWhite"
                         android:textSize="16sp" />
                 </LinearLayout>
 
@@ -108,8 +108,8 @@
                     android:layout_marginStart="18dp"
                     android:layout_marginTop="20dp"
                     android:text="@{viewModel.purchaseDetail.content}"
-                    android:textColor="@color/colorBlack"
-                    android:textSize="18sp"/>
+                    android:textColor="@color/colorBlackWhite"
+                    android:textSize="18sp" />
 
 
                 <Button
@@ -120,7 +120,7 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginEnd="30dp"
                     android:layout_marginBottom="20dp"
-                    android:background="@color/colorPrimaryLight"
+                    android:background="@color/colorPrimaryGrey"
                     android:text="@string/deal_with_chatting"
                     android:textColor="@color/colorWhite"
                     android:textSize="14sp" />
@@ -143,7 +143,7 @@
                         android:layout_marginStart="18dp"
                         android:layout_marginEnd="10dp"
                         android:text="@string/comment"
-                        android:textColor="@color/colorBlack"
+                        android:textColor="@color/colorBlackWhite"
                         android:textSize="17sp" />
 
                     <TextView
@@ -182,14 +182,14 @@
                     android:layout_marginTop="18dp"
                     android:layout_marginBottom="15dp"
                     android:text="@string/related_product"
-                    android:textColor="@color/colorBlack"
+                    android:textColor="@color/colorBlackWhite"
                     android:textSize="18sp" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_related"
                     android:layout_width="match_parent"
                     android:layout_height="130dp"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
                 <View
                     android:layout_width="match_parent"
@@ -200,35 +200,29 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="15dp"
                     android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="15dp">
+                    android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="18dp"
                         android:text="@string/recommend_product"
-                        android:textColor="@color/colorBlack"
+                        android:textColor="@color/colorBlackWhite"
                         android:textSize="18sp" />
 
                     <View
                         android:layout_width="0dp"
                         android:layout_height="1dp"
                         android:layout_weight="1" />
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
-                        android:layout_marginEnd="14dp"
-                        android:src="@drawable/ic_right_arrow_grey" />
                 </LinearLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_recommend"
                     android:layout_width="match_parent"
                     android:layout_height="130dp"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
 
@@ -236,11 +230,11 @@
             android:id="@+id/tb_purchase_detail"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorWhite"
+            android:background="@color/colorWhiteBlack"
             app:layout_behavior=".custom.ToolbarAlphaScrollBehavior"
             app:navigationIcon="@drawable/ic_back_white"
-            app:titleTextColor="@color/colorWhite"
-            app:title="@{viewModel.purchaseDetail.title}"/>
+            app:title="@{viewModel.purchaseDetail.title}"
+            app:titleTextColor="@color/colorWhite" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
