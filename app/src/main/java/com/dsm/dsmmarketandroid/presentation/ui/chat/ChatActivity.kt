@@ -13,6 +13,8 @@ import io.socket.client.Socket
 import io.socket.emitter.Emitter
 import kotlinx.android.synthetic.main.activity_chat.*
 import org.json.JSONObject
+import java.text.SimpleDateFormat
+import java.util.*
 
 class ChatActivity : AppCompatActivity() {
 
@@ -42,8 +44,12 @@ class ChatActivity : AppCompatActivity() {
         iv_send_chat.setOnClickListener {
             val msg = et_chat.text.toString().trim()
             if (msg.isNotBlank()) {
-                socket.emit("sendMessage", JSONObject().apply { put("msg", msg) })
-                adapter.addMyChatItem(ChatModel.MyChat(msg, ""))
+                val time = SimpleDateFormat("H:mm", Locale.KOREA).format(Date(System.currentTimeMillis()))
+                socket.emit("sendMessage", JSONObject().apply {
+                    put("msg", msg)
+                    put("time", time)
+                })
+                adapter.addMyChatItem(ChatModel.MyChat(msg, time))
                 et_chat.setText("")
                 rv_chat.scrollToPosition(adapter.listItems.size - 1)
             }
@@ -58,7 +64,7 @@ class ChatActivity : AppCompatActivity() {
     private val broadcastMessage = Emitter.Listener {
         runOnUiThread {
             val data = it[0] as JSONObject
-            adapter.addForeignChatItem(ChatModel.ForeignChat(data.getString("msg"), ""))
+            adapter.addForeignChatItem(ChatModel.ForeignChat(data.getString("msg"), data.getString("time")))
             rv_chat.scrollToPosition(adapter.listItems.size - 1)
         }
     }

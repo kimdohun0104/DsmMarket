@@ -5,7 +5,7 @@ import io.reactivex.Flowable
 
 interface RecommendDataSource {
 
-    fun getRecommendProduct(postId: Int): Flowable<RecommendListEntity>
+    fun getRecommendProduct(): Flowable<RecommendListEntity>
 
     fun getRelatedProduct(postId: Int, type: Int): Flowable<RecommendListEntity>
 }

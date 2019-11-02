@@ -67,6 +67,7 @@ class ChatListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         fun bind() {
             val item = listItems[adapterPosition] as ChatModel.Date
             itemView.tv_date.text = item.date
+
         }
     }
 

@@ -63,7 +63,7 @@ class PurchaseDetailActivity : BaseActivity<ActivityPurchaseDetailBinding>() {
 
         viewModel.getPurchaseDetail(postId)
         viewModel.getRelatedProduct(postId)
-        viewModel.getRecommendProduct(postId)
+        viewModel.getRecommendProduct()
 
         viewModel.isInterest.observe(this, Observer {
             if (it) tb_purchase_detail.menu[0].icon = getDrawable(R.drawable.ic_heart_full_red)

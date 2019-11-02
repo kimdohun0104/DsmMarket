@@ -7,8 +7,8 @@ import io.reactivex.Flowable
 
 class RecommendDataSourceImpl(private val api: Api) : RecommendDataSource {
 
-    override fun getRecommendProduct(postId: Int): Flowable<RecommendListEntity> =
-        api.getRecommendProduct(postId).addSchedulers()
+    override fun getRecommendProduct(): Flowable<RecommendListEntity> =
+        api.getRecommendProduct().addSchedulers()
 
     override fun getRelatedProduct(postId: Int, type: Int): Flowable<RecommendListEntity> =
         api.getRelatedProduct(postId, type).addSchedulers()

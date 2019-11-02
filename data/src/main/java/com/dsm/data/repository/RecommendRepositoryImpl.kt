@@ -10,8 +10,8 @@ class RecommendRepositoryImpl(private val recommendDataSource: RecommendDataSour
 
     private val recommendMapper = RecommendMapper()
 
-    override fun getRecommendProduct(postId: Int): Flowable<List<Recommend>> =
-        recommendDataSource.getRecommendProduct(postId).map(recommendMapper::mapFrom)
+    override fun getRecommendProduct(): Flowable<List<Recommend>> =
+        recommendDataSource.getRecommendProduct().map(recommendMapper::mapFrom)
 
     override fun getRelatedProduct(postId: Int, type: Int): Flowable<List<Recommend>> =
         recommendDataSource.getRelatedProduct(postId, type).map(recommendMapper::mapFrom)

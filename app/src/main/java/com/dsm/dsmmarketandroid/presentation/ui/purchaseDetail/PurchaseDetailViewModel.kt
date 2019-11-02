@@ -79,9 +79,9 @@ class PurchaseDetailViewModel(
         }
     }
 
-    fun getRecommendProduct(postId: Int) {
+    fun getRecommendProduct() {
         addDisposable(
-            getRecommendUseCase.create(postId)
+            getRecommendUseCase.create(Unit)
                 .map(recommendModelMapper::mapFrom)
                 .subscribe({
                     recommendList.value = it

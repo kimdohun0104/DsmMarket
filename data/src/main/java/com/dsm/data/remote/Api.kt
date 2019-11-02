@@ -122,7 +122,7 @@ interface Api {
     ): Flowable<RecommendListEntity>
 
     @GET("list/recommend")
-    fun getRecommendProduct(@Query("postId") postId: Int): Flowable<RecommendListEntity>
+    fun getRecommendProduct(): Flowable<RecommendListEntity>
 
     @POST("report/post")
     fun reportPost(@Body params: Any): Flowable<Response<Unit>>
