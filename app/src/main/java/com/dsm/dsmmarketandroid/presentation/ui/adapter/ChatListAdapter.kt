@@ -17,7 +17,7 @@ class ChatListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         private const val ITEM_DATE = 2
     }
 
-    private val listItems = arrayListOf<ChatModel>()
+    val listItems = arrayListOf<ChatModel>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)

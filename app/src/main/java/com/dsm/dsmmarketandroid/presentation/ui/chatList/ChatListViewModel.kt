@@ -33,13 +33,14 @@ class ChatListViewModel(
         )
     }
 
-    fun joinRoom(roomId: Int) {
+    fun joinRoom(roomId: Int, roomTitle: String) {
         addDisposable(
             joinRoomUseCase.create(roomId)
                 .subscribe({
                     intentChatActivityEvent.value = Bundle().apply {
                         putInt("roomId", roomId)
                         putString("email", it)
+                        putString("roomTitle", roomTitle)
                     }
                 }, {
                     toastEvent.value = R.string.fail_server_error

@@ -8,7 +8,7 @@
         android:id="@+id/iv_siren"
         android:layout_width="21dp"
         android:layout_height="21dp"
-        android:src="@drawable/ic_siren"
+        android:src="@drawable/ic_report"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginStart="24dp"
