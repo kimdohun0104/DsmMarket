@@ -51,21 +51,21 @@ class ChatActivity : AppCompatActivity() {
                 })
                 adapter.addMyChatItem(ChatModel.MyChat(msg, time))
                 et_chat.setText("")
-                rv_chat.scrollToPosition(adapter.listItems.size - 1)
+                rv_chat.scrollToPosition(0)
             }
         }
 
         et_chat.setEditorActionListener(EditorInfo.IME_ACTION_SEND) { iv_send_chat.performClick() }
 
         rv_chat.adapter = adapter
-        (rv_chat.layoutManager as LinearLayoutManager).stackFromEnd = true
+        (rv_chat.layoutManager as LinearLayoutManager).reverseLayout = true
     }
 
     private val broadcastMessage = Emitter.Listener {
         runOnUiThread {
             val data = it[0] as JSONObject
             adapter.addForeignChatItem(ChatModel.ForeignChat(data.getString("msg"), data.getString("time")))
-            rv_chat.scrollToPosition(adapter.listItems.size - 1)
+            rv_chat.scrollToPosition(0)
         }
     }
 

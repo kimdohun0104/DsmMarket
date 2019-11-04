@@ -26,6 +26,8 @@ class ChatListFragment : BaseFragment<FragmentChatListBinding>() {
         val adapter = ChatRoomListAdapter(viewModel)
         rv_chat_room.adapter = adapter
 
+        srl_chat.setOnRefreshListener { viewModel.getChatRoom() }
+
         viewModel.getChatRoom()
 
         viewModel.chatRoomList.observe(this, Observer { adapter.addItems(it) })
@@ -33,5 +35,7 @@ class ChatListFragment : BaseFragment<FragmentChatListBinding>() {
         viewModel.toastEvent.observe(this, Observer { toast(it) })
 
         viewModel.intentChatActivityEvent.observe(this, Observer { startActivity<ChatActivity>("bundle" to it) })
+
+        viewModel.hideChatRefreshEvent.observe(this, Observer { srl_chat.isRefreshing = false })
     }
 }

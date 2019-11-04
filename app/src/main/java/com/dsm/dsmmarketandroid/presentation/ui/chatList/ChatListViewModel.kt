@@ -18,6 +18,7 @@ class ChatListViewModel(
 
     val toastEvent = SingleLiveEvent<Int>()
     val intentChatActivityEvent = SingleLiveEvent<Bundle>()
+    val hideChatRefreshEvent = SingleLiveEvent<Any>()
 
     val chatRoomList = MutableLiveData<List<ChatRoomModel>>()
 
@@ -27,6 +28,7 @@ class ChatListViewModel(
                 .map(chatRoomModelMapper::mapFrom)
                 .subscribe({
                     chatRoomList.value = it
+                    hideChatRefreshEvent.call()
                 }, {
                     toastEvent.value = R.string.fail_server_error
                 })
