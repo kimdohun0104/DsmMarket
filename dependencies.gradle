@@ -13,6 +13,7 @@ ext {
     roomVersion = '2.2.0-alpha02'
     pagingVersion = '1.0.1'
     glideVersion = '4.9.0'
+    messageBusVersion = '0.7.5'
 
     // testing
     junitVersion = '4.12'
@@ -61,7 +62,8 @@ ext {
             paging: "android.arch.paging:runtime:$pagingVersion",
             glide: "com.github.bumptech.glide:glide:$glideVersion",
             glideCompiler: "com.github.bumptech.glide:compiler:$glideVersion",
-            rxAndroid: "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
+            rxAndroid: "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion",
+            messageBus: "com.github.UnsignedUSB:MessageBus:$messageBusVersion"
     ]
 
     dataTestDependencies = [

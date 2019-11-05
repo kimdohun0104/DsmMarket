@@ -19,6 +19,12 @@ android {
         versionName "1.0.0-beta1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         resConfigs "kr", "en"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                includeCompileClasspath = true
+            }
+        }
     }
     buildTypes {
         release {
@@ -114,6 +120,9 @@ dependencies {
 
     // rxJava
     implementation dependencies.rxAndroid
+
+    // messageBus
+    implementation dependencies.messageBus
 }
 
 apply plugin: 'com.google.gms.google-services'

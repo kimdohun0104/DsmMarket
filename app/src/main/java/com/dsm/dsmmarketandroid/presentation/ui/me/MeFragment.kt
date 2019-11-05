@@ -15,7 +15,10 @@ import com.dsm.dsmmarketandroid.presentation.ui.myPost.MyPostActivity
 import com.dsm.dsmmarketandroid.presentation.ui.openSource.OpenSourceActivity
 import com.dsm.dsmmarketandroid.presentation.ui.password.passwordConfirm.PasswordConfirmActivity
 import com.dsm.dsmmarketandroid.presentation.ui.recent.RecentActivity
+import com.dsm.dsmmarketandroid.presentation.util.MessageEvents
 import kotlinx.android.synthetic.main.fragment_me.*
+import kr.sdusb.libs.messagebus.MessageBus
+import kr.sdusb.libs.messagebus.Subscribe
 import org.jetbrains.anko.startActivity
 import org.koin.android.ext.android.inject
 
@@ -27,6 +30,8 @@ class MeFragment : BaseFragment<FragmentMeBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        MessageBus.getInstance().register(this)
+        activity?.title = prefHelper.getUserNick() + getString(R.string.my_page)
 
         tv_version.text = BuildConfig.VERSION_NAME
 
@@ -40,10 +45,13 @@ class MeFragment : BaseFragment<FragmentMeBinding>() {
         cl_logout.setOnClickListener { LogoutDialog().show(childFragmentManager, "") }
     }
 
-    override fun onHiddenChanged(hidden: Boolean) {
-        if (!hidden) {
-            activity?.title = prefHelper.getUserNick() + getString(R.string.my_page)
-        }
-        super.onHiddenChanged(hidden)
+    @Subscribe(events = [MessageEvents.NICK_CHANGED_EVENT])
+    fun onNickChanged() {
+        activity?.title = prefHelper.getUserNick() + getString(R.string.my_page)
+    }
+
+    override fun onDestroy() {
+        MessageBus.getInstance().unregister(this)
+        super.onDestroy()
     }
 }

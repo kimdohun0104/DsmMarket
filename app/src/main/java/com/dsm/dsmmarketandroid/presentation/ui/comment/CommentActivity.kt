@@ -10,12 +10,16 @@ import com.dsm.dsmmarketandroid.presentation.base.BaseActivity
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.CommentListAdapter
 import com.dsm.dsmmarketandroid.presentation.ui.addComment.AddCommentActivity
 import com.dsm.dsmmarketandroid.presentation.ui.report.ReportCommentDialog
+import com.dsm.dsmmarketandroid.presentation.util.MessageEvents
 import kotlinx.android.synthetic.main.activity_comment.*
+import kr.sdusb.libs.messagebus.MessageBus
+import kr.sdusb.libs.messagebus.Subscribe
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CommentActivity : BaseActivity<ActivityCommentBinding>() {
+
     override val layoutResourceId: Int
         get() = R.layout.activity_comment
 
@@ -26,8 +30,9 @@ class CommentActivity : BaseActivity<ActivityCommentBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        tb_comment_list.setNavigationOnClickListener { finish() }
         setSupportActionBar(tb_comment_list)
+        tb_comment_list.setNavigationOnClickListener { finish() }
+        MessageBus.getInstance().register(this)
 
         val adapter = CommentListAdapter(viewModel)
         rv_comment.adapter = adapter
@@ -56,6 +61,11 @@ class CommentActivity : BaseActivity<ActivityCommentBinding>() {
         binding.viewModel = viewModel
     }
 
+    @Subscribe(events = [MessageEvents.ADD_COMMENT_EVENT])
+    fun onCommentAdded() {
+        viewModel.getCommentList(postId, type)
+    }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_comment_toolbar, menu)
         return true
@@ -67,4 +77,10 @@ class CommentActivity : BaseActivity<ActivityCommentBinding>() {
         }
         return super.onOptionsItemSelected(item)
     }
+
+    override fun onDestroy() {
+        MessageBus.getInstance().unregister(this)
+        super.onDestroy()
+    }
 }
+
