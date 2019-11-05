@@ -1,5 +1,6 @@
 package com.dsm.domain.repository
 
+import com.dsm.domain.entity.ChatLog
 import com.dsm.domain.entity.ChatRoom
 import io.reactivex.Flowable
 
@@ -10,4 +11,6 @@ interface ChatRepository {
     fun getChatRoom(): Flowable<List<ChatRoom>>
 
     fun joinRoom(roomId: Int): Flowable<String>
+
+    fun getChatLog(roomId: Int, count: Int): Flowable<List<ChatLog>>
 }

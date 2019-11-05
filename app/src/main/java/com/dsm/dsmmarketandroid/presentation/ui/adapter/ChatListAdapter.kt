@@ -13,6 +13,7 @@ class ChatListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     companion object {
         private const val ITEM_MY_CHAT = 0
         private const val ITEM_FOREIGN_CHAT = 1
+        private const val ITEM_LOADING = 2
     }
 
     val listItems = arrayListOf<ChatModel>()
@@ -22,7 +23,7 @@ class ChatListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         return when (viewType) {
             ITEM_MY_CHAT -> MyChatViewHolder(inflater.inflate(R.layout.item_my_chat, parent, false))
             ITEM_FOREIGN_CHAT -> ForeignChatViewHolder(inflater.inflate(R.layout.item_foreign_chat, parent, false))
-            else -> MyChatViewHolder(inflater.inflate(R.layout.item_my_chat, parent, false))
+            else -> LoadingHolder(inflater.inflate(R.layout.item_loading, parent, false))
         }
     }
 
@@ -40,6 +41,7 @@ class ChatListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         when (listItems[position]) {
             is ChatModel.MyChat -> ITEM_MY_CHAT
             is ChatModel.ForeignChat -> ITEM_FOREIGN_CHAT
+            is ChatModel.Loading -> ITEM_LOADING
         }
 
     inner class MyChatViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -58,6 +60,8 @@ class ChatListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         }
     }
 
+    inner class LoadingHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+
     fun addMyChatItem(item: ChatModel.MyChat) {
         listItems.add(0, item)
         notifyItemInserted(0)
@@ -66,5 +70,20 @@ class ChatListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     fun addForeignChatItem(item: ChatModel.ForeignChat) {
         listItems.add(0, item)
         notifyItemInserted(0)
+    }
+
+    fun addItems(items: List<ChatModel>) {
+        listItems.addAll(items)
+        notifyDataSetChanged()
+    }
+
+    fun showLoading() {
+        listItems.add(ChatModel.Loading)
+        notifyDataSetChanged()
+    }
+
+    fun hideLoading() {
+        listItems.remove(ChatModel.Loading)
+        notifyDataSetChanged()
     }
 }

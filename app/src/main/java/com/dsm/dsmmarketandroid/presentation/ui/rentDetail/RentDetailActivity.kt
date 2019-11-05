@@ -15,6 +15,7 @@ import com.dsm.dsmmarketandroid.presentation.ui.chat.ChatActivity
 import com.dsm.dsmmarketandroid.presentation.ui.comment.CommentActivity
 import com.dsm.dsmmarketandroid.presentation.ui.rentImage.RentImageActivity
 import com.dsm.dsmmarketandroid.presentation.ui.report.ReportPostDialog
+import com.dsm.dsmmarketandroid.presentation.util.LoadingDialog
 import com.dsm.dsmmarketandroid.presentation.util.ProductType
 import kotlinx.android.synthetic.main.activity_rent_detail.*
 import org.jetbrains.anko.startActivity
@@ -63,6 +64,10 @@ class RentDetailActivity : BaseActivity<ActivityRentDetailBinding>() {
         viewModel.toastEvent.observe(this, Observer { toast(it) })
 
         viewModel.startChatActivityEvent.observe(this, Observer { startActivity<ChatActivity>("bundle" to it) })
+
+        viewModel.showLoadingDialogEvent.observe(this, Observer { LoadingDialog.show(supportFragmentManager) })
+
+        viewModel.hideLoadingDialogEvent.observe(this, Observer { LoadingDialog.hide() })
 
         binding.viewModel = viewModel
     }

@@ -22,6 +22,9 @@ class ChatListViewModel(
 
     val chatRoomList = MutableLiveData<List<ChatRoomModel>>()
 
+    val showLoadingDialogEvent = SingleLiveEvent<Any>()
+    val hideLoadingDialogEvent = SingleLiveEvent<Any>()
+
     fun getChatRoom() {
         addDisposable(
             getChatRoomUseCase.create(Unit)
@@ -38,6 +41,8 @@ class ChatListViewModel(
     fun joinRoom(roomId: Int, roomTitle: String) {
         addDisposable(
             joinRoomUseCase.create(roomId)
+                .doOnSubscribe { showLoadingDialogEvent.call() }
+                .doOnTerminate { hideLoadingDialogEvent.call() }
                 .subscribe({
                     intentChatActivityEvent.value = Bundle().apply {
                         putInt("roomId", roomId)

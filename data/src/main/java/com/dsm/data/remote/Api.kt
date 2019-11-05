@@ -160,4 +160,10 @@ interface Api {
 
     @GET("room/join/{roomId}")
     fun joinRoom(@Path("roomId") roomId: Int) : Flowable<Response<HashMap<String, String>>>
+
+    @GET("room/chatLog")
+    fun getChatLog(
+        @Query("roomId") roomId: Int,
+        @Query("count") count: Int
+    ) : Flowable<ChatLogListEntity>
 }

@@ -37,6 +37,9 @@ class PurchaseDetailViewModel(
     val finishActivityEvent = SingleLiveEvent<Any>()
     val intentChatActivityEvent = SingleLiveEvent<Bundle>()
 
+    val showLoadingDialogEvent = SingleLiveEvent<Any>()
+    val hideLoadingDialogEvent = SingleLiveEvent<Any>()
+
     fun getPurchaseDetail(postId: Int) {
         addDisposable(
             getPurchaseDetailUseCase.create(postId)
@@ -105,7 +108,9 @@ class PurchaseDetailViewModel(
 
     fun createRoom(postId: Int) {
         addDisposable(
-            createRoomUseCase.create(CreateRoomUseCase.Params(postId, 0))
+            createRoomUseCase.create(CreateRoomUseCase.Params(postId, ProductType.PURCHASE))
+                .doOnSubscribe { showLoadingDialogEvent.call() }
+                .doOnTerminate { hideLoadingDialogEvent.call() }
                 .map { roomId ->
                     joinRoomUseCase.create(roomId)
                         .subscribe({ email ->
