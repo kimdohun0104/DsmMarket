@@ -49,7 +49,7 @@ class ChatActivity : AppCompatActivity() {
         iv_send_chat.setOnClickListener {
             val msg = et_chat.text.toString().trim()
             if (msg.isNotBlank()) {
-                val time = SimpleDateFormat("H:mm", Locale.KOREA).format(Date(System.currentTimeMillis()))
+                val time = SimpleDateFormat("HH:mm", Locale.KOREA).format(Date(System.currentTimeMillis()))
                 socket.emit("sendMessage", JSONObject().apply {
                     put("msg", msg)
                     put("time", time)

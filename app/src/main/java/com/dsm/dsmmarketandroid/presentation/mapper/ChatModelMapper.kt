@@ -5,13 +5,21 @@ import com.dsm.domain.entity.ChatLog
 import com.dsm.dsmmarketandroid.presentation.model.ChatModel
 
 class ChatModelMapper : Mapper<List<ChatLog>, List<ChatModel>> {
-    override fun mapFrom(from: List<ChatLog>): List<ChatModel> =
-        from.map {
+    override fun mapFrom(from: List<ChatLog>): List<ChatModel> {
+        val result = arrayListOf<ChatModel>()
+        var lastDate = from[0].date
+        from.forEach {
             if (it.me) {
-                ChatModel.MyChat(it.message, "")
+                result.add(ChatModel.MyChat(it.message, it.time))
             } else {
-                ChatModel.ForeignChat(it.message, "")
+                result.add(ChatModel.ForeignChat(it.message, it.time))
+            }
+            if (lastDate != it.date) {
+                result.add(ChatModel.Date(lastDate))
+                lastDate = it.date
             }
         }
-
+        result.add(ChatModel.Date(lastDate))
+        return result
+    }
 }

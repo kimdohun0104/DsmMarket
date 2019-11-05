@@ -5,5 +5,7 @@ sealed class ChatModel {
 
     data class ForeignChat(val content: String, val time: String) : ChatModel()
 
+    data class Date(val date: String) : ChatModel()
+
     object Loading : ChatModel()
 }

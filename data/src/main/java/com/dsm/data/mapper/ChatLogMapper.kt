@@ -9,7 +9,9 @@ class ChatLogMapper : Mapper<ChatLogListEntity, List<ChatLog>> {
         from.chatLogList.map {
             ChatLog(
                 me = it.me,
-                message = it.message
+                message = it.message,
+                date = it.createdAt.split("T")[0],
+                time = it.createdAt.split("T")[1].substring(0, 5)
             )
         }
 

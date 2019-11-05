@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.model.ChatModel
+import kotlinx.android.synthetic.main.item_date.view.*
 import kotlinx.android.synthetic.main.item_my_chat.view.*
 
 class ChatListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -13,7 +14,8 @@ class ChatListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     companion object {
         private const val ITEM_MY_CHAT = 0
         private const val ITEM_FOREIGN_CHAT = 1
-        private const val ITEM_LOADING = 2
+        private const val ITEM_DATE = 2
+        private const val ITEM_LOADING = 3
     }
 
     val listItems = arrayListOf<ChatModel>()
@@ -23,6 +25,7 @@ class ChatListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         return when (viewType) {
             ITEM_MY_CHAT -> MyChatViewHolder(inflater.inflate(R.layout.item_my_chat, parent, false))
             ITEM_FOREIGN_CHAT -> ForeignChatViewHolder(inflater.inflate(R.layout.item_foreign_chat, parent, false))
+            ITEM_DATE -> DateHolder(inflater.inflate(R.layout.item_date, parent, false))
             else -> LoadingHolder(inflater.inflate(R.layout.item_loading, parent, false))
         }
     }
@@ -33,6 +36,7 @@ class ChatListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         when (holder) {
             is MyChatViewHolder -> holder.bind()
             is ForeignChatViewHolder -> holder.bind()
+            is DateHolder -> holder.bind()
             else -> {
             }
         }
@@ -41,6 +45,7 @@ class ChatListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         when (listItems[position]) {
             is ChatModel.MyChat -> ITEM_MY_CHAT
             is ChatModel.ForeignChat -> ITEM_FOREIGN_CHAT
+            is ChatModel.Date -> ITEM_DATE
             is ChatModel.Loading -> ITEM_LOADING
         }
 
@@ -60,6 +65,13 @@ class ChatListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         }
     }
 
+    inner class DateHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        fun bind() {
+            val item = listItems[adapterPosition] as ChatModel.Date
+            itemView.tv_date.text = item.date
+        }
+    }
+
     inner class LoadingHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
     fun addMyChatItem(item: ChatModel.MyChat) {
@@ -73,6 +85,7 @@ class ChatListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     fun addItems(items: List<ChatModel>) {
+        listItems.removeAt(listItems.size - 1)
         listItems.addAll(items)
         notifyDataSetChanged()
     }
