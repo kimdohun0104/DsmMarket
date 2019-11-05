@@ -102,6 +102,7 @@ class RentDetailViewModel(
                             startChatActivityEvent.value = Bundle().apply {
                                 putString("email", email)
                                 putInt("roomId", roomId)
+                                putString("roomTitle", rentDetail.value?.title)
                             }
                         }, {
                             toastEvent.value = R.string.fail_server_error

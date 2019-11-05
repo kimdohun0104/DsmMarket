@@ -117,6 +117,7 @@ class PurchaseDetailViewModel(
                             intentChatActivityEvent.value = Bundle().apply {
                                 putString("email", email)
                                 putInt("roomId", roomId)
+                                putString("roomTitle", purchaseDetail.value?.title)
                             }
                         }, {
                             toastEvent.value = R.string.fail_server_error

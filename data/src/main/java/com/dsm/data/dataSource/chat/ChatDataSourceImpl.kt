@@ -3,7 +3,6 @@ package com.dsm.data.dataSource.chat
 import com.dsm.data.addSchedulers
 import com.dsm.data.remote.Api
 import com.dsm.data.remote.entity.ChatLogListEntity
-import com.dsm.data.remote.entity.ChatRoomEntity
 import com.dsm.data.remote.entity.ChatRoomListEntity
 import io.reactivex.Flowable
 import retrofit2.Response
