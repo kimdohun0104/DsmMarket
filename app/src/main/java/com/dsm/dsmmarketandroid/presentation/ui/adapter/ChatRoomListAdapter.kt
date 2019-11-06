@@ -19,6 +19,7 @@ class ChatRoomListAdapter(private val viewModel: ChatListViewModel) : RecyclerVi
     override fun onBindViewHolder(holder: ChatRoomHolder, position: Int) = holder.bind()
 
     fun addItems(items: List<ChatRoomModel>) {
+        listItems.clear()
         items.forEach { listItems.add(it) }
         notifyDataSetChanged()
     }
