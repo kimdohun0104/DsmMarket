@@ -50,11 +50,13 @@ class ChatActivity : AppCompatActivity() {
             val msg = et_chat.text.toString().trim()
             if (msg.isNotBlank()) {
                 val time = SimpleDateFormat("HH:mm", Locale.KOREA).format(Date(System.currentTimeMillis()))
+                val date = SimpleDateFormat("yyyy-MM-dd", Locale.KOREA).format(Date(System.currentTimeMillis()))
+                adapter.addDate(date)
                 socket.emit("sendMessage", JSONObject().apply {
                     put("msg", msg)
                     put("time", time)
                 })
-                adapter.addMyChatItem(ChatModel.MyChat(msg, time))
+                adapter.addMyChatItem(ChatModel.MyChat(msg, time, date))
                 et_chat.setText("")
                 rv_chat.scrollToPosition(0)
             }
@@ -67,11 +69,10 @@ class ChatActivity : AppCompatActivity() {
 
         viewModel.loadChatLog(roomId, 0)
 
-        rv_chat.addOnScrollListener(object : EndlessRecyclerViewScrollListener((rv_chat.layoutManager) as LinearLayoutManager) {
+        rv_chat.addOnScrollListener(object : EndlessRecyclerViewScrollListener(rv_chat.layoutManager as LinearLayoutManager) {
             override fun onLoadMore(page: Int) {
                 viewModel.loadChatLog(roomId, page)
             }
-
         })
 
         viewModel.newItems.observe(this, Observer { adapter.addItems(it) })
@@ -84,7 +85,7 @@ class ChatActivity : AppCompatActivity() {
     private val broadcastMessage = Emitter.Listener {
         runOnUiThread {
             val data = it[0] as JSONObject
-            adapter.addForeignChatItem(ChatModel.ForeignChat(data.getString("msg"), data.getString("time")))
+            adapter.addForeignChatItem(ChatModel.ForeignChat(data.getString("msg"), data.getString("time"), ""))
             rv_chat.scrollToPosition(0)
         }
     }

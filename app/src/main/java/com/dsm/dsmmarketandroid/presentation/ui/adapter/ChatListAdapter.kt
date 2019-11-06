@@ -99,4 +99,23 @@ class ChatListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         listItems.remove(ChatModel.Loading)
         notifyDataSetChanged()
     }
+
+    fun addDate(now: String) {
+        if (listItems.size == 0) {
+            listItems.add(ChatModel.Date(now))
+            return
+        }
+        when (val item = listItems.first()) {
+            is ChatModel.MyChat -> {
+                if (now != item.date) {
+                    listItems.add(ChatModel.Date(now))
+                }
+            }
+            is ChatModel.ForeignChat -> {
+                if (now != item.date) {
+                    listItems.add(ChatModel.Date(now))
+                }
+            }
+        }
+    }
 }

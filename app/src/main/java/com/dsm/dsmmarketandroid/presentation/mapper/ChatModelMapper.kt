@@ -10,9 +10,9 @@ class ChatModelMapper : Mapper<List<ChatLog>, List<ChatModel>> {
         var lastDate = from[0].date
         from.forEach {
             if (it.me) {
-                result.add(ChatModel.MyChat(it.message, it.time))
+                result.add(ChatModel.MyChat(it.message, it.time, it.date))
             } else {
-                result.add(ChatModel.ForeignChat(it.message, it.time))
+                result.add(ChatModel.ForeignChat(it.message, it.time, it.date))
             }
             if (lastDate != it.date) {
                 result.add(ChatModel.Date(lastDate))

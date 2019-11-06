@@ -1,7 +1,7 @@
 package com.dsm.domain.entity
 
 data class ChatRoom(
-    val title: String,
+    val roomName: String,
 
     val picture: String,
 

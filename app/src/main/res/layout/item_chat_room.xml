@@ -37,7 +37,7 @@
             app:layout_constraintLeft_toRightOf="@id/iv_chat_room"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="@id/iv_chat_room"
-            android:text="@{chatRoom.title}"
+            android:text="@{chatRoom.roomName}"
             app:layout_constraintBottom_toBottomOf="@id/iv_chat_room" />
 
         <View

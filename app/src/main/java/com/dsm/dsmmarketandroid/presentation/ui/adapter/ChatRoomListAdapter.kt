@@ -28,7 +28,7 @@ class ChatRoomListAdapter(private val viewModel: ChatListViewModel) : RecyclerVi
         fun bind() {
             binding.chatRoom = listItems[adapterPosition]
             binding.root.setOnClickListener {
-                viewModel.joinRoom(listItems[adapterPosition].roomId, listItems[adapterPosition].title)
+                viewModel.joinRoom(listItems[adapterPosition].roomId, listItems[adapterPosition].roomName)
             }
         }
     }
