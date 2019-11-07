@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dsm.dsmmarketandroid.R
-import com.dsm.dsmmarketandroid.custom.EndlessRecyclerViewScrollListener
+import com.dsm.dsmmarketandroid.custom.EndlessRecyclerListener
 import com.dsm.dsmmarketandroid.presentation.model.ChatModel
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.ChatListAdapter
 import com.dsm.dsmmarketandroid.presentation.util.setEditorActionListener
@@ -69,9 +69,9 @@ class ChatActivity : AppCompatActivity() {
 
         viewModel.loadChatLog(roomId, 0)
 
-        rv_chat.addOnScrollListener(object : EndlessRecyclerViewScrollListener(rv_chat.layoutManager as LinearLayoutManager) {
-            override fun onLoadMore(page: Int) {
-                viewModel.loadChatLog(roomId, page)
+        rv_chat.addOnScrollListener(object : EndlessRecyclerListener() {
+            override fun onLoadMore(currentPage: Int) {
+                viewModel.loadChatLog(roomId, currentPage)
             }
         })
 
