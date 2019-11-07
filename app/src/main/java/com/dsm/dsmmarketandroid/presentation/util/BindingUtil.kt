@@ -6,11 +6,12 @@ import android.widget.NumberPicker
 import android.widget.Spinner
 import androidx.databinding.BindingAdapter
 import androidx.databinding.BindingConversion
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.DetailImageListAdapter
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.ModifyImageListAdapter
-
 
 object BindingUtil {
 
@@ -60,5 +61,11 @@ object BindingUtil {
     fun bindModifyImages(view: RecyclerView, value: ListLiveData<String>?) {
         val adapter = view.adapter as ModifyImageListAdapter
         value?.let { adapter.setItems(it.value!!) }
+    }
+
+    @JvmStatic
+    @BindingAdapter("bind:isRefreshing")
+    fun bindIsRefreshing(view: SwipeRefreshLayout, value: LiveData<Boolean>) {
+        value.value?.let { view.isRefreshing = it }
     }
 }
