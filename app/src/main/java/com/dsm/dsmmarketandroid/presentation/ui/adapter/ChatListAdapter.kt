@@ -86,6 +86,9 @@ class ChatListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     fun addItems(items: List<ChatModel>) {
         listItems.removeAt(listItems.size - 1)  // remove loading
+        if (listItems.size != 0) {
+            listItems.removeAt(listItems.size - 1)  // remove date
+        }
         listItems.addAll(items)
         notifyDataSetChanged()
     }
