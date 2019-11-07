@@ -75,7 +75,6 @@ class MyPostViewModelTests : BaseTest() {
 
         viewModel.run {
             purchaseList.test().assertValue(productModelMapper.mapFrom(response))
-            hidePurchaseRefresh.test().assertHasValue()
             hidePurchaseLoadingEvent.test().assertHasValue()
         }
     }
@@ -101,7 +100,6 @@ class MyPostViewModelTests : BaseTest() {
         viewModel.run {
             rentList.test().assertValue(productModelMapper.mapFrom(response))
             hideRentLoadingEvent.test().assertHasValue()
-            hideRentRefresh.test().assertHasValue()
         }
     }
 

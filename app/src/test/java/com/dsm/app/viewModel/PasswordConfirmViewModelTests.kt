@@ -59,7 +59,7 @@ class PasswordConfirmViewModelTests : BaseTest() {
             originalPassword.value = "ORIGINAL_PASSWORD"
 
             `when`(confirmPasswordUseCase.create(originalPassword.value!!))
-                .thenReturn(Flowable.error(createHttpException(401)))
+                .thenReturn(Flowable.error(createHttpException(403)))
 
             confirmPassword()
 

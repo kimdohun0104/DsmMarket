@@ -174,16 +174,6 @@ class PurchaseDetailViewModelTests : BaseTest() {
     }
 
     @Test
-    fun `get recommend product failed server error test`() {
-        `when`(getRecommendUseCase.create(Unit))
-            .thenReturn(Flowable.error(Exception()))
-
-        viewModel.getRecommendProduct()
-
-        viewModel.toastEvent.test().assertValue(R.string.fail_server_error)
-    }
-
-    @Test
     fun getRelatedProductSuccess() {
         val response = listOf(
             Recommend(0, "TITLE", "IMG")

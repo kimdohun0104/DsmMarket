@@ -37,10 +37,10 @@ class ChatListFragment : BaseFragment<FragmentChatListBinding>() {
 
         viewModel.intentChatActivityEvent.observe(this, Observer { startActivity<ChatActivity>("bundle" to it) })
 
-        viewModel.hideChatRefreshEvent.observe(this, Observer { srl_chat.isRefreshing = false })
-
         viewModel.showLoadingDialogEvent.observe(this, Observer { LoadingDialog.show(childFragmentManager) })
 
         viewModel.hideLoadingDialogEvent.observe(this, Observer { LoadingDialog.hide() })
+
+        binding.viewModel = viewModel
     }
 }

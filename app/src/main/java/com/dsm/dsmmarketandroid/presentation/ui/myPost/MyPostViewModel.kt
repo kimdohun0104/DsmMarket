@@ -36,17 +36,17 @@ class MyPostViewModel(
     val isPurchaseEmpty = Transformations.map(purchaseList) { it.isEmpty() }
     val isRentEmpty = Transformations.map(rentList) { it.isEmpty() }
 
-    val hidePurchaseRefresh = SingleLiveEvent<Any>()
-    val hideRentRefresh = SingleLiveEvent<Any>()
+    val isPurchaseRefreshing = MutableLiveData<Boolean>()
+    val isRentRefreshing = MutableLiveData<Boolean>()
 
     fun getMyPurchase() {
         addDisposable(
             getMyPurchaseUseCase.create(Unit)
+                .doOnTerminate { isPurchaseRefreshing.value = false }
                 .map(productModelMapper::mapFrom)
                 .subscribe({
                     purchaseList.value = it
                     hidePurchaseLoadingEvent.call()
-                    hidePurchaseRefresh.call()
                 }, {
                     toastEvent.value = R.string.fail_server_error
                 })
@@ -56,11 +56,11 @@ class MyPostViewModel(
     fun getMyRent() {
         addDisposable(
             getMyRentUseCase.create(Unit)
+                .doOnTerminate { isRentRefreshing.value = false }
                 .map(productModelMapper::mapFrom)
                 .subscribe({
                     rentList.value = it
                     hideRentLoadingEvent.call()
-                    hideRentRefresh.call()
                 }, {
                     toastEvent.value = R.string.fail_server_error
                 })

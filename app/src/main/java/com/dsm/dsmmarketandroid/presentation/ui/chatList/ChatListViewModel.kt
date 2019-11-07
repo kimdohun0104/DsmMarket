@@ -18,20 +18,21 @@ class ChatListViewModel(
 
     val toastEvent = SingleLiveEvent<Int>()
     val intentChatActivityEvent = SingleLiveEvent<Bundle>()
-    val hideChatRefreshEvent = SingleLiveEvent<Any>()
 
     val chatRoomList = MutableLiveData<List<ChatRoomModel>>()
 
     val showLoadingDialogEvent = SingleLiveEvent<Any>()
     val hideLoadingDialogEvent = SingleLiveEvent<Any>()
 
+    val isRefreshing = MutableLiveData<Boolean>()
+
     fun getChatRoom() {
         addDisposable(
             getChatRoomUseCase.create(Unit)
+                .doOnTerminate { isRefreshing.value = false }
                 .map(chatRoomModelMapper::mapFrom)
                 .subscribe({
                     chatRoomList.value = it
-                    hideChatRefreshEvent.call()
                 }, {
                     toastEvent.value = R.string.fail_server_error
                 })
