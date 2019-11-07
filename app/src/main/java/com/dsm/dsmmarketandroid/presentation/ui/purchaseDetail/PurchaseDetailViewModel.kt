@@ -89,7 +89,6 @@ class PurchaseDetailViewModel(
                 .subscribe({
                     recommendList.value = it
                 }, {
-                    toastEvent.value = R.string.fail_server_error
                 })
         )
     }
