@@ -17,4 +17,6 @@ val mapperModule = module {
     factory { RecommendModelMapper() }
 
     factory { ChatRoomModelMapper() }
+
+    factory { ChatModelMapper() }
 }

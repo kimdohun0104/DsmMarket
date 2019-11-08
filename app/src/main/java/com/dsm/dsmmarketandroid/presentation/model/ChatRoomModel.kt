@@ -1,7 +1,7 @@
 package com.dsm.dsmmarketandroid.presentation.model
 
 data class ChatRoomModel(
-    val title: String,
+    val roomName: String,
 
     val picture: String,
 

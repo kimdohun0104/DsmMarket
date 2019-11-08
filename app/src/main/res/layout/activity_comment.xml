@@ -20,14 +20,14 @@
             style="@style/ToolBarStyle.Event"
             android:layout_width="0dp"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorWhite"
+            android:background="@color/colorWhiteBlack"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:menu="@menu/menu_comment_toolbar"
             app:navigationIcon="@drawable/ic_back_black"
             app:title="@string/comment"
-            app:titleTextColor="@color/colorBlack" />
+            app:titleTextColor="@color/colorBlackWhite" />
 
         <TextView
             android:id="@+id/tv_all"
@@ -36,7 +36,7 @@
             android:layout_marginStart="15dp"
             android:layout_marginTop="13dp"
             android:text="@string/all"
-            android:textColor="@color/colorBlack"
+            android:textColor="@color/colorBlackWhite"
             android:textSize="15sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tb_comment_list" />
@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="3dp"
             android:text="@{String.valueOf(viewModel.commentCount)}"
-            android:textColor="@color/colorBlack"
+            android:textColor="@color/colorBlackWhite"
             android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="@id/tv_all"
             app:layout_constraintLeft_toRightOf="@id/tv_all"
@@ -57,7 +57,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/count"
-            android:textColor="@color/colorBlack"
+            android:textColor="@color/colorBlackWhite"
             android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="@id/tv_comment_count"
             app:layout_constraintLeft_toRightOf="@id/tv_comment_count"

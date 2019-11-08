@@ -19,16 +19,22 @@ android {
         versionName "1.0.0-beta1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         resConfigs "kr", "en"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                includeCompileClasspath = true
+            }
+        }
     }
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
 
         debug {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
     compileOptions {
@@ -61,7 +67,7 @@ dependencies {
     implementation 'com.github.chrisbanes:PhotoView:2.3.0'
 
     // socket
-    implementation ('io.socket:socket.io-client:1.0.0') { exclude group: 'org.json', module: 'json' }
+    implementation ('io.socket:socket.io-client:0.8.3') { exclude group: 'org.json', module: 'json' }
 
     // image
     implementation 'com.github.kimdohun0104:MediaPicker:1.0.3'
@@ -114,6 +120,9 @@ dependencies {
 
     // rxJava
     implementation dependencies.rxAndroid
+
+    // messageBus
+    implementation dependencies.messageBus
 }
 
 apply plugin: 'com.google.gms.google-services'

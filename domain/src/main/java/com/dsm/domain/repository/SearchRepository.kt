@@ -7,4 +7,6 @@ interface SearchRepository {
     fun getSearchHistory(): Flowable<List<String>>
 
     fun deleteSearchHistory(content: String): Completable
+
+    fun addSearchHistory(search: String): Completable
 }

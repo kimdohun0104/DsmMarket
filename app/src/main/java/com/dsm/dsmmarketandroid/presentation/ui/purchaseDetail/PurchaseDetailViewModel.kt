@@ -37,6 +37,9 @@ class PurchaseDetailViewModel(
     val finishActivityEvent = SingleLiveEvent<Any>()
     val intentChatActivityEvent = SingleLiveEvent<Bundle>()
 
+    val showLoadingDialogEvent = SingleLiveEvent<Any>()
+    val hideLoadingDialogEvent = SingleLiveEvent<Any>()
+
     fun getPurchaseDetail(postId: Int) {
         addDisposable(
             getPurchaseDetailUseCase.create(postId)
@@ -79,14 +82,13 @@ class PurchaseDetailViewModel(
         }
     }
 
-    fun getRecommendProduct(postId: Int) {
+    fun getRecommendProduct() {
         addDisposable(
-            getRecommendUseCase.create(postId)
+            getRecommendUseCase.create(Unit)
                 .map(recommendModelMapper::mapFrom)
                 .subscribe({
                     recommendList.value = it
                 }, {
-                    toastEvent.value = R.string.fail_server_error
                 })
         )
     }
@@ -105,13 +107,16 @@ class PurchaseDetailViewModel(
 
     fun createRoom(postId: Int) {
         addDisposable(
-            createRoomUseCase.create(CreateRoomUseCase.Params(postId, 0))
+            createRoomUseCase.create(CreateRoomUseCase.Params(postId, ProductType.PURCHASE))
+                .doOnSubscribe { showLoadingDialogEvent.call() }
+                .doOnTerminate { hideLoadingDialogEvent.call() }
                 .map { roomId ->
                     joinRoomUseCase.create(roomId)
                         .subscribe({ email ->
                             intentChatActivityEvent.value = Bundle().apply {
                                 putString("email", email)
                                 putInt("roomId", roomId)
+                                putString("roomTitle", purchaseDetail.value?.title)
                             }
                         }, {
                             toastEvent.value = R.string.fail_server_error

@@ -32,8 +32,6 @@ class InterestPurchaseFragment : BaseFragment<FragmentInterestPurchaseBinding>()
 
         viewModel.hidePurchaseProgressEvent.observe(this, Observer { pb_loading.visibility = View.GONE })
 
-        viewModel.hidePurchaseRefresh.observe(this, Observer { srl_interest_purchase.isRefreshing = false })
-
         binding.viewModel = viewModel
     }
 }

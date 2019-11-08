@@ -165,22 +165,12 @@ class PurchaseDetailViewModelTests : BaseTest() {
         val response = listOf(
             Recommend(0, "TITLE", "IMG")
         )
-        `when`(getRecommendUseCase.create(0))
+        `when`(getRecommendUseCase.create(Unit))
             .thenReturn(Flowable.just(response))
 
-        viewModel.getRecommendProduct(0)
+        viewModel.getRecommendProduct()
 
         viewModel.recommendList.test().assertValue(recommendModelMapper.mapFrom(response))
-    }
-
-    @Test
-    fun `get recommend product failed server error test`() {
-        `when`(getRecommendUseCase.create(0))
-            .thenReturn(Flowable.error(Exception()))
-
-        viewModel.getRecommendProduct(0)
-
-        viewModel.toastEvent.test().assertValue(R.string.fail_server_error)
     }
 
     @Test

@@ -19,6 +19,7 @@ class ChatRoomListAdapter(private val viewModel: ChatListViewModel) : RecyclerVi
     override fun onBindViewHolder(holder: ChatRoomHolder, position: Int) = holder.bind()
 
     fun addItems(items: List<ChatRoomModel>) {
+        listItems.clear()
         items.forEach { listItems.add(it) }
         notifyDataSetChanged()
     }
@@ -27,7 +28,7 @@ class ChatRoomListAdapter(private val viewModel: ChatListViewModel) : RecyclerVi
         fun bind() {
             binding.chatRoom = listItems[adapterPosition]
             binding.root.setOnClickListener {
-                viewModel.joinRoom(listItems[adapterPosition].roomId)
+                viewModel.joinRoom(listItems[adapterPosition].roomId, listItems[adapterPosition].roomName)
             }
         }
     }

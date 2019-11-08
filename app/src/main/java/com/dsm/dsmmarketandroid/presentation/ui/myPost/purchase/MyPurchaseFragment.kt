@@ -35,8 +35,6 @@ class MyPurchaseFragment : BaseFragment<FragmentMyPurchaseBinding>() {
 
         viewModel.hidePurchaseLoadingEvent.observe(this, Observer { pb_loading.visibility = View.GONE })
 
-        viewModel.hidePurchaseRefresh.observe(this, Observer { srl_my_purchase.isRefreshing = false })
-
         binding.viewModel = viewModel
     }
 }

@@ -21,9 +21,15 @@ class ChatListViewModel(
 
     val chatRoomList = MutableLiveData<List<ChatRoomModel>>()
 
+    val showLoadingDialogEvent = SingleLiveEvent<Any>()
+    val hideLoadingDialogEvent = SingleLiveEvent<Any>()
+
+    val isRefreshing = MutableLiveData<Boolean>()
+
     fun getChatRoom() {
         addDisposable(
             getChatRoomUseCase.create(Unit)
+                .doOnTerminate { isRefreshing.value = false }
                 .map(chatRoomModelMapper::mapFrom)
                 .subscribe({
                     chatRoomList.value = it
@@ -33,13 +39,16 @@ class ChatListViewModel(
         )
     }
 
-    fun joinRoom(roomId: Int) {
+    fun joinRoom(roomId: Int, roomTitle: String) {
         addDisposable(
             joinRoomUseCase.create(roomId)
+                .doOnSubscribe { showLoadingDialogEvent.call() }
+                .doOnTerminate { hideLoadingDialogEvent.call() }
                 .subscribe({
                     intentChatActivityEvent.value = Bundle().apply {
                         putInt("roomId", roomId)
                         putString("email", it)
+                        putString("roomTitle", roomTitle)
                     }
                 }, {
                     toastEvent.value = R.string.fail_server_error

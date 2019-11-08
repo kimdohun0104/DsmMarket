@@ -7,7 +7,7 @@ import androidx.lifecycle.Observer
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.ActivityModifyRentBinding
 import com.dsm.dsmmarketandroid.presentation.base.BaseActivity
-import com.dsm.dsmmarketandroid.presentation.ui.modify.rent.rentTime.ModifyRentTimeFragment
+import com.dsm.dsmmarketandroid.presentation.ui.modify.rent.rentTime.ModifyRentTimeDialog
 import com.dsm.dsmmarketandroid.presentation.ui.postCategory.PostCategoryActivity
 import kotlinx.android.synthetic.main.activity_modify_rent.*
 import kotlinx.android.synthetic.main.activity_post_rent.cl_category
@@ -32,7 +32,7 @@ class ModifyRentActivity : BaseActivity<ActivityModifyRentBinding>() {
 
         cl_category.setOnClickListener { startActivityForResult(Intent(this, PostCategoryActivity::class.java), CATEGORY) }
 
-        btn_modify_time.setOnClickListener { ModifyRentTimeFragment().show(supportFragmentManager, "") }
+        btn_modify_time.setOnClickListener { ModifyRentTimeDialog().show(supportFragmentManager, "") }
 
         viewModel.getRentDetail(postId)
 

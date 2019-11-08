@@ -51,8 +51,6 @@ class SignUpViewModel(private val signUpUseCase: SignUpUseCase) : BaseViewModel(
             return
         }
 
-        showLoadingDialogEvent.call()
-
         addDisposable(
             signUpUseCase.create(
                 hashMapOf(
@@ -63,14 +61,15 @@ class SignUpViewModel(private val signUpUseCase: SignUpUseCase) : BaseViewModel(
                     "gender" to gender.value
                 )
             )
-                .doFinally { hideLoadingDialogEvent.call() }
+                .doOnSubscribe { showLoadingDialogEvent.call() }
+                .doOnTerminate { hideLoadingDialogEvent.call() }
                 .subscribe({
                     finishActivityEvent.call()
                 }, {
                     if (it is HttpException && it.code() == 403) {
                         val errorResponse = JSONObject(it.response()?.errorBody()?.string()!!)
-                        if (errorResponse.has("errorCode")) {
-                            if (errorResponse.getInt("errorCode") == 0)
+                        if (errorResponse.has("message")) {
+                            if (errorResponse.getString("message") == "existent email")
                                 toastEvent.value = R.string.fail_existent_email
                             else
                                 toastEvent.value = R.string.fail_existent_nick

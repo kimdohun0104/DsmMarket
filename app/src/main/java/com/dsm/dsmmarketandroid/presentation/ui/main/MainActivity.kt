@@ -6,7 +6,7 @@ import com.dsm.data.local.pref.PrefHelper
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.ui.chatList.ChatListFragment
 import com.dsm.dsmmarketandroid.presentation.ui.me.MeFragment
-import com.dsm.dsmmarketandroid.presentation.ui.post.PostBottomFragment
+import com.dsm.dsmmarketandroid.presentation.ui.post.PostDialog
 import com.dsm.dsmmarketandroid.presentation.ui.purchase.PurchaseFragment
 import com.dsm.dsmmarketandroid.presentation.ui.rent.RentFragment
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.purchase -> switchFragment(0)
                 R.id.rent -> switchFragment(1)
                 R.id.post -> {
-                    PostBottomFragment().show(supportFragmentManager, "")
+                    PostDialog().show(supportFragmentManager, "")
                     return@setOnNavigationItemSelectedListener false
                 }
                 R.id.chatting -> switchFragment(2)

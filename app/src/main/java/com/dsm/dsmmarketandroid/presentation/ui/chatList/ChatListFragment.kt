@@ -8,6 +8,7 @@ import com.dsm.dsmmarketandroid.databinding.FragmentChatListBinding
 import com.dsm.dsmmarketandroid.presentation.base.BaseFragment
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.ChatRoomListAdapter
 import com.dsm.dsmmarketandroid.presentation.ui.chat.ChatActivity
+import com.dsm.dsmmarketandroid.presentation.util.LoadingDialog
 import kotlinx.android.synthetic.main.fragment_chat_list.*
 import org.jetbrains.anko.support.v4.startActivity
 import org.jetbrains.anko.support.v4.toast
@@ -26,6 +27,8 @@ class ChatListFragment : BaseFragment<FragmentChatListBinding>() {
         val adapter = ChatRoomListAdapter(viewModel)
         rv_chat_room.adapter = adapter
 
+        srl_chat.setOnRefreshListener { viewModel.getChatRoom() }
+
         viewModel.getChatRoom()
 
         viewModel.chatRoomList.observe(this, Observer { adapter.addItems(it) })
@@ -33,5 +36,11 @@ class ChatListFragment : BaseFragment<FragmentChatListBinding>() {
         viewModel.toastEvent.observe(this, Observer { toast(it) })
 
         viewModel.intentChatActivityEvent.observe(this, Observer { startActivity<ChatActivity>("bundle" to it) })
+
+        viewModel.showLoadingDialogEvent.observe(this, Observer { LoadingDialog.show(childFragmentManager) })
+
+        viewModel.hideLoadingDialogEvent.observe(this, Observer { LoadingDialog.hide() })
+
+        binding.viewModel = viewModel
     }
 }

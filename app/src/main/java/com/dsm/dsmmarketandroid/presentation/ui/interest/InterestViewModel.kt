@@ -23,20 +23,20 @@ class InterestViewModel(
 
     val toastEvent = SingleLiveEvent<Int>()
 
-    val hidePurchaseRefresh = SingleLiveEvent<Any>()
-    val hideRentRefresh = SingleLiveEvent<Any>()
-
     val isPurchaseEmpty = Transformations.map(purchaseList) { it.isEmpty() }
     val isRentEmpty = Transformations.map(rentList) { it.isEmpty() }
+
+    val isPurchaseRefreshing = MutableLiveData<Boolean>()
+    val isRentRefreshing = MutableLiveData<Boolean>()
 
     fun getInterestPurchase() {
         addDisposable(
             getInterestUseCase.create(ProductType.PURCHASE)
+                .doOnTerminate { isPurchaseRefreshing.value = false }
                 .map(productModelMapper::mapFrom)
                 .subscribe({
                     purchaseList.value = it
                     hidePurchaseProgressEvent.call()
-                    hidePurchaseRefresh.call()
                 }, {
                     toastEvent.value = R.string.fail_server_error
                 })
@@ -46,11 +46,11 @@ class InterestViewModel(
     fun getInterestRent() {
         addDisposable(
             getInterestUseCase.create(ProductType.RENT)
+                .doOnTerminate { isRentRefreshing.value = false }
                 .map(productModelMapper::mapFrom)
                 .subscribe({
                     rentList.value = it
                     hideRentProgressEvent.call()
-                    hideRentRefresh.call()
                 }, {
                     toastEvent.value = R.string.fail_server_error
                 })

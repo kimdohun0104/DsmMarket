@@ -24,12 +24,12 @@ class TokenInterceptor(private val prefHelper: PrefHelper) : Interceptor, KoinCo
         val response = chain.proceed(request)
         val responseCopy = response.peekBody(Long.MAX_VALUE)
         val json = JSONObject(responseCopy.string())
-        var errorCode = 0
-        if (json.has("errorCode")) {
-            errorCode = json.getInt("errorCode")
+        var refresh = true
+        if (json.has("refresh")) {
+            refresh = json.getBoolean("refresh")
         }
 
-        if (response.code() == 401 && errorCode != 4) {
+        if (response.code() == 401 && !refresh) {
             Log.d("DEBUGLOG", "access token expired")
             val refreshResponse = refreshTokenUseCase.create(prefHelper.getRefreshToken()!!).blockingFirst()
 

@@ -34,6 +34,9 @@ class RentDetailViewModel(
     val toastEvent = SingleLiveEvent<Int>()
     val startChatActivityEvent = SingleLiveEvent<Bundle>()
 
+    val showLoadingDialogEvent = SingleLiveEvent<Any>()
+    val hideLoadingDialogEvent = SingleLiveEvent<Any>()
+
     fun getRentDetail(postId: Int) {
         addDisposable(
             getRentDetailUseCase.create(postId)
@@ -91,12 +94,15 @@ class RentDetailViewModel(
     fun createRoom(postId: Int) {
         addDisposable(
             createRoomUseCase.create(CreateRoomUseCase.Params(postId, 0))
+                .doOnSubscribe { showLoadingDialogEvent.call() }
+                .doOnTerminate { hideLoadingDialogEvent.call() }
                 .map { roomId ->
                     joinRoomUseCase.create(roomId)
                         .subscribe({ email ->
                             startChatActivityEvent.value = Bundle().apply {
                                 putString("email", email)
                                 putInt("roomId", roomId)
+                                putString("roomTitle", rentDetail.value?.title)
                             }
                         }, {
                             toastEvent.value = R.string.fail_server_error

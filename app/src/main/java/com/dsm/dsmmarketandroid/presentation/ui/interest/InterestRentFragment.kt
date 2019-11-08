@@ -30,8 +30,6 @@ class InterestRentFragment : BaseFragment<FragmentInterestRentBinding>() {
 
         viewModel.hideRentProgressEvent.observe(this, Observer { pb_loading.visibility = View.GONE })
 
-        viewModel.hideRentRefresh.observe(this, Observer { srl_interest_rent.isRefreshing = false })
-
         binding.viewModel = viewModel
     }
 }

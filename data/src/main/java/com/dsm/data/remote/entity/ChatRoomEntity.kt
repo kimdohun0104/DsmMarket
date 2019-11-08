@@ -1,7 +1,7 @@
 package com.dsm.data.remote.entity
 
 data class ChatRoomEntity(
-    val title: String,
+    val roomName: String,
 
     val picture: String,
 

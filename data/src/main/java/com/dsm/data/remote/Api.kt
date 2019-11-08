@@ -26,7 +26,7 @@ interface Api {
     fun changePassword(@Field("password") password: String): Flowable<Response<Unit>>
 
     @POST("account/join")
-    fun signUp(@Body body: Any): Flowable<Response<Map<String, Int>>>
+    fun signUp(@Body body: Any): Flowable<Response<Unit>>
 
     @FormUrlEncoded
     @PATCH("account/nick")
@@ -122,7 +122,7 @@ interface Api {
     ): Flowable<RecommendListEntity>
 
     @GET("list/recommend")
-    fun getRecommendProduct(@Query("postId") postId: Int): Flowable<RecommendListEntity>
+    fun getRecommendProduct(): Flowable<RecommendListEntity>
 
     @POST("report/post")
     fun reportPost(@Body params: Any): Flowable<Response<Unit>>
@@ -160,4 +160,10 @@ interface Api {
 
     @GET("room/join/{roomId}")
     fun joinRoom(@Path("roomId") roomId: Int) : Flowable<Response<HashMap<String, String>>>
+
+    @GET("room/chatLog")
+    fun getChatLog(
+        @Query("roomId") roomId: Int,
+        @Query("count") count: Int
+    ) : Flowable<ChatLogListEntity>
 }

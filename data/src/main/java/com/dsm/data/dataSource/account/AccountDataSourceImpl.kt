@@ -13,7 +13,7 @@ class AccountDataSourceImpl(private val api: Api) : AccountDataSource {
     override fun autoLogin(): Flowable<Response<Unit>> =
         api.autoLogin().addSchedulers()
 
-    override fun signUp(body: Any): Flowable<Response<Map<String, Int>>> =
+    override fun signUp(body: Any): Flowable<Response<Unit>> =
         api.signUp(body).addSchedulers()
 
     override fun refreshToken(refreshToken: String): Flowable<Response<Map<String, Any>>> =

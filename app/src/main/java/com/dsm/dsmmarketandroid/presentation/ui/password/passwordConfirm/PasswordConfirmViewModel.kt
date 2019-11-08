@@ -25,7 +25,7 @@ class PasswordConfirmViewModel(private val confirmPasswordUseCase: ConfirmPasswo
                     intentChangePasswordEvent.call()
                     finishActivityEvent.call()
                 }, {
-                    if (it is HttpException && it.code() == 401)
+                    if (it is HttpException && it.code() == 403)
                         toastEvent.value = R.string.fail_diff_password
                     else
                         toastEvent.value = R.string.fail_server_error

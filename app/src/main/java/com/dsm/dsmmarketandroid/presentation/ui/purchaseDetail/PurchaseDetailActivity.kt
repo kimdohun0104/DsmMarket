@@ -17,6 +17,7 @@ import com.dsm.dsmmarketandroid.presentation.ui.adapter.RecommendListAdapter
 import com.dsm.dsmmarketandroid.presentation.ui.chat.ChatActivity
 import com.dsm.dsmmarketandroid.presentation.ui.comment.CommentActivity
 import com.dsm.dsmmarketandroid.presentation.ui.report.ReportPostDialog
+import com.dsm.dsmmarketandroid.presentation.util.LoadingDialog
 import com.dsm.dsmmarketandroid.presentation.util.ProductType
 import kotlinx.android.synthetic.main.activity_purchase_detail.*
 import org.jetbrains.anko.startActivity
@@ -63,7 +64,7 @@ class PurchaseDetailActivity : BaseActivity<ActivityPurchaseDetailBinding>() {
 
         viewModel.getPurchaseDetail(postId)
         viewModel.getRelatedProduct(postId)
-        viewModel.getRecommendProduct(postId)
+        viewModel.getRecommendProduct()
 
         viewModel.isInterest.observe(this, Observer {
             if (it) tb_purchase_detail.menu[0].icon = getDrawable(R.drawable.ic_heart_full_red)
@@ -79,6 +80,10 @@ class PurchaseDetailActivity : BaseActivity<ActivityPurchaseDetailBinding>() {
         viewModel.finishActivityEvent.observe(this, Observer { finish() })
 
         viewModel.intentChatActivityEvent.observe(this, Observer { startActivity<ChatActivity>("bundle" to it) })
+
+        viewModel.showLoadingDialogEvent.observe(this, Observer { LoadingDialog.show(supportFragmentManager) })
+
+        viewModel.hideLoadingDialogEvent.observe(this, Observer { LoadingDialog.hide() })
 
         binding.viewModel = viewModel
     }

@@ -28,16 +28,16 @@ class RentListFragment : BaseFragment<FragmentRentListBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        srl_rent_list.setOnRefreshListener {
-            viewModel.refreshList()
-            srl_rent_list.isRefreshing = false
-        }
+        srl_rent_list.setOnRefreshListener { viewModel.refreshList() }
 
         val adapter = ProductListAdapter(ProductType.RENT)
         rv_rent_list.adapter = adapter
 
         viewModel.networkState.observe(this, Observer {
-            if (it == NetworkState.LOADED) pb_loading.visibility = View.GONE
+            if (it == NetworkState.LOADED) {
+                pb_loading.visibility = View.GONE
+                srl_rent_list.isRefreshing = false
+            }
             adapter.setNetworkState(it)
         })
 

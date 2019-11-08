@@ -33,8 +33,6 @@ class MyRentFragment : BaseFragment<FragmentMyRentBinding>() {
 
         viewModel.hideRentLoadingEvent.observe(this, Observer { pb_loading.visibility = View.GONE })
 
-        viewModel.hideRentRefresh.observe(this, Observer { srl_my_rent.isRefreshing = false })
-
         binding.viewModel = viewModel
     }
 }

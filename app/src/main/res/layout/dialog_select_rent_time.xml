@@ -9,12 +9,13 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhiteBlack">
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tl_rent_time"
-            android:layout_width="0dp"
+            android:layout_width="300dp"
             android:layout_height="46dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -25,7 +26,7 @@
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/vp_rent_time"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="200dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tl_rent_time" />

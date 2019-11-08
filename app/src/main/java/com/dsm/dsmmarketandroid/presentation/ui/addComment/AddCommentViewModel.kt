@@ -5,7 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import com.dsm.domain.usecase.PostCommentUseCase
 import com.dsm.dsmmarketandroid.presentation.base.BaseViewModel
+import com.dsm.dsmmarketandroid.presentation.util.MessageEvents
 import com.dsm.dsmmarketandroid.presentation.util.SingleLiveEvent
+import kr.sdusb.libs.messagebus.MessageBus
 
 class AddCommentViewModel(private val postCommentUseCase: PostCommentUseCase) : BaseViewModel() {
 
@@ -26,6 +28,7 @@ class AddCommentViewModel(private val postCommentUseCase: PostCommentUseCase) : 
                 )
             ).subscribe({
                 finishActivityEvent.call()
+                MessageBus.getInstance().handle(MessageEvents.ADD_COMMENT_EVENT, null)
             }, {
                 toastServerErrorEvent.call()
             })

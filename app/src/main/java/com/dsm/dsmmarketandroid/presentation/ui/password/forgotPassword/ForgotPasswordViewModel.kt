@@ -17,6 +17,9 @@ class ForgotPasswordViewModel(private val sendTempPasswordUseCase: SendTempPassw
     val finishActivityEvent = SingleLiveEvent<Any>()
     val toastEvent = SingleLiveEvent<Int>()
 
+    val showLoadingDialogEvent = SingleLiveEvent<Any>()
+    val hideLoadingDialogEvent = SingleLiveEvent<Any>()
+
     fun sendTempPassword() {
         if (!Validator.validEmail(email.value!!)) {
             toastEvent.value = R.string.fail_invalid_email
@@ -25,6 +28,8 @@ class ForgotPasswordViewModel(private val sendTempPasswordUseCase: SendTempPassw
 
         addDisposable(
             sendTempPasswordUseCase.create(email.value!!)
+                .doOnSubscribe { showLoadingDialogEvent.call() }
+                .doOnTerminate { hideLoadingDialogEvent.call() }
                 .subscribe({
                     toastEvent.value = R.string.send_temp_password_success
                     finishActivityEvent.call()
