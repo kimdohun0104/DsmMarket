@@ -1,6 +1,7 @@
 package com.dsm.app.viewModel
 
 import com.dsm.app.BaseTest
+import com.dsm.domain.usecase.AddSearchHistoryUseCase
 import com.dsm.domain.usecase.DeleteSearchHistoryUseCase
 import com.dsm.domain.usecase.GetSearchHistoryUseCase
 import com.dsm.dsmmarketandroid.presentation.ui.search.SearchViewModel
@@ -18,13 +19,16 @@ class SearchViewModelTests : BaseTest() {
     private lateinit var getSearchHistoryUseCase: GetSearchHistoryUseCase
 
     @Mock
+    private lateinit var addSearchHistoryUseCase: AddSearchHistoryUseCase
+
+    @Mock
     private lateinit var deleteSearchHistoryUseCase: DeleteSearchHistoryUseCase
 
     private lateinit var viewModel: SearchViewModel
 
     @Before
     fun init() {
-        viewModel = SearchViewModel(getSearchHistoryUseCase, deleteSearchHistoryUseCase)
+        viewModel = SearchViewModel(getSearchHistoryUseCase, addSearchHistoryUseCase, deleteSearchHistoryUseCase)
     }
 
     @Test
@@ -36,28 +40,6 @@ class SearchViewModelTests : BaseTest() {
         viewModel.getSearchHistory()
 
         viewModel.searchHistoryList.test().assertValue(response)
-    }
-
-    @Test
-    fun `search test`() {
-        viewModel.run {
-            searchText.value = "SEARCH"
-
-            search()
-
-            intentSearchResult.test().assertValue(searchText.value!!)
-            finishActivityEvent.test().assertHasValue()
-        }
-    }
-
-    @Test
-    fun `onClickSearchHistory test`() {
-        viewModel.run {
-            onClickSearchHistory("CONTENT")
-
-            intentSearchResult.test().assertValue("CONTENT")
-            finishActivityEvent.test().assertHasValue()
-        }
     }
 
     @Test

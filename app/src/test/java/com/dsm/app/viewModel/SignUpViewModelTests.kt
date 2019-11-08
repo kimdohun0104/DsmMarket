@@ -114,7 +114,7 @@ class SignUpViewModelTests : BaseTest() {
             "grade" to viewModel.grade.value!!.toInt()
         )
         `when`(signUpUseCase.create(request))
-            .thenReturn(Flowable.error(createHttpException(403, "{\"errorCode\": 0}")))
+            .thenReturn(Flowable.error(createHttpException(403, "{\"message\": \"existent email\"}")))
 
         viewModel.signUp()
 
@@ -141,7 +141,7 @@ class SignUpViewModelTests : BaseTest() {
             "grade" to viewModel.grade.value!!.toInt()
         )
         `when`(signUpUseCase.create(request))
-            .thenReturn(Flowable.error(createHttpException(403, "{\"errorCode\": 1}")))
+            .thenReturn(Flowable.error(createHttpException(403, "{\"message\": \"existent nick\"}")))
 
         viewModel.signUp()
 
