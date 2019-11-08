@@ -26,7 +26,7 @@ interface Api {
     fun changePassword(@Field("password") password: String): Flowable<Response<Unit>>
 
     @POST("account/join")
-    fun signUp(@Body body: Any): Flowable<Response<Map<String, Int>>>
+    fun signUp(@Body body: Any): Flowable<Response<Unit>>
 
     @FormUrlEncoded
     @PATCH("account/nick")
