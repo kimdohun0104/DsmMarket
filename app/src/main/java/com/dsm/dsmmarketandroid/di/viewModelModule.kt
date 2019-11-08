@@ -60,7 +60,7 @@ val viewModelModule = module {
 
     viewModel { RecentViewModel(get(), get(), get()) }
 
-    viewModel { SearchViewModel(get(), get()) }
+    viewModel { SearchViewModel(get(), get(), get()) }
 
     viewModel { InterestViewModel(get(), get()) }
 

@@ -45,7 +45,7 @@ val dataSourceModule = module {
 
     factory<RecentDataSource> { RecentDataSourceImpl(get(), get()) }
 
-    factory<SearchDataSource> { SearchDataSourceImpl(get(), get()) }
+    factory<SearchDataSource> { SearchDataSourceImpl(get()) }
 
     factory<MyPostDataSource> { MyPostDataSourceImpl(get()) }
 

@@ -7,10 +7,8 @@ import com.dsm.data.remote.Api
 import io.reactivex.Completable
 import io.reactivex.Flowable
 
-class SearchDataSourceImpl(
-    private val searchDao: SearchDao,
-    private val api: Api
-) : SearchDataSource {
+class SearchDataSourceImpl(private val searchDao: SearchDao) : SearchDataSource {
+
     override fun addSearchHistory(searchHistoryRoomEntity: SearchHistoryRoomEntity): Completable =
         searchDao.addSearchHistory(searchHistoryRoomEntity).addSchedulers()
 

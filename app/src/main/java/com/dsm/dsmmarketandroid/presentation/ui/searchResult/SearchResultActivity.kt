@@ -2,6 +2,7 @@ package com.dsm.dsmmarketandroid.presentation.ui.searchResult
 
 import android.os.Bundle
 import android.view.inputmethod.EditorInfo
+import com.dsm.domain.usecase.AddSearchHistoryUseCase
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.ActivitySearchResultBinding
 import com.dsm.dsmmarketandroid.presentation.base.BaseActivity
@@ -9,14 +10,19 @@ import com.dsm.dsmmarketandroid.presentation.ui.adapter.SearchPagerAdapter
 import com.dsm.dsmmarketandroid.presentation.util.addOnTabSelectedListener
 import com.dsm.dsmmarketandroid.presentation.util.setEditorActionListener
 import com.google.android.material.tabs.TabLayoutMediator
+import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_search_result.*
 import org.jetbrains.anko.startActivity
+import org.koin.android.ext.android.inject
 
 class SearchResultActivity : BaseActivity<ActivitySearchResultBinding>() {
     override val layoutResourceId: Int
         get() = R.layout.activity_search_result
 
     private val search: String by lazy { intent.getStringExtra("search") }
+
+    private val addSearchHistoryUseCase: AddSearchHistoryUseCase by inject()
+    private val composite = CompositeDisposable()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,6 +49,13 @@ class SearchResultActivity : BaseActivity<ActivitySearchResultBinding>() {
         if (search.isNotBlank()) {
             startActivity<SearchResultActivity>("search" to search)
             finish()
+
+            composite.add(addSearchHistoryUseCase.create(search).subscribe())
         }
+    }
+
+    override fun onDestroy() {
+        composite.clear()
+        super.onDestroy()
     }
 }

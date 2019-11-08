@@ -79,4 +79,6 @@ val useCaseModule = module {
     factory { JoinRoomUseCase(get()) }
 
     factory { GetChatLogUseCase(get()) }
+
+    factory { AddSearchHistoryUseCase(get()) }
 }
