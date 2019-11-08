@@ -14,9 +14,9 @@ class SearchRentFragment : BaseFragment<FragmentSearchRentBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val rentListFragment = RentListFragment().apply {
-            arguments = Bundle().apply { putString("search", activity?.intent?.getStringExtra("search")) }
-        }
+        val bundle = Bundle().apply { putString("search", activity?.intent?.getStringExtra("search")) }
+
+        val rentListFragment = RentListFragment().apply { arguments = bundle }
         childFragmentManager.beginTransaction().replace(R.id.fl_rent_container, rentListFragment).commit()
     }
 }

@@ -45,12 +45,12 @@ class SearchResultActivity : BaseActivity<ActivitySearchResultBinding>() {
     }
 
     private fun startNewSearchResult() {
-        val search = et_search.text.toString().trim()
-        if (search.isNotBlank()) {
-            startActivity<SearchResultActivity>("search" to search)
+        val searchText = et_search.text.toString().trim()
+        if (searchText.isNotBlank()) {
+            startActivity<SearchResultActivity>("search" to searchText)
             finish()
 
-            composite.add(addSearchHistoryUseCase.create(search).subscribe())
+            composite.add(addSearchHistoryUseCase.create(searchText).subscribe())
         }
     }
 
