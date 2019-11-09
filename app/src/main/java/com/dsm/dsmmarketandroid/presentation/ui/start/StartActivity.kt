@@ -16,20 +16,28 @@ class StartActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_start)
 
-        val ivLogo = findViewById<View>(R.id.iv_logo)
+        val ivStartLogo = findViewById<View>(R.id.iv_start_logo)
 
-        btn_login.setOnClickListener {
+        btn_start_login.setOnClickListener {
+            btn_start_login.isEnabled = false
             startActivity(
                 Intent(this, LoginActivity::class.java),
-                ActivityOptions.makeSceneTransitionAnimation(this, ivLogo, "logo").toBundle()
+                ActivityOptions.makeSceneTransitionAnimation(this, ivStartLogo, "logo").toBundle()
             )
         }
 
-        btn_sign_up.setOnClickListener {
+        btn_start_sign_up.setOnClickListener {
+            btn_start_sign_up.isEnabled = false
             startActivity(
                 Intent(this, SignUpActivity::class.java),
-                ActivityOptions.makeSceneTransitionAnimation(this, ivLogo, "logo").toBundle()
+                ActivityOptions.makeSceneTransitionAnimation(this, ivStartLogo, "logo").toBundle()
             )
         }
+    }
+
+    override fun onResume() {
+        btn_start_login.isEnabled = true
+        btn_start_sign_up.isEnabled = true
+        super.onResume()
     }
 }

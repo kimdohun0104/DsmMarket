@@ -34,10 +34,8 @@ class SignUpViewModel(private val signUpUseCase: SignUpUseCase) : BaseViewModel(
         || grade.isValueBlank() || gender.isValueBlank()
 
     val showLoadingDialogEvent = SingleLiveEvent<Any>()
-
-    val finishActivityEvent = SingleLiveEvent<Any>()
     val hideLoadingDialogEvent = SingleLiveEvent<Any>()
-
+    val finishActivityEvent = SingleLiveEvent<Any>()
     val toastEvent = SingleLiveEvent<Int>()
 
     fun signUp() {
@@ -73,7 +71,7 @@ class SignUpViewModel(private val signUpUseCase: SignUpUseCase) : BaseViewModel(
                                 toastEvent.value = R.string.fail_existent_email
                             else
                                 toastEvent.value = R.string.fail_existent_nick
-                        }
+                        } else toastEvent.value = R.string.fail_server_error
                     } else toastEvent.value = R.string.fail_server_error
                 })
         )

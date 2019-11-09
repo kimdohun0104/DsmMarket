@@ -1,5 +1,6 @@
 package com.dsm.dsmmarketandroid.presentation.ui.password.forgotPassword
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import com.dsm.domain.usecase.SendTempPasswordUseCase
@@ -12,13 +13,12 @@ class ForgotPasswordViewModel(private val sendTempPasswordUseCase: SendTempPassw
 
     val email = MutableLiveData<String>().apply { value = "" }
 
-    val isSendTempPasswordEnable = Transformations.map(email) { it != "" }
-
-    val finishActivityEvent = SingleLiveEvent<Any>()
-    val toastEvent = SingleLiveEvent<Int>()
+    val isSendTempPasswordEnable: LiveData<Boolean> = Transformations.map(email) { it != "" }
 
     val showLoadingDialogEvent = SingleLiveEvent<Any>()
     val hideLoadingDialogEvent = SingleLiveEvent<Any>()
+    val finishActivityEvent = SingleLiveEvent<Any>()
+    val toastEvent = SingleLiveEvent<Int>()
 
     fun sendTempPassword() {
         if (!Validator.validEmail(email.value!!)) {

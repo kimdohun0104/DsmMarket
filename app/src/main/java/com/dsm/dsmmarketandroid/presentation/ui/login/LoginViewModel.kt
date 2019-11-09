@@ -22,12 +22,9 @@ class LoginViewModel(private val loginUseCase: LoginUseCase) : BaseViewModel() {
     }
 
     val showLoadingDialogEvent = SingleLiveEvent<Any>()
-
+    val hideLoadingDialogEvent = SingleLiveEvent<Any>()
     val intentMainActivityEvent = SingleLiveEvent<Any>()
     val hideKeyboardEvent = SingleLiveEvent<Any>()
-
-    val hideLoadingDialogEvent = SingleLiveEvent<Any>()
-
     val toastEvent = SingleLiveEvent<Int>()
 
     fun login() {
@@ -36,8 +33,6 @@ class LoginViewModel(private val loginUseCase: LoginUseCase) : BaseViewModel() {
             return
         }
 
-        showLoadingDialogEvent.call()
-
         addDisposable(
             loginUseCase.create(
                 hashMapOf(
@@ -45,7 +40,8 @@ class LoginViewModel(private val loginUseCase: LoginUseCase) : BaseViewModel() {
                     "password" to password.value
                 )
             )
-                .doFinally { hideLoadingDialogEvent.call() }
+                .doOnSubscribe { showLoadingDialogEvent.call() }
+                .doOnTerminate { hideLoadingDialogEvent.call() }
                 .subscribe({
                     hideLoadingDialogEvent.call()
                     hideKeyboardEvent.call()

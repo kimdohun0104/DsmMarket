@@ -8,17 +8,16 @@ import java.util.concurrent.TimeUnit
 
 class SplashViewModel(private val autoLoginUseCase: AutoLoginUseCase) : BaseViewModel() {
 
+    val intentStartActivity = SingleLiveEvent<Any>()
     val intentMainActivityEvent = SingleLiveEvent<Any>()
     val finishActivityEvent = SingleLiveEvent<Any>()
-
-    val intentStartActivity = SingleLiveEvent<Any>()
 
     fun login() {
         addDisposable(
             autoLoginUseCase.create(Unit)
-                .delay(1, TimeUnit.SECONDS)
+                .delay(700, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
-                .doFinally { finishActivityEvent.call() }
+                .doOnTerminate { finishActivityEvent.call() }
                 .subscribe({
                     intentMainActivityEvent.call()
                 }, {

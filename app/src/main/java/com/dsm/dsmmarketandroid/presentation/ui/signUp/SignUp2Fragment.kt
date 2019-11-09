@@ -14,8 +14,6 @@ class SignUp2Fragment : BaseFragment<FragmentSignUp2Binding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val viewModel = ViewModelProviders.of(activity!!).get(SignUpViewModel::class.java)
-
-        binding.viewModel = viewModel
+        binding.viewModel = ViewModelProviders.of(activity!!).get(SignUpViewModel::class.java)
     }
 }
