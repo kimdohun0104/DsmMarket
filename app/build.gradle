@@ -70,7 +70,7 @@ dependencies {
     implementation ('io.socket:socket.io-client:0.8.3') { exclude group: 'org.json', module: 'json' }
 
     // image
-    implementation 'com.github.kimdohun0104:MediaPicker:1.0.3'
+    implementation 'com.github.kimdohun0104:MediaPicker:1.0.4'
 
     // kotlin
     implementation dependencies.kotlin

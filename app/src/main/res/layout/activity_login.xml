@@ -26,7 +26,8 @@
             app:layout_constraintTop_toTopOf="parent"
             app:navigationIcon="@drawable/ic_back_black"
             app:title="@string/login"
-            app:titleTextColor="@color/colorBlackWhite" />
+            app:titleTextColor="@color/colorBlackWhite"
+            app:navigationContentDescription="back"/>
 
         <View
             android:layout_width="0dp"
@@ -115,7 +116,9 @@
                 android:textStyle="bold"
                 app:layout_constraintRight_toRightOf="@id/til_password"
                 app:layout_constraintTop_toBottomOf="@id/til_password"
-                tools:ignore="SmallSp" />
+                tools:ignore="SmallSp"
+                android:layout_marginTop="4dp"
+                android:padding="10dp"/>
 
             <Button
                 android:id="@+id/btn_login"
