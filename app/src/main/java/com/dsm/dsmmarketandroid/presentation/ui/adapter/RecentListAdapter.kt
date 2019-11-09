@@ -42,8 +42,8 @@ class RecentListAdapter(private val productType: Int) : RecyclerView.Adapter<Rec
                 intent.putExtra("post_id", item.postId)
                 val options = ActivityOptions.makeSceneTransitionAnimation(
                     context as Activity,
-                    Pair.create(binding.ivProduct as View, "image"),
-                    Pair.create(binding.tvTitle as View, "title")
+                    Pair.create(binding.ivProductThumb as View, "image"),
+                    Pair.create(binding.tvProductTitle as View, "title")
                 )
                 context.startActivity(intent, options.toBundle())
             }

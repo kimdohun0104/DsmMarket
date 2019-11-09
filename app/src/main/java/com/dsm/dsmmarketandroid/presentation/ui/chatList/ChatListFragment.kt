@@ -5,7 +5,7 @@ import android.view.View
 import androidx.lifecycle.Observer
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.FragmentChatListBinding
-import com.dsm.dsmmarketandroid.presentation.base.BaseFragment
+import com.dsm.dsmmarketandroid.presentation.base.BaseFragmentRefac
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.ChatRoomListAdapter
 import com.dsm.dsmmarketandroid.presentation.ui.chat.ChatActivity
 import com.dsm.dsmmarketandroid.presentation.util.LoadingDialog
@@ -14,24 +14,25 @@ import org.jetbrains.anko.support.v4.startActivity
 import org.jetbrains.anko.support.v4.toast
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class ChatListFragment : BaseFragment<FragmentChatListBinding>() {
+class ChatListFragment : BaseFragmentRefac<FragmentChatListBinding>() {
 
     override val layoutResourceId: Int
         get() = R.layout.fragment_chat_list
 
     private val viewModel: ChatListViewModel by viewModel()
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    private val adapter: ChatRoomListAdapter by lazy { ChatRoomListAdapter(viewModel) }
 
-        val adapter = ChatRoomListAdapter(viewModel)
+    override fun initView() {
         rv_chat_room.adapter = adapter
 
         srl_chat.setOnRefreshListener { viewModel.getChatRoom() }
 
         viewModel.getChatRoom()
+    }
 
-        viewModel.chatRoomList.observe(this, Observer { adapter.addItems(it) })
+    override fun observeViewModel() {
+        viewModel.chatRoomList.observe(this, Observer { adapter.setItems(it) })
 
         viewModel.toastEvent.observe(this, Observer { toast(it) })
 
@@ -40,7 +41,10 @@ class ChatListFragment : BaseFragment<FragmentChatListBinding>() {
         viewModel.showLoadingDialogEvent.observe(this, Observer { LoadingDialog.show(childFragmentManager) })
 
         viewModel.hideLoadingDialogEvent.observe(this, Observer { LoadingDialog.hide() })
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         binding.viewModel = viewModel
     }
 }

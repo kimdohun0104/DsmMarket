@@ -35,14 +35,14 @@ class MeFragment : BaseFragment<FragmentMeBinding>() {
 
         tv_version.text = BuildConfig.VERSION_NAME
 
-        cl_interest.setOnClickListener { activity?.startActivity<InterestActivity>() }
-        cl_post_product.setOnClickListener { activity?.startActivity<MyPostActivity>() }
-        cl_past_product.setOnClickListener { activity?.startActivity<RecentActivity>() }
-        cl_change_name.setOnClickListener { activity?.startActivity<ChangeNickActivity>("nick" to prefHelper.getUserNick()) }
-        cl_change_password.setOnClickListener { activity?.startActivity<PasswordConfirmActivity>() }
-        cl_open_source.setOnClickListener { activity?.startActivity<OpenSourceActivity>() }
-        cl_language.setOnClickListener { activity?.startActivity<ChangeLanguageActivity>() }
-        cl_logout.setOnClickListener { LogoutDialog().show(childFragmentManager, "") }
+        cl_me_interest.setOnClickListener { activity?.startActivity<InterestActivity>() }
+        cl_me_my_post.setOnClickListener { activity?.startActivity<MyPostActivity>() }
+        cl_me_product_history.setOnClickListener { activity?.startActivity<RecentActivity>() }
+        cl_me_change_name.setOnClickListener { activity?.startActivity<ChangeNickActivity>("nick" to prefHelper.getUserNick()) }
+        cl_me_change_password.setOnClickListener { activity?.startActivity<PasswordConfirmActivity>() }
+        cl_me_open_source.setOnClickListener { activity?.startActivity<OpenSourceActivity>() }
+        cl_me_change_language.setOnClickListener { activity?.startActivity<ChangeLanguageActivity>() }
+        cl_me_logout.setOnClickListener { LogoutDialog().show(childFragmentManager, "") }
     }
 
     @Subscribe(events = [MessageEvents.NICK_CHANGED_EVENT])

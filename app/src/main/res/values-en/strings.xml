@@ -42,8 +42,8 @@
 	<string name="my_page">\'s my page</string>
 	<string name="success_change_nick">Success for change nick</string>
 
-	<string name="post_purchase_product">Purchase Product Registration</string>
-	<string name="post_rent_product">Rent Product Registration</string>
+	<string name="post_purchase_product">Post Purchase</string>
+	<string name="post_rent_product">Post Rent</string>
 
 	<string name="interest_product">Wish List</string>
 	<string name="my_post_product">My Registered Products</string>
