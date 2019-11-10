@@ -14,7 +14,7 @@ abstract class BaseFragmentRefac<T : ViewDataBinding> : Fragment() {
 
     abstract val layoutResourceId: Int
 
-    abstract fun initView()
+    abstract fun viewInit()
 
     abstract fun observeViewModel()
 
@@ -27,7 +27,7 @@ abstract class BaseFragmentRefac<T : ViewDataBinding> : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initView()
+        viewInit()
         observeViewModel()
     }
 }

@@ -27,7 +27,7 @@ class RentListFragment : BaseFragmentRefac<FragmentRentListBinding>() {
 
     private val adapter = ProductListAdapter(ProductType.RENT)
 
-    override fun initView() {
+    override fun viewInit() {
         srl_rent_list.setOnRefreshListener { viewModel.refreshList() }
 
         rv_rent_list.adapter = adapter

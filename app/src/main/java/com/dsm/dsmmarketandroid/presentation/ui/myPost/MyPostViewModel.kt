@@ -1,5 +1,6 @@
 package com.dsm.dsmmarketandroid.presentation.ui.myPost
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import com.dsm.domain.usecase.CompletePurchaseUseCase
@@ -11,6 +12,8 @@ import com.dsm.dsmmarketandroid.presentation.base.BaseViewModel
 import com.dsm.dsmmarketandroid.presentation.mapper.ProductModelMapper
 import com.dsm.dsmmarketandroid.presentation.model.ProductModel
 import com.dsm.dsmmarketandroid.presentation.util.SingleLiveEvent
+import com.dsm.dsmmarketandroid.presentation.util.isPurchase
+import io.reactivex.Flowable
 
 class MyPostViewModel(
     private val getMyPurchaseUseCase: GetMyPurchaseUseCase,
@@ -27,64 +30,53 @@ class MyPostViewModel(
 
     val toastEvent = SingleLiveEvent<Int>()
 
-    val deletePositionFromPurchase = MutableLiveData<Int>()
-    val deletePositionFromRent = MutableLiveData<Int>()
+    val deletePositionFromPurchase = SingleLiveEvent<Int>()
+    val deletePositionFromRent = SingleLiveEvent<Int>()
 
-    val hidePurchaseLoadingEvent = SingleLiveEvent<Any>()
-    val hideRentLoadingEvent = SingleLiveEvent<Any>()
+    val isPurchaseProgressVisible = MutableLiveData<Boolean>().apply { value = true }
+    val isRentProgressVisible = MutableLiveData<Boolean>().apply { value = true }
 
-    val isPurchaseEmpty = Transformations.map(purchaseList) { it.isEmpty() }
-    val isRentEmpty = Transformations.map(rentList) { it.isEmpty() }
+    val isPurchaseEmpty: LiveData<Boolean> = Transformations.map(purchaseList) { it.isEmpty() }
+    val isRentEmpty: LiveData<Boolean> = Transformations.map(rentList) { it.isEmpty() }
 
     val isPurchaseRefreshing = MutableLiveData<Boolean>()
     val isRentRefreshing = MutableLiveData<Boolean>()
 
-    fun getMyPurchase() {
+    fun getMyPost(type: Int) {
         addDisposable(
-            getMyPurchaseUseCase.create(Unit)
-                .doOnTerminate { isPurchaseRefreshing.value = false }
-                .map(productModelMapper::mapFrom)
+            Flowable.just(type)
+                .doOnTerminate {
+                    if (type.isPurchase()) {
+                        isPurchaseRefreshing.value = false
+                        isPurchaseProgressVisible.value = false
+                    } else {
+                        isRentRefreshing.value = false
+                        isRentProgressVisible.value = false
+                    }
+                }.flatMap {
+                    if (it.isPurchase()) getMyPurchaseUseCase.create(Unit)
+                    else getMyRentUseCase.create(Unit)
+                }.map(productModelMapper::mapFrom)
                 .subscribe({
-                    purchaseList.value = it
-                    hidePurchaseLoadingEvent.call()
+                    if (type.isPurchase()) purchaseList.value = it
+                    else rentList.value = it
                 }, {
                     toastEvent.value = R.string.fail_server_error
                 })
         )
     }
 
-    fun getMyRent() {
+    fun completePost(position: Int, type: Int) {
         addDisposable(
-            getMyRentUseCase.create(Unit)
-                .doOnTerminate { isRentRefreshing.value = false }
-                .map(productModelMapper::mapFrom)
-                .subscribe({
-                    rentList.value = it
-                    hideRentLoadingEvent.call()
-                }, {
-                    toastEvent.value = R.string.fail_server_error
-                })
-        )
-    }
+            Flowable.just(type)
+                .flatMap {
+                    if (type.isPurchase()) completePurchaseUseCase.create(purchaseList.value?.get(position)?.postId ?: -1)
+                    else completeRentUseCase.create(rentList.value?.get(position)?.postId ?: -1)
+                }.subscribe({
+                    if (type.isPurchase()) deletePositionFromPurchase.value = position
+                    else deletePositionFromRent.value = position
 
-    fun completePurchase(position: Int) {
-        addDisposable(
-            completePurchaseUseCase.create(purchaseList.value?.get(position)?.postId ?: -1)
-                .subscribe({
                     dismissEvent.call()
-                    deletePositionFromPurchase.value = position
-                }, {
-                    toastEvent.value = R.string.fail_server_error
-                })
-        )
-    }
-
-    fun completeRent(position: Int) {
-        addDisposable(
-            completeRentUseCase.create(rentList.value?.get(position)?.postId ?: -1)
-                .subscribe({
-                    dismissEvent.call()
-                    deletePositionFromRent.value = position
                 }, {
                     toastEvent.value = R.string.fail_server_error
                 })

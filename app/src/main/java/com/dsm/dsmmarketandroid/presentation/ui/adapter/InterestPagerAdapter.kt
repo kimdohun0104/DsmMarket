@@ -4,8 +4,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.dsm.dsmmarketandroid.presentation.ui.interest.InterestPurchaseFragment
-import com.dsm.dsmmarketandroid.presentation.ui.interest.InterestRentFragment
+import com.dsm.dsmmarketandroid.presentation.ui.interest.purchase.InterestPurchaseFragment
+import com.dsm.dsmmarketandroid.presentation.ui.interest.rent.InterestRentFragment
 
 class InterestPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
     FragmentStateAdapter(fragmentManager, lifecycle) {

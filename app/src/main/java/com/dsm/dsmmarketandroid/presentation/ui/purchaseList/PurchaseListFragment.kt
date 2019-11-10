@@ -27,7 +27,7 @@ class PurchaseListFragment : BaseFragmentRefac<FragmentPurchaseListBinding>() {
 
     private val adapter = ProductListAdapter(ProductType.PURCHASE)
 
-    override fun initView() {
+    override fun viewInit() {
         srl_purchase_list.setOnRefreshListener { viewModel.refreshList() }
 
         rv_purchase_list.adapter = adapter

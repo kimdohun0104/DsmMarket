@@ -23,7 +23,7 @@ class ChatListFragment : BaseFragmentRefac<FragmentChatListBinding>() {
 
     private val adapter: ChatRoomListAdapter by lazy { ChatRoomListAdapter(viewModel) }
 
-    override fun initView() {
+    override fun viewInit() {
         rv_chat_room.adapter = adapter
 
         srl_chat.setOnRefreshListener { viewModel.getChatRoom() }

@@ -27,9 +27,8 @@ class MainActivity : AppCompatActivity() {
                 else toast(getString(R.string.back_to_exit))
             }
 
-    override fun onBackPressed() {
+    override fun onBackPressed() =
         backSubject.onNext(System.currentTimeMillis())
-    }
 
     private val fragments = listOf(PurchaseFragment(), RentFragment(), ChatListFragment(), MeFragment())
     private var currentPosition = -1
