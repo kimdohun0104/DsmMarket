@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:bind="http://schemas.android.com/tools">
 
     <data>
 
@@ -70,7 +71,8 @@
                 android:layout_marginTop="40dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                bind:pagerIndex="@{viewModel.pagerIndex}"/>
 
             <Button
                 android:id="@+id/btn_sign_up"
@@ -79,10 +81,10 @@
                 android:layout_marginStart="25dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="25dp"
-                android:background="@{viewModel.isSignUpEnable ? @drawable/bg_primary_rounded : @drawable/bg_grey_rounded}"
-                android:clickable="@{viewModel.isSignUpEnable}"
+                android:background="@{viewModel.isBtnEnable ? @drawable/bg_primary_rounded : @drawable/bg_grey_rounded}"
+                android:clickable="@{viewModel.isBtnEnable}"
                 android:onClick="@{() -> viewModel.signUp()}"
-                android:text="@string/sign_up"
+                bind:textWithId="@{viewModel.btnText}"
                 android:textColor="@color/colorWhite"
                 android:textSize="16sp"
                 android:textStyle="bold"
