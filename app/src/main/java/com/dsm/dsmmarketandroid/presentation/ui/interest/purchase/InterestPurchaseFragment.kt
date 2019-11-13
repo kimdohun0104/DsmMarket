@@ -6,13 +6,13 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.FragmentInterestPurchaseBinding
-import com.dsm.dsmmarketandroid.presentation.base.BaseFragmentRefac
+import com.dsm.dsmmarketandroid.presentation.base.BaseFragment
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.InterestListAdapter
 import com.dsm.dsmmarketandroid.presentation.ui.interest.InterestViewModel
 import com.dsm.dsmmarketandroid.presentation.util.ProductType
 import kotlinx.android.synthetic.main.fragment_interest_purchase.*
 
-class InterestPurchaseFragment : BaseFragmentRefac<FragmentInterestPurchaseBinding>() {
+class InterestPurchaseFragment : BaseFragment<FragmentInterestPurchaseBinding>() {
 
     override val layoutResourceId: Int
         get() = R.layout.fragment_interest_purchase

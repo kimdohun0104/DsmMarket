@@ -5,7 +5,7 @@ import android.view.View
 import androidx.lifecycle.Observer
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.FragmentChatListBinding
-import com.dsm.dsmmarketandroid.presentation.base.BaseFragmentRefac
+import com.dsm.dsmmarketandroid.presentation.base.BaseFragment
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.ChatRoomListAdapter
 import com.dsm.dsmmarketandroid.presentation.ui.chat.ChatActivity
 import com.dsm.dsmmarketandroid.presentation.util.LoadingDialog
@@ -14,7 +14,7 @@ import org.jetbrains.anko.support.v4.startActivity
 import org.jetbrains.anko.support.v4.toast
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class ChatListFragment : BaseFragmentRefac<FragmentChatListBinding>() {
+class ChatListFragment : BaseFragment<FragmentChatListBinding>() {
 
     override val layoutResourceId: Int
         get() = R.layout.fragment_chat_list

@@ -8,7 +8,7 @@ import android.view.inputmethod.InputMethodManager
 import androidx.lifecycle.Observer
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.ActivityLoginBinding
-import com.dsm.dsmmarketandroid.presentation.base.BaseActivityRefac
+import com.dsm.dsmmarketandroid.presentation.base.BaseActivity
 import com.dsm.dsmmarketandroid.presentation.ui.main.MainActivity
 import com.dsm.dsmmarketandroid.presentation.ui.password.forgotPassword.ForgotPasswordActivity
 import com.dsm.dsmmarketandroid.presentation.util.LoadingDialog
@@ -18,7 +18,7 @@ import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class LoginActivity : BaseActivityRefac<ActivityLoginBinding>() {
+class LoginActivity : BaseActivity<ActivityLoginBinding>() {
 
     override val layoutResourceId: Int
         get() = R.layout.activity_login

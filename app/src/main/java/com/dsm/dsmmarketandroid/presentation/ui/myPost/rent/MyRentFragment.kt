@@ -6,13 +6,13 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.FragmentMyRentBinding
-import com.dsm.dsmmarketandroid.presentation.base.BaseFragmentRefac
+import com.dsm.dsmmarketandroid.presentation.base.BaseFragment
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.MyProductListAdapter
 import com.dsm.dsmmarketandroid.presentation.ui.myPost.MyPostViewModel
 import com.dsm.dsmmarketandroid.presentation.util.ProductType
 import kotlinx.android.synthetic.main.fragment_my_rent.*
 
-class MyRentFragment : BaseFragmentRefac<FragmentMyRentBinding>() {
+class MyRentFragment : BaseFragment<FragmentMyRentBinding>() {
 
     override val layoutResourceId: Int
         get() = R.layout.fragment_my_rent

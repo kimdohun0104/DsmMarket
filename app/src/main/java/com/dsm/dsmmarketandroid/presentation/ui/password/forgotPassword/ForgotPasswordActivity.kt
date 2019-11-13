@@ -5,14 +5,14 @@ import android.view.inputmethod.EditorInfo
 import androidx.lifecycle.Observer
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.ActivityForgotPasswordBinding
-import com.dsm.dsmmarketandroid.presentation.base.BaseActivityRefac
+import com.dsm.dsmmarketandroid.presentation.base.BaseActivity
 import com.dsm.dsmmarketandroid.presentation.util.LoadingDialog
 import com.dsm.dsmmarketandroid.presentation.util.setEditorActionListener
 import kotlinx.android.synthetic.main.activity_forgot_password.*
 import org.jetbrains.anko.toast
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class ForgotPasswordActivity : BaseActivityRefac<ActivityForgotPasswordBinding>() {
+class ForgotPasswordActivity : BaseActivity<ActivityForgotPasswordBinding>() {
 
     override val layoutResourceId: Int
         get() = R.layout.activity_forgot_password

@@ -3,13 +3,13 @@ package com.dsm.dsmmarketandroid.presentation.ui.splash
 import androidx.lifecycle.Observer
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.ActivitySplashBinding
-import com.dsm.dsmmarketandroid.presentation.base.BaseActivityRefac
+import com.dsm.dsmmarketandroid.presentation.base.BaseActivity
 import com.dsm.dsmmarketandroid.presentation.ui.main.MainActivity
 import com.dsm.dsmmarketandroid.presentation.ui.start.StartActivity
 import org.jetbrains.anko.startActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class SplashActivity : BaseActivityRefac<ActivitySplashBinding>() {
+class SplashActivity : BaseActivity<ActivitySplashBinding>() {
 
     override val layoutResourceId: Int
         get() = R.layout.activity_splash

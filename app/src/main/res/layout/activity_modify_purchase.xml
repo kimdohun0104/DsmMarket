@@ -140,7 +140,8 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="@id/iv_select_image"
-            bind:modifyImages="@{viewModel.imageList}"/>
+            bind:modifyImages="@{viewModel.imageList}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_select_image"

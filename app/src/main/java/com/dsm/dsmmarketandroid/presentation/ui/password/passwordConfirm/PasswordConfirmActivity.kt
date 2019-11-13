@@ -20,18 +20,22 @@ class PasswordConfirmActivity : BaseActivity<ActivityPasswordConfirmBinding>() {
 
     private val viewModel: PasswordConfirmViewModel by viewModel()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun viewInit() {
         tb_password_confirm.setNavigationOnClickListener { finish() }
 
         et_original_password.setEditorActionListener(EditorInfo.IME_ACTION_DONE) { if (btn_confirm_password.isClickable) viewModel.confirmPassword() }
+    }
 
+    override fun observeViewModel() {
         viewModel.intentChangePasswordEvent.observe(this, Observer { startActivity<ChangePasswordActivity>() })
 
         viewModel.finishActivityEvent.observe(this, Observer { finish() })
 
         viewModel.toastEvent.observe(this, Observer { toast(it) })
+    }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         binding.viewModel = viewModel
     }
 }

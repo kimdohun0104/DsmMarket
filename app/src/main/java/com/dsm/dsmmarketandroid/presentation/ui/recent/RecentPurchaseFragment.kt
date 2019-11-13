@@ -6,12 +6,12 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.FragmentRecentPurchaseBinding
-import com.dsm.dsmmarketandroid.presentation.base.BaseFragmentRefac
+import com.dsm.dsmmarketandroid.presentation.base.BaseFragment
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.RecentListAdapter
 import com.dsm.dsmmarketandroid.presentation.util.ProductType
 import kotlinx.android.synthetic.main.fragment_recent_purchase.*
 
-class RecentPurchaseFragment : BaseFragmentRefac<FragmentRecentPurchaseBinding>() {
+class RecentPurchaseFragment : BaseFragment<FragmentRecentPurchaseBinding>() {
 
     override val layoutResourceId: Int
         get() = R.layout.fragment_recent_purchase

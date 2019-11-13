@@ -6,7 +6,7 @@ import com.dsm.data.paging.NetworkState
 import com.dsm.data.paging.purchase.PurchaseDataFactory
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.FragmentPurchaseListBinding
-import com.dsm.dsmmarketandroid.presentation.base.BaseFragmentRefac
+import com.dsm.dsmmarketandroid.presentation.base.BaseFragment
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.ProductListAdapter
 import com.dsm.dsmmarketandroid.presentation.util.ProductType
 import kotlinx.android.synthetic.main.fragment_purchase_list.*
@@ -14,7 +14,7 @@ import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
-class PurchaseListFragment : BaseFragmentRefac<FragmentPurchaseListBinding>() {
+class PurchaseListFragment : BaseFragment<FragmentPurchaseListBinding>() {
 
     override val layoutResourceId: Int
         get() = R.layout.fragment_purchase_list

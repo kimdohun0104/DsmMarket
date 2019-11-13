@@ -20,24 +20,28 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
 
     private val viewModel: SearchViewModel by viewModel()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    private val adapter: SearchHistoryListAdapter by lazy { SearchHistoryListAdapter(viewModel) }
 
+    override fun viewInit() {
         ib_back.setOnClickListener { finish() }
 
         et_search.setEditorActionListener(EditorInfo.IME_ACTION_SEARCH) { if (ib_search.isClickable) viewModel.search() }
 
-        val adapter = SearchHistoryListAdapter(viewModel)
         rv_recent_search.adapter = adapter
 
         viewModel.getSearchHistory()
+    }
 
+    override fun observeViewModel() {
         viewModel.searchHistoryList.observe(this, Observer { adapter.setItems(it) })
 
         viewModel.intentSearchResult.observe(this, Observer { startActivity<SearchResultActivity>("search" to it) })
 
         viewModel.finishActivityEvent.observe(this, Observer { finish() })
+    }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         binding.viewModel = viewModel
     }
 }

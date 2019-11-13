@@ -6,7 +6,6 @@ import android.view.MenuItem
 import androidx.core.content.ContextCompat
 import androidx.core.view.get
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.ActivityRentDetailBinding
 import com.dsm.dsmmarketandroid.presentation.base.BaseActivity
@@ -31,10 +30,10 @@ class RentDetailActivity : BaseActivity<ActivityRentDetailBinding>() {
 
     private val postId by lazy { intent.getIntExtra("post_id", -1) }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setSupportActionBar(tb_rent_detail)
+    private val relatedListAdapter = RecommendListAdapter(ProductType.RENT)
 
+    override fun viewInit() {
+        setSupportActionBar(tb_rent_detail)
         tb_rent_detail.run {
             background.alpha = 0
             setNavigationOnClickListener { finish() }
@@ -47,13 +46,13 @@ class RentDetailActivity : BaseActivity<ActivityRentDetailBinding>() {
 
         btn_deal_with_chat.setOnClickListener { viewModel.createRoom(postId) }
 
-       val relatedListAdapter = RecommendListAdapter(ProductType.RENT)
-       (rv_related.layoutManager as LinearLayoutManager).orientation = LinearLayoutManager.HORIZONTAL
         rv_related.adapter = relatedListAdapter
 
         viewModel.getRentDetail(postId)
         viewModel.getRelatedProduct(postId)
+    }
 
+    override fun observeViewModel() {
         viewModel.isInterest.observe(this, Observer {
             if (it) tb_rent_detail.menu[0].icon = getDrawable(R.drawable.ic_heart_full_red)
             else tb_rent_detail.menu[0].icon = getDrawable(R.drawable.ic_heart_white)
@@ -68,7 +67,10 @@ class RentDetailActivity : BaseActivity<ActivityRentDetailBinding>() {
         viewModel.showLoadingDialogEvent.observe(this, Observer { LoadingDialog.show(supportFragmentManager) })
 
         viewModel.hideLoadingDialogEvent.observe(this, Observer { LoadingDialog.hide() })
+    }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         binding.viewModel = viewModel
     }
 

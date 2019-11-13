@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.lifecycle.Observer
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.ActivityInterestBinding
-import com.dsm.dsmmarketandroid.presentation.base.BaseActivityRefac
+import com.dsm.dsmmarketandroid.presentation.base.BaseActivity
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.InterestPagerAdapter
 import com.dsm.dsmmarketandroid.presentation.util.ProductType
 import com.dsm.dsmmarketandroid.presentation.util.addOnTabSelectedListener
@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.activity_interest.*
 import org.jetbrains.anko.toast
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class InterestActivity : BaseActivityRefac<ActivityInterestBinding>() {
+class InterestActivity : BaseActivity<ActivityInterestBinding>() {
 
     override val layoutResourceId: Int
         get() = R.layout.activity_interest

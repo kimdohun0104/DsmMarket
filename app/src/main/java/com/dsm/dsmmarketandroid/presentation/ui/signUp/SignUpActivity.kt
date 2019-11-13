@@ -5,14 +5,14 @@ import androidx.lifecycle.Observer
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.custom.LinePagerIndicatorDecoration
 import com.dsm.dsmmarketandroid.databinding.ActivitySignUpBinding
-import com.dsm.dsmmarketandroid.presentation.base.BaseActivityRefac
+import com.dsm.dsmmarketandroid.presentation.base.BaseActivity
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.SignUpPagerAdapter
 import com.dsm.dsmmarketandroid.presentation.util.LoadingDialog
 import kotlinx.android.synthetic.main.activity_sign_up.*
 import org.jetbrains.anko.toast
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class SignUpActivity : BaseActivityRefac<ActivitySignUpBinding>() {
+class SignUpActivity : BaseActivity<ActivitySignUpBinding>() {
 
     override val layoutResourceId: Int
         get() = R.layout.activity_sign_up

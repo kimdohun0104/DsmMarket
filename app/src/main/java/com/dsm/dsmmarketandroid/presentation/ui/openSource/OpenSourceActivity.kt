@@ -18,6 +18,5 @@ class OpenSourceActivity : AppCompatActivity() {
             Configuration.UI_MODE_NIGHT_NO -> wv_open_source.loadUrl("file:///android_asset/open_source_licenses.html")
             Configuration.UI_MODE_NIGHT_YES -> wv_open_source.loadUrl("file:///android_asset/open_source_licenses_dark.html")
         }
-
     }
 }

@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.lifecycle.Observer
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.ActivityMyPostBinding
-import com.dsm.dsmmarketandroid.presentation.base.BaseActivityRefac
+import com.dsm.dsmmarketandroid.presentation.base.BaseActivity
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.MyPostPagerAdapter
 import com.dsm.dsmmarketandroid.presentation.util.ProductType
 import com.dsm.dsmmarketandroid.presentation.util.addOnTabSelectedListener
@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.activity_my_post.*
 import org.jetbrains.anko.toast
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MyPostActivity : BaseActivityRefac<ActivityMyPostBinding>() {
+class MyPostActivity : BaseActivity<ActivityMyPostBinding>() {
 
     override val layoutResourceId: Int
         get() = R.layout.activity_my_post
