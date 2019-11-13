@@ -2,6 +2,7 @@ package com.dsm.app.viewModel
 
 import com.dsm.app.BaseTest
 import com.dsm.domain.usecase.PostCommentUseCase
+import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.ui.addComment.AddCommentViewModel
 import com.jraska.livedata.test
 import io.reactivex.Flowable
@@ -74,7 +75,7 @@ class AddCommentViewModelTests : BaseTest() {
 
             postComment(0, 0)
 
-            toastServerErrorEvent.test().assertHasValue()
+            toastEvent.test().assertValue(R.string.fail_server_error)
         }
     }
 }
