@@ -19,20 +19,22 @@ class MyRentFragment : BaseFragment<FragmentMyRentBinding>() {
 
     private val viewModel: MyPostViewModel by lazy { ViewModelProviders.of(activity!!)[MyPostViewModel::class.java] }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    val adapter: MyProductListAdapter by lazy { MyProductListAdapter(ProductType.RENT, childFragmentManager) }
 
-        val adapter = MyProductListAdapter(ProductType.RENT, childFragmentManager)
+    override fun viewInit() {
         rv_my_post_rent.adapter = adapter
 
-        srl_my_rent.setOnRefreshListener { viewModel.getMyRent() }
+        srl_my_rent.setOnRefreshListener { viewModel.getMyPost(ProductType.RENT) }
+    }
 
+    override fun observeViewModel() {
         viewModel.rentList.observe(this, Observer { adapter.setItems(it) })
 
         viewModel.deletePositionFromRent.observe(this, Observer { adapter.deleteAt(it) })
+    }
 
-        viewModel.hideRentLoadingEvent.observe(this, Observer { pb_loading.visibility = View.GONE })
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         binding.viewModel = viewModel
     }
 }

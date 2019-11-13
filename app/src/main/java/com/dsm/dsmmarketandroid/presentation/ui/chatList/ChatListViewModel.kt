@@ -25,11 +25,15 @@ class ChatListViewModel(
     val hideLoadingDialogEvent = SingleLiveEvent<Any>()
 
     val isRefreshing = MutableLiveData<Boolean>()
+    val isProgressVisible = MutableLiveData<Boolean>().apply { value = true }
 
     fun getChatRoom() {
         addDisposable(
             getChatRoomUseCase.create(Unit)
-                .doOnTerminate { isRefreshing.value = false }
+                .doOnTerminate {
+                    isRefreshing.value = false
+                    isProgressVisible.value = false
+                }
                 .map(chatRoomModelMapper::mapFrom)
                 .subscribe({
                     chatRoomList.value = it

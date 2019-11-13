@@ -8,6 +8,7 @@ import kotlinx.android.synthetic.main.activity_rent_image.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class RentImageActivity : BaseActivity<ActivityRentImageBinding>() {
+
     override val layoutResourceId: Int
         get() = R.layout.activity_rent_image
 
@@ -15,12 +16,17 @@ class RentImageActivity : BaseActivity<ActivityRentImageBinding>() {
 
     private val postId: Int by lazy { intent.getIntExtra("post_id", -1) }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun viewInit() {
         tb_rent_image.setNavigationOnClickListener { finish() }
 
         viewModel.getRentImage(postId)
+    }
 
+    override fun observeViewModel() {
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         binding.viewModel = viewModel
     }
 }

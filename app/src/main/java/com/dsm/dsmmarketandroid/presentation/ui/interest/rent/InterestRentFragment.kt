@@ -1,4 +1,4 @@
-package com.dsm.dsmmarketandroid.presentation.ui.interest
+package com.dsm.dsmmarketandroid.presentation.ui.interest.rent
 
 import android.os.Bundle
 import android.view.View
@@ -8,6 +8,7 @@ import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.FragmentInterestRentBinding
 import com.dsm.dsmmarketandroid.presentation.base.BaseFragment
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.InterestListAdapter
+import com.dsm.dsmmarketandroid.presentation.ui.interest.InterestViewModel
 import com.dsm.dsmmarketandroid.presentation.util.ProductType
 import kotlinx.android.synthetic.main.fragment_interest_rent.*
 
@@ -18,18 +19,20 @@ class InterestRentFragment : BaseFragment<FragmentInterestRentBinding>() {
 
     private val viewModel: InterestViewModel by lazy { ViewModelProviders.of(activity!!)[InterestViewModel::class.java] }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    private val adapter = InterestListAdapter(ProductType.RENT)
 
-        val adapter = InterestListAdapter(ProductType.RENT)
+    override fun viewInit() {
         rv_interest_rent.adapter = adapter
 
-        srl_interest_rent.setOnRefreshListener { viewModel.getInterestRent() }
+        srl_interest_rent.setOnRefreshListener { viewModel.getInterest(ProductType.RENT) }
+    }
 
+    override fun observeViewModel() {
         viewModel.rentList.observe(this, Observer { adapter.setItems(it) })
+    }
 
-        viewModel.hideRentProgressEvent.observe(this, Observer { pb_loading.visibility = View.GONE })
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         binding.viewModel = viewModel
     }
 }

@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.ActivityPostPurchaseBinding
 import com.dsm.dsmmarketandroid.presentation.base.BaseActivity
@@ -32,12 +31,9 @@ class PostPurchaseActivity : BaseActivity<ActivityPostPurchaseBinding>() {
 
     private val viewModel: PostPurchaseViewModel by viewModel()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        PermissionUtil.requestReadExternalStorage(this)
+    private val adapter: PostImageListAdapter by lazy { PostImageListAdapter(viewModel) }
 
-        val adapter = PostImageListAdapter(viewModel)
-        rv_post_image.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+    override fun viewInit() {
         rv_post_image.adapter = adapter
 
         tb_post_purchase.setNavigationOnClickListener { finish() }
@@ -58,7 +54,9 @@ class PostPurchaseActivity : BaseActivity<ActivityPostPurchaseBinding>() {
                 .orientation(PickerOrientation.PORTRAIT)
                 .start(SELECT_IMAGE)
         }
+    }
 
+    override fun observeViewModel() {
         viewModel.imageList.observe(this, Observer {
             if (it.size == 0) {
                 iv_select_image.visibility = View.VISIBLE
@@ -75,7 +73,11 @@ class PostPurchaseActivity : BaseActivity<ActivityPostPurchaseBinding>() {
         viewModel.showLoadingDialogEvent.observe(this, Observer { LoadingDialog.show(supportFragmentManager) })
 
         viewModel.hideLoadingDialogEvent.observe(this, Observer { LoadingDialog.hide() })
+    }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        PermissionUtil.requestReadExternalStorage(this)
         binding.viewModel = viewModel
     }
 

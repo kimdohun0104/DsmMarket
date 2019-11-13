@@ -229,7 +229,8 @@
                         android:id="@+id/rv_related"
                         android:layout_width="match_parent"
                         android:layout_height="130dp"
-                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        android:orientation="horizontal"/>
                 </LinearLayout>
 
             </LinearLayout>

@@ -3,6 +3,7 @@ package com.dsm.app.viewModel
 import com.dsm.app.BaseTest
 import com.dsm.domain.entity.Comment
 import com.dsm.domain.usecase.GetCommentUseCase
+import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.mapper.CommentModelMapper
 import com.dsm.dsmmarketandroid.presentation.ui.comment.CommentViewModel
 import com.jraska.livedata.test
@@ -53,7 +54,7 @@ class CommentViewModelTests : BaseTest() {
         viewModel.run {
             getCommentList(0, 0)
 
-            toastServerErrorEvent.test().assertHasValue()
+            toastEvent.test().assertValue(R.string.fail_server_error)
         }
     }
 

@@ -13,11 +13,18 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
 
     abstract val layoutResourceId: Int
 
+    abstract fun viewInit()
+
+    abstract fun observeViewModel()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = DataBindingUtil.setContentView(this, layoutResourceId)
         binding.lifecycleOwner = this
+
+        viewInit()
+        observeViewModel()
     }
 
     override fun attachBaseContext(newBase: Context?) {

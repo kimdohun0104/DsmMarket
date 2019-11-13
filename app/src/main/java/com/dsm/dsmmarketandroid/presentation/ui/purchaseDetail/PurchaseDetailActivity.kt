@@ -6,7 +6,6 @@ import android.view.MenuItem
 import androidx.core.content.ContextCompat
 import androidx.core.view.get
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.custom.LinePagerIndicatorDecoration
@@ -24,6 +23,7 @@ import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+// TODO 여기서부터 밑으로 확인해야함
 class PurchaseDetailActivity : BaseActivity<ActivityPurchaseDetailBinding>() {
 
     override val layoutResourceId: Int
@@ -33,10 +33,11 @@ class PurchaseDetailActivity : BaseActivity<ActivityPurchaseDetailBinding>() {
 
     private val postId: Int by lazy { intent.getIntExtra("post_id", -1) }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setSupportActionBar(tb_purchase_detail)
+    private val recommendListAdapter = RecommendListAdapter(ProductType.PURCHASE)
+    private val relatedListAdapter = RecommendListAdapter(ProductType.PURCHASE)
 
+    override fun viewInit() {
+        setSupportActionBar(tb_purchase_detail)
         tb_purchase_detail.run {
             background.alpha = 0
             setNavigationOnClickListener { finish() }
@@ -44,18 +45,12 @@ class PurchaseDetailActivity : BaseActivity<ActivityPurchaseDetailBinding>() {
         }
 
         rv_detail_image.run {
-            (layoutManager as LinearLayoutManager).orientation = LinearLayoutManager.HORIZONTAL
             adapter = DetailImageListAdapter(postId)
             addItemDecoration(LinePagerIndicatorDecoration())
             PagerSnapHelper().attachToRecyclerView(this)
         }
 
-        val recommendListAdapter = RecommendListAdapter(ProductType.PURCHASE)
-        (rv_recommend.layoutManager as LinearLayoutManager).orientation = LinearLayoutManager.HORIZONTAL
         rv_recommend.adapter = recommendListAdapter
-
-        val relatedListAdapter = RecommendListAdapter(ProductType.PURCHASE)
-        (rv_related.layoutManager as LinearLayoutManager).orientation = LinearLayoutManager.HORIZONTAL
         rv_related.adapter = relatedListAdapter
 
         ll_comment.setOnClickListener { startActivity<CommentActivity>("post_id" to postId, "type" to ProductType.PURCHASE) }
@@ -65,7 +60,9 @@ class PurchaseDetailActivity : BaseActivity<ActivityPurchaseDetailBinding>() {
         viewModel.getPurchaseDetail(postId)
         viewModel.getRelatedProduct(postId)
         viewModel.getRecommendProduct()
+    }
 
+    override fun observeViewModel() {
         viewModel.isInterest.observe(this, Observer {
             if (it) tb_purchase_detail.menu[0].icon = getDrawable(R.drawable.ic_heart_full_red)
             else tb_purchase_detail.menu[0].icon = getDrawable(R.drawable.ic_heart_white)
@@ -84,7 +81,10 @@ class PurchaseDetailActivity : BaseActivity<ActivityPurchaseDetailBinding>() {
         viewModel.showLoadingDialogEvent.observe(this, Observer { LoadingDialog.show(supportFragmentManager) })
 
         viewModel.hideLoadingDialogEvent.observe(this, Observer { LoadingDialog.hide() })
+    }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         binding.viewModel = viewModel
     }
 

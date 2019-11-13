@@ -1,24 +1,19 @@
 package com.dsm.dsmmarketandroid.presentation.ui.rent
 
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
-import android.view.View
+import android.view.*
+import androidx.fragment.app.Fragment
 import com.dsm.dsmmarketandroid.R
-import com.dsm.dsmmarketandroid.databinding.FragmentRentBinding
-import com.dsm.dsmmarketandroid.presentation.base.BaseFragment
 import com.dsm.dsmmarketandroid.presentation.ui.category.CategoryActivity
 import com.dsm.dsmmarketandroid.presentation.ui.interest.InterestActivity
 import com.dsm.dsmmarketandroid.presentation.ui.rentList.RentListFragment
 import com.dsm.dsmmarketandroid.presentation.ui.search.SearchActivity
 import org.jetbrains.anko.startActivity
 
+class RentFragment : Fragment() {
 
-class RentFragment : BaseFragment<FragmentRentBinding>() {
-
-    override val layoutResourceId: Int
-        get() = R.layout.fragment_rent
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
+        inflater.inflate(R.layout.fragment_rent, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

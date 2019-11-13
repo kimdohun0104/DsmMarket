@@ -33,7 +33,8 @@
                     android:layout_height="310dp"
                     android:transitionName="image"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    bind:detailImages="@{viewModel.purchaseDetail.img}" />
+                    bind:detailImages="@{viewModel.purchaseDetail.img}"
+                    android:orientation="horizontal"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -199,7 +200,8 @@
                         android:id="@+id/rv_related"
                         android:layout_width="match_parent"
                         android:layout_height="130dp"
-                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        android:orientation="horizontal"/>
 
                     <View
                         android:layout_width="match_parent"
@@ -227,7 +229,8 @@
                         android:id="@+id/rv_recommend"
                         android:layout_width="match_parent"
                         android:layout_height="130dp"
-                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        android:orientation="horizontal"/>
                 </LinearLayout>
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>

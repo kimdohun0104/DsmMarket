@@ -14,10 +14,20 @@ abstract class BaseFragment<T : ViewDataBinding> : Fragment() {
 
     abstract val layoutResourceId: Int
 
+    abstract fun viewInit()
+
+    abstract fun observeViewModel()
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, layoutResourceId, container, false)
         binding.lifecycleOwner = this
 
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewInit()
+        observeViewModel()
     }
 }

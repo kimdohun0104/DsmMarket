@@ -18,14 +18,18 @@ class RecentRentFragment : BaseFragment<FragmentRecentRentBinding>() {
 
     private val viewModel: RecentViewModel by lazy { ViewModelProviders.of(activity!!).get(RecentViewModel::class.java) }
 
+    private val adapter = RecentListAdapter(ProductType.RENT)
+
+    override fun viewInit() {
+        rv_recent_rent.adapter = adapter
+    }
+
+    override fun observeViewModel() {
+        viewModel.rentList.observe(this, Observer { adapter.setItems(it) })
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val adapter = RecentListAdapter(ProductType.RENT)
-        rv_recent_rent.adapter = adapter
-
-        viewModel.rentList.observe(this, Observer { adapter.setItems(it) })
-
         binding.viewModel = viewModel
     }
 

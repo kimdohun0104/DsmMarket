@@ -1,6 +1,5 @@
 package com.dsm.dsmmarketandroid.presentation.ui.purchaseList
 
-import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
 import com.dsm.data.paging.NetworkState
@@ -22,17 +21,19 @@ class PurchaseListFragment : BaseFragment<FragmentPurchaseListBinding>() {
 
     private val search: String by lazy { arguments?.getString("search") ?: "" }
     private val category: String by lazy { arguments?.getString("category") ?: "" }
+
     private val purchaseDataFactory: PurchaseDataFactory by inject { parametersOf(search, category) }
     private val viewModel: PurchaseListViewModel by viewModel { parametersOf(purchaseDataFactory) }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    private val adapter = ProductListAdapter(ProductType.PURCHASE)
 
+    override fun viewInit() {
         srl_purchase_list.setOnRefreshListener { viewModel.refreshList() }
 
-        val adapter = ProductListAdapter(ProductType.PURCHASE)
         rv_purchase_list.adapter = adapter
+    }
 
+    override fun observeViewModel() {
         viewModel.networkState.observe(this, Observer {
             if (it == NetworkState.LOADED) {
                 pb_loading.visibility = View.GONE

@@ -19,22 +19,24 @@ class MyPurchaseFragment : BaseFragment<FragmentMyPurchaseBinding>() {
 
     private val viewModel: MyPostViewModel by lazy { ViewModelProviders.of(activity!!)[MyPostViewModel::class.java] }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    private val adapter: MyProductListAdapter by lazy { MyProductListAdapter(ProductType.PURCHASE, childFragmentManager) }
 
-        val adapter = MyProductListAdapter(ProductType.PURCHASE, childFragmentManager)
+    override fun viewInit() {
         rv_my_post_purchase.adapter = adapter
 
-        srl_my_purchase.setOnRefreshListener { viewModel.getMyPurchase() }
+        srl_my_purchase.setOnRefreshListener { viewModel.getMyPost(ProductType.PURCHASE) }
 
-        viewModel.getMyPurchase()
+        viewModel.getMyPost(ProductType.PURCHASE)
+    }
 
+    override fun observeViewModel() {
         viewModel.purchaseList.observe(this, Observer { adapter.setItems(it) })
 
         viewModel.deletePositionFromPurchase.observe(this, Observer { adapter.deleteAt(it) })
+    }
 
-        viewModel.hidePurchaseLoadingEvent.observe(this, Observer { pb_loading.visibility = View.GONE })
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         binding.viewModel = viewModel
     }
 }

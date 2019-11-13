@@ -19,9 +19,8 @@ class ChangePasswordViewModel(private val changePasswordUseCase: ChangePasswordU
         value = false
     }
 
-    val toastEvent = SingleLiveEvent<Int>()
-
     val finishActivityEvent = SingleLiveEvent<Any>()
+    val toastEvent = SingleLiveEvent<Int>()
 
     fun changePassword() {
         if (newPassword.value != reType.value) {

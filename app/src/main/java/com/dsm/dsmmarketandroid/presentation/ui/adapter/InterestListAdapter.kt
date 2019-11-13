@@ -33,21 +33,23 @@ class InterestListAdapter(private val type: Int) : RecyclerView.Adapter<Interest
     inner class ViewHolder(private val binding: ItemInterestBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind() {
             val item = listItems[adapterPosition]
-            val context = binding.root.context
-            binding.product = item
-            binding.clParent.setOnClickListener {
-                val intent =
-                    if (type == ProductType.PURCHASE)
-                        Intent(context, PurchaseDetailActivity::class.java)
-                    else
-                        Intent(context, RentDetailActivity::class.java)
-                intent.putExtra("post_id", item.postId)
-                val options = ActivityOptions.makeSceneTransitionAnimation(
-                    context as Activity,
-                    Pair.create(binding.ivProduct as View, "image"),
-                    Pair.create(binding.tvTitle as View, "title")
-                )
-                context.startActivity(intent, options.toBundle())
+            binding.run {
+                val context = root.context
+                product = item
+                clParent.setOnClickListener {
+                    val intent =
+                        if (type == ProductType.PURCHASE)
+                            Intent(context, PurchaseDetailActivity::class.java)
+                        else
+                            Intent(context, RentDetailActivity::class.java)
+                    intent.putExtra("post_id", item.postId)
+                    val options = ActivityOptions.makeSceneTransitionAnimation(
+                        context as Activity,
+                        Pair.create(ivInterestThumb as View, "image"),
+                        Pair.create(tvInterestTitle as View, "title")
+                    )
+                    context.startActivity(intent, options.toBundle())
+                }
             }
         }
     }

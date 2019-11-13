@@ -2,6 +2,7 @@ package com.dsm.dsmmarketandroid.presentation.ui.comment
 
 import androidx.lifecycle.MutableLiveData
 import com.dsm.domain.usecase.GetCommentUseCase
+import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.base.BaseViewModel
 import com.dsm.dsmmarketandroid.presentation.mapper.CommentModelMapper
 import com.dsm.dsmmarketandroid.presentation.model.CommentModel
@@ -15,10 +16,8 @@ class CommentViewModel(
     val listItems = MutableLiveData<List<CommentModel>>()
     val commentCount = MutableLiveData<Int>()
 
-    val toastServerErrorEvent = SingleLiveEvent<Any>()
-
-    val dialogReportComment = MutableLiveData<String>()
-
+    val toastEvent = SingleLiveEvent<Int>()
+    val dialogReportComment = SingleLiveEvent<String>()
     val hideRefreshEvent = SingleLiveEvent<Any>()
 
     fun getCommentList(postId: Int, type: Int) {
@@ -30,7 +29,7 @@ class CommentViewModel(
                     commentCount.value = it.size
                     hideRefreshEvent.call()
                 }, {
-                    toastServerErrorEvent.call()
+                    toastEvent.value = R.string.fail_server_error
                 })
         )
     }

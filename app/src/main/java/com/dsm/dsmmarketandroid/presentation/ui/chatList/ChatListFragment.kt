@@ -21,17 +21,18 @@ class ChatListFragment : BaseFragment<FragmentChatListBinding>() {
 
     private val viewModel: ChatListViewModel by viewModel()
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    private val adapter: ChatRoomListAdapter by lazy { ChatRoomListAdapter(viewModel) }
 
-        val adapter = ChatRoomListAdapter(viewModel)
+    override fun viewInit() {
         rv_chat_room.adapter = adapter
 
         srl_chat.setOnRefreshListener { viewModel.getChatRoom() }
 
         viewModel.getChatRoom()
+    }
 
-        viewModel.chatRoomList.observe(this, Observer { adapter.addItems(it) })
+    override fun observeViewModel() {
+        viewModel.chatRoomList.observe(this, Observer { adapter.setItems(it) })
 
         viewModel.toastEvent.observe(this, Observer { toast(it) })
 
@@ -40,7 +41,10 @@ class ChatListFragment : BaseFragment<FragmentChatListBinding>() {
         viewModel.showLoadingDialogEvent.observe(this, Observer { LoadingDialog.show(childFragmentManager) })
 
         viewModel.hideLoadingDialogEvent.observe(this, Observer { LoadingDialog.hide() })
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         binding.viewModel = viewModel
     }
 }

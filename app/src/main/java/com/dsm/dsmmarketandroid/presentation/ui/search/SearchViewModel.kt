@@ -18,7 +18,7 @@ class SearchViewModel(
     val searchText = MutableLiveData<String>()
 
     val searchHistoryList = MutableLiveData<List<String>>()
-    val intentSearchResult = MutableLiveData<String>()
+    val intentSearchResult = SingleLiveEvent<String>()
 
     val isSearchEnable: LiveData<Boolean> = Transformations.map(searchText) { it != "" }
 

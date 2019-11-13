@@ -13,25 +13,32 @@ import org.jetbrains.anko.toast
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ForgotPasswordActivity : BaseActivity<ActivityForgotPasswordBinding>() {
+
     override val layoutResourceId: Int
         get() = R.layout.activity_forgot_password
 
     private val viewModel: ForgotPasswordViewModel by viewModel()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun viewInit() {
         tb_forgot_password.setNavigationOnClickListener { finish() }
 
-        et_email.setEditorActionListener(EditorInfo.IME_ACTION_DONE) { if (btn_find_password.isClickable) viewModel.sendTempPassword() }
+        et_forgot_password_email.setEditorActionListener(EditorInfo.IME_ACTION_DONE) {
+            if (btn_forgot_password_send_email.isClickable) viewModel.sendTempPassword()
+        }
+    }
 
-        viewModel.finishActivityEvent.observe(this, Observer { finish() })
-
-        viewModel.toastEvent.observe(this, Observer { toast(it) })
-
+    override fun observeViewModel() {
         viewModel.showLoadingDialogEvent.observe(this, Observer { LoadingDialog.show(supportFragmentManager) })
 
         viewModel.hideLoadingDialogEvent.observe(this, Observer { LoadingDialog.hide() })
 
+        viewModel.finishActivityEvent.observe(this, Observer { finish() })
+
+        viewModel.toastEvent.observe(this, Observer { toast(it) })
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         binding.viewModel = viewModel
     }
 }
