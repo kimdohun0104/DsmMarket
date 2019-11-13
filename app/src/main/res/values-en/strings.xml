@@ -31,6 +31,7 @@
 	<string name="original_password">original password</string>
 	<string name="send_temp_password">Send temp password</string>
 	<string name="send_temp_password_success">Sending temporary password succeeded</string>
+	<string name="next">Next</string>
 
 	<string name="description_logo">App logo</string>
 

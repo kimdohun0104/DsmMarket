@@ -1,6 +1,7 @@
 package com.dsm.dsmmarketandroid.presentation.util
 
 import android.graphics.drawable.ColorDrawable
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.NumberPicker
 import android.widget.Spinner
@@ -10,6 +11,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import androidx.viewpager2.widget.ViewPager2
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.DetailImageListAdapter
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.ModifyImageListAdapter
 
@@ -67,5 +69,17 @@ object BindingUtil {
     @BindingAdapter("bind:isRefreshing")
     fun bindIsRefreshing(view: SwipeRefreshLayout, value: LiveData<Boolean>) {
         value.value?.let { view.isRefreshing = it }
+    }
+
+    @JvmStatic
+    @BindingAdapter("bind:pagerIndex")
+    fun bindPagerIndex(view: ViewPager2, value: MutableLiveData<Int>) {
+        value.value = view.currentItem
+    }
+
+    @JvmStatic
+    @BindingAdapter("bind:textWithId")
+    fun bindTextWithId(view: Button, value: LiveData<Int>) {
+        value.value?.let { view.text = view.resources.getString(it) }
     }
 }

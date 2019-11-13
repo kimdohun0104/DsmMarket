@@ -24,6 +24,12 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() {
 
         vp_sign_up.adapter = SignUpPagerAdapter(supportFragmentManager, lifecycle)
         vp_sign_up.addItemDecoration(LinePagerIndicatorDecoration())
+
+        btn_sign_up.setOnClickListener {
+            if (vp_sign_up.currentItem == 0) vp_sign_up.setCurrentItem(1, true)
+            else viewModel.signUp()
+
+        }
     }
 
     override fun observeViewModel() {
