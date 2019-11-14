@@ -1,6 +1,5 @@
 package com.dsm.dsmmarketandroid.presentation.util;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -34,11 +33,8 @@ public class LocaleManager {
         return prefs.getString(LANGUAGE_KEY, LANGUAGE_KOREAN);
     }
 
-    @SuppressLint("ApplySharedPref")
     private void persistLanguage(String language) {
-        // use commit() instead of apply(), because sometimes we kill the application process immediately
-        // which will prevent apply() to finish
-        prefs.edit().putString(LANGUAGE_KEY, language).commit();
+        prefs.edit().putString(LANGUAGE_KEY, language).apply();
     }
 
     private Context updateResources(Context context, String language) {
