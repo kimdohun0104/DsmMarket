@@ -21,13 +21,13 @@ class PurchaseImageActivity : BaseActivity<ActivityPurchaseImageBinding>() {
 
     private val postId: Int by lazy { intent.getIntExtra("post_id", -1) }
 
-    private val adapter = PurchaseImageDetailListAdapter()
+    private val imageAdapter = PurchaseImageDetailListAdapter()
 
     override fun viewInit() {
         tb_purchase_image.setNavigationOnClickListener { finish() }
 
         rv_purchase_image.run {
-            adapter = adapter
+            adapter = imageAdapter
             rv_purchase_image.addItemDecoration(LinePagerIndicatorDecoration())
             PagerSnapHelper().attachToRecyclerView(this)
         }
@@ -36,7 +36,7 @@ class PurchaseImageActivity : BaseActivity<ActivityPurchaseImageBinding>() {
     }
 
     override fun observeViewModel() {
-        viewModel.imageList.observe(this, Observer { adapter.listItems = it })
+        viewModel.imageList.observe(this, Observer { imageAdapter.addItems(it) })
 
         viewModel.toastEvent.observe(this, Observer { toast(it) })
     }

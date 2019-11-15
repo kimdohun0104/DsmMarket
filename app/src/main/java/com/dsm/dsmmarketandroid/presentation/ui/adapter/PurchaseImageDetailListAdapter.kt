@@ -10,11 +10,7 @@ import kotlinx.android.synthetic.main.item_purchase_image_detail.view.*
 
 class PurchaseImageDetailListAdapter : RecyclerView.Adapter<PurchaseImageDetailListAdapter.ViewHolder>() {
 
-    var listItems = listOf<String>()
-        set(value) {
-            field = value
-            notifyDataSetChanged()
-        }
+    private val listItems = arrayListOf<String>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_purchase_image_detail, parent, false))
@@ -27,5 +23,10 @@ class PurchaseImageDetailListAdapter : RecyclerView.Adapter<PurchaseImageDetailL
         fun bind() {
             GlideApp.with(itemView).load(listItems[adapterPosition]).into(itemView.iv_image)
         }
+    }
+
+    fun addItems(items: List<String>) {
+        listItems.addAll(items)
+        notifyDataSetChanged()
     }
 }

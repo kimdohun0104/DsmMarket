@@ -214,7 +214,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:visibility="@{viewModel.recommendList.size() == 0 ? View.GONE : View.VISIBLE}">
+                    android:visibility="@{viewModel.recommendList.size() == 0 ? View.GONE : View.VISIBLE}"
+                    android:layout_marginTop="10dp">
 
                     <TextView
                         android:layout_width="wrap_content"
