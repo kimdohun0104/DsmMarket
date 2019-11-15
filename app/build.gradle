@@ -89,6 +89,7 @@ dependencies {
     // firebase
     implementation dependencies.firebaseCore
     implementation dependencies.crashlytics
+    implementation dependencies.analytics
 
     // anko
     implementation dependencies.anko
