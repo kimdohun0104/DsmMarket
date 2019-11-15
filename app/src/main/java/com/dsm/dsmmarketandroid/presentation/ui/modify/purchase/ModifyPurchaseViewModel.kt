@@ -43,7 +43,7 @@ class ModifyPurchaseViewModel(
                 .map(purchaseDetailModelMapper::mapFrom)
                 .subscribe({
                     title.value = it.title
-                    price.value = it.price.substring(0, it.price.length - 1)
+                    price.value = it.price.substring(0, it.price.length - 1)    // 100원
                     category.value = it.category
                     content.value = it.content
                     imageList.value = it.img as ArrayList<String>

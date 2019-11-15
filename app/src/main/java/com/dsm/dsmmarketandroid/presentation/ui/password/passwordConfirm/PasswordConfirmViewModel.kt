@@ -1,5 +1,6 @@
 package com.dsm.dsmmarketandroid.presentation.ui.password.passwordConfirm
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import com.dsm.domain.usecase.ConfirmPasswordUseCase
@@ -12,7 +13,7 @@ class PasswordConfirmViewModel(private val confirmPasswordUseCase: ConfirmPasswo
 
     val originalPassword = MutableLiveData<String>()
 
-    val isConfirmEnable = Transformations.map(originalPassword) { it != "" }
+    val isConfirmEnable: LiveData<Boolean> = Transformations.map(originalPassword) { it != "" }
 
     val intentChangePasswordEvent = SingleLiveEvent<Any>()
     val finishActivityEvent = SingleLiveEvent<Any>()

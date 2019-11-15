@@ -18,14 +18,18 @@ class RecentPurchaseFragment : BaseFragment<FragmentRecentPurchaseBinding>() {
 
     private val viewModel: RecentViewModel by lazy { ViewModelProviders.of(activity!!).get(RecentViewModel::class.java) }
 
+    private val adapter = RecentListAdapter(ProductType.PURCHASE)
+
+    override fun viewInit() {
+        rv_recent_purchase.adapter = adapter
+    }
+
+    override fun observeViewModel() {
+        viewModel.purchaseList.observe(this, Observer { adapter.setItems(it) })
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val adapter = RecentListAdapter(ProductType.PURCHASE)
-        rv_recent_purchase.adapter = adapter
-
-        viewModel.purchaseList.observe(this, Observer { adapter.setItems(it) })
-
         binding.viewModel = viewModel
     }
 

@@ -25,16 +25,18 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
 
     private val viewModel: LoginViewModel by viewModel()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
+    override fun viewInit() {
         tb_login.setNavigationOnClickListener { finish() }
 
-        tv_forget_password.setOnClickListener { startActivity<ForgotPasswordActivity>() }
+        tv_login_forget_password.setOnClickListener { startActivity<ForgotPasswordActivity>() }
 
-        et_password.setEditorActionListener(EditorInfo.IME_ACTION_DONE) { if (btn_login.isClickable) viewModel.login() }
+        et_login_password.setEditorActionListener(EditorInfo.IME_ACTION_DONE) { if (btn_login.isClickable) viewModel.login() }
+    }
 
+    override fun observeViewModel() {
         viewModel.showLoadingDialogEvent.observe(this, Observer { LoadingDialog.show(supportFragmentManager) })
+
+        viewModel.hideLoadingDialogEvent.observe(this, Observer { LoadingDialog.hide() })
 
         viewModel.intentMainActivityEvent.observe(this, Observer {
             Intent(this, MainActivity::class.java).apply {
@@ -44,13 +46,14 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
         })
 
         viewModel.hideKeyboardEvent.observe(this, Observer {
-            (getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).hideSoftInputFromWindow(et_password.windowToken, 0)
+            (getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).hideSoftInputFromWindow(et_login_password.windowToken, 0)
         })
 
-        viewModel.hideLoadingDialogEvent.observe(this, Observer { LoadingDialog.hide() })
-
         viewModel.toastEvent.observe(this, Observer { toast(it) })
+    }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         binding.viewModel = viewModel
     }
 }

@@ -18,17 +18,22 @@ class ChangeNickActivity : BaseActivity<ActivityChangeNickBinding>() {
 
     private val viewModel: ChangeNickViewModel by viewModel()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        tb_change_name.setNavigationOnClickListener { finish() }
+    override fun viewInit() {
         binding.nick = intent.getStringExtra("nick")
 
-        et_nick.setEditorActionListener(EditorInfo.IME_ACTION_DONE) { if (btn_change_nick.isClickable) viewModel.changeNick() }
+        tb_change_name.setNavigationOnClickListener { finish() }
 
+        et_nick.setEditorActionListener(EditorInfo.IME_ACTION_DONE) { if (btn_change_nick.isClickable) viewModel.changeNick() }
+    }
+
+    override fun observeViewModel() {
         viewModel.finishActivityEvent.observe(this, Observer { finish() })
 
         viewModel.toastEvent.observe(this, Observer { toast(it) })
+    }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         binding.viewModel = viewModel
     }
 }

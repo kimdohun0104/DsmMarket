@@ -2,7 +2,6 @@ package com.dsm.dsmmarketandroid.presentation.ui.purchaseImage
 
 import android.os.Bundle
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.custom.LinePagerIndicatorDecoration
@@ -14,6 +13,7 @@ import org.jetbrains.anko.toast
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PurchaseImageActivity : BaseActivity<ActivityPurchaseImageBinding>() {
+
     override val layoutResourceId: Int
         get() = R.layout.activity_purchase_image
 
@@ -21,24 +21,28 @@ class PurchaseImageActivity : BaseActivity<ActivityPurchaseImageBinding>() {
 
     private val postId: Int by lazy { intent.getIntExtra("post_id", -1) }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    private val imageAdapter = PurchaseImageDetailListAdapter()
+
+    override fun viewInit() {
         tb_purchase_image.setNavigationOnClickListener { finish() }
 
-        val adapter = PurchaseImageDetailListAdapter()
         rv_purchase_image.run {
-            setAdapter(adapter)
-            (layoutManager as LinearLayoutManager).orientation = LinearLayoutManager.HORIZONTAL
+            adapter = imageAdapter
             rv_purchase_image.addItemDecoration(LinePagerIndicatorDecoration())
             PagerSnapHelper().attachToRecyclerView(this)
         }
 
         viewModel.getPurchaseImage(postId)
+    }
 
-        viewModel.imageList.observe(this, Observer { adapter.listItems = it })
+    override fun observeViewModel() {
+        viewModel.imageList.observe(this, Observer { imageAdapter.addItems(it) })
 
-        viewModel.toastServerError.observe(this, Observer { toast(getString(R.string.fail_server_error)) })
+        viewModel.toastEvent.observe(this, Observer { toast(it) })
+    }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         binding.viewModel = viewModel
     }
 }

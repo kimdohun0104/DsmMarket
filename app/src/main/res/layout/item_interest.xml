@@ -18,7 +18,7 @@
         android:background="?android:attr/selectableItemBackground">
 
         <com.makeramen.roundedimageview.RoundedImageView
-            android:id="@+id/iv_product"
+            android:id="@+id/iv_interest_thumb"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginStart="17dp"
@@ -35,7 +35,7 @@
             bind:image="@{product.img}" />
 
         <TextView
-            android:id="@+id/tv_title"
+            android:id="@+id/tv_interest_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="14dp"
@@ -46,12 +46,12 @@
             android:textColor="@color/colorBlackWhite"
             android:textSize="21sp"
             android:transitionName="title"
-            app:layout_constraintLeft_toRightOf="@id/iv_product"
+            app:layout_constraintLeft_toRightOf="@id/iv_interest_thumb"
             app:layout_constraintRight_toLeftOf="@id/ib_interest"
-            app:layout_constraintTop_toTopOf="@id/iv_product" />
+            app:layout_constraintTop_toTopOf="@id/iv_interest_thumb" />
 
         <TextView
-            android:id="@+id/tv_product_price"
+            android:id="@+id/tv_interest_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
@@ -60,7 +60,7 @@
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@id/tv_post_date"
-            app:layout_constraintLeft_toLeftOf="@id/tv_title" />
+            app:layout_constraintLeft_toLeftOf="@id/tv_interest_title" />
 
         <TextView
             android:id="@+id/tv_post_date"
@@ -70,11 +70,11 @@
             android:textColor="@color/colorGrey"
             android:textSize="12sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@id/iv_product"
-            app:layout_constraintLeft_toLeftOf="@id/tv_title" />
+            app:layout_constraintBottom_toBottomOf="@id/iv_interest_thumb"
+            app:layout_constraintLeft_toLeftOf="@id/tv_interest_title" />
 
         <TextView
-            android:id="@+id/tv_product_date"
+            android:id="@+id/tv_interest_post_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="2dp"

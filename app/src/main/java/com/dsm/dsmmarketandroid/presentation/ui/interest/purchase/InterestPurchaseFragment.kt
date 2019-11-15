@@ -1,4 +1,4 @@
-package com.dsm.dsmmarketandroid.presentation.ui.interest
+package com.dsm.dsmmarketandroid.presentation.ui.interest.purchase
 
 import android.os.Bundle
 import android.view.View
@@ -8,6 +8,7 @@ import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.FragmentInterestPurchaseBinding
 import com.dsm.dsmmarketandroid.presentation.base.BaseFragment
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.InterestListAdapter
+import com.dsm.dsmmarketandroid.presentation.ui.interest.InterestViewModel
 import com.dsm.dsmmarketandroid.presentation.util.ProductType
 import kotlinx.android.synthetic.main.fragment_interest_purchase.*
 
@@ -18,20 +19,22 @@ class InterestPurchaseFragment : BaseFragment<FragmentInterestPurchaseBinding>()
 
     private val viewModel: InterestViewModel by lazy { ViewModelProviders.of(activity!!)[InterestViewModel::class.java] }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    private val adapter = InterestListAdapter(ProductType.PURCHASE)
 
-        val adapter = InterestListAdapter(ProductType.PURCHASE)
+    override fun viewInit() {
         rv_interest_purchase.adapter = adapter
 
-        srl_interest_purchase.setOnRefreshListener { viewModel.getInterestPurchase() }
+        srl_interest_purchase.setOnRefreshListener { viewModel.getInterest(ProductType.PURCHASE) }
 
-        viewModel.getInterestPurchase()
+        viewModel.getInterest(ProductType.PURCHASE)
+    }
 
+    override fun observeViewModel() {
         viewModel.purchaseList.observe(this, Observer { adapter.setItems(it) })
+    }
 
-        viewModel.hidePurchaseProgressEvent.observe(this, Observer { pb_loading.visibility = View.GONE })
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         binding.viewModel = viewModel
     }
 }

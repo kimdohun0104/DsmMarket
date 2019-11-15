@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:bind="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.dsm.dsmmarketandroid.presentation.ui.signUp.SignUpViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".presentation.ui.signUp.SignUpActivity">
@@ -23,6 +25,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:navigationContentDescription="back"
             app:navigationIcon="@drawable/ic_back_black"
             app:title="@string/sign_up"
             app:titleTextColor="@color/colorBlackWhite" />
@@ -36,19 +39,18 @@
             app:layout_constraintTop_toBottomOf="@id/tb_sign_up" />
 
         <ImageView
-            android:id="@+id/iv_logo"
+            android:id="@+id/iv_sign_up_logo"
             android:layout_width="74dp"
             android:layout_height="74dp"
             android:layout_marginTop="10dp"
             android:contentDescription="@string/description_logo"
-            android:src="@drawable/logo"
+            android:src="@drawable/common_logo"
             android:transitionName="logo"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tb_sign_up" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cl_parent"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="34dp"
@@ -60,34 +62,35 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/iv_logo">
+            app:layout_constraintTop_toBottomOf="@id/iv_sign_up_logo">
 
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/vp_sign_up"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
-                app:layout_constraintLeft_toLeftOf="@id/cl_parent"
-                app:layout_constraintRight_toRightOf="@id/cl_parent"
-                app:layout_constraintTop_toTopOf="@id/cl_parent" />
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                bind:pagerIndex="@{viewModel.pagerIndex}"/>
 
             <Button
                 android:id="@+id/btn_sign_up"
                 android:layout_width="0dp"
-                android:layout_height="46dp"
+                android:layout_height="48dp"
                 android:layout_marginStart="25dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="25dp"
-                android:text="@string/sign_up"
+                android:background="@{viewModel.isBtnEnable ? @drawable/bg_primary_rounded : @drawable/bg_grey_rounded}"
+                android:clickable="@{viewModel.isBtnEnable}"
+                android:onClick="@{() -> viewModel.signUp()}"
+                bind:textWithId="@{viewModel.btnText}"
                 android:textColor="@color/colorWhite"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                app:layout_constraintLeft_toLeftOf="@id/cl_parent"
-                app:layout_constraintRight_toRightOf="@id/cl_parent"
-                app:layout_constraintTop_toBottomOf="@id/vp_sign_up"
-                android:background="@{viewModel.isSignUpEnable ? @drawable/bg_primary_rounded : @drawable/bg_grey_rounded}"
-                android:clickable="@{viewModel.isSignUpEnable}"
-                android:onClick="@{() -> viewModel.signUp()}"/>
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/vp_sign_up" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

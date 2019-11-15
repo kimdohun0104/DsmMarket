@@ -13,20 +13,23 @@ import org.jetbrains.anko.toast
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PostCategoryActivity : BaseActivity<ActivityPostCategoryBinding>() {
+
     override val layoutResourceId: Int
         get() = R.layout.activity_post_category
 
     private val viewModel: PostCategoryViewModel by viewModel()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    private val adapter: PostCategoryListAdapter by lazy { PostCategoryListAdapter(viewModel) }
+
+    override fun viewInit() {
         tb_post_category.setNavigationOnClickListener { finish() }
 
-        viewModel.getPostCategory()
-
-        val adapter = PostCategoryListAdapter(viewModel)
         rv_post_category.adapter = adapter
 
+        viewModel.getPostCategory()
+    }
+
+    override fun observeViewModel() {
         viewModel.categoryList.observe(this, Observer { adapter.addItems(it) })
 
         viewModel.toastEvent.observe(this, Observer { toast(it) })
@@ -38,7 +41,10 @@ class PostCategoryActivity : BaseActivity<ActivityPostCategoryBinding>() {
                 finish()
             }
         })
+    }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         binding.viewModel = viewModel
     }
 }

@@ -19,22 +19,31 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() {
 
     private val viewModel: SignUpViewModel by viewModel()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
+    override fun viewInit() {
         tb_sign_up.setNavigationOnClickListener { finish() }
 
         vp_sign_up.adapter = SignUpPagerAdapter(supportFragmentManager, lifecycle)
         vp_sign_up.addItemDecoration(LinePagerIndicatorDecoration())
 
-        viewModel.showLoadingDialogEvent.observe(this, Observer { LoadingDialog.show(supportFragmentManager) })
+        btn_sign_up.setOnClickListener {
+            if (vp_sign_up.currentItem == 0) vp_sign_up.setCurrentItem(1, true)
+            else viewModel.signUp()
 
-        viewModel.finishActivityEvent.observe(this, Observer { finish() })
+        }
+    }
+
+    override fun observeViewModel() {
+        viewModel.showLoadingDialogEvent.observe(this, Observer { LoadingDialog.show(supportFragmentManager) })
 
         viewModel.hideLoadingDialogEvent.observe(this, Observer { LoadingDialog.hide() })
 
-        viewModel.toastEvent.observe(this, Observer { toast(it) })
+        viewModel.finishActivityEvent.observe(this, Observer { finish() })
 
+        viewModel.toastEvent.observe(this, Observer { toast(it) })
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         binding.viewModel = viewModel
     }
 }

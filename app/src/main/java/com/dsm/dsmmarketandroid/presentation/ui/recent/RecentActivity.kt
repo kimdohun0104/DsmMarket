@@ -11,13 +11,13 @@ import kotlinx.android.synthetic.main.activity_recent.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class RecentActivity : BaseActivity<ActivityRecentBinding>() {
+
     override val layoutResourceId: Int
         get() = R.layout.activity_recent
 
     private val viewModel: RecentViewModel by viewModel()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun viewInit() {
         tb_past.setNavigationOnClickListener { finish() }
 
         vp_recent.adapter = RecentPagerAdapter(supportFragmentManager, lifecycle)
@@ -31,7 +31,13 @@ class RecentActivity : BaseActivity<ActivityRecentBinding>() {
         tl_recent.addOnTabSelectedListener { vp_recent.currentItem = it.position }
 
         viewModel.getRecentProduct()
+    }
 
+    override fun observeViewModel() {
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         binding.viewModel = viewModel
     }
 }

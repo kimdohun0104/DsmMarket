@@ -17,7 +17,7 @@
         android:background="?android:attr/selectableItemBackground">
 
         <com.makeramen.roundedimageview.RoundedImageView
-            android:id="@+id/iv_product"
+            android:id="@+id/iv_product_thumb"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginStart="17dp"
@@ -34,7 +34,7 @@
             bind:image="@{product.img}" />
 
         <TextView
-            android:id="@+id/tv_title"
+            android:id="@+id/tv_product_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="14dp"
@@ -44,9 +44,9 @@
             android:textColor="@color/colorBlackWhite"
             android:textSize="21sp"
             android:transitionName="title"
-            app:layout_constraintLeft_toRightOf="@id/iv_product"
+            app:layout_constraintLeft_toRightOf="@id/iv_product_thumb"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@id/iv_product" />
+            app:layout_constraintTop_toTopOf="@id/iv_product_thumb" />
 
         <TextView
             android:id="@+id/tv_product_price"
@@ -68,8 +68,8 @@
             android:textColor="@color/colorGrey"
             android:textSize="12sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@id/iv_product"
-            app:layout_constraintLeft_toLeftOf="@id/tv_title" />
+            app:layout_constraintBottom_toBottomOf="@id/iv_product_thumb"
+            app:layout_constraintLeft_toLeftOf="@id/tv_product_title" />
 
         <TextView
             android:id="@+id/tv_product_date"

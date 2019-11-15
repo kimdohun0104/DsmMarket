@@ -15,8 +15,8 @@ android {
         applicationId "com.dsm.dsmmarketandroid"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 1
-        versionName "1.0.0-beta1"
+        versionCode 2
+        versionName "1.0.0-beta2"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         resConfigs "kr", "en"
 
@@ -70,7 +70,7 @@ dependencies {
     implementation ('io.socket:socket.io-client:0.8.3') { exclude group: 'org.json', module: 'json' }
 
     // image
-    implementation 'com.github.kimdohun0104:MediaPicker:1.0.3'
+    implementation 'com.github.kimdohun0104:MediaPicker:1.0.4'
 
     // kotlin
     implementation dependencies.kotlin

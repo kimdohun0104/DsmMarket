@@ -31,10 +31,7 @@ class PostRentActivity : BaseActivity<ActivityPostRentBinding>() {
 
     private val viewModel: PostRentViewModel by viewModel()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        PermissionUtil.requestReadExternalStorage(this)
-
+    override fun viewInit() {
         tb_post_rent.setNavigationOnClickListener { finish() }
 
         cl_category.setOnClickListener { startActivityForResult(Intent(this, PostCategoryActivity::class.java), CATEGORY) }
@@ -55,7 +52,9 @@ class PostRentActivity : BaseActivity<ActivityPostRentBinding>() {
         }
 
         btn_select_time.setOnClickListener { SelectRentTimeDialog().show(supportFragmentManager, "") }
+    }
 
+    override fun observeViewModel() {
         viewModel.finishActivityEvent.observe(this, Observer { finish() })
 
         viewModel.toastEvent.observe(this, Observer { toast(it) })
@@ -63,7 +62,11 @@ class PostRentActivity : BaseActivity<ActivityPostRentBinding>() {
         viewModel.showLoadingDialogEvent.observe(this, Observer { LoadingDialog.show(supportFragmentManager) })
 
         viewModel.hideLoadingDialogEvent.observe(this, Observer { LoadingDialog.hide() })
+    }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        PermissionUtil.requestReadExternalStorage(this)
         binding.viewModel = viewModel
     }
 

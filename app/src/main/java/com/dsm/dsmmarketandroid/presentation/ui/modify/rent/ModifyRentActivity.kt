@@ -15,6 +15,7 @@ import org.jetbrains.anko.toast
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ModifyRentActivity : BaseActivity<ActivityModifyRentBinding>() {
+
     override val layoutResourceId: Int
         get() = R.layout.activity_modify_rent
 
@@ -24,10 +25,10 @@ class ModifyRentActivity : BaseActivity<ActivityModifyRentBinding>() {
 
     private val viewModel: ModifyRentViewModel by viewModel()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun viewInit() {
         val postId = intent.getIntExtra("post_id", -1)
         binding.postId = postId
+
         tb_modify_rent.setNavigationOnClickListener { finish() }
 
         cl_category.setOnClickListener { startActivityForResult(Intent(this, PostCategoryActivity::class.java), CATEGORY) }
@@ -35,20 +36,22 @@ class ModifyRentActivity : BaseActivity<ActivityModifyRentBinding>() {
         btn_modify_time.setOnClickListener { ModifyRentTimeDialog().show(supportFragmentManager, "") }
 
         viewModel.getRentDetail(postId)
+    }
 
+    override fun observeViewModel() {
         viewModel.toastEvent.observe(this, Observer { toast(it) })
 
         viewModel.finishActivityEvent.observe(this, Observer { finish() })
+    }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         binding.viewModel = viewModel
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == Activity.RESULT_OK) {
-            if (requestCode == CATEGORY) {
-                viewModel.setCategory(data?.getStringExtra("category") ?: "")
-            }
-        }
+        if (resultCode == Activity.RESULT_OK && requestCode == CATEGORY)
+            viewModel.setCategory(data?.getStringExtra("category") ?: "")
     }
 }

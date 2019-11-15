@@ -42,3 +42,5 @@ fun Spinner.onItemSelectedListener(callback: (position: Int) -> Unit) {
 }
 
 fun MutableLiveData<String>.isValueBlank() = this.value.isNullOrBlank()
+
+fun Int.isPurchase(): Boolean = this == ProductType.PURCHASE

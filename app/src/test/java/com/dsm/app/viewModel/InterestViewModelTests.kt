@@ -65,7 +65,7 @@ class InterestViewModelTests : BaseTest() {
         `when`(getInterestUseCase.create(0))
             .thenReturn(Flowable.just(response))
 
-        viewModel.getInterestPurchase()
+        viewModel.getInterest(ProductType.PURCHASE)
 
         viewModel.purchaseList.test().assertValue(productModelMapper.mapFrom(response))
     }
@@ -75,7 +75,7 @@ class InterestViewModelTests : BaseTest() {
         `when`(getInterestUseCase.create(ProductType.PURCHASE))
             .thenReturn(Flowable.error(Exception()))
 
-        viewModel.getInterestPurchase()
+        viewModel.getInterest(ProductType.PURCHASE)
 
         viewModel.toastEvent.test().assertValue(R.string.fail_server_error)
     }
@@ -94,7 +94,7 @@ class InterestViewModelTests : BaseTest() {
         `when`(getInterestUseCase.create(1))
             .thenReturn(Flowable.just(response))
 
-        viewModel.getInterestRent()
+        viewModel.getInterest(ProductType.RENT)
 
         viewModel.rentList.test().assertValue(productModelMapper.mapFrom(response))
     }
@@ -104,7 +104,7 @@ class InterestViewModelTests : BaseTest() {
          `when`(getInterestUseCase.create(ProductType.RENT))
              .thenReturn(Flowable.error(Exception()))
 
-         viewModel.getInterestRent()
+         viewModel.getInterest(ProductType.RENT)
 
          viewModel.toastEvent.test().assertValue(R.string.fail_server_error)
      }

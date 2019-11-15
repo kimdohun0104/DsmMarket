@@ -11,7 +11,7 @@
             android:layout_height="wrap_content">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cl_interest"
+                android:id="@+id/cl_me_interest"
                 android:layout_width="0dp"
                 android:layout_height="68dp"
                 android:background="@color/colorRed"
@@ -20,7 +20,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/iv_heart"
+                    android:id="@+id/iv_me_heart"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_marginStart="18dp"
@@ -37,23 +37,23 @@
                     android:textColor="@color/colorWhite"
                     android:textSize="17sp"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@id/iv_heart"
-                    app:layout_constraintLeft_toRightOf="@id/iv_heart"
-                    app:layout_constraintTop_toTopOf="@id/iv_heart" />
+                    app:layout_constraintBottom_toBottomOf="@id/iv_me_heart"
+                    app:layout_constraintLeft_toRightOf="@id/iv_me_heart"
+                    app:layout_constraintTop_toTopOf="@id/iv_me_heart" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cl_post_product"
+                android:id="@+id/cl_me_my_post"
                 android:layout_width="0dp"
                 android:layout_height="68dp"
                 android:background="@color/colorSky"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cl_interest">
+                app:layout_constraintTop_toBottomOf="@id/cl_me_interest">
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/iv_box"
+                    android:id="@+id/iv_me_box"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_marginStart="18dp"
@@ -70,22 +70,22 @@
                     android:textColor="@color/colorWhite"
                     android:textSize="17sp"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@id/iv_box"
-                    app:layout_constraintLeft_toRightOf="@id/iv_box"
-                    app:layout_constraintTop_toTopOf="@id/iv_box" />
+                    app:layout_constraintBottom_toBottomOf="@id/iv_me_box"
+                    app:layout_constraintLeft_toRightOf="@id/iv_me_box"
+                    app:layout_constraintTop_toTopOf="@id/iv_me_box" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cl_past_product"
+                android:id="@+id/cl_me_product_history"
                 android:layout_width="0dp"
                 android:layout_height="68dp"
                 android:background="@color/colorGreen"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cl_post_product">
+                app:layout_constraintTop_toBottomOf="@id/cl_me_my_post">
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/iv_past"
+                    android:id="@+id/iv_me_history"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_marginStart="18dp"
@@ -102,22 +102,22 @@
                     android:textColor="@color/colorWhite"
                     android:textSize="17sp"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@id/iv_past"
-                    app:layout_constraintLeft_toRightOf="@id/iv_past"
-                    app:layout_constraintTop_toTopOf="@id/iv_past" />
+                    app:layout_constraintBottom_toBottomOf="@id/iv_me_history"
+                    app:layout_constraintLeft_toRightOf="@id/iv_me_history"
+                    app:layout_constraintTop_toTopOf="@id/iv_me_history" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cl_change_name"
+                android:id="@+id/cl_me_change_name"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cl_past_product"
+                app:layout_constraintTop_toBottomOf="@id/cl_me_product_history"
                 android:layout_marginTop="30dp">
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/iv_name"
+                    android:id="@+id/iv_me_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="18dp"
@@ -134,7 +134,7 @@
                     android:textColor="@color/colorBlackWhite"
                     android:textSize="17sp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toRightOf="@id/iv_name"
+                    app:layout_constraintLeft_toRightOf="@id/iv_me_name"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.appcompat.widget.AppCompatImageView
@@ -148,15 +148,15 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cl_change_password"
+                android:id="@+id/cl_me_change_password"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cl_change_name">
+                app:layout_constraintTop_toBottomOf="@id/cl_me_change_name">
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/iv_password"
+                    android:id="@+id/iv_me_password"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="18dp"
@@ -173,7 +173,7 @@
                     android:textColor="@color/colorBlackWhite"
                     android:textSize="17sp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toRightOf="@id/iv_password"
+                    app:layout_constraintLeft_toRightOf="@id/iv_me_password"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.appcompat.widget.AppCompatImageView
@@ -187,12 +187,12 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cl_language"
+                android:id="@+id/cl_me_change_language"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cl_change_password">
+                app:layout_constraintTop_toBottomOf="@id/cl_me_change_password">
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/iv_language"
@@ -226,15 +226,15 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cl_version"
+                android:id="@+id/cl_me_version_info"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cl_language">
+                app:layout_constraintTop_toBottomOf="@id/cl_me_change_language">
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/iv_version_info"
+                    android:id="@+id/iv_me_version_info"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="18dp"
@@ -250,11 +250,11 @@
                     android:text="@string/version_info"
                     android:textColor="@color/colorBlackWhite"
                     android:textSize="17sp"
-                    app:layout_constraintLeft_toRightOf="@id/iv_version_info"
-                    app:layout_constraintTop_toTopOf="@id/iv_version_info" />
+                    app:layout_constraintLeft_toRightOf="@id/iv_me_version_info"
+                    app:layout_constraintTop_toTopOf="@id/iv_me_version_info" />
 
                 <TextView
-                    android:id="@+id/tv_current_version"
+                    android:id="@+id/tv_version"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
@@ -262,27 +262,27 @@
                     android:layout_marginBottom="4dp"
                     android:text="@string/current_version"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="@id/iv_version_info"
-                    app:layout_constraintTop_toBottomOf="@id/iv_version_info" />
+                    app:layout_constraintLeft_toLeftOf="@id/iv_me_version_info"
+                    app:layout_constraintTop_toBottomOf="@id/iv_me_version_info" />
 
                 <TextView
-                    android:id="@+id/tv_version"
+                    android:id="@+id/tv_me_current_version"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
-                    app:layout_constraintBottom_toBottomOf="@id/tv_current_version"
-                    app:layout_constraintLeft_toRightOf="@id/tv_current_version"
-                    app:layout_constraintTop_toTopOf="@id/tv_current_version" />
+                    app:layout_constraintBottom_toBottomOf="@id/tv_version"
+                    app:layout_constraintLeft_toRightOf="@id/tv_version"
+                    app:layout_constraintTop_toTopOf="@id/tv_version" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cl_open_source"
+                android:id="@+id/cl_me_open_source"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cl_version">
+                app:layout_constraintTop_toBottomOf="@id/cl_me_version_info">
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/iv_open_source"
@@ -316,12 +316,12 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cl_logout"
+                android:id="@+id/cl_me_logout"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cl_open_source">
+                app:layout_constraintTop_toBottomOf="@id/cl_me_open_source">
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/iv_logout"

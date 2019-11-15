@@ -1,7 +1,9 @@
 package com.dsm.dsmmarketandroid.presentation.ui.signUp
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import com.dsm.domain.usecase.SignUpUseCase
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.base.BaseViewModel
@@ -20,24 +22,33 @@ class SignUpViewModel(private val signUpUseCase: SignUpUseCase) : BaseViewModel(
     val grade = MutableLiveData<String>()
     val gender = MutableLiveData<String>()
 
-    val isSignUpEnable = MediatorLiveData<Boolean>().apply {
-        addSource(email) { value = !isBlankExist() }
-        addSource(password) { value = !isBlankExist() }
-        addSource(reType) { value = !isBlankExist() }
+    val pagerIndex = MutableLiveData<Int>()
+
+    val btnText: LiveData<Int> = Transformations.map(pagerIndex) { if (it == 0) R.string.next else R.string.sign_up }
+
+    val isBtnEnable = MediatorLiveData<Boolean>().apply {
+        addSource(pagerIndex) {
+            value =
+                if (it == 0) !signUp1Enable()
+                else !isBlankExist()
+        }
+        addSource(email) { value = !signUp1Enable() }
+        addSource(password) { value = !signUp1Enable() }
+        addSource(reType) { value = !signUp1Enable() }
         addSource(name) { value = !isBlankExist() }
         addSource(grade) { value = !isBlankExist() }
         addSource(gender) { value = !isBlankExist() }
     }
+
+    private fun signUp1Enable() = email.isValueBlank() || password.isValueBlank() || reType.isValueBlank()
 
     private fun isBlankExist() = email.isValueBlank() || password.isValueBlank()
         || reType.isValueBlank() || name.isValueBlank()
         || grade.isValueBlank() || gender.isValueBlank()
 
     val showLoadingDialogEvent = SingleLiveEvent<Any>()
-
-    val finishActivityEvent = SingleLiveEvent<Any>()
     val hideLoadingDialogEvent = SingleLiveEvent<Any>()
-
+    val finishActivityEvent = SingleLiveEvent<Any>()
     val toastEvent = SingleLiveEvent<Int>()
 
     fun signUp() {
@@ -73,7 +84,7 @@ class SignUpViewModel(private val signUpUseCase: SignUpUseCase) : BaseViewModel(
                                 toastEvent.value = R.string.fail_existent_email
                             else
                                 toastEvent.value = R.string.fail_existent_nick
-                        }
+                        } else toastEvent.value = R.string.fail_server_error
                     } else toastEvent.value = R.string.fail_server_error
                 })
         )

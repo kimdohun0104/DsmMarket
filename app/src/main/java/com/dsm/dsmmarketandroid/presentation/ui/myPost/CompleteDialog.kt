@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.util.ProductType
+import com.dsm.dsmmarketandroid.presentation.util.isPurchase
 import kotlinx.android.synthetic.main.dialog_complete_purchase.*
 
 class CompleteDialog : DialogFragment() {
@@ -22,10 +23,10 @@ class CompleteDialog : DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         btn_complete.setOnClickListener {
-            if (arguments?.getInt("type") ?: 0 == ProductType.PURCHASE) {
-                viewModel.completePurchase(arguments?.getInt("position") ?: -1)
+            if ((arguments?.getInt("type") ?: 0).isPurchase()) {
+                viewModel.completePost(arguments?.getInt("position") ?: -1, ProductType.PURCHASE)
             } else {
-                viewModel.completeRent(arguments?.getInt("position") ?: -1)
+                viewModel.completePost(arguments?.getInt("position") ?: -1, ProductType.RENT)
             }
         }
 

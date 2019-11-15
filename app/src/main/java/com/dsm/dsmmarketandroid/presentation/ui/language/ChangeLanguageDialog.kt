@@ -22,10 +22,9 @@ class ChangeLanguageDialog : DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
         val lang = arguments?.getString("lang")
 
-        if (lang == LANGUAGE_ENGLISH) {
-            tv_language.text = getString(R.string.english)
-        } else if (lang == LANGUAGE_KOREAN) {
-            tv_language.text = getString(R.string.korean)
+        when (lang) {
+            LANGUAGE_KOREAN -> tv_language.text = getString(R.string.korean)
+            LANGUAGE_ENGLISH -> tv_language.text = getString(R.string.english)
         }
 
         btn_complete.setOnClickListener {

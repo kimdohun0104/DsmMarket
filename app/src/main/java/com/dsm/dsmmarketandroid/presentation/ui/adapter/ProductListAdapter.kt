@@ -73,19 +73,22 @@ class ProductListAdapter(private val type: Int) : PagedListAdapter<ProductModel,
 
     inner class ItemHolder(private val binding: ItemProductBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: ProductModel?) {
-            val context = binding.root.context
-            binding.product = item
-            binding.clParent.setOnClickListener {
-                val intent =
-                    if (type == ProductType.PURCHASE) Intent(context, PurchaseDetailActivity::class.java)
-                    else Intent(context, RentDetailActivity::class.java)
-                intent.putExtra("post_id", item?.postId)
-                val options = ActivityOptions.makeSceneTransitionAnimation(
-                    context as Activity,
-                    Pair.create(binding.ivProduct as View, "image"),
-                    Pair.create(binding.tvTitle as View, "title")
-                )
-                context.startActivity(intent, options.toBundle())
+            binding.run {
+                val context = root.context
+                product = item
+
+                root.setOnClickListener {
+                    val intent =
+                        if (type == ProductType.PURCHASE) Intent(context, PurchaseDetailActivity::class.java)
+                        else Intent(context, RentDetailActivity::class.java)
+                    intent.putExtra("post_id", item?.postId)
+                    val options = ActivityOptions.makeSceneTransitionAnimation(
+                        context as Activity,
+                        Pair.create(ivProductThumb as View, "image"),
+                        Pair.create(tvProductTitle as View, "title")
+                    )
+                    context.startActivity(intent, options.toBundle())
+                }
             }
         }
     }

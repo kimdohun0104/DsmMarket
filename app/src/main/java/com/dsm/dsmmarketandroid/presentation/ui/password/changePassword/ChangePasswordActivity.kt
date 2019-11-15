@@ -19,19 +19,23 @@ class ChangePasswordActivity : BaseActivity<ActivityChangePasswordBinding>() {
 
     private val viewModel: ChangePasswordViewModel by viewModel()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun viewInit() {
         tb_change_password.setNavigationOnClickListener { finish() }
 
         val rotateAnim = AnimationUtils.loadAnimation(this, R.anim.anim_rotate)
         view_ring.startAnimation(rotateAnim)
 
         et_new_password_confirm.setEditorActionListener(EditorInfo.IME_ACTION_DONE) { if (btn_change_password.isClickable) viewModel.changePassword() }
+    }
 
-        viewModel.toastEvent.observe(this, Observer { toast(it) })
-
+    override fun observeViewModel() {
         viewModel.finishActivityEvent.observe(this, Observer { finish() })
 
+        viewModel.toastEvent.observe(this, Observer { toast(it) })
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         binding.viewModel = viewModel
     }
 }

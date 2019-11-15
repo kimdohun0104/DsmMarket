@@ -23,27 +23,28 @@ class CommentActivity : BaseActivity<ActivityCommentBinding>() {
     override val layoutResourceId: Int
         get() = R.layout.activity_comment
 
-    private val viewModel: CommentViewModel by viewModel()
-
     private val postId: Int by lazy { intent.getIntExtra("post_id", -1) }
     private val type: Int by lazy { intent.getIntExtra("type", -1) }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    private val viewModel: CommentViewModel by viewModel()
+
+    private val adapter: CommentListAdapter by lazy { CommentListAdapter(viewModel) }
+
+    override fun viewInit() {
         setSupportActionBar(tb_comment_list)
         tb_comment_list.setNavigationOnClickListener { finish() }
-        MessageBus.getInstance().register(this)
 
-        val adapter = CommentListAdapter(viewModel)
         rv_comment.adapter = adapter
 
         srl_comment.setOnRefreshListener { viewModel.getCommentList(postId, type) }
 
         viewModel.getCommentList(postId, type)
+    }
 
+    override fun observeViewModel() {
         viewModel.listItems.observe(this, Observer { adapter.setItems(it) })
 
-        viewModel.toastServerErrorEvent.observe(this, Observer { toast(getString(R.string.fail_server_error)) })
+        viewModel.toastEvent.observe(this, Observer { toast(it) })
 
         viewModel.dialogReportComment.observe(this, Observer {
             ReportCommentDialog().apply {
@@ -57,7 +58,11 @@ class CommentActivity : BaseActivity<ActivityCommentBinding>() {
         })
 
         viewModel.hideRefreshEvent.observe(this, Observer { srl_comment.isRefreshing = false })
+    }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        MessageBus.getInstance().register(this)
         binding.viewModel = viewModel
     }
 

@@ -28,7 +28,7 @@ class SignUpViewModelTests : BaseTest() {
 
     @Test
     fun `sign up button enable test`() {
-        val isSignUpEnable = viewModel.isSignUpEnable.test()
+        val isSignUpEnable = viewModel.isBtnEnable.test()
 
         viewModel.email.value = "example@test.com"
         viewModel.password.value = "testPassword"
@@ -42,7 +42,7 @@ class SignUpViewModelTests : BaseTest() {
 
     @Test
     fun `sign up button disable test`() {
-        val isSignUpEnable = viewModel.isSignUpEnable.test()
+        val isSignUpEnable = viewModel.isBtnEnable.test()
 
         viewModel.email.value = "example@test.com"
 

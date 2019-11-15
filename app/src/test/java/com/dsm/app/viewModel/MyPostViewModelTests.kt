@@ -10,6 +10,7 @@ import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.mapper.ProductModelMapper
 import com.dsm.dsmmarketandroid.presentation.model.ProductModel
 import com.dsm.dsmmarketandroid.presentation.ui.myPost.MyPostViewModel
+import com.dsm.dsmmarketandroid.presentation.util.ProductType
 import com.jraska.livedata.test
 import io.reactivex.Flowable
 import org.junit.Assert.assertFalse
@@ -71,11 +72,12 @@ class MyPostViewModelTests : BaseTest() {
         `when`(getMyPurchaseUseCase.create(Unit))
             .thenReturn(Flowable.just(response))
 
-        viewModel.getMyPurchase()
+        viewModel.getMyPost(ProductType.PURCHASE)
 
         viewModel.run {
             purchaseList.test().assertValue(productModelMapper.mapFrom(response))
-            hidePurchaseLoadingEvent.test().assertHasValue()
+            isPurchaseRefreshing.test().assertValue(false)
+            isPurchaseProgressVisible.test().assertValue(false)
         }
     }
 
@@ -84,7 +86,7 @@ class MyPostViewModelTests : BaseTest() {
         `when`(getMyPurchaseUseCase.create(Unit))
             .thenReturn(Flowable.error(IOException()))
 
-        viewModel.getMyPurchase()
+        viewModel.getMyPost(ProductType.PURCHASE)
 
         viewModel.toastEvent.test().assertValue(R.string.fail_server_error)
     }
@@ -95,11 +97,12 @@ class MyPostViewModelTests : BaseTest() {
         `when`(getMyRentUseCase.create(Unit))
             .thenReturn(Flowable.just(response))
 
-        viewModel.getMyRent()
+        viewModel.getMyPost(ProductType.RENT)
 
         viewModel.run {
             rentList.test().assertValue(productModelMapper.mapFrom(response))
-            hideRentLoadingEvent.test().assertHasValue()
+            isRentRefreshing.test().assertValue(false)
+            isRentProgressVisible.test().assertValue(false)
         }
     }
 
@@ -108,7 +111,7 @@ class MyPostViewModelTests : BaseTest() {
         `when`(getMyRentUseCase.create(Unit))
             .thenReturn(Flowable.error(IOException()))
 
-        viewModel.getMyRent()
+        viewModel.getMyPost(ProductType.RENT)
 
         viewModel.toastEvent.test().assertValue(R.string.fail_server_error)
     }
@@ -121,7 +124,7 @@ class MyPostViewModelTests : BaseTest() {
         `when`(completePurchaseUseCase.create(purchaseList[0].postId))
             .thenReturn(Flowable.just(Unit))
 
-        viewModel.completePurchase(0)
+        viewModel.completePost(0, ProductType.PURCHASE)
 
         viewModel.dismissEvent.test().assertHasValue()
         viewModel.deletePositionFromPurchase.test().assertValue(0)
@@ -135,7 +138,7 @@ class MyPostViewModelTests : BaseTest() {
         `when`(completePurchaseUseCase.create(purchaseList[0].postId))
             .thenReturn(Flowable.error(IOException()))
 
-        viewModel.completePurchase(0)
+        viewModel.completePost(0, ProductType.PURCHASE)
 
         viewModel.toastEvent.test().assertValue(R.string.fail_server_error)
     }
@@ -148,7 +151,7 @@ class MyPostViewModelTests : BaseTest() {
         `when`(completeRentUseCase.create(rentList[0].postId))
             .thenReturn(Flowable.just(Unit))
 
-        viewModel.completeRent(0)
+        viewModel.completePost(0, ProductType.RENT)
 
         viewModel.dismissEvent.test().assertHasValue()
         viewModel.deletePositionFromRent.test().assertValue(0)
@@ -162,7 +165,7 @@ class MyPostViewModelTests : BaseTest() {
         `when`(completeRentUseCase.create(rentList[0].postId))
             .thenReturn(Flowable.error(IOException()))
 
-        viewModel.completeRent(0)
+        viewModel.completePost(0, ProductType.RENT)
 
         viewModel.toastEvent.test().assertValue(R.string.fail_server_error)
     }
