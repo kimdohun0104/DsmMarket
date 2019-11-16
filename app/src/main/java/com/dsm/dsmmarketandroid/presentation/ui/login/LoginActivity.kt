@@ -11,6 +11,7 @@ import com.dsm.dsmmarketandroid.databinding.ActivityLoginBinding
 import com.dsm.dsmmarketandroid.presentation.base.BaseActivity
 import com.dsm.dsmmarketandroid.presentation.ui.main.MainActivity
 import com.dsm.dsmmarketandroid.presentation.ui.password.forgotPassword.ForgotPasswordActivity
+import com.dsm.dsmmarketandroid.presentation.util.Analytics
 import com.dsm.dsmmarketandroid.presentation.util.LoadingDialog
 import com.dsm.dsmmarketandroid.presentation.util.setEditorActionListener
 import kotlinx.android.synthetic.main.activity_login.*
@@ -50,6 +51,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
         })
 
         viewModel.toastEvent.observe(this, Observer { toast(it) })
+
+        viewModel.loginLogEvent.observe(this, Observer { Analytics.logEvent(this, Analytics.LOGIN, it) })
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

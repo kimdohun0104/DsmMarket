@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.dsm.domain.usecase.ReportCommentUseCase
 import com.dsm.dsmmarketandroid.R
+import com.dsm.dsmmarketandroid.presentation.util.Analytics
 import com.dsm.dsmmarketandroid.presentation.util.onItemSelectedListener
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.dialog_comment_report.*
@@ -53,11 +54,18 @@ class ReportCommentDialog : DialogFragment() {
                         "nick" to arguments?.getString("nick"),
                         "reason" to reason
                     )
-                ).subscribe({
-                    dismiss()
-                }, {
-                    toast(getString(R.string.fail_server_error))
-                })
+                )
+                    .doOnNext {
+                        Analytics.logEvent(activity!!, Analytics.REPORT_COMMENT, Bundle().apply {
+                            putInt(Analytics.POST_ID, arguments?.getInt("post_id") ?: -1)
+                            putString(Analytics.REASON, reason)
+                        })
+                    }
+                    .subscribe({
+                        dismiss()
+                    }, {
+                        toast(getString(R.string.fail_server_error))
+                    })
             )
         }
     }

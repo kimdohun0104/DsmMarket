@@ -16,6 +16,7 @@ import com.dsm.dsmmarketandroid.presentation.ui.adapter.RecommendListAdapter
 import com.dsm.dsmmarketandroid.presentation.ui.chat.ChatActivity
 import com.dsm.dsmmarketandroid.presentation.ui.comment.CommentActivity
 import com.dsm.dsmmarketandroid.presentation.ui.report.ReportPostDialog
+import com.dsm.dsmmarketandroid.presentation.util.Analytics
 import com.dsm.dsmmarketandroid.presentation.util.LoadingDialog
 import com.dsm.dsmmarketandroid.presentation.util.ProductType
 import kotlinx.android.synthetic.main.activity_purchase_detail.*
@@ -23,7 +24,6 @@ import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-// TODO 여기서부터 밑으로 확인해야함
 class PurchaseDetailActivity : BaseActivity<ActivityPurchaseDetailBinding>() {
 
     override val layoutResourceId: Int
@@ -81,6 +81,10 @@ class PurchaseDetailActivity : BaseActivity<ActivityPurchaseDetailBinding>() {
         viewModel.showLoadingDialogEvent.observe(this, Observer { LoadingDialog.show(supportFragmentManager) })
 
         viewModel.hideLoadingDialogEvent.observe(this, Observer { LoadingDialog.hide() })
+
+        viewModel.purchaseDetailLogEvent.observe(this, Observer { Analytics.logEvent(this, Analytics.PURCHASE_DETAIL, it) })
+
+        viewModel.interestLogEvent.observe(this, Observer { Analytics.logEvent(this, Analytics.INTEREST_PURCHASE, it) })
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
