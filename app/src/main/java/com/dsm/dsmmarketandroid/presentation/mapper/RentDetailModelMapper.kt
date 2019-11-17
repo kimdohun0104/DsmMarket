@@ -16,7 +16,8 @@ class RentDetailModelMapper : Mapper<RentDetail,RentDetailModel> {
         possibleTime = if (from.possibleTime.isBlank()) "설정되지 않음" else from.possibleTime,
         commentCount = from.commentCount,
         isInterest = from.isInterest,
-        category = from.category
+        category = from.category,
+        isMe = from.isMe
     )
 
 }

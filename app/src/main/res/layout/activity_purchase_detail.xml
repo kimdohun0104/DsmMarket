@@ -31,10 +31,10 @@
                     android:id="@+id/rv_detail_image"
                     android:layout_width="match_parent"
                     android:layout_height="310dp"
+                    android:orientation="horizontal"
                     android:transitionName="image"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    bind:detailImages="@{viewModel.purchaseDetail.img}"
-                    android:orientation="horizontal"/>
+                    bind:detailImages="@{viewModel.purchaseDetail.img}" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -112,7 +112,8 @@
                     android:layout_marginTop="20dp"
                     android:text="@{viewModel.purchaseDetail.content}"
                     android:textColor="@color/colorBlackWhite"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    android:layout_marginBottom="20dp"/>
 
 
                 <Button
@@ -120,13 +121,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="34dp"
                     android:layout_marginStart="30dp"
-                    android:layout_marginTop="20dp"
                     android:layout_marginEnd="30dp"
                     android:layout_marginBottom="20dp"
                     android:background="@color/colorPrimaryGrey"
                     android:text="@string/deal_with_chatting"
                     android:textColor="@color/colorWhite"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:visibility="@{viewModel.isMe ? View.GONE : View.VISIBLE}" />
 
                 <View
                     android:layout_width="match_parent"
@@ -200,8 +201,8 @@
                         android:id="@+id/rv_related"
                         android:layout_width="match_parent"
                         android:layout_height="130dp"
-                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                        android:orientation="horizontal"/>
+                        android:orientation="horizontal"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
                     <View
                         android:layout_width="match_parent"
@@ -213,9 +214,9 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     android:orientation="vertical"
-                    android:visibility="@{viewModel.recommendList.size() == 0 ? View.GONE : View.VISIBLE}"
-                    android:layout_marginTop="10dp">
+                    android:visibility="@{viewModel.recommendList.size() == 0 ? View.GONE : View.VISIBLE}">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -230,12 +231,11 @@
                         android:id="@+id/rv_recommend"
                         android:layout_width="match_parent"
                         android:layout_height="130dp"
-                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                        android:orientation="horizontal"/>
+                        android:orientation="horizontal"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
                 </LinearLayout>
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
-
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/tb_purchase_detail"
             android:layout_width="match_parent"

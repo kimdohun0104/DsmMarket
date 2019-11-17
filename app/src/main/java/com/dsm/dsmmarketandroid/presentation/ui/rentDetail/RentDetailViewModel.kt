@@ -28,6 +28,7 @@ class RentDetailViewModel(
 ) : BaseViewModel() {
 
     val rentDetail = MutableLiveData<RentDetailModel>()
+    val isMe = MutableLiveData<Boolean>()
     val isInterest = MutableLiveData<Boolean>()
 
     val relatedList = MutableLiveData<List<RecommendModel>>()
@@ -52,6 +53,7 @@ class RentDetailViewModel(
                 .doOnNext { rentDetailLogEvent.value = Bundle().apply { putInt(Analytics.POST_ID, postId) } }
                 .subscribe({
                     isInterest.value = it.isInterest
+                    isMe.value = it.isMe
                     rentDetail.value = it
                 }, {
                     if (it is HttpException && it.code() == 410)

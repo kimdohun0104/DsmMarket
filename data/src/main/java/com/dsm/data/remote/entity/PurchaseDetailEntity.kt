@@ -23,5 +23,7 @@ data class PurchaseDetailEntity(
     @SerializedName("interest")
     val isInterest: Boolean,
 
-    val category: String
+    val category: String,
+    
+    val isMe: Boolean
 )
