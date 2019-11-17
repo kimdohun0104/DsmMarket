@@ -1,10 +1,12 @@
 package com.dsm.dsmmarketandroid.presentation.ui.login
 
+import android.os.Bundle
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import com.dsm.domain.usecase.LoginUseCase
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.base.BaseViewModel
+import com.dsm.dsmmarketandroid.presentation.util.Analytics
 import com.dsm.dsmmarketandroid.presentation.util.SingleLiveEvent
 import com.dsm.dsmmarketandroid.presentation.util.Validator
 import com.dsm.dsmmarketandroid.presentation.util.isValueBlank
@@ -26,6 +28,7 @@ class LoginViewModel(private val loginUseCase: LoginUseCase) : BaseViewModel() {
     val intentMainActivityEvent = SingleLiveEvent<Any>()
     val hideKeyboardEvent = SingleLiveEvent<Any>()
     val toastEvent = SingleLiveEvent<Int>()
+    val loginLogEvent = SingleLiveEvent<Bundle>()
 
     fun login() {
         if (!Validator.validEmail(email.value!!)) {
@@ -42,6 +45,7 @@ class LoginViewModel(private val loginUseCase: LoginUseCase) : BaseViewModel() {
             )
                 .doOnSubscribe { showLoadingDialogEvent.call() }
                 .doOnTerminate { hideLoadingDialogEvent.call() }
+                .doOnNext { loginLogEvent.value = Bundle().apply { putString(Analytics.USER_EMAIL, email.value) } }
                 .subscribe({
                     hideLoadingDialogEvent.call()
                     hideKeyboardEvent.call()

@@ -6,6 +6,7 @@ import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.ActivityMyPostBinding
 import com.dsm.dsmmarketandroid.presentation.base.BaseActivity
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.MyPostPagerAdapter
+import com.dsm.dsmmarketandroid.presentation.util.Analytics
 import com.dsm.dsmmarketandroid.presentation.util.ProductType
 import com.dsm.dsmmarketandroid.presentation.util.addOnTabSelectedListener
 import com.google.android.material.tabs.TabLayoutMediator
@@ -43,6 +44,8 @@ class MyPostActivity : BaseActivity<ActivityMyPostBinding>() {
 
     override fun observeViewModel() {
         viewModel.toastEvent.observe(this, Observer { toast(it) })
+
+        viewModel.completePostLogEvent.observe(this, Observer { Analytics.logEvent(this, Analytics.COMPLETE_POST, it) })
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

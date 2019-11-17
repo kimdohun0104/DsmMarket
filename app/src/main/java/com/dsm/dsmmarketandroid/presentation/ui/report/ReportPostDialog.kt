@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.dsm.domain.usecase.ReportPostUseCase
 import com.dsm.dsmmarketandroid.R
+import com.dsm.dsmmarketandroid.presentation.util.Analytics
 import com.dsm.dsmmarketandroid.presentation.util.onItemSelectedListener
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.dialog_post_report.*
@@ -52,11 +53,18 @@ class ReportPostDialog : DialogFragment() {
                         "type" to arguments?.getInt("type"),
                         "reason" to reason
                     )
-                ).subscribe({
-                    dismiss()
-                }, {
-                    toast(getString(R.string.fail_server_error))
-                })
+                )
+                    .doOnNext {
+                        Analytics.logEvent(activity!!, Analytics.REPORT_POST, Bundle().apply {
+                            putString(Analytics.REASON, reason)
+                            putInt(Analytics.POST_ID, arguments?.getInt("post_id") ?: -1)
+                        })
+                    }
+                    .subscribe({
+                        dismiss()
+                    }, {
+                        toast(getString(R.string.fail_server_error))
+                    })
             )
         }
     }

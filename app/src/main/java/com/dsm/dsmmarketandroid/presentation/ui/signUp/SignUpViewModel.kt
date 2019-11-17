@@ -1,5 +1,6 @@
 package com.dsm.dsmmarketandroid.presentation.ui.signUp
 
+import android.os.Bundle
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
@@ -7,6 +8,7 @@ import androidx.lifecycle.Transformations
 import com.dsm.domain.usecase.SignUpUseCase
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.base.BaseViewModel
+import com.dsm.dsmmarketandroid.presentation.util.Analytics
 import com.dsm.dsmmarketandroid.presentation.util.SingleLiveEvent
 import com.dsm.dsmmarketandroid.presentation.util.Validator
 import com.dsm.dsmmarketandroid.presentation.util.isValueBlank
@@ -50,6 +52,7 @@ class SignUpViewModel(private val signUpUseCase: SignUpUseCase) : BaseViewModel(
     val hideLoadingDialogEvent = SingleLiveEvent<Any>()
     val finishActivityEvent = SingleLiveEvent<Any>()
     val toastEvent = SingleLiveEvent<Int>()
+    val signUpLogEvent = SingleLiveEvent<Bundle>()
 
     fun signUp() {
         if (!Validator.validEmail(email.value!!)) {
@@ -74,6 +77,13 @@ class SignUpViewModel(private val signUpUseCase: SignUpUseCase) : BaseViewModel(
             )
                 .doOnSubscribe { showLoadingDialogEvent.call() }
                 .doOnTerminate { hideLoadingDialogEvent.call() }
+                .doOnNext {
+                    signUpLogEvent.value = Bundle().apply {
+                        putString(Analytics.USER_NAME, name.value)
+                        putString(Analytics.USER_GRADE, grade.value)
+                        putString(Analytics.USER_EMAIL, email.value)
+                    }
+                }
                 .subscribe({
                     finishActivityEvent.call()
                 }, {

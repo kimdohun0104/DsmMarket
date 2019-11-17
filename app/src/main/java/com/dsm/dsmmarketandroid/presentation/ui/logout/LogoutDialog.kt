@@ -9,6 +9,7 @@ import androidx.fragment.app.DialogFragment
 import com.dsm.data.local.pref.PrefHelper
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.ui.start.StartActivity
+import com.dsm.dsmmarketandroid.presentation.util.Analytics
 import kotlinx.android.synthetic.main.dialog_logout.*
 import org.koin.android.ext.android.inject
 
@@ -32,6 +33,7 @@ class LogoutDialog : DialogFragment() {
                 flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(this)
             }
+            Analytics.logEvent(activity!!, Analytics.LOGOUT, null)
         }
 
         btn_cancel.setOnClickListener { dismiss() }

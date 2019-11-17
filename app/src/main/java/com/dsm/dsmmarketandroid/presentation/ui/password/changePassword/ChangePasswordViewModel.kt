@@ -21,6 +21,7 @@ class ChangePasswordViewModel(private val changePasswordUseCase: ChangePasswordU
 
     val finishActivityEvent = SingleLiveEvent<Any>()
     val toastEvent = SingleLiveEvent<Int>()
+    val changePasswordLogEvent = SingleLiveEvent<Any>()
 
     fun changePassword() {
         if (newPassword.value != reType.value) {
@@ -30,6 +31,7 @@ class ChangePasswordViewModel(private val changePasswordUseCase: ChangePasswordU
 
         addDisposable(
             changePasswordUseCase.create(newPassword.value!!)
+                .doOnNext { changePasswordLogEvent.call() }
                 .subscribe({
                     finishActivityEvent.call()
                 }, {

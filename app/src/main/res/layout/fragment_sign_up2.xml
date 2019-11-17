@@ -68,6 +68,7 @@
             app:layout_constraintTop_toBottomOf="@id/tv_gender" />
 
         <Spinner
+            android:id="@+id/spn_grade"
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:entries="@array/grade"

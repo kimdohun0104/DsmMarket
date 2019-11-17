@@ -9,6 +9,7 @@ import com.dsm.dsmmarketandroid.presentation.mapper.PurchaseDetailModelMapper
 import com.dsm.dsmmarketandroid.presentation.mapper.RecommendModelMapper
 import com.dsm.dsmmarketandroid.presentation.model.PurchaseDetailModel
 import com.dsm.dsmmarketandroid.presentation.model.RecommendModel
+import com.dsm.dsmmarketandroid.presentation.util.Analytics
 import com.dsm.dsmmarketandroid.presentation.util.ProductType
 import com.dsm.dsmmarketandroid.presentation.util.SingleLiveEvent
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -40,12 +41,17 @@ class PurchaseDetailViewModel(
     val showLoadingDialogEvent = SingleLiveEvent<Any>()
     val hideLoadingDialogEvent = SingleLiveEvent<Any>()
 
+    val purchaseDetailLogEvent = SingleLiveEvent<Bundle>()
+    val interestLogEvent = SingleLiveEvent<Bundle>()
+    val createChatRoomLogEvent = SingleLiveEvent<Bundle>()
+
     fun getPurchaseDetail(postId: Int) {
         addDisposable(
             getPurchaseDetailUseCase.create(postId)
                 .map(purchaseDetailModelMapper::mapFrom)
                 .delay(80, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
+                .doOnNext { purchaseDetailLogEvent.value = Bundle().apply { putInt(Analytics.POST_ID, postId) } }
                 .subscribe({
                     isInterest.value = it.isInterest
                     purchaseDetail.value = it
@@ -72,6 +78,7 @@ class PurchaseDetailViewModel(
         } else {
             addDisposable(
                 interestUseCase.create(InterestUseCase.Params(postId, ProductType.PURCHASE))
+                    .doOnNext { interestLogEvent.value = Bundle().apply { putInt(Analytics.POST_ID, postId) } }
                     .subscribe({
                         isInterest.value = true
                         toastEvent.value = R.string.interest
@@ -110,6 +117,7 @@ class PurchaseDetailViewModel(
             createRoomUseCase.create(CreateRoomUseCase.Params(postId, ProductType.PURCHASE))
                 .doOnSubscribe { showLoadingDialogEvent.call() }
                 .doOnTerminate { hideLoadingDialogEvent.call() }
+                .doOnNext { createChatRoomLogEvent.value = Bundle().apply { putInt(Analytics.POST_ID, postId) } }
                 .map { roomId ->
                     joinRoomUseCase.create(roomId)
                         .subscribe({ email ->

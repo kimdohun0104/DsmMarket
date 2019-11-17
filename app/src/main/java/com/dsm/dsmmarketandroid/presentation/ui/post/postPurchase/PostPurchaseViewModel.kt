@@ -1,5 +1,6 @@
 package com.dsm.dsmmarketandroid.presentation.ui.post.postPurchase
 
+import android.os.Bundle
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
@@ -7,6 +8,7 @@ import androidx.lifecycle.Transformations
 import com.dsm.domain.usecase.PostPurchaseUseCase
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.base.BaseViewModel
+import com.dsm.dsmmarketandroid.presentation.util.Analytics
 import com.dsm.dsmmarketandroid.presentation.util.ListLiveData
 import com.dsm.dsmmarketandroid.presentation.util.SingleLiveEvent
 import com.dsm.dsmmarketandroid.presentation.util.isValueBlank
@@ -43,14 +45,14 @@ class PostPurchaseViewModel(private val postPurchaseUseCase: PostPurchaseUseCase
     val showLoadingDialogEvent = SingleLiveEvent<Any>()
     val hideLoadingDialogEvent = SingleLiveEvent<Any>()
 
+    val postPurchaseLogEvent = SingleLiveEvent<Bundle>()
+
     fun post() {
         val multipartImageList = arrayListOf<MultipartBody.Part>()
         imageList.value!!.forEach {
             val imageFile = File(it)
             multipartImageList.add(MultipartBody.Part.createFormData("img", imageFile.name, RequestBody.create(MediaType.parse("image/*"), imageFile)))
         }
-
-        showLoadingDialogEvent.call()
 
         addDisposable(
             postPurchaseUseCase.create(
@@ -64,7 +66,15 @@ class PostPurchaseViewModel(private val postPurchaseUseCase: PostPurchaseUseCase
                     )
                 )
             )
+                .doOnSubscribe { showLoadingDialogEvent.call() }
                 .doFinally { hideLoadingDialogEvent.call() }
+                .doOnNext {
+                    postPurchaseLogEvent.value = Bundle().apply {
+                        putString(Analytics.TITLE, title.value)
+                        putInt(Analytics.PRICE, price.value?.toInt() ?: -1)
+                        putString(Analytics.CATEGORY, category.value)
+                    }
+                }
                 .subscribe({
                     finishActivityEvent.call()
                 }, {
