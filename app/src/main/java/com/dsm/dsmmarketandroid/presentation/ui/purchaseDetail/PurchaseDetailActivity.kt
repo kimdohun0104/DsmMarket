@@ -33,8 +33,8 @@ class PurchaseDetailActivity : BaseActivity<ActivityPurchaseDetailBinding>() {
 
     private val postId: Int by lazy { intent.getIntExtra("post_id", -1) }
 
-    private val recommendListAdapter = RecommendListAdapter(ProductType.PURCHASE)
-    private val relatedListAdapter = RecommendListAdapter(ProductType.PURCHASE)
+    private val recommendListAdapter = RecommendListAdapter(ProductType.PURCHASE, true)
+    private val relatedListAdapter = RecommendListAdapter(ProductType.PURCHASE, false)
 
     override fun viewInit() {
         setSupportActionBar(tb_purchase_detail)

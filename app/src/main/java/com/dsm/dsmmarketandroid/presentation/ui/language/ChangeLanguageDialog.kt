@@ -9,6 +9,7 @@ import androidx.fragment.app.DialogFragment
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.BaseApp
 import com.dsm.dsmmarketandroid.presentation.ui.main.MainActivity
+import com.dsm.dsmmarketandroid.presentation.util.Analytics
 import com.dsm.dsmmarketandroid.presentation.util.LocaleManager.LANGUAGE_ENGLISH
 import com.dsm.dsmmarketandroid.presentation.util.LocaleManager.LANGUAGE_KOREAN
 import kotlinx.android.synthetic.main.dialog_change_language.*
@@ -33,6 +34,7 @@ class ChangeLanguageDialog : DialogFragment() {
                 flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(this)
             }
+            Analytics.logEvent(activity!!, Analytics.CHANGE_LANG, Bundle().apply { putString("language", lang) })
         }
 
         btn_cancel.setOnClickListener { dismiss() }

@@ -31,7 +31,7 @@ class RentDetailActivity : BaseActivity<ActivityRentDetailBinding>() {
 
     private val postId by lazy { intent.getIntExtra("post_id", -1) }
 
-    private val relatedListAdapter = RecommendListAdapter(ProductType.RENT)
+    private val relatedListAdapter = RecommendListAdapter(ProductType.RENT, false)
 
     override fun viewInit() {
         setSupportActionBar(tb_rent_detail)
