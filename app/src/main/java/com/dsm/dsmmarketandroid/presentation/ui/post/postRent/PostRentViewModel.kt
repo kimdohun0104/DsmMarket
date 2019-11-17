@@ -1,5 +1,6 @@
 package com.dsm.dsmmarketandroid.presentation.ui.post.postRent
 
+import android.os.Bundle
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
@@ -7,6 +8,7 @@ import androidx.lifecycle.Transformations
 import com.dsm.domain.usecase.PostRentUseCase
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.base.BaseViewModel
+import com.dsm.dsmmarketandroid.presentation.util.Analytics
 import com.dsm.dsmmarketandroid.presentation.util.SingleLiveEvent
 import com.dsm.dsmmarketandroid.presentation.util.isValueBlank
 import okhttp3.MediaType
@@ -59,10 +61,10 @@ class PostRentViewModel(private val postRentUseCase: PostRentUseCase) : BaseView
     val showLoadingDialogEvent = SingleLiveEvent<Any>()
     val hideLoadingDialogEvent = SingleLiveEvent<Any>()
 
+    val postRentLogEvent = SingleLiveEvent<Bundle>()
+
     fun post() {
         val imageFile = File(photo.value!!)
-
-        showLoadingDialogEvent.call()
 
         addDisposable(
             postRentUseCase.create(
@@ -77,7 +79,15 @@ class PostRentViewModel(private val postRentUseCase: PostRentUseCase) : BaseView
                     )
                 )
             )
+                .doOnSubscribe { showLoadingDialogEvent.call() }
                 .doFinally { hideLoadingDialogEvent.call() }
+                .doOnNext {
+                    postRentLogEvent.value = Bundle().apply {
+                        putString(Analytics.TITLE, title.value)
+                        putInt(Analytics.PRICE, price.value?.toInt() ?: -1)
+                        putString(Analytics.CATEGORY, category.value)
+                    }
+                }
                 .subscribe({
                     finishActivityEvent.call()
                 }, {

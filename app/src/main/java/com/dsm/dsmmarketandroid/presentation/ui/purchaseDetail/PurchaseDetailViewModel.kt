@@ -43,6 +43,7 @@ class PurchaseDetailViewModel(
 
     val purchaseDetailLogEvent = SingleLiveEvent<Bundle>()
     val interestLogEvent = SingleLiveEvent<Bundle>()
+    val createChatRoomLogEvent = SingleLiveEvent<Bundle>()
 
     fun getPurchaseDetail(postId: Int) {
         addDisposable(
@@ -116,6 +117,7 @@ class PurchaseDetailViewModel(
             createRoomUseCase.create(CreateRoomUseCase.Params(postId, ProductType.PURCHASE))
                 .doOnSubscribe { showLoadingDialogEvent.call() }
                 .doOnTerminate { hideLoadingDialogEvent.call() }
+                .doOnNext { createChatRoomLogEvent.value = Bundle().apply { putInt(Analytics.POST_ID, postId) } }
                 .map { roomId ->
                     joinRoomUseCase.create(roomId)
                         .subscribe({ email ->

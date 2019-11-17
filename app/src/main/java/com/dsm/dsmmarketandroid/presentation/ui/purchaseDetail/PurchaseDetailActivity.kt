@@ -85,6 +85,8 @@ class PurchaseDetailActivity : BaseActivity<ActivityPurchaseDetailBinding>() {
         viewModel.purchaseDetailLogEvent.observe(this, Observer { Analytics.logEvent(this, Analytics.PURCHASE_DETAIL, it) })
 
         viewModel.interestLogEvent.observe(this, Observer { Analytics.logEvent(this, Analytics.INTEREST_PURCHASE, it) })
+
+        viewModel.createChatRoomLogEvent.observe(this, Observer { Analytics.logEvent(this, Analytics.CREATE_CHAT_ROOM, it) })
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

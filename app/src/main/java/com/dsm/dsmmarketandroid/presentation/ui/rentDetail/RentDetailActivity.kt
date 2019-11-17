@@ -74,6 +74,8 @@ class RentDetailActivity : BaseActivity<ActivityRentDetailBinding>() {
         viewModel.interestLogEvent.observe(this, Observer { Analytics.logEvent(this, Analytics.INTEREST_RENT, it) })
 
         viewModel.rentDetailLogEvent.observe(this, Observer { Analytics.logEvent(this, Analytics.RENT_DETAIL, it) })
+
+        viewModel.createChatRoomLogEvent.observe(this, Observer { Analytics.logEvent(this, Analytics.CREATE_CHAT_ROOM, it) })
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

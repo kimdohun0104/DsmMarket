@@ -41,6 +41,8 @@ class RentDetailViewModel(
     val interestLogEvent = SingleLiveEvent<Bundle>()
     val rentDetailLogEvent = SingleLiveEvent<Bundle>()
 
+    val createChatRoomLogEvent = SingleLiveEvent<Bundle>()
+
     fun getRentDetail(postId: Int) {
         addDisposable(
             getRentDetailUseCase.create(postId)
@@ -102,6 +104,7 @@ class RentDetailViewModel(
             createRoomUseCase.create(CreateRoomUseCase.Params(postId, 0))
                 .doOnSubscribe { showLoadingDialogEvent.call() }
                 .doOnTerminate { hideLoadingDialogEvent.call() }
+                .doOnNext { createChatRoomLogEvent.value = Bundle().apply { putInt(Analytics.POST_ID, postId) } }
                 .map { roomId ->
                     joinRoomUseCase.create(roomId)
                         .subscribe({ email ->

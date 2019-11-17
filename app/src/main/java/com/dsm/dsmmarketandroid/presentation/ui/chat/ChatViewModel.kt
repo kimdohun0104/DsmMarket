@@ -1,6 +1,5 @@
 package com.dsm.dsmmarketandroid.presentation.ui.chat
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.dsm.domain.usecase.GetChatLogUseCase
 import com.dsm.dsmmarketandroid.presentation.base.BaseViewModel
@@ -26,7 +25,6 @@ class ChatViewModel(
                 .doOnTerminate { hideLoadingItemEvent.call() }
                 .subscribe({
                     newItems.value = it
-                    Log.d("DEBUGLOG", page.toString())
                 }, {
                 })
         )

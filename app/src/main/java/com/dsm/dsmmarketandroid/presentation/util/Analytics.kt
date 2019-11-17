@@ -20,12 +20,19 @@ object Analytics {
     const val ADD_COMMENT = "add_comment"
     const val REPORT_COMMENT = "report_comment"
     const val REPORT_POST = "report_post"
+    const val POST_PURCHASE = "post_purchase"
+    const val POST_RENT = "post_rent"
+    const val CREATE_CHAT_ROOM = "create_chat_room"
+    const val COMPLETE_POST = "complete_post"
 
     const val USER_NAME = "user_name"
     const val USER_GRADE = "user_grade"
     const val USER_EMAIL = "user_email"
 
     const val POST_ID = "post_id"
+    const val TITLE = "title"
+    const val PRICE = "price"
+    const val CATEGORY = "category"
 
     const val REASON = "reason"
 }

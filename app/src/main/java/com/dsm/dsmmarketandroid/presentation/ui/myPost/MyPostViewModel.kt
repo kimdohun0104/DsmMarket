@@ -1,5 +1,6 @@
 package com.dsm.dsmmarketandroid.presentation.ui.myPost
 
+import android.os.Bundle
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
@@ -11,6 +12,7 @@ import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.base.BaseViewModel
 import com.dsm.dsmmarketandroid.presentation.mapper.ProductModelMapper
 import com.dsm.dsmmarketandroid.presentation.model.ProductModel
+import com.dsm.dsmmarketandroid.presentation.util.Analytics
 import com.dsm.dsmmarketandroid.presentation.util.SingleLiveEvent
 import com.dsm.dsmmarketandroid.presentation.util.isPurchase
 import io.reactivex.Flowable
@@ -42,6 +44,8 @@ class MyPostViewModel(
     val isPurchaseRefreshing = MutableLiveData<Boolean>()
     val isRentRefreshing = MutableLiveData<Boolean>()
 
+    val completePostLogEvent = SingleLiveEvent<Bundle>()
+
     fun getMyPost(type: Int) {
         addDisposable(
             Flowable.just(type)
@@ -67,11 +71,16 @@ class MyPostViewModel(
     }
 
     fun completePost(position: Int, type: Int) {
+        val postId =
+            if (type.isPurchase()) purchaseList.value?.get(position)?.postId ?: -1
+            else rentList.value?.get(position)?.postId ?: -1
+
         addDisposable(
             Flowable.just(type)
+                .doOnNext { completePostLogEvent.value = Bundle().apply { putInt(Analytics.POST_ID, postId) } }
                 .flatMap {
-                    if (type.isPurchase()) completePurchaseUseCase.create(purchaseList.value?.get(position)?.postId ?: -1)
-                    else completeRentUseCase.create(rentList.value?.get(position)?.postId ?: -1)
+                    if (type.isPurchase()) completePurchaseUseCase.create(postId)
+                    else completeRentUseCase.create(postId)
                 }.subscribe({
                     if (type.isPurchase()) deletePositionFromPurchase.value = position
                     else deletePositionFromRent.value = position
