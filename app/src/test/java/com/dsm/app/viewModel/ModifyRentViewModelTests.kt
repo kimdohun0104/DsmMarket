@@ -111,7 +111,8 @@ class ModifyRentViewModelTests : BaseTest() {
             createdAt = "CREATED_AT",
             price = "1회 당 1000원",
             isInterest = true,
-            possibleTime = "POSSIBLE_TIME"
+            possibleTime = "POSSIBLE_TIME",
+            isMe = false
         )
         `when`(getRentDetailUseCase.create(0))
             .thenReturn(Flowable.just(response))

@@ -22,5 +22,7 @@ data class PurchaseDetailRoomEntity(
 
     val author: String,
 
-    val isInterest: Boolean
+    val isInterest: Boolean,
+
+    val isMe: Boolean
 )

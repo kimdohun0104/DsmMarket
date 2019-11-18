@@ -19,5 +19,7 @@ data class PurchaseDetailModel(
 
     val isInterest: Boolean,
 
-    val category: String
+    val category: String,
+
+    val isMe: Boolean
 )

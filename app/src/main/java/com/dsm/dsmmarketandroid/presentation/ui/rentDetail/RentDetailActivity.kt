@@ -1,10 +1,7 @@
 package com.dsm.dsmmarketandroid.presentation.ui.rentDetail
 
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
-import androidx.core.content.ContextCompat
-import androidx.core.view.get
+import android.widget.PopupMenu
 import androidx.lifecycle.Observer
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.ActivityRentDetailBinding
@@ -12,12 +9,16 @@ import com.dsm.dsmmarketandroid.presentation.base.BaseActivity
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.RecommendListAdapter
 import com.dsm.dsmmarketandroid.presentation.ui.chat.ChatActivity
 import com.dsm.dsmmarketandroid.presentation.ui.comment.CommentActivity
+import com.dsm.dsmmarketandroid.presentation.ui.modify.rent.ModifyRentActivity
 import com.dsm.dsmmarketandroid.presentation.ui.rentImage.RentImageActivity
 import com.dsm.dsmmarketandroid.presentation.ui.report.ReportPostDialog
 import com.dsm.dsmmarketandroid.presentation.util.Analytics
 import com.dsm.dsmmarketandroid.presentation.util.LoadingDialog
+import com.dsm.dsmmarketandroid.presentation.util.MessageEvents
 import com.dsm.dsmmarketandroid.presentation.util.ProductType
 import kotlinx.android.synthetic.main.activity_rent_detail.*
+import kr.sdusb.libs.messagebus.MessageBus
+import kr.sdusb.libs.messagebus.Subscribe
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -33,13 +34,10 @@ class RentDetailActivity : BaseActivity<ActivityRentDetailBinding>() {
 
     private val relatedListAdapter = RecommendListAdapter(ProductType.RENT, false)
 
+    private val popup: PopupMenu by lazy { PopupMenu(this, iv_rent_detail_menu) }
+
     override fun viewInit() {
-        setSupportActionBar(tb_rent_detail)
-        tb_rent_detail.run {
-            background.alpha = 0
-            setNavigationOnClickListener { finish() }
-            overflowIcon = ContextCompat.getDrawable(this@RentDetailActivity, R.drawable.ic_menu)
-        }
+        tb_rent_detail.setNavigationOnClickListener { finish() }
 
         ll_comment.setOnClickListener { startActivity<CommentActivity>("post_id" to postId, "type" to ProductType.RENT) }
 
@@ -49,16 +47,33 @@ class RentDetailActivity : BaseActivity<ActivityRentDetailBinding>() {
 
         rv_related.adapter = relatedListAdapter
 
+        popup.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.report -> {
+                    ReportPostDialog().apply {
+                        arguments = Bundle().apply {
+                            putInt("post_id", postId)
+                            putInt("type", ProductType.RENT)
+                        }
+                        show(supportFragmentManager, "")
+                    }
+                }
+                R.id.modify -> {
+                    startActivity<ModifyRentActivity>("post_id" to postId)
+                }
+            }
+            true
+        }
+
+        iv_rent_detail_menu.setOnClickListener { popup.show() }
+
+        iv_rent_detail_interest.setOnClickListener { viewModel.onClickInterest(postId) }
+
         viewModel.getRentDetail(postId)
         viewModel.getRelatedProduct(postId)
     }
 
     override fun observeViewModel() {
-        viewModel.isInterest.observe(this, Observer {
-            if (it) tb_rent_detail.menu[0].icon = getDrawable(R.drawable.ic_heart_full_red)
-            else tb_rent_detail.menu[0].icon = getDrawable(R.drawable.ic_heart_white)
-        })
-
         viewModel.relatedList.observe(this, Observer { relatedListAdapter.setItems(it) })
 
         viewModel.toastEvent.observe(this, Observer { toast(it) })
@@ -76,31 +91,26 @@ class RentDetailActivity : BaseActivity<ActivityRentDetailBinding>() {
         viewModel.rentDetailLogEvent.observe(this, Observer { Analytics.logEvent(this, Analytics.RENT_DETAIL, it) })
 
         viewModel.createChatRoomLogEvent.observe(this, Observer { Analytics.logEvent(this, Analytics.CREATE_CHAT_ROOM, it) })
+
+        viewModel.isMe.observe(this, Observer {
+            if (it) popup.menuInflater.inflate(R.menu.menu_my_product_detail_toolbar, popup.menu)
+            else popup.menuInflater.inflate(R.menu.menu_product_detail_toolbar, popup.menu)
+        })
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        MessageBus.getInstance().register(this)
         binding.viewModel = viewModel
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_product_detail_toolbar, menu)
-        return true
+    @Subscribe(events = [MessageEvents.MODIFY_RENT_EVENT])
+    fun modifyRentEvent() {
+        viewModel.getRentDetail(postId)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.interest -> viewModel.onClickInterest(postId)
-            R.id.report -> {
-                ReportPostDialog().apply {
-                    arguments = Bundle().apply {
-                        putInt("post_id", postId)
-                        putInt("type", ProductType.RENT)
-                    }
-                    show(supportFragmentManager, "")
-                }
-            }
-        }
-        return super.onOptionsItemSelected(item)
+    override fun onDestroy() {
+        MessageBus.getInstance().unregister(this)
+        super.onDestroy()
     }
 }

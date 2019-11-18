@@ -94,7 +94,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".presentation.ui.purchaseDetail.PurchaseDetailActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/WhiteAppTheme"/>
         <activity
             android:name=".presentation.ui.category.CategoryActivity"
             android:screenOrientation="portrait"

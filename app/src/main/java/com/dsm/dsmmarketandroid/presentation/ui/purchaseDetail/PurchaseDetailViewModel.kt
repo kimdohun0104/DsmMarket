@@ -29,6 +29,7 @@ class PurchaseDetailViewModel(
 ) : BaseViewModel() {
 
     val purchaseDetail = MutableLiveData<PurchaseDetailModel>()
+    val isMe = MutableLiveData<Boolean>()
     val isInterest = MutableLiveData<Boolean>()
 
     val recommendList = MutableLiveData<List<RecommendModel>>()
@@ -54,6 +55,7 @@ class PurchaseDetailViewModel(
                 .doOnNext { purchaseDetailLogEvent.value = Bundle().apply { putInt(Analytics.POST_ID, postId) } }
                 .subscribe({
                     isInterest.value = it.isInterest
+                    isMe.value = it.isMe
                     purchaseDetail.value = it
                 }, {
                     if (it is HttpException && it.code() == 410) {
