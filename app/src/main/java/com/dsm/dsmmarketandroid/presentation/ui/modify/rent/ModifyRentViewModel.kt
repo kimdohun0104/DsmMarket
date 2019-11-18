@@ -7,8 +7,10 @@ import com.dsm.domain.usecase.ModifyRentUseCase
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.base.BaseViewModel
 import com.dsm.dsmmarketandroid.presentation.mapper.RentDetailModelMapper
+import com.dsm.dsmmarketandroid.presentation.util.MessageEvents
 import com.dsm.dsmmarketandroid.presentation.util.SingleLiveEvent
 import com.dsm.dsmmarketandroid.presentation.util.isValueBlank
+import kr.sdusb.libs.messagebus.MessageBus
 
 class ModifyRentViewModel(
     private val getRentDetailUseCase: GetRentDetailUseCase,
@@ -82,6 +84,7 @@ class ModifyRentViewModel(
                     "possible_time" to rentTime.value
                 )
             ).subscribe({
+                MessageBus.getInstance().handle(MessageEvents.MODIFY_RENT_EVENT, null)
                 finishActivityEvent.call()
             }, {
                 toastEvent.value = R.string.fail_server_error

@@ -14,8 +14,11 @@ import com.dsm.dsmmarketandroid.presentation.ui.rentImage.RentImageActivity
 import com.dsm.dsmmarketandroid.presentation.ui.report.ReportPostDialog
 import com.dsm.dsmmarketandroid.presentation.util.Analytics
 import com.dsm.dsmmarketandroid.presentation.util.LoadingDialog
+import com.dsm.dsmmarketandroid.presentation.util.MessageEvents
 import com.dsm.dsmmarketandroid.presentation.util.ProductType
 import kotlinx.android.synthetic.main.activity_rent_detail.*
+import kr.sdusb.libs.messagebus.MessageBus
+import kr.sdusb.libs.messagebus.Subscribe
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -97,6 +100,17 @@ class RentDetailActivity : BaseActivity<ActivityRentDetailBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        MessageBus.getInstance().register(this)
         binding.viewModel = viewModel
+    }
+
+    @Subscribe(events = [MessageEvents.MODIFY_RENT_EVENT])
+    fun modifyRentEvent() {
+        viewModel.getRentDetail(postId)
+    }
+
+    override fun onDestroy() {
+        MessageBus.getInstance().unregister(this)
+        super.onDestroy()
     }
 }

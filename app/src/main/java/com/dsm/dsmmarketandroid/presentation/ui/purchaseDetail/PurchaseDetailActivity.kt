@@ -16,8 +16,11 @@ import com.dsm.dsmmarketandroid.presentation.ui.modify.purchase.ModifyPurchaseAc
 import com.dsm.dsmmarketandroid.presentation.ui.report.ReportPostDialog
 import com.dsm.dsmmarketandroid.presentation.util.Analytics
 import com.dsm.dsmmarketandroid.presentation.util.LoadingDialog
+import com.dsm.dsmmarketandroid.presentation.util.MessageEvents
 import com.dsm.dsmmarketandroid.presentation.util.ProductType
 import kotlinx.android.synthetic.main.activity_purchase_detail.*
+import kr.sdusb.libs.messagebus.MessageBus
+import kr.sdusb.libs.messagebus.Subscribe
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -108,6 +111,17 @@ class PurchaseDetailActivity : BaseActivity<ActivityPurchaseDetailBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        MessageBus.getInstance().register(this)
         binding.viewModel = viewModel
+    }
+
+    @Subscribe(events = [MessageEvents.MODIFY_PURCHASE_EVENT])
+    fun modifyPurchaseEvent() {
+        viewModel.getPurchaseDetail(postId)
+    }
+
+    override fun onDestroy() {
+        MessageBus.getInstance().unregister(this)
+        super.onDestroy()
     }
 }
