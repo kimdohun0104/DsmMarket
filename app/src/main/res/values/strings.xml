@@ -151,6 +151,9 @@
     <string name="advertisement">광고</string>
     <string name="etc">기타</string>
 
+    <string name="restart_to_update">업데이트를 위해 재시작</string>
+    <string name="restart">재시작</string>
+
     <string-array name="grade">
         <item>1</item>
         <item>2</item>

@@ -14,6 +14,7 @@ ext {
     pagingVersion = '1.0.1'
     glideVersion = '4.9.0'
     messageBusVersion = '0.7.5'
+    googlePlayVersion = '1.6.4'
 
     // testing
     junitVersion = '4.12'
@@ -64,7 +65,8 @@ ext {
             glideCompiler: "com.github.bumptech.glide:compiler:$glideVersion",
             rxAndroid: "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion",
             messageBus: "com.github.UnsignedUSB:MessageBus:$messageBusVersion",
-            analytics: "com.google.firebase:firebase-analytics:$firebaseCoreVersion"
+            analytics: "com.google.firebase:firebase-analytics:$firebaseCoreVersion",
+            googlePlayCore: "com.google.android.play:core:$googlePlayVersion"
     ]
 
     dataTestDependencies = [
