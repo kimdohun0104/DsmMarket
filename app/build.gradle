@@ -66,6 +66,9 @@ dependencies {
     implementation 'net.cachapa.expandablelayout:expandablelayout:2.9.2'
     implementation 'com.github.chrisbanes:PhotoView:2.3.0'
 
+    // google play
+    implementation dependencies.googlePlayCore
+
     // socket
     implementation ('io.socket:socket.io-client:0.8.3') { exclude group: 'org.json', module: 'json' }
 
