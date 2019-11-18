@@ -72,7 +72,8 @@ class ModifyPurchaseViewModelTests : BaseTest() {
             content = "CONTENT",
             author = "AUTHOR",
             commentCount = 0,
-            id = 0
+            id = 0,
+            isMe = false
         )
         `when`(getPurchaseDetailUseCase.create(0))
             .thenReturn(Flowable.just(response))

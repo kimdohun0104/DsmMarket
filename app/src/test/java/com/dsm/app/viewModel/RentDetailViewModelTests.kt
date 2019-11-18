@@ -119,7 +119,7 @@ class RentDetailViewModelTests : BaseTest() {
 
     @Test
     fun `get rent detail success test`() {
-        val response = RentDetail("", "", 0, "", "", "", "", "", 0, true, "")
+        val response = RentDetail("", "", 0, "", "", "", "", "", 0, true, "", false)
         `when`(getRentDetailUseCase.create(0))
             .thenReturn(Flowable.just(response))
 
