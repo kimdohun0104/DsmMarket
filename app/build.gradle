@@ -106,20 +106,24 @@ dependencies {
     implementation dependencies.retrofitGson
     implementation dependencies.retrofitRxJava
 
+    // okhttp
+    implementation dependencies.okhttp
+
     // lifecycle
     implementation dependencies.lifecycleRuntime
     implementation dependencies.lifecycleExtensions
     kapt dependencies.lifecycleCompiler
 
     // room
-    implementation presentationDependencies.roomRuntime
-    kapt presentationDependencies.roomCompiler
+    implementation dependencies.roomRuntime
+    kapt dependencies.roomCompiler
 
     // paging
     implementation dependencies.paging
 
     // glide
     implementation dependencies.glide
+    implementation dependencies.glideOkhttpIntegration
     kapt dependencies.glideCompiler
 
     // rxJava

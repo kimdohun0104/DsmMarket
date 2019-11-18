@@ -15,6 +15,7 @@ ext {
     glideVersion = '4.9.0'
     messageBusVersion = '0.7.5'
     googlePlayVersion = '1.6.4'
+    okhttpVersion = '4.2.1'
 
     // testing
     junitVersion = '4.12'
@@ -63,10 +64,12 @@ ext {
             paging: "android.arch.paging:runtime:$pagingVersion",
             glide: "com.github.bumptech.glide:glide:$glideVersion",
             glideCompiler: "com.github.bumptech.glide:compiler:$glideVersion",
+            glideOkhttpIntegration: "com.github.bumptech.glide:okhttp3-integration:$glideVersion",
             rxAndroid: "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion",
             messageBus: "com.github.UnsignedUSB:MessageBus:$messageBusVersion",
             analytics: "com.google.firebase:firebase-analytics:$firebaseCoreVersion",
-            googlePlayCore: "com.google.android.play:core:$googlePlayVersion"
+            googlePlayCore: "com.google.android.play:core:$googlePlayVersion",
+            okhttp: "com.squareup.okhttp3:okhttp:$okhttpVersion"
     ]
 
     dataTestDependencies = [
