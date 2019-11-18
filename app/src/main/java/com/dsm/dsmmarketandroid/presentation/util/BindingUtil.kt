@@ -55,7 +55,7 @@ object BindingUtil {
     @JvmStatic
     @BindingAdapter("bind:image")
     fun bindImage(view: ImageView, value: String?) {
-        value?.let { GlideApp.with(view).load(it).into(view) }
+        value?.let { GlideApp.with(view).load(it.trim()).into(view) }
     }
 
     @JvmStatic
