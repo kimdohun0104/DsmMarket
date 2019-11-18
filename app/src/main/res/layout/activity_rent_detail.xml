@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
 
     <data>
 
@@ -10,15 +12,65 @@
         <import type="android.view.View" />
     </data>
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:bind="http://schemas.android.com/tools"
-        xmlns:tools="http://schemas.android.com/tools"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.ui.rentDetail.RentDetailActivity">
+        android:orientation="vertical">
 
-        <androidx.core.widget.NestedScrollView
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/tb_rent_detail"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorWhiteBlack"
+            android:elevation="4dp"
+            app:navigationIcon="@drawable/ic_back_black"
+            app:titleTextColor="@color/colorBlackWhite">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/tv_rent_detail_title"
+                    android:layout_width="0dp"
+                    android:singleLine="true"
+                    android:layout_marginEnd="14dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:textSize="20sp"
+                    android:text="@{viewModel.rentDetail.title}"
+                    android:textColor="@color/colorBlackWhite"
+                    android:textStyle="bold"
+                    app:layout_constraintRight_toLeftOf="@id/iv_rent_detail_interest" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_rent_detail_interest"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@{viewModel.isInterest ? @drawable/ic_heart_full_red : @drawable/ic_heart_black}"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintRight_toLeftOf="@id/iv_rent_detail_menu"
+                    android:layout_marginEnd="14dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:visibility="@{viewModel.isMe ? View.GONE : View.VISIBLE}"/>
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_rent_detail_menu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="12dp"
+                    android:src="@drawable/ic_menu_black"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:background="?attr/selectableItemBackgroundBorderless" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.appcompat.widget.Toolbar>
+
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -141,10 +193,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="18dp"
                     android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
                     android:text="@{viewModel.rentDetail.content}"
                     android:textColor="@color/colorBlackWhite"
-                    android:textSize="18sp"
-                    android:layout_marginBottom="20dp"/>
+                    android:textSize="18sp" />
 
 
                 <Button
@@ -158,7 +210,8 @@
                     android:text="@string/deal_with_chatting"
                     android:textColor="@color/colorWhite"
                     android:textSize="14sp"
-                    android:visibility="@{viewModel.isMe ? View.GONE : View.VISIBLE}"/>
+                    android:visibility="@{viewModel.isMe ? View.GONE : View.VISIBLE}"
+                    android:clickable="@{viewModel.isMe ? false : true}"/>
 
                 <View
                     android:layout_width="match_parent"
@@ -230,23 +283,10 @@
                         android:id="@+id/rv_related"
                         android:layout_width="match_parent"
                         android:layout_height="130dp"
-                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                        android:orientation="horizontal"/>
+                        android:orientation="horizontal"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
                 </LinearLayout>
-
             </LinearLayout>
-        </androidx.core.widget.NestedScrollView>
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/tb_rent_detail"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorWhiteBlack"
-            app:layout_behavior=".custom.ToolbarAlphaScrollBehavior"
-            app:menu="@menu/menu_product_detail_toolbar"
-            app:navigationIcon="@drawable/ic_back_white"
-            app:title="@{viewModel.rentDetail.title}"
-            app:titleTextColor="@color/colorWhite" />
-
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+        </ScrollView>
+    </LinearLayout>
 </layout>
