@@ -109,6 +109,11 @@ class RentDetailActivity : BaseActivity<ActivityRentDetailBinding>() {
         viewModel.getRentDetail(postId)
     }
 
+    @Subscribe(events = [MessageEvents.INCREASE_COMMENT_COUNT_EVENT])
+    fun increaseCommentCountEvent() {
+        tv_rent_comment_count.text = (tv_rent_comment_count.text.toString().toInt() + 1).toString()
+    }
+
     override fun onDestroy() {
         MessageBus.getInstance().unregister(this)
         super.onDestroy()
