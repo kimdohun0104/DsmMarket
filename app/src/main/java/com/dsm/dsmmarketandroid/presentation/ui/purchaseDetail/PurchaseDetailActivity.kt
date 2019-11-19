@@ -120,6 +120,11 @@ class PurchaseDetailActivity : BaseActivity<ActivityPurchaseDetailBinding>() {
         viewModel.getPurchaseDetail(postId)
     }
 
+    @Subscribe(events = [MessageEvents.INCREASE_COMMENT_COUNT_EVENT])
+    fun increaseCommentCountEvent() {
+        tv_purchase_comment_count.text = (tv_purchase_comment_count.text.toString().toInt() + 1).toString()
+    }
+
     override fun onDestroy() {
         MessageBus.getInstance().unregister(this)
         super.onDestroy()

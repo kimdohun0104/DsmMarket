@@ -235,6 +235,7 @@
                         android:textSize="17sp" />
 
                     <TextView
+                        android:id="@+id/tv_rent_comment_count"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@{String.valueOf(viewModel.rentDetail.commentCount)}"

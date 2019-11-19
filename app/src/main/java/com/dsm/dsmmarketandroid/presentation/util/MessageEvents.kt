@@ -9,4 +9,6 @@ object MessageEvents {
     const val MODIFY_PURCHASE_EVENT = 2
 
     const val MODIFY_RENT_EVENT = 3
+
+    const val INCREASE_COMMENT_COUNT_EVENT = 4
 }
