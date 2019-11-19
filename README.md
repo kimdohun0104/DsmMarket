@@ -74,11 +74,6 @@ feature는 특정 기능을 개발하는 브랜치입니다.
 
 <br>
 
-### 코드 스타일
-[대마장터 코드 스타일](https://github.com/DsmMarket/Android/blob/master/codestyle.md)
-
-<br>
-
 ### 도움!
 아직 부족한 점이 많은 코드입니다. 하지만 여러분의 소중한 Issue는 큰 도움이 된답니다.  
 코드에 대한 피드백은 언제나 환영이에요.
