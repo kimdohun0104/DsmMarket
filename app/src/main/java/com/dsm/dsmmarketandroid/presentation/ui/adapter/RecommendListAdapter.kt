@@ -1,5 +1,6 @@
 package com.dsm.dsmmarketandroid.presentation.ui.adapter
 
+import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -42,6 +43,7 @@ class RecommendListAdapter(
                 else Analytics.logEvent(itemView.context, Analytics.SELECT_RELATED, bundle)
                 if (type == ProductType.PURCHASE) context.startActivity<PurchaseDetailActivity>("post_id" to item.postId)
                 else context.startActivity<RentDetailActivity>("post_id" to item.postId)
+                (context as Activity).finish()
             }
         }
     }
