@@ -1,5 +1,6 @@
 package com.dsm.dsmmarketandroid.presentation.ui.post.postRent
 
+import android.os.Bundle
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
@@ -7,13 +8,15 @@ import androidx.lifecycle.Transformations
 import com.dsm.domain.usecase.PostRentUseCase
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.base.BaseViewModel
+import com.dsm.dsmmarketandroid.presentation.util.Analytics
 import com.dsm.dsmmarketandroid.presentation.util.SingleLiveEvent
 import com.dsm.dsmmarketandroid.presentation.util.isValueBlank
-import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
-
 
 class PostRentViewModel(private val postRentUseCase: PostRentUseCase) : BaseViewModel() {
 
@@ -59,15 +62,15 @@ class PostRentViewModel(private val postRentUseCase: PostRentUseCase) : BaseView
     val showLoadingDialogEvent = SingleLiveEvent<Any>()
     val hideLoadingDialogEvent = SingleLiveEvent<Any>()
 
+    val postRentLogEvent = SingleLiveEvent<Bundle>()
+
     fun post() {
         val imageFile = File(photo.value!!)
-
-        showLoadingDialogEvent.call()
 
         addDisposable(
             postRentUseCase.create(
                 PostRentUseCase.Params(
-                    MultipartBody.Part.createFormData("img", imageFile.name, RequestBody.create(MediaType.parse("image/*"), imageFile)),
+                    MultipartBody.Part.createFormData("img", imageFile.name, imageFile.asRequestBody("image/*".toMediaTypeOrNull())),
                     mapOf(
                         "title" to createTextPlain(title.value),
                         "content" to createTextPlain(content.value),
@@ -77,7 +80,15 @@ class PostRentViewModel(private val postRentUseCase: PostRentUseCase) : BaseView
                     )
                 )
             )
+                .doOnSubscribe { showLoadingDialogEvent.call() }
                 .doFinally { hideLoadingDialogEvent.call() }
+                .doOnNext {
+                    postRentLogEvent.value = Bundle().apply {
+                        putString(Analytics.TITLE, title.value)
+                        putInt(Analytics.PRICE, price.value?.toInt() ?: -1)
+                        putString(Analytics.CATEGORY, category.value)
+                    }
+                }
                 .subscribe({
                     finishActivityEvent.call()
                 }, {
@@ -86,8 +97,7 @@ class PostRentViewModel(private val postRentUseCase: PostRentUseCase) : BaseView
         )
     }
 
-    private fun createTextPlain(value: String?): RequestBody =
-        RequestBody.create(MediaType.parse("text/plain"), value ?: "")
+    private fun createTextPlain(value: String?): RequestBody = value!!.toRequestBody("text/plain".toMediaTypeOrNull())
 
     fun selectPriceUnit(unit: Int) {
         this.unit.value = unit.toString()

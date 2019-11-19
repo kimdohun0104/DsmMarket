@@ -1,5 +1,6 @@
 package com.dsm.dsmmarketandroid.presentation.ui.post.postPurchase
 
+import android.os.Bundle
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
@@ -7,12 +8,15 @@ import androidx.lifecycle.Transformations
 import com.dsm.domain.usecase.PostPurchaseUseCase
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.base.BaseViewModel
+import com.dsm.dsmmarketandroid.presentation.util.Analytics
 import com.dsm.dsmmarketandroid.presentation.util.ListLiveData
 import com.dsm.dsmmarketandroid.presentation.util.SingleLiveEvent
 import com.dsm.dsmmarketandroid.presentation.util.isValueBlank
-import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
 
 class PostPurchaseViewModel(private val postPurchaseUseCase: PostPurchaseUseCase) : BaseViewModel() {
@@ -43,14 +47,14 @@ class PostPurchaseViewModel(private val postPurchaseUseCase: PostPurchaseUseCase
     val showLoadingDialogEvent = SingleLiveEvent<Any>()
     val hideLoadingDialogEvent = SingleLiveEvent<Any>()
 
+    val postPurchaseLogEvent = SingleLiveEvent<Bundle>()
+
     fun post() {
         val multipartImageList = arrayListOf<MultipartBody.Part>()
         imageList.value!!.forEach {
             val imageFile = File(it)
-            multipartImageList.add(MultipartBody.Part.createFormData("img", imageFile.name, RequestBody.create(MediaType.parse("image/*"), imageFile)))
+            multipartImageList.add(MultipartBody.Part.createFormData("img", imageFile.name, imageFile.asRequestBody("image/*".toMediaTypeOrNull())))
         }
-
-        showLoadingDialogEvent.call()
 
         addDisposable(
             postPurchaseUseCase.create(
@@ -64,7 +68,15 @@ class PostPurchaseViewModel(private val postPurchaseUseCase: PostPurchaseUseCase
                     )
                 )
             )
+                .doOnSubscribe { showLoadingDialogEvent.call() }
                 .doFinally { hideLoadingDialogEvent.call() }
+                .doOnNext {
+                    postPurchaseLogEvent.value = Bundle().apply {
+                        putString(Analytics.TITLE, title.value)
+                        putInt(Analytics.PRICE, price.value?.toInt() ?: -1)
+                        putString(Analytics.CATEGORY, category.value)
+                    }
+                }
                 .subscribe({
                     finishActivityEvent.call()
                 }, {
@@ -73,8 +85,7 @@ class PostPurchaseViewModel(private val postPurchaseUseCase: PostPurchaseUseCase
         )
     }
 
-    private fun createTextPlain(value: String?): RequestBody =
-        RequestBody.create(MediaType.parse("text/plain"), value ?: "")
+    private fun createTextPlain(value: String?): RequestBody = value!!.toRequestBody("text/plain".toMediaTypeOrNull())
 
     fun imageRemovedAt(index: Int) {
         imageList.removeAt(index)

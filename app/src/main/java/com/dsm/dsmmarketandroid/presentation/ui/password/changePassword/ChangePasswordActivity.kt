@@ -7,6 +7,7 @@ import androidx.lifecycle.Observer
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.ActivityChangePasswordBinding
 import com.dsm.dsmmarketandroid.presentation.base.BaseActivity
+import com.dsm.dsmmarketandroid.presentation.util.Analytics
 import com.dsm.dsmmarketandroid.presentation.util.setEditorActionListener
 import kotlinx.android.synthetic.main.activity_change_password.*
 import org.jetbrains.anko.toast
@@ -32,6 +33,8 @@ class ChangePasswordActivity : BaseActivity<ActivityChangePasswordBinding>() {
         viewModel.finishActivityEvent.observe(this, Observer { finish() })
 
         viewModel.toastEvent.observe(this, Observer { toast(it) })
+
+        viewModel.changePasswordLogEvent.observe(this, Observer { Analytics.logEvent(this, Analytics.CHANGE_PASSWORD, null) })
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

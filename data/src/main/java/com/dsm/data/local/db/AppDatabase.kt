@@ -10,7 +10,7 @@ import com.dsm.data.local.db.entity.PurchaseDetailRoomEntity
 import com.dsm.data.local.db.entity.RentDetailRoomEntity
 import com.dsm.data.local.db.entity.SearchHistoryRoomEntity
 
-@Database(entities = [PurchaseDetailRoomEntity::class, RentDetailRoomEntity::class, SearchHistoryRoomEntity::class], version = 1)
+@Database(entities = [PurchaseDetailRoomEntity::class, RentDetailRoomEntity::class, SearchHistoryRoomEntity::class], version = 2)
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
 

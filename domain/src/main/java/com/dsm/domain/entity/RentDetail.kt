@@ -21,5 +21,7 @@ data class RentDetail(
 
     val isInterest: Boolean,
 
-    val category: String
+    val category: String,
+    
+    val isMe: Boolean
 )

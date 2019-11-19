@@ -37,18 +37,15 @@ class InterestViewModel(
                     if (type.isPurchase()) {
                         isPurchaseRefreshing.value = false
                         isPurchaseProgressVisible.value = false
-                    }
-                    else {
+                    } else {
                         isRentRefreshing.value = false
                         isRentProgressVisible.value = false
                     }
                 }
                 .map(productModelMapper::mapFrom)
                 .subscribe({
-                    if (type.isPurchase())
-                        purchaseList.value = it
-                    else
-                        rentList.value = it
+                    if (type.isPurchase()) purchaseList.value = it
+                    else rentList.value = it
                 }, {
                     toastEvent.value = R.string.fail_server_error
                 })

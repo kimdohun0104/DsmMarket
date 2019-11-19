@@ -24,5 +24,7 @@ data class RentDetailRoomEntity(
 
     val commentCount: Int,
 
-    val isInterest: Boolean
+    val isInterest: Boolean,
+
+    val isMe: Boolean
 )

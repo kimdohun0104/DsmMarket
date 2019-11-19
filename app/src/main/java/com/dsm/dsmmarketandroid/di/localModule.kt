@@ -9,7 +9,10 @@ import org.koin.dsl.module
 val localModule = module {
     single<PrefHelper> { PrefHelperImpl(get()) }
 
-    single { Room.databaseBuilder(get(), AppDatabase::class.java, "dsmmarket.db").allowMainThreadQueries().build() }
+    single { Room.databaseBuilder(get(), AppDatabase::class.java, "dsmmarket.db")
+        .allowMainThreadQueries()
+        .fallbackToDestructiveMigration()
+        .build() }
 
     factory { get<AppDatabase>().purchaseDao() }
 

@@ -9,13 +9,25 @@ import com.dsm.dsmmarketandroid.presentation.ui.me.MeFragment
 import com.dsm.dsmmarketandroid.presentation.ui.post.PostDialog
 import com.dsm.dsmmarketandroid.presentation.ui.purchase.PurchaseFragment
 import com.dsm.dsmmarketandroid.presentation.ui.rent.RentFragment
+import com.google.android.material.snackbar.Snackbar
+import com.google.android.play.core.appupdate.AppUpdateManager
+import com.google.android.play.core.appupdate.AppUpdateManagerFactory
+import com.google.android.play.core.install.InstallState
+import com.google.android.play.core.install.InstallStateUpdatedListener
+import com.google.android.play.core.install.model.AppUpdateType
+import com.google.android.play.core.install.model.InstallStatus
+import com.google.android.play.core.install.model.UpdateAvailability
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.subjects.BehaviorSubject
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.toast
 import org.koin.android.ext.android.inject
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), InstallStateUpdatedListener {
+
+    companion object {
+        private const val IN_APP_UPDATE_REQUEST = 1000
+    }
 
     private val backSubject = BehaviorSubject.createDefault(0L).toSerialized()
 
@@ -34,6 +46,8 @@ class MainActivity : AppCompatActivity() {
     private var currentPosition = -1
 
     private val prefHelper: PrefHelper by inject()
+
+    private val appUpdateManager: AppUpdateManager by lazy { AppUpdateManagerFactory.create(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,6 +68,8 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
+
+        inAppUpdate()
     }
 
     private fun switchFragment(index: Int) {
@@ -83,8 +99,32 @@ class MainActivity : AppCompatActivity() {
         currentPosition = index
     }
 
+    private fun inAppUpdate() {
+        val appUpdateInfoTask = appUpdateManager.appUpdateInfo
+
+        appUpdateInfoTask.addOnSuccessListener { appUpdateInfo ->
+            if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
+                && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.FLEXIBLE)
+            ) {
+                appUpdateManager.registerListener(this)
+                appUpdateManager.startUpdateFlowForResult(appUpdateInfo, AppUpdateType.FLEXIBLE, this, IN_APP_UPDATE_REQUEST)
+            }
+        }
+    }
+
+    override fun onStateUpdate(state: InstallState?) {
+        if (state?.installStatus() == InstallStatus.DOWNLOADED) {
+            Snackbar.make(cl_main_container, R.string.restart_to_update, Snackbar.LENGTH_INDEFINITE)
+                .setAction(R.string.restart) {
+                    appUpdateManager.completeUpdate()
+                    appUpdateManager.unregisterListener(this)
+                }.show()
+        }
+    }
+
     override fun onDestroy() {
         backSubjectDisposable.dispose()
+        appUpdateManager.unregisterListener(this)
         super.onDestroy()
     }
 }

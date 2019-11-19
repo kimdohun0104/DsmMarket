@@ -8,8 +8,10 @@ import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.base.BaseViewModel
 import com.dsm.dsmmarketandroid.presentation.mapper.PurchaseDetailModelMapper
 import com.dsm.dsmmarketandroid.presentation.util.ListLiveData
+import com.dsm.dsmmarketandroid.presentation.util.MessageEvents
 import com.dsm.dsmmarketandroid.presentation.util.SingleLiveEvent
 import com.dsm.dsmmarketandroid.presentation.util.isValueBlank
+import kr.sdusb.libs.messagebus.MessageBus
 
 class ModifyPurchaseViewModel(
     private val getPurchaseDetailUseCase: GetPurchaseDetailUseCase,
@@ -64,6 +66,7 @@ class ModifyPurchaseViewModel(
                     "category" to category.value
                 )
             ).subscribe({
+                MessageBus.getInstance().handle(MessageEvents.MODIFY_PURCHASE_EVENT, null)
                 finishActivityEvent.call()
             }, {
                 toastEvent.value = R.string.fail_server_error

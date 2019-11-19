@@ -10,6 +10,7 @@ import com.dsm.dsmmarketandroid.databinding.ActivityPostPurchaseBinding
 import com.dsm.dsmmarketandroid.presentation.base.BaseActivity
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.PostImageListAdapter
 import com.dsm.dsmmarketandroid.presentation.ui.postCategory.PostCategoryActivity
+import com.dsm.dsmmarketandroid.presentation.util.Analytics
 import com.dsm.dsmmarketandroid.presentation.util.LoadingDialog
 import com.dsm.dsmmarketandroid.presentation.util.PermissionUtil
 import com.dsm.mediapicker.MediaPicker
@@ -73,6 +74,8 @@ class PostPurchaseActivity : BaseActivity<ActivityPostPurchaseBinding>() {
         viewModel.showLoadingDialogEvent.observe(this, Observer { LoadingDialog.show(supportFragmentManager) })
 
         viewModel.hideLoadingDialogEvent.observe(this, Observer { LoadingDialog.hide() })
+
+        viewModel.postPurchaseLogEvent.observe(this, Observer { Analytics.logEvent(this, Analytics.POST_PURCHASE, it) })
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -15,8 +15,8 @@ android {
         applicationId "com.dsm.dsmmarketandroid"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 2
-        versionName "1.0.0-beta2"
+        versionCode 3
+        versionName "1.0.0-beta3"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         resConfigs "kr", "en"
 
@@ -66,6 +66,9 @@ dependencies {
     implementation 'net.cachapa.expandablelayout:expandablelayout:2.9.2'
     implementation 'com.github.chrisbanes:PhotoView:2.3.0'
 
+    // google play
+    implementation dependencies.googlePlayCore
+
     // socket
     implementation ('io.socket:socket.io-client:0.8.3') { exclude group: 'org.json', module: 'json' }
 
@@ -89,6 +92,7 @@ dependencies {
     // firebase
     implementation dependencies.firebaseCore
     implementation dependencies.crashlytics
+    implementation dependencies.analytics
 
     // anko
     implementation dependencies.anko
@@ -102,20 +106,24 @@ dependencies {
     implementation dependencies.retrofitGson
     implementation dependencies.retrofitRxJava
 
+    // okhttp
+    implementation dependencies.okhttp
+
     // lifecycle
     implementation dependencies.lifecycleRuntime
     implementation dependencies.lifecycleExtensions
     kapt dependencies.lifecycleCompiler
 
     // room
-    implementation presentationDependencies.roomRuntime
-    kapt presentationDependencies.roomCompiler
+    implementation dependencies.roomRuntime
+    kapt dependencies.roomCompiler
 
     // paging
     implementation dependencies.paging
 
     // glide
     implementation dependencies.glide
+    implementation dependencies.glideOkhttpIntegration
     kapt dependencies.glideCompiler
 
     // rxJava

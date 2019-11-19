@@ -122,7 +122,7 @@ class PurchaseDetailViewModelTests : BaseTest() {
 
     @Test
     fun `get purchase detail success test`() {
-        val response = PurchaseDetail(listOf(), 0, "", "", "", "", 1, "", true, "")
+        val response = PurchaseDetail(listOf(), 0, "", "", "", "", 1, "", true, "", false)
         `when`(getPurchaseDetailUseCase.create(0))
             .thenReturn(Flowable.just(response))
 

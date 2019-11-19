@@ -5,6 +5,7 @@ import androidx.lifecycle.Observer
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.ActivityAddCommentBinding
 import com.dsm.dsmmarketandroid.presentation.base.BaseActivity
+import com.dsm.dsmmarketandroid.presentation.util.Analytics
 import kotlinx.android.synthetic.main.activity_add_comment.*
 import org.jetbrains.anko.toast
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -27,6 +28,8 @@ class AddCommentActivity : BaseActivity<ActivityAddCommentBinding>() {
         viewModel.finishActivityEvent.observe(this, Observer { finish() })
 
         viewModel.toastEvent.observe(this, Observer { toast(it) })
+
+        viewModel.addCommentLogEvent.observe(this, Observer { Analytics.logEvent(this, Analytics.ADD_COMMENT, it) })
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

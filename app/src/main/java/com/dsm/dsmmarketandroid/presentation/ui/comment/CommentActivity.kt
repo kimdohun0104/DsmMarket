@@ -10,6 +10,7 @@ import com.dsm.dsmmarketandroid.presentation.base.BaseActivity
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.CommentListAdapter
 import com.dsm.dsmmarketandroid.presentation.ui.addComment.AddCommentActivity
 import com.dsm.dsmmarketandroid.presentation.ui.report.ReportCommentDialog
+import com.dsm.dsmmarketandroid.presentation.util.Analytics
 import com.dsm.dsmmarketandroid.presentation.util.MessageEvents
 import kotlinx.android.synthetic.main.activity_comment.*
 import kr.sdusb.libs.messagebus.MessageBus
@@ -58,6 +59,8 @@ class CommentActivity : BaseActivity<ActivityCommentBinding>() {
         })
 
         viewModel.hideRefreshEvent.observe(this, Observer { srl_comment.isRefreshing = false })
+
+        viewModel.getCommentLogEvent.observe(this, Observer { Analytics.logEvent(this, Analytics.GET_COMMENT, it) })
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

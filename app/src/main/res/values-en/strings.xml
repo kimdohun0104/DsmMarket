@@ -111,7 +111,9 @@
 	<string name="ask_rent_complete">Are you sure you want to quit your rental?</string>
 	<string name="complete">complete</string>
 
-	<string name="modify_purchase">Buying edit your posts</string>
+	<string name="modify">Edit</string>
+	<string name="modify_purchase">Edit your purchase post</string>
+	<string name="modify_rent">Edit your rent post</string>
 
 	<string name="report_comment">Report Comment</string>
 	<string name="report_post">Posts Report</string>
@@ -128,4 +130,7 @@
 	<string name="slander_or_abuse">slander or abuse</string>
 	<string name="advertisement">advertisement</string>
 	<string name="etc">etc</string>
+
+	<string name="restart_to_update">Restart to Update</string>
+	<string name="restart">재시작</string>
 </resources>

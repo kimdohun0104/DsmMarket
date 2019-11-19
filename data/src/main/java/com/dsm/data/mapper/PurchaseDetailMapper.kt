@@ -16,7 +16,8 @@ class PurchaseDetailMapper : Mapper<PurchaseDetailEntity, PurchaseDetail> {
         content = from.content,
         author = from.author,
         isInterest = from.isInterest,
-        category = from.category
+        category = from.category,
+        isMe = from.isMe
     )
 
     fun mapFrom(from: PurchaseDetail) = PurchaseDetailRoomEntity(
@@ -28,7 +29,8 @@ class PurchaseDetailMapper : Mapper<PurchaseDetailEntity, PurchaseDetail> {
         commentCount = from.commentCount,
         content = from.content,
         author = from.author,
-        isInterest = from.isInterest
+        isInterest = from.isInterest,
+        isMe = from.isMe
     )
 
     fun mapFrom(from: PurchaseDetailRoomEntity) = PurchaseDetail(
@@ -41,6 +43,7 @@ class PurchaseDetailMapper : Mapper<PurchaseDetailEntity, PurchaseDetail> {
         content = from.content,
         author = from.author,
         isInterest = from.isInterest,
-        category = ""
+        category = "",
+        isMe = from.isMe
     )
 }

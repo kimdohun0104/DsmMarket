@@ -1,11 +1,13 @@
 package com.dsm.dsmmarketandroid.presentation.ui.searchResult
 
+import android.os.Bundle
 import android.view.inputmethod.EditorInfo
 import com.dsm.domain.usecase.AddSearchHistoryUseCase
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.ActivitySearchResultBinding
 import com.dsm.dsmmarketandroid.presentation.base.BaseActivity
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.SearchPagerAdapter
+import com.dsm.dsmmarketandroid.presentation.util.Analytics
 import com.dsm.dsmmarketandroid.presentation.util.addOnTabSelectedListener
 import com.dsm.dsmmarketandroid.presentation.util.setEditorActionListener
 import com.google.android.material.tabs.TabLayoutMediator
@@ -41,6 +43,8 @@ class SearchResultActivity : BaseActivity<ActivitySearchResultBinding>() {
         }.attach()
 
         tl_search.addOnTabSelectedListener { vp_search.currentItem = it.position }
+
+        Analytics.logEvent(this, Analytics.SEARCH, Bundle().apply { putString("search", search) })
     }
 
     override fun observeViewModel() {
