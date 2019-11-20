@@ -1,6 +1,7 @@
 package com.dsm.dsmmarketandroid.presentation.ui.purchaseDetail
 
 import android.os.Bundle
+import android.view.View
 import android.widget.PopupMenu
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.PagerSnapHelper
@@ -38,6 +39,8 @@ class PurchaseDetailActivity : BaseActivity<ActivityPurchaseDetailBinding>() {
     private val relatedListAdapter = RecommendListAdapter(ProductType.PURCHASE, false)
 
     private val popup: PopupMenu by lazy { PopupMenu(this, iv_purchase_detail_menu) }
+
+    private var isMe = false
 
     override fun viewInit() {
         tb_purchase_detail.setNavigationOnClickListener { finish() }
@@ -108,7 +111,10 @@ class PurchaseDetailActivity : BaseActivity<ActivityPurchaseDetailBinding>() {
             createChatRoomLogEvent.observe(`this`, Observer { Analytics.logEvent(`this`, Analytics.CREATE_CHAT_ROOM, it) })
 
             isMe.observe(`this`, Observer {
-                if (it) popup.menuInflater.inflate(R.menu.menu_my_product_detail_toolbar, popup.menu)
+                if (it) {
+                    `this`.isMe = true
+                    popup.menuInflater.inflate(R.menu.menu_my_product_detail_toolbar, popup.menu)
+                }
                 else popup.menuInflater.inflate(R.menu.menu_product_detail_toolbar, popup.menu)
             })
         }
@@ -128,6 +134,11 @@ class PurchaseDetailActivity : BaseActivity<ActivityPurchaseDetailBinding>() {
     @Subscribe(events = [MessageEvents.INCREASE_COMMENT_COUNT_EVENT])
     fun increaseCommentCountEvent() {
         tv_purchase_comment_count.text = (tv_purchase_comment_count.text.toString().toInt() + 1).toString()
+    }
+
+    override fun onResume() {
+        if (isMe) btn_deal_with_chat.visibility = View.GONE
+        super.onResume()
     }
 
     override fun onDestroy() {

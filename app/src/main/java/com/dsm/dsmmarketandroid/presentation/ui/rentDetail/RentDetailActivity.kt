@@ -1,6 +1,7 @@
 package com.dsm.dsmmarketandroid.presentation.ui.rentDetail
 
 import android.os.Bundle
+import android.view.View
 import android.widget.PopupMenu
 import androidx.lifecycle.Observer
 import com.dsm.dsmmarketandroid.R
@@ -35,6 +36,8 @@ class RentDetailActivity : BaseActivity<ActivityRentDetailBinding>() {
     private val relatedListAdapter = RecommendListAdapter(ProductType.RENT, false)
 
     private val popup: PopupMenu by lazy { PopupMenu(this, iv_rent_detail_menu) }
+
+    private var isMe = false
 
     override fun viewInit() {
         tb_rent_detail.setNavigationOnClickListener { finish() }
@@ -86,8 +89,6 @@ class RentDetailActivity : BaseActivity<ActivityRentDetailBinding>() {
 
             hideLoadingDialogEvent.observe(`this`, Observer { LoadingDialog.hide() })
 
-            rentDetailLogEvent.observe(`this`, Observer {  })
-
             interestLogEvent.observe(`this`, Observer { Analytics.logEvent(`this`, Analytics.INTEREST_RENT, it) })
 
             rentDetailLogEvent.observe(`this`, Observer { Analytics.logEvent(`this`, Analytics.RENT_DETAIL, it) })
@@ -95,7 +96,10 @@ class RentDetailActivity : BaseActivity<ActivityRentDetailBinding>() {
             createChatRoomLogEvent.observe(`this`, Observer { Analytics.logEvent(`this`, Analytics.CREATE_CHAT_ROOM, it) })
 
             isMe.observe(`this`, Observer {
-                if (it) popup.menuInflater.inflate(R.menu.menu_my_product_detail_toolbar, popup.menu)
+                if (it) {
+                    `this`.isMe = true
+                    popup.menuInflater.inflate(R.menu.menu_my_product_detail_toolbar, popup.menu)
+                }
                 else popup.menuInflater.inflate(R.menu.menu_product_detail_toolbar, popup.menu)
             })
         }
@@ -115,6 +119,11 @@ class RentDetailActivity : BaseActivity<ActivityRentDetailBinding>() {
     @Subscribe(events = [MessageEvents.INCREASE_COMMENT_COUNT_EVENT])
     fun increaseCommentCountEvent() {
         tv_rent_comment_count.text = (tv_rent_comment_count.text.toString().toInt() + 1).toString()
+    }
+
+    override fun onResume() {
+        if (isMe) btn_deal_with_chat.visibility = View.GONE
+        super.onResume()
     }
 
     override fun onDestroy() {
