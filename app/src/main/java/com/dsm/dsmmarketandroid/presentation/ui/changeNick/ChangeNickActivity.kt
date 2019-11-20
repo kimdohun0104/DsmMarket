@@ -28,11 +28,14 @@ class ChangeNickActivity : BaseActivity<ActivityChangeNickBinding>() {
     }
 
     override fun observeViewModel() {
-        viewModel.finishActivityEvent.observe(this, Observer { finish() })
+        val `this` = this@ChangeNickActivity
+        viewModel.run {
+            finishActivityEvent.observe(`this`, Observer { finish() })
 
-        viewModel.toastEvent.observe(this, Observer { toast(it) })
+            toastEvent.observe(`this`, Observer { toast(it) })
 
-        viewModel.changeNickLogEvent.observe(this, Observer { Analytics.logEvent(this, Analytics.CHANGE_NICK, it) })
+            changeNickLogEvent.observe(`this`, Observer { Analytics.logEvent(`this`, Analytics.CHANGE_NICK, it) })
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

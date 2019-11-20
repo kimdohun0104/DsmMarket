@@ -32,15 +32,18 @@ class ChatListFragment : BaseFragment<FragmentChatListBinding>() {
     }
 
     override fun observeViewModel() {
-        viewModel.chatRoomList.observe(this, Observer { adapter.setItems(it) })
+        val `this` = this@ChatListFragment
+        viewModel.run {
+            chatRoomList.observe(`this`, Observer { adapter.setItems(it) })
 
-        viewModel.toastEvent.observe(this, Observer { toast(it) })
+            toastEvent.observe(`this`, Observer { toast(it) })
 
-        viewModel.intentChatActivityEvent.observe(this, Observer { startActivity<ChatActivity>("bundle" to it) })
+            intentChatActivityEvent.observe(`this`, Observer { startActivity<ChatActivity>("bundle" to it) })
 
-        viewModel.showLoadingDialogEvent.observe(this, Observer { LoadingDialog.show(childFragmentManager) })
+            showLoadingDialogEvent.observe(`this`, Observer { LoadingDialog.show(childFragmentManager) })
 
-        viewModel.hideLoadingDialogEvent.observe(this, Observer { LoadingDialog.hide() })
+            hideLoadingDialogEvent.observe(`this`, Observer { LoadingDialog.hide() })
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

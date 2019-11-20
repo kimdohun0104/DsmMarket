@@ -33,11 +33,14 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
     }
 
     override fun observeViewModel() {
-        viewModel.searchHistoryList.observe(this, Observer { adapter.setItems(it) })
+        val `this` = this@SearchActivity
+        viewModel.run {
+            searchHistoryList.observe(`this`, Observer { adapter.setItems(it) })
 
-        viewModel.intentSearchResult.observe(this, Observer { startActivity<SearchResultActivity>("search" to it) })
+            intentSearchResult.observe(`this`, Observer { startActivity<SearchResultActivity>("search" to it) })
 
-        viewModel.finishActivityEvent.observe(this, Observer { finish() })
+            finishActivityEvent.observe(`this`, Observer { finish() })
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

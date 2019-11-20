@@ -21,10 +21,13 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
     }
 
     override fun observeViewModel() {
-        viewModel.intentStartActivity.observe(this, Observer { startActivity<StartActivity>() })
+        val `this` = this@SplashActivity
+        viewModel.run {
+            intentStartActivity.observe(`this`, Observer { startActivity<StartActivity>() })
 
-        viewModel.intentMainActivityEvent.observe(this, Observer { startActivity<MainActivity>() })
+            intentMainActivityEvent.observe(`this`, Observer { startActivity<MainActivity>() })
 
-        viewModel.finishActivityEvent.observe(this, Observer { finish() })
+            finishActivityEvent.observe(`this`, Observer { finish() })
+        }
     }
 }

@@ -77,36 +77,41 @@ class PurchaseDetailActivity : BaseActivity<ActivityPurchaseDetailBinding>() {
 
         iv_purchase_detail_menu.setOnClickListener { popup.show() }
 
-        viewModel.getPurchaseDetail(postId)
-        viewModel.getRelatedProduct(postId)
-        viewModel.getRecommendProduct()
+        viewModel.run {
+            getPurchaseDetail(postId)
+            getRelatedProduct(postId)
+            getRecommendProduct()
+        }
     }
 
     override fun observeViewModel() {
-        viewModel.recommendList.observe(this, Observer { recommendListAdapter.setItems(it) })
+        val `this` = this@PurchaseDetailActivity
+        viewModel.run {
+            recommendList.observe(`this`, Observer { recommendListAdapter.setItems(it) })
 
-        viewModel.relatedList.observe(this, Observer { relatedListAdapter.setItems(it) })
+            relatedList.observe(`this`, Observer { relatedListAdapter.setItems(it) })
 
-        viewModel.toastEvent.observe(this, Observer { toast(it) })
+            toastEvent.observe(`this`, Observer { toast(it) })
 
-        viewModel.finishActivityEvent.observe(this, Observer { finish() })
+            finishActivityEvent.observe(`this`, Observer { finish() })
 
-        viewModel.intentChatActivityEvent.observe(this, Observer { startActivity<ChatActivity>("bundle" to it) })
+            intentChatActivityEvent.observe(`this`, Observer { startActivity<ChatActivity>("bundle" to it) })
 
-        viewModel.showLoadingDialogEvent.observe(this, Observer { LoadingDialog.show(supportFragmentManager) })
+            showLoadingDialogEvent.observe(`this`, Observer { LoadingDialog.show(supportFragmentManager) })
 
-        viewModel.hideLoadingDialogEvent.observe(this, Observer { LoadingDialog.hide() })
+            hideLoadingDialogEvent.observe(`this`, Observer { LoadingDialog.hide() })
 
-        viewModel.purchaseDetailLogEvent.observe(this, Observer { Analytics.logEvent(this, Analytics.PURCHASE_DETAIL, it) })
+            purchaseDetailLogEvent.observe(`this`, Observer { Analytics.logEvent(`this`, Analytics.PURCHASE_DETAIL, it) })
 
-        viewModel.interestLogEvent.observe(this, Observer { Analytics.logEvent(this, Analytics.INTEREST_PURCHASE, it) })
+            interestLogEvent.observe(`this`, Observer { Analytics.logEvent(`this`, Analytics.INTEREST_PURCHASE, it) })
 
-        viewModel.createChatRoomLogEvent.observe(this, Observer { Analytics.logEvent(this, Analytics.CREATE_CHAT_ROOM, it) })
+            createChatRoomLogEvent.observe(`this`, Observer { Analytics.logEvent(`this`, Analytics.CREATE_CHAT_ROOM, it) })
 
-        viewModel.isMe.observe(this, Observer {
-            if (it) popup.menuInflater.inflate(R.menu.menu_my_product_detail_toolbar, popup.menu)
-            else popup.menuInflater.inflate(R.menu.menu_product_detail_toolbar, popup.menu)
-        })
+            isMe.observe(`this`, Observer {
+                if (it) popup.menuInflater.inflate(R.menu.menu_my_product_detail_toolbar, popup.menu)
+                else popup.menuInflater.inflate(R.menu.menu_product_detail_toolbar, popup.menu)
+            })
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

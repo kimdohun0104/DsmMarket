@@ -74,28 +74,31 @@ class RentDetailActivity : BaseActivity<ActivityRentDetailBinding>() {
     }
 
     override fun observeViewModel() {
-        viewModel.relatedList.observe(this, Observer { relatedListAdapter.setItems(it) })
+        val `this` = this@RentDetailActivity
+        viewModel.run {
+            relatedList.observe(`this`, Observer { relatedListAdapter.setItems(it) })
 
-        viewModel.toastEvent.observe(this, Observer { toast(it) })
+            toastEvent.observe(`this`, Observer { toast(it) })
 
-        viewModel.startChatActivityEvent.observe(this, Observer { startActivity<ChatActivity>("bundle" to it) })
+            startChatActivityEvent.observe(`this`, Observer { startActivity<ChatActivity>("bundle" to it) })
 
-        viewModel.showLoadingDialogEvent.observe(this, Observer { LoadingDialog.show(supportFragmentManager) })
+            showLoadingDialogEvent.observe(`this`, Observer { LoadingDialog.show(supportFragmentManager) })
 
-        viewModel.hideLoadingDialogEvent.observe(this, Observer { LoadingDialog.hide() })
+            hideLoadingDialogEvent.observe(`this`, Observer { LoadingDialog.hide() })
 
-        viewModel.rentDetailLogEvent.observe(this, Observer {  })
+            rentDetailLogEvent.observe(`this`, Observer {  })
 
-        viewModel.interestLogEvent.observe(this, Observer { Analytics.logEvent(this, Analytics.INTEREST_RENT, it) })
+            interestLogEvent.observe(`this`, Observer { Analytics.logEvent(`this`, Analytics.INTEREST_RENT, it) })
 
-        viewModel.rentDetailLogEvent.observe(this, Observer { Analytics.logEvent(this, Analytics.RENT_DETAIL, it) })
+            rentDetailLogEvent.observe(`this`, Observer { Analytics.logEvent(`this`, Analytics.RENT_DETAIL, it) })
 
-        viewModel.createChatRoomLogEvent.observe(this, Observer { Analytics.logEvent(this, Analytics.CREATE_CHAT_ROOM, it) })
+            createChatRoomLogEvent.observe(`this`, Observer { Analytics.logEvent(`this`, Analytics.CREATE_CHAT_ROOM, it) })
 
-        viewModel.isMe.observe(this, Observer {
-            if (it) popup.menuInflater.inflate(R.menu.menu_my_product_detail_toolbar, popup.menu)
-            else popup.menuInflater.inflate(R.menu.menu_product_detail_toolbar, popup.menu)
-        })
+            isMe.observe(`this`, Observer {
+                if (it) popup.menuInflater.inflate(R.menu.menu_my_product_detail_toolbar, popup.menu)
+                else popup.menuInflater.inflate(R.menu.menu_product_detail_toolbar, popup.menu)
+            })
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

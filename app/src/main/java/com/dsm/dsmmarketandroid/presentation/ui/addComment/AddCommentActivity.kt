@@ -25,11 +25,14 @@ class AddCommentActivity : BaseActivity<ActivityAddCommentBinding>() {
     }
 
     override fun observeViewModel() {
-        viewModel.finishActivityEvent.observe(this, Observer { finish() })
+        val `this` = this@AddCommentActivity
+        viewModel.run {
+            finishActivityEvent.observe(`this`, Observer { finish() })
 
-        viewModel.toastEvent.observe(this, Observer { toast(it) })
+            toastEvent.observe(`this`, Observer { toast(it) })
 
-        viewModel.addCommentLogEvent.observe(this, Observer { Analytics.logEvent(this, Analytics.ADD_COMMENT, it) })
+            addCommentLogEvent.observe(`this`, Observer { Analytics.logEvent(`this`, Analytics.ADD_COMMENT, it) })
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
