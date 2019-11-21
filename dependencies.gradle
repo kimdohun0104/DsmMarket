@@ -18,8 +18,8 @@ ext {
     okhttpVersion = '4.2.1'
 
     // testing
-    junitVersion = '4.12'
-    testRunnerVersion = '1.2.0'
+    junitVersion = '1.1.1'
+    testVersion = '1.2.0'
     espressoCoreVersion = '3.2.0'
     mockitoAndroidVersion = '2.6.3'
     mockitoCoreVersion = '2.23.4'
@@ -73,18 +73,21 @@ ext {
     ]
 
     dataTestDependencies = [
-            junit: "junit:junit:$junitVersion",
-            testRunner: "androidx.test:runner:$testRunnerVersion"
+            junit: "androidx.test.ext:junit:$junitVersion",
+            testRunner: "androidx.test:runner:$testVersion"
     ]
 
     presentationTestDependencies = [
-            junit: "junit:junit:$junitVersion",
-            testRunner: "androidx.test:runner:$testRunnerVersion",
+            junit: "androidx.test.ext:junit:$junitVersion",
+            testRunner: "androidx.test:runner:$testVersion",
             espressoCore: "androidx.test.espresso:espresso-core:$espressoCoreVersion",
             mockitoAndroid: "org.mockito:mockito-android:$mockitoAndroidVersion",
             mockitoCore: "org.mockito:mockito-core:$mockitoCoreVersion",
             mockitoInline: "org.mockito:mockito-inline:$mockitoInlineVersion",
             liveDataTestingKtx: "com.jraska.livedata:testing-ktx:$liveDataTestingVersion",
-            coreTesting: "android.arch.core:core-testing:$coreTestingVersion"
+            coreTesting: "android.arch.core:core-testing:$coreTestingVersion",
+            mockWebServer: "com.squareup.okhttp3:mockwebserver:$okhttpVersion",
+            testRules: "androidx.test:rules:$testVersion",
+            espressoIntent: "androidx.test.espresso:espresso-intents:$espressoCoreVersion"
     ]
 }

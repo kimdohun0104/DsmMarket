@@ -2,7 +2,9 @@ package com.dsm.dsmmarketandroid.di
 
 import com.dsm.data.remote.Api
 import com.dsm.data.remote.token.TokenInterceptor
+import com.dsm.dsmmarketandroid.presentation.BaseApp
 import okhttp3.OkHttpClient
+import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -20,7 +22,7 @@ val networkModule = module {
 
     single {
         Retrofit.Builder()
-            .baseUrl("https://dsm-market.ga/")
+            .baseUrl((androidContext() as BaseApp).getApiUrl())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .client(get())

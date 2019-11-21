@@ -8,7 +8,7 @@ import com.dsm.dsmmarketandroid.presentation.util.LocaleManager
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
-class BaseApp : Application() {
+open class BaseApp : Application() {
 
     companion object {
         var localeManager: LocaleManager? = null
@@ -43,4 +43,6 @@ class BaseApp : Application() {
         super.onConfigurationChanged(newConfig)
         localeManager?.setLocale(this)
     }
+
+    open fun getApiUrl() = "https://dsm-market.ga/"
 }
