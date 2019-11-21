@@ -12,9 +12,7 @@ import com.dsm.dsmmarketandroid.presentation.base.BaseFragment
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.ProductListAdapter
 import com.dsm.dsmmarketandroid.presentation.util.MessageEvents
 import com.dsm.dsmmarketandroid.presentation.util.ProductType
-import kotlinx.android.synthetic.main.fragment_purchase_list.*
 import kotlinx.android.synthetic.main.fragment_rent_list.*
-import kotlinx.android.synthetic.main.fragment_rent_list.pb_loading
 import kr.sdusb.libs.messagebus.MessageBus
 import kr.sdusb.libs.messagebus.Subscribe
 import org.koin.android.ext.android.inject
@@ -69,7 +67,7 @@ class RentListFragment : BaseFragment<FragmentRentListBinding>() {
     @Subscribe(events = [MessageEvents.SCROLL_TO_TOP_RENT])
     fun scrollToTop() {
         rv_rent_list.layoutManager!!.smoothScrollToPosition(
-            rv_purchase_list,
+            rv_rent_list,
             RecyclerView.State(),
             0
         )
