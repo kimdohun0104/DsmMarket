@@ -1,9 +1,7 @@
 package com.dsm.dsmmarketandroid.presentation.ui.chatList
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.dsm.dsmmarketandroid.R
@@ -56,17 +54,8 @@ class ChatListFragment : BaseFragment<FragmentChatListBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.viewModel = viewModel
-    }
-
-    @Suppress("UNREACHABLE_CODE")
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
         MessageBus.getInstance().register(this)
-        return super.onCreateView(inflater, container, savedInstanceState)
+        binding.viewModel = viewModel
     }
 
     override fun onDestroy() {

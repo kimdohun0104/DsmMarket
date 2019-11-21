@@ -1,9 +1,7 @@
 package com.dsm.dsmmarketandroid.presentation.ui.rentList
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.dsm.data.paging.NetworkState
@@ -58,14 +56,9 @@ class RentListFragment : BaseFragment<FragmentRentListBinding>() {
 
     }
 
-    @Suppress("UNREACHABLE_CODE")
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         MessageBus.getInstance().register(this)
-        return super.onCreateView(inflater, container, savedInstanceState)
     }
 
     override fun onDestroy() {
