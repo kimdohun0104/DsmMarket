@@ -11,9 +11,7 @@ import com.dsm.dsmmarketandroid.presentation.ui.adapter.ChatRoomListAdapter
 import com.dsm.dsmmarketandroid.presentation.ui.chat.ChatActivity
 import com.dsm.dsmmarketandroid.presentation.util.LoadingDialog
 import com.dsm.dsmmarketandroid.presentation.util.MessageEvents
-import kotlinx.android.synthetic.main.activity_chat.*
 import kotlinx.android.synthetic.main.fragment_chat_list.*
-import kotlinx.android.synthetic.main.fragment_purchase_list.*
 import kr.sdusb.libs.messagebus.MessageBus
 import kr.sdusb.libs.messagebus.Subscribe
 import org.jetbrains.anko.support.v4.startActivity
@@ -65,8 +63,8 @@ class ChatListFragment : BaseFragment<FragmentChatListBinding>() {
 
     @Subscribe(events = [MessageEvents.SCROLL_TO_TOP_CHAT])
     fun scrollToTop() {
-        rv_chat.layoutManager!!.smoothScrollToPosition(
-            rv_purchase_list,
+        rv_chat_room.layoutManager!!.smoothScrollToPosition(
+            rv_chat_room,
             RecyclerView.State(),
             0
         )
