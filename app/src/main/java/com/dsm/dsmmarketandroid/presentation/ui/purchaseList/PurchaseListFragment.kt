@@ -1,15 +1,22 @@
 package com.dsm.dsmmarketandroid.presentation.ui.purchaseList
 
+import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.RecyclerView
 import com.dsm.data.paging.NetworkState
 import com.dsm.data.paging.purchase.PurchaseDataFactory
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.FragmentPurchaseListBinding
 import com.dsm.dsmmarketandroid.presentation.base.BaseFragment
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.ProductListAdapter
+import com.dsm.dsmmarketandroid.presentation.util.MessageEvents
 import com.dsm.dsmmarketandroid.presentation.util.ProductType
 import kotlinx.android.synthetic.main.fragment_purchase_list.*
+import kr.sdusb.libs.messagebus.MessageBus
+import kr.sdusb.libs.messagebus.Subscribe
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
@@ -43,5 +50,29 @@ class PurchaseListFragment : BaseFragment<FragmentPurchaseListBinding>() {
         })
 
         viewModel.purchaseItems.observe(this, Observer { adapter.submitList(it) })
+    }
+
+    @Suppress("UNREACHABLE_CODE")
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        MessageBus.getInstance().register(this)
+        return super.onCreateView(inflater, container, savedInstanceState)
+    }
+
+    override fun onDestroy() {
+        MessageBus.getInstance().unregister(this)
+        super.onDestroy()
+    }
+
+    @Subscribe(events = [MessageEvents.SCROLL_TO_TOP_PURCHASE])
+    fun scrollToTop() {
+        rv_purchase_list.layoutManager!!.smoothScrollToPosition(
+            rv_purchase_list,
+            RecyclerView.State(),
+            0
+        )
     }
 }

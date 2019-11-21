@@ -11,4 +11,10 @@ object MessageEvents {
     const val MODIFY_RENT_EVENT = 3
 
     const val INCREASE_COMMENT_COUNT_EVENT = 4
+
+    const val SCROLL_TO_TOP_PURCHASE = 10
+
+    const val SCROLL_TO_TOP_RENT = 11
+
+    const val SCROLL_TO_TOP_CHAT = 12
 }

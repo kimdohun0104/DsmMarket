@@ -1,15 +1,23 @@
 package com.dsm.dsmmarketandroid.presentation.ui.chatList
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.RecyclerView
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.FragmentChatListBinding
 import com.dsm.dsmmarketandroid.presentation.base.BaseFragment
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.ChatRoomListAdapter
 import com.dsm.dsmmarketandroid.presentation.ui.chat.ChatActivity
 import com.dsm.dsmmarketandroid.presentation.util.LoadingDialog
+import com.dsm.dsmmarketandroid.presentation.util.MessageEvents
+import kotlinx.android.synthetic.main.activity_chat.*
 import kotlinx.android.synthetic.main.fragment_chat_list.*
+import kotlinx.android.synthetic.main.fragment_purchase_list.*
+import kr.sdusb.libs.messagebus.MessageBus
+import kr.sdusb.libs.messagebus.Subscribe
 import org.jetbrains.anko.support.v4.startActivity
 import org.jetbrains.anko.support.v4.toast
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -49,5 +57,29 @@ class ChatListFragment : BaseFragment<FragmentChatListBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.viewModel = viewModel
+    }
+
+    @Suppress("UNREACHABLE_CODE")
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        MessageBus.getInstance().register(this)
+        return super.onCreateView(inflater, container, savedInstanceState)
+    }
+
+    override fun onDestroy() {
+        MessageBus.getInstance().unregister(this)
+        super.onDestroy()
+    }
+
+    @Subscribe(events = [MessageEvents.SCROLL_TO_TOP_CHAT])
+    fun scrollToTop() {
+        rv_chat.layoutManager!!.smoothScrollToPosition(
+            rv_purchase_list,
+            RecyclerView.State(),
+            0
+        )
     }
 }
