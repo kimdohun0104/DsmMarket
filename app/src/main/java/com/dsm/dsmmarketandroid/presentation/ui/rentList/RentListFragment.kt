@@ -1,15 +1,22 @@
 package com.dsm.dsmmarketandroid.presentation.ui.rentList
 
+import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.RecyclerView
 import com.dsm.data.paging.NetworkState
 import com.dsm.data.paging.rent.RentDataFactory
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.FragmentRentListBinding
 import com.dsm.dsmmarketandroid.presentation.base.BaseFragment
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.ProductListAdapter
+import com.dsm.dsmmarketandroid.presentation.util.MessageEvents
 import com.dsm.dsmmarketandroid.presentation.util.ProductType
+import kotlinx.android.synthetic.main.fragment_purchase_list.*
 import kotlinx.android.synthetic.main.fragment_rent_list.*
+import kotlinx.android.synthetic.main.fragment_rent_list.pb_loading
+import kr.sdusb.libs.messagebus.MessageBus
+import kr.sdusb.libs.messagebus.Subscribe
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
@@ -46,6 +53,25 @@ class RentListFragment : BaseFragment<FragmentRentListBinding>() {
 
             rentItems.observe(`this`, Observer { adapter.submitList(it) })
         }
-        
+
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        MessageBus.getInstance().register(this)
+    }
+
+    override fun onDestroy() {
+        MessageBus.getInstance().unregister(this)
+        super.onDestroy()
+    }
+
+    @Subscribe(events = [MessageEvents.SCROLL_TO_TOP_RENT])
+    fun scrollToTop() {
+        rv_rent_list.layoutManager!!.smoothScrollToPosition(
+            rv_purchase_list,
+            RecyclerView.State(),
+            0
+        )
     }
 }

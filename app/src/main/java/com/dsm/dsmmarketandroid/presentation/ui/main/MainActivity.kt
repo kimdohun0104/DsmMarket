@@ -9,6 +9,7 @@ import com.dsm.dsmmarketandroid.presentation.ui.me.MeFragment
 import com.dsm.dsmmarketandroid.presentation.ui.post.PostDialog
 import com.dsm.dsmmarketandroid.presentation.ui.purchase.PurchaseFragment
 import com.dsm.dsmmarketandroid.presentation.ui.rent.RentFragment
+import com.dsm.dsmmarketandroid.presentation.util.MessageEvents
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
@@ -20,6 +21,7 @@ import com.google.android.play.core.install.model.UpdateAvailability
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.subjects.BehaviorSubject
 import kotlinx.android.synthetic.main.activity_main.*
+import kr.sdusb.libs.messagebus.MessageBus
 import org.jetbrains.anko.toast
 import org.koin.android.ext.android.inject
 
@@ -67,6 +69,14 @@ class MainActivity : AppCompatActivity(), InstallStateUpdatedListener {
                 R.id.me -> switchFragment(3)
             }
             true
+        }
+
+        bnv_main.setOnNavigationItemReselectedListener {
+            when (it.itemId) {
+                R.id.purchase -> MessageBus.getInstance().handle(MessageEvents.SCROLL_TO_TOP_PURCHASE, null)
+                R.id.rent -> MessageBus.getInstance().handle(MessageEvents.SCROLL_TO_TOP_RENT, null)
+                R.id.chatting -> MessageBus.getInstance().handle(MessageEvents.SCROLL_TO_TOP_CHAT, null)
+            }
         }
 
         inAppUpdate()
