@@ -1,6 +1,7 @@
 package com.dsm.dsmmarketandroid.presentation.ui.purchaseDetail
 
 import android.os.Bundle
+import android.view.View
 import android.widget.PopupMenu
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.PagerSnapHelper
@@ -38,6 +39,8 @@ class PurchaseDetailActivity : BaseActivity<ActivityPurchaseDetailBinding>() {
     private val relatedListAdapter = RecommendListAdapter(ProductType.PURCHASE, false)
 
     private val popup: PopupMenu by lazy { PopupMenu(this, iv_purchase_detail_menu) }
+
+    private var isMe = false
 
     override fun viewInit() {
         tb_purchase_detail.setNavigationOnClickListener { finish() }
@@ -77,36 +80,44 @@ class PurchaseDetailActivity : BaseActivity<ActivityPurchaseDetailBinding>() {
 
         iv_purchase_detail_menu.setOnClickListener { popup.show() }
 
-        viewModel.getPurchaseDetail(postId)
-        viewModel.getRelatedProduct(postId)
-        viewModel.getRecommendProduct()
+        viewModel.run {
+            getPurchaseDetail(postId)
+            getRelatedProduct(postId)
+            getRecommendProduct()
+        }
     }
 
     override fun observeViewModel() {
-        viewModel.recommendList.observe(this, Observer { recommendListAdapter.setItems(it) })
+        val `this` = this@PurchaseDetailActivity
+        viewModel.run {
+            recommendList.observe(`this`, Observer { recommendListAdapter.setItems(it) })
 
-        viewModel.relatedList.observe(this, Observer { relatedListAdapter.setItems(it) })
+            relatedList.observe(`this`, Observer { relatedListAdapter.setItems(it) })
 
-        viewModel.toastEvent.observe(this, Observer { toast(it) })
+            toastEvent.observe(`this`, Observer { toast(it) })
 
-        viewModel.finishActivityEvent.observe(this, Observer { finish() })
+            finishActivityEvent.observe(`this`, Observer { finish() })
 
-        viewModel.intentChatActivityEvent.observe(this, Observer { startActivity<ChatActivity>("bundle" to it) })
+            intentChatActivityEvent.observe(`this`, Observer { startActivity<ChatActivity>("bundle" to it) })
 
-        viewModel.showLoadingDialogEvent.observe(this, Observer { LoadingDialog.show(supportFragmentManager) })
+            showLoadingDialogEvent.observe(`this`, Observer { LoadingDialog.show(supportFragmentManager) })
 
-        viewModel.hideLoadingDialogEvent.observe(this, Observer { LoadingDialog.hide() })
+            hideLoadingDialogEvent.observe(`this`, Observer { LoadingDialog.hide() })
 
-        viewModel.purchaseDetailLogEvent.observe(this, Observer { Analytics.logEvent(this, Analytics.PURCHASE_DETAIL, it) })
+            purchaseDetailLogEvent.observe(`this`, Observer { Analytics.logEvent(`this`, Analytics.PURCHASE_DETAIL, it) })
 
-        viewModel.interestLogEvent.observe(this, Observer { Analytics.logEvent(this, Analytics.INTEREST_PURCHASE, it) })
+            interestLogEvent.observe(`this`, Observer { Analytics.logEvent(`this`, Analytics.INTEREST_PURCHASE, it) })
 
-        viewModel.createChatRoomLogEvent.observe(this, Observer { Analytics.logEvent(this, Analytics.CREATE_CHAT_ROOM, it) })
+            createChatRoomLogEvent.observe(`this`, Observer { Analytics.logEvent(`this`, Analytics.CREATE_CHAT_ROOM, it) })
 
-        viewModel.isMe.observe(this, Observer {
-            if (it) popup.menuInflater.inflate(R.menu.menu_my_product_detail_toolbar, popup.menu)
-            else popup.menuInflater.inflate(R.menu.menu_product_detail_toolbar, popup.menu)
-        })
+            isMe.observe(`this`, Observer {
+                if (it) {
+                    `this`.isMe = true
+                    popup.menuInflater.inflate(R.menu.menu_my_product_detail_toolbar, popup.menu)
+                }
+                else popup.menuInflater.inflate(R.menu.menu_product_detail_toolbar, popup.menu)
+            })
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -118,6 +129,16 @@ class PurchaseDetailActivity : BaseActivity<ActivityPurchaseDetailBinding>() {
     @Subscribe(events = [MessageEvents.MODIFY_PURCHASE_EVENT])
     fun modifyPurchaseEvent() {
         viewModel.getPurchaseDetail(postId)
+    }
+
+    @Subscribe(events = [MessageEvents.INCREASE_COMMENT_COUNT_EVENT])
+    fun increaseCommentCountEvent() {
+        tv_purchase_comment_count.text = (tv_purchase_comment_count.text.toString().toInt() + 1).toString()
+    }
+
+    override fun onResume() {
+        if (isMe) btn_deal_with_chat.visibility = View.GONE
+        super.onResume()
     }
 
     override fun onDestroy() {

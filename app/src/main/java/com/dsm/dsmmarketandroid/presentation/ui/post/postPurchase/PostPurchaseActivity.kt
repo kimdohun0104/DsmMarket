@@ -58,24 +58,27 @@ class PostPurchaseActivity : BaseActivity<ActivityPostPurchaseBinding>() {
     }
 
     override fun observeViewModel() {
-        viewModel.imageList.observe(this, Observer {
-            if (it.size == 0) {
-                iv_select_image.visibility = View.VISIBLE
-            } else {
-                adapter.setItems(it)
-                iv_select_image.visibility = View.INVISIBLE
-            }
-        })
+        val `this` = this@PostPurchaseActivity
+        viewModel.run {
+            imageList.observe(`this`, Observer {
+                if (it.size == 0) {
+                    iv_select_image.visibility = View.VISIBLE
+                } else {
+                    adapter.setItems(it)
+                    iv_select_image.visibility = View.INVISIBLE
+                }
+            })
 
-        viewModel.finishActivityEvent.observe(this, Observer { finish() })
+            finishActivityEvent.observe(`this`, Observer { finish() })
 
-        viewModel.toastEvent.observe(this, Observer { toast(it) })
+            toastEvent.observe(`this`, Observer { toast(it) })
 
-        viewModel.showLoadingDialogEvent.observe(this, Observer { LoadingDialog.show(supportFragmentManager) })
+            showLoadingDialogEvent.observe(`this`, Observer { LoadingDialog.show(supportFragmentManager) })
 
-        viewModel.hideLoadingDialogEvent.observe(this, Observer { LoadingDialog.hide() })
+            hideLoadingDialogEvent.observe(`this`, Observer { LoadingDialog.hide() })
 
-        viewModel.postPurchaseLogEvent.observe(this, Observer { Analytics.logEvent(this, Analytics.POST_PURCHASE, it) })
+            postPurchaseLogEvent.observe(`this`, Observer { Analytics.logEvent(`this`, Analytics.POST_PURCHASE, it) })
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

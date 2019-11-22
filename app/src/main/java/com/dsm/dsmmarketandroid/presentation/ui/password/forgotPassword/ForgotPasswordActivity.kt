@@ -29,15 +29,18 @@ class ForgotPasswordActivity : BaseActivity<ActivityForgotPasswordBinding>() {
     }
 
     override fun observeViewModel() {
-        viewModel.showLoadingDialogEvent.observe(this, Observer { LoadingDialog.show(supportFragmentManager) })
+        val `this` = this@ForgotPasswordActivity
+        viewModel.run {
+            showLoadingDialogEvent.observe(`this`, Observer { LoadingDialog.show(supportFragmentManager) })
 
-        viewModel.hideLoadingDialogEvent.observe(this, Observer { LoadingDialog.hide() })
+            hideLoadingDialogEvent.observe(`this`, Observer { LoadingDialog.hide() })
 
-        viewModel.finishActivityEvent.observe(this, Observer { finish() })
+            finishActivityEvent.observe(`this`, Observer { finish() })
 
-        viewModel.toastEvent.observe(this, Observer { toast(it) })
+            toastEvent.observe(`this`, Observer { toast(it) })
 
-        viewModel.sendTempPasswordLogEvent.observe(this, Observer { Analytics.logEvent(this, Analytics.SEND_TEMP_PASSWORD, it) })
+            sendTempPasswordLogEvent.observe(`this`, Observer { Analytics.logEvent(`this`, Analytics.SEND_TEMP_PASSWORD, it) })
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

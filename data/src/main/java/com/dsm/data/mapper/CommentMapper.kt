@@ -10,7 +10,8 @@ class CommentMapper : Mapper<CommentListEntity, List<Comment>> {
             Comment(
                 nick = it.nick,
                 content = it.content,
-                createdAt = it.createdAt
+                createdAt = it.createdAt,
+                isMe = it.isMe
             )
         }
 }

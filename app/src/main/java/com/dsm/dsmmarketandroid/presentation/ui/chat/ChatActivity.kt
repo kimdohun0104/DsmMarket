@@ -70,11 +70,14 @@ class ChatActivity : BaseActivity<ActivityChatBinding>() {
     }
 
     override fun observeViewModel() {
-        viewModel.newItems.observe(this, Observer { adapter.addItems(it) })
+        val `this` = this@ChatActivity
+        viewModel.run {
+            newItems.observe(`this`, Observer { adapter.addItems(it) })
 
-        viewModel.showLoadingItemEvent.observe(this, Observer { adapter.showLoading() })
+            showLoadingItemEvent.observe(`this`, Observer { adapter.showLoading() })
 
-        viewModel.hideLoadingItemEvent.observe(this, Observer { adapter.hideLoading() })
+            hideLoadingItemEvent.observe(`this`, Observer { adapter.hideLoading() })
+        }
     }
 
     private fun socketInit() {

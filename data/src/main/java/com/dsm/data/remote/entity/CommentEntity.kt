@@ -5,5 +5,7 @@ data class CommentEntity(
 
     val content: String,
 
-    val createdAt: String
+    val createdAt: String,
+
+    val isMe: Boolean
 )

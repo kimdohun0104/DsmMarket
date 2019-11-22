@@ -35,24 +35,27 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
     }
 
     override fun observeViewModel() {
-        viewModel.showLoadingDialogEvent.observe(this, Observer { LoadingDialog.show(supportFragmentManager) })
+        val `this` = this@LoginActivity
+        viewModel.run {
+            showLoadingDialogEvent.observe(`this`, Observer { LoadingDialog.show(supportFragmentManager) })
 
-        viewModel.hideLoadingDialogEvent.observe(this, Observer { LoadingDialog.hide() })
+            hideLoadingDialogEvent.observe(`this`, Observer { LoadingDialog.hide() })
 
-        viewModel.intentMainActivityEvent.observe(this, Observer {
-            Intent(this, MainActivity::class.java).apply {
-                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                startActivity(this)
-            }
-        })
+            intentMainActivityEvent.observe(`this`, Observer {
+                Intent(`this`, MainActivity::class.java).apply {
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    startActivity(this)
+                }
+            })
 
-        viewModel.hideKeyboardEvent.observe(this, Observer {
-            (getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).hideSoftInputFromWindow(et_login_password.windowToken, 0)
-        })
+            hideKeyboardEvent.observe(`this`, Observer {
+                (getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).hideSoftInputFromWindow(et_login_password.windowToken, 0)
+            })
 
-        viewModel.toastEvent.observe(this, Observer { toast(it) })
+            toastEvent.observe(`this`, Observer { toast(it) })
 
-        viewModel.loginLogEvent.observe(this, Observer { Analytics.logEvent(this, Analytics.LOGIN, it) })
+            loginLogEvent.observe(`this`, Observer { Analytics.logEvent(`this`, Analytics.LOGIN, it) })
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

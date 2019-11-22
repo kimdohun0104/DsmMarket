@@ -83,7 +83,6 @@
                 android:layout_marginEnd="25dp"
                 android:background="@{viewModel.isBtnEnable ? @drawable/bg_primary_rounded : @drawable/bg_grey_rounded}"
                 android:clickable="@{viewModel.isBtnEnable}"
-                android:onClick="@{() -> viewModel.signUp()}"
                 bind:textWithId="@{viewModel.btnText}"
                 android:textColor="@color/colorWhite"
                 android:textSize="16sp"

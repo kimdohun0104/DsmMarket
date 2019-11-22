@@ -30,11 +30,14 @@ class ChangePasswordActivity : BaseActivity<ActivityChangePasswordBinding>() {
     }
 
     override fun observeViewModel() {
-        viewModel.finishActivityEvent.observe(this, Observer { finish() })
+        val `this` = this@ChangePasswordActivity
+        viewModel.run {
+            finishActivityEvent.observe(`this`, Observer { finish() })
 
-        viewModel.toastEvent.observe(this, Observer { toast(it) })
+            toastEvent.observe(`this`, Observer { toast(it) })
 
-        viewModel.changePasswordLogEvent.observe(this, Observer { Analytics.logEvent(this, Analytics.CHANGE_PASSWORD, null) })
+            changePasswordLogEvent.observe(`this`, Observer { Analytics.logEvent(`this`, Analytics.CHANGE_PASSWORD, null) })
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

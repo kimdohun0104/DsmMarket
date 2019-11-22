@@ -1,6 +1,7 @@
 package com.dsm.dsmmarketandroid.presentation.ui.rentDetail
 
 import android.os.Bundle
+import android.view.View
 import android.widget.PopupMenu
 import androidx.lifecycle.Observer
 import com.dsm.dsmmarketandroid.R
@@ -35,6 +36,8 @@ class RentDetailActivity : BaseActivity<ActivityRentDetailBinding>() {
     private val relatedListAdapter = RecommendListAdapter(ProductType.RENT, false)
 
     private val popup: PopupMenu by lazy { PopupMenu(this, iv_rent_detail_menu) }
+
+    private var isMe = false
 
     override fun viewInit() {
         tb_rent_detail.setNavigationOnClickListener { finish() }
@@ -74,28 +77,32 @@ class RentDetailActivity : BaseActivity<ActivityRentDetailBinding>() {
     }
 
     override fun observeViewModel() {
-        viewModel.relatedList.observe(this, Observer { relatedListAdapter.setItems(it) })
+        val `this` = this@RentDetailActivity
+        viewModel.run {
+            relatedList.observe(`this`, Observer { relatedListAdapter.setItems(it) })
 
-        viewModel.toastEvent.observe(this, Observer { toast(it) })
+            toastEvent.observe(`this`, Observer { toast(it) })
 
-        viewModel.startChatActivityEvent.observe(this, Observer { startActivity<ChatActivity>("bundle" to it) })
+            startChatActivityEvent.observe(`this`, Observer { startActivity<ChatActivity>("bundle" to it) })
 
-        viewModel.showLoadingDialogEvent.observe(this, Observer { LoadingDialog.show(supportFragmentManager) })
+            showLoadingDialogEvent.observe(`this`, Observer { LoadingDialog.show(supportFragmentManager) })
 
-        viewModel.hideLoadingDialogEvent.observe(this, Observer { LoadingDialog.hide() })
+            hideLoadingDialogEvent.observe(`this`, Observer { LoadingDialog.hide() })
 
-        viewModel.rentDetailLogEvent.observe(this, Observer {  })
+            interestLogEvent.observe(`this`, Observer { Analytics.logEvent(`this`, Analytics.INTEREST_RENT, it) })
 
-        viewModel.interestLogEvent.observe(this, Observer { Analytics.logEvent(this, Analytics.INTEREST_RENT, it) })
+            rentDetailLogEvent.observe(`this`, Observer { Analytics.logEvent(`this`, Analytics.RENT_DETAIL, it) })
 
-        viewModel.rentDetailLogEvent.observe(this, Observer { Analytics.logEvent(this, Analytics.RENT_DETAIL, it) })
+            createChatRoomLogEvent.observe(`this`, Observer { Analytics.logEvent(`this`, Analytics.CREATE_CHAT_ROOM, it) })
 
-        viewModel.createChatRoomLogEvent.observe(this, Observer { Analytics.logEvent(this, Analytics.CREATE_CHAT_ROOM, it) })
-
-        viewModel.isMe.observe(this, Observer {
-            if (it) popup.menuInflater.inflate(R.menu.menu_my_product_detail_toolbar, popup.menu)
-            else popup.menuInflater.inflate(R.menu.menu_product_detail_toolbar, popup.menu)
-        })
+            isMe.observe(`this`, Observer {
+                if (it) {
+                    `this`.isMe = true
+                    popup.menuInflater.inflate(R.menu.menu_my_product_detail_toolbar, popup.menu)
+                }
+                else popup.menuInflater.inflate(R.menu.menu_product_detail_toolbar, popup.menu)
+            })
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -107,6 +114,16 @@ class RentDetailActivity : BaseActivity<ActivityRentDetailBinding>() {
     @Subscribe(events = [MessageEvents.MODIFY_RENT_EVENT])
     fun modifyRentEvent() {
         viewModel.getRentDetail(postId)
+    }
+
+    @Subscribe(events = [MessageEvents.INCREASE_COMMENT_COUNT_EVENT])
+    fun increaseCommentCountEvent() {
+        tv_rent_comment_count.text = (tv_rent_comment_count.text.toString().toInt() + 1).toString()
+    }
+
+    override fun onResume() {
+        if (isMe) btn_deal_with_chat.visibility = View.GONE
+        super.onResume()
     }
 
     override fun onDestroy() {

@@ -3,13 +3,17 @@ package com.dsm.dsmmarketandroid.presentation.ui.chatList
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.RecyclerView
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.FragmentChatListBinding
 import com.dsm.dsmmarketandroid.presentation.base.BaseFragment
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.ChatRoomListAdapter
 import com.dsm.dsmmarketandroid.presentation.ui.chat.ChatActivity
 import com.dsm.dsmmarketandroid.presentation.util.LoadingDialog
+import com.dsm.dsmmarketandroid.presentation.util.MessageEvents
 import kotlinx.android.synthetic.main.fragment_chat_list.*
+import kr.sdusb.libs.messagebus.MessageBus
+import kr.sdusb.libs.messagebus.Subscribe
 import org.jetbrains.anko.support.v4.startActivity
 import org.jetbrains.anko.support.v4.toast
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -32,19 +36,37 @@ class ChatListFragment : BaseFragment<FragmentChatListBinding>() {
     }
 
     override fun observeViewModel() {
-        viewModel.chatRoomList.observe(this, Observer { adapter.setItems(it) })
+        val `this` = this@ChatListFragment
+        viewModel.run {
+            chatRoomList.observe(`this`, Observer { adapter.setItems(it) })
 
-        viewModel.toastEvent.observe(this, Observer { toast(it) })
+            toastEvent.observe(`this`, Observer { toast(it) })
 
-        viewModel.intentChatActivityEvent.observe(this, Observer { startActivity<ChatActivity>("bundle" to it) })
+            intentChatActivityEvent.observe(`this`, Observer { startActivity<ChatActivity>("bundle" to it) })
 
-        viewModel.showLoadingDialogEvent.observe(this, Observer { LoadingDialog.show(childFragmentManager) })
+            showLoadingDialogEvent.observe(`this`, Observer { LoadingDialog.show(childFragmentManager) })
 
-        viewModel.hideLoadingDialogEvent.observe(this, Observer { LoadingDialog.hide() })
+            hideLoadingDialogEvent.observe(`this`, Observer { LoadingDialog.hide() })
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        MessageBus.getInstance().register(this)
         binding.viewModel = viewModel
+    }
+
+    override fun onDestroy() {
+        MessageBus.getInstance().unregister(this)
+        super.onDestroy()
+    }
+
+    @Subscribe(events = [MessageEvents.SCROLL_TO_TOP_CHAT])
+    fun scrollToTop() {
+        rv_chat_room.layoutManager!!.smoothScrollToPosition(
+            rv_chat_room,
+            RecyclerView.State(),
+            0
+        )
     }
 }

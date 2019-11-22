@@ -56,15 +56,18 @@ class PostRentActivity : BaseActivity<ActivityPostRentBinding>() {
     }
 
     override fun observeViewModel() {
-        viewModel.finishActivityEvent.observe(this, Observer { finish() })
+        val `this` = this@PostRentActivity
+        viewModel.run {
+            finishActivityEvent.observe(`this`, Observer { finish() })
 
-        viewModel.toastEvent.observe(this, Observer { toast(it) })
+            toastEvent.observe(`this`, Observer { toast(it) })
 
-        viewModel.showLoadingDialogEvent.observe(this, Observer { LoadingDialog.show(supportFragmentManager) })
+            showLoadingDialogEvent.observe(`this`, Observer { LoadingDialog.show(supportFragmentManager) })
 
-        viewModel.hideLoadingDialogEvent.observe(this, Observer { LoadingDialog.hide() })
+            hideLoadingDialogEvent.observe(`this`, Observer { LoadingDialog.hide() })
 
-        viewModel.postRentLogEvent.observe(this, Observer { Analytics.logEvent(this, Analytics.POST_RENT, it) })
+            postRentLogEvent.observe(`this`, Observer { Analytics.logEvent(`this`, Analytics.POST_RENT, it) })
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

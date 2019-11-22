@@ -30,11 +30,11 @@ class CommentViewModelTests : BaseTest() {
     @Test
     fun getCommentSuccess() {
         val response = arrayListOf(
-            Comment("nick", "content", "createdAt"),
-            Comment("nick", "content", "createdAt"),
-            Comment("nick", "content", "createdAt"),
-            Comment("nick", "content", "createdAt"),
-            Comment("nick", "content", "createdAt")
+            Comment("nick", "content", "createdAt", false),
+            Comment("nick", "content", "createdAt", false),
+            Comment("nick", "content", "createdAt", false),
+            Comment("nick", "content", "createdAt", false),
+            Comment("nick", "content", "createdAt", false)
         )
         `when`(getCommentUseCase.create(GetCommentUseCase.Params(0, 0))).thenReturn(Flowable.just(response))
 

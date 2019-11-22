@@ -43,24 +43,26 @@ class CommentActivity : BaseActivity<ActivityCommentBinding>() {
     }
 
     override fun observeViewModel() {
-        viewModel.listItems.observe(this, Observer { adapter.setItems(it) })
+        val `this` = this@CommentActivity
+        viewModel.run {
+            listItems.observe(`this`, Observer { adapter.setItems(it) })
 
-        viewModel.toastEvent.observe(this, Observer { toast(it) })
+            toastEvent.observe(`this`, Observer { toast(it) })
 
-        viewModel.dialogReportComment.observe(this, Observer {
-            ReportCommentDialog().apply {
-                arguments = Bundle().apply {
-                    putInt("post_id", postId)
-                    putInt("type", type)
-                    putString("nick", it)
+            dialogReportComment.observe(`this`, Observer {
+                ReportCommentDialog().apply {
+                    arguments = Bundle().apply {
+                        putInt("post_id", postId)
+                        putInt("type", type)
+                        putString("nick", it)
+                    }
+                    show(supportFragmentManager, "")
                 }
-                show(supportFragmentManager, "")
-            }
-        })
+            })
+            hideRefreshEvent.observe(`this`, Observer { srl_comment.isRefreshing = false })
 
-        viewModel.hideRefreshEvent.observe(this, Observer { srl_comment.isRefreshing = false })
-
-        viewModel.getCommentLogEvent.observe(this, Observer { Analytics.logEvent(this, Analytics.GET_COMMENT, it) })
+            getCommentLogEvent.observe(`this`, Observer { Analytics.logEvent(`this`, Analytics.GET_COMMENT, it) })
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

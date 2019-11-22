@@ -33,15 +33,18 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() {
     }
 
     override fun observeViewModel() {
-        viewModel.showLoadingDialogEvent.observe(this, Observer { LoadingDialog.show(supportFragmentManager) })
+        val `this` = this@SignUpActivity
+        viewModel.run {
+            showLoadingDialogEvent.observe(`this`, Observer { LoadingDialog.show(supportFragmentManager) })
 
-        viewModel.hideLoadingDialogEvent.observe(this, Observer { LoadingDialog.hide() })
+            hideLoadingDialogEvent.observe(`this`, Observer { LoadingDialog.hide() })
 
-        viewModel.finishActivityEvent.observe(this, Observer { finish() })
+            finishActivityEvent.observe(`this`, Observer { finish() })
 
-        viewModel.toastEvent.observe(this, Observer { toast(it) })
+            toastEvent.observe(`this`, Observer { toast(it) })
 
-        viewModel.signUpLogEvent.observe(this, Observer { Analytics.logEvent(this, Analytics.SIGN_UP, it) })
+            signUpLogEvent.observe(`this`, Observer { Analytics.logEvent(`this`, Analytics.SIGN_UP, it) })
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -36,6 +36,7 @@ class AddCommentViewModel(private val postCommentUseCase: PostCommentUseCase) : 
                 .subscribe({
                     finishActivityEvent.call()
                     MessageBus.getInstance().handle(MessageEvents.ADD_COMMENT_EVENT, null)
+                    MessageBus.getInstance().handle(MessageEvents.INCREASE_COMMENT_COUNT_EVENT, null)
                 }, {
                     toastEvent.value = R.string.fail_server_error
                 })

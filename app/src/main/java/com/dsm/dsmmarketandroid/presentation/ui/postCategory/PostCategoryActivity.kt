@@ -30,17 +30,20 @@ class PostCategoryActivity : BaseActivity<ActivityPostCategoryBinding>() {
     }
 
     override fun observeViewModel() {
-        viewModel.categoryList.observe(this, Observer { adapter.addItems(it) })
+        val `this` = this@PostCategoryActivity
+        viewModel.run {
+            categoryList.observe(`this`, Observer { adapter.addItems(it) })
 
-        viewModel.toastEvent.observe(this, Observer { toast(it) })
+            toastEvent.observe(`this`, Observer { toast(it) })
 
-        viewModel.selectedCategory.observe(this, Observer {
-            Intent().apply {
-                putExtra("category", it)
-                setResult(Activity.RESULT_OK, this)
-                finish()
-            }
-        })
+            selectedCategory.observe(`this`, Observer {
+                Intent().apply {
+                    putExtra("category", it)
+                    setResult(Activity.RESULT_OK, this)
+                    finish()
+                }
+            })
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

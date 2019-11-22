@@ -27,11 +27,14 @@ class PasswordConfirmActivity : BaseActivity<ActivityPasswordConfirmBinding>() {
     }
 
     override fun observeViewModel() {
-        viewModel.intentChangePasswordEvent.observe(this, Observer { startActivity<ChangePasswordActivity>() })
+        val `this` = this@PasswordConfirmActivity
+        viewModel.run {
+            intentChangePasswordEvent.observe(`this`, Observer { startActivity<ChangePasswordActivity>() })
 
-        viewModel.finishActivityEvent.observe(this, Observer { finish() })
+            finishActivityEvent.observe(`this`, Observer { finish() })
 
-        viewModel.toastEvent.observe(this, Observer { toast(it) })
+            toastEvent.observe(`this`, Observer { toast(it) })
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
