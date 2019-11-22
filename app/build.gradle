@@ -86,7 +86,6 @@ dependencies {
     testImplementation testDependencies.mockitoInline
     testImplementation testDependencies.liveDataTestingKtx
     testImplementation testDependencies.coreTesting
-    testImplementation "org.json:json:20140107"
 
     // firebase
     implementation dependencies.firebaseCore
