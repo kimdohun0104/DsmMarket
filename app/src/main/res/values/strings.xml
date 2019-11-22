@@ -7,6 +7,8 @@
 
     <string name="empty_post">아직 등록하신 상품이 없습니다.</string>
     <string name="empty_interest">아직 관심을 표시한 상품이 없습니다.</string>
+    <string name="empty_list">등록된 상품이 없습니다.</string>
+    <string name="empty_chat">채팅방이 아직 없습니다.</string>
 
     <!--account-->
     <string name="login">로그인</string>

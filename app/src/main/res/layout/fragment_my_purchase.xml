@@ -49,7 +49,7 @@
             android:visibility="@{viewModel.isPurchaseEmpty ? View.VISIBLE : View.GONE}">
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/iv_empty_box"
+                android:id="@+id/iv_empty_chat"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
                 android:src="@drawable/empty_box"
@@ -64,9 +64,9 @@
                 android:textColor="@color/colorBlackWhite"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                app:layout_constraintLeft_toLeftOf="@id/iv_empty_box"
-                app:layout_constraintRight_toRightOf="@id/iv_empty_box"
-                app:layout_constraintTop_toBottomOf="@id/iv_empty_box" />
+                app:layout_constraintLeft_toLeftOf="@id/iv_empty_chat"
+                app:layout_constraintRight_toRightOf="@id/iv_empty_chat"
+                app:layout_constraintTop_toBottomOf="@id/iv_empty_chat" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 

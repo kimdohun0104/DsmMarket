@@ -24,7 +24,8 @@ class PurchaseKeyedDataSource(
             purchaseRepository.getPurchaseList(0, params.requestedLoadSize, search, category)
                 .subscribe({
                     callback.onResult(it, null, 1)
-                    networkState.postValue(NetworkState.LOADED)
+                    if (it.isNotEmpty()) networkState.postValue(NetworkState.LOADED)
+                    else networkState.postValue(NetworkState.EMPTY)
                 }, {
                     networkState.postValue(NetworkState.FAILED)
                 })
