@@ -42,8 +42,10 @@ class RentListFragment : BaseFragment<FragmentRentListBinding>() {
         viewModel.networkState.observe(this, Observer {
             binding.isEmpty = it == NetworkState.EMPTY
 
-            pb_loading.visibility = View.GONE
-            srl_rent_list.isRefreshing = false
+            if (it == NetworkState.LOADED || it == NetworkState.EMPTY) {
+                pb_loading.visibility = View.GONE
+                srl_rent_list.isRefreshing = false
+            }
 
             adapter.setNetworkState(it)
         })
