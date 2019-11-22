@@ -43,13 +43,13 @@ class LoginActivityTest {
     fun loginSuccessTest() {
         mockWebServer.dispatcher = MockServerDispatcher.RequestDispatcher()
         activityRule.launchActivity(Intent())
+
         Intents.init()
 
         onView(withId(R.id.et_login_email)).perform(typeText("example@example.com"))
         onView(withId(R.id.et_login_password)).perform(typeText("passwordexample"), closeSoftKeyboard())
         onView(withId(R.id.btn_login)).perform(click())
 
-        onView(withId(R.id.pb_loading)).check(matches(isDisplayed()))
         intended(hasComponent(MainActivity::class.java.name))
         assertTrue(activityRule.activity.isFinishing)
     }
@@ -64,6 +64,17 @@ class LoginActivityTest {
         onView(withId(R.id.btn_login)).perform(click())
 
         onView(withText(R.string.fail_server_error)).inRoot(withDecorView(not(`is`(activityRule.activity.window.decorView)))).check(matches(isDisplayed()))
+    }
+
+    @Test
+    fun invalidEmailTest() {
+        activityRule.launchActivity(Intent())
+
+        onView(withId(R.id.et_login_email)).perform(typeText("example@com"))
+        onView(withId(R.id.et_login_password)).perform(typeText("passwordexample"), closeSoftKeyboard())
+        onView(withId(R.id.btn_login)).perform(click())
+
+        onView(withText(R.string.fail_invalid_email)).inRoot(withDecorView(not(`is`(activityRule.activity.window.decorView)))).check(matches(isDisplayed()))
     }
 
     @After

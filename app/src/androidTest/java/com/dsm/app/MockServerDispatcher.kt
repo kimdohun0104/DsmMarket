@@ -16,7 +16,7 @@ class MockServerDispatcher {
 
     }
 
-    class ErrorDispatcher() : Dispatcher() {
+    class ErrorDispatcher : Dispatcher() {
         override fun dispatch(request: RecordedRequest): MockResponse {
             return MockResponse().setResponseCode(400)
         }
