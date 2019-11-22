@@ -103,7 +103,7 @@ class RentDetailViewModel(
 
     fun createRoom(postId: Int) {
         addDisposable(
-            createRoomUseCase.create(CreateRoomUseCase.Params(postId, 0))
+            createRoomUseCase.create(CreateRoomUseCase.Params(postId, ProductType.RENT))
                 .doOnSubscribe { showLoadingDialogEvent.call() }
                 .doOnTerminate { hideLoadingDialogEvent.call() }
                 .doOnNext { createChatRoomLogEvent.value = Bundle().apply { putInt(Analytics.POST_ID, postId) } }

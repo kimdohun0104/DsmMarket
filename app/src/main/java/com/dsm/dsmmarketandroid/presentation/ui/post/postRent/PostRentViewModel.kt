@@ -76,7 +76,7 @@ class PostRentViewModel(private val postRentUseCase: PostRentUseCase) : BaseView
                         "content" to createTextPlain(content.value),
                         "price" to createTextPlain(unit.value + "/" + price.value),
                         "category" to createTextPlain(category.value),
-                        "possible_time" to createTextPlain(rentTime.value)
+                        "possible_time" to createTextPlain(rentTime.value ?: "")
                     )
                 )
             )

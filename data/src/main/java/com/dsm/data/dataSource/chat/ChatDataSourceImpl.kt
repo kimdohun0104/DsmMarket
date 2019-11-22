@@ -9,7 +9,7 @@ import retrofit2.Response
 
 class ChatDataSourceImpl(private val api: Api) : ChatDataSource {
 
-    override fun createRoom(postId: Int, type: Int): Flowable<Map<String, Int>> =
+    override fun createRoom(postId: Int, type: Int): Flowable<Map<String, Any>> =
         api.createRoom(postId, type).addSchedulers()
 
     override fun getChatRoom(): Flowable<ChatRoomListEntity> =
