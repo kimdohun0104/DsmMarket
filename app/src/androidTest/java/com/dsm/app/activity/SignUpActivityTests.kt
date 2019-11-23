@@ -28,22 +28,15 @@ class SignUpActivityTests : BaseUiTest() {
     val activityRule = ActivityTestRule(SignUpActivity::class.java, false, false)
 
     @Test
-    fun nextBtnDisableTest() {
-        activityRule.launchActivity(Intent())
-
-        onView(withId(R.id.et_sign_up_email)).perform(typeText("example@example.com"), pressImeActionButton())
-        onView(withId(R.id.et_sign_up_password)).perform(typeText("hello"), closeSoftKeyboard())
-
-        onView(withId(R.id.btn_sign_up)).check(matches(withBackground(R.drawable.bg_grey_rounded)))
-        onView(withId(R.id.btn_sign_up)).check(matches(not(isClickable())))
-    }
-
-    @Test
-    fun nextBtnEnableTest() {
+    fun nextBtnTest() {
         activityRule.launchActivity(Intent())
 
         onView(withId(R.id.et_sign_up_email)).perform(typeText("example@example.com"), pressImeActionButton())
         onView(withId(R.id.et_sign_up_password)).perform(typeText("hello"), pressImeActionButton())
+
+        onView(withId(R.id.btn_sign_up)).check(matches(withBackground(R.drawable.bg_grey_rounded)))
+        onView(withId(R.id.btn_sign_up)).check(matches(not(isClickable())))
+
         onView(withId(R.id.et_sign_up_password_confirm)).perform(typeText("hello"), closeSoftKeyboard())
 
         onView(withId(R.id.btn_sign_up)).check(matches(withBackground(R.drawable.bg_primary_rounded)))

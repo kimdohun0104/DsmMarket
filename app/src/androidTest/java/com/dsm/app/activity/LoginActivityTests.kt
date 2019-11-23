@@ -70,20 +70,14 @@ class LoginActivityTests : BaseUiTest() {
     }
 
     @Test
-    fun loginBtnEnableTest() {
-        activityRule.launchActivity(Intent())
-
-        onView(withId(R.id.et_login_email)).perform(typeText("example@example.com"), closeSoftKeyboard())
-
-        onView(withId(R.id.btn_login)).check(matches(withBackground(R.drawable.bg_grey_rounded)))
-        onView(withId(R.id.btn_login)).check(matches(not(isClickable())))
-    }
-
-    @Test
-    fun loginBtnDisableTest() {
+    fun loginBtnTest() {
         activityRule.launchActivity(Intent())
 
         onView(withId(R.id.et_login_email)).perform(typeText("example@example.com"), pressImeActionButton())
+
+        onView(withId(R.id.btn_login)).check(matches(withBackground(R.drawable.bg_grey_rounded)))
+        onView(withId(R.id.btn_login)).check(matches(not(isClickable())))
+
         onView(withId(R.id.et_login_password)).perform(typeText("passwordexample"), closeSoftKeyboard())
 
         onView(withId(R.id.btn_login)).check(matches(withBackground(R.drawable.bg_primary_rounded)))
