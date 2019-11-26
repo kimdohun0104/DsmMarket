@@ -111,6 +111,7 @@ class PurchaseDetailActivity : BaseActivity<ActivityPurchaseDetailBinding>() {
             createChatRoomLogEvent.observe(`this`, Observer { Analytics.logEvent(`this`, Analytics.CREATE_CHAT_ROOM, it) })
 
             isMe.observe(`this`, Observer {
+                popup.menu.clear()
                 if (it) {
                     `this`.isMe = true
                     popup.menuInflater.inflate(R.menu.menu_my_product_detail_toolbar, popup.menu)

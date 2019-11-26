@@ -8,6 +8,8 @@
 
 	<string name="empty_post">There are no items you posted yet.</string>
 	<string name="empty_interest">There is no product that you wished.</string>
+	<string name="empty_list">There is no product.</string>
+	<string name="empty_chat">There is no chat.</string>
 
 	<string name="login">login</string>
 	<string name="logout">logout</string>

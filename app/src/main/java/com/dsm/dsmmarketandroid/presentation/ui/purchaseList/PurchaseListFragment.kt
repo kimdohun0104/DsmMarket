@@ -40,10 +40,13 @@ class PurchaseListFragment : BaseFragment<FragmentPurchaseListBinding>() {
 
     override fun observeViewModel() {
         viewModel.networkState.observe(this, Observer {
-            if (it == NetworkState.LOADED) {
+            binding.isEmpty = it == NetworkState.EMPTY
+
+            if (it == NetworkState.LOADED || it == NetworkState.EMPTY) {
                 pb_loading.visibility = View.GONE
                 srl_purchase_list.isRefreshing = false
             }
+
             adapter.setNetworkState(it)
         })
 

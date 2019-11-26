@@ -41,7 +41,7 @@ dependencies {
     implementation dependencies.kotlin
 
     // testing
-    testImplementation testDependencies.junit
+    androidTestImplementation testDependencies.junit
     androidTestImplementation testDependencies.testRunner
 
     // retrofit

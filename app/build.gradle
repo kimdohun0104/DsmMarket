@@ -15,9 +15,9 @@ android {
         applicationId "com.dsm.dsmmarketandroid"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 4
-        versionName "1.0.0-beta4"
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        versionCode 5
+        versionName "1.0.0-beta5"
+        testInstrumentationRunner "com.dsm.app.MockTestRunner"
 
         javaCompileOptions {
             annotationProcessorOptions {
@@ -78,15 +78,17 @@ dependencies {
     implementation dependencies.kotlin
 
     // testing
-    testImplementation testDependencies.junit
+    androidTestImplementation testDependencies.junit
     androidTestImplementation testDependencies.testRunner
     androidTestImplementation testDependencies.espressoCore
     androidTestImplementation testDependencies.mockitoAndroid
+    androidTestImplementation testDependencies.mockWebServer
+    androidTestImplementation testDependencies.testRules
+    androidTestImplementation testDependencies.espressoIntent
     testImplementation testDependencies.mockitoCore
     testImplementation testDependencies.mockitoInline
     testImplementation testDependencies.liveDataTestingKtx
     testImplementation testDependencies.coreTesting
-    testImplementation "org.json:json:20140107"
 
     // firebase
     implementation dependencies.firebaseCore

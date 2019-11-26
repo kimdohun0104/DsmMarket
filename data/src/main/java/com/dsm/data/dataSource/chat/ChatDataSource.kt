@@ -7,11 +7,11 @@ import retrofit2.Response
 
 interface ChatDataSource {
 
-    fun createRoom(postId: Int, type: Int): Flowable<Map<String, Int>>
+    fun createRoom(postId: Int, type: Int): Flowable<Map<String, Any>>
 
     fun getChatRoom(): Flowable<ChatRoomListEntity>
 
     fun joinRoom(roomId: Int): Flowable<Response<HashMap<String, String>>>
 
-    fun getChatLog(roomId: Int, count: Int) : Flowable<ChatLogListEntity>
+    fun getChatLog(roomId: Int, count: Int): Flowable<ChatLogListEntity>
 }

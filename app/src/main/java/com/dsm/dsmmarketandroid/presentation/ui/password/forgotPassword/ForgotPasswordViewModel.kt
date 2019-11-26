@@ -1,6 +1,7 @@
 package com.dsm.dsmmarketandroid.presentation.ui.password.forgotPassword
 
 import android.os.Bundle
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
@@ -38,6 +39,7 @@ class ForgotPasswordViewModel(private val sendTempPasswordUseCase: SendTempPassw
                     toastEvent.value = R.string.send_temp_password_success
                     finishActivityEvent.call()
                 }, {
+                    Log.d("DEBUGLOG", it.message.toString())
                     toastEvent.value = R.string.fail_server_error
                 })
         )

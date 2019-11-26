@@ -39,19 +39,18 @@ class RentListFragment : BaseFragment<FragmentRentListBinding>() {
     }
 
     override fun observeViewModel() {
-        val `this` = this@RentListFragment
-        viewModel.run {
-            networkState.observe(`this`, Observer {
-                if (it == NetworkState.LOADED) {
-                    pb_loading.visibility = View.GONE
-                    srl_rent_list.isRefreshing = false
-                }
-                adapter.setNetworkState(it)
-            })
+        viewModel.networkState.observe(this, Observer {
+            binding.isEmpty = it == NetworkState.EMPTY
 
-            rentItems.observe(`this`, Observer { adapter.submitList(it) })
-        }
+            if (it == NetworkState.LOADED || it == NetworkState.EMPTY) {
+                pb_loading.visibility = View.GONE
+                srl_rent_list.isRefreshing = false
+            }
 
+            adapter.setNetworkState(it)
+        })
+
+        viewModel.rentItems.observe(this, Observer { adapter.submitList(it) })
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

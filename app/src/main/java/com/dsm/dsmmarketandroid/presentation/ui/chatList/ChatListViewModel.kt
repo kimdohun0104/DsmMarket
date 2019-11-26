@@ -2,6 +2,7 @@ package com.dsm.dsmmarketandroid.presentation.ui.chatList
 
 import android.os.Bundle
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import com.dsm.domain.usecase.GetChatRoomUseCase
 import com.dsm.domain.usecase.JoinRoomUseCase
 import com.dsm.dsmmarketandroid.R
@@ -26,6 +27,8 @@ class ChatListViewModel(
 
     val isRefreshing = MutableLiveData<Boolean>()
     val isProgressVisible = MutableLiveData<Boolean>().apply { value = true }
+
+    val isChatEmpty = Transformations.map(chatRoomList) { it.isEmpty() }
 
     fun getChatRoom() {
         addDisposable(

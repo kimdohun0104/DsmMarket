@@ -1,7 +1,6 @@
 package com.dsm.app.viewModel
 
 import com.dsm.app.BaseTest
-import com.dsm.app.createHttpException
 import com.dsm.domain.usecase.SignUpUseCase
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.ui.signUp.SignUpViewModel
@@ -92,60 +91,6 @@ class SignUpViewModelTests : BaseTest() {
         viewModel.signUp()
 
         viewModel.finishActivityEvent.test().assertHasValue()
-        viewModel.hideLoadingDialogEvent.test().assertHasValue()
-    }
-
-    @Test
-    fun `already exist email test`() {
-        viewModel.run {
-            email.value = "example@test.com"
-            password.value = "testPassword"
-            reType.value = "testPassword"
-            name.value = "김도훈"
-            gender.value = "남성"
-            grade.value = "1"
-        }
-
-        val request = hashMapOf(
-            "email" to viewModel.email.value,
-            "password" to viewModel.password.value,
-            "nick" to viewModel.name.value,
-            "gender" to viewModel.gender.value,
-            "grade" to viewModel.grade.value!!.toInt()
-        )
-        `when`(signUpUseCase.create(request))
-            .thenReturn(Flowable.error(createHttpException(403, "{\"message\": \"existent email\"}")))
-
-        viewModel.signUp()
-
-        viewModel.toastEvent.test().assertValue(R.string.fail_existent_email)
-        viewModel.hideLoadingDialogEvent.test().assertHasValue()
-    }
-
-    @Test
-    fun `already exist name test`() {
-        viewModel.run {
-            email.value = "example@test.com"
-            password.value = "testPassword"
-            reType.value = "testPassword"
-            name.value = "김도훈"
-            gender.value = "남성"
-            grade.value = "1"
-        }
-
-        val request = hashMapOf(
-            "email" to viewModel.email.value,
-            "password" to viewModel.password.value,
-            "nick" to viewModel.name.value,
-            "gender" to viewModel.gender.value,
-            "grade" to viewModel.grade.value!!.toInt()
-        )
-        `when`(signUpUseCase.create(request))
-            .thenReturn(Flowable.error(createHttpException(403, "{\"message\": \"existent nick\"}")))
-
-        viewModel.signUp()
-
-        viewModel.toastEvent.test().assertValue(R.string.fail_existent_nick)
         viewModel.hideLoadingDialogEvent.test().assertHasValue()
     }
 }
