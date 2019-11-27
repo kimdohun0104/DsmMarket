@@ -4,8 +4,6 @@ import com.dsm.domain.usecase.*
 import org.koin.dsl.module
 
 val useCaseModule = module {
-    factory { LoginUseCase(get()) }
-
     factory { AutoLoginUseCase(get()) }
 
     factory { SignUpUseCase(get()) }

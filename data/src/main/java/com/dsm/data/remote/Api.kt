@@ -10,7 +10,7 @@ import retrofit2.http.*
 interface Api {
 
     @POST("auth/login")
-    fun login(@Body body: Any): Flowable<Response<Map<String, String>>>
+    fun login(@Body body: Any): Flowable<TokenEntity>
 
     @GET("auth/login")
     fun autoLogin(): Flowable<Response<Unit>>

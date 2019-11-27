@@ -2,6 +2,8 @@ package com.dsm.app.viewModel
 
 import com.dsm.app.BaseTest
 import com.dsm.app.createHttpException
+import com.dsm.domain.error.ErrorEntity
+import com.dsm.domain.error.Resource
 import com.dsm.domain.usecase.LoginUseCase
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.ui.auth.login.LoginViewModel
@@ -13,7 +15,6 @@ import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
-import java.io.IOException
 
 class LoginViewModelTests : BaseTest() {
 
@@ -58,56 +59,58 @@ class LoginViewModelTests : BaseTest() {
 
     @Test
     fun `login success test`() {
-        viewModel.email.value = "test@test.com"
-        viewModel.password.value = "testPassword"
-
-        val request = hashMapOf(
-            "email" to viewModel.email.value,
-            "password" to viewModel.password.value
-        )
-        `when`(loginUseCase.create(request)).thenReturn(Flowable.just(Unit))
-
-        viewModel.login()
-
         viewModel.run {
-            hideLoadingDialogEvent.test().assertHasValue()
+            email.value = "test@a.a"
+            password.value = "password"
+
+            val param = hashMapOf(
+                "email" to email.value,
+                "password" to password.value
+            )
+            `when`(loginUseCase.create(param)).thenReturn(Flowable.just(Resource.Success(Unit)))
+
+            login()
+
+            showLoadingDialogEvent.test().assertHasValue()
             hideKeyboardEvent.test().assertHasValue()
-            intentMainActivityEvent.test().assertHasValue()
-            hideLoadingDialogEvent.test().assertHasValue()
         }
     }
 
     @Test
-    fun `server error test`() {
-        viewModel.email.value = "test@test.com"
-        viewModel.password.value = "testPassword"
+    fun `login forbidden error test`() {
+        viewModel.run {
+            email.value = "test@a.a"
+            password.value = "password"
 
-        val request = hashMapOf(
-            "email" to viewModel.email.value,
-            "password" to viewModel.password.value
-        )
-        `when`(loginUseCase.create(request)).thenReturn(Flowable.error(IOException()))
+            val param = hashMapOf(
+                "email" to email.value,
+                "password" to password.value
+            )
+            `when`(loginUseCase.create(param))
+                .thenReturn(Flowable.just(Resource.Error(ErrorEntity.Forbidden(createHttpException(403)))))
 
-        viewModel.login()
+            login()
 
-        viewModel.toastEvent.test().assertValue(R.string.fail_server_error)
-        viewModel.hideLoadingDialogEvent.test().assertHasValue()
+            toastEvent.test().assertValue(R.string.fail_login)
+        }
     }
 
     @Test
-    fun `incorrect email or password test`() {
-        viewModel.email.value = "test@test.com"
-        viewModel.password.value = "testPassword"
+    fun `login internal error test`() {
+        viewModel.run {
+            email.value = "test@a.a"
+            password.value = "password"
 
-        val request = hashMapOf(
-            "email" to viewModel.email.value,
-            "password" to viewModel.password.value
-        )
-        `when`(loginUseCase.create(request)).thenReturn(Flowable.error(createHttpException(403)))
+            val param = hashMapOf(
+                "email" to email.value,
+                "password" to password.value
+            )
+            `when`(loginUseCase.create(param))
+                .thenReturn(Flowable.just(Resource.Error(ErrorEntity.Internal(createHttpException(403)))))
 
-        viewModel.login()
+            login()
 
-        viewModel.toastEvent.test().assertValue(R.string.fail_login)
-        viewModel.hideLoadingDialogEvent.test().assertHasValue()
+            toastEvent.test().assertValue(R.string.fail_server_error)
+        }
     }
 }

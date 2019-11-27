@@ -7,9 +7,6 @@ import retrofit2.Response
 
 class AccountDataSourceImpl(private val api: Api) : AccountDataSource {
 
-    override fun login(body: Any): Flowable<Response<Map<String, String>>> =
-        api.login(body).addSchedulers()
-
     override fun autoLogin(): Flowable<Response<Unit>> =
         api.autoLogin().addSchedulers()
 

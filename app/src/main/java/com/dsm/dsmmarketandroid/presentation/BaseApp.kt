@@ -28,7 +28,8 @@ open class BaseApp : Application() {
                     repositoryModule,
                     useCaseModule,
                     viewModelModule,
-                    pagingModule
+                    pagingModule,
+                    loginModule
                 )
             )
         }

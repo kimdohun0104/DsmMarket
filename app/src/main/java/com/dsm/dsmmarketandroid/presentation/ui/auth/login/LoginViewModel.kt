@@ -3,6 +3,8 @@ package com.dsm.dsmmarketandroid.presentation.ui.auth.login
 import android.os.Bundle
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
+import com.dsm.domain.error.ErrorEntity
+import com.dsm.domain.error.Resource
 import com.dsm.domain.usecase.LoginUseCase
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.base.BaseViewModel
@@ -10,7 +12,6 @@ import com.dsm.dsmmarketandroid.presentation.util.Analytics
 import com.dsm.dsmmarketandroid.presentation.util.SingleLiveEvent
 import com.dsm.dsmmarketandroid.presentation.util.Validator
 import com.dsm.dsmmarketandroid.presentation.util.isValueBlank
-import retrofit2.HttpException
 
 class LoginViewModel(private val loginUseCase: LoginUseCase) : BaseViewModel() {
 
@@ -45,17 +46,21 @@ class LoginViewModel(private val loginUseCase: LoginUseCase) : BaseViewModel() {
             )
                 .doOnSubscribe { showLoadingDialogEvent.call() }
                 .doOnTerminate { hideLoadingDialogEvent.call() }
-                .doOnNext { loginLogEvent.value = Bundle().apply { putString(Analytics.USER_EMAIL, email.value) } }
+                .doOnComplete { loginLogEvent.value = Bundle().apply { putString(Analytics.USER_EMAIL, email.value) } }
                 .subscribe({
-                    hideLoadingDialogEvent.call()
-                    hideKeyboardEvent.call()
-                    intentMainActivityEvent.call()
-                }, {
-                    if (it is HttpException && it.code() == 403)
-                        toastEvent.value = R.string.fail_login
-                    else
-                        toastEvent.value = R.string.fail_server_error
-                })
+                    when (it) {
+                        is Resource.Success -> {
+                            hideKeyboardEvent.call()
+                            intentMainActivityEvent.call()
+                        }
+                        is Resource.Error -> {
+                            when (it.error) {
+                                is ErrorEntity.Forbidden -> toastEvent.value = R.string.fail_login
+                                else -> toastEvent.value = R.string.fail_server_error
+                            }
+                        }
+                    }
+                }, {})
         )
     }
 }
