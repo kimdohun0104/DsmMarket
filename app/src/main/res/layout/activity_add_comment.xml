@@ -4,7 +4,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.dsm.dsmmarketandroid.presentation.ui.addComment.AddCommentViewModel" />
+            type="com.dsm.dsmmarketandroid.presentation.ui.comment.addComment.AddCommentViewModel" />
 
         <variable
             name="postId"
@@ -22,7 +22,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.ui.addComment.AddCommentActivity">
+        tools:context=".presentation.ui.comment.addComment.AddCommentActivity">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/tb_add_comment"

@@ -23,16 +23,16 @@
             android:name=".presentation.ui.password.forgotPassword.ForgotPasswordActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".presentation.ui.purchaseImage.PurchaseImageActivity"
+            android:name=".presentation.ui.main.purchase.purchaseImage.PurchaseImageActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".presentation.ui.rentImage.RentImageActivity"
+            android:name=".presentation.ui.main.rent.rentImage.RentImageActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".presentation.ui.language.ChangeLanguageActivity"
+            android:name=".presentation.ui.me.language.ChangeLanguageActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".presentation.ui.openSource.OpenSourceActivity"
+            android:name=".presentation.ui.me.openSource.OpenSourceActivity"
             android:screenOrientation="portrait"
             android:theme="@style/WhiteAppTheme" />
         <activity
@@ -47,7 +47,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/WhiteAppTheme" />
         <activity
-            android:name=".presentation.ui.rentDetail.RentDetailActivity"
+            android:name=".presentation.ui.main.rent.rentDetail.RentDetailActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".presentation.ui.password.passwordConfirm.PasswordConfirmActivity"
@@ -66,11 +66,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".presentation.ui.postCategory.PostCategoryActivity"
+            android:name=".presentation.ui.post.postCategory.PostCategoryActivity"
             android:screenOrientation="portrait"
             android:theme="@style/WhiteAppTheme" />
         <activity
-            android:name=".presentation.ui.searchResult.SearchResultActivity"
+            android:name=".presentation.ui.search.searchResult.SearchResultActivity"
             android:screenOrientation="portrait"
             android:theme="@style/WhiteAppTheme" />
         <activity
@@ -87,14 +87,14 @@
             android:theme="@style/WhiteAppTheme"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".presentation.ui.addComment.AddCommentActivity"
+            android:name=".presentation.ui.comment.addComment.AddCommentActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".presentation.ui.comment.CommentActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".presentation.ui.purchaseDetail.PurchaseDetailActivity"
+            android:name=".presentation.ui.main.purchase.purchaseDetail.PurchaseDetailActivity"
             android:screenOrientation="portrait"
             android:theme="@style/WhiteAppTheme"/>
         <activity
@@ -106,16 +106,16 @@
             android:screenOrientation="portrait"
             android:theme="@style/WhiteAppTheme" />
         <activity
-            android:name=".presentation.ui.recent.RecentActivity"
+            android:name=".presentation.ui.me.recent.RecentActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".presentation.ui.myPost.MyPostActivity"
+            android:name=".presentation.ui.me.myPost.MyPostActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".presentation.ui.interest.InterestActivity"
+            android:name=".presentation.ui.me.interest.InterestActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".presentation.ui.changeNick.ChangeNickActivity"
+            android:name=".presentation.ui.me.changeNick.ChangeNickActivity"
             android:screenOrientation="portrait"
             android:theme="@style/WhiteAppTheme"
             android:windowSoftInputMode="adjustResize" />
@@ -124,7 +124,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/WhiteAppTheme" />
         <activity
-            android:name=".presentation.ui.login.LoginActivity"
+            android:name=".presentation.ui.auth.login.LoginActivity"
             android:screenOrientation="portrait"
             android:theme="@style/WhiteAppTheme"
             android:windowSoftInputMode="adjustPan" />
@@ -133,7 +133,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/WhiteAppTheme" />
         <activity
-            android:name=".presentation.ui.signUp.SignUpActivity"
+            android:name=".presentation.ui.auth.signUp.SignUpActivity"
             android:screenOrientation="portrait"
             android:theme="@style/WhiteAppTheme"
             android:windowSoftInputMode="adjustPan"/>

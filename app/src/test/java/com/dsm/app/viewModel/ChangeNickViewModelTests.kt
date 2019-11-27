@@ -4,7 +4,7 @@ import com.dsm.app.BaseTest
 import com.dsm.app.createHttpException
 import com.dsm.domain.usecase.ChangeNickUseCase
 import com.dsm.dsmmarketandroid.R
-import com.dsm.dsmmarketandroid.presentation.ui.changeNick.ChangeNickViewModel
+import com.dsm.dsmmarketandroid.presentation.ui.me.changeNick.ChangeNickViewModel
 import com.jraska.livedata.test
 import io.reactivex.Flowable
 import org.junit.Assert.assertFalse

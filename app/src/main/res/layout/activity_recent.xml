@@ -4,7 +4,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.dsm.dsmmarketandroid.presentation.ui.recent.RecentViewModel" />
+            type="com.dsm.dsmmarketandroid.presentation.ui.me.recent.RecentViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -12,7 +12,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.ui.recent.RecentActivity">
+        tools:context=".presentation.ui.me.recent.RecentActivity">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/tb_past"

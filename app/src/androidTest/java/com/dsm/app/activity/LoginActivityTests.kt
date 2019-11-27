@@ -15,7 +15,7 @@ import com.dsm.app.BaseUiTest
 import com.dsm.app.MockServerDispatcher
 import com.dsm.app.withBackground
 import com.dsm.dsmmarketandroid.R
-import com.dsm.dsmmarketandroid.presentation.ui.login.LoginActivity
+import com.dsm.dsmmarketandroid.presentation.ui.auth.login.LoginActivity
 import com.dsm.dsmmarketandroid.presentation.ui.main.MainActivity
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.CoreMatchers.not

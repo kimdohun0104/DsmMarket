@@ -5,7 +5,7 @@
 
         <variable
             name="viewModel"
-            type="com.dsm.dsmmarketandroid.presentation.ui.recent.RecentViewModel" />
+            type="com.dsm.dsmmarketandroid.presentation.ui.me.recent.RecentViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"

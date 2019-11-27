@@ -8,7 +8,7 @@ import com.dsm.domain.usecase.*
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.mapper.PurchaseDetailModelMapper
 import com.dsm.dsmmarketandroid.presentation.mapper.RecommendModelMapper
-import com.dsm.dsmmarketandroid.presentation.ui.purchaseDetail.PurchaseDetailViewModel
+import com.dsm.dsmmarketandroid.presentation.ui.main.purchase.purchaseDetail.PurchaseDetailViewModel
 import com.dsm.dsmmarketandroid.presentation.util.ProductType
 import com.jraska.livedata.test
 import io.reactivex.Flowable

@@ -9,7 +9,7 @@ import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.ActivityModifyPurchaseBinding
 import com.dsm.dsmmarketandroid.presentation.base.BaseActivity
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.ModifyImageListAdapter
-import com.dsm.dsmmarketandroid.presentation.ui.postCategory.PostCategoryActivity
+import com.dsm.dsmmarketandroid.presentation.ui.post.postCategory.PostCategoryActivity
 import kotlinx.android.synthetic.main.activity_modify_purchase.*
 import org.jetbrains.anko.toast
 import org.koin.androidx.viewmodel.ext.android.viewModel

@@ -6,7 +6,7 @@ import com.dsm.domain.usecase.GetInterestUseCase
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.mapper.ProductModelMapper
 import com.dsm.dsmmarketandroid.presentation.model.ProductModel
-import com.dsm.dsmmarketandroid.presentation.ui.interest.InterestViewModel
+import com.dsm.dsmmarketandroid.presentation.ui.me.interest.InterestViewModel
 import com.dsm.dsmmarketandroid.presentation.util.ProductType
 import com.jraska.livedata.test
 import io.reactivex.Flowable

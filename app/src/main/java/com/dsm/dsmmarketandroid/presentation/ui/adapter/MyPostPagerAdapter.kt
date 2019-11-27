@@ -4,8 +4,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.dsm.dsmmarketandroid.presentation.ui.myPost.purchase.MyPurchaseFragment
-import com.dsm.dsmmarketandroid.presentation.ui.myPost.rent.MyRentFragment
+import com.dsm.dsmmarketandroid.presentation.ui.me.myPost.purchase.MyPurchaseFragment
+import com.dsm.dsmmarketandroid.presentation.ui.me.myPost.rent.MyRentFragment
 
 class MyPostPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
     FragmentStateAdapter(fragmentManager, lifecycle) {

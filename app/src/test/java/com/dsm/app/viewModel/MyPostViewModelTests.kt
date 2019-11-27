@@ -9,7 +9,7 @@ import com.dsm.domain.usecase.GetMyRentUseCase
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.mapper.ProductModelMapper
 import com.dsm.dsmmarketandroid.presentation.model.ProductModel
-import com.dsm.dsmmarketandroid.presentation.ui.myPost.MyPostViewModel
+import com.dsm.dsmmarketandroid.presentation.ui.me.myPost.MyPostViewModel
 import com.dsm.dsmmarketandroid.presentation.util.ProductType
 import com.jraska.livedata.test
 import io.reactivex.Flowable
@@ -41,7 +41,13 @@ class MyPostViewModelTests : BaseTest() {
 
     @Before
     fun init() {
-        viewModel = MyPostViewModel(getMyPurchaseUseCase, getMyRentUseCase, completePurchaseUseCase, completeRentUseCase, productModelMapper)
+        viewModel = MyPostViewModel(
+            getMyPurchaseUseCase,
+            getMyRentUseCase,
+            completePurchaseUseCase,
+            completeRentUseCase,
+            productModelMapper
+        )
     }
 
     @Test

@@ -8,7 +8,7 @@ import com.dsm.domain.usecase.*
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.mapper.RecommendModelMapper
 import com.dsm.dsmmarketandroid.presentation.mapper.RentDetailModelMapper
-import com.dsm.dsmmarketandroid.presentation.ui.rentDetail.RentDetailViewModel
+import com.dsm.dsmmarketandroid.presentation.ui.main.rent.rentDetail.RentDetailViewModel
 import com.dsm.dsmmarketandroid.presentation.util.ProductType
 import com.jraska.livedata.test
 import io.reactivex.Flowable
@@ -46,7 +46,16 @@ class RentDetailViewModelTests : BaseTest() {
 
     @Before
     fun init() {
-        viewModel = RentDetailViewModel(getRentDetailUseCase, interestUseCase, unInterestUseCase, getRelatedUseCase, createRoomUseCase, joinRoomUseCase, recommendModelMapper, rentDetailModelMapper)
+        viewModel = RentDetailViewModel(
+            getRentDetailUseCase,
+            interestUseCase,
+            unInterestUseCase,
+            getRelatedUseCase,
+            createRoomUseCase,
+            joinRoomUseCase,
+            recommendModelMapper,
+            rentDetailModelMapper
+        )
     }
 
     @Test

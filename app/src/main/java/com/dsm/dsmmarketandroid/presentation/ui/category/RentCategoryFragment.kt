@@ -4,7 +4,7 @@ import android.os.Bundle
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.FragmentRentCategoryBinding
 import com.dsm.dsmmarketandroid.presentation.base.BaseFragment
-import com.dsm.dsmmarketandroid.presentation.ui.rentList.RentListFragment
+import com.dsm.dsmmarketandroid.presentation.ui.main.rent.rentList.RentListFragment
 
 class RentCategoryFragment : BaseFragment<FragmentRentCategoryBinding>() {
 

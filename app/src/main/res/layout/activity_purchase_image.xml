@@ -5,14 +5,14 @@
 
         <variable
             name="viewModel"
-            type="com.dsm.dsmmarketandroid.presentation.ui.purchaseImage.PurchaseImageViewModel" />
+            type="com.dsm.dsmmarketandroid.presentation.ui.main.purchase.purchaseImage.PurchaseImageViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.ui.purchaseImage.PurchaseImageActivity"
+        tools:context=".presentation.ui.main.purchase.purchaseImage.PurchaseImageActivity"
         android:background="@color/colorBlack">
 
         <androidx.appcompat.widget.Toolbar

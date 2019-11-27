@@ -8,7 +8,7 @@ import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.ActivityCommentBinding
 import com.dsm.dsmmarketandroid.presentation.base.BaseActivity
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.CommentListAdapter
-import com.dsm.dsmmarketandroid.presentation.ui.addComment.AddCommentActivity
+import com.dsm.dsmmarketandroid.presentation.ui.comment.addComment.AddCommentActivity
 import com.dsm.dsmmarketandroid.presentation.ui.report.ReportCommentDialog
 import com.dsm.dsmmarketandroid.presentation.util.Analytics
 import com.dsm.dsmmarketandroid.presentation.util.MessageEvents

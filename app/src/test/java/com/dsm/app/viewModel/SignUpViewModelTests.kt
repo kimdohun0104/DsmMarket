@@ -3,7 +3,7 @@ package com.dsm.app.viewModel
 import com.dsm.app.BaseTest
 import com.dsm.domain.usecase.SignUpUseCase
 import com.dsm.dsmmarketandroid.R
-import com.dsm.dsmmarketandroid.presentation.ui.signUp.SignUpViewModel
+import com.dsm.dsmmarketandroid.presentation.ui.auth.signUp.SignUpViewModel
 import com.jraska.livedata.test
 import io.reactivex.Flowable
 import org.junit.Assert.assertFalse

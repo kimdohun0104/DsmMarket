@@ -7,14 +7,14 @@
 
         <variable
             name="viewModel"
-            type="com.dsm.dsmmarketandroid.presentation.ui.rentImage.RentImageViewModel" />
+            type="com.dsm.dsmmarketandroid.presentation.ui.main.rent.rentImage.RentImageViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorBlack"
-        tools:context=".presentation.ui.rentImage.RentImageActivity">
+        tools:context=".presentation.ui.main.rent.rentImage.RentImageActivity">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/tb_rent_image"

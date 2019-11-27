@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.dsm.dsmmarketandroid.R
-import com.dsm.dsmmarketandroid.presentation.ui.purchaseImage.PurchaseImageActivity
+import com.dsm.dsmmarketandroid.presentation.ui.main.purchase.purchaseImage.PurchaseImageActivity
 import com.dsm.dsmmarketandroid.presentation.util.GlideApp
 import kotlinx.android.synthetic.main.item_detail_image.view.*
 import org.jetbrains.anko.startActivity

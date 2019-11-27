@@ -4,8 +4,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.dsm.dsmmarketandroid.presentation.ui.recent.RecentPurchaseFragment
-import com.dsm.dsmmarketandroid.presentation.ui.recent.RecentRentFragment
+import com.dsm.dsmmarketandroid.presentation.ui.me.recent.RecentPurchaseFragment
+import com.dsm.dsmmarketandroid.presentation.ui.me.recent.RecentRentFragment
 
 class RecentPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
     FragmentStateAdapter(fragmentManager, lifecycle) {

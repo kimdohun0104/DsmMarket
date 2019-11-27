@@ -4,7 +4,7 @@ import com.dsm.app.BaseTest
 import com.dsm.app.createHttpException
 import com.dsm.domain.usecase.LoginUseCase
 import com.dsm.dsmmarketandroid.R
-import com.dsm.dsmmarketandroid.presentation.ui.login.LoginViewModel
+import com.dsm.dsmmarketandroid.presentation.ui.auth.login.LoginViewModel
 import com.jraska.livedata.test
 import io.reactivex.Flowable
 import org.junit.Assert.assertFalse

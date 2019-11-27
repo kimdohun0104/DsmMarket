@@ -4,7 +4,7 @@ import android.os.Bundle
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.FragmentPurchaseCategoryBinding
 import com.dsm.dsmmarketandroid.presentation.base.BaseFragment
-import com.dsm.dsmmarketandroid.presentation.ui.purchaseList.PurchaseListFragment
+import com.dsm.dsmmarketandroid.presentation.ui.main.purchase.purchaseList.PurchaseListFragment
 
 class PurchaseCategoryFragment : BaseFragment<FragmentPurchaseCategoryBinding>() {
 

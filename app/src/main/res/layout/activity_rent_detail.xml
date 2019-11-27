@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.dsm.dsmmarketandroid.presentation.ui.rentDetail.RentDetailViewModel" />
+            type="com.dsm.dsmmarketandroid.presentation.ui.main.rent.rentDetail.RentDetailViewModel" />
 
         <import type="android.view.View" />
     </data>
