@@ -14,6 +14,9 @@ class AuthRepositoryImpl(
     override fun login(body: Any): Flowable<Token> =
         dataSource.login(body).map(tokenMapper::mapFrom)
 
+    override fun autoLogin(): Flowable<Unit> =
+        dataSource.autoLogin()
+
     override fun setAccessToken(token: String) =
         dataSource.setAccessToken(token)
 

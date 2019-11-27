@@ -5,8 +5,6 @@ import retrofit2.Response
 
 interface AccountDataSource {
 
-    fun autoLogin(): Flowable<Response<Unit>>
-
     fun signUp(body: Any): Flowable<Response<Unit>>
 
     fun refreshToken(refreshToken: String): Flowable<Response<Map<String, Any>>>

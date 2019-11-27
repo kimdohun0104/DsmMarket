@@ -26,7 +26,6 @@ import com.dsm.dsmmarketandroid.presentation.ui.post.postCategory.PostCategoryVi
 import com.dsm.dsmmarketandroid.presentation.ui.post.postPurchase.PostPurchaseViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.post.postRent.PostRentViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.search.SearchViewModel
-import com.dsm.dsmmarketandroid.presentation.ui.splash.SplashViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -37,8 +36,6 @@ val viewModelModule = module {
     viewModel { ChangePasswordViewModel(get()) }
 
     viewModel { ChangeNickViewModel(get()) }
-
-    viewModel { SplashViewModel(get()) }
 
     viewModel { PostCategoryViewModel(get(), get()) }
 

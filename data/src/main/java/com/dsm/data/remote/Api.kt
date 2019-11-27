@@ -13,7 +13,7 @@ interface Api {
     fun login(@Body body: Any): Flowable<TokenEntity>
 
     @GET("auth/login")
-    fun autoLogin(): Flowable<Response<Unit>>
+    fun autoLogin(): Flowable<Unit>
 
     @GET("auth/login")
     fun confirmPassword(@Query("password") password: String): Flowable<Response<Unit>>

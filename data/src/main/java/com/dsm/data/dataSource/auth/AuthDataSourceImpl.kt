@@ -14,6 +14,9 @@ class AuthDataSourceImpl(
     override fun login(body: Any): Flowable<TokenEntity> =
         api.login(body).addSchedulers()
 
+    override fun autoLogin(): Flowable<Unit> =
+        api.autoLogin().addSchedulers()
+
     override fun setAccessToken(token: String) =
         prefHelper.setAccessToken(token)
 

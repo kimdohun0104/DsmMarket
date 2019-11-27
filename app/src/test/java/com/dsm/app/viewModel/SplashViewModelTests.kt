@@ -1,6 +1,9 @@
 package com.dsm.app.viewModel
 
 import com.dsm.app.BaseTest
+import com.dsm.app.createHttpException
+import com.dsm.domain.error.ErrorEntity
+import com.dsm.domain.error.Resource
 import com.dsm.domain.usecase.AutoLoginUseCase
 import com.dsm.dsmmarketandroid.presentation.ui.splash.SplashViewModel
 import com.jraska.livedata.test
@@ -9,7 +12,6 @@ import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
-import java.io.IOException
 
 
 class SplashViewModelTests : BaseTest() {
@@ -26,7 +28,7 @@ class SplashViewModelTests : BaseTest() {
 
     @Test
     fun `auto login success test`() {
-        `when`(loginUseCase.create(Unit)).thenReturn(Flowable.just(Unit))
+        `when`(loginUseCase.create(Unit)).thenReturn(Flowable.just(Resource.Success(Unit)))
 
         viewModel.login()
 
@@ -35,9 +37,11 @@ class SplashViewModelTests : BaseTest() {
 
     @Test
     fun `auto login failed test`() {
-        `when`(loginUseCase.create(Unit)).thenReturn(Flowable.error(IOException()))
+        `when`(loginUseCase.create(Unit))
+            .thenReturn(Flowable.just(Resource.Error(ErrorEntity.Unauthorized(createHttpException(401)))))
 
         viewModel.login()
+
         viewModel.intentStartActivity.test().assertHasValue()
     }
 }

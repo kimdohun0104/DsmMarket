@@ -15,6 +15,8 @@ class ErrorHandlerImpl : ErrorHandler {
 
                     HttpURLConnection.HTTP_FORBIDDEN -> ErrorEntity.Forbidden(throwable)
 
+                    HttpURLConnection.HTTP_UNAUTHORIZED -> ErrorEntity.Unauthorized(throwable)
+
                     else -> ErrorEntity.Unknown(throwable)
                 }
             }

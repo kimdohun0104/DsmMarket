@@ -5,7 +5,9 @@ import io.reactivex.Flowable
 
 interface AuthRepository {
 
-    fun login(body: Any) : Flowable<Token>
+    fun login(body: Any): Flowable<Token>
+
+    fun autoLogin(): Flowable<Unit>
 
     fun setAccessToken(token: String)
 

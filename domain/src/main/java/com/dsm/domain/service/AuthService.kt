@@ -4,5 +4,8 @@ import com.dsm.domain.error.Resource
 import io.reactivex.Flowable
 
 interface AuthService {
+
     fun login(body: Any) : Flowable<Resource<Unit>>
+
+    fun autoLogin(): Flowable<Resource<Unit>>
 }

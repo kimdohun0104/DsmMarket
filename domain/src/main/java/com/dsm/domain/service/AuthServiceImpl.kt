@@ -21,4 +21,6 @@ class AuthServiceImpl(
             .map { Unit }
             .toResource(errorHandler)
 
+    override fun autoLogin(): Flowable<Resource<Unit>> =
+        authRepository.autoLogin().toResource(errorHandler)
 }
