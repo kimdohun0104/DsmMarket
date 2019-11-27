@@ -5,7 +5,7 @@ import retrofit2.Response
 
 interface AccountDataSource {
 
-    fun getUserNick(): Flowable<Response<Map<String, String>>>
+    fun sendTempPassword(email: String): Flowable<Unit>
 
     fun changeUserNick(newNick: String): Flowable<Response<Unit>>
 }

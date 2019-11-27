@@ -12,6 +12,4 @@ class PasswordDataSourceImpl(private val api: Api) : PasswordDataSource {
     override fun changePassword(password: String): Flowable<Response<Unit>> =
         api.changePassword(password).addSchedulers()
 
-    override fun sendTempPassword(email: String): Flowable<Response<Unit>> =
-        api.sendTempPassword(email).addSchedulers()
 }

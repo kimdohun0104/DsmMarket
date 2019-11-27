@@ -7,5 +7,4 @@ interface PasswordRepository {
 
     fun changePassword(password: String): Flowable<Unit>
 
-    fun sendTempPassword(email: String): Flowable<Unit>
 }

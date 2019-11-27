@@ -1,10 +1,10 @@
 package com.dsm.dsmmarketandroid.presentation.ui.password.forgotPassword
 
 import android.os.Bundle
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
+import com.dsm.domain.error.Resource
 import com.dsm.domain.usecase.SendTempPasswordUseCase
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.base.BaseViewModel
@@ -34,14 +34,16 @@ class ForgotPasswordViewModel(private val sendTempPasswordUseCase: SendTempPassw
             sendTempPasswordUseCase.create(email.value!!)
                 .doOnSubscribe { showLoadingDialogEvent.call() }
                 .doOnTerminate { hideLoadingDialogEvent.call() }
-                .doOnNext { sendTempPasswordLogEvent.value = Bundle().apply { putString(Analytics.USER_EMAIL, email.value) } }
+                .doOnComplete { sendTempPasswordLogEvent.value = Bundle().apply { putString(Analytics.USER_EMAIL, email.value) } }
                 .subscribe({
-                    toastEvent.value = R.string.send_temp_password_success
-                    finishActivityEvent.call()
-                }, {
-                    Log.d("DEBUGLOG", it.message.toString())
-                    toastEvent.value = R.string.fail_server_error
-                })
+                    when (it) {
+                        is Resource.Success -> {
+                            toastEvent.value = R.string.send_temp_password_success
+                            finishActivityEvent.call()
+                        }
+                        is Resource.Error -> toastEvent.value = R.string.fail_server_error
+                    }
+                }, {})
         )
     }
 }

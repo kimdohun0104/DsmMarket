@@ -1,7 +1,5 @@
 package com.dsm.dsmmarketandroid.di
 
-import com.dsm.data.dataSource.account.AccountDataSource
-import com.dsm.data.dataSource.account.AccountDataSourceImpl
 import com.dsm.data.dataSource.chat.ChatDataSource
 import com.dsm.data.dataSource.chat.ChatDataSourceImpl
 import com.dsm.data.dataSource.comment.CommentDataSource
@@ -29,8 +27,6 @@ import com.dsm.data.dataSource.search.SearchDataSourceImpl
 import org.koin.dsl.module
 
 val dataSourceModule = module {
-    factory<AccountDataSource> { AccountDataSourceImpl(get()) }
-
     factory<PasswordDataSource> { PasswordDataSourceImpl(get()) }
 
     factory<PostDataSource> { PostDataSourceImpl(get()) }

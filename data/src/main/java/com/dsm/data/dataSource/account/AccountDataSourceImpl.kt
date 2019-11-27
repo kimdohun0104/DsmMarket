@@ -7,8 +7,8 @@ import retrofit2.Response
 
 class AccountDataSourceImpl(private val api: Api) : AccountDataSource {
 
-    override fun getUserNick(): Flowable<Response<Map<String, String>>> =
-        api.getUserNick().addSchedulers()
+    override fun sendTempPassword(email: String): Flowable<Unit> =
+        api.sendTempPassword(email).addSchedulers()
 
     override fun changeUserNick(newNick: String): Flowable<Response<Unit>> =
         api.changeUserNick(newNick).addSchedulers()

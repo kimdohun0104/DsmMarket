@@ -11,13 +11,8 @@ class AccountRepositoryImpl(
     private val prefHelper: PrefHelper
 ) : AccountRepository {
 
-    override fun getUserNick(): Flowable<String?> =
-        accountDataSource.getUserNick().map {
-            if (it.code() == 200) it.body()!!["nick"]
-            else throw HttpException(it)
-        }
-            .doOnNext { prefHelper.setUserNick(it!!) }
-            .onErrorReturn { prefHelper.getUserNick() }
+    override fun sendTempPassword(email: String): Flowable<Unit> =
+        accountDataSource.sendTempPassword(email)
 
     override fun changeUserNick(newNick: String): Flowable<Unit> =
         accountDataSource.changeUserNick(newNick).map {

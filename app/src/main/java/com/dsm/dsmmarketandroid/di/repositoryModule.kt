@@ -5,7 +5,6 @@ import com.dsm.domain.repository.*
 import org.koin.dsl.module
 
 val repositoryModule = module {
-    factory<AccountRepository> { AccountRepositoryImpl(get(), get()) }
 
     factory<PasswordRepository> { PasswordRepositoryImpl(get()) }
 

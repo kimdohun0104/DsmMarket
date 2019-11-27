@@ -4,9 +4,7 @@ import io.reactivex.Flowable
 
 interface AccountRepository {
 
-
-
-    fun getUserNick(): Flowable<String?>
+    fun sendTempPassword(email: String): Flowable<Unit>
 
     fun changeUserNick(newNick: String): Flowable<Unit>
 }

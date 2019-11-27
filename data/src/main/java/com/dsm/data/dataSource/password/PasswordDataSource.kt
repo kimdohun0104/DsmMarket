@@ -8,5 +8,4 @@ interface PasswordDataSource {
 
     fun changePassword(password: String): Flowable<Response<Unit>>
 
-    fun sendTempPassword(email: String): Flowable<Response<Unit>>
 }

@@ -19,7 +19,7 @@ interface Api {
     fun confirmPassword(@Query("password") password: String): Flowable<Response<Unit>>
 
     @GET("auth/mail")
-    fun sendTempPassword(@Query("email") email: String): Flowable<Response<Unit>>
+    fun sendTempPassword(@Query("email") email: String): Flowable<Unit>
 
     @FormUrlEncoded
     @PATCH("account/password")

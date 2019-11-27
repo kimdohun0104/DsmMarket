@@ -17,8 +17,4 @@ class PasswordRepositoryImpl(private val passwordDataSource: PasswordDataSource)
             if (it.code() != 200) throw HttpException(it)
         }
 
-    override fun sendTempPassword(email: String): Flowable<Unit> =
-        passwordDataSource.sendTempPassword(email).map {
-            if (it.code() != 200) throw HttpException(it)
-        }
 }
