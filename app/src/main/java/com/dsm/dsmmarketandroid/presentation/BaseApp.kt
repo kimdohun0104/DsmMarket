@@ -6,6 +6,7 @@ import android.content.res.Configuration
 import com.dsm.dsmmarketandroid.di.*
 import com.dsm.dsmmarketandroid.di.auth.authModule
 import com.dsm.dsmmarketandroid.di.auth.loginModule
+import com.dsm.dsmmarketandroid.di.auth.signUpModule
 import com.dsm.dsmmarketandroid.di.auth.splashModule
 import com.dsm.dsmmarketandroid.presentation.util.LocaleManager
 import org.koin.android.ext.koin.androidContext
@@ -34,7 +35,8 @@ open class BaseApp : Application() {
                     pagingModule,
                     loginModule,
                     authModule,
-                    splashModule
+                    splashModule,
+                    signUpModule
                 )
             )
         }

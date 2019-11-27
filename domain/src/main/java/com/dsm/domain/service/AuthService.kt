@@ -8,4 +8,6 @@ interface AuthService {
     fun login(body: Any) : Flowable<Resource<Unit>>
 
     fun autoLogin(): Flowable<Resource<Unit>>
+
+    fun signUp(body: Any): Flowable<Resource<Unit>>
 }

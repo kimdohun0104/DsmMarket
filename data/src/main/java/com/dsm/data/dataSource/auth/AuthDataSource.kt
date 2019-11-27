@@ -9,6 +9,8 @@ interface AuthDataSource {
 
     fun autoLogin(): Flowable<Unit>
 
+    fun signUp(body: Any): Flowable<Unit>
+
     fun setAccessToken(token: String)
 
     fun setRefreshToken(token: String)

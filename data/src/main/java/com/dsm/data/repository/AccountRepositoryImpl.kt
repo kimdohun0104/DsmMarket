@@ -12,12 +12,6 @@ class AccountRepositoryImpl(
     private val prefHelper: PrefHelper
 ) : AccountRepository {
 
-    override fun signUp(body: Any): Flowable<Unit> =
-        accountDataSource.signUp(body).map {
-            if (it.code() != 200) throw HttpException(it)
-        }
-
-
     override fun refreshToken(refreshToken: String): Flowable<Response<Map<String, Any>>> =
         accountDataSource.refreshToken(refreshToken)
 

@@ -5,8 +5,6 @@ import org.koin.dsl.module
 
 val useCaseModule = module {
 
-    factory { SignUpUseCase(get()) }
-
     factory { RefreshTokenUseCase(get()) }
 
     factory { ChangePasswordUseCase(get()) }

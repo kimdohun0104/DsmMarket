@@ -2,7 +2,6 @@ package com.dsm.dsmmarketandroid.di
 
 import com.dsm.data.paging.purchase.PurchaseDataFactory
 import com.dsm.data.paging.rent.RentDataFactory
-import com.dsm.dsmmarketandroid.presentation.ui.auth.signUp.SignUpViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.chat.ChatViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.chat.chatList.ChatListViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.comment.CommentViewModel
@@ -30,8 +29,6 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val viewModelModule = module {
-
-    viewModel { SignUpViewModel(get()) }
 
     viewModel { ChangePasswordViewModel(get()) }
 

@@ -17,6 +17,9 @@ class AuthRepositoryImpl(
     override fun autoLogin(): Flowable<Unit> =
         dataSource.autoLogin()
 
+    override fun signUp(body: Any): Flowable<Unit> =
+        dataSource.signUp(body)
+
     override fun setAccessToken(token: String) =
         dataSource.setAccessToken(token)
 

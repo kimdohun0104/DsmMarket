@@ -23,4 +23,7 @@ class AuthServiceImpl(
 
     override fun autoLogin(): Flowable<Resource<Unit>> =
         authRepository.autoLogin().toResource(errorHandler)
+
+    override fun signUp(body: Any): Flowable<Resource<Unit>> =
+        authRepository.signUp(body).toResource(errorHandler)
 }
