@@ -7,9 +7,6 @@ import retrofit2.Response
 
 class AccountDataSourceImpl(private val api: Api) : AccountDataSource {
 
-    override fun refreshToken(refreshToken: String): Flowable<Response<Map<String, Any>>> =
-        api.refreshToken(refreshToken).addSchedulers()
-
     override fun getUserNick(): Flowable<Response<Map<String, String>>> =
         api.getUserNick().addSchedulers()
 

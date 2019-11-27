@@ -5,6 +5,7 @@ import com.dsm.data.local.pref.PrefHelper
 import com.dsm.data.remote.Api
 import com.dsm.data.remote.entity.TokenEntity
 import io.reactivex.Flowable
+import retrofit2.Response
 
 class AuthDataSourceImpl(
     private val api: Api,
@@ -19,6 +20,9 @@ class AuthDataSourceImpl(
 
     override fun signUp(body: Any): Flowable<Unit> =
         api.signUp(body).addSchedulers()
+
+    override fun refreshToken(refreshToken: String): Flowable<Response<Map<String, Any>>> =
+        api.refreshToken(refreshToken).addSchedulers()
 
     override fun setAccessToken(token: String) =
         prefHelper.setAccessToken(token)

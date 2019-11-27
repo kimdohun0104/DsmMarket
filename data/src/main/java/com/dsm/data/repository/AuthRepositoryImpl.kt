@@ -5,6 +5,7 @@ import com.dsm.data.mapper.TokenMapper
 import com.dsm.domain.entity.Token
 import com.dsm.domain.repository.AuthRepository
 import io.reactivex.Flowable
+import retrofit2.Response
 
 class AuthRepositoryImpl(
     private val dataSource: AuthDataSource,
@@ -19,6 +20,9 @@ class AuthRepositoryImpl(
 
     override fun signUp(body: Any): Flowable<Unit> =
         dataSource.signUp(body)
+
+    override fun refreshToken(refreshToken: String): Flowable<Response<Map<String, Any>>> =
+        dataSource.refreshToken(refreshToken)
 
     override fun setAccessToken(token: String) =
         dataSource.setAccessToken(token)

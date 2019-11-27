@@ -6,6 +6,7 @@ import com.dsm.data.repository.AuthRepositoryImpl
 import com.dsm.domain.repository.AuthRepository
 import com.dsm.domain.service.AuthService
 import com.dsm.domain.service.AuthServiceImpl
+import com.dsm.domain.usecase.RefreshTokenUseCase
 import org.koin.dsl.module
 
 val authModule = module {
@@ -15,4 +16,6 @@ val authModule = module {
     factory<AuthRepository> { AuthRepositoryImpl(get(), get()) }
 
     factory<AuthService> { AuthServiceImpl(get(), get()) }
+
+    factory { RefreshTokenUseCase(get()) }
 }
