@@ -1,4 +1,4 @@
-package com.dsm.dsmmarketandroid.presentation.ui.password.passwordConfirm
+package com.dsm.dsmmarketandroid.presentation.ui.me.password.passwordConfirm
 
 import android.os.Bundle
 import android.view.inputmethod.EditorInfo
@@ -6,7 +6,7 @@ import androidx.lifecycle.Observer
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.ActivityPasswordConfirmBinding
 import com.dsm.dsmmarketandroid.presentation.base.BaseActivity
-import com.dsm.dsmmarketandroid.presentation.ui.password.changePassword.ChangePasswordActivity
+import com.dsm.dsmmarketandroid.presentation.ui.me.password.changePassword.ChangePasswordActivity
 import com.dsm.dsmmarketandroid.presentation.util.setEditorActionListener
 import kotlinx.android.synthetic.main.activity_password_confirm.*
 import org.jetbrains.anko.startActivity

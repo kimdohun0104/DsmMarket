@@ -6,7 +6,7 @@ import com.dsm.domain.error.ErrorEntity
 import com.dsm.domain.error.Resource
 import com.dsm.domain.usecase.ConfirmPasswordUseCase
 import com.dsm.dsmmarketandroid.R
-import com.dsm.dsmmarketandroid.presentation.ui.password.passwordConfirm.ConfirmPasswordViewModel
+import com.dsm.dsmmarketandroid.presentation.ui.me.password.passwordConfirm.ConfirmPasswordViewModel
 import com.jraska.livedata.test
 import io.reactivex.Flowable
 import org.junit.Assert.assertFalse

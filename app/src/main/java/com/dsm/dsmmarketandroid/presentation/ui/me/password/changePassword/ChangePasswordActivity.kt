@@ -1,4 +1,4 @@
-package com.dsm.dsmmarketandroid.presentation.ui.password.changePassword
+package com.dsm.dsmmarketandroid.presentation.ui.me.password.changePassword
 
 import android.os.Bundle
 import android.view.animation.AnimationUtils

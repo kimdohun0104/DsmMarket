@@ -1,4 +1,4 @@
-package com.dsm.dsmmarketandroid.presentation.ui.password.changePassword
+package com.dsm.dsmmarketandroid.presentation.ui.me.password.changePassword
 
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData

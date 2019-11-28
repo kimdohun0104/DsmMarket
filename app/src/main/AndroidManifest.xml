@@ -20,7 +20,7 @@
         android:usesCleartextTraffic="true">
 
         <activity
-            android:name=".presentation.ui.password.forgotPassword.ForgotPasswordActivity"
+            android:name="com.dsm.dsmmarketandroid.presentation.ui.me.password.forgotPassword.ForgotPasswordActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".presentation.ui.main.purchase.purchaseImage.PurchaseImageActivity"
@@ -50,7 +50,7 @@
             android:name=".presentation.ui.main.rent.rentDetail.RentDetailActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".presentation.ui.password.passwordConfirm.ConfirmPasswordActivity"
+            android:name="com.dsm.dsmmarketandroid.presentation.ui.me.password.passwordConfirm.ConfirmPasswordActivity"
             android:screenOrientation="portrait"
             android:theme="@style/WhiteAppTheme"
             android:windowSoftInputMode="adjustResize" />
@@ -120,7 +120,7 @@
             android:theme="@style/WhiteAppTheme"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".presentation.ui.password.changePassword.ChangePasswordActivity"
+            android:name="com.dsm.dsmmarketandroid.presentation.ui.me.password.changePassword.ChangePasswordActivity"
             android:screenOrientation="portrait"
             android:theme="@style/WhiteAppTheme" />
         <activity

@@ -12,8 +12,8 @@ import com.dsm.dsmmarketandroid.presentation.ui.me.interest.InterestActivity
 import com.dsm.dsmmarketandroid.presentation.ui.me.language.ChangeLanguageActivity
 import com.dsm.dsmmarketandroid.presentation.ui.me.myPost.MyPostActivity
 import com.dsm.dsmmarketandroid.presentation.ui.me.openSource.OpenSourceActivity
+import com.dsm.dsmmarketandroid.presentation.ui.me.password.passwordConfirm.ConfirmPasswordActivity
 import com.dsm.dsmmarketandroid.presentation.ui.me.recent.RecentActivity
-import com.dsm.dsmmarketandroid.presentation.ui.password.passwordConfirm.ConfirmPasswordActivity
 import com.dsm.dsmmarketandroid.presentation.util.MessageEvents
 import kotlinx.android.synthetic.main.fragment_me.*
 import kr.sdusb.libs.messagebus.MessageBus

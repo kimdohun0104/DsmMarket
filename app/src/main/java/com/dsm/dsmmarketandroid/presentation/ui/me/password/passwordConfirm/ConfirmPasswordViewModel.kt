@@ -1,4 +1,4 @@
-package com.dsm.dsmmarketandroid.presentation.ui.password.passwordConfirm
+package com.dsm.dsmmarketandroid.presentation.ui.me.password.passwordConfirm
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

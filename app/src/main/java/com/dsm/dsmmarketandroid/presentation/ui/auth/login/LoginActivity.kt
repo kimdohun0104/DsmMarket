@@ -10,7 +10,7 @@ import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.ActivityLoginBinding
 import com.dsm.dsmmarketandroid.presentation.base.BaseActivity
 import com.dsm.dsmmarketandroid.presentation.ui.main.MainActivity
-import com.dsm.dsmmarketandroid.presentation.ui.password.forgotPassword.ForgotPasswordActivity
+import com.dsm.dsmmarketandroid.presentation.ui.me.password.forgotPassword.ForgotPasswordActivity
 import com.dsm.dsmmarketandroid.presentation.util.Analytics
 import com.dsm.dsmmarketandroid.presentation.util.LoadingDialog
 import com.dsm.dsmmarketandroid.presentation.util.setEditorActionListener
