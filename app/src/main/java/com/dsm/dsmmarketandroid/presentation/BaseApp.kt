@@ -9,6 +9,7 @@ import com.dsm.dsmmarketandroid.di.auth.authModule
 import com.dsm.dsmmarketandroid.di.auth.loginModule
 import com.dsm.dsmmarketandroid.di.auth.signUpModule
 import com.dsm.dsmmarketandroid.di.auth.splashModule
+import com.dsm.dsmmarketandroid.di.purchase.purchaseModule
 import com.dsm.dsmmarketandroid.presentation.util.LocaleManager
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
@@ -42,7 +43,8 @@ open class BaseApp : Application() {
                     forgotPasswordModule,
                     changeNickModule,
                     confirmPasswordModule,
-                    changePasswordModule
+                    changePasswordModule,
+                    purchaseModule
                 )
             )
         }

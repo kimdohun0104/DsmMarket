@@ -10,8 +10,8 @@ import com.dsm.data.dataSource.myPost.MyPostDataSource
 import com.dsm.data.dataSource.myPost.MyPostDataSourceImpl
 import com.dsm.data.dataSource.post.PostDataSource
 import com.dsm.data.dataSource.post.PostDataSourceImpl
-import com.dsm.data.dataSource.purchase.PurchaseDataSource
-import com.dsm.data.dataSource.purchase.PurchaseDataSourceImpl
+import com.dsm.data.dataSource.purchaseBefore.PurchaseDataSourceBefore
+import com.dsm.data.dataSource.purchaseBefore.PurchaseDataSourceImplBefore
 import com.dsm.data.dataSource.recent.RecentDataSource
 import com.dsm.data.dataSource.recent.RecentDataSourceImpl
 import com.dsm.data.dataSource.recommend.RecommendDataSource
@@ -27,7 +27,7 @@ import org.koin.dsl.module
 val dataSourceModule = module {
     factory<PostDataSource> { PostDataSourceImpl(get()) }
 
-    factory<PurchaseDataSource> { PurchaseDataSourceImpl(get(), get(), get()) }
+    factory<PurchaseDataSourceBefore> { PurchaseDataSourceImplBefore(get(), get(), get()) }
 
     factory<RentDataSource> { RentDataSourceImpl(get(), get(), get()) }
 
