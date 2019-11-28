@@ -78,7 +78,7 @@ interface Api {
     fun getRentDetail(
         @Query("postId") postId: Int,
         @Query("type") type: Int = 1
-    ): Flowable<Response<RentDetailEntity>>
+    ): Flowable<RentDetailEntity>
 
     @POST("post/comment")
     fun postComment(@Body params: Any): Flowable<Response<Unit>>
@@ -94,14 +94,14 @@ interface Api {
     fun interest(
         @Field("postId") postId: Int,
         @Field("type") type: Int
-    ): Flowable<Response<Unit>>
+    ): Flowable<Unit>
 
     @FormUrlEncoded
     @PATCH("post/uninterest")
     fun unInterest(
         @Field("postId") postId: Int,
         @Field("type") type: Int
-    ): Flowable<Response<Unit>>
+    ): Flowable<Unit>
 
     @GET("list/interest")
     fun getInterest(@Query("type") type: Int): Flowable<ProductListEntity>
@@ -156,7 +156,7 @@ interface Api {
     fun getChatRoom(): Flowable<ChatRoomListEntity>
 
     @GET("room/join/{roomId}")
-    fun joinRoom(@Path("roomId") roomId: Int) : Flowable<Response<HashMap<String, String>>>
+    fun joinRoom(@Path("roomId") roomId: Int) : Flowable<Map<String, String>>
 
     @GET("room/chatLog")
     fun getChatLog(

@@ -11,17 +11,9 @@ val useCaseModule = module {
 
     factory { PostPurchaseUseCase(get()) }
 
-    factory { GetPurchaseDetailUseCase(get()) }
-
-    factory { GetRentDetailUseCase(get()) }
-
     factory { PostCommentUseCase(get()) }
 
     factory { GetCommentUseCase(get()) }
-
-    factory { InterestUseCase(get()) }
-
-    factory { UnInterestUseCase(get()) }
 
     factory { GetRecentPurchaseUseCase(get()) }
 
@@ -41,10 +33,6 @@ val useCaseModule = module {
 
     factory { ReportCommentUseCase(get()) }
 
-    factory { GetRecommendUseCase(get()) }
-
-    factory { GetRelatedUseCase(get()) }
-
     factory { CompletePurchaseUseCase(get()) }
 
     factory { CompleteRentUseCase(get()) }
@@ -56,14 +44,6 @@ val useCaseModule = module {
     factory { GetRentImageUseCase(get()) }
 
     factory { GetPurchaseImageUseCase(get()) }
-
-    factory { CreateRoomUseCase(get()) }
-
-    factory { GetChatRoomUseCase(get()) }
-
-    factory { JoinRoomUseCase(get()) }
-
-    factory { GetChatLogUseCase(get()) }
 
     factory { AddSearchHistoryUseCase(get()) }
 }

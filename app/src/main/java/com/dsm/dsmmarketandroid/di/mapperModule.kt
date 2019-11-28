@@ -1,6 +1,8 @@
 package com.dsm.dsmmarketandroid.di
 
-import com.dsm.dsmmarketandroid.presentation.mapper.*
+import com.dsm.dsmmarketandroid.presentation.mapper.CommentModelMapper
+import com.dsm.dsmmarketandroid.presentation.mapper.PostCategoryModelMapper
+import com.dsm.dsmmarketandroid.presentation.mapper.ProductModelMapper
 import org.koin.dsl.module
 
 val mapperModule = module {
@@ -8,15 +10,5 @@ val mapperModule = module {
 
     factory { ProductModelMapper() }
 
-    factory { PurchaseDetailModelMapper() }
-
-    factory { RentDetailModelMapper() }
-
     factory { CommentModelMapper() }
-
-    factory { RecommendModelMapper() }
-
-    factory { ChatRoomModelMapper() }
-
-    factory { ChatModelMapper() }
 }

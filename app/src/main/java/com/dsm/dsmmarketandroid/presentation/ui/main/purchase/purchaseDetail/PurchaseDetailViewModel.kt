@@ -2,6 +2,8 @@ package com.dsm.dsmmarketandroid.presentation.ui.main.purchase.purchaseDetail
 
 import android.os.Bundle
 import androidx.lifecycle.MutableLiveData
+import com.dsm.domain.error.ErrorEntity
+import com.dsm.domain.error.Resource
 import com.dsm.domain.usecase.*
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.base.BaseViewModel
@@ -13,7 +15,6 @@ import com.dsm.dsmmarketandroid.presentation.util.Analytics
 import com.dsm.dsmmarketandroid.presentation.util.ProductType
 import com.dsm.dsmmarketandroid.presentation.util.SingleLiveEvent
 import io.reactivex.android.schedulers.AndroidSchedulers
-import retrofit2.HttpException
 import java.util.concurrent.TimeUnit
 
 class PurchaseDetailViewModel(
@@ -49,20 +50,28 @@ class PurchaseDetailViewModel(
     fun getPurchaseDetail(postId: Int) {
         addDisposable(
             getPurchaseDetailUseCase.create(postId)
-                .map(purchaseDetailModelMapper::mapFrom)
                 .delay(80, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnNext { purchaseDetailLogEvent.value = Bundle().apply { putInt(Analytics.POST_ID, postId) } }
                 .subscribe({
-                    isInterest.value = it.isInterest
-                    isMe.value = it.isMe
-                    purchaseDetail.value = it
-                }, {
-                    if (it is HttpException && it.code() == 410) {
-                        toastEvent.value = R.string.fail_non_exist_post
-                        finishActivityEvent.call()
-                    } else toastEvent.value = R.string.fail_server_error
-                })
+                    when (it) {
+                        is Resource.Success -> {
+                            val detailModel = purchaseDetailModelMapper.mapFrom(it.data)
+                            isInterest.value = detailModel.isInterest
+                            isMe.value = detailModel.isMe
+                            purchaseDetail.value = detailModel
+                        }
+                        is Resource.Error -> {
+                            when (it.error) {
+                                is ErrorEntity.Gone -> {
+                                    toastEvent.value = R.string.fail_non_exist_post
+                                    finishActivityEvent.call()
+                                }
+                                else -> toastEvent.value = R.string.fail_server_error
+                            }
+                        }
+                    }
+                }, {})
         )
     }
 
@@ -71,22 +80,40 @@ class PurchaseDetailViewModel(
             addDisposable(
                 unInterestUseCase.create(UnInterestUseCase.Params(postId, ProductType.PURCHASE))
                     .subscribe({
-                        isInterest.value = false
-                        toastEvent.value = R.string.un_interest
-                    }, {
-                        toastEvent.value = R.string.fail_server_error
-                    })
+                        when (it) {
+                            is Resource.Success -> {
+                                isInterest.value = false
+                                toastEvent.value = R.string.un_interest
+                            }
+                            is Resource.Error -> {
+                                when (it.error) {
+                                    is ErrorEntity.Unauthorized -> toastEvent.value = R.string.fail_unauthorized
+                                    is ErrorEntity.Gone -> toastEvent.value = R.string.fail_non_exist_post
+                                    else -> toastEvent.value = R.string.fail_server_error
+                                }
+                            }
+                        }
+                    }, {})
             )
         } else {
             addDisposable(
                 interestUseCase.create(InterestUseCase.Params(postId, ProductType.PURCHASE))
                     .doOnNext { interestLogEvent.value = Bundle().apply { putInt(Analytics.POST_ID, postId) } }
                     .subscribe({
-                        isInterest.value = true
-                        toastEvent.value = R.string.interest
-                    }, {
-                        toastEvent.value = R.string.fail_server_error
-                    })
+                        when (it) {
+                            is Resource.Success -> {
+                                isInterest.value = true
+                                toastEvent.value = R.string.interest
+                            }
+                            is Resource.Error -> {
+                                when (it.error) {
+                                    is ErrorEntity.Unauthorized -> toastEvent.value = R.string.fail_unauthorized
+                                    is ErrorEntity.Gone -> toastEvent.value = R.string.fail_non_exist_post
+                                    else -> toastEvent.value = R.string.fail_server_error
+                                }
+                            }
+                        }
+                    }, {})
             )
         }
     }
@@ -94,23 +121,18 @@ class PurchaseDetailViewModel(
     fun getRecommendProduct() {
         addDisposable(
             getRecommendUseCase.create(Unit)
-                .map(recommendModelMapper::mapFrom)
                 .subscribe({
-                    recommendList.value = it
-                }, {
-                })
+                    if (it is Resource.Success) recommendList.value = recommendModelMapper.mapFrom(it.data)
+                }, {})
         )
     }
 
     fun getRelatedProduct(postId: Int) {
         addDisposable(
             getRelatedUseCase.create(GetRelatedUseCase.Params(postId, ProductType.PURCHASE))
-                .map(recommendModelMapper::mapFrom)
                 .subscribe({
-                    relatedList.value = it
-                }, {
-                    toastEvent.value = R.string.fail_server_error
-                })
+                    if (it is Resource.Success) relatedList.value = recommendModelMapper.mapFrom(it.data)
+                }, {})
         )
     }
 
@@ -122,15 +144,22 @@ class PurchaseDetailViewModel(
                 .doOnNext { createChatRoomLogEvent.value = Bundle().apply { putInt(Analytics.POST_ID, postId) } }
                 .map { roomId ->
                     joinRoomUseCase.create(roomId)
-                        .subscribe({ email ->
-                            intentChatActivityEvent.value = Bundle().apply {
-                                putString("email", email)
-                                putInt("roomId", roomId)
-                                putString("roomTitle", purchaseDetail.value?.title)
+                        .subscribe({
+                            when (it) {
+                                is Resource.Success -> intentChatActivityEvent.value = Bundle().apply {
+                                    putString("email", it.data)
+                                    putInt("roomId", roomId)
+                                    putString("roomTitle", purchaseDetail.value?.title)
+                                }
+                                is Resource.Error -> {
+                                    when (it.error) {
+                                        is ErrorEntity.Unauthorized -> toastEvent.value = R.string.fail_unauthorized
+                                        is ErrorEntity.Gone -> toastEvent.value = R.string.fail_join_chat_room
+                                        else -> toastEvent.value = R.string.fail_server_error
+                                    }
+                                }
                             }
-                        }, {
-                            toastEvent.value = R.string.fail_server_error
-                        })
+                        }, {})
                 }.subscribe({
                 }, {
                     toastEvent.value = R.string.fail_server_error

@@ -107,6 +107,7 @@
 	<string name="fail_permission_denied">You need permission</string>
 	<string name="fail_non_exist_post">The post does not exist</string>
 	<string name="fail_unauthorized">Login is required</string>
+	<string name="fail_join_chat_room">Failed to connect to chat</string>
 
 	<string name="confirm">Confirm</string>
 

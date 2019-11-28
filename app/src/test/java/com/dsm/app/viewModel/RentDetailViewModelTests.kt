@@ -4,6 +4,8 @@ import com.dsm.app.BaseTest
 import com.dsm.app.createHttpException
 import com.dsm.domain.entity.Recommend
 import com.dsm.domain.entity.RentDetail
+import com.dsm.domain.error.ErrorEntity
+import com.dsm.domain.error.Resource
 import com.dsm.domain.usecase.*
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.mapper.RecommendModelMapper
@@ -63,7 +65,7 @@ class RentDetailViewModelTests : BaseTest() {
         viewModel.isInterest.value = false
 
         `when`(interestUseCase.create(InterestUseCase.Params(0, ProductType.RENT)))
-            .thenReturn(Flowable.just(Unit))
+            .thenReturn(Flowable.just(Resource.Success(Unit)))
 
         viewModel.onClickInterest(0)
 
@@ -77,7 +79,7 @@ class RentDetailViewModelTests : BaseTest() {
             isInterest.value = false
 
             `when`(interestUseCase.create(InterestUseCase.Params(0, ProductType.RENT)))
-                .thenReturn(Flowable.error(Exception()))
+                .thenReturn(Flowable.just(Resource.Error(ErrorEntity.Internal(createHttpException(500)))))
 
             onClickInterest(0)
 
@@ -90,7 +92,7 @@ class RentDetailViewModelTests : BaseTest() {
         viewModel.isInterest.value = true
 
         `when`(unInterestUseCase.create(UnInterestUseCase.Params(0, 1)))
-            .thenReturn(Flowable.just(Unit))
+            .thenReturn(Flowable.just(Resource.Success(Unit)))
 
         viewModel.onClickInterest(0)
 
@@ -104,7 +106,7 @@ class RentDetailViewModelTests : BaseTest() {
             isInterest.value = true
 
             `when`(unInterestUseCase.create(UnInterestUseCase.Params(0, ProductType.RENT)))
-                .thenReturn(Flowable.error(Exception()))
+                .thenReturn(Flowable.just(Resource.Error(ErrorEntity.Internal(createHttpException(500)))))
 
             onClickInterest(0)
 
@@ -119,7 +121,7 @@ class RentDetailViewModelTests : BaseTest() {
         )
 
         `when`(getRelatedUseCase.create(GetRelatedUseCase.Params(0, 1)))
-            .thenReturn(Flowable.just(response))
+            .thenReturn(Flowable.just(Resource.Success(response)))
 
         viewModel.getRelatedProduct(0)
 
@@ -130,7 +132,7 @@ class RentDetailViewModelTests : BaseTest() {
     fun `get rent detail success test`() {
         val response = RentDetail("", "", 0, "", "", "", "", "", 0, true, "", false)
         `when`(getRentDetailUseCase.create(0))
-            .thenReturn(Flowable.just(response))
+            .thenReturn(Flowable.just(Resource.Success(response)))
 
         viewModel.run {
             getRentDetail(0)
@@ -145,7 +147,7 @@ class RentDetailViewModelTests : BaseTest() {
     @Test
     fun `get rent detail failed not exist post test`() {
         `when`(getRentDetailUseCase.create(0))
-            .thenReturn(Flowable.error(createHttpException(410)))
+            .thenReturn(Flowable.just(Resource.Error(ErrorEntity.Gone(createHttpException(410)))))
 
         viewModel.run {
             getRentDetail(0)
@@ -157,7 +159,7 @@ class RentDetailViewModelTests : BaseTest() {
     @Test
     fun `get rent detail failed server error test`() {
         `when`(getRentDetailUseCase.create(0))
-            .thenReturn(Flowable.error(Exception()))
+            .thenReturn(Flowable.just(Resource.Error(ErrorEntity.Internal(createHttpException(500)))))
 
         viewModel.run {
             getRentDetail(0)

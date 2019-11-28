@@ -6,6 +6,7 @@ import android.content.res.Configuration
 import com.dsm.dsmmarketandroid.di.*
 import com.dsm.dsmmarketandroid.di.account.accountModule
 import com.dsm.dsmmarketandroid.di.auth.authModule
+import com.dsm.dsmmarketandroid.di.chat.chatModule
 import com.dsm.dsmmarketandroid.di.detail.detailModule
 import com.dsm.dsmmarketandroid.di.purchase.purchaseModule
 import com.dsm.dsmmarketandroid.presentation.util.LocaleManager
@@ -36,7 +37,8 @@ open class BaseApp : Application() {
                     authModule,
                     accountModule,
                     purchaseModule,
-                    detailModule
+                    detailModule,
+                    chatModule
                 )
             )
         }

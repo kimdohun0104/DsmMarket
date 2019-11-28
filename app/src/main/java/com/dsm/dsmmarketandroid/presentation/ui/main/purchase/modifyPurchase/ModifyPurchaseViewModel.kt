@@ -2,6 +2,7 @@ package com.dsm.dsmmarketandroid.presentation.ui.main.purchase.modifyPurchase
 
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
+import com.dsm.domain.error.Resource
 import com.dsm.domain.usecase.GetPurchaseDetailUseCase
 import com.dsm.domain.usecase.ModifyPurchaseUseCase
 import com.dsm.dsmmarketandroid.R
@@ -42,16 +43,19 @@ class ModifyPurchaseViewModel(
     fun getPurchaseDetail(postId: Int) {
         addDisposable(
             getPurchaseDetailUseCase.create(postId)
-                .map(purchaseDetailModelMapper::mapFrom)
                 .subscribe({
-                    title.value = it.title
-                    price.value = it.price.substring(0, it.price.length - 1)    // 100원
-                    category.value = it.category
-                    content.value = it.content
-                    imageList.value = it.img as ArrayList<String>
-                }, {
-                    toastEvent.value = R.string.fail_server_error
-                })
+                    when (it) {
+                        is Resource.Success -> {
+                            val detail = purchaseDetailModelMapper.mapFrom(it.data)
+                            title.value = detail.title
+                            price.value = detail.price.substring(0, detail.price.length - 1)    // 100원
+                            category.value = detail.category
+                            content.value = detail.content
+                            imageList.value = detail.img as ArrayList<String>
+                        }
+                        is Resource.Error -> toastEvent.value = R.string.fail_server_error
+                    }
+                }, {})
         )
     }
 

@@ -83,7 +83,7 @@ class RentDetailActivity : BaseActivity<ActivityRentDetailBinding>() {
 
             toastEvent.observe(`this`, Observer { toast(it) })
 
-            startChatActivityEvent.observe(`this`, Observer { startActivity<ChatActivity>("bundle" to it) })
+            intentChatActivityEvent.observe(`this`, Observer { startActivity<ChatActivity>("bundle" to it) })
 
             showLoadingDialogEvent.observe(`this`, Observer { LoadingDialog.show(supportFragmentManager) })
 

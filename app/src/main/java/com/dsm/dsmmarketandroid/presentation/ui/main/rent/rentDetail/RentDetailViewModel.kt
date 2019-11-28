@@ -2,6 +2,8 @@ package com.dsm.dsmmarketandroid.presentation.ui.main.rent.rentDetail
 
 import android.os.Bundle
 import androidx.lifecycle.MutableLiveData
+import com.dsm.domain.error.ErrorEntity
+import com.dsm.domain.error.Resource
 import com.dsm.domain.usecase.*
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.base.BaseViewModel
@@ -13,7 +15,6 @@ import com.dsm.dsmmarketandroid.presentation.util.Analytics
 import com.dsm.dsmmarketandroid.presentation.util.ProductType
 import com.dsm.dsmmarketandroid.presentation.util.SingleLiveEvent
 import io.reactivex.android.schedulers.AndroidSchedulers
-import retrofit2.HttpException
 import java.util.concurrent.TimeUnit
 
 class RentDetailViewModel(
@@ -34,7 +35,7 @@ class RentDetailViewModel(
     val relatedList = MutableLiveData<List<RecommendModel>>()
 
     val toastEvent = SingleLiveEvent<Int>()
-    val startChatActivityEvent = SingleLiveEvent<Bundle>()
+    val intentChatActivityEvent = SingleLiveEvent<Bundle>()
 
     val showLoadingDialogEvent = SingleLiveEvent<Any>()
     val hideLoadingDialogEvent = SingleLiveEvent<Any>()
@@ -42,25 +43,35 @@ class RentDetailViewModel(
     val interestLogEvent = SingleLiveEvent<Bundle>()
     val rentDetailLogEvent = SingleLiveEvent<Bundle>()
 
+    val finishActivityEvent = SingleLiveEvent<Unit>()
+
     val createChatRoomLogEvent = SingleLiveEvent<Bundle>()
 
     fun getRentDetail(postId: Int) {
         addDisposable(
             getRentDetailUseCase.create(postId)
-                .map(rentDetailModelMapper::mapFrom)
                 .delay(70, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnNext { rentDetailLogEvent.value = Bundle().apply { putInt(Analytics.POST_ID, postId) } }
                 .subscribe({
-                    isInterest.value = it.isInterest
-                    isMe.value = it.isMe
-                    rentDetail.value = it
-                }, {
-                    if (it is HttpException && it.code() == 410)
-                        toastEvent.value = R.string.fail_non_exist_post
-                    else
-                        toastEvent.value = R.string.fail_server_error
-                })
+                    when (it) {
+                        is Resource.Success -> {
+                            val rentDetail = rentDetailModelMapper.mapFrom(it.data)
+                            isInterest.value = rentDetail.isInterest
+                            isMe.value = rentDetail.isMe
+                            this.rentDetail.value = rentDetail
+                        }
+                        is Resource.Error -> {
+                            when (it.error) {
+                                is ErrorEntity.Gone -> {
+                                    toastEvent.value = R.string.fail_non_exist_post
+                                    finishActivityEvent.call()
+                                }
+                                else -> toastEvent.value = R.string.fail_server_error
+                            }
+                        }
+                    }
+                }, {})
         )
     }
 
@@ -69,22 +80,40 @@ class RentDetailViewModel(
             addDisposable(
                 unInterestUseCase.create(UnInterestUseCase.Params(postId, ProductType.RENT))
                     .subscribe({
-                        isInterest.value = false
-                        toastEvent.value = R.string.un_interest
-                    }, {
-                        toastEvent.value = R.string.fail_server_error
-                    })
+                        when (it) {
+                            is Resource.Success -> {
+                                isInterest.value = false
+                                toastEvent.value = R.string.un_interest
+                            }
+                            is Resource.Error -> {
+                                when (it.error) {
+                                    is ErrorEntity.Unauthorized -> toastEvent.value = R.string.fail_unauthorized
+                                    is ErrorEntity.Gone -> toastEvent.value = R.string.fail_non_exist_post
+                                    else -> toastEvent.value = R.string.fail_server_error
+                                }
+                            }
+                        }
+                    }, {})
             )
         } else {
             addDisposable(
                 interestUseCase.create(InterestUseCase.Params(postId, ProductType.RENT))
                     .doOnNext { interestLogEvent.value = Bundle().apply { putInt(Analytics.POST_ID, postId) } }
                     .subscribe({
-                        isInterest.value = true
-                        toastEvent.value = R.string.interest
-                    }, {
-                        toastEvent.value = R.string.fail_server_error
-                    })
+                        when (it) {
+                            is Resource.Success -> {
+                                isInterest.value = true
+                                toastEvent.value = R.string.interest
+                            }
+                            is Resource.Error -> {
+                                when (it.error) {
+                                    is ErrorEntity.Unauthorized -> toastEvent.value = R.string.fail_unauthorized
+                                    is ErrorEntity.Gone -> toastEvent.value = R.string.fail_non_exist_post
+                                    else -> toastEvent.value = R.string.fail_server_error
+                                }
+                            }
+                        }
+                    }, {})
             )
         }
     }
@@ -92,12 +121,9 @@ class RentDetailViewModel(
     fun getRelatedProduct(postId: Int) {
         addDisposable(
             getRelatedUseCase.create(GetRelatedUseCase.Params(postId, ProductType.RENT))
-                .map(recommendModelMapper::mapFrom)
                 .subscribe({
-                    relatedList.value = it
-                }, {
-                    toastEvent.value = R.string.fail_server_error
-                })
+                    if (it is Resource.Success) relatedList.value = recommendModelMapper.mapFrom(it.data)
+                }, {})
         )
     }
 
@@ -109,15 +135,22 @@ class RentDetailViewModel(
                 .doOnNext { createChatRoomLogEvent.value = Bundle().apply { putInt(Analytics.POST_ID, postId) } }
                 .map { roomId ->
                     joinRoomUseCase.create(roomId)
-                        .subscribe({ email ->
-                            startChatActivityEvent.value = Bundle().apply {
-                                putString("email", email)
-                                putInt("roomId", roomId)
-                                putString("roomTitle", rentDetail.value?.title)
+                        .subscribe({
+                            when (it) {
+                                is Resource.Success -> intentChatActivityEvent.value = Bundle().apply {
+                                    putString("email", it.data)
+                                    putInt("roomId", roomId)
+                                    putString("roomTitle", rentDetail.value?.title)
+                                }
+                                is Resource.Error -> {
+                                    when (it.error) {
+                                        is ErrorEntity.Unauthorized -> toastEvent.value = R.string.fail_unauthorized
+                                        is ErrorEntity.Gone -> toastEvent.value = R.string.fail_join_chat_room
+                                        else -> toastEvent.value = R.string.fail_server_error
+                                    }
+                                }
                             }
-                        }, {
-                            toastEvent.value = R.string.fail_server_error
-                        })
+                        }, {})
                 }.subscribe({
                 }, {
                     toastEvent.value = R.string.fail_server_error

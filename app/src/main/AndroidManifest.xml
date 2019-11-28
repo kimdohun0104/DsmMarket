@@ -48,7 +48,8 @@
             android:theme="@style/WhiteAppTheme" />
         <activity
             android:name=".presentation.ui.main.rent.rentDetail.RentDetailActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/WhiteAppTheme" />
         <activity
             android:name="com.dsm.dsmmarketandroid.presentation.ui.main.me.password.passwordConfirm.ConfirmPasswordActivity"
             android:screenOrientation="portrait"

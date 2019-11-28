@@ -10,5 +10,7 @@ sealed class ErrorEntity {
 
     data class Unauthorized(override val originalException: Throwable) : ErrorEntity()
 
+    data class Gone(override val originalException: Throwable) : ErrorEntity()
+
     data class Unknown(override val originalException: Throwable) : ErrorEntity()
 }

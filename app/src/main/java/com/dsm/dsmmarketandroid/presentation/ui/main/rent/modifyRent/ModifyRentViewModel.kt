@@ -2,6 +2,7 @@ package com.dsm.dsmmarketandroid.presentation.ui.main.rent.modifyRent
 
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
+import com.dsm.domain.error.Resource
 import com.dsm.domain.usecase.GetRentDetailUseCase
 import com.dsm.domain.usecase.ModifyRentUseCase
 import com.dsm.dsmmarketandroid.R
@@ -58,17 +59,22 @@ class ModifyRentViewModel(
     fun getRentDetail(postId: Int) {
         addDisposable(
             getRentDetailUseCase.create(postId)
-                .map(rentDetailModelMapper::mapFrom)
                 .subscribe({
-                    title.value = it.title
-                    price.value = it.price.split(" ")[2].substring(0, it.price.split(" ")[2].length - 1)    // 1회당 100원
-                    photo.value = it.img
-                    content.value = it.content
-                    category.value = it.category
-                    rentTime.value = it.possibleTime
-                }, {
-                    toastEvent.value = R.string.fail_server_error
-                })
+                    when (it) {
+                        is Resource.Success -> {
+                            val detail = rentDetailModelMapper.mapFrom(it.data)
+                            title.value = detail.title
+                            price.value = detail.price.split(" ")[2].substring(0, detail.price.split(" ")[2].length - 1)    // 1회당 100원
+                            photo.value = detail.img
+                            content.value = detail.content
+                            category.value = detail.category
+                            rentTime.value = detail.possibleTime
+                        }
+                        is Resource.Error -> {
+                            toastEvent.value = R.string.fail_server_error
+                        }
+                    }
+                }, {})
         )
     }
 

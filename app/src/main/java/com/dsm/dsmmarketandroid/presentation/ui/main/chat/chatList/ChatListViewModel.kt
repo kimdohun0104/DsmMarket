@@ -3,6 +3,8 @@ package com.dsm.dsmmarketandroid.presentation.ui.main.chat.chatList
 import android.os.Bundle
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
+import com.dsm.domain.error.ErrorEntity
+import com.dsm.domain.error.Resource
 import com.dsm.domain.usecase.GetChatRoomUseCase
 import com.dsm.domain.usecase.JoinRoomUseCase
 import com.dsm.dsmmarketandroid.R
@@ -37,12 +39,17 @@ class ChatListViewModel(
                     isRefreshing.value = false
                     isProgressVisible.value = false
                 }
-                .map(chatRoomModelMapper::mapFrom)
                 .subscribe({
-                    chatRoomList.value = it
-                }, {
-                    toastEvent.value = R.string.fail_server_error
-                })
+                    when (it) {
+                        is Resource.Success -> chatRoomList.value = chatRoomModelMapper.mapFrom(it.data)
+                        is Resource.Error -> {
+                            when (it.error) {
+                                is ErrorEntity.Unauthorized -> toastEvent.value = R.string.fail_unauthorized
+                                else -> toastEvent.value = R.string.fail_server_error
+                            }
+                        }
+                    }
+                }, {})
         )
     }
 
@@ -52,14 +59,21 @@ class ChatListViewModel(
                 .doOnSubscribe { showLoadingDialogEvent.call() }
                 .doOnTerminate { hideLoadingDialogEvent.call() }
                 .subscribe({
-                    intentChatActivityEvent.value = Bundle().apply {
-                        putInt("roomId", roomId)
-                        putString("email", it)
-                        putString("roomTitle", roomTitle)
+                    when (it) {
+                        is Resource.Success -> intentChatActivityEvent.value = Bundle().apply {
+                            putInt("roomId", roomId)
+                            putString("email", it.data)
+                            putString("roomTitle", roomTitle)
+                        }
+                        is Resource.Error -> {
+                            when (it.error) {
+                                is ErrorEntity.Unauthorized -> toastEvent.value = R.string.fail_unauthorized
+                                is ErrorEntity.Gone -> toastEvent.value = R.string.fail_join_chat_room
+                                else -> toastEvent.value = R.string.fail_server_error
+                            }
+                        }
                     }
-                }, {
-                    toastEvent.value = R.string.fail_server_error
-                })
+                }, {})
         )
     }
 }
