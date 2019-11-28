@@ -1,7 +1,7 @@
 package com.dsm.dsmmarketandroid.di.account
 
 import com.dsm.domain.usecase.SendTempPasswordUseCase
-import com.dsm.dsmmarketandroid.presentation.ui.me.password.forgotPassword.ForgotPasswordViewModel
+import com.dsm.dsmmarketandroid.presentation.ui.main.me.password.forgotPassword.ForgotPasswordViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 

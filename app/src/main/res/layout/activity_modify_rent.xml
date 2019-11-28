@@ -4,7 +4,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.dsm.dsmmarketandroid.presentation.ui.modify.rent.ModifyRentViewModel" />
+            type="com.dsm.dsmmarketandroid.presentation.ui.main.rent.modifyRent.ModifyRentViewModel" />
         <variable
             name="postId"
             type="Integer" />
@@ -16,7 +16,7 @@
         xmlns:bind="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.ui.modify.rent.ModifyRentActivity">
+        tools:context=".presentation.ui.main.rent.modifyRent.ModifyRentActivity">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/tb_modify_rent"

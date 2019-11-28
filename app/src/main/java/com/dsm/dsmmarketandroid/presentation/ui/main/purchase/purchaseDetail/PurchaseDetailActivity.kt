@@ -11,9 +11,9 @@ import com.dsm.dsmmarketandroid.databinding.ActivityPurchaseDetailBinding
 import com.dsm.dsmmarketandroid.presentation.base.BaseActivity
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.DetailImageListAdapter
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.RecommendListAdapter
-import com.dsm.dsmmarketandroid.presentation.ui.chat.ChatActivity
-import com.dsm.dsmmarketandroid.presentation.ui.comment.CommentActivity
-import com.dsm.dsmmarketandroid.presentation.ui.modify.purchase.ModifyPurchaseActivity
+import com.dsm.dsmmarketandroid.presentation.ui.main.chat.ChatActivity
+import com.dsm.dsmmarketandroid.presentation.ui.main.comment.CommentActivity
+import com.dsm.dsmmarketandroid.presentation.ui.main.purchase.modifyPurchase.ModifyPurchaseActivity
 import com.dsm.dsmmarketandroid.presentation.ui.report.ReportPostDialog
 import com.dsm.dsmmarketandroid.presentation.util.Analytics
 import com.dsm.dsmmarketandroid.presentation.util.LoadingDialog

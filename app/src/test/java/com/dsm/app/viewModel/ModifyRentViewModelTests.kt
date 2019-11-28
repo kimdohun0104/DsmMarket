@@ -6,7 +6,7 @@ import com.dsm.domain.usecase.GetRentDetailUseCase
 import com.dsm.domain.usecase.ModifyRentUseCase
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.mapper.RentDetailModelMapper
-import com.dsm.dsmmarketandroid.presentation.ui.modify.rent.ModifyRentViewModel
+import com.dsm.dsmmarketandroid.presentation.ui.main.rent.modifyRent.ModifyRentViewModel
 import com.jraska.livedata.test
 import io.reactivex.Flowable
 import org.junit.Assert.assertFalse

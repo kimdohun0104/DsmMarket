@@ -102,7 +102,7 @@
 	<string name="fail_send_email">It failed to send email</string>
 	<string name="fail_confirm_code">You can not check the authentication code</string>
 	<string name="fail_invalid_confirm_code">An authorization code is not valid</string>
-	<string name="fail_server_error">There was a problem with the server</string>
+	<string name="fail_server_error">Please check network status</string>
 	<string name="fail_change_password">Failed to change password</string>
 	<string name="fail_permission_denied">You need permission</string>
 	<string name="fail_non_exist_post">The post does not exist</string>

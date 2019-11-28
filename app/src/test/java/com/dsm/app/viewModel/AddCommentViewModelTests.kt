@@ -3,7 +3,7 @@ package com.dsm.app.viewModel
 import com.dsm.app.BaseTest
 import com.dsm.domain.usecase.PostCommentUseCase
 import com.dsm.dsmmarketandroid.R
-import com.dsm.dsmmarketandroid.presentation.ui.comment.addComment.AddCommentViewModel
+import com.dsm.dsmmarketandroid.presentation.ui.main.comment.addComment.AddCommentViewModel
 import com.jraska.livedata.test
 import io.reactivex.Flowable
 import org.junit.Assert.assertFalse

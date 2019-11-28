@@ -4,8 +4,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.dsm.dsmmarketandroid.presentation.ui.modify.rent.rentTime.ModifyEndTimeFragment
-import com.dsm.dsmmarketandroid.presentation.ui.modify.rent.rentTime.ModifyStartTimeFragment
+import com.dsm.dsmmarketandroid.presentation.ui.main.rent.modifyRent.rentTime.ModifyEndTimeFragment
+import com.dsm.dsmmarketandroid.presentation.ui.main.rent.modifyRent.rentTime.ModifyStartTimeFragment
 
 class ModifyRentTimePagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
     FragmentStateAdapter(fragmentManager, lifecycle) {

@@ -71,13 +71,13 @@ interface Api {
     @GET("post")
     fun getPurchaseDetail(
         @Query("postId") postId: Int,
-        @Query("type") type: Int
-    ): Flowable<Response<PurchaseDetailEntity>>
+        @Query("type") type: Int = 0
+    ): Flowable<PurchaseDetailEntity>
 
     @GET("post")
     fun getRentDetail(
         @Query("postId") postId: Int,
-        @Query("type") type: Int
+        @Query("type") type: Int = 1
     ): Flowable<Response<RentDetailEntity>>
 
     @POST("post/comment")

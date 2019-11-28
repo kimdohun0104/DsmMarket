@@ -2,25 +2,24 @@ package com.dsm.dsmmarketandroid.di
 
 import com.dsm.data.paging.purchase.PurchaseDataFactory
 import com.dsm.data.paging.rent.RentDataFactory
-import com.dsm.dsmmarketandroid.presentation.ui.chat.ChatViewModel
-import com.dsm.dsmmarketandroid.presentation.ui.chat.chatList.ChatListViewModel
-import com.dsm.dsmmarketandroid.presentation.ui.comment.CommentViewModel
-import com.dsm.dsmmarketandroid.presentation.ui.comment.addComment.AddCommentViewModel
-import com.dsm.dsmmarketandroid.presentation.ui.main.purchase.purchaseDetail.PurchaseDetailViewModel
+import com.dsm.dsmmarketandroid.presentation.ui.main.chat.ChatViewModel
+import com.dsm.dsmmarketandroid.presentation.ui.main.chat.chatList.ChatListViewModel
+import com.dsm.dsmmarketandroid.presentation.ui.main.comment.CommentViewModel
+import com.dsm.dsmmarketandroid.presentation.ui.main.comment.addComment.AddCommentViewModel
+import com.dsm.dsmmarketandroid.presentation.ui.main.me.interest.InterestViewModel
+import com.dsm.dsmmarketandroid.presentation.ui.main.me.myPost.MyPostViewModel
+import com.dsm.dsmmarketandroid.presentation.ui.main.me.recent.RecentViewModel
+import com.dsm.dsmmarketandroid.presentation.ui.main.post.postCategory.PostCategoryViewModel
+import com.dsm.dsmmarketandroid.presentation.ui.main.post.postPurchase.PostPurchaseViewModel
+import com.dsm.dsmmarketandroid.presentation.ui.main.post.postRent.PostRentViewModel
+import com.dsm.dsmmarketandroid.presentation.ui.main.purchase.modifyPurchase.ModifyPurchaseViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.main.purchase.purchaseImage.PurchaseImageViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.main.purchase.purchaseList.PurchaseListViewModel
+import com.dsm.dsmmarketandroid.presentation.ui.main.rent.modifyRent.ModifyRentViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.main.rent.rentDetail.RentDetailViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.main.rent.rentImage.RentImageViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.main.rent.rentList.RentListViewModel
-import com.dsm.dsmmarketandroid.presentation.ui.me.interest.InterestViewModel
-import com.dsm.dsmmarketandroid.presentation.ui.me.myPost.MyPostViewModel
-import com.dsm.dsmmarketandroid.presentation.ui.me.recent.RecentViewModel
-import com.dsm.dsmmarketandroid.presentation.ui.modify.purchase.ModifyPurchaseViewModel
-import com.dsm.dsmmarketandroid.presentation.ui.modify.rent.ModifyRentViewModel
-import com.dsm.dsmmarketandroid.presentation.ui.post.postCategory.PostCategoryViewModel
-import com.dsm.dsmmarketandroid.presentation.ui.post.postPurchase.PostPurchaseViewModel
-import com.dsm.dsmmarketandroid.presentation.ui.post.postRent.PostRentViewModel
-import com.dsm.dsmmarketandroid.presentation.ui.search.SearchViewModel
+import com.dsm.dsmmarketandroid.presentation.ui.main.search.SearchViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -31,8 +30,6 @@ val viewModelModule = module {
     viewModel { PostPurchaseViewModel(get()) }
 
     viewModel { PostRentViewModel(get()) }
-
-    viewModel { PurchaseDetailViewModel(get(), get(), get(), get(), get(), get(), get(), get(), get()) }
 
     viewModel { RentDetailViewModel(get(), get(), get(), get(), get(), get(), get(), get()) }
 

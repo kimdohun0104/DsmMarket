@@ -12,7 +12,7 @@ import com.dsm.app.BaseUiTest
 import com.dsm.app.MockServerDispatcher
 import com.dsm.app.withBackground
 import com.dsm.dsmmarketandroid.R
-import com.dsm.dsmmarketandroid.presentation.ui.me.password.forgotPassword.ForgotPasswordActivity
+import com.dsm.dsmmarketandroid.presentation.ui.main.me.password.forgotPassword.ForgotPasswordActivity
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.CoreMatchers.not
 import org.junit.Assert.assertTrue

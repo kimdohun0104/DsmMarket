@@ -8,10 +8,10 @@ import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.ActivityRentDetailBinding
 import com.dsm.dsmmarketandroid.presentation.base.BaseActivity
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.RecommendListAdapter
-import com.dsm.dsmmarketandroid.presentation.ui.chat.ChatActivity
-import com.dsm.dsmmarketandroid.presentation.ui.comment.CommentActivity
+import com.dsm.dsmmarketandroid.presentation.ui.main.chat.ChatActivity
+import com.dsm.dsmmarketandroid.presentation.ui.main.comment.CommentActivity
+import com.dsm.dsmmarketandroid.presentation.ui.main.rent.modifyRent.ModifyRentActivity
 import com.dsm.dsmmarketandroid.presentation.ui.main.rent.rentImage.RentImageActivity
-import com.dsm.dsmmarketandroid.presentation.ui.modify.rent.ModifyRentActivity
 import com.dsm.dsmmarketandroid.presentation.ui.report.ReportPostDialog
 import com.dsm.dsmmarketandroid.presentation.util.Analytics
 import com.dsm.dsmmarketandroid.presentation.util.LoadingDialog

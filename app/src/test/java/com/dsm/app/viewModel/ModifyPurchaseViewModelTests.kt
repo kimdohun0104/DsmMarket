@@ -6,7 +6,7 @@ import com.dsm.domain.usecase.GetPurchaseDetailUseCase
 import com.dsm.domain.usecase.ModifyPurchaseUseCase
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.mapper.PurchaseDetailModelMapper
-import com.dsm.dsmmarketandroid.presentation.ui.modify.purchase.ModifyPurchaseViewModel
+import com.dsm.dsmmarketandroid.presentation.ui.main.purchase.modifyPurchase.ModifyPurchaseViewModel
 import com.jraska.livedata.test
 import io.reactivex.Flowable
 import org.junit.Assert.assertFalse
@@ -30,7 +30,8 @@ class ModifyPurchaseViewModelTests : BaseTest() {
 
     @Before
     fun init() {
-        viewModel = ModifyPurchaseViewModel(getPurchaseDetailUseCase, modifyPurchaseUseCase, purchaseDetailModelMapper)
+        viewModel =
+            ModifyPurchaseViewModel(getPurchaseDetailUseCase, modifyPurchaseUseCase, purchaseDetailModelMapper)
     }
 
     @Test

@@ -8,7 +8,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.model.PostCategoryModel
-import com.dsm.dsmmarketandroid.presentation.ui.post.postCategory.PostCategoryViewModel
+import com.dsm.dsmmarketandroid.presentation.ui.main.post.postCategory.PostCategoryViewModel
 import kotlinx.android.synthetic.main.item_child_category.view.*
 import kotlinx.android.synthetic.main.item_parent_category.view.*
 

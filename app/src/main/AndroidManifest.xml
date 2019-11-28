@@ -20,7 +20,7 @@
         android:usesCleartextTraffic="true">
 
         <activity
-            android:name="com.dsm.dsmmarketandroid.presentation.ui.me.password.forgotPassword.ForgotPasswordActivity"
+            android:name="com.dsm.dsmmarketandroid.presentation.ui.main.me.password.forgotPassword.ForgotPasswordActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".presentation.ui.main.purchase.purchaseImage.PurchaseImageActivity"
@@ -29,28 +29,28 @@
             android:name=".presentation.ui.main.rent.rentImage.RentImageActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".presentation.ui.me.language.ChangeLanguageActivity"
+            android:name="com.dsm.dsmmarketandroid.presentation.ui.main.me.language.ChangeLanguageActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".presentation.ui.me.openSource.OpenSourceActivity"
+            android:name="com.dsm.dsmmarketandroid.presentation.ui.main.me.openSource.OpenSourceActivity"
             android:screenOrientation="portrait"
             android:theme="@style/WhiteAppTheme" />
         <activity
-            android:name=".presentation.ui.category.CategoryListActivity"
+            android:name=".presentation.ui.main.category.CategoryListActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".presentation.ui.modify.rent.ModifyRentActivity"
+            android:name=".presentation.ui.main.rent.modifyRent.ModifyRentActivity"
             android:screenOrientation="portrait"
             android:theme="@style/WhiteAppTheme" />
         <activity
-            android:name=".presentation.ui.modify.purchase.ModifyPurchaseActivity"
+            android:name=".presentation.ui.main.purchase.modifyPurchase.ModifyPurchaseActivity"
             android:screenOrientation="portrait"
             android:theme="@style/WhiteAppTheme" />
         <activity
             android:name=".presentation.ui.main.rent.rentDetail.RentDetailActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.dsm.dsmmarketandroid.presentation.ui.me.password.passwordConfirm.ConfirmPasswordActivity"
+            android:name="com.dsm.dsmmarketandroid.presentation.ui.main.me.password.passwordConfirm.ConfirmPasswordActivity"
             android:screenOrientation="portrait"
             android:theme="@style/WhiteAppTheme"
             android:windowSoftInputMode="adjustResize" />
@@ -66,61 +66,61 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".presentation.ui.post.postCategory.PostCategoryActivity"
+            android:name=".presentation.ui.main.post.postCategory.PostCategoryActivity"
             android:screenOrientation="portrait"
             android:theme="@style/WhiteAppTheme" />
         <activity
-            android:name=".presentation.ui.search.searchResult.SearchResultActivity"
+            android:name=".presentation.ui.main.search.searchResult.SearchResultActivity"
             android:screenOrientation="portrait"
             android:theme="@style/WhiteAppTheme" />
         <activity
-            android:name=".presentation.ui.chat.ChatActivity"
+            android:name=".presentation.ui.main.chat.ChatActivity"
             android:screenOrientation="portrait"
             android:theme="@style/WhiteAppTheme" />
         <activity
-            android:name=".presentation.ui.post.postRent.PostRentActivity"
+            android:name=".presentation.ui.main.post.postRent.PostRentActivity"
             android:screenOrientation="portrait"
             android:theme="@style/WhiteAppTheme" />
         <activity
-            android:name=".presentation.ui.post.postPurchase.PostPurchaseActivity"
+            android:name=".presentation.ui.main.post.postPurchase.PostPurchaseActivity"
             android:screenOrientation="portrait"
             android:theme="@style/WhiteAppTheme"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".presentation.ui.comment.addComment.AddCommentActivity"
+            android:name=".presentation.ui.main.comment.addComment.AddCommentActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".presentation.ui.comment.CommentActivity"
+            android:name=".presentation.ui.main.comment.CommentActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".presentation.ui.main.purchase.purchaseDetail.PurchaseDetailActivity"
             android:screenOrientation="portrait"
             android:theme="@style/WhiteAppTheme"/>
         <activity
-            android:name=".presentation.ui.category.CategoryActivity"
+            android:name=".presentation.ui.main.category.CategoryActivity"
             android:screenOrientation="portrait"
             android:theme="@style/WhiteAppTheme" />
         <activity
-            android:name=".presentation.ui.search.SearchActivity"
+            android:name=".presentation.ui.main.search.SearchActivity"
             android:screenOrientation="portrait"
             android:theme="@style/WhiteAppTheme" />
         <activity
-            android:name=".presentation.ui.me.recent.RecentActivity"
+            android:name="com.dsm.dsmmarketandroid.presentation.ui.main.me.recent.RecentActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".presentation.ui.me.myPost.MyPostActivity"
+            android:name="com.dsm.dsmmarketandroid.presentation.ui.main.me.myPost.MyPostActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".presentation.ui.me.interest.InterestActivity"
+            android:name="com.dsm.dsmmarketandroid.presentation.ui.main.me.interest.InterestActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".presentation.ui.me.changeNick.ChangeNickActivity"
+            android:name="com.dsm.dsmmarketandroid.presentation.ui.main.me.changeNick.ChangeNickActivity"
             android:screenOrientation="portrait"
             android:theme="@style/WhiteAppTheme"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name="com.dsm.dsmmarketandroid.presentation.ui.me.password.changePassword.ChangePasswordActivity"
+            android:name="com.dsm.dsmmarketandroid.presentation.ui.main.me.password.changePassword.ChangePasswordActivity"
             android:screenOrientation="portrait"
             android:theme="@style/WhiteAppTheme" />
         <activity

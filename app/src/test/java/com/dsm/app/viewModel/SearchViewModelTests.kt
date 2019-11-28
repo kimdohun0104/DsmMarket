@@ -4,7 +4,7 @@ import com.dsm.app.BaseTest
 import com.dsm.domain.usecase.AddSearchHistoryUseCase
 import com.dsm.domain.usecase.DeleteSearchHistoryUseCase
 import com.dsm.domain.usecase.GetSearchHistoryUseCase
-import com.dsm.dsmmarketandroid.presentation.ui.search.SearchViewModel
+import com.dsm.dsmmarketandroid.presentation.ui.main.search.SearchViewModel
 import com.jraska.livedata.test
 import io.reactivex.Completable
 import io.reactivex.Flowable

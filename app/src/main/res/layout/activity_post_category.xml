@@ -5,7 +5,7 @@
 
         <variable
             name="viewModel"
-            type="com.dsm.dsmmarketandroid.presentation.ui.post.postCategory.PostCategoryViewModel" />
+            type="com.dsm.dsmmarketandroid.presentation.ui.main.post.postCategory.PostCategoryViewModel" />
 
         <import type="android.view.View" />
     </data>
@@ -15,7 +15,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.ui.post.postCategory.PostCategoryActivity">
+        tools:context=".presentation.ui.main.post.postCategory.PostCategoryActivity">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/tb_post_category"

@@ -4,7 +4,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.dsm.dsmmarketandroid.presentation.ui.post.postRent.PostRentViewModel" />
+            type="com.dsm.dsmmarketandroid.presentation.ui.main.post.postRent.PostRentViewModel" />
 
         <import type="android.view.View" />
         <import type="com.dsm.dsmmarketandroid.presentation.util.BindingUtil" />
@@ -15,7 +15,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.ui.post.postRent.PostRentActivity">
+        tools:context=".presentation.ui.main.post.postRent.PostRentActivity">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/tb_post_rent"

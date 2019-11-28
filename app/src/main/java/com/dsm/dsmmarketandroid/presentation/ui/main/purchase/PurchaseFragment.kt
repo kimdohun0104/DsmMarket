@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import com.dsm.dsmmarketandroid.R
-import com.dsm.dsmmarketandroid.presentation.ui.category.CategoryActivity
+import com.dsm.dsmmarketandroid.presentation.ui.main.category.CategoryActivity
+import com.dsm.dsmmarketandroid.presentation.ui.main.me.interest.InterestActivity
 import com.dsm.dsmmarketandroid.presentation.ui.main.purchase.purchaseList.PurchaseListFragment
-import com.dsm.dsmmarketandroid.presentation.ui.me.interest.InterestActivity
-import com.dsm.dsmmarketandroid.presentation.ui.search.SearchActivity
+import com.dsm.dsmmarketandroid.presentation.ui.main.search.SearchActivity
 import org.jetbrains.anko.startActivity
 
 class PurchaseFragment : Fragment() {

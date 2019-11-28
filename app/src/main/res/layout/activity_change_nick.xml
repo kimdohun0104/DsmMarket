@@ -19,7 +19,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.ui.me.changeNick.ChangeNickActivity">
+        tools:context=".presentation.ui.main.me.changeNick.ChangeNickActivity">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/tb_change_name"

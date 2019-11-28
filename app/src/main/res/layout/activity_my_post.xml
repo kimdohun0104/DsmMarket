@@ -13,7 +13,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.ui.me.myPost.MyPostActivity">
+        tools:context=".presentation.ui.main.me.myPost.MyPostActivity">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/tb_my_post"

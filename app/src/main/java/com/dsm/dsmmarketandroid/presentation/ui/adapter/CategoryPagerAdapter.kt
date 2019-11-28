@@ -4,8 +4,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.dsm.dsmmarketandroid.presentation.ui.category.PurchaseCategoryFragment
-import com.dsm.dsmmarketandroid.presentation.ui.category.RentCategoryFragment
+import com.dsm.dsmmarketandroid.presentation.ui.main.category.PurchaseCategoryFragment
+import com.dsm.dsmmarketandroid.presentation.ui.main.category.RentCategoryFragment
 
 class CategoryPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
     FragmentStateAdapter(fragmentManager, lifecycle) {

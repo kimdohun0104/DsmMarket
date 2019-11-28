@@ -2,7 +2,7 @@ package com.dsm.app.viewModel
 
 import com.dsm.app.BaseTest
 import com.dsm.domain.usecase.PostPurchaseUseCase
-import com.dsm.dsmmarketandroid.presentation.ui.post.postPurchase.PostPurchaseViewModel
+import com.dsm.dsmmarketandroid.presentation.ui.main.post.postPurchase.PostPurchaseViewModel
 import com.jraska.livedata.test
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue

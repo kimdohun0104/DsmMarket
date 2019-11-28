@@ -4,11 +4,11 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.dsm.data.local.pref.PrefHelper
 import com.dsm.dsmmarketandroid.R
-import com.dsm.dsmmarketandroid.presentation.ui.chat.chatList.ChatListFragment
+import com.dsm.dsmmarketandroid.presentation.ui.main.chat.chatList.ChatListFragment
+import com.dsm.dsmmarketandroid.presentation.ui.main.me.MeFragment
+import com.dsm.dsmmarketandroid.presentation.ui.main.post.PostDialog
 import com.dsm.dsmmarketandroid.presentation.ui.main.purchase.PurchaseFragment
 import com.dsm.dsmmarketandroid.presentation.ui.main.rent.RentFragment
-import com.dsm.dsmmarketandroid.presentation.ui.me.MeFragment
-import com.dsm.dsmmarketandroid.presentation.ui.post.PostDialog
 import com.dsm.dsmmarketandroid.presentation.util.MessageEvents
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.play.core.appupdate.AppUpdateManager
