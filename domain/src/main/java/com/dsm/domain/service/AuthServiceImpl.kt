@@ -26,4 +26,7 @@ class AuthServiceImpl(
 
     override fun signUp(body: Any): Flowable<Resource<Unit>> =
         authRepository.signUp(body).toResource(errorHandler)
+
+    override fun confirmPassword(password: String): Flowable<Resource<Unit>> =
+        authRepository.confirmPassword(password).toResource(errorHandler)
 }

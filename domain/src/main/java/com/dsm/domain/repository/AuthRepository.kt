@@ -12,6 +12,8 @@ interface AuthRepository {
 
     fun signUp(body: Any): Flowable<Unit>
 
+    fun confirmPassword(password: String): Flowable<Unit>
+
     fun refreshToken(refreshToken: String): Flowable<Response<Map<String, Any>>>
 
     fun setAccessToken(token: String)

@@ -21,6 +21,9 @@ class AuthRepositoryImpl(
     override fun signUp(body: Any): Flowable<Unit> =
         dataSource.signUp(body)
 
+    override fun confirmPassword(password: String): Flowable<Unit> =
+        dataSource.confirmPassword(password)
+
     override fun refreshToken(refreshToken: String): Flowable<Response<Map<String, Any>>> =
         dataSource.refreshToken(refreshToken)
 

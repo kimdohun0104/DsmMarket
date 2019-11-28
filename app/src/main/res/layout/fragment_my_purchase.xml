@@ -4,7 +4,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.dsm.dsmmarketandroid.presentation.ui.me.myPost.MyPostViewModel" />
+            type="com.dsm.dsmmarketandroid.presentation.ui.main.me.myPost.MyPostViewModel" />
 
         <import type="android.view.View" />
     </data>

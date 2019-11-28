@@ -13,9 +13,6 @@ class AccountDataSourceImpl(
     override fun sendTempPassword(email: String): Flowable<Unit> =
         api.sendTempPassword(email).addSchedulers()
 
-    override fun confirmPassword(password: String): Flowable<Unit> =
-        api.confirmPassword(password).addSchedulers()
-
     override fun changePassword(password: String): Flowable<Unit> =
         api.changePassword(password).addSchedulers()
 

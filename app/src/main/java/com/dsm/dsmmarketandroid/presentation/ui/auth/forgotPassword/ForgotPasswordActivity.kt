@@ -1,4 +1,4 @@
-package com.dsm.dsmmarketandroid.presentation.ui.main.me.password.forgotPassword
+package com.dsm.dsmmarketandroid.presentation.ui.auth.forgotPassword
 
 import android.os.Bundle
 import android.view.inputmethod.EditorInfo

@@ -9,9 +9,6 @@ class AccountRepositoryImpl(private val accountDataSource: AccountDataSource) : 
     override fun sendTempPassword(email: String): Flowable<Unit> =
         accountDataSource.sendTempPassword(email)
 
-    override fun confirmPassword(password: String): Flowable<Unit> =
-        accountDataSource.confirmPassword(password)
-
     override fun changePassword(password: String): Flowable<Unit> =
         accountDataSource.changePassword(password)
 

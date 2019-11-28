@@ -21,6 +21,9 @@ class AuthDataSourceImpl(
     override fun signUp(body: Any): Flowable<Unit> =
         api.signUp(body).addSchedulers()
 
+    override fun confirmPassword(password: String): Flowable<Unit> =
+        api.confirmPassword(password).addSchedulers()
+
     override fun refreshToken(refreshToken: String): Flowable<Response<Map<String, Any>>> =
         api.refreshToken(refreshToken).addSchedulers()
 

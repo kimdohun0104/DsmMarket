@@ -14,9 +14,6 @@ class AccountServiceImpl(
     override fun sendTempPassword(email: String): Flowable<Resource<Unit>> =
         accountRepository.sendTempPassword(email).toResource(errorHandler)
 
-    override fun confirmPassword(password: String): Flowable<Resource<Unit>> =
-        accountRepository.confirmPassword(password).toResource(errorHandler)
-
     override fun changePassword(password: String): Flowable<Resource<Unit>> =
         accountRepository.changePassword(password).toResource(errorHandler)
 

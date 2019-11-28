@@ -2,10 +2,10 @@ package com.dsm.domain.usecase
 
 import com.dsm.domain.base.UseCase
 import com.dsm.domain.error.Resource
-import com.dsm.domain.service.AccountService
+import com.dsm.domain.service.AuthService
 import io.reactivex.Flowable
 
-class ConfirmPasswordUseCase(private val accountService: AccountService) : UseCase<String, Resource<Unit>>() {
+class ConfirmPasswordUseCase(private val authService: AuthService) : UseCase<String, Resource<Unit>>() {
     override fun create(data: String): Flowable<Resource<Unit>> =
-        accountService.confirmPassword(data)
+        authService.confirmPassword(data)
 }

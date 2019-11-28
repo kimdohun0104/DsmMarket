@@ -21,4 +21,5 @@ class DetailRepositoryImpl(
     override fun addLocalPurchaseDetail(purchaseDetail: PurchaseDetail): Completable =
         dataSource.addLocalPurchaseDetail(purchaseDetailMapper.mapFrom(purchaseDetail))
 
+
 }

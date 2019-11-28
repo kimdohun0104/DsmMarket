@@ -4,13 +4,9 @@ import android.app.Application
 import android.content.Context
 import android.content.res.Configuration
 import com.dsm.dsmmarketandroid.di.*
-import com.dsm.dsmmarketandroid.di.account.*
+import com.dsm.dsmmarketandroid.di.account.accountModule
 import com.dsm.dsmmarketandroid.di.auth.authModule
-import com.dsm.dsmmarketandroid.di.auth.loginModule
-import com.dsm.dsmmarketandroid.di.auth.signUpModule
-import com.dsm.dsmmarketandroid.di.auth.splashModule
 import com.dsm.dsmmarketandroid.di.detail.detailModule
-import com.dsm.dsmmarketandroid.di.detail.purchaseDetailModule
 import com.dsm.dsmmarketandroid.di.purchase.purchaseModule
 import com.dsm.dsmmarketandroid.presentation.util.LocaleManager
 import org.koin.android.ext.koin.androidContext
@@ -37,18 +33,10 @@ open class BaseApp : Application() {
                     useCaseModule,
                     viewModelModule,
                     pagingModule,
-                    loginModule,
                     authModule,
-                    splashModule,
-                    signUpModule,
                     accountModule,
-                    forgotPasswordModule,
-                    changeNickModule,
-                    confirmPasswordModule,
-                    changePasswordModule,
                     purchaseModule,
-                    detailModule,
-                    purchaseDetailModule
+                    detailModule
                 )
             )
         }

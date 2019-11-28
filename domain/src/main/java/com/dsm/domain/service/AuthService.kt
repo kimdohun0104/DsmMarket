@@ -10,4 +10,6 @@ interface AuthService {
     fun autoLogin(): Flowable<Resource<Unit>>
 
     fun signUp(body: Any): Flowable<Resource<Unit>>
+
+    fun confirmPassword(password: String): Flowable<Resource<Unit>>
 }

@@ -20,7 +20,7 @@
         android:usesCleartextTraffic="true">
 
         <activity
-            android:name="com.dsm.dsmmarketandroid.presentation.ui.main.me.password.forgotPassword.ForgotPasswordActivity"
+            android:name="com.dsm.dsmmarketandroid.presentation.ui.auth.forgotPassword.ForgotPasswordActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".presentation.ui.main.purchase.purchaseImage.PurchaseImageActivity"
