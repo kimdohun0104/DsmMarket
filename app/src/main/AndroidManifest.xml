@@ -50,7 +50,7 @@
             android:name=".presentation.ui.main.rent.rentDetail.RentDetailActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".presentation.ui.password.passwordConfirm.PasswordConfirmActivity"
+            android:name=".presentation.ui.password.passwordConfirm.ConfirmPasswordActivity"
             android:screenOrientation="portrait"
             android:theme="@style/WhiteAppTheme"
             android:windowSoftInputMode="adjustResize" />

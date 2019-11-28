@@ -8,8 +8,6 @@ import com.dsm.data.dataSource.interest.InterestDataSource
 import com.dsm.data.dataSource.interest.InterestDataSourceImpl
 import com.dsm.data.dataSource.myPost.MyPostDataSource
 import com.dsm.data.dataSource.myPost.MyPostDataSourceImpl
-import com.dsm.data.dataSource.password.PasswordDataSource
-import com.dsm.data.dataSource.password.PasswordDataSourceImpl
 import com.dsm.data.dataSource.post.PostDataSource
 import com.dsm.data.dataSource.post.PostDataSourceImpl
 import com.dsm.data.dataSource.purchase.PurchaseDataSource
@@ -27,8 +25,6 @@ import com.dsm.data.dataSource.search.SearchDataSourceImpl
 import org.koin.dsl.module
 
 val dataSourceModule = module {
-    factory<PasswordDataSource> { PasswordDataSourceImpl(get()) }
-
     factory<PostDataSource> { PostDataSourceImpl(get()) }
 
     factory<PurchaseDataSource> { PurchaseDataSourceImpl(get(), get(), get()) }

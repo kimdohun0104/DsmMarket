@@ -5,17 +5,11 @@ import org.koin.dsl.module
 
 val useCaseModule = module {
 
-    factory { ChangePasswordUseCase(get()) }
-
-    factory { ChangeNickUseCase(get()) }
-
     factory { GetPostCategoryUseCase(get()) }
 
     factory { PostRentUseCase(get()) }
 
     factory { PostPurchaseUseCase(get()) }
-
-    factory { ConfirmPasswordUseCase(get()) }
 
     factory { GetPurchaseDetailUseCase(get()) }
 

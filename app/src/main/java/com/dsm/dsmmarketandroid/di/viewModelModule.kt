@@ -12,14 +12,11 @@ import com.dsm.dsmmarketandroid.presentation.ui.main.purchase.purchaseList.Purch
 import com.dsm.dsmmarketandroid.presentation.ui.main.rent.rentDetail.RentDetailViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.main.rent.rentImage.RentImageViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.main.rent.rentList.RentListViewModel
-import com.dsm.dsmmarketandroid.presentation.ui.me.changeNick.ChangeNickViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.me.interest.InterestViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.me.myPost.MyPostViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.me.recent.RecentViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.modify.purchase.ModifyPurchaseViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.modify.rent.ModifyRentViewModel
-import com.dsm.dsmmarketandroid.presentation.ui.password.changePassword.ChangePasswordViewModel
-import com.dsm.dsmmarketandroid.presentation.ui.password.passwordConfirm.PasswordConfirmViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.post.postCategory.PostCategoryViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.post.postPurchase.PostPurchaseViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.post.postRent.PostRentViewModel
@@ -29,17 +26,11 @@ import org.koin.dsl.module
 
 val viewModelModule = module {
 
-    viewModel { ChangePasswordViewModel(get()) }
-
-    viewModel { ChangeNickViewModel(get()) }
-
     viewModel { PostCategoryViewModel(get(), get()) }
 
     viewModel { PostPurchaseViewModel(get()) }
 
     viewModel { PostRentViewModel(get()) }
-
-    viewModel { PasswordConfirmViewModel(get()) }
 
     viewModel { PurchaseDetailViewModel(get(), get(), get(), get(), get(), get(), get(), get(), get()) }
 

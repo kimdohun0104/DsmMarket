@@ -13,12 +13,12 @@ import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class PasswordConfirmActivity : BaseActivity<ActivityPasswordConfirmBinding>() {
+class ConfirmPasswordActivity : BaseActivity<ActivityPasswordConfirmBinding>() {
 
     override val layoutResourceId: Int
         get() = R.layout.activity_password_confirm
 
-    private val viewModel: PasswordConfirmViewModel by viewModel()
+    private val viewModel: ConfirmPasswordViewModel by viewModel()
 
     override fun viewInit() {
         tb_password_confirm.setNavigationOnClickListener { finish() }
@@ -27,7 +27,7 @@ class PasswordConfirmActivity : BaseActivity<ActivityPasswordConfirmBinding>() {
     }
 
     override fun observeViewModel() {
-        val `this` = this@PasswordConfirmActivity
+        val `this` = this@ConfirmPasswordActivity
         viewModel.run {
             intentChangePasswordEvent.observe(`this`, Observer { startActivity<ChangePasswordActivity>() })
 

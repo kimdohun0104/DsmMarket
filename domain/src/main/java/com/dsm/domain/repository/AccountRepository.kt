@@ -6,5 +6,11 @@ interface AccountRepository {
 
     fun sendTempPassword(email: String): Flowable<Unit>
 
+    fun confirmPassword(password: String): Flowable<Unit>
+
+    fun changePassword(password: String): Flowable<Unit>
+
     fun changeUserNick(newNick: String): Flowable<Unit>
+
+    fun setLocalUserNick(nick: String)
 }

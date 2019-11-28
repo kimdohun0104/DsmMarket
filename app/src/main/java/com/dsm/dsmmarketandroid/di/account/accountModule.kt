@@ -10,9 +10,9 @@ import org.koin.dsl.module
 
 val accountModule = module {
 
-    factory<AccountDataSource> { AccountDataSourceImpl(get()) }
+    factory<AccountDataSource> { AccountDataSourceImpl(get(), get()) }
 
-    factory<AccountRepository> { AccountRepositoryImpl(get(), get()) }
+    factory<AccountRepository> { AccountRepositoryImpl(get()) }
 
     factory<AccountService> { AccountServiceImpl(get(), get()) }
 }

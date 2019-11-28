@@ -6,8 +6,6 @@ import org.koin.dsl.module
 
 val repositoryModule = module {
 
-    factory<PasswordRepository> { PasswordRepositoryImpl(get()) }
-
     factory<PostRepository> { PostRepositoryImpl(get()) }
 
     factory<PurchaseRepository> { PurchaseRepositoryImpl(get()) }

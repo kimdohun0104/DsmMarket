@@ -6,4 +6,10 @@ import io.reactivex.Flowable
 interface AccountService {
 
     fun sendTempPassword(email: String): Flowable<Resource<Unit>>
+
+    fun confirmPassword(password: String): Flowable<Resource<Unit>>
+
+    fun changePassword(password: String): Flowable<Resource<Unit>>
+
+    fun changeNick(nick: String): Flowable<Resource<Unit>>
 }

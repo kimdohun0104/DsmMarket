@@ -13,7 +13,7 @@ import com.dsm.dsmmarketandroid.presentation.ui.me.language.ChangeLanguageActivi
 import com.dsm.dsmmarketandroid.presentation.ui.me.myPost.MyPostActivity
 import com.dsm.dsmmarketandroid.presentation.ui.me.openSource.OpenSourceActivity
 import com.dsm.dsmmarketandroid.presentation.ui.me.recent.RecentActivity
-import com.dsm.dsmmarketandroid.presentation.ui.password.passwordConfirm.PasswordConfirmActivity
+import com.dsm.dsmmarketandroid.presentation.ui.password.passwordConfirm.ConfirmPasswordActivity
 import com.dsm.dsmmarketandroid.presentation.util.MessageEvents
 import kotlinx.android.synthetic.main.fragment_me.*
 import kr.sdusb.libs.messagebus.MessageBus
@@ -40,7 +40,7 @@ class MeFragment : BaseFragment<FragmentMeBinding>() {
             cl_me_my_post.setOnClickListener { startActivity<MyPostActivity>() }
             cl_me_product_history.setOnClickListener { startActivity<RecentActivity>() }
             cl_me_change_name.setOnClickListener { startActivity<ChangeNickActivity>("nick" to prefHelper.getUserNick()) }
-            cl_me_change_password.setOnClickListener { startActivity<PasswordConfirmActivity>() }
+            cl_me_change_password.setOnClickListener { startActivity<ConfirmPasswordActivity>() }
             cl_me_open_source.setOnClickListener { startActivity<OpenSourceActivity>() }
             cl_me_change_language.setOnClickListener { startActivity<ChangeLanguageActivity>() }
         }

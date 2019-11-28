@@ -3,6 +3,7 @@ package com.dsm.dsmmarketandroid.di.auth
 import com.dsm.data.mapper.TokenMapper
 import com.dsm.domain.usecase.LoginUseCase
 import com.dsm.dsmmarketandroid.presentation.ui.auth.login.LoginViewModel
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val loginModule = module {
@@ -11,5 +12,5 @@ val loginModule = module {
 
     factory { LoginUseCase(get()) }
 
-    factory { LoginViewModel(get()) }
+    viewModel { LoginViewModel(get()) }
 }

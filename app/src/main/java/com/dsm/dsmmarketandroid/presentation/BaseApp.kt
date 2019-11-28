@@ -4,8 +4,7 @@ import android.app.Application
 import android.content.Context
 import android.content.res.Configuration
 import com.dsm.dsmmarketandroid.di.*
-import com.dsm.dsmmarketandroid.di.account.accountModule
-import com.dsm.dsmmarketandroid.di.account.forgotPasswordModule
+import com.dsm.dsmmarketandroid.di.account.*
 import com.dsm.dsmmarketandroid.di.auth.authModule
 import com.dsm.dsmmarketandroid.di.auth.loginModule
 import com.dsm.dsmmarketandroid.di.auth.signUpModule
@@ -40,7 +39,10 @@ open class BaseApp : Application() {
                     splashModule,
                     signUpModule,
                     accountModule,
-                    forgotPasswordModule
+                    forgotPasswordModule,
+                    changeNickModule,
+                    confirmPasswordModule,
+                    changePasswordModule
                 )
             )
         }

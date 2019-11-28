@@ -1,6 +1,5 @@
 package com.dsm.app.viewModel
 
-import android.os.Bundle
 import com.dsm.app.BaseTest
 import com.dsm.app.createHttpException
 import com.dsm.domain.error.ErrorEntity
@@ -8,7 +7,6 @@ import com.dsm.domain.error.Resource
 import com.dsm.domain.usecase.LoginUseCase
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.ui.auth.login.LoginViewModel
-import com.dsm.dsmmarketandroid.presentation.util.Analytics
 import com.jraska.livedata.test
 import io.reactivex.Flowable
 import org.junit.Assert.assertFalse
@@ -75,7 +73,6 @@ class LoginViewModelTests : BaseTest() {
 
             showLoadingDialogEvent.test().assertHasValue()
             hideKeyboardEvent.test().assertHasValue()
-            loginLogEvent.test().assertValue(Bundle().apply { putString(Analytics.USER_EMAIL, email.value) })
         }
     }
 

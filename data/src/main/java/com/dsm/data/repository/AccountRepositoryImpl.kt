@@ -1,22 +1,23 @@
 package com.dsm.data.repository
 
 import com.dsm.data.dataSource.account.AccountDataSource
-import com.dsm.data.local.pref.PrefHelper
 import com.dsm.domain.repository.AccountRepository
 import io.reactivex.Flowable
-import retrofit2.HttpException
 
-class AccountRepositoryImpl(
-    private val accountDataSource: AccountDataSource,
-    private val prefHelper: PrefHelper
-) : AccountRepository {
+class AccountRepositoryImpl(private val accountDataSource: AccountDataSource) : AccountRepository {
 
     override fun sendTempPassword(email: String): Flowable<Unit> =
         accountDataSource.sendTempPassword(email)
 
+    override fun confirmPassword(password: String): Flowable<Unit> =
+        accountDataSource.confirmPassword(password)
+
+    override fun changePassword(password: String): Flowable<Unit> =
+        accountDataSource.changePassword(password)
+
     override fun changeUserNick(newNick: String): Flowable<Unit> =
-        accountDataSource.changeUserNick(newNick).map {
-            if (it.code() == 200) prefHelper.setUserNick(newNick)
-            else throw HttpException(it)
-        }
+        accountDataSource.changeUserNick(newNick)
+
+    override fun setLocalUserNick(nick: String) =
+        accountDataSource.setLocalUserNick(nick)
 }

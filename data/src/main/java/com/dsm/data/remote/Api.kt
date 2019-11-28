@@ -16,27 +16,24 @@ interface Api {
     fun autoLogin(): Flowable<Unit>
 
     @GET("auth/login")
-    fun confirmPassword(@Query("password") password: String): Flowable<Response<Unit>>
+    fun confirmPassword(@Query("password") password: String): Flowable<Unit>
 
     @GET("auth/mail")
     fun sendTempPassword(@Query("email") email: String): Flowable<Unit>
 
     @FormUrlEncoded
     @PATCH("account/password")
-    fun changePassword(@Field("password") password: String): Flowable<Response<Unit>>
+    fun changePassword(@Field("password") password: String): Flowable<Unit>
 
     @POST("account/join")
     fun signUp(@Body body: Any): Flowable<Unit>
 
     @FormUrlEncoded
     @PATCH("account/nick")
-    fun changeUserNick(@Field("nick") nick: String): Flowable<Response<Unit>>
+    fun changeUserNick(@Field("nick") nick: String): Flowable<Unit>
 
     @GET("token")
     fun refreshToken(@Header("authorization") refreshToken: String): Flowable<Response<Map<String, Any>>>
-
-    @GET("user/nick")
-    fun getUserNick(): Flowable<Response<Map<String, String>>>
 
     @GET("category")
     fun getPostCategory(): Flowable<PostCategoryListEntity>

@@ -2,9 +2,11 @@ package com.dsm.app.viewModel
 
 import com.dsm.app.BaseTest
 import com.dsm.app.createHttpException
+import com.dsm.domain.error.ErrorEntity
+import com.dsm.domain.error.Resource
 import com.dsm.domain.usecase.ConfirmPasswordUseCase
 import com.dsm.dsmmarketandroid.R
-import com.dsm.dsmmarketandroid.presentation.ui.password.passwordConfirm.PasswordConfirmViewModel
+import com.dsm.dsmmarketandroid.presentation.ui.password.passwordConfirm.ConfirmPasswordViewModel
 import com.jraska.livedata.test
 import io.reactivex.Flowable
 import org.junit.Assert.assertFalse
@@ -13,18 +15,17 @@ import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
-import java.io.IOException
 
-class PasswordConfirmViewModelTests : BaseTest() {
+class ConfirmPasswordViewModelTests : BaseTest() {
 
     @Mock
     private lateinit var confirmPasswordUseCase: ConfirmPasswordUseCase
 
-    private lateinit var viewModel: PasswordConfirmViewModel
+    private lateinit var viewModel: ConfirmPasswordViewModel
 
     @Before
     fun init() {
-        viewModel = PasswordConfirmViewModel(confirmPasswordUseCase)
+        viewModel = ConfirmPasswordViewModel(confirmPasswordUseCase)
     }
 
     @Test
@@ -44,7 +45,7 @@ class PasswordConfirmViewModelTests : BaseTest() {
             originalPassword.value = "ORIGINAL_PASSWORD"
 
             `when`(confirmPasswordUseCase.create(originalPassword.value!!))
-                .thenReturn(Flowable.just(Unit))
+                .thenReturn(Flowable.just(Resource.Success(Unit)))
 
             confirmPassword()
 
@@ -59,11 +60,25 @@ class PasswordConfirmViewModelTests : BaseTest() {
             originalPassword.value = "ORIGINAL_PASSWORD"
 
             `when`(confirmPasswordUseCase.create(originalPassword.value!!))
-                .thenReturn(Flowable.error(createHttpException(403)))
+                .thenReturn(Flowable.just(Resource.Error(ErrorEntity.Forbidden(createHttpException(403)))))
 
             confirmPassword()
 
             toastEvent.test().assertValue(R.string.fail_diff_password)
+        }
+    }
+
+    @Test
+    fun `unauthorized failed test`() {
+        viewModel.run {
+            originalPassword.value = "ORIGINAL_PASSWORD"
+
+            `when`(confirmPasswordUseCase.create(originalPassword.value!!))
+                .thenReturn(Flowable.just(Resource.Error(ErrorEntity.Unauthorized(createHttpException(401)))))
+
+            confirmPassword()
+
+            toastEvent.test().assertValue(R.string.fail_unauthorized)
         }
     }
 
@@ -73,7 +88,7 @@ class PasswordConfirmViewModelTests : BaseTest() {
             originalPassword.value = "ORIGINAL_PASSWORD"
 
             `when`(confirmPasswordUseCase.create(originalPassword.value!!))
-                .thenReturn(Flowable.error(IOException()))
+                .thenReturn(Flowable.just(Resource.Error(ErrorEntity.Internal(createHttpException(500)))))
 
             confirmPassword()
 
