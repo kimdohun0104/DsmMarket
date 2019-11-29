@@ -12,8 +12,8 @@ import com.dsm.data.dataSource.purchaseBefore.PurchaseDataSourceBefore
 import com.dsm.data.dataSource.purchaseBefore.PurchaseDataSourceImplBefore
 import com.dsm.data.dataSource.recent.RecentDataSource
 import com.dsm.data.dataSource.recent.RecentDataSourceImpl
-import com.dsm.data.dataSource.rent.RentDataSource
-import com.dsm.data.dataSource.rent.RentDataSourceImpl
+import com.dsm.data.dataSource.rent.RentDataSourceBefore
+import com.dsm.data.dataSource.rent.RentDataSourceImplBefore
 import com.dsm.data.dataSource.report.ReportDataSource
 import com.dsm.data.dataSource.report.ReportDataSourceImpl
 import com.dsm.data.dataSource.search.SearchDataSource
@@ -23,9 +23,9 @@ import org.koin.dsl.module
 val dataSourceModule = module {
     factory<PostDataSource> { PostDataSourceImpl(get()) }
 
-    factory<PurchaseDataSourceBefore> { PurchaseDataSourceImplBefore(get(), get(), get()) }
+    factory<PurchaseDataSourceBefore> { PurchaseDataSourceImplBefore(get(), get()) }
 
-    factory<RentDataSource> { RentDataSourceImpl(get(), get()) }
+    factory<RentDataSourceBefore> { RentDataSourceImplBefore(get(), get()) }
 
     factory<CommentDataSource> { CommentDataSourceImpl(get()) }
 

@@ -1,23 +1,36 @@
 package com.dsm.data.repository
 
 import com.dsm.data.dataSource.rent.RentDataSource
+import com.dsm.data.mapper.InterestProductMapper
 import com.dsm.data.mapper.ProductMapper
 import com.dsm.domain.entity.Product
 import com.dsm.domain.repository.RentRepository
+import io.reactivex.Completable
 import io.reactivex.Flowable
-import retrofit2.HttpException
 
-class RentRepositoryImpl(private val rentDataSource: RentDataSource) : RentRepository {
+class RentRepositoryImpl(
+    private val dataSource: RentDataSource,
+    private val productMapper: ProductMapper,
+    private val interestProductMapper: InterestProductMapper
+) : RentRepository {
 
-    private val productMapper = ProductMapper()
+    override fun getRemoteRentList(page: Int, pageSize: Int, search: String, category: String): Flowable<List<Product>> =
+        dataSource.getRemoteRentList(page, pageSize, search, category).map(productMapper::mapFrom)
 
-    override fun getRentList(page: Int, pageSize: Int, search: String, category: String): Flowable<List<Product>> =
-        rentDataSource.getRentList(page, pageSize, search, category).map(productMapper::mapFrom)
-            .doOnNext { if (search.isNotBlank()) rentDataSource.addSearchHistory(search).subscribe() }
+    override fun getLocalRentList(page: Int, pageSize: Int): List<Product> =
+        dataSource.getLocalRentList(page, pageSize).map(productMapper::mapFrom)
 
-    override fun modifyRent(params: Any): Flowable<Unit> =
-        rentDataSource.modifyRent(params).map { if (it.code() != 200) throw HttpException(it) }
+    override fun addLocalRentList(list: List<Product>): Completable =
+        dataSource.addLocalRentList(productMapper.mapFrom(list, 1))
 
-    override fun getRentImage(postId: Int): Flowable<String> =
-        rentDataSource.getRentImage(postId).map { it.image }
+    override fun getRemoteInterestRent(): Flowable<List<Product>> =
+        dataSource.getRemoteInterestRent().map(productMapper::mapFrom)
+
+    override fun getLocalInterestRent(): List<Product> =
+        dataSource.getLocalInterestRent().map { interestProductMapper.mapFrom(it) }
+
+    override fun addLocalInterestRent(interestRent: List<Product>): Completable =
+        dataSource.addLocalInterestRent(interestProductMapper.mapFrom(interestRent, 1))
+
+
 }

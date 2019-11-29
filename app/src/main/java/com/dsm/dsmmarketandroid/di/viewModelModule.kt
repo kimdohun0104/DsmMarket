@@ -4,7 +4,6 @@ import com.dsm.data.paging.purchase.PurchaseDataFactory
 import com.dsm.data.paging.rent.RentDataFactory
 import com.dsm.dsmmarketandroid.presentation.ui.main.comment.CommentViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.main.comment.addComment.AddCommentViewModel
-import com.dsm.dsmmarketandroid.presentation.ui.main.me.interest.InterestViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.main.me.myPost.MyPostViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.main.me.recent.RecentViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.main.post.postCategory.PostCategoryViewModel
@@ -35,8 +34,6 @@ val viewModelModule = module {
     viewModel { RecentViewModel(get(), get(), get()) }
 
     viewModel { SearchViewModel(get(), get(), get()) }
-
-    viewModel { InterestViewModel(get(), get()) }
 
     viewModel { MyPostViewModel(get(), get(), get(), get(), get()) }
 

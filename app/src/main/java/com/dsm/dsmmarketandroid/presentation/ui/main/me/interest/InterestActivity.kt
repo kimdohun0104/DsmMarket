@@ -6,7 +6,6 @@ import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.ActivityInterestBinding
 import com.dsm.dsmmarketandroid.presentation.base.BaseActivity
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.InterestPagerAdapter
-import com.dsm.dsmmarketandroid.presentation.util.ProductType
 import com.dsm.dsmmarketandroid.presentation.util.addOnTabSelectedListener
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_interest.*
@@ -35,7 +34,7 @@ class InterestActivity : BaseActivity<ActivityInterestBinding>() {
         tl_interest.addOnTabSelectedListener {
             vp_interest.currentItem = it.position
             if (it.position == 1 && !isRentLoaded) {
-                viewModel.getInterest(ProductType.RENT)
+                viewModel.getRentInterest()
                 isRentLoaded = true
             }
         }

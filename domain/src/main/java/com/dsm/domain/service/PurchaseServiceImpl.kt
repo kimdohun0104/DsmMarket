@@ -11,4 +11,8 @@ class PurchaseServiceImpl(private val repository: PurchaseRepository) : Purchase
             .doOnNext { repository.addLocalPurchaseList(it).subscribe() }
             .onErrorReturn { repository.getLocalPurchaseList(page, pageSize) }
 
+    override fun getInterestPurchase(): Flowable<List<Product>> =
+        repository.getRemoteInterestPurchase()
+            .doOnNext { repository.addLocalInterestPurchase(it).subscribe() }
+            .onErrorReturn { repository.getLocalInterestPurchase() }
 }

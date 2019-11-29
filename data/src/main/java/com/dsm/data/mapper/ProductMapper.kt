@@ -25,14 +25,15 @@ class ProductMapper : Mapper<ProductListEntity, List<Product>> {
         title = from.title
     )
 
-    fun mapFrom(from: List<Product>) : List<ProductRoomEntity> =
+    fun mapFrom(from: List<Product>, type: Int) : List<ProductRoomEntity> =
         from.map {
             ProductRoomEntity(
                 postId = it.postId,
                 createdAt = it.createdAt,
                 price = it.price,
                 title = it.title,
-                img = it.img
+                img = it.img,
+                type = type
             )
         }
 }

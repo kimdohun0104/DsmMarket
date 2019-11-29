@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-data class ProductRoomEntity(
+data class InterestProductRoomEntity(
 
     @PrimaryKey
     val postId: Int,

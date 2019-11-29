@@ -1,17 +1,22 @@
 package com.dsm.data.dataSource.rent
 
+import com.dsm.data.local.db.entity.InterestProductRoomEntity
+import com.dsm.data.local.db.entity.ProductRoomEntity
 import com.dsm.data.remote.entity.ProductListEntity
-import com.dsm.data.remote.entity.RentImageEntity
 import io.reactivex.Completable
 import io.reactivex.Flowable
-import retrofit2.Response
 
 interface RentDataSource {
-    fun getRentList(page: Int, pageSize: Int, search: String, category: String): Flowable<ProductListEntity>
 
-    fun modifyRent(params: Any): Flowable<Response<Unit>>
+    fun getRemoteRentList(page: Int, pageSize: Int, search: String, category: String): Flowable<ProductListEntity>
 
-    fun addSearchHistory(search: String): Completable
+    fun getLocalRentList(page: Int, pageSize: Int): List<ProductRoomEntity>
 
-    fun getRentImage(postId: Int): Flowable<RentImageEntity>
+    fun addLocalRentList(list: List<ProductRoomEntity>): Completable
+
+    fun getRemoteInterestRent(): Flowable<ProductListEntity>
+
+    fun getLocalInterestRent(): List<InterestProductRoomEntity>
+
+    fun addLocalInterestRent(interestRent: List<InterestProductRoomEntity>): Completable
 }

@@ -10,7 +10,7 @@ val repositoryModule = module {
 
     factory<PurchaseRepositoryBefore> { PurchaseRepositoryImplBefore(get()) }
 
-    factory<RentRepository> { RentRepositoryImpl(get()) }
+    factory<RentRepositoryBefore> { RentRepositoryImplBefore(get()) }
 
     factory<CommentRepository> { CommentRepositoryImpl(get()) }
 

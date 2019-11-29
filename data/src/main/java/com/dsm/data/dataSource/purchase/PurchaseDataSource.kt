@@ -1,5 +1,6 @@
 package com.dsm.data.dataSource.purchase
 
+import com.dsm.data.local.db.entity.InterestProductRoomEntity
 import com.dsm.data.local.db.entity.ProductRoomEntity
 import com.dsm.data.remote.entity.ProductListEntity
 import io.reactivex.Completable
@@ -12,4 +13,10 @@ interface PurchaseDataSource {
     fun getLocalPurchaseList(page: Int, pageSize: Int): List<ProductRoomEntity>
 
     fun addLocalPurchaseList(list: List<ProductRoomEntity>) : Completable
+
+    fun getRemoteInterestPurchase(): Flowable<ProductListEntity>
+
+    fun getLocalInterestPurchase(): List<InterestProductRoomEntity>
+
+    fun addLocalInterestPurchase(interestPurchase: List<InterestProductRoomEntity>): Completable
 }

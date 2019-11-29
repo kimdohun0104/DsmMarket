@@ -13,6 +13,6 @@ interface ProductDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun addProductList(productList: List<ProductRoomEntity>) : Completable
 
-    @Query("SELECT * FROM ProductRoomEntity ORDER BY postId DESC LIMIT :pageSize OFFSET :page")
-    fun getProductList(page: Int, pageSize: Int): List<ProductRoomEntity>
+    @Query("SELECT * FROM ProductRoomEntity WHERE type = :type ORDER BY postId DESC LIMIT :pageSize OFFSET :page")
+    fun getProduct(page: Int, pageSize: Int, type: Int): List<ProductRoomEntity>
 }

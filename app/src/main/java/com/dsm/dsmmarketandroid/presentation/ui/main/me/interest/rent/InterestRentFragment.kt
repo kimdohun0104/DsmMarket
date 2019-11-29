@@ -24,7 +24,7 @@ class InterestRentFragment : BaseFragment<FragmentInterestRentBinding>() {
     override fun viewInit() {
         rv_interest_rent.adapter = adapter
 
-        srl_interest_rent.setOnRefreshListener { viewModel.getInterest(ProductType.RENT) }
+        srl_interest_rent.setOnRefreshListener { viewModel.getRentInterest() }
     }
 
     override fun observeViewModel() {

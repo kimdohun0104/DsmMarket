@@ -11,4 +11,10 @@ interface PurchaseRepository {
     fun getLocalPurchaseList(page: Int, pageSize: Int): List<Product>
 
     fun addLocalPurchaseList(list: List<Product>): Completable
+
+    fun getRemoteInterestPurchase(): Flowable<List<Product>>
+
+    fun getLocalInterestPurchase(): List<Product>
+
+    fun addLocalInterestPurchase(interestPurchase: List<Product>): Completable
 }

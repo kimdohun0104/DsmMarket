@@ -24,9 +24,9 @@ class InterestPurchaseFragment : BaseFragment<FragmentInterestPurchaseBinding>()
     override fun viewInit() {
         rv_interest_purchase.adapter = adapter
 
-        srl_interest_purchase.setOnRefreshListener { viewModel.getInterest(ProductType.PURCHASE) }
+        srl_interest_purchase.setOnRefreshListener { viewModel.getPurchaseInterest() }
 
-        viewModel.getInterest(ProductType.PURCHASE)
+        viewModel.getPurchaseInterest()
     }
 
     override fun observeViewModel() {
