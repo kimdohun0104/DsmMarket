@@ -4,11 +4,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.paging.PageKeyedDataSource
 import com.dsm.data.paging.NetworkState
 import com.dsm.domain.entity.Product
-import com.dsm.domain.service.PurchaseService
+import com.dsm.domain.service.ProductService
 import io.reactivex.disposables.CompositeDisposable
 
 class PurchaseKeyedDataSource(
-    private val purchaseService: PurchaseService,
+    private val productService: ProductService,
     private val search: String,
     private val category: String
 ) : PageKeyedDataSource<Int, Product>() {
@@ -21,7 +21,7 @@ class PurchaseKeyedDataSource(
         networkState.postValue(NetworkState.LOADING)
 
         composite.add(
-            purchaseService.getPurchaseList(0, params.requestedLoadSize, search, category)
+            productService.getPurchaseList(0, params.requestedLoadSize, search, category)
                 .subscribe({
                     callback.onResult(it, null, 1)
                     if (it.isNotEmpty()) networkState.postValue(NetworkState.LOADED)
@@ -36,7 +36,7 @@ class PurchaseKeyedDataSource(
         networkState.postValue(NetworkState.LOADING)
 
         composite.add(
-            purchaseService.getPurchaseList(params.key, params.requestedLoadSize, search, category)
+            productService.getPurchaseList(params.key, params.requestedLoadSize, search, category)
                 .subscribe({
                     callback.onResult(it, params.key + 1)
                     networkState.postValue(NetworkState.LOADED)

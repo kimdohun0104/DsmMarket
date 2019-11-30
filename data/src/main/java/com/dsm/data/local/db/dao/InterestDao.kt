@@ -13,9 +13,6 @@ interface InterestDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun addInterestPurchase(interestPurchase: List<InterestProductRoomEntity>): Completable
 
-    @Query("select * from InterestProductRoomEntity where type = 0")
-    fun getInterestPurchase(): List<InterestProductRoomEntity>
-
-    @Query("select * from InterestProductRoomEntity where type = 1")
-    fun getInterestRent(): List<InterestProductRoomEntity>
+    @Query("select * from InterestProductRoomEntity where type = :type")
+    fun getInterestProductList(type: Int): List<InterestProductRoomEntity>
 }

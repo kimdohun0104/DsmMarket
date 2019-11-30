@@ -8,8 +8,7 @@ import com.dsm.dsmmarketandroid.di.account.accountModule
 import com.dsm.dsmmarketandroid.di.auth.authModule
 import com.dsm.dsmmarketandroid.di.chat.chatModule
 import com.dsm.dsmmarketandroid.di.detail.detailModule
-import com.dsm.dsmmarketandroid.di.purchase.purchaseModule
-import com.dsm.dsmmarketandroid.di.rent.rentModule
+import com.dsm.dsmmarketandroid.di.product.productModule
 import com.dsm.dsmmarketandroid.presentation.util.LocaleManager
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
@@ -36,10 +35,9 @@ open class BaseApp : Application() {
                     viewModelModule,
                     authModule,
                     accountModule,
-                    purchaseModule,
-                    detailModule,
                     chatModule,
-                    rentModule
+                    productModule,
+                    detailModule
                 )
             )
         }
