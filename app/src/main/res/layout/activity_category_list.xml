@@ -6,7 +6,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.ui.category.CategoryListActivity">
+        tools:context=".presentation.ui.main.category.CategoryListActivity">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/tb_category_list"

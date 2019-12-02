@@ -1,12 +1,15 @@
 package com.dsm.app.viewModel
 
 import com.dsm.app.BaseTest
+import com.dsm.app.createHttpException
 import com.dsm.domain.entity.PurchaseDetail
+import com.dsm.domain.error.ErrorEntity
+import com.dsm.domain.error.Resource
 import com.dsm.domain.usecase.GetPurchaseDetailUseCase
 import com.dsm.domain.usecase.ModifyPurchaseUseCase
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.mapper.PurchaseDetailModelMapper
-import com.dsm.dsmmarketandroid.presentation.ui.modify.purchase.ModifyPurchaseViewModel
+import com.dsm.dsmmarketandroid.presentation.ui.main.purchase.modifyPurchase.ModifyPurchaseViewModel
 import com.jraska.livedata.test
 import io.reactivex.Flowable
 import org.junit.Assert.assertFalse
@@ -30,7 +33,8 @@ class ModifyPurchaseViewModelTests : BaseTest() {
 
     @Before
     fun init() {
-        viewModel = ModifyPurchaseViewModel(getPurchaseDetailUseCase, modifyPurchaseUseCase, purchaseDetailModelMapper)
+        viewModel =
+            ModifyPurchaseViewModel(getPurchaseDetailUseCase, modifyPurchaseUseCase, purchaseDetailModelMapper)
     }
 
     @Test
@@ -76,7 +80,7 @@ class ModifyPurchaseViewModelTests : BaseTest() {
             isMe = false
         )
         `when`(getPurchaseDetailUseCase.create(0))
-            .thenReturn(Flowable.just(response))
+            .thenReturn(Flowable.just(Resource.Success(response)))
 
         val mapped = purchaseDetailModelMapper.mapFrom(response)
 
@@ -96,7 +100,7 @@ class ModifyPurchaseViewModelTests : BaseTest() {
     @Test
     fun `get purchase detail failed test`() {
         `when`(getPurchaseDetailUseCase.create(0))
-            .thenReturn(Flowable.error(Exception()))
+            .thenReturn(Flowable.just(Resource.Error(ErrorEntity.Internal(createHttpException(500)))))
 
         viewModel.run {
             getPurchaseDetail(0)
@@ -123,37 +127,11 @@ class ModifyPurchaseViewModelTests : BaseTest() {
                     "category" to viewModel.category.value
                 )
             )
-        ).thenReturn(Flowable.just(Unit))
+        ).thenReturn(Flowable.just(Resource.Success(Unit)))
 
         viewModel.modifyPurchase(0)
 
         viewModel.finishActivityEvent.test().assertHasValue()
-    }
-
-    @Test
-    fun `modify purchase failed test`() {
-        viewModel.run {
-            title.value = "TITLE"
-            content.value = "CONTENT"
-            price.value = "PRICE"
-            category.value = "CATEGORY"
-        }
-
-        `when`(
-            modifyPurchaseUseCase.create(
-                hashMapOf(
-                    "postId" to 0,
-                    "title" to viewModel.title.value,
-                    "content" to viewModel.content.value,
-                    "price" to viewModel.price.value,
-                    "category" to viewModel.category.value
-                )
-            )
-        ).thenReturn(Flowable.error(Exception()))
-
-        viewModel.modifyPurchase(0)
-
-        viewModel.toastEvent.test().assertValue(R.string.fail_server_error)
     }
 
     @Test

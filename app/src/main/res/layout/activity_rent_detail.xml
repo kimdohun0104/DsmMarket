@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.dsm.dsmmarketandroid.presentation.ui.rentDetail.RentDetailViewModel" />
+            type="com.dsm.dsmmarketandroid.presentation.ui.main.rent.rentDetail.RentDetailViewModel" />
 
         <import type="android.view.View" />
     </data>
@@ -54,7 +54,8 @@
                     app:layout_constraintRight_toLeftOf="@id/iv_rent_detail_menu"
                     android:layout_marginEnd="14dp"
                     android:background="?attr/selectableItemBackgroundBorderless"
-                    android:visibility="@{viewModel.isMe ? View.GONE : View.VISIBLE}"/>
+                    android:visibility="@{viewModel.isMe ? View.GONE : View.VISIBLE}"
+                    android:onClick="@{() -> viewModel.onClickRentImage()}"/>
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/iv_rent_detail_menu"

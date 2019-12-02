@@ -1,12 +1,15 @@
 package com.dsm.app.viewModel
 
 import com.dsm.app.BaseTest
+import com.dsm.app.createHttpException
 import com.dsm.domain.entity.RentDetail
+import com.dsm.domain.error.ErrorEntity
+import com.dsm.domain.error.Resource
 import com.dsm.domain.usecase.GetRentDetailUseCase
 import com.dsm.domain.usecase.ModifyRentUseCase
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.mapper.RentDetailModelMapper
-import com.dsm.dsmmarketandroid.presentation.ui.modify.rent.ModifyRentViewModel
+import com.dsm.dsmmarketandroid.presentation.ui.main.rent.modifyRent.ModifyRentViewModel
 import com.jraska.livedata.test
 import io.reactivex.Flowable
 import org.junit.Assert.assertFalse
@@ -91,7 +94,7 @@ class ModifyRentViewModelTests : BaseTest() {
                         "possible_time" to rentTime.value
                     )
                 )
-            ).thenReturn(Flowable.just(Unit))
+            ).thenReturn(Flowable.just(Resource.Success(Unit)))
 
             modifyRent(0)
             viewModel.finishActivityEvent.test().assertHasValue()
@@ -115,7 +118,7 @@ class ModifyRentViewModelTests : BaseTest() {
             isMe = false
         )
         `when`(getRentDetailUseCase.create(0))
-            .thenReturn(Flowable.just(response))
+            .thenReturn(Flowable.just(Resource.Success(response)))
 
         val mapped = rentDetailModelMapper.mapFrom(response)
 
@@ -134,7 +137,7 @@ class ModifyRentViewModelTests : BaseTest() {
     @Test
     fun `get rent detail failed test`() {
         `when`(getRentDetailUseCase.create(0))
-            .thenReturn(Flowable.error(Exception()))
+            .thenReturn(Flowable.just(Resource.Error(ErrorEntity.Internal(createHttpException(500)))))
 
         viewModel.getRentDetail(0)
 
@@ -165,43 +168,11 @@ class ModifyRentViewModelTests : BaseTest() {
                         "possible_time" to rentTime.value
                     )
                 )
-            ).thenReturn(Flowable.just(Unit))
+            ).thenReturn(Flowable.just(Resource.Success(Unit)))
 
             modifyRent(0)
 
             finishActivityEvent.test().assertHasValue()
-        }
-    }
-
-    @Test
-    fun `modify rent failed test`() {
-        viewModel.run {
-            title.value = "TITLE"
-            content.value = "CONTENT"
-            unit.value = "1회 당"
-            price.value = "100원"
-            category.value = "CATEGORY"
-            startHour.value = "10"
-            startMinute.value = "30"
-            endHour.value = "11"
-            endMinute.value = "30"
-
-            `when`(
-                modifyRentUseCase.create(
-                    hashMapOf(
-                        "postId" to 0,
-                        "title" to title.value,
-                        "content" to content.value,
-                        "price" to unit.value + "/" + price.value,
-                        "category" to category.value,
-                        "possible_time" to rentTime.value
-                    )
-                )
-            ).thenReturn(Flowable.error(Exception()))
-
-            modifyRent(0)
-
-            toastEvent.test().assertValue(R.string.fail_server_error)
         }
     }
 

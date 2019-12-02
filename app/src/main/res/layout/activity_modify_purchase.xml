@@ -4,7 +4,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.dsm.dsmmarketandroid.presentation.ui.modify.purchase.ModifyPurchaseViewModel" />
+            type="com.dsm.dsmmarketandroid.presentation.ui.main.purchase.modifyPurchase.ModifyPurchaseViewModel" />
         <import type="com.dsm.dsmmarketandroid.presentation.util.BindingUtil" />
         <variable
             name="postId"
@@ -17,7 +17,7 @@
         xmlns:bind="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.ui.modify.purchase.ModifyPurchaseActivity">
+        tools:context=".presentation.ui.main.purchase.modifyPurchase.ModifyPurchaseActivity">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/tb_modify_purchase"

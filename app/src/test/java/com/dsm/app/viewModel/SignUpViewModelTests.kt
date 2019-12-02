@@ -1,9 +1,12 @@
 package com.dsm.app.viewModel
 
 import com.dsm.app.BaseTest
+import com.dsm.app.createHttpException
+import com.dsm.domain.error.ErrorEntity
+import com.dsm.domain.error.Resource
 import com.dsm.domain.usecase.SignUpUseCase
 import com.dsm.dsmmarketandroid.R
-import com.dsm.dsmmarketandroid.presentation.ui.signUp.SignUpViewModel
+import com.dsm.dsmmarketandroid.presentation.ui.auth.signUp.SignUpViewModel
 import com.jraska.livedata.test
 import io.reactivex.Flowable
 import org.junit.Assert.assertFalse
@@ -77,20 +80,105 @@ class SignUpViewModelTests : BaseTest() {
             name.value = "김도훈"
             gender.value = "남성"
             grade.value = "1"
+
+            val request = hashMapOf(
+                "email" to viewModel.email.value,
+                "password" to viewModel.password.value,
+                "nick" to viewModel.name.value,
+                "gender" to viewModel.gender.value,
+                "grade" to viewModel.grade.value!!.toInt()
+            )
+            `when`(signUpUseCase.create(request)).thenReturn(Flowable.just(Resource.Success(Unit)))
+
+            signUp()
+
+            showLoadingDialogEvent.test().assertHasValue()
+            finishActivityEvent.test().assertHasValue()
+            hideLoadingDialogEvent.test().assertHasValue()
         }
+    }
 
-        val request = hashMapOf(
-            "email" to viewModel.email.value,
-            "password" to viewModel.password.value,
-            "nick" to viewModel.name.value,
-            "gender" to viewModel.gender.value,
-            "grade" to viewModel.grade.value!!.toInt()
-        )
-        `when`(signUpUseCase.create(request)).thenReturn(Flowable.just(Unit))
+    @Test
+    fun `sign up internal error test`() {
+        viewModel.run {
+            email.value = "example@test.com"
+            password.value = "testPassword"
+            reType.value = "testPassword"
+            name.value = "김도훈"
+            gender.value = "남성"
+            grade.value = "1"
 
-        viewModel.signUp()
+            val request = hashMapOf(
+                "email" to viewModel.email.value,
+                "password" to viewModel.password.value,
+                "nick" to viewModel.name.value,
+                "gender" to viewModel.gender.value,
+                "grade" to viewModel.grade.value!!.toInt()
+            )
+            `when`(signUpUseCase.create(request))
+                .thenReturn(Flowable.just(Resource.Error(ErrorEntity.Internal(createHttpException(500)))))
 
-        viewModel.finishActivityEvent.test().assertHasValue()
-        viewModel.hideLoadingDialogEvent.test().assertHasValue()
+            signUp()
+
+            showLoadingDialogEvent.test().assertHasValue()
+            toastEvent.value = R.string.fail_server_error
+            hideLoadingDialogEvent.test().assertHasValue()
+        }
+    }
+
+    @Test
+    fun `sign up exist email test`() {
+        viewModel.run {
+            email.value = "example@test.com"
+            password.value = "testPassword"
+            reType.value = "testPassword"
+            name.value = "김도훈"
+            gender.value = "남성"
+            grade.value = "1"
+
+            val request = hashMapOf(
+                "email" to viewModel.email.value,
+                "password" to viewModel.password.value,
+                "nick" to viewModel.name.value,
+                "gender" to viewModel.gender.value,
+                "grade" to viewModel.grade.value!!.toInt()
+            )
+            `when`(signUpUseCase.create(request))
+                .thenReturn(Flowable.just(Resource.Error(ErrorEntity.Internal(createHttpException(500, "{\"message\":\"existent email\"}")))))
+
+            signUp()
+
+            showLoadingDialogEvent.test().assertHasValue()
+            toastEvent.value = R.string.fail_existent_email
+            hideLoadingDialogEvent.test().assertHasValue()
+        }
+    }
+
+    @Test
+    fun `sign up exist nick test`() {
+        viewModel.run {
+            email.value = "example@test.com"
+            password.value = "testPassword"
+            reType.value = "testPassword"
+            name.value = "김도훈"
+            gender.value = "남성"
+            grade.value = "1"
+
+            val request = hashMapOf(
+                "email" to viewModel.email.value,
+                "password" to viewModel.password.value,
+                "nick" to viewModel.name.value,
+                "gender" to viewModel.gender.value,
+                "grade" to viewModel.grade.value!!.toInt()
+            )
+            `when`(signUpUseCase.create(request))
+                .thenReturn(Flowable.just(Resource.Error(ErrorEntity.Internal(createHttpException(500, "{\"message\":\"existent nick\"}")))))
+
+            signUp()
+
+            showLoadingDialogEvent.test().assertHasValue()
+            toastEvent.value = R.string.fail_existent_nick
+            hideLoadingDialogEvent.test().assertHasValue()
+        }
     }
 }

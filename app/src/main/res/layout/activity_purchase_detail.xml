@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="com.dsm.dsmmarketandroid.presentation.ui.purchaseDetail.PurchaseDetailViewModel" />
+            type="com.dsm.dsmmarketandroid.presentation.ui.main.purchase.purchaseDetail.PurchaseDetailViewModel" />
 
         <import type="android.view.View" />
     </data>
@@ -79,7 +79,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                tools:context=".presentation.ui.purchaseDetail.PurchaseDetailActivity">
+                tools:context=".presentation.ui.main.purchase.purchaseDetail.PurchaseDetailActivity">
 
 
                 <androidx.recyclerview.widget.RecyclerView

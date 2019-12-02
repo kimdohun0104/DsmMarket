@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.dsm.dsmmarketandroid.databinding.ItemCommentBinding
 import com.dsm.dsmmarketandroid.presentation.model.CommentModel
-import com.dsm.dsmmarketandroid.presentation.ui.comment.CommentViewModel
+import com.dsm.dsmmarketandroid.presentation.ui.main.comment.CommentViewModel
 
 class CommentListAdapter(
     private val viewModel: CommentViewModel

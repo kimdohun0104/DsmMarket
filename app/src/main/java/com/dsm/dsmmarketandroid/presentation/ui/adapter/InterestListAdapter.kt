@@ -10,8 +10,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.dsm.dsmmarketandroid.databinding.ItemInterestBinding
 import com.dsm.dsmmarketandroid.presentation.model.ProductModel
-import com.dsm.dsmmarketandroid.presentation.ui.purchaseDetail.PurchaseDetailActivity
-import com.dsm.dsmmarketandroid.presentation.ui.rentDetail.RentDetailActivity
+import com.dsm.dsmmarketandroid.presentation.ui.main.purchase.purchaseDetail.PurchaseDetailActivity
+import com.dsm.dsmmarketandroid.presentation.ui.main.rent.rentDetail.RentDetailActivity
 import com.dsm.dsmmarketandroid.presentation.util.ProductType
 
 class InterestListAdapter(private val type: Int) : RecyclerView.Adapter<InterestListAdapter.ViewHolder>() {

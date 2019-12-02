@@ -5,7 +5,7 @@ import com.dsm.domain.entity.Comment
 import com.dsm.domain.usecase.GetCommentUseCase
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.mapper.CommentModelMapper
-import com.dsm.dsmmarketandroid.presentation.ui.comment.CommentViewModel
+import com.dsm.dsmmarketandroid.presentation.ui.main.comment.CommentViewModel
 import com.jraska.livedata.test
 import io.reactivex.Flowable
 import org.junit.Before

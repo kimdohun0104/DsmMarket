@@ -5,7 +5,7 @@
 
         <variable
             name="viewModel"
-            type="com.dsm.dsmmarketandroid.presentation.ui.interest.InterestViewModel" />
+            type="com.dsm.dsmmarketandroid.presentation.ui.main.me.interest.InterestViewModel" />
 
         <import type="android.view.View" />
     </data>

@@ -1,9 +1,12 @@
 package com.dsm.app.viewModel
 
 import com.dsm.app.BaseTest
+import com.dsm.app.createHttpException
+import com.dsm.domain.error.ErrorEntity
+import com.dsm.domain.error.Resource
 import com.dsm.domain.usecase.ChangePasswordUseCase
 import com.dsm.dsmmarketandroid.R
-import com.dsm.dsmmarketandroid.presentation.ui.password.changePassword.ChangePasswordViewModel
+import com.dsm.dsmmarketandroid.presentation.ui.main.me.password.changePassword.ChangePasswordViewModel
 import com.jraska.livedata.test
 import io.reactivex.Flowable
 import org.junit.Assert.assertFalse
@@ -59,11 +62,26 @@ class ChangePasswordViewModelTests : BaseTest() {
             reType.value = "PASSWORD"
 
             `when`(changePasswordUseCase.create(newPassword.value!!))
-                .thenReturn(Flowable.just(Unit))
+                .thenReturn(Flowable.just(Resource.Success(Unit)))
 
-            viewModel.changePassword()
+            changePassword()
 
             finishActivityEvent.test().assertHasValue()
+        }
+    }
+
+    @Test
+    fun `unauthorized test`() {
+        viewModel.run {
+            newPassword.value = "PASSWORD"
+            reType.value = "PASSWORD"
+
+            `when`(changePasswordUseCase.create(newPassword.value!!))
+                .thenReturn(Flowable.just(Resource.Error(ErrorEntity.Unauthorized(createHttpException(401)))))
+
+            changePassword()
+
+            toastEvent.test().assertValue(R.string.fail_unauthorized)
         }
     }
 
@@ -74,11 +92,11 @@ class ChangePasswordViewModelTests : BaseTest() {
             reType.value = "PASSWORD"
 
             `when`(changePasswordUseCase.create(newPassword.value!!))
-                .thenReturn(Flowable.error(Exception()))
+                .thenReturn(Flowable.just(Resource.Error(ErrorEntity.Internal(createHttpException(500)))))
 
-            viewModel.changePassword()
+            changePassword()
 
-            viewModel.toastEvent.test().assertValue(R.string.fail_server_error)
+            toastEvent.test().assertValue(R.string.fail_server_error)
         }
     }
 }

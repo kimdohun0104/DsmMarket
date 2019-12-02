@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.dsm.dsmmarketandroid.databinding.ItemChatRoomBinding
 import com.dsm.dsmmarketandroid.presentation.model.ChatRoomModel
-import com.dsm.dsmmarketandroid.presentation.ui.chatList.ChatListViewModel
+import com.dsm.dsmmarketandroid.presentation.ui.main.chat.chatList.ChatListViewModel
 
 class ChatRoomListAdapter(private val viewModel: ChatListViewModel) : RecyclerView.Adapter<ChatRoomListAdapter.ChatRoomHolder>() {
 

@@ -8,13 +8,13 @@
 
         <variable
             name="viewModel"
-            type="com.dsm.dsmmarketandroid.presentation.ui.signUp.SignUpViewModel" />
+            type="com.dsm.dsmmarketandroid.presentation.ui.auth.signUp.SignUpViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.ui.signUp.SignUpActivity">
+        tools:context=".presentation.ui.auth.signUp.SignUpActivity">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/tb_sign_up"

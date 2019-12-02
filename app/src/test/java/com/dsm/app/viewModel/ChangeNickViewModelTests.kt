@@ -2,9 +2,11 @@ package com.dsm.app.viewModel
 
 import com.dsm.app.BaseTest
 import com.dsm.app.createHttpException
+import com.dsm.domain.error.ErrorEntity
+import com.dsm.domain.error.Resource
 import com.dsm.domain.usecase.ChangeNickUseCase
 import com.dsm.dsmmarketandroid.R
-import com.dsm.dsmmarketandroid.presentation.ui.changeNick.ChangeNickViewModel
+import com.dsm.dsmmarketandroid.presentation.ui.main.me.changeNick.ChangeNickViewModel
 import com.jraska.livedata.test
 import io.reactivex.Flowable
 import org.junit.Assert.assertFalse
@@ -13,7 +15,6 @@ import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
-import java.io.IOException
 
 class ChangeNickViewModelTests : BaseTest() {
 
@@ -46,7 +47,7 @@ class ChangeNickViewModelTests : BaseTest() {
         viewModel.nick.value = "NICK"
 
         `when`(changeNickUseCase.create(viewModel.nick.value!!))
-            .thenReturn(Flowable.just(Unit))
+            .thenReturn(Flowable.just(Resource.Success(Unit)))
 
         viewModel.changeNick()
 
@@ -59,7 +60,7 @@ class ChangeNickViewModelTests : BaseTest() {
         viewModel.nick.value = "NICK"
 
         `when`(changeNickUseCase.create(viewModel.nick.value!!))
-            .thenReturn(Flowable.error(createHttpException(403)))
+            .thenReturn(Flowable.just(Resource.Error(ErrorEntity.Forbidden(createHttpException(403)))))
 
         viewModel.changeNick()
 
@@ -67,11 +68,23 @@ class ChangeNickViewModelTests : BaseTest() {
     }
 
     @Test
+    fun `change nick unauthorized error`() {
+        viewModel.nick.value = "NICK"
+
+        `when`(changeNickUseCase.create(viewModel.nick.value!!))
+            .thenReturn(Flowable.just(Resource.Error(ErrorEntity.Unauthorized(createHttpException(401)))))
+
+        viewModel.changeNick()
+
+        viewModel.toastEvent.test().assertValue(R.string.fail_unauthorized)
+    }
+
+    @Test
     fun `server error test`() {
         viewModel.nick.value = "NICK"
 
         `when`(changeNickUseCase.create(viewModel.nick.value!!))
-            .thenReturn(Flowable.error(IOException()))
+            .thenReturn(Flowable.just(Resource.Error(ErrorEntity.Internal(createHttpException(500)))))
 
         viewModel.changeNick()
 

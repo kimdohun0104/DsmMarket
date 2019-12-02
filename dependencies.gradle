@@ -69,7 +69,8 @@ ext {
             messageBus: "com.github.UnsignedUSB:MessageBus:$messageBusVersion",
             analytics: "com.google.firebase:firebase-analytics:$firebaseCoreVersion",
             googlePlayCore: "com.google.android.play:core:$googlePlayVersion",
-            okhttp: "com.squareup.okhttp3:okhttp:$okhttpVersion"
+            okhttp: "com.squareup.okhttp3:okhttp:$okhttpVersion",
+            okhttpLogging: "com.squareup.okhttp3:logging-interceptor:$okhttpVersion"
     ]
 
     dataTestDependencies = [

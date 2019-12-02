@@ -2,7 +2,7 @@ package com.dsm.app.viewModel
 
 import com.dsm.app.BaseTest
 import com.dsm.domain.usecase.PostRentUseCase
-import com.dsm.dsmmarketandroid.presentation.ui.post.postRent.PostRentViewModel
+import com.dsm.dsmmarketandroid.presentation.ui.main.post.postRent.PostRentViewModel
 import com.jraska.livedata.test
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue

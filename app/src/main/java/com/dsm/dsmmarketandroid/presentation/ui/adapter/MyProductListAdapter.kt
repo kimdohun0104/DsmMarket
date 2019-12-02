@@ -12,11 +12,11 @@ import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dsm.dsmmarketandroid.databinding.ItemMyPostBinding
 import com.dsm.dsmmarketandroid.presentation.model.ProductModel
-import com.dsm.dsmmarketandroid.presentation.ui.modify.purchase.ModifyPurchaseActivity
-import com.dsm.dsmmarketandroid.presentation.ui.modify.rent.ModifyRentActivity
-import com.dsm.dsmmarketandroid.presentation.ui.myPost.CompleteDialog
-import com.dsm.dsmmarketandroid.presentation.ui.purchaseDetail.PurchaseDetailActivity
-import com.dsm.dsmmarketandroid.presentation.ui.rentDetail.RentDetailActivity
+import com.dsm.dsmmarketandroid.presentation.ui.main.me.myPost.CompleteDialog
+import com.dsm.dsmmarketandroid.presentation.ui.main.purchase.modifyPurchase.ModifyPurchaseActivity
+import com.dsm.dsmmarketandroid.presentation.ui.main.purchase.purchaseDetail.PurchaseDetailActivity
+import com.dsm.dsmmarketandroid.presentation.ui.main.rent.modifyRent.ModifyRentActivity
+import com.dsm.dsmmarketandroid.presentation.ui.main.rent.rentDetail.RentDetailActivity
 import com.dsm.dsmmarketandroid.presentation.util.ProductType
 import org.jetbrains.anko.startActivity
 

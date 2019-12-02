@@ -109,6 +109,7 @@ dependencies {
 
     // okhttp
     implementation dependencies.okhttp
+    implementation dependencies.okhttpLogging
 
     // lifecycle
     implementation dependencies.lifecycleRuntime

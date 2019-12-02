@@ -1,13 +1,16 @@
 package com.dsm.app.viewModel
 
 import com.dsm.app.BaseTest
+import com.dsm.app.createHttpException
 import com.dsm.domain.entity.Product
-import com.dsm.domain.usecase.GetInterestUseCase
+import com.dsm.domain.error.ErrorEntity
+import com.dsm.domain.error.Resource
+import com.dsm.domain.usecase.GetInterestPurchaseUseCase
+import com.dsm.domain.usecase.GetInterestRentUseCase
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.mapper.ProductModelMapper
 import com.dsm.dsmmarketandroid.presentation.model.ProductModel
-import com.dsm.dsmmarketandroid.presentation.ui.interest.InterestViewModel
-import com.dsm.dsmmarketandroid.presentation.util.ProductType
+import com.dsm.dsmmarketandroid.presentation.ui.main.me.interest.InterestViewModel
 import com.jraska.livedata.test
 import io.reactivex.Flowable
 import org.junit.Assert.assertFalse
@@ -20,7 +23,10 @@ import org.mockito.Mockito.`when`
 class InterestViewModelTests : BaseTest() {
 
     @Mock
-    private lateinit var getInterestUseCase: GetInterestUseCase
+    private lateinit var getInterestPurchaseUseCase: GetInterestPurchaseUseCase
+
+    @Mock
+    private lateinit var getInterestRentUseCase: GetInterestRentUseCase
 
     private val productModelMapper = ProductModelMapper()
 
@@ -28,7 +34,7 @@ class InterestViewModelTests : BaseTest() {
 
     @Before
     fun init() {
-        viewModel = InterestViewModel(getInterestUseCase, productModelMapper)
+        viewModel = InterestViewModel(getInterestRentUseCase, getInterestPurchaseUseCase, productModelMapper)
     }
 
     @Test
@@ -62,20 +68,20 @@ class InterestViewModelTests : BaseTest() {
     @Test
     fun `get interest purchase success test`() {
         val response = listOf(Product(0, "TITLE", "IMG", "CREATED_AT", "PRICE"))
-        `when`(getInterestUseCase.create(0))
-            .thenReturn(Flowable.just(response))
+        `when`(getInterestPurchaseUseCase.create(Unit))
+            .thenReturn(Flowable.just(Resource.Success(response)))
 
-        viewModel.getInterest(ProductType.PURCHASE)
+        viewModel.getPurchaseInterest()
 
         viewModel.purchaseList.test().assertValue(productModelMapper.mapFrom(response))
     }
 
     @Test
     fun `get interest purchase failed test`() {
-        `when`(getInterestUseCase.create(ProductType.PURCHASE))
-            .thenReturn(Flowable.error(Exception()))
+        `when`(getInterestPurchaseUseCase.create(Unit))
+            .thenReturn(Flowable.just(Resource.Error(ErrorEntity.Internal(createHttpException(500)))))
 
-        viewModel.getInterest(ProductType.PURCHASE)
+        viewModel.getPurchaseInterest()
 
         viewModel.toastEvent.test().assertValue(R.string.fail_server_error)
     }
@@ -91,20 +97,20 @@ class InterestViewModelTests : BaseTest() {
             Product(0, "TITLE", "IMG", "CREATED_AT", "PRICE"),
             Product(0, "TITLE", "IMG", "CREATED_AT", "PRICE")
         )
-        `when`(getInterestUseCase.create(1))
-            .thenReturn(Flowable.just(response))
+        `when`(getInterestRentUseCase.create(Unit))
+            .thenReturn(Flowable.just(Resource.Success(response)))
 
-        viewModel.getInterest(ProductType.RENT)
+        viewModel.getRentInterest()
 
         viewModel.rentList.test().assertValue(productModelMapper.mapFrom(response))
     }
 
      @Test
      fun `get interest rent failed test`() {
-         `when`(getInterestUseCase.create(ProductType.RENT))
-             .thenReturn(Flowable.error(Exception()))
+         `when`(getInterestRentUseCase.create(Unit))
+             .thenReturn(Flowable.just(Resource.Error(ErrorEntity.Internal(createHttpException(500)))))
 
-         viewModel.getInterest(ProductType.RENT)
+         viewModel.getRentInterest()
 
          viewModel.toastEvent.test().assertValue(R.string.fail_server_error)
      }

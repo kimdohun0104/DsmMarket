@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.dsm.dsmmarketandroid.databinding.ItemSearchHistoryBinding
-import com.dsm.dsmmarketandroid.presentation.ui.search.SearchViewModel
+import com.dsm.dsmmarketandroid.presentation.ui.main.search.SearchViewModel
 
 class SearchHistoryListAdapter(private val viewModel: SearchViewModel) : RecyclerView.Adapter<SearchHistoryListAdapter.ViewHolder>() {
 
