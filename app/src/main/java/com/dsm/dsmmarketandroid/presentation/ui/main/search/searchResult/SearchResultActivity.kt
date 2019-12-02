@@ -2,7 +2,8 @@ package com.dsm.dsmmarketandroid.presentation.ui.main.search.searchResult
 
 import android.os.Bundle
 import android.view.inputmethod.EditorInfo
-import com.dsm.domain.usecase.AddSearchHistoryUseCase
+import com.dsm.data.local.db.dao.SearchDao
+import com.dsm.data.local.db.entity.SearchHistoryRoomEntity
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.databinding.ActivitySearchResultBinding
 import com.dsm.dsmmarketandroid.presentation.base.BaseActivity
@@ -23,7 +24,7 @@ class SearchResultActivity : BaseActivity<ActivitySearchResultBinding>() {
 
     private val search: String by lazy { intent.getStringExtra("search") }
 
-    private val addSearchHistoryUseCase: AddSearchHistoryUseCase by inject()
+    private val searchDao: SearchDao by inject()
     private val composite = CompositeDisposable()
 
     override fun viewInit() {
@@ -56,7 +57,7 @@ class SearchResultActivity : BaseActivity<ActivitySearchResultBinding>() {
             startActivity<SearchResultActivity>("search" to searchText)
             finish()
 
-            composite.add(addSearchHistoryUseCase.create(searchText).subscribe())
+            composite.add(searchDao.addSearchHistory(SearchHistoryRoomEntity(searchText)).subscribe())
         }
     }
 

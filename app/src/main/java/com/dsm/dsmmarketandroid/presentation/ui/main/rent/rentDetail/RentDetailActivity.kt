@@ -100,9 +100,10 @@ class RentDetailActivity : BaseActivity<ActivityRentDetailBinding>() {
                 if (it) {
                     `this`.isMe = true
                     popup.menuInflater.inflate(R.menu.menu_my_product_detail_toolbar, popup.menu)
-                }
-                else popup.menuInflater.inflate(R.menu.menu_product_detail_toolbar, popup.menu)
+                } else popup.menuInflater.inflate(R.menu.menu_product_detail_toolbar, popup.menu)
             })
+
+            intentRentImage.observe(`this`, Observer { startActivity<RentImageActivity>("img" to it) })
         }
     }
 

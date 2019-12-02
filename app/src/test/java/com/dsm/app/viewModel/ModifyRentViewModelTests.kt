@@ -94,7 +94,7 @@ class ModifyRentViewModelTests : BaseTest() {
                         "possible_time" to rentTime.value
                     )
                 )
-            ).thenReturn(Flowable.just(Unit))
+            ).thenReturn(Flowable.just(Resource.Success(Unit)))
 
             modifyRent(0)
             viewModel.finishActivityEvent.test().assertHasValue()
@@ -168,7 +168,7 @@ class ModifyRentViewModelTests : BaseTest() {
                         "possible_time" to rentTime.value
                     )
                 )
-            ).thenReturn(Flowable.just(Unit))
+            ).thenReturn(Flowable.just(Resource.Success(Unit)))
 
             modifyRent(0)
 

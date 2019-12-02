@@ -3,17 +3,13 @@ package com.dsm.dsmmarketandroid.presentation.ui.main.search
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
-import com.dsm.domain.usecase.AddSearchHistoryUseCase
-import com.dsm.domain.usecase.DeleteSearchHistoryUseCase
-import com.dsm.domain.usecase.GetSearchHistoryUseCase
+import com.dsm.data.local.db.dao.SearchDao
+import com.dsm.data.local.db.entity.SearchHistoryRoomEntity
 import com.dsm.dsmmarketandroid.presentation.base.BaseViewModel
 import com.dsm.dsmmarketandroid.presentation.util.SingleLiveEvent
+import io.reactivex.android.schedulers.AndroidSchedulers
 
-class SearchViewModel(
-    private val getSearchHistoryUseCase: GetSearchHistoryUseCase,
-    private val addSearchHistoryUseCase: AddSearchHistoryUseCase,
-    private val deleteSearchHistoryUseCase: DeleteSearchHistoryUseCase
-) : BaseViewModel() {
+class SearchViewModel(private val searchDao: SearchDao) : BaseViewModel() {
 
     val searchText = MutableLiveData<String>()
 
@@ -27,25 +23,23 @@ class SearchViewModel(
     fun search() {
         intentSearchResult.value = searchText.value!!
         finishActivityEvent.call()
-        addDisposable(addSearchHistoryUseCase.create(searchText.value!!).subscribe())
+        addDisposable(searchDao.addSearchHistory(SearchHistoryRoomEntity(searchText.value ?: "")).subscribe())
     }
 
     fun getSearchHistory() {
         addDisposable(
-            getSearchHistoryUseCase.create(Unit)
-                .subscribe({
-                    searchHistoryList.value = it
-                }, {
-                })
+            searchDao.getSearchHistory()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe { searchHistoryList.value = it.map { it.content } }
         )
     }
 
     fun onClickSearchHistory(content: String) {
         intentSearchResult.value = content
         finishActivityEvent.call()
-        addDisposable(addSearchHistoryUseCase.create(content).subscribe())
+        addDisposable(searchDao.addSearchHistory(SearchHistoryRoomEntity(content)).subscribe())
     }
 
     fun deleteSearchHistory(content: String) =
-        addDisposable(deleteSearchHistoryUseCase.create(content).subscribe())
+        addDisposable(searchDao.deleteSearchHistory(content).subscribe())
 }

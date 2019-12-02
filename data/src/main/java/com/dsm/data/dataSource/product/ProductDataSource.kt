@@ -1,7 +1,8 @@
 package com.dsm.data.dataSource.product
 
-import com.dsm.data.local.db.entity.InterestProductRoomEntity
 import com.dsm.data.local.db.entity.ProductRoomEntity
+import com.dsm.data.local.db.entity.RecentPurchaseRoomEntity
+import com.dsm.data.local.db.entity.RecentRentRoomEntity
 import com.dsm.data.remote.entity.ProductListEntity
 import io.reactivex.Completable
 import io.reactivex.Flowable
@@ -18,7 +19,15 @@ interface ProductDataSource {
 
     fun getRemoteInterestProduct(type: Int): Flowable<ProductListEntity>
 
-    fun getLocalInterestProduct(type: Int): List<InterestProductRoomEntity>
+    fun getMyPurchase(): Flowable<ProductListEntity>
 
-    fun addLocalInterestProduct(interestProduct: List<InterestProductRoomEntity>): Completable
+    fun getMyRent(): Flowable<ProductListEntity>
+
+    fun completePurchase(postId: Int): Flowable<Unit>
+
+    fun completeRent(postId: Int): Flowable<Unit>
+
+    fun getRecentPurchase(): Flowable<List<RecentPurchaseRoomEntity>>
+
+    fun getRecentRent(): Flowable<List<RecentRentRoomEntity>>
 }

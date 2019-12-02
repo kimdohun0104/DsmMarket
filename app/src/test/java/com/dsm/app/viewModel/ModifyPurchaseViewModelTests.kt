@@ -127,7 +127,7 @@ class ModifyPurchaseViewModelTests : BaseTest() {
                     "category" to viewModel.category.value
                 )
             )
-        ).thenReturn(Flowable.just(Unit))
+        ).thenReturn(Flowable.just(Resource.Success(Unit)))
 
         viewModel.modifyPurchase(0)
 

@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="viewModel"
-            type="com.dsm.dsmmarketandroid.presentation.ui.main.rent.rentImage.RentImageViewModel" />
+            name="img"
+            type="String" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -35,7 +35,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:image="@{viewModel.image}" />
+            tools:image="@{img}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

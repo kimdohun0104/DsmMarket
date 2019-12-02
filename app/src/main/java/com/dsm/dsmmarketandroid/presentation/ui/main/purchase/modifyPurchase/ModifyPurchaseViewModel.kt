@@ -48,7 +48,7 @@ class ModifyPurchaseViewModel(
                         is Resource.Success -> {
                             val detail = purchaseDetailModelMapper.mapFrom(it.data)
                             title.value = detail.title
-                            price.value = detail.price.substring(0, detail.price.length - 1)    // 100원
+                            price.value = detail.price.substring(0, detail.price.length - 1).replace(",", "")    // 100원
                             category.value = detail.category
                             content.value = detail.content
                             imageList.value = detail.img as ArrayList<String>

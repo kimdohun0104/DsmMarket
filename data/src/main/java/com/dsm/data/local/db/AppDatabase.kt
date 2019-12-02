@@ -6,7 +6,15 @@ import androidx.room.TypeConverters
 import com.dsm.data.local.db.dao.*
 import com.dsm.data.local.db.entity.*
 
-@Database(entities = [PurchaseDetailRoomEntity::class, RentDetailRoomEntity::class, SearchHistoryRoomEntity::class, ProductRoomEntity::class, InterestProductRoomEntity::class], version = 5)
+@Database(
+    entities = [
+        PurchaseDetailRoomEntity::class,
+        RentDetailRoomEntity::class,
+        SearchHistoryRoomEntity::class,
+        ProductRoomEntity::class,
+        CommentRoomEntity::class
+    ], version = 6
+)
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
 
@@ -18,5 +26,5 @@ abstract class AppDatabase : RoomDatabase() {
 
     abstract fun productDao(): ProductDao
 
-    abstract fun interestDao(): InterestDao
+    abstract fun commentDao(): CommentDao
 }

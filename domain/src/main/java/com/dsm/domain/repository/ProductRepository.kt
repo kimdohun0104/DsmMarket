@@ -16,7 +16,15 @@ interface ProductRepository {
 
     fun getRemoteInterestProduct(type: Int): Flowable<List<Product>>
 
-    fun getLocalInterestProduct(type: Int): List<Product>
+    fun getMyPurchase(): Flowable<List<Product>>
 
-    fun addLocalInterestProduct(interestProduct: List<Product>, type: Int): Completable
+    fun getMyRent(): Flowable<List<Product>>
+
+    fun completePurchase(postId: Int): Flowable<Unit>
+
+    fun completeRent(postId: Int): Flowable<Unit>
+
+    fun getRecentPurchase(): Flowable<List<Product>>
+
+    fun getRecentRent(): Flowable<List<Product>>
 }

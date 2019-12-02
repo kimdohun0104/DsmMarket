@@ -13,7 +13,9 @@ import com.dsm.domain.usecase.*
 import com.dsm.dsmmarketandroid.presentation.mapper.PurchaseDetailModelMapper
 import com.dsm.dsmmarketandroid.presentation.mapper.RecommendModelMapper
 import com.dsm.dsmmarketandroid.presentation.mapper.RentDetailModelMapper
+import com.dsm.dsmmarketandroid.presentation.ui.main.purchase.modifyPurchase.ModifyPurchaseViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.main.purchase.purchaseDetail.PurchaseDetailViewModel
+import com.dsm.dsmmarketandroid.presentation.ui.main.rent.modifyRent.ModifyRentViewModel
 import com.dsm.dsmmarketandroid.presentation.ui.main.rent.rentDetail.RentDetailViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -55,5 +57,15 @@ val detailModule = module {
     factory { RentDetailModelMapper() }
 
     viewModel { RentDetailViewModel(get(), get(), get(), get(), get(), get(), get(), get()) }
+
+    // modify purchase
+    factory { ModifyPurchaseUseCase(get()) }
+
+    viewModel { ModifyPurchaseViewModel(get(), get(), get()) }
+
+    // modify rent
+    factory { ModifyRentUseCase(get()) }
+
+    viewModel { ModifyRentViewModel(get(), get(), get()) }
 
 }

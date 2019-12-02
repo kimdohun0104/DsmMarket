@@ -37,4 +37,10 @@ class DetailServiceImpl(
 
     override fun getRelatedProduct(postId: Int, type: Int): Flowable<Resource<List<Recommend>>> =
         repository.getRelatedProduct(postId, type).toResource(errorHandler)
+
+    override fun modifyPurchase(param: Any): Flowable<Resource<Unit>> =
+        repository.modifyPurchase(param).toResource(errorHandler)
+
+    override fun modifyRent(param: Any): Flowable<Resource<Unit>> =
+        repository.modifyRent(param).toResource(errorHandler)
 }

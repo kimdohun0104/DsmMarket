@@ -5,18 +5,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
-import com.dsm.domain.usecase.ReportPostUseCase
+import com.dsm.data.remote.Api
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.util.Analytics
 import com.dsm.dsmmarketandroid.presentation.util.onItemSelectedListener
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.dialog_post_report.*
 import org.jetbrains.anko.support.v4.toast
 import org.koin.android.ext.android.inject
 
 class ReportPostDialog : DialogFragment() {
 
-    private val reportPostUseCase: ReportPostUseCase by inject()
+    private val api: Api by inject()
 
     private val compositeDisposable = CompositeDisposable()
 
@@ -47,13 +49,15 @@ class ReportPostDialog : DialogFragment() {
             }
 
             compositeDisposable.add(
-                reportPostUseCase.create(
+                api.reportPost(
                     hashMapOf(
                         "postId" to arguments?.getInt("post_id"),
                         "type" to arguments?.getInt("type"),
                         "reason" to reason
                     )
                 )
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
                     .doOnNext {
                         Analytics.logEvent(activity!!, Analytics.REPORT_POST, Bundle().apply {
                             putString(Analytics.REASON, reason)
@@ -63,7 +67,7 @@ class ReportPostDialog : DialogFragment() {
                     .subscribe({
                         dismiss()
                     }, {
-                        toast(getString(R.string.fail_server_error))
+                        toast(R.string.fail_server_error)
                     })
             )
         }

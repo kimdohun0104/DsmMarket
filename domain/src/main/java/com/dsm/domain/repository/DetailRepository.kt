@@ -27,4 +27,8 @@ interface DetailRepository {
     fun getRecommendProduct(): Flowable<List<Recommend>>
 
     fun getRelatedProduct(postId: Int, type: Int): Flowable<List<Recommend>>
+
+    fun modifyPurchase(param: Any): Flowable<Unit>
+
+    fun modifyRent(param: Any): Flowable<Unit>
 }

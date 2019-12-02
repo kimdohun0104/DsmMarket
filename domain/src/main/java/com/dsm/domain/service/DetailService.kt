@@ -19,4 +19,8 @@ interface DetailService {
     fun getRecommendProduct(): Flowable<Resource<List<Recommend>>>
 
     fun getRelatedProduct(postId: Int, type: Int): Flowable<Resource<List<Recommend>>>
+
+    fun modifyPurchase(param: Any): Flowable<Resource<Unit>>
+
+    fun modifyRent(param: Any): Flowable<Resource<Unit>>
 }

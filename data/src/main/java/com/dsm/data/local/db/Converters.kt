@@ -1,7 +1,7 @@
 package com.dsm.data.local.db
 
 import androidx.room.TypeConverter
-import com.dsm.data.local.db.entity.InterestProductRoomEntity
+import com.dsm.data.local.db.entity.CommentRoomEntity
 import com.dsm.data.local.db.entity.ProductRoomEntity
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -33,12 +33,12 @@ object Converters {
 
     @JvmStatic
     @TypeConverter
-    fun fromInterestListToString(list: List<InterestProductRoomEntity>) : String = Gson().toJson(list)
+    fun fromCommentListToString(list: List<CommentRoomEntity>): String = Gson().toJson(list)
 
     @JvmStatic
     @TypeConverter
-    fun fromStringToInterestList(value: String): List<InterestProductRoomEntity> {
-        val listType = object : TypeToken<List<InterestProductRoomEntity>>() {}.type
+    fun fromStringToCommentList(value: String): List<CommentRoomEntity> {
+        val listType = object: TypeToken<List<CommentRoomEntity>>() {}.type
         return Gson().fromJson(value, listType)
     }
 }

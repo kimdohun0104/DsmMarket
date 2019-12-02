@@ -64,7 +64,7 @@ class ModifyRentViewModel(
                         is Resource.Success -> {
                             val detail = rentDetailModelMapper.mapFrom(it.data)
                             title.value = detail.title
-                            price.value = detail.price.split(" ")[2].substring(0, detail.price.split(" ")[2].length - 1)    // 1회당 100원
+                            price.value = detail.price.split(" ")[2].substring(0, detail.price.split(" ")[2].length - 1).replace(",", "")    // 1회당 100원
                             photo.value = detail.img
                             content.value = detail.content
                             category.value = detail.category

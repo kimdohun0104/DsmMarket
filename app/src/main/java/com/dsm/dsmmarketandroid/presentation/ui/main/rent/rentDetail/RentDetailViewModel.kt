@@ -47,6 +47,8 @@ class RentDetailViewModel(
 
     val createChatRoomLogEvent = SingleLiveEvent<Bundle>()
 
+    val intentRentImage = SingleLiveEvent<String>()
+
     fun getRentDetail(postId: Int) {
         addDisposable(
             getRentDetailUseCase.create(postId)
@@ -156,5 +158,9 @@ class RentDetailViewModel(
                     toastEvent.value = R.string.fail_server_error
                 })
         )
+    }
+
+    fun onClickRentImage() {
+        intentRentImage.value = rentDetail.value?.img
     }
 }

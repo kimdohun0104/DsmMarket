@@ -46,7 +46,7 @@ class PurchaseDetailActivity : BaseActivity<ActivityPurchaseDetailBinding>() {
         tb_purchase_detail.setNavigationOnClickListener { finish() }
 
         rv_detail_image.run {
-            adapter = DetailImageListAdapter(postId)
+            adapter = DetailImageListAdapter()
             addItemDecoration(LinePagerIndicatorDecoration())
             PagerSnapHelper().attachToRecyclerView(this)
         }

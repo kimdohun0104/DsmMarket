@@ -47,4 +47,10 @@ class DetailRepositoryImpl(
 
     override fun getRelatedProduct(postId: Int, type: Int): Flowable<List<Recommend>> =
         dataSource.getRelatedProduct(postId, type).map(recommendMapper::mapFrom)
+
+    override fun modifyPurchase(param: Any): Flowable<Unit> =
+        dataSource.modifyPurchase(param)
+
+    override fun modifyRent(param: Any): Flowable<Unit> =
+        dataSource.modifyRent(param)
 }

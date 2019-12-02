@@ -22,5 +22,5 @@ val localModule = module {
 
     factory { get<AppDatabase>().productDao() }
 
-    factory { get<AppDatabase>().interestDao() }
+    factory { get<AppDatabase>().commentDao() }
 }

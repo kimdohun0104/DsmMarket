@@ -47,4 +47,10 @@ class DetailDataSourceImpl(
 
     override fun getRelatedProduct(postId: Int, type: Int): Flowable<RecommendListEntity> =
         api.getRelatedProduct(postId, type).addSchedulers()
+
+    override fun modifyPurchase(param: Any): Flowable<Unit> =
+        api.modifyPurchase(param).addSchedulers()
+
+    override fun modifyRent(param: Any): Flowable<Unit> =
+        api.modifyRent(param).addSchedulers()
 }

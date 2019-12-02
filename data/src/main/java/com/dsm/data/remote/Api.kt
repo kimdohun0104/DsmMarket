@@ -43,14 +43,14 @@ interface Api {
     fun postRent(
         @Part img: MultipartBody.Part,
         @PartMap params: Map<String, @JvmSuppressWildcards RequestBody>
-    ): Flowable<Response<Unit>>
+    ): Flowable<Unit>
 
     @Multipart
     @POST("post/deal")
     fun postPurchase(
         @Part img: List<MultipartBody.Part>,
         @PartMap params: Map<String, @JvmSuppressWildcards RequestBody>
-    ): Flowable<Response<Unit>>
+    ): Flowable<Unit>
 
     @GET("list/deal")
     fun getPurchaseList(
@@ -81,7 +81,7 @@ interface Api {
     ): Flowable<RentDetailEntity>
 
     @POST("post/comment")
-    fun postComment(@Body params: Any): Flowable<Response<Unit>>
+    fun postComment(@Body params: Any): Flowable<Unit>
 
     @GET("comment")
     fun getComment(
@@ -128,22 +128,16 @@ interface Api {
     fun reportComment(@Body params: Any): Flowable<Response<Unit>>
 
     @DELETE("post/deal/{postId}")
-    fun completePurchase(@Path("postId") postId: Int): Flowable<Response<Unit>>
+    fun completePurchase(@Path("postId") postId: Int): Flowable<Unit>
 
     @DELETE("post/rent/{postId}")
-    fun completeRent(@Path("postId") postId: Int): Flowable<Response<Unit>>
+    fun completeRent(@Path("postId") postId: Int): Flowable<Unit>
 
     @PATCH("post/deal")
-    fun modifyPurchase(@Body params: Any): Flowable<Response<Unit>>
+    fun modifyPurchase(@Body params: Any): Flowable<Unit>
 
     @PATCH("post/rent")
-    fun modifyRent(@Body params: Any): Flowable<Response<Unit>>
-
-    @GET("deal/img")
-    fun getPurchaseImage(@Query("postId") postId: Int): Flowable<PurchaseImageEntity>
-
-    @GET("rent/img")
-    fun getRentImage(@Query("postId") postId: Int): Flowable<RentImageEntity>
+    fun modifyRent(@Body params: Any): Flowable<Unit>
 
     @FormUrlEncoded
     @POST("room")

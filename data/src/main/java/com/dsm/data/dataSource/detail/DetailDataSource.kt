@@ -29,4 +29,8 @@ interface DetailDataSource {
     fun getRecommendProduct(): Flowable<RecommendListEntity>
 
     fun getRelatedProduct(postId: Int, type: Int): Flowable<RecommendListEntity>
+
+    fun modifyPurchase(param: Any): Flowable<Unit>
+
+    fun modifyRent(param: Any): Flowable<Unit>
 }

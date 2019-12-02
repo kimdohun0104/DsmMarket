@@ -1,11 +1,12 @@
 package com.dsm.domain.usecase
 
 import com.dsm.domain.base.UseCase
-import com.dsm.domain.repository.RentRepositoryBefore
+import com.dsm.domain.error.Resource
+import com.dsm.domain.service.DetailService
 import io.reactivex.Flowable
 
-class ModifyRentUseCase(private val rentRepository: RentRepositoryBefore) : UseCase<Any, Unit>() {
-    override fun create(data: Any): Flowable<Unit> =
-        rentRepository.modifyRent(data)
+class ModifyRentUseCase(private val detailService: DetailService) : UseCase<Any, Resource<Unit>>() {
+    override fun create(data: Any): Flowable<Resource<Unit>> =
+        detailService.modifyRent(data)
 
 }

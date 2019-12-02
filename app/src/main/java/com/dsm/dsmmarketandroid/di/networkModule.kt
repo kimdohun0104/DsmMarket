@@ -6,6 +6,7 @@ import com.dsm.domain.error.ErrorHandler
 import com.dsm.domain.error.ErrorHandlerImpl
 import com.dsm.dsmmarketandroid.presentation.BaseApp
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -18,6 +19,7 @@ val networkModule = module {
     single {
         OkHttpClient.Builder()
             .addInterceptor(TokenInterceptor(get()))
+            .addInterceptor(HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BASIC })
             .writeTimeout(15, TimeUnit.SECONDS)
             .build()
     }
