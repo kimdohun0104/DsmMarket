@@ -33,8 +33,9 @@ class PurchaseDetailMapper : Mapper<PurchaseDetailEntity, PurchaseDetail> {
         isMe = from.isMe
     )
 
-    fun mapFrom(from: PurchaseDetailRoomEntity) = PurchaseDetail(
-        img = from.img,
+    fun mapFrom(from: PurchaseDetailRoomEntity?) = from?.img?.let {
+        PurchaseDetail(
+        img = it,
         id = from.id,
         createdAt = from.createdAt,
         price = from.price,
@@ -46,4 +47,5 @@ class PurchaseDetailMapper : Mapper<PurchaseDetailEntity, PurchaseDetail> {
         category = "",
         isMe = from.isMe
     )
+    }
 }

@@ -49,6 +49,8 @@ class RentDetailViewModel(
 
     val intentRentImage = SingleLiveEvent<String>()
 
+    val snackbarRetry = SingleLiveEvent<Unit>()
+
     fun getRentDetail(postId: Int) {
         addDisposable(
             getRentDetailUseCase.create(postId)
@@ -58,10 +60,12 @@ class RentDetailViewModel(
                 .subscribe({
                     when (it) {
                         is Resource.Success -> {
-                            val rentDetail = rentDetailModelMapper.mapFrom(it.data)
-                            isInterest.value = rentDetail.isInterest
-                            isMe.value = rentDetail.isMe
-                            this.rentDetail.value = rentDetail
+                            if (it.isLocal) snackbarRetry.call()
+                            rentDetailModelMapper.mapFrom(it.data).let { detail ->
+                                isInterest.value = detail.isInterest
+                                isMe.value = detail.isMe
+                                rentDetail.value = detail
+                            }
                         }
                         is Resource.Error -> {
                             when (it.error) {

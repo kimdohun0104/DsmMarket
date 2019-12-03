@@ -21,7 +21,7 @@ class DetailRepositoryImpl(
     override fun getRemotePurchaseDetail(postId: Int): Flowable<PurchaseDetail> =
         dataSource.getRemotePurchaseDetail(postId).map(purchaseDetailMapper::mapFrom)
 
-    override fun getLocalPurchaseDetail(postId: Int): PurchaseDetail =
+    override fun getLocalPurchaseDetail(postId: Int): PurchaseDetail? =
         purchaseDetailMapper.mapFrom(dataSource.getLocalPurchaseDetail(postId))
 
     override fun addLocalPurchaseDetail(purchaseDetail: PurchaseDetail): Completable =
@@ -30,7 +30,7 @@ class DetailRepositoryImpl(
     override fun getRemoteRentDetail(postId: Int): Flowable<RentDetail> =
         dataSource.getRemoteRentDetail(postId).map(rentDetailMapper::mapFrom)
 
-    override fun getLocalRentDetail(postId: Int): RentDetail =
+    override fun getLocalRentDetail(postId: Int): RentDetail? =
         rentDetailMapper.mapFrom(dataSource.getLocalRentDetail(postId))
 
     override fun addLocalRentDetail(rentDetail: RentDetail): Completable =

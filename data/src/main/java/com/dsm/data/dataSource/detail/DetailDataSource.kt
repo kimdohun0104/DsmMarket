@@ -12,13 +12,13 @@ interface DetailDataSource {
 
     fun getRemotePurchaseDetail(postId: Int): Flowable<PurchaseDetailEntity>
 
-    fun getLocalPurchaseDetail(postId: Int): PurchaseDetailRoomEntity
+    fun getLocalPurchaseDetail(postId: Int): PurchaseDetailRoomEntity?
 
     fun addLocalPurchaseDetail(purchaseDetailRoomEntity: PurchaseDetailRoomEntity): Completable
 
     fun getRemoteRentDetail(postId: Int): Flowable<RentDetailEntity>
 
-    fun getLocalRentDetail(postId: Int): RentDetailRoomEntity
+    fun getLocalRentDetail(postId: Int): RentDetailRoomEntity?
 
     fun addLocalRentDetail(rentDetailRoomEntity: RentDetailRoomEntity): Completable
 

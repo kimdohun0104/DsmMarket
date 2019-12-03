@@ -15,7 +15,7 @@ interface PurchaseDao {
     fun addPurchaseDetail(purchaseDetailRoomEntity: PurchaseDetailRoomEntity): Completable
 
     @Query("select * from PurchaseDetailRoomEntity where id = :id")
-    fun getPurchaseDetail(id: Int): PurchaseDetailRoomEntity
+    fun getPurchaseDetail(id: Int): PurchaseDetailRoomEntity?
 
     @Query("select id, title, createdAt, price, img from PurchaseDetailRoomEntity limit 30")
     fun getRecentPurchase(): Flowable<List<RecentPurchaseRoomEntity>>

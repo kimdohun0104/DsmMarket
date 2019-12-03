@@ -35,18 +35,20 @@ class RentDetailMapper : Mapper<RentDetailEntity, RentDetail> {
         isMe = from.isMe
     )
 
-    fun mapFrom(from: RentDetailRoomEntity) = RentDetail(
-        img = from.img,
-        author = from.author,
-        id = from.id,
-        title = from.title,
-        content = from.content,
-        createdAt = from.createdAt,
-        price = from.price,
-        possibleTime = from.possibleTime,
-        commentCount = from.commentCount,
-        isInterest = from.isInterest,
-        category = "",
-        isMe = from.isMe
-    )
+    fun mapFrom(from: RentDetailRoomEntity?) = from?.let {
+        RentDetail(
+            img = from.img,
+            author = from.author,
+            id = from.id,
+            title = from.title,
+            content = from.content,
+            createdAt = from.createdAt,
+            price = from.price,
+            possibleTime = from.possibleTime,
+            commentCount = from.commentCount,
+            isInterest = from.isInterest,
+            category = "",
+            isMe = from.isMe
+        )
+    }
 }

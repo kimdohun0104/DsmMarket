@@ -12,6 +12,7 @@ import com.dsm.dsmmarketandroid.presentation.ui.main.comment.addComment.AddComme
 import com.dsm.dsmmarketandroid.presentation.ui.report.ReportCommentDialog
 import com.dsm.dsmmarketandroid.presentation.util.Analytics
 import com.dsm.dsmmarketandroid.presentation.util.MessageEvents
+import com.dsm.dsmmarketandroid.presentation.util.retrySnackbar
 import kotlinx.android.synthetic.main.activity_comment.*
 import kr.sdusb.libs.messagebus.MessageBus
 import kr.sdusb.libs.messagebus.Subscribe
@@ -62,6 +63,8 @@ class CommentActivity : BaseActivity<ActivityCommentBinding>() {
             hideRefreshEvent.observe(`this`, Observer { srl_comment.isRefreshing = false })
 
             getCommentLogEvent.observe(`this`, Observer { Analytics.logEvent(`this`, Analytics.GET_COMMENT, it) })
+
+            snackbarRetry.observe(`this`, Observer { retrySnackbar(tb_comment_list) { viewModel.getCommentList(postId, type) } })
         }
     }
 

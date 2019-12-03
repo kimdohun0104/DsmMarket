@@ -13,10 +13,7 @@ import com.dsm.dsmmarketandroid.presentation.ui.main.comment.CommentActivity
 import com.dsm.dsmmarketandroid.presentation.ui.main.rent.modifyRent.ModifyRentActivity
 import com.dsm.dsmmarketandroid.presentation.ui.main.rent.rentImage.RentImageActivity
 import com.dsm.dsmmarketandroid.presentation.ui.report.ReportPostDialog
-import com.dsm.dsmmarketandroid.presentation.util.Analytics
-import com.dsm.dsmmarketandroid.presentation.util.LoadingDialog
-import com.dsm.dsmmarketandroid.presentation.util.MessageEvents
-import com.dsm.dsmmarketandroid.presentation.util.ProductType
+import com.dsm.dsmmarketandroid.presentation.util.*
 import kotlinx.android.synthetic.main.activity_rent_detail.*
 import kr.sdusb.libs.messagebus.MessageBus
 import kr.sdusb.libs.messagebus.Subscribe
@@ -104,6 +101,8 @@ class RentDetailActivity : BaseActivity<ActivityRentDetailBinding>() {
             })
 
             intentRentImage.observe(`this`, Observer { startActivity<RentImageActivity>("img" to it) })
+
+            snackbarRetry.observe(`this`, Observer { retrySnackbar(tb_rent_detail) { viewModel.getRentDetail(postId) } })
         }
     }
 

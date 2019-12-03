@@ -15,10 +15,7 @@ import com.dsm.dsmmarketandroid.presentation.ui.main.chat.ChatActivity
 import com.dsm.dsmmarketandroid.presentation.ui.main.comment.CommentActivity
 import com.dsm.dsmmarketandroid.presentation.ui.main.purchase.modifyPurchase.ModifyPurchaseActivity
 import com.dsm.dsmmarketandroid.presentation.ui.report.ReportPostDialog
-import com.dsm.dsmmarketandroid.presentation.util.Analytics
-import com.dsm.dsmmarketandroid.presentation.util.LoadingDialog
-import com.dsm.dsmmarketandroid.presentation.util.MessageEvents
-import com.dsm.dsmmarketandroid.presentation.util.ProductType
+import com.dsm.dsmmarketandroid.presentation.util.*
 import kotlinx.android.synthetic.main.activity_purchase_detail.*
 import kr.sdusb.libs.messagebus.MessageBus
 import kr.sdusb.libs.messagebus.Subscribe
@@ -118,6 +115,8 @@ class PurchaseDetailActivity : BaseActivity<ActivityPurchaseDetailBinding>() {
                 }
                 else popup.menuInflater.inflate(R.menu.menu_product_detail_toolbar, popup.menu)
             })
+
+            snackbarRetryEvent.observe(`this`, Observer { retrySnackbar(tb_purchase_detail) { viewModel.getPurchaseDetail(postId) } })
         }
     }
 

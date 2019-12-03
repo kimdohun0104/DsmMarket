@@ -10,13 +10,13 @@ interface DetailRepository {
 
     fun getRemotePurchaseDetail(postId: Int): Flowable<PurchaseDetail>
 
-    fun getLocalPurchaseDetail(postId: Int): PurchaseDetail
+    fun getLocalPurchaseDetail(postId: Int): PurchaseDetail?
 
     fun addLocalPurchaseDetail(purchaseDetail: PurchaseDetail): Completable
 
     fun getRemoteRentDetail(postId: Int): Flowable<RentDetail>
 
-    fun getLocalRentDetail(postId: Int): RentDetail
+    fun getLocalRentDetail(postId: Int): RentDetail?
 
     fun addLocalRentDetail(rentDetail: RentDetail): Completable
 

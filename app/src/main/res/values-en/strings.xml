@@ -136,5 +136,6 @@
 	<string name="etc">etc</string>
 
 	<string name="restart_to_update">Restart to Update</string>
-	<string name="restart">재시작</string>
+	<string name="restart">restart</string>
+	<string name="retry">retry</string>
 </resources>

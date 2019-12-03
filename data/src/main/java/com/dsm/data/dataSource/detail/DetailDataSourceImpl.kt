@@ -21,7 +21,7 @@ class DetailDataSourceImpl(
     override fun getRemotePurchaseDetail(postId: Int): Flowable<PurchaseDetailEntity> =
         api.getPurchaseDetail(postId).addSchedulers()
 
-    override fun getLocalPurchaseDetail(postId: Int): PurchaseDetailRoomEntity =
+    override fun getLocalPurchaseDetail(postId: Int): PurchaseDetailRoomEntity? =
         purchaseDao.getPurchaseDetail(postId)
 
     override fun addLocalPurchaseDetail(purchaseDetailRoomEntity: PurchaseDetailRoomEntity): Completable =
@@ -30,7 +30,7 @@ class DetailDataSourceImpl(
     override fun getRemoteRentDetail(postId: Int): Flowable<RentDetailEntity> =
         api.getRentDetail(postId).addSchedulers()
 
-    override fun getLocalRentDetail(postId: Int): RentDetailRoomEntity =
+    override fun getLocalRentDetail(postId: Int): RentDetailRoomEntity? =
         rentDao.getRentDetail(postId)
 
     override fun addLocalRentDetail(rentDetailRoomEntity: RentDetailRoomEntity): Completable =

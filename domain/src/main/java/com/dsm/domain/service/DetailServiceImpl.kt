@@ -17,14 +17,24 @@ class DetailServiceImpl(
     override fun getPurchaseDetail(postId: Int): Flowable<Resource<PurchaseDetail>> =
         repository.getRemotePurchaseDetail(postId)
             .doOnNext { repository.addLocalPurchaseDetail(it).subscribe() }
-            .onErrorReturn { repository.getLocalPurchaseDetail(postId) }
-            .toResource(errorHandler)
+            .map<Resource<PurchaseDetail>> { Resource.Success(it) }
+            .onErrorReturn {
+                repository.getLocalPurchaseDetail(postId)?.let { detail ->
+                    return@onErrorReturn Resource.Success(detail, true)
+                }
+                Resource.Error(errorHandler.getError(it))
+            }
 
     override fun getRentDetail(postId: Int): Flowable<Resource<RentDetail>> =
         repository.getRemoteRentDetail(postId)
             .doOnNext { repository.addLocalRentDetail(it).subscribe() }
-            .onErrorReturn { repository.getLocalRentDetail(postId) }
-            .toResource(errorHandler)
+            .map<Resource<RentDetail>> { Resource.Success(it) }
+            .onErrorReturn {
+                repository.getLocalRentDetail(postId)?.let { detail ->
+                    return@onErrorReturn Resource.Success(detail, true)
+                }
+                Resource.Error(errorHandler.getError(it))
+            }
 
     override fun interest(postId: Int, type: Int): Flowable<Resource<Unit>> =
         repository.interest(postId, type).toResource(errorHandler)

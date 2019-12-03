@@ -47,6 +47,8 @@ class PurchaseDetailViewModel(
     val interestLogEvent = SingleLiveEvent<Bundle>()
     val createChatRoomLogEvent = SingleLiveEvent<Bundle>()
 
+    val snackbarRetryEvent = SingleLiveEvent<Unit>()
+
     fun getPurchaseDetail(postId: Int) {
         addDisposable(
             getPurchaseDetailUseCase.create(postId)
@@ -56,10 +58,12 @@ class PurchaseDetailViewModel(
                 .subscribe({
                     when (it) {
                         is Resource.Success -> {
-                            val detailModel = purchaseDetailModelMapper.mapFrom(it.data)
-                            isInterest.value = detailModel.isInterest
-                            isMe.value = detailModel.isMe
-                            purchaseDetail.value = detailModel
+                            if (it.isLocal) snackbarRetryEvent.call()
+                            purchaseDetailModelMapper.mapFrom(it.data).let { detail ->
+                                isInterest.value = detail.isInterest
+                                isMe.value = detail.isMe
+                                purchaseDetail.value = detail
+                            }
                         }
                         is Resource.Error -> {
                             when (it.error) {

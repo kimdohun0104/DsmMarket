@@ -2,6 +2,8 @@ package com.dsm.dsmmarketandroid.presentation.ui.main.comment
 
 import android.os.Bundle
 import androidx.lifecycle.MutableLiveData
+import com.dsm.domain.error.ErrorEntity
+import com.dsm.domain.error.Resource
 import com.dsm.domain.usecase.GetCommentUseCase
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.base.BaseViewModel
@@ -21,6 +23,7 @@ class CommentViewModel(
     val toastEvent = SingleLiveEvent<Int>()
     val dialogReportComment = SingleLiveEvent<String>()
     val hideRefreshEvent = SingleLiveEvent<Any>()
+    val snackbarRetry = SingleLiveEvent<Unit>()
 
     val getCommentLogEvent = SingleLiveEvent<Bundle>()
 
@@ -28,14 +31,24 @@ class CommentViewModel(
         addDisposable(
             getCommentUseCase.create(GetCommentUseCase.Params(postId, type))
                 .doOnNext { getCommentLogEvent.value = Bundle().apply { putInt(Analytics.POST_ID, postId) } }
-                .map(commentModelMapper::mapFrom)
                 .subscribe({
-                    listItems.value = it
-                    commentCount.value = it.size
-                    hideRefreshEvent.call()
-                }, {
-                    toastEvent.value = R.string.fail_server_error
-                })
+                    when (it) {
+                        is Resource.Success -> {
+                            if (it.isLocal) snackbarRetry.call()
+                            commentModelMapper.mapFrom(it.data).let { model ->
+                                listItems.value = model
+                                commentCount.value = model.size
+                                hideRefreshEvent.call()
+                            }
+                        }
+                        is Resource.Error -> {
+                            toastEvent.value = when (it.error) {
+                                is ErrorEntity.Unauthorized -> R.string.fail_unauthorized
+                                else -> R.string.fail_server_error
+                            }
+                        }
+                    }
+                }, {})
         )
     }
 
