@@ -5,12 +5,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.dsm.dsmmarketandroid.R
-import com.dsm.dsmmarketandroid.presentation.ui.purchaseImage.PurchaseImageActivity
+import com.dsm.dsmmarketandroid.presentation.ui.main.purchase.purchaseImage.PurchaseImageActivity
 import com.dsm.dsmmarketandroid.presentation.util.GlideApp
 import kotlinx.android.synthetic.main.item_detail_image.view.*
 import org.jetbrains.anko.startActivity
 
-class DetailImageListAdapter(private val postId: Int) : RecyclerView.Adapter<DetailImageListAdapter.ViewHolder>() {
+class DetailImageListAdapter : RecyclerView.Adapter<DetailImageListAdapter.ViewHolder>() {
 
     var listItems = listOf<String>()
         set(value) {
@@ -27,11 +27,10 @@ class DetailImageListAdapter(private val postId: Int) : RecyclerView.Adapter<Det
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind() {
-            val context = itemView.context
             GlideApp.with(itemView).load(listItems[adapterPosition]).into(itemView.iv_image)
 
             itemView.setOnClickListener {
-                context.startActivity<PurchaseImageActivity>("post_id" to postId)
+                it.context.startActivity<PurchaseImageActivity>("img" to listItems)
             }
         }
     }

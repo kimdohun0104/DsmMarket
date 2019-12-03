@@ -1,11 +1,14 @@
 package com.dsm.app.viewModel
 
 import com.dsm.app.BaseTest
+import com.dsm.app.createHttpException
 import com.dsm.domain.entity.Comment
+import com.dsm.domain.error.ErrorEntity
+import com.dsm.domain.error.Resource
 import com.dsm.domain.usecase.GetCommentUseCase
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.mapper.CommentModelMapper
-import com.dsm.dsmmarketandroid.presentation.ui.comment.CommentViewModel
+import com.dsm.dsmmarketandroid.presentation.ui.main.comment.CommentViewModel
 import com.jraska.livedata.test
 import io.reactivex.Flowable
 import org.junit.Before
@@ -35,8 +38,8 @@ class CommentViewModelTests : BaseTest() {
             Comment("nick", "content", "createdAt", false),
             Comment("nick", "content", "createdAt", false),
             Comment("nick", "content", "createdAt", false)
-        )
-        `when`(getCommentUseCase.create(GetCommentUseCase.Params(0, 0))).thenReturn(Flowable.just(response))
+        ) as List<Comment>
+        `when`(getCommentUseCase.create(GetCommentUseCase.Params(0, 0))).thenReturn(Flowable.just(Resource.Success(response)))
 
         viewModel.run {
             getCommentList(0, 0)
@@ -49,7 +52,7 @@ class CommentViewModelTests : BaseTest() {
     @Test
     fun `get comment list failed test`() {
         `when`(getCommentUseCase.create(GetCommentUseCase.Params(0, 0)))
-            .thenReturn(Flowable.error(Exception()))
+            .thenReturn(Flowable.just(Resource.Error(ErrorEntity.Internal(createHttpException(500)))))
 
         viewModel.run {
             getCommentList(0, 0)

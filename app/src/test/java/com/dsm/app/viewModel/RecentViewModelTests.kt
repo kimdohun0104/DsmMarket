@@ -5,7 +5,7 @@ import com.dsm.domain.entity.Product
 import com.dsm.domain.usecase.GetRecentPurchaseUseCase
 import com.dsm.domain.usecase.GetRecentRentUseCase
 import com.dsm.dsmmarketandroid.presentation.mapper.ProductModelMapper
-import com.dsm.dsmmarketandroid.presentation.ui.recent.RecentViewModel
+import com.dsm.dsmmarketandroid.presentation.ui.main.me.recent.RecentViewModel
 import com.jraska.livedata.test
 import io.reactivex.Flowable
 import org.junit.Before

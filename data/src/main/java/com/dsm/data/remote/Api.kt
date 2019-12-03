@@ -10,33 +10,30 @@ import retrofit2.http.*
 interface Api {
 
     @POST("auth/login")
-    fun login(@Body body: Any): Flowable<Response<Map<String, String>>>
+    fun login(@Body body: Any): Flowable<TokenEntity>
 
     @GET("auth/login")
-    fun autoLogin(): Flowable<Response<Unit>>
+    fun autoLogin(): Flowable<Unit>
 
     @GET("auth/login")
-    fun confirmPassword(@Query("password") password: String): Flowable<Response<Unit>>
+    fun confirmPassword(@Query("password") password: String): Flowable<Unit>
 
     @GET("auth/mail")
-    fun sendTempPassword(@Query("email") email: String): Flowable<Response<Unit>>
+    fun sendTempPassword(@Query("email") email: String): Flowable<Unit>
 
     @FormUrlEncoded
     @PATCH("account/password")
-    fun changePassword(@Field("password") password: String): Flowable<Response<Unit>>
+    fun changePassword(@Field("password") password: String): Flowable<Unit>
 
     @POST("account/join")
-    fun signUp(@Body body: Any): Flowable<Response<Unit>>
+    fun signUp(@Body body: Any): Flowable<Unit>
 
     @FormUrlEncoded
     @PATCH("account/nick")
-    fun changeUserNick(@Field("nick") nick: String): Flowable<Response<Unit>>
+    fun changeUserNick(@Field("nick") nick: String): Flowable<Unit>
 
     @GET("token")
     fun refreshToken(@Header("authorization") refreshToken: String): Flowable<Response<Map<String, Any>>>
-
-    @GET("user/nick")
-    fun getUserNick(): Flowable<Response<Map<String, String>>>
 
     @GET("category")
     fun getPostCategory(): Flowable<PostCategoryListEntity>
@@ -46,14 +43,14 @@ interface Api {
     fun postRent(
         @Part img: MultipartBody.Part,
         @PartMap params: Map<String, @JvmSuppressWildcards RequestBody>
-    ): Flowable<Response<Unit>>
+    ): Flowable<Unit>
 
     @Multipart
     @POST("post/deal")
     fun postPurchase(
         @Part img: List<MultipartBody.Part>,
         @PartMap params: Map<String, @JvmSuppressWildcards RequestBody>
-    ): Flowable<Response<Unit>>
+    ): Flowable<Unit>
 
     @GET("list/deal")
     fun getPurchaseList(
@@ -74,17 +71,17 @@ interface Api {
     @GET("post")
     fun getPurchaseDetail(
         @Query("postId") postId: Int,
-        @Query("type") type: Int
-    ): Flowable<Response<PurchaseDetailEntity>>
+        @Query("type") type: Int = 0
+    ): Flowable<PurchaseDetailEntity>
 
     @GET("post")
     fun getRentDetail(
         @Query("postId") postId: Int,
-        @Query("type") type: Int
-    ): Flowable<Response<RentDetailEntity>>
+        @Query("type") type: Int = 1
+    ): Flowable<RentDetailEntity>
 
     @POST("post/comment")
-    fun postComment(@Body params: Any): Flowable<Response<Unit>>
+    fun postComment(@Body params: Any): Flowable<Unit>
 
     @GET("comment")
     fun getComment(
@@ -97,14 +94,14 @@ interface Api {
     fun interest(
         @Field("postId") postId: Int,
         @Field("type") type: Int
-    ): Flowable<Response<Unit>>
+    ): Flowable<Unit>
 
     @FormUrlEncoded
     @PATCH("post/uninterest")
     fun unInterest(
         @Field("postId") postId: Int,
         @Field("type") type: Int
-    ): Flowable<Response<Unit>>
+    ): Flowable<Unit>
 
     @GET("list/interest")
     fun getInterest(@Query("type") type: Int): Flowable<ProductListEntity>
@@ -131,22 +128,16 @@ interface Api {
     fun reportComment(@Body params: Any): Flowable<Response<Unit>>
 
     @DELETE("post/deal/{postId}")
-    fun completePurchase(@Path("postId") postId: Int): Flowable<Response<Unit>>
+    fun completePurchase(@Path("postId") postId: Int): Flowable<Unit>
 
     @DELETE("post/rent/{postId}")
-    fun completeRent(@Path("postId") postId: Int): Flowable<Response<Unit>>
+    fun completeRent(@Path("postId") postId: Int): Flowable<Unit>
 
     @PATCH("post/deal")
-    fun modifyPurchase(@Body params: Any): Flowable<Response<Unit>>
+    fun modifyPurchase(@Body params: Any): Flowable<Unit>
 
     @PATCH("post/rent")
-    fun modifyRent(@Body params: Any): Flowable<Response<Unit>>
-
-    @GET("deal/img")
-    fun getPurchaseImage(@Query("postId") postId: Int): Flowable<PurchaseImageEntity>
-
-    @GET("rent/img")
-    fun getRentImage(@Query("postId") postId: Int): Flowable<RentImageEntity>
+    fun modifyRent(@Body params: Any): Flowable<Unit>
 
     @FormUrlEncoded
     @POST("room")
@@ -159,7 +150,7 @@ interface Api {
     fun getChatRoom(): Flowable<ChatRoomListEntity>
 
     @GET("room/join/{roomId}")
-    fun joinRoom(@Path("roomId") roomId: Int) : Flowable<Response<HashMap<String, String>>>
+    fun joinRoom(@Path("roomId") roomId: Int) : Flowable<Map<String, String>>
 
     @GET("room/chatLog")
     fun getChatLog(

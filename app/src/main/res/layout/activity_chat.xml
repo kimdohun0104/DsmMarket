@@ -6,7 +6,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.ui.chat.ChatActivity">
+        tools:context=".presentation.ui.main.chat.ChatActivity">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/tb_chat"

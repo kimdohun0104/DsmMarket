@@ -5,7 +5,7 @@
 
         <variable
             name="viewModel"
-            type="com.dsm.dsmmarketandroid.presentation.ui.post.postPurchase.PostPurchaseViewModel" />
+            type="com.dsm.dsmmarketandroid.presentation.ui.main.post.postPurchase.PostPurchaseViewModel" />
 
         <import type="android.view.View" />
 
@@ -17,7 +17,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.ui.post.postPurchase.PostPurchaseActivity">
+        tools:context=".presentation.ui.main.post.postPurchase.PostPurchaseActivity">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/tb_post_purchase"

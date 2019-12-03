@@ -5,7 +5,7 @@ import com.dsm.domain.entity.PostCategory
 import com.dsm.domain.usecase.GetPostCategoryUseCase
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.mapper.PostCategoryModelMapper
-import com.dsm.dsmmarketandroid.presentation.ui.postCategory.PostCategoryViewModel
+import com.dsm.dsmmarketandroid.presentation.ui.main.post.postCategory.PostCategoryViewModel
 import com.jraska.livedata.test
 import io.reactivex.Flowable
 import org.junit.Before

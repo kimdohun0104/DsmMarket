@@ -13,7 +13,7 @@ import com.dsm.app.MockServerDispatcher
 import com.dsm.app.withBackground
 import com.dsm.app.withViewPagerPage
 import com.dsm.dsmmarketandroid.R
-import com.dsm.dsmmarketandroid.presentation.ui.signUp.SignUpActivity
+import com.dsm.dsmmarketandroid.presentation.ui.auth.signUp.SignUpActivity
 import org.hamcrest.CoreMatchers
 import org.hamcrest.CoreMatchers.not
 import org.junit.Assert.assertTrue

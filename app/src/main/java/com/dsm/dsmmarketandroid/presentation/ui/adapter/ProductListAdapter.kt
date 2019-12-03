@@ -14,8 +14,8 @@ import com.dsm.data.paging.NetworkState
 import com.dsm.dsmmarketandroid.databinding.ItemLoadingBinding
 import com.dsm.dsmmarketandroid.databinding.ItemProductBinding
 import com.dsm.dsmmarketandroid.presentation.model.ProductModel
-import com.dsm.dsmmarketandroid.presentation.ui.purchaseDetail.PurchaseDetailActivity
-import com.dsm.dsmmarketandroid.presentation.ui.rentDetail.RentDetailActivity
+import com.dsm.dsmmarketandroid.presentation.ui.main.purchase.purchaseDetail.PurchaseDetailActivity
+import com.dsm.dsmmarketandroid.presentation.ui.main.rent.rentDetail.RentDetailActivity
 import com.dsm.dsmmarketandroid.presentation.util.ProductType
 
 class ProductListAdapter(private val type: Int) : PagedListAdapter<ProductModel, RecyclerView.ViewHolder>(DIFF_CALLBACK) {

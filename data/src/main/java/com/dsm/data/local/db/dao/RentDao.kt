@@ -16,7 +16,7 @@ interface RentDao {
     fun addRentDetail(rentDetailRoomEntity: RentDetailRoomEntity): Completable
 
     @Query("select * from RentDetailRoomEntity where id = :id")
-    fun getRentDetail(id: Int): RentDetailRoomEntity
+    fun getRentDetail(id: Int): RentDetailRoomEntity?
 
     @Query("select id, title, createdAt, price, img from RentDetailRoomEntity limit 30")
     fun getRecentRent(): Flowable<List<RecentRentRoomEntity>>

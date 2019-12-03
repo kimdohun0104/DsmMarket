@@ -5,6 +5,8 @@ import android.widget.AdapterView
 import android.widget.EditText
 import android.widget.Spinner
 import androidx.lifecycle.MutableLiveData
+import com.dsm.dsmmarketandroid.R
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
 
 fun EditText.setEditorActionListener(action: Int, callback: () -> Unit) =
@@ -44,3 +46,9 @@ fun Spinner.onItemSelectedListener(callback: (position: Int) -> Unit) {
 fun MutableLiveData<String>.isValueBlank() = this.value.isNullOrBlank()
 
 fun Int.isPurchase(): Boolean = this == ProductType.PURCHASE
+
+fun retrySnackbar(view: View, task: () -> Unit) =
+    Snackbar.make(view, R.string.fail_server_error, Snackbar.LENGTH_LONG)
+        .setAction(R.string.retry) {
+            task.invoke()
+        }.show()

@@ -1,5 +1,6 @@
 package com.dsm.dsmmarketandroid.presentation.ui.splash
 
+import com.dsm.domain.error.Resource
 import com.dsm.domain.usecase.AutoLoginUseCase
 import com.dsm.dsmmarketandroid.presentation.base.BaseViewModel
 import com.dsm.dsmmarketandroid.presentation.util.SingleLiveEvent
@@ -19,10 +20,11 @@ class SplashViewModel(private val autoLoginUseCase: AutoLoginUseCase) : BaseView
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnTerminate { finishActivityEvent.call() }
                 .subscribe({
-                    intentMainActivityEvent.call()
-                }, {
-                    intentStartActivity.call()
-                })
+                    when (it) {
+                        is Resource.Success -> intentMainActivityEvent.call()
+                        is Resource.Error -> intentStartActivity.call()
+                    }
+                }, {})
         )
     }
 }

@@ -1,27 +1,24 @@
 package com.dsm.data.dataSource.account
 
 import com.dsm.data.addSchedulers
+import com.dsm.data.local.pref.PrefHelper
 import com.dsm.data.remote.Api
 import io.reactivex.Flowable
-import retrofit2.Response
 
-class AccountDataSourceImpl(private val api: Api) : AccountDataSource {
+class AccountDataSourceImpl(
+    private val api: Api,
+    private val prefHelper: PrefHelper
+) : AccountDataSource {
 
-    override fun login(body: Any): Flowable<Response<Map<String, String>>> =
-        api.login(body).addSchedulers()
+    override fun sendTempPassword(email: String): Flowable<Unit> =
+        api.sendTempPassword(email).addSchedulers()
 
-    override fun autoLogin(): Flowable<Response<Unit>> =
-        api.autoLogin().addSchedulers()
+    override fun changePassword(password: String): Flowable<Unit> =
+        api.changePassword(password).addSchedulers()
 
-    override fun signUp(body: Any): Flowable<Response<Unit>> =
-        api.signUp(body).addSchedulers()
-
-    override fun refreshToken(refreshToken: String): Flowable<Response<Map<String, Any>>> =
-        api.refreshToken(refreshToken).addSchedulers()
-
-    override fun getUserNick(): Flowable<Response<Map<String, String>>> =
-        api.getUserNick().addSchedulers()
-
-    override fun changeUserNick(newNick: String): Flowable<Response<Unit>> =
+    override fun changeUserNick(newNick: String): Flowable<Unit> =
         api.changeUserNick(newNick).addSchedulers()
+
+    override fun setLocalUserNick(nick: String) =
+        prefHelper.setUserNick(nick)
 }

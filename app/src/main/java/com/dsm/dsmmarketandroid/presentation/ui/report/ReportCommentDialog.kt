@@ -5,18 +5,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
-import com.dsm.domain.usecase.ReportCommentUseCase
+import com.dsm.data.remote.Api
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.util.Analytics
 import com.dsm.dsmmarketandroid.presentation.util.onItemSelectedListener
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.dialog_comment_report.*
 import org.jetbrains.anko.support.v4.toast
 import org.koin.android.ext.android.inject
 
 class ReportCommentDialog : DialogFragment() {
 
-    private val reportCommentUseCase: ReportCommentUseCase by inject()
+    private val api: Api by inject()
 
     private val compositeDisposable = CompositeDisposable()
 
@@ -47,7 +49,7 @@ class ReportCommentDialog : DialogFragment() {
             }
 
             compositeDisposable.add(
-                reportCommentUseCase.create(
+                api.reportComment(
                     hashMapOf(
                         "postId" to arguments?.getInt("post_id"),
                         "type" to arguments?.getInt("type"),
@@ -55,6 +57,8 @@ class ReportCommentDialog : DialogFragment() {
                         "reason" to reason
                     )
                 )
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
                     .doOnNext {
                         Analytics.logEvent(activity!!, Analytics.REPORT_COMMENT, Bundle().apply {
                             putInt(Analytics.POST_ID, arguments?.getInt("post_id") ?: -1)
@@ -64,7 +68,7 @@ class ReportCommentDialog : DialogFragment() {
                     .subscribe({
                         dismiss()
                     }, {
-                        toast(getString(R.string.fail_server_error))
+                        toast(R.string.fail_server_error)
                     })
             )
         }
