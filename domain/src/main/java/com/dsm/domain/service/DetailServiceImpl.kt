@@ -4,9 +4,8 @@ import com.dsm.domain.entity.PurchaseDetail
 import com.dsm.domain.entity.Recommend
 import com.dsm.domain.entity.RentDetail
 import com.dsm.domain.error.ErrorHandler
-import com.dsm.domain.error.Resource
+import com.dsm.domain.error.Success
 import com.dsm.domain.repository.DetailRepository
-import com.dsm.domain.toResource
 import io.reactivex.Flowable
 
 class DetailServiceImpl(
@@ -14,43 +13,41 @@ class DetailServiceImpl(
     private val errorHandler: ErrorHandler
 ) : DetailService {
 
-    override fun getPurchaseDetail(postId: Int): Flowable<Resource<PurchaseDetail>> =
+    override fun getPurchaseDetail(postId: Int): Flowable<Success<PurchaseDetail>> =
         repository.getRemotePurchaseDetail(postId)
             .doOnNext { repository.addLocalPurchaseDetail(it).subscribe() }
-            .map<Resource<PurchaseDetail>> { Resource.Success(it) }
+            .toSuccess(errorHandler)
             .onErrorReturn {
-                repository.getLocalPurchaseDetail(postId)?.let { detail ->
-                    return@onErrorReturn Resource.Success(detail, true)
+                repository.getLocalPurchaseDetail(postId)?.let {detail ->
+                    return@onErrorReturn Success(detail, true)
                 }
-                Resource.Error(errorHandler.getError(it))
             }
 
-    override fun getRentDetail(postId: Int): Flowable<Resource<RentDetail>> =
+    override fun getRentDetail(postId: Int): Flowable<Success<RentDetail>> =
         repository.getRemoteRentDetail(postId)
             .doOnNext { repository.addLocalRentDetail(it).subscribe() }
-            .map<Resource<RentDetail>> { Resource.Success(it) }
+            .toSuccess(errorHandler)
             .onErrorReturn {
                 repository.getLocalRentDetail(postId)?.let { detail ->
-                    return@onErrorReturn Resource.Success(detail, true)
+                    return@onErrorReturn Success(detail, true)
                 }
-                Resource.Error(errorHandler.getError(it))
             }
 
-    override fun interest(postId: Int, type: Int): Flowable<Resource<Unit>> =
-        repository.interest(postId, type).toResource(errorHandler)
+    override fun interest(postId: Int, type: Int): Flowable<Unit> =
+        repository.interest(postId, type).handleError(errorHandler)
 
-    override fun unInterest(postId: Int, type: Int): Flowable<Resource<Unit>> =
-        repository.unInterest(postId, type).toResource(errorHandler)
+    override fun unInterest(postId: Int, type: Int): Flowable<Unit> =
+        repository.unInterest(postId, type).handleError(errorHandler)
 
-    override fun getRecommendProduct(): Flowable<Resource<List<Recommend>>> =
-        repository.getRecommendProduct().toResource(errorHandler)
+    override fun getRecommendProduct(): Flowable<List<Recommend>> =
+        repository.getRecommendProduct().handleError(errorHandler)
 
-    override fun getRelatedProduct(postId: Int, type: Int): Flowable<Resource<List<Recommend>>> =
-        repository.getRelatedProduct(postId, type).toResource(errorHandler)
+    override fun getRelatedProduct(postId: Int, type: Int): Flowable<List<Recommend>> =
+        repository.getRelatedProduct(postId, type).handleError(errorHandler)
 
-    override fun modifyPurchase(param: Any): Flowable<Resource<Unit>> =
-        repository.modifyPurchase(param).toResource(errorHandler)
+    override fun modifyPurchase(param: Any): Flowable<Unit> =
+        repository.modifyPurchase(param).handleError(errorHandler)
 
-    override fun modifyRent(param: Any): Flowable<Resource<Unit>> =
-        repository.modifyRent(param).toResource(errorHandler)
+    override fun modifyRent(param: Any): Flowable<Unit> =
+        repository.modifyRent(param).handleError(errorHandler)
 }

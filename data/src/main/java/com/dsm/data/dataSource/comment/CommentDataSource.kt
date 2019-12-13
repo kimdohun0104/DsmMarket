@@ -10,7 +10,7 @@ interface CommentDataSource {
 
     fun getRemoteCommentList(postId: Int, type: Int): Flowable<CommentListEntity>
 
-    fun getLocalCommentList(postId: Int, type: Int): List<CommentRoomEntity>
+    fun getLocalCommentList(postId: Int, type: Int): List<CommentRoomEntity>?
 
     fun addLocalComment(comment: List<CommentRoomEntity>): Completable
 }

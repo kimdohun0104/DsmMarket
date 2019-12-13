@@ -1,15 +1,15 @@
 package com.dsm.domain.service
 
-import com.dsm.domain.error.Resource
+import com.dsm.domain.error.Success
 import io.reactivex.Flowable
 
 interface AuthService {
 
-    fun login(body: Any) : Flowable<Resource<Unit>>
+    fun login(body: Any) : Flowable<Unit>
 
-    fun autoLogin(): Flowable<Resource<Unit>>
+    fun autoLogin(): Flowable<Unit>
 
-    fun signUp(body: Any): Flowable<Resource<Unit>>
+    fun signUp(body: Any): Flowable<Unit>
 
-    fun confirmPassword(password: String): Flowable<Resource<Unit>>
+    fun confirmPassword(password: String): Flowable<Unit>
 }

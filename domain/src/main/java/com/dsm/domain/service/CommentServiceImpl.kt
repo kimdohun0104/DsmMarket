@@ -2,9 +2,8 @@ package com.dsm.domain.service
 
 import com.dsm.domain.entity.Comment
 import com.dsm.domain.error.ErrorHandler
-import com.dsm.domain.error.Resource
+import com.dsm.domain.error.Success
 import com.dsm.domain.repository.CommentRepository
-import com.dsm.domain.toResource
 import io.reactivex.Flowable
 
 class CommentServiceImpl(
@@ -12,17 +11,16 @@ class CommentServiceImpl(
     private val errorHandler: ErrorHandler
 ) : CommentService {
 
-    override fun getCommentList(postId: Int, type: Int): Flowable<Resource<List<Comment>>> =
+    override fun getCommentList(postId: Int, type: Int): Flowable<Success<List<Comment>>> =
         repository.getRemoteCommentList(postId, type)
             .doOnNext { repository.addLocalComment(it, postId, type).subscribe() }
-            .map<Resource<List<Comment>>> { Resource.Success(it) }
+            .toSuccess(errorHandler)
             .onErrorReturn {
-                repository.getLocalCommentList(postId, type).let { localComments ->
-                    if (localComments.isNotEmpty()) Resource.Success(localComments, true)
-                    else Resource.Error(errorHandler.getError(it))
+                repository.getLocalCommentList(postId, type)?.let {
+                    Success(it, true)
                 }
             }
 
-    override fun postComment(param: Any): Flowable<Resource<Unit>> =
-        repository.postComment(param).toResource(errorHandler)
+    override fun postComment(param: Any): Flowable<Unit> =
+        repository.postComment(param).handleError(errorHandler)
 }
