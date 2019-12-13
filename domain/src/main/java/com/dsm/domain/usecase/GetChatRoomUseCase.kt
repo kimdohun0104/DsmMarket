@@ -6,8 +6,8 @@ import com.dsm.domain.error.Success
 import com.dsm.domain.service.ChatService
 import io.reactivex.Flowable
 
-class GetChatRoomUseCase(private val chatService: ChatService) : UseCase<Unit, Success<List<ChatRoom>>>() {
-    override fun create(data: Unit): Flowable<Success<List<ChatRoom>>> =
+class GetChatRoomUseCase(private val chatService: ChatService) : UseCase<Unit, List<ChatRoom>>() {
+    override fun create(data: Unit): Flowable<List<ChatRoom>> =
         chatService.getChatRoom()
 
 }

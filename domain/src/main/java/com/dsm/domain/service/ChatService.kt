@@ -8,7 +8,7 @@ import io.reactivex.Flowable
 interface ChatService {
     fun createRoom(postId: Int, type: Int): Flowable<Int>
 
-    fun getChatRoom(): Flowable<Success<List<ChatRoom>>>
+    fun getChatRoom(): Flowable<List<ChatRoom>>
 
     fun joinRoom(roomId: Int): Flowable<String>
 

@@ -9,6 +9,7 @@ import com.dsm.dsmmarketandroid.databinding.ActivityModifyRentBinding
 import com.dsm.dsmmarketandroid.presentation.base.BaseActivity
 import com.dsm.dsmmarketandroid.presentation.ui.main.post.postCategory.PostCategoryActivity
 import com.dsm.dsmmarketandroid.presentation.ui.main.rent.modifyRent.rentTime.ModifyRentTimeDialog
+import com.dsm.dsmmarketandroid.presentation.util.retrySnackbar
 import kotlinx.android.synthetic.main.activity_modify_rent.*
 import kotlinx.android.synthetic.main.activity_post_rent.cl_category
 import org.jetbrains.anko.toast
@@ -23,17 +24,20 @@ class ModifyRentActivity : BaseActivity<ActivityModifyRentBinding>() {
         private const val CATEGORY = 1
     }
 
+    private val postId: Int by lazy { intent.getIntExtra("post_id", -1) }
     private val viewModel: ModifyRentViewModel by viewModel()
 
     override fun viewInit() {
-        val postId = intent.getIntExtra("post_id", -1)
         binding.postId = postId
 
         tb_modify_rent.setNavigationOnClickListener { finish() }
 
-        cl_category.setOnClickListener { startActivityForResult(Intent(this, PostCategoryActivity::class.java),
-            CATEGORY
-        ) }
+        cl_category.setOnClickListener {
+            startActivityForResult(
+                Intent(this, PostCategoryActivity::class.java),
+                CATEGORY
+            )
+        }
 
         btn_modify_time.setOnClickListener { ModifyRentTimeDialog().show(supportFragmentManager, "") }
 
@@ -44,6 +48,10 @@ class ModifyRentActivity : BaseActivity<ActivityModifyRentBinding>() {
         viewModel.toastEvent.observe(this, Observer { toast(it) })
 
         viewModel.finishActivityEvent.observe(this, Observer { finish() })
+
+        viewModel.snackbarRetryEvent.observe(this, Observer {
+            retrySnackbar(cl_modify_rent_parent) { viewModel.getRentDetail(postId) }
+        })
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

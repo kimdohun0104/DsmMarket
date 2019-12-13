@@ -17,8 +17,8 @@ class ChatServiceImpl(
             .map { (it["roomId"] as Double).toInt() }
             .handleError(errorHandler)
 
-    override fun getChatRoom(): Flowable<Success<List<ChatRoom>>> =
-        repository.getChatRoom().toSuccess(errorHandler)
+    override fun getChatRoom(): Flowable<List<ChatRoom>> =
+        repository.getChatRoom().handleError(errorHandler)
 
     override fun joinRoom(roomId: Int): Flowable<String> =
         repository.joinRoom(roomId)

@@ -5,8 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
-import com.dsm.domain.error.ErrorEntity
-import com.dsm.domain.error.Resource
+import com.dsm.data.error.exception.ForbiddenException
+import com.dsm.data.error.exception.InternalException
 import com.dsm.domain.usecase.SignUpUseCase
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.base.BaseViewModel
@@ -47,8 +47,8 @@ class SignUpViewModel(private val signUpUseCase: SignUpUseCase) : BaseViewModel(
     private fun signUp1Enable() = email.isValueBlank() || password.isValueBlank() || reType.isValueBlank()
 
     private fun isBlankExist() = email.isValueBlank() || password.isValueBlank()
-        || reType.isValueBlank() || name.isValueBlank()
-        || grade.isValueBlank() || gender.isValueBlank()
+            || reType.isValueBlank() || name.isValueBlank()
+            || grade.isValueBlank() || gender.isValueBlank()
 
     val showLoadingDialogEvent = SingleLiveEvent<Any>()
     val hideLoadingDialogEvent = SingleLiveEvent<Any>()
@@ -87,23 +87,19 @@ class SignUpViewModel(private val signUpUseCase: SignUpUseCase) : BaseViewModel(
                     }
                 }
                 .subscribe({
-                    when (it) {
-                        is Resource.Success -> finishActivityEvent.call()
-                        is Resource.Error -> {
-                            when (it.error) {
-                                is ErrorEntity.Forbidden -> {
-                                    val errorResponse = JSONObject((it.error.originalException as HttpException).response()?.errorBody()?.string()!!)
-                                    if (errorResponse.getString("message") == "existent email")
-                                        toastEvent.value = R.string.fail_existent_email
-                                    else
-                                        toastEvent.value = R.string.fail_existent_nick
-                                }
-                                is ErrorEntity.Internal -> toastEvent.value = R.string.fail_server_error
-                                else -> toastEvent.value = R.string.fail_server_error
-                            }
+                    finishActivityEvent.call()
+                }, {
+                    toastEvent.value = when (it) {
+                        is ForbiddenException -> {
+                            val response = JSONObject((it as HttpException).response()?.errorBody()?.toString() ?: "{}")
+                            if (response.getString("message") == "existent email")
+                                R.string.fail_existent_email
+                            else
+                                R.string.fail_existent_nick
                         }
+                        else -> R.string.fail_server_error
                     }
-                }, {})
+                })
         )
     }
 }

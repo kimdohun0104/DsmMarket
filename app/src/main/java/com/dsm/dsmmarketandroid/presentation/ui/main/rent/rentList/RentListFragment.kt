@@ -12,6 +12,7 @@ import com.dsm.dsmmarketandroid.presentation.base.BaseFragment
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.ProductListAdapter
 import com.dsm.dsmmarketandroid.presentation.util.MessageEvents
 import com.dsm.dsmmarketandroid.presentation.util.ProductType
+import com.dsm.dsmmarketandroid.presentation.util.retrySnackbar
 import kotlinx.android.synthetic.main.fragment_rent_list.*
 import kr.sdusb.libs.messagebus.MessageBus
 import kr.sdusb.libs.messagebus.Subscribe
@@ -43,6 +44,9 @@ class RentListFragment : BaseFragment<FragmentRentListBinding>() {
             binding.isEmpty = it == NetworkState.EMPTY
 
             if (it == NetworkState.LOADED || it == NetworkState.EMPTY) {
+                if (it == NetworkState.LOCAL)
+                    retrySnackbar(cl_rent_list_parent) { viewModel.refreshList() }
+
                 pb_loading.visibility = View.GONE
                 srl_rent_list.isRefreshing = false
             }

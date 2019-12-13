@@ -2,7 +2,7 @@ package com.dsm.dsmmarketandroid.presentation.ui.main.purchase.modifyPurchase
 
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
-import com.dsm.domain.error.Resource
+import com.dsm.data.error.exception.UnauthorizedException
 import com.dsm.domain.usecase.GetPurchaseDetailUseCase
 import com.dsm.domain.usecase.ModifyPurchaseUseCase
 import com.dsm.dsmmarketandroid.R
@@ -27,11 +27,11 @@ class ModifyPurchaseViewModel(
     val imageList = ListLiveData<String>()
 
     val finishActivityEvent = SingleLiveEvent<Any>()
-
+    val snackbarRetryEvent = SingleLiveEvent<Any>()
     val toastEvent = SingleLiveEvent<Int>()
 
     private fun isBlankExist() = title.isValueBlank() || price.isValueBlank()
-        || content.isValueBlank() || category.isValueBlank()
+            || content.isValueBlank() || category.isValueBlank()
 
     val isModifyEnable = MediatorLiveData<Boolean>().apply {
         addSource(title) { value = !isBlankExist() }
@@ -44,18 +44,21 @@ class ModifyPurchaseViewModel(
         addDisposable(
             getPurchaseDetailUseCase.create(postId)
                 .subscribe({
-                    when (it) {
-                        is Resource.Success -> {
-                            val detail = purchaseDetailModelMapper.mapFrom(it.data)
-                            title.value = detail.title
-                            price.value = detail.price.substring(0, detail.price.length - 1).replace(",", "")    // 100원
-                            category.value = detail.category
-                            content.value = detail.content
-                            imageList.value = detail.img as ArrayList<String>
-                        }
-                        is Resource.Error -> toastEvent.value = R.string.fail_server_error
+                    if (it.isLocal) snackbarRetryEvent.call()
+
+                    purchaseDetailModelMapper.mapFrom(it.data).let { detail ->
+                        title.value = detail.title
+                        price.value = detail.price.substring(0, detail.price.length - 1).replace(",", "")    // 100원
+                        category.value = detail.category
+                        content.value = detail.content
+                        imageList.value = detail.img as ArrayList<String>
                     }
-                }, {})
+                }, {
+                    toastEvent.value = when (it) {
+                        is UnauthorizedException -> R.string.fail_unauthorized
+                        else -> R.string.fail_server_error
+                    }
+                })
         )
     }
 
@@ -73,7 +76,10 @@ class ModifyPurchaseViewModel(
                 MessageBus.getInstance().handle(MessageEvents.MODIFY_PURCHASE_EVENT, null)
                 finishActivityEvent.call()
             }, {
-                toastEvent.value = R.string.fail_server_error
+                toastEvent.value = when (it) {
+                    is UnauthorizedException -> R.string.fail_unauthorized
+                    else -> R.string.fail_server_error
+                }
             })
         )
     }

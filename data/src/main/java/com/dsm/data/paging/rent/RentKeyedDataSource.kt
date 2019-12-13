@@ -23,9 +23,11 @@ class RentKeyedDataSource(
         composite.add(
             productService.getRentList(0, params.requestedLoadSize, search, category)
                 .subscribe({
-                    callback.onResult(it, null, 1)
-                    if (it.isNotEmpty()) networkState.postValue(NetworkState.LOADED)
-                    else networkState.postValue(NetworkState.EMPTY)
+                    callback.onResult(it.data, null, 1)
+                    networkState.postValue(
+                        if (it.isLocal) NetworkState.LOCAL
+                        else NetworkState.LOADED
+                    )
                 }, {
                     networkState.postValue(NetworkState.FAILED)
                 })
@@ -38,8 +40,11 @@ class RentKeyedDataSource(
         composite.add(
             productService.getRentList(params.key, params.requestedLoadSize, search, category)
                 .subscribe({
-                    callback.onResult(it, params.key + 1)
-                    networkState.postValue(NetworkState.LOADED)
+                    callback.onResult(it.data, params.key + 1)
+                    networkState.postValue(
+                        if (it.isLocal) NetworkState.LOCAL
+                        else NetworkState.LOADED
+                    )
                 }, {
                     networkState.postValue(NetworkState.FAILED)
                 })
