@@ -2,8 +2,9 @@ package com.dsm.app.viewModel
 
 import com.dsm.app.BaseTest
 import com.dsm.app.createHttpException
-import com.dsm.domain.error.ErrorEntity
-import com.dsm.domain.error.Resource
+import com.dsm.data.error.exception.ForbiddenException
+import com.dsm.data.error.exception.InternalException
+import com.dsm.data.error.exception.UnauthorizedException
 import com.dsm.domain.usecase.ChangeNickUseCase
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.ui.main.me.changeNick.ChangeNickViewModel
@@ -47,7 +48,7 @@ class ChangeNickViewModelTests : BaseTest() {
         viewModel.nick.value = "NICK"
 
         `when`(changeNickUseCase.create(viewModel.nick.value!!))
-            .thenReturn(Flowable.just(Resource.Success(Unit)))
+            .thenReturn(Flowable.just((Unit)))
 
         viewModel.changeNick()
 
@@ -60,7 +61,7 @@ class ChangeNickViewModelTests : BaseTest() {
         viewModel.nick.value = "NICK"
 
         `when`(changeNickUseCase.create(viewModel.nick.value!!))
-            .thenReturn(Flowable.just(Resource.Error(ErrorEntity.Forbidden(createHttpException(403)))))
+            .thenReturn(Flowable.error(ForbiddenException(createHttpException(403))))
 
         viewModel.changeNick()
 
@@ -72,7 +73,7 @@ class ChangeNickViewModelTests : BaseTest() {
         viewModel.nick.value = "NICK"
 
         `when`(changeNickUseCase.create(viewModel.nick.value!!))
-            .thenReturn(Flowable.just(Resource.Error(ErrorEntity.Unauthorized(createHttpException(401)))))
+            .thenReturn(Flowable.error(UnauthorizedException(createHttpException(401))))
 
         viewModel.changeNick()
 
@@ -84,7 +85,7 @@ class ChangeNickViewModelTests : BaseTest() {
         viewModel.nick.value = "NICK"
 
         `when`(changeNickUseCase.create(viewModel.nick.value!!))
-            .thenReturn(Flowable.just(Resource.Error(ErrorEntity.Internal(createHttpException(500)))))
+            .thenReturn(Flowable.error(InternalException(createHttpException(500))))
 
         viewModel.changeNick()
 

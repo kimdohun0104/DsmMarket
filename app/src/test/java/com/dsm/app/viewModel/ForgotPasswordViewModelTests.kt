@@ -2,8 +2,7 @@ package com.dsm.app.viewModel
 
 import com.dsm.app.BaseTest
 import com.dsm.app.createHttpException
-import com.dsm.domain.error.ErrorEntity
-import com.dsm.domain.error.Resource
+import com.dsm.data.error.exception.InternalException
 import com.dsm.domain.usecase.SendTempPasswordUseCase
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.ui.auth.forgotPassword.ForgotPasswordViewModel
@@ -56,7 +55,7 @@ class ForgotPasswordViewModelTests : BaseTest() {
             email.value = "email@example.com"
 
             `when`(sendTempPasswordUseCase.create(email.value!!))
-                .thenReturn(Flowable.just(Resource.Success(Unit)))
+                .thenReturn(Flowable.just(Unit))
 
             sendTempPassword()
 
@@ -73,7 +72,7 @@ class ForgotPasswordViewModelTests : BaseTest() {
             email.value = "email@example.com"
 
             `when`(sendTempPasswordUseCase.create(email.value!!))
-                .thenReturn(Flowable.just(Resource.Error(ErrorEntity.Internal(createHttpException(500)))))
+                .thenReturn(Flowable.error(InternalException(createHttpException(500))))
 
             sendTempPassword()
 

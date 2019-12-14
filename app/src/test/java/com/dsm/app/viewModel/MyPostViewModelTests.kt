@@ -2,9 +2,8 @@ package com.dsm.app.viewModel
 
 import com.dsm.app.BaseTest
 import com.dsm.app.createHttpException
+import com.dsm.data.error.exception.InternalException
 import com.dsm.domain.entity.Product
-import com.dsm.domain.error.ErrorEntity
-import com.dsm.domain.error.Resource
 import com.dsm.domain.usecase.CompletePurchaseUseCase
 import com.dsm.domain.usecase.CompleteRentUseCase
 import com.dsm.domain.usecase.GetMyPurchaseUseCase
@@ -131,7 +130,7 @@ class MyPostViewModelTests : BaseTest() {
         viewModel.purchaseList.value = purchaseList
 
         `when`(completePurchaseUseCase.create(purchaseList[0].postId))
-            .thenReturn(Flowable.just(Resource.Success(Unit)))
+            .thenReturn(Flowable.just(Unit))
 
         viewModel.completePost(0, ProductType.PURCHASE)
 
@@ -145,7 +144,7 @@ class MyPostViewModelTests : BaseTest() {
         viewModel.purchaseList.value = purchaseList
 
         `when`(completePurchaseUseCase.create(purchaseList[0].postId))
-            .thenReturn(Flowable.just(Resource.Error(ErrorEntity.Internal(createHttpException(500)))))
+            .thenReturn(Flowable.error(InternalException(createHttpException(500))))
 
         viewModel.completePost(0, ProductType.PURCHASE)
 
@@ -158,7 +157,7 @@ class MyPostViewModelTests : BaseTest() {
         viewModel.rentList.value = rentList
 
         `when`(completeRentUseCase.create(rentList[0].postId))
-            .thenReturn(Flowable.just(Resource.Success(Unit)))
+            .thenReturn(Flowable.just(Unit))
 
         viewModel.completePost(0, ProductType.RENT)
 
@@ -172,7 +171,7 @@ class MyPostViewModelTests : BaseTest() {
         viewModel.rentList.value = rentList
 
         `when`(completeRentUseCase.create(rentList[0].postId))
-            .thenReturn(Flowable.just(Resource.Error(ErrorEntity.Internal(createHttpException(500)))))
+            .thenReturn(Flowable.error(InternalException(createHttpException(500))))
 
         viewModel.completePost(0, ProductType.RENT)
 

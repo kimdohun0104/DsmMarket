@@ -1,7 +1,7 @@
 package com.dsm.app.viewModel
 
 import com.dsm.app.BaseTest
-import com.dsm.domain.error.Resource
+import com.dsm.domain.error.Success
 import com.dsm.domain.usecase.PostCommentUseCase
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.ui.main.comment.addComment.AddCommentViewModel
@@ -52,7 +52,7 @@ class AddCommentViewModelTests : BaseTest() {
                     "content" to viewModel.content.value
                 )
             )
-        ).thenReturn(Flowable.just(Resource.Success(Unit)))
+        ).thenReturn(Flowable.just(Unit))
 
         viewModel.postComment(0, 0)
 

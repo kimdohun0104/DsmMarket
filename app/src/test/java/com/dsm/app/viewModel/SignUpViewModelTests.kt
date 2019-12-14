@@ -2,8 +2,7 @@ package com.dsm.app.viewModel
 
 import com.dsm.app.BaseTest
 import com.dsm.app.createHttpException
-import com.dsm.domain.error.ErrorEntity
-import com.dsm.domain.error.Resource
+import com.dsm.data.error.exception.InternalException
 import com.dsm.domain.usecase.SignUpUseCase
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.ui.auth.signUp.SignUpViewModel
@@ -88,7 +87,7 @@ class SignUpViewModelTests : BaseTest() {
                 "gender" to viewModel.gender.value,
                 "grade" to viewModel.grade.value!!.toInt()
             )
-            `when`(signUpUseCase.create(request)).thenReturn(Flowable.just(Resource.Success(Unit)))
+            `when`(signUpUseCase.create(request)).thenReturn(Flowable.just(Unit))
 
             signUp()
 
@@ -116,7 +115,7 @@ class SignUpViewModelTests : BaseTest() {
                 "grade" to viewModel.grade.value!!.toInt()
             )
             `when`(signUpUseCase.create(request))
-                .thenReturn(Flowable.just(Resource.Error(ErrorEntity.Internal(createHttpException(500)))))
+                .thenReturn(Flowable.error(InternalException(createHttpException(500))))
 
             signUp()
 
@@ -144,7 +143,7 @@ class SignUpViewModelTests : BaseTest() {
                 "grade" to viewModel.grade.value!!.toInt()
             )
             `when`(signUpUseCase.create(request))
-                .thenReturn(Flowable.just(Resource.Error(ErrorEntity.Internal(createHttpException(500, "{\"message\":\"existent email\"}")))))
+                .thenReturn(Flowable.error(InternalException(createHttpException(403, "{\"message\":\"existent email\"}"))))
 
             signUp()
 
@@ -172,7 +171,7 @@ class SignUpViewModelTests : BaseTest() {
                 "grade" to viewModel.grade.value!!.toInt()
             )
             `when`(signUpUseCase.create(request))
-                .thenReturn(Flowable.just(Resource.Error(ErrorEntity.Internal(createHttpException(500, "{\"message\":\"existent nick\"}")))))
+                .thenReturn(Flowable.error(InternalException(createHttpException(500, "{\"message\":\"existent nick\"}"))))
 
             signUp()
 
