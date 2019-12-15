@@ -3,7 +3,7 @@ package com.dsm.dsmmarketandroid.di
 import com.dsm.data.remote.Api
 import com.dsm.data.remote.token.TokenInterceptor
 import com.dsm.domain.error.ErrorHandler
-import com.dsm.domain.error.ErrorHandlerImpl
+import com.dsm.data.error.ErrorHandlerImpl
 import com.dsm.dsmmarketandroid.presentation.BaseApp
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

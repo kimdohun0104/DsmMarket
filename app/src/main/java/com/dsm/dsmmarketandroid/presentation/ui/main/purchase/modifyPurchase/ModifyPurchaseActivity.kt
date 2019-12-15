@@ -10,6 +10,7 @@ import com.dsm.dsmmarketandroid.databinding.ActivityModifyPurchaseBinding
 import com.dsm.dsmmarketandroid.presentation.base.BaseActivity
 import com.dsm.dsmmarketandroid.presentation.ui.adapter.ModifyImageListAdapter
 import com.dsm.dsmmarketandroid.presentation.ui.main.post.postCategory.PostCategoryActivity
+import com.dsm.dsmmarketandroid.presentation.util.retrySnackbar
 import kotlinx.android.synthetic.main.activity_modify_purchase.*
 import org.jetbrains.anko.toast
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -23,10 +24,10 @@ class ModifyPurchaseActivity : BaseActivity<ActivityModifyPurchaseBinding>() {
         private const val CATEGORY = 1
     }
 
+    private val postId: Int by lazy { intent.getIntExtra("post_id", -1) }
     private val viewModel: ModifyPurchaseViewModel by viewModel()
 
     override fun viewInit() {
-        val postId = intent.getIntExtra("post_id", -1)
         binding.postId = postId
 
         tb_modify_purchase.setNavigationOnClickListener { finish() }
@@ -34,9 +35,12 @@ class ModifyPurchaseActivity : BaseActivity<ActivityModifyPurchaseBinding>() {
         (rv_modify_image.layoutManager as LinearLayoutManager).orientation = LinearLayoutManager.HORIZONTAL
         rv_modify_image.adapter = ModifyImageListAdapter()
 
-        cl_category.setOnClickListener { startActivityForResult(Intent(this, PostCategoryActivity::class.java),
-            CATEGORY
-        ) }
+        cl_category.setOnClickListener {
+            startActivityForResult(
+                Intent(this, PostCategoryActivity::class.java),
+                CATEGORY
+            )
+        }
 
         viewModel.getPurchaseDetail(postId)
     }
@@ -45,6 +49,10 @@ class ModifyPurchaseActivity : BaseActivity<ActivityModifyPurchaseBinding>() {
         viewModel.finishActivityEvent.observe(this, Observer { finish() })
 
         viewModel.toastEvent.observe(this, Observer { toast(it) })
+
+        viewModel.snackbarRetryEvent.observe(this, Observer {
+            retrySnackbar(cl_modify_purchase_parent) { viewModel.getPurchaseDetail(postId) }
+        })
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

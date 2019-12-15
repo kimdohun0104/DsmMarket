@@ -4,5 +4,6 @@ enum class NetworkState {
     LOADING,
     LOADED,
     FAILED,
-    EMPTY
+    EMPTY,
+    LOCAL
 }

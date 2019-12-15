@@ -2,8 +2,7 @@ package com.dsm.dsmmarketandroid.presentation.ui.main.me.password.changePassword
 
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
-import com.dsm.domain.error.ErrorEntity
-import com.dsm.domain.error.Resource
+import com.dsm.data.error.exception.UnauthorizedException
 import com.dsm.domain.usecase.ChangePasswordUseCase
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.base.BaseViewModel
@@ -35,16 +34,13 @@ class ChangePasswordViewModel(private val changePasswordUseCase: ChangePasswordU
             changePasswordUseCase.create(newPassword.value!!)
                 .doOnComplete { changePasswordLogEvent.call() }
                 .subscribe({
-                    when (it) {
-                        is Resource.Success -> finishActivityEvent.call()
-                        is Resource.Error -> {
-                            when (it.error) {
-                                is ErrorEntity.Unauthorized -> toastEvent.value = R.string.fail_unauthorized
-                                else -> toastEvent.value = R.string.fail_server_error
-                            }
-                        }
+                    finishActivityEvent.call()
+                }, {
+                    toastEvent.value = when (it) {
+                        is UnauthorizedException -> R.string.fail_unauthorized
+                        else -> R.string.fail_server_error
                     }
-                }, {})
+                })
         )
     }
 }

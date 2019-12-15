@@ -18,8 +18,8 @@ class CommentRepositoryImpl(
     override fun getRemoteCommentList(postId: Int, type: Int): Flowable<List<Comment>> =
         commentDataSource.getRemoteCommentList(postId, type).map(commentMapper::mapFrom)
 
-    override fun getLocalCommentList(postId: Int, type: Int): List<Comment> =
-        commentDataSource.getLocalCommentList(postId, type).map(commentMapper::mapFrom)
+    override fun getLocalCommentList(postId: Int, type: Int): List<Comment>? =
+        commentDataSource.getLocalCommentList(postId, type)?.map(commentMapper::mapFrom)
 
     override fun addLocalComment(comment: List<Comment>, postId: Int, type: Int): Completable =
         commentDataSource.addLocalComment(commentMapper.mapFrom(comment, postId, type))

@@ -4,8 +4,7 @@ import android.os.Bundle
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
-import com.dsm.domain.error.ErrorEntity
-import com.dsm.domain.error.Resource
+import com.dsm.data.error.exception.UnauthorizedException
 import com.dsm.domain.usecase.CompletePurchaseUseCase
 import com.dsm.domain.usecase.CompleteRentUseCase
 import com.dsm.domain.usecase.GetMyPurchaseUseCase
@@ -67,7 +66,10 @@ class MyPostViewModel(
                     if (type.isPurchase()) purchaseList.value = it
                     else rentList.value = it
                 }, {
-                    toastEvent.value = R.string.fail_server_error
+                    toastEvent.value = when (it) {
+                        is UnauthorizedException -> R.string.fail_unauthorized
+                        else -> R.string.fail_server_error
+                    }
                 })
         )
     }
@@ -84,22 +86,16 @@ class MyPostViewModel(
                     if (type.isPurchase()) completePurchaseUseCase.create(postId)
                     else completeRentUseCase.create(postId)
                 }.subscribe({
-                    when (it) {
-                        is Resource.Success -> {
-                            if (type.isPurchase()) deletePositionFromPurchase.value = position
-                            else deletePositionFromRent.value = position
-                        }
-                        is Resource.Error -> {
-                            when (it.error) {
-                                is ErrorEntity.Unauthorized -> toastEvent.value = R.string.fail_unauthorized
-                                else -> toastEvent.value = R.string.fail_server_error
-                            }
-                        }
-                    }
-
+                    if (type.isPurchase()) deletePositionFromPurchase.value = position
+                    else deletePositionFromRent.value = position
 
                     dismissEvent.call()
-                }, {})
+                }, {
+                    toastEvent.value = when (it) {
+                        is UnauthorizedException -> R.string.fail_unauthorized
+                        else -> R.string.fail_server_error
+                    }
+                })
         )
     }
 }

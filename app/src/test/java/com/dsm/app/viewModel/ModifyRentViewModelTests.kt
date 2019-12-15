@@ -2,9 +2,9 @@ package com.dsm.app.viewModel
 
 import com.dsm.app.BaseTest
 import com.dsm.app.createHttpException
+import com.dsm.data.error.exception.InternalException
 import com.dsm.domain.entity.RentDetail
-import com.dsm.domain.error.ErrorEntity
-import com.dsm.domain.error.Resource
+import com.dsm.domain.error.Success
 import com.dsm.domain.usecase.GetRentDetailUseCase
 import com.dsm.domain.usecase.ModifyRentUseCase
 import com.dsm.dsmmarketandroid.R
@@ -94,7 +94,7 @@ class ModifyRentViewModelTests : BaseTest() {
                         "possible_time" to rentTime.value
                     )
                 )
-            ).thenReturn(Flowable.just(Resource.Success(Unit)))
+            ).thenReturn(Flowable.just(Unit))
 
             modifyRent(0)
             viewModel.finishActivityEvent.test().assertHasValue()
@@ -118,7 +118,7 @@ class ModifyRentViewModelTests : BaseTest() {
             isMe = false
         )
         `when`(getRentDetailUseCase.create(0))
-            .thenReturn(Flowable.just(Resource.Success(response)))
+            .thenReturn(Flowable.just(Success(response)))
 
         val mapped = rentDetailModelMapper.mapFrom(response)
 
@@ -137,7 +137,7 @@ class ModifyRentViewModelTests : BaseTest() {
     @Test
     fun `get rent detail failed test`() {
         `when`(getRentDetailUseCase.create(0))
-            .thenReturn(Flowable.just(Resource.Error(ErrorEntity.Internal(createHttpException(500)))))
+            .thenReturn(Flowable.error(InternalException(createHttpException(500))))
 
         viewModel.getRentDetail(0)
 
@@ -168,7 +168,7 @@ class ModifyRentViewModelTests : BaseTest() {
                         "possible_time" to rentTime.value
                     )
                 )
-            ).thenReturn(Flowable.just(Resource.Success(Unit)))
+            ).thenReturn(Flowable.just(Unit))
 
             modifyRent(0)
 

@@ -2,10 +2,11 @@ package com.dsm.app.viewModel
 
 import com.dsm.app.BaseTest
 import com.dsm.app.createHttpException
+import com.dsm.data.error.exception.GoneException
+import com.dsm.data.error.exception.InternalException
 import com.dsm.domain.entity.PurchaseDetail
 import com.dsm.domain.entity.Recommend
-import com.dsm.domain.error.ErrorEntity
-import com.dsm.domain.error.Resource
+import com.dsm.domain.error.Success
 import com.dsm.domain.usecase.*
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.mapper.PurchaseDetailModelMapper
@@ -70,7 +71,7 @@ class PurchaseDetailViewModelTests : BaseTest() {
             isInterest.value = false
 
             `when`(interestUseCase.create(InterestUseCase.Params(0, ProductType.PURCHASE)))
-                .thenReturn(Flowable.just(Resource.Success(Unit)))
+                .thenReturn(Flowable.just(Unit))
 
             onClickInterest(0)
 
@@ -85,7 +86,7 @@ class PurchaseDetailViewModelTests : BaseTest() {
             isInterest.value = false
 
             `when`(interestUseCase.create(InterestUseCase.Params(0, ProductType.PURCHASE)))
-                .thenReturn(Flowable.just(Resource.Error(ErrorEntity.Internal(createHttpException(500)))))
+                .thenReturn(Flowable.error(InternalException(createHttpException(500))))
 
             onClickInterest(0)
 
@@ -99,7 +100,7 @@ class PurchaseDetailViewModelTests : BaseTest() {
             isInterest.value = true
 
             `when`(unInterestUseCase.create(UnInterestUseCase.Params(0, ProductType.PURCHASE)))
-                .thenReturn(Flowable.just(Resource.Success(Unit)))
+                .thenReturn(Flowable.just(Unit))
 
             onClickInterest(0)
 
@@ -114,7 +115,7 @@ class PurchaseDetailViewModelTests : BaseTest() {
             isInterest.value = true
 
             `when`(unInterestUseCase.create(UnInterestUseCase.Params(0, ProductType.PURCHASE)))
-                .thenReturn(Flowable.just(Resource.Error(ErrorEntity.Internal(createHttpException(500)))))
+                .thenReturn(Flowable.error(InternalException(createHttpException(500))))
 
             onClickInterest(0)
 
@@ -126,7 +127,7 @@ class PurchaseDetailViewModelTests : BaseTest() {
     fun `get purchase detail success test`() {
         val response = PurchaseDetail(listOf(), 0, "", "", "", "", 1, "", true, "", false)
         `when`(getPurchaseDetailUseCase.create(0))
-            .thenReturn(Flowable.just(Resource.Success(response)))
+            .thenReturn(Flowable.just(Success(response)))
 
         viewModel.run {
             getPurchaseDetail(0)
@@ -140,7 +141,7 @@ class PurchaseDetailViewModelTests : BaseTest() {
     @Test
     fun `get purchase detail failed non exist post test`() {
         `when`(getPurchaseDetailUseCase.create(0))
-            .thenReturn(Flowable.just(Resource.Error(ErrorEntity.Gone(createHttpException(410)))))
+            .thenReturn(Flowable.error(GoneException(createHttpException(410))))
 
         viewModel.run {
             getPurchaseDetail(0)
@@ -153,7 +154,7 @@ class PurchaseDetailViewModelTests : BaseTest() {
     @Test
     fun `get purchase detail failed server error test`() {
         `when`(getPurchaseDetailUseCase.create(0))
-            .thenReturn(Flowable.just(Resource.Error(ErrorEntity.Internal(createHttpException(500)))))
+            .thenReturn(Flowable.error(InternalException(createHttpException(500))))
 
         viewModel.run {
             getPurchaseDetail(0)
@@ -168,7 +169,7 @@ class PurchaseDetailViewModelTests : BaseTest() {
             Recommend(0, "TITLE", "IMG")
         )
         `when`(getRecommendUseCase.create(Unit))
-            .thenReturn(Flowable.just(Resource.Success(response)))
+            .thenReturn(Flowable.just(response))
 
         viewModel.getRecommendProduct()
 
@@ -181,7 +182,7 @@ class PurchaseDetailViewModelTests : BaseTest() {
             Recommend(0, "TITLE", "IMG")
         )
         `when`(getRelatedUseCase.create(GetRelatedUseCase.Params(0, ProductType.PURCHASE)))
-            .thenReturn(Flowable.just(Resource.Success(response)))
+            .thenReturn(Flowable.just(response))
 
         viewModel.getRelatedProduct(0)
 
@@ -193,7 +194,7 @@ class PurchaseDetailViewModelTests : BaseTest() {
         `when`(createRoomUseCase.create(CreateRoomUseCase.Params(0, ProductType.PURCHASE)))
             .thenReturn(Flowable.just(0))
 
-        `when`(joinRoomUseCase.create(0)).thenReturn(Flowable.just(Resource.Success("EMAIL")))
+        `when`(joinRoomUseCase.create(0)).thenReturn(Flowable.just("EMAIL"))
 
         viewModel.createRoom(0)
 

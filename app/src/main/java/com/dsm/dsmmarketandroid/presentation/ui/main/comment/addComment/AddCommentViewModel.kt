@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
+import com.dsm.data.error.exception.UnauthorizedException
 import com.dsm.domain.usecase.PostCommentUseCase
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.base.BaseViewModel
@@ -38,7 +39,10 @@ class AddCommentViewModel(private val postCommentUseCase: PostCommentUseCase) : 
                     MessageBus.getInstance().handle(MessageEvents.ADD_COMMENT_EVENT, null)
                     MessageBus.getInstance().handle(MessageEvents.INCREASE_COMMENT_COUNT_EVENT, null)
                 }, {
-                    toastEvent.value = R.string.fail_server_error
+                    toastEvent.value = when (it) {
+                        is UnauthorizedException -> R.string.fail_unauthorized
+                        else -> R.string.fail_server_error
+                    }
                 })
         )
     }

@@ -1,9 +1,8 @@
 package com.dsm.domain.service
 
 import com.dsm.domain.error.ErrorHandler
-import com.dsm.domain.error.Resource
+import com.dsm.domain.error.Success
 import com.dsm.domain.repository.AuthRepository
-import com.dsm.domain.toResource
 import io.reactivex.Flowable
 
 class AuthServiceImpl(
@@ -11,7 +10,7 @@ class AuthServiceImpl(
     private val errorHandler: ErrorHandler
 ) : AuthService {
 
-    override fun login(body: Any): Flowable<Resource<Unit>> =
+    override fun login(body: Any): Flowable<Unit> =
         authRepository.login(body)
             .doOnNext {
                 authRepository.setAccessToken(it.accessToken)
@@ -19,14 +18,14 @@ class AuthServiceImpl(
                 authRepository.setUserNick(it.nick)
             }
             .map { Unit }
-            .toResource(errorHandler)
+            .handleError(errorHandler)
 
-    override fun autoLogin(): Flowable<Resource<Unit>> =
-        authRepository.autoLogin().toResource(errorHandler)
+    override fun autoLogin(): Flowable<Unit> =
+        authRepository.autoLogin().handleError(errorHandler)
 
-    override fun signUp(body: Any): Flowable<Resource<Unit>> =
-        authRepository.signUp(body).toResource(errorHandler)
+    override fun signUp(body: Any): Flowable<Unit> =
+        authRepository.signUp(body).handleError(errorHandler)
 
-    override fun confirmPassword(password: String): Flowable<Resource<Unit>> =
-        authRepository.confirmPassword(password).toResource(errorHandler)
+    override fun confirmPassword(password: String): Flowable<Unit> =
+        authRepository.confirmPassword(password).handleError(errorHandler)
 }

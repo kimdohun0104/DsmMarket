@@ -2,9 +2,8 @@ package com.dsm.app.viewModel
 
 import com.dsm.app.BaseTest
 import com.dsm.app.createHttpException
+import com.dsm.data.error.exception.InternalException
 import com.dsm.domain.entity.Product
-import com.dsm.domain.error.ErrorEntity
-import com.dsm.domain.error.Resource
 import com.dsm.domain.usecase.GetInterestPurchaseUseCase
 import com.dsm.domain.usecase.GetInterestRentUseCase
 import com.dsm.dsmmarketandroid.R
@@ -69,7 +68,7 @@ class InterestViewModelTests : BaseTest() {
     fun `get interest purchase success test`() {
         val response = listOf(Product(0, "TITLE", "IMG", "CREATED_AT", "PRICE"))
         `when`(getInterestPurchaseUseCase.create(Unit))
-            .thenReturn(Flowable.just(Resource.Success(response)))
+            .thenReturn(Flowable.just(response))
 
         viewModel.getPurchaseInterest()
 
@@ -79,7 +78,7 @@ class InterestViewModelTests : BaseTest() {
     @Test
     fun `get interest purchase failed test`() {
         `when`(getInterestPurchaseUseCase.create(Unit))
-            .thenReturn(Flowable.just(Resource.Error(ErrorEntity.Internal(createHttpException(500)))))
+            .thenReturn(Flowable.error(InternalException(createHttpException(500))))
 
         viewModel.getPurchaseInterest()
 
@@ -98,20 +97,20 @@ class InterestViewModelTests : BaseTest() {
             Product(0, "TITLE", "IMG", "CREATED_AT", "PRICE")
         )
         `when`(getInterestRentUseCase.create(Unit))
-            .thenReturn(Flowable.just(Resource.Success(response)))
+            .thenReturn(Flowable.just(response))
 
         viewModel.getRentInterest()
 
         viewModel.rentList.test().assertValue(productModelMapper.mapFrom(response))
     }
 
-     @Test
-     fun `get interest rent failed test`() {
-         `when`(getInterestRentUseCase.create(Unit))
-             .thenReturn(Flowable.just(Resource.Error(ErrorEntity.Internal(createHttpException(500)))))
+    @Test
+    fun `get interest rent failed test`() {
+        `when`(getInterestRentUseCase.create(Unit))
+            .thenReturn(Flowable.error(InternalException(createHttpException(500))))
 
-         viewModel.getRentInterest()
+        viewModel.getRentInterest()
 
-         viewModel.toastEvent.test().assertValue(R.string.fail_server_error)
-     }
+        viewModel.toastEvent.test().assertValue(R.string.fail_server_error)
+    }
 }

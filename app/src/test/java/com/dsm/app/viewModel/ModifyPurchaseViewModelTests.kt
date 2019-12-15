@@ -2,9 +2,9 @@ package com.dsm.app.viewModel
 
 import com.dsm.app.BaseTest
 import com.dsm.app.createHttpException
+import com.dsm.data.error.exception.InternalException
 import com.dsm.domain.entity.PurchaseDetail
-import com.dsm.domain.error.ErrorEntity
-import com.dsm.domain.error.Resource
+import com.dsm.domain.error.Success
 import com.dsm.domain.usecase.GetPurchaseDetailUseCase
 import com.dsm.domain.usecase.ModifyPurchaseUseCase
 import com.dsm.dsmmarketandroid.R
@@ -80,7 +80,7 @@ class ModifyPurchaseViewModelTests : BaseTest() {
             isMe = false
         )
         `when`(getPurchaseDetailUseCase.create(0))
-            .thenReturn(Flowable.just(Resource.Success(response)))
+            .thenReturn(Flowable.just(Success(response)))
 
         val mapped = purchaseDetailModelMapper.mapFrom(response)
 
@@ -100,7 +100,7 @@ class ModifyPurchaseViewModelTests : BaseTest() {
     @Test
     fun `get purchase detail failed test`() {
         `when`(getPurchaseDetailUseCase.create(0))
-            .thenReturn(Flowable.just(Resource.Error(ErrorEntity.Internal(createHttpException(500)))))
+            .thenReturn(Flowable.error(InternalException(createHttpException(500))))
 
         viewModel.run {
             getPurchaseDetail(0)
@@ -127,7 +127,7 @@ class ModifyPurchaseViewModelTests : BaseTest() {
                     "category" to viewModel.category.value
                 )
             )
-        ).thenReturn(Flowable.just(Resource.Success(Unit)))
+        ).thenReturn(Flowable.just(Unit))
 
         viewModel.modifyPurchase(0)
 

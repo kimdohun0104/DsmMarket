@@ -2,8 +2,8 @@ package com.dsm.app.viewModel
 
 import com.dsm.app.BaseTest
 import com.dsm.app.createHttpException
-import com.dsm.domain.error.ErrorEntity
-import com.dsm.domain.error.Resource
+import com.dsm.data.error.exception.InternalException
+import com.dsm.data.error.exception.UnauthorizedException
 import com.dsm.domain.usecase.ChangePasswordUseCase
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.ui.main.me.password.changePassword.ChangePasswordViewModel
@@ -62,7 +62,7 @@ class ChangePasswordViewModelTests : BaseTest() {
             reType.value = "PASSWORD"
 
             `when`(changePasswordUseCase.create(newPassword.value!!))
-                .thenReturn(Flowable.just(Resource.Success(Unit)))
+                .thenReturn(Flowable.just(Unit))
 
             changePassword()
 
@@ -77,7 +77,7 @@ class ChangePasswordViewModelTests : BaseTest() {
             reType.value = "PASSWORD"
 
             `when`(changePasswordUseCase.create(newPassword.value!!))
-                .thenReturn(Flowable.just(Resource.Error(ErrorEntity.Unauthorized(createHttpException(401)))))
+                .thenReturn(Flowable.error(UnauthorizedException(createHttpException(401))))
 
             changePassword()
 
@@ -92,7 +92,7 @@ class ChangePasswordViewModelTests : BaseTest() {
             reType.value = "PASSWORD"
 
             `when`(changePasswordUseCase.create(newPassword.value!!))
-                .thenReturn(Flowable.just(Resource.Error(ErrorEntity.Internal(createHttpException(500)))))
+                .thenReturn(Flowable.error(InternalException(createHttpException(500))))
 
             changePassword()
 

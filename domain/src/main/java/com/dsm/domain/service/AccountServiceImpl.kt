@@ -1,9 +1,8 @@
 package com.dsm.domain.service
 
 import com.dsm.domain.error.ErrorHandler
-import com.dsm.domain.error.Resource
+import com.dsm.domain.error.Success
 import com.dsm.domain.repository.AccountRepository
-import com.dsm.domain.toResource
 import io.reactivex.Flowable
 
 class AccountServiceImpl(
@@ -11,14 +10,14 @@ class AccountServiceImpl(
     private val errorHandler: ErrorHandler
 ) : AccountService {
 
-    override fun sendTempPassword(email: String): Flowable<Resource<Unit>> =
-        accountRepository.sendTempPassword(email).toResource(errorHandler)
+    override fun sendTempPassword(email: String): Flowable<Unit> =
+        accountRepository.sendTempPassword(email).handleError(errorHandler)
 
-    override fun changePassword(password: String): Flowable<Resource<Unit>> =
-        accountRepository.changePassword(password).toResource(errorHandler)
+    override fun changePassword(password: String): Flowable<Unit> =
+        accountRepository.changePassword(password).handleError(errorHandler)
 
-    override fun changeNick(nick: String): Flowable<Resource<Unit>> =
-        accountRepository.changeUserNick(nick).doOnNext {
-            accountRepository.setLocalUserNick(nick)
-        }.toResource(errorHandler)
+    override fun changeNick(nick: String): Flowable<Unit> =
+        accountRepository.changeUserNick(nick)
+            .doOnNext { accountRepository.setLocalUserNick(nick) }
+            .handleError(errorHandler)
 }

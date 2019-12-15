@@ -14,5 +14,5 @@ interface CommentDao {
     fun addComment(comment: List<CommentRoomEntity>): Completable
 
     @Query("SELECT * from CommentRoomEntity WHERE postId = :postId AND type = :type")
-    fun getCommentList(postId: Int, type: Int): List<CommentRoomEntity>
+    fun getCommentList(postId: Int, type: Int): List<CommentRoomEntity>?
 }

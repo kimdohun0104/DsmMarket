@@ -19,7 +19,7 @@ class CommentDataSourceImpl(
     override fun getRemoteCommentList(postId: Int, type: Int): Flowable<CommentListEntity> =
         api.getComment(postId, type).addSchedulers()
 
-    override fun getLocalCommentList(postId: Int, type: Int): List<CommentRoomEntity> =
+    override fun getLocalCommentList(postId: Int, type: Int): List<CommentRoomEntity>? =
         commentDao.getCommentList(postId, type)
 
     override fun addLocalComment(comment: List<CommentRoomEntity>): Completable =

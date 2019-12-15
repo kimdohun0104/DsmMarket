@@ -3,8 +3,7 @@ package com.dsm.dsmmarketandroid.presentation.ui.auth.login
 import android.os.Bundle
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
-import com.dsm.domain.error.ErrorEntity
-import com.dsm.domain.error.Resource
+import com.dsm.data.error.exception.ForbiddenException
 import com.dsm.domain.usecase.LoginUseCase
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.base.BaseViewModel
@@ -48,19 +47,14 @@ class LoginViewModel(private val loginUseCase: LoginUseCase) : BaseViewModel() {
                 .doOnTerminate { hideLoadingDialogEvent.call() }
                 .doOnComplete { loginLogEvent.value = Bundle().apply { putString(Analytics.USER_EMAIL, email.value) } }
                 .subscribe({
-                    when (it) {
-                        is Resource.Success -> {
-                            hideKeyboardEvent.call()
-                            intentMainActivityEvent.call()
-                        }
-                        is Resource.Error -> {
-                            when (it.error) {
-                                is ErrorEntity.Forbidden -> toastEvent.value = R.string.fail_login
-                                else -> toastEvent.value = R.string.fail_server_error
-                            }
-                        }
+                    hideKeyboardEvent.call()
+                    intentMainActivityEvent.call()
+                }, {
+                    toastEvent.value = when (it) {
+                        is ForbiddenException -> R.string.fail_login
+                        else -> R.string.fail_server_error
                     }
-                }, {})
+                })
         )
     }
 }

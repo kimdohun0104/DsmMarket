@@ -2,9 +2,8 @@ package com.dsm.domain.service
 
 import com.dsm.domain.entity.Product
 import com.dsm.domain.error.ErrorHandler
-import com.dsm.domain.error.Resource
+import com.dsm.domain.error.Success
 import com.dsm.domain.repository.ProductRepository
-import com.dsm.domain.toResource
 import io.reactivex.Flowable
 
 class ProductServiceImpl(
@@ -12,34 +11,34 @@ class ProductServiceImpl(
     private val errorHandler: ErrorHandler
 ) : ProductService {
 
-    override fun getPurchaseList(page: Int, pageSize: Int, search: String, category: String): Flowable<List<Product>> =
+    override fun getPurchaseList(page: Int, pageSize: Int, search: String, category: String): Flowable<Success<List<Product>>> =
         repository.getRemotePurchaseList(page, pageSize, search, category)
             .doOnNext { repository.addLocalProductList(it, 0).subscribe() }
-            .onErrorReturn { repository.getLocalProductList(page, pageSize, 0) }
+            .toSuccess(errorHandler)
 
-    override fun getRentList(page: Int, pageSize: Int, search: String, category: String): Flowable<List<Product>> =
+    override fun getRentList(page: Int, pageSize: Int, search: String, category: String): Flowable<Success<List<Product>>> =
         repository.getRemoteRentList(page, pageSize, search, category)
             .doOnNext { repository.addLocalProductList(it, 1).subscribe() }
-            .onErrorReturn { repository.getLocalProductList(page, pageSize, 1) }
+            .toSuccess(errorHandler)
 
-    override fun getInterest(type: Int): Flowable<Resource<List<Product>>> =
-        repository.getRemoteInterestProduct(type).toResource(errorHandler)
+    override fun getInterest(type: Int): Flowable<List<Product>> =
+        repository.getRemoteInterestProduct(type).handleError(errorHandler)
 
     override fun getMyPurchase(): Flowable<List<Product>> =
-        repository.getMyPurchase()
+        repository.getMyPurchase().handleError(errorHandler)
 
     override fun getMyRent(): Flowable<List<Product>> =
-        repository.getMyRent()
+        repository.getMyRent().handleError(errorHandler)
 
-    override fun completePurchase(postId: Int): Flowable<Resource<Unit>> =
-        repository.completePurchase(postId).toResource(errorHandler)
+    override fun completePurchase(postId: Int): Flowable<Unit> =
+        repository.completePurchase(postId).handleError(errorHandler)
 
-    override fun completeRent(postId: Int): Flowable<Resource<Unit>> =
-        repository.completeRent(postId).toResource(errorHandler)
+    override fun completeRent(postId: Int): Flowable<Unit> =
+        repository.completeRent(postId).handleError(errorHandler)
 
     override fun getRecentPurchase(): Flowable<List<Product>> =
-        repository.getRecentPurchase()
+        repository.getRecentPurchase().handleError(errorHandler)
 
     override fun getRecentRent(): Flowable<List<Product>> =
-        repository.getRecentRent()
+        repository.getRecentRent().handleError(errorHandler)
 }

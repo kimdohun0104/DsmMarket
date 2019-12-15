@@ -2,7 +2,7 @@ package com.dsm.dsmmarketandroid.presentation.ui.main.rent.modifyRent
 
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
-import com.dsm.domain.error.Resource
+import com.dsm.data.error.exception.UnauthorizedException
 import com.dsm.domain.usecase.GetRentDetailUseCase
 import com.dsm.domain.usecase.ModifyRentUseCase
 import com.dsm.dsmmarketandroid.R
@@ -28,7 +28,7 @@ class ModifyRentViewModel(
     val unit = MutableLiveData<String>().apply { value = "0" }
 
     val finishActivityEvent = SingleLiveEvent<Any>()
-
+    val snackbarRetryEvent = SingleLiveEvent<Unit>()
     val toastEvent = SingleLiveEvent<Int>()
 
     private fun isBlankExist() = title.isValueBlank() || price.isValueBlank()
@@ -60,21 +60,22 @@ class ModifyRentViewModel(
         addDisposable(
             getRentDetailUseCase.create(postId)
                 .subscribe({
-                    when (it) {
-                        is Resource.Success -> {
-                            val detail = rentDetailModelMapper.mapFrom(it.data)
-                            title.value = detail.title
-                            price.value = detail.price.split(" ")[2].substring(0, detail.price.split(" ")[2].length - 1).replace(",", "")    // 1회당 100원
-                            photo.value = detail.img
-                            content.value = detail.content
-                            category.value = detail.category
-                            rentTime.value = detail.possibleTime
-                        }
-                        is Resource.Error -> {
-                            toastEvent.value = R.string.fail_server_error
-                        }
+                    if (it.isLocal) snackbarRetryEvent.call()
+
+                    rentDetailModelMapper.mapFrom(it.data).let {detail ->
+                        title.value = detail.title
+                        price.value = detail.price.split(" ")[2].substring(0, detail.price.split(" ")[2].length - 1).replace(",", "")    // 1회당 100원
+                        photo.value = detail.img
+                        content.value = detail.content
+                        category.value = detail.category
+                        rentTime.value = detail.possibleTime
                     }
-                }, {})
+                }, {
+                    toastEvent.value = when (it) {
+                        is UnauthorizedException -> R.string.fail_unauthorized
+                        else -> R.string.fail_server_error
+                    }
+                })
         )
     }
 

@@ -4,8 +4,8 @@ import android.os.Bundle
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
-import com.dsm.domain.error.ErrorEntity
-import com.dsm.domain.error.Resource
+import com.dsm.data.error.exception.ForbiddenException
+import com.dsm.data.error.exception.UnauthorizedException
 import com.dsm.domain.usecase.ChangeNickUseCase
 import com.dsm.dsmmarketandroid.R
 import com.dsm.dsmmarketandroid.presentation.base.BaseViewModel
@@ -29,21 +29,16 @@ class ChangeNickViewModel(private val changeNickUseCase: ChangeNickUseCase) : Ba
             changeNickUseCase.create(nick.value!!)
                 .doOnNext { changeNickLogEvent.value = Bundle().apply { putString(Analytics.USER_NAME, nick.value) } }
                 .subscribe({
-                    when (it) {
-                        is Resource.Success -> {
-                            finishActivityEvent.call()
-                            toastEvent.value = R.string.success_change_nick
-                            MessageBus.getInstance().handle(MessageEvents.NICK_CHANGED_EVENT, null)
-                        }
-                        is Resource.Error -> {
-                            when (it.error) {
-                                is ErrorEntity.Forbidden -> toastEvent.value = R.string.fail_existent_nick
-                                is ErrorEntity.Unauthorized -> toastEvent.value = R.string.fail_unauthorized
-                                else -> toastEvent.value = R.string.fail_server_error
-                            }
-                        }
+                    finishActivityEvent.call()
+                    toastEvent.value = R.string.success_change_nick
+                    MessageBus.getInstance().handle(MessageEvents.NICK_CHANGED_EVENT, null)
+                }, {
+                    toastEvent.value = when (it) {
+                        is ForbiddenException -> R.string.fail_existent_nick
+                        is UnauthorizedException -> R.string.fail_unauthorized
+                        else -> R.string.fail_server_error
                     }
-                }, {})
+                })
         )
     }
 }

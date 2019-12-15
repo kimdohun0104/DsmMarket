@@ -17,7 +17,8 @@
         xmlns:bind="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.ui.main.purchase.modifyPurchase.ModifyPurchaseActivity">
+        tools:context=".presentation.ui.main.purchase.modifyPurchase.ModifyPurchaseActivity"
+        android:id="@+id/cl_modify_purchase_parent">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/tb_modify_purchase"
